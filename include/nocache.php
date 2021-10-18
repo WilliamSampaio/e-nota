@@ -18,7 +18,7 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php 
+<?php
 $gmtDate = gmdate("D, d M Y H:i:s");
 header("Expires: {$gmtDate} GMT");
 header("Last-Modified: {$gmtDate} GMT");

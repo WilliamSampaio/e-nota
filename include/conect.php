@@ -18,31 +18,43 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php 
+<?php
 //arquivo com as configuracoes de HOST, USUARIO, SENHA e BANCO
-require_once dirname(__FILE__).'/config.php';
+require_once dirname(__FILE__) . '/config.php';
 
 // Conectar ao banco de dados das prefeituras
-$conectar_pref = mysql_connect($HOST,$USUARIO, $SENHA); 
-if (!$conectar_pref) { die('N&atilde;o foi poss&iacute;vel  conectar: ' . mysql_error()); } 
+// $conectar_pref = mysql_connect($HOST,$USUARIO, $SENHA); 
+// if (!$conectar_pref) { die('N&atilde;o foi poss&iacute;vel  conectar: ' . mysql_error()); } 
 
 // Seleciona o banco de dados
-$db_selected_pref = mysql_select_db($BANCO, $conectar_pref);
-if (!$db_selected_pref) {die ('N&atilde;o foi poss&iacute;vel  acessar a base: ' . mysql_error());}
+// $db_selected_pref = mysql_select_db($BANCO, $conectar_pref);
+// if (!$db_selected_pref) {die ('N&atilde;o foi poss&iacute;vel  acessar a base: ' . mysql_error());}
 //mysql_close($conectar);
+
+try {
+	$PDO = new PDO('mysql:host=' . $DB_HOST . ';dbname=' . $DB_DATABASE, $DB_USERNAME, $DB_PASSWORD);
+} catch (PDOException $e) {
+	echo 'Erro ao conectar com o MySQL: ' . $e->getMessage();
+}
 
 //SELEIONA O CODIGO DA EMPRESA
 
- if($_SESSION['login'] != "")
- {
-  $NOME =$_SESSION['nome'];
-  $CODIGO = $_SESSION['codempresa'];
-  $sql_codigo_empresa=mysql_query("SELECT codigo, ultimanota, senha FROM cadastro WHERE nome = '$NOME' AND codigo = '$CODIGO'");
-  list($CODIGO_DA_EMPRESA,$ULTIMA_NOTA,$SENHA_EMPRESA)=mysql_fetch_array($sql_codigo_empresa);
- }
+if ($_SESSION['login'] != "") {
+	$NOME = $_SESSION['nome'];
+	$CODIGO = $_SESSION['codempresa'];
+	$sql_codigo_empresa = $PDO->prepare("
+		SELECT codigo, ultimanota, senha 
+		FROM cadastro 
+		WHERE nome = '$NOME' AND codigo = '$CODIGO'");
+	list(
+		$CODIGO_DA_EMPRESA,
+		$ULTIMA_NOTA,
+		$SENHA_EMPRESA
+	) = $sql_codigo_empresa->fetchAll();
+}
 
 // lista confguracoes
-$sql_configuracoes = mysql_query("
+$sql_configuracoes = $PDO->prepare("
 	SELECT 
 		endereco, 
 		cidade, 
@@ -60,21 +72,39 @@ $sql_configuracoes = mysql_query("
 		gerar_guia_site ,
 		codintegracao
 	FROM  
-		configuracoes
-");
-list($CONF_ENDERECO, $CONF_CIDADE, $CONF_ESTADO, $CONF_CNPJ, $CONF_EMAIL, $CONF_SECRETARIA, $CONF_LEI, $CONF_DECRETO, $CONF_TOPO, $CONF_LOGO,$CONF_BRASAO, $CONF_CODLAYOUT, $DEC_ATRAZADAS,$GERAR_GUIA_SITE,$CODINTEGRACAO) = mysql_fetch_array($sql_configuracoes);
+		configuracoes");
+list(
+	$CONF_ENDERECO,
+	$CONF_CIDADE,
+	$CONF_ESTADO,
+	$CONF_CNPJ,
+	$CONF_EMAIL,
+	$CONF_SECRETARIA,
+	$CONF_LEI,
+	$CONF_DECRETO,
+	$CONF_TOPO,
+	$CONF_LOGO,
+	$CONF_BRASAO,
+	$CONF_CODLAYOUT,
+	$DEC_ATRAZADAS,
+	$GERAR_GUIA_SITE,
+	$CODINTEGRACAO
+) = $sql_configuracoes->fetchAll();
 
-if($CODINTEGRACAO!=0){
-  	$sql_integracao=mysql_query("SELECT empresa,diretorio FROM integracao WHERE codigo=$CODINTEGRACAO");
-	list($EMPRESAINTEGRACAO,$DIRETORIOINTEGRACAO)=mysql_fetch_array($sql_integracao);
+if ($CODINTEGRACAO != 0) {
+	$sql_integracao = $PDO->prepare("
+		SELECT empresa,diretorio 
+		FROM integracao 
+		WHERE codigo=$CODINTEGRACAO");
+	list(
+		$EMPRESAINTEGRACAO,
+		$DIRETORIOINTEGRACAO
+	) = $sql_integracao->fetchAll();
 }
-	
 
-
-$sql_boleto_banco = mysql_query("
+$sql_boleto_banco = $PDO->prepare("
 	SELECT bancos.boleto
 	FROM boleto
-	INNER JOIN bancos ON bancos.codigo = boleto.codbanco
-");
-list($BOLETO_BANCO)=mysql_fetch_array($sql_boleto_banco);
+	INNER JOIN bancos ON bancos.codigo = boleto.codbanco");
+list($BOLETO_BANCO) = $sql_boleto_banco->fetchAll();
 ?>

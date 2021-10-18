@@ -19,8 +19,25 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-$HOST = "localhost";
-$USUARIO = "root";
-$SENHA = "mysql";
-$BANCO = "pmnossasenhoradelourdes";
+
+function getSubdominio()
+{
+    $dominio = $_SERVER['SERVER_NAME'];
+    $dominioArray = explode(".", $dominio);
+    if ($dominioArray[0] == 'www') {
+        //return $dominioArray[1];
+    } else {
+        //return $dominioArray[0];
+    }
+    return 'subdominio1';
+    // return 'subdominio1';
+}
+
+$config = parse_ini_file('../.config.ini');
+
+$DB_HOST = $config[getSubdominio() . '.DB_HOST'];
+$DB_DATABASE = $config[getSubdominio() . '.DB_DATABASE'];
+$DB_USERNAME = $config[getSubdominio() . '.DB_USERNAME'];
+$DB_PASSWORD = $config[getSubdominio() . '.DB_PASSWORD'];
+
 ?>
