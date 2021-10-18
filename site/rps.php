@@ -75,9 +75,15 @@ include("../funcoes/util.php");
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
     <?php
-    $sql = $PDO->query("SELECT COUNT(codigo) FROM emissores WHERE estado = 'A'");
+
+    $sql = $PDO->query("SELECT COUNT(codigo) FROM aidf_solicitacoes WHERE estado = 'A'");
+    var_dump($sql->fetch());
     list($empresas_ativas) = $sql->fetch();
+
+    var_dump($sql->fetch());
+
     echo "<font color=#FF0000 size=4><strong>$empresas_ativas</strong></font>";
 
     ?>
