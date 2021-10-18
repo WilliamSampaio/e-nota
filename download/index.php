@@ -19,26 +19,26 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-$file = $_GET['file']; // pega o endereço do arquivo
-                       // ou o nome dele se o arquivo 
-                       // estiver na mesma pagina!! 
-foreach($_GET as $link => $nada);
-$file = "..".str_replace("_",".",$link);
-if(strpos($file,".csv")===false){//teste se o arquivo é a extenção esperada, para nao baixar arquivos php por exemplo
-	echo "erro na importação do arquivo!";
-}else{
-	$nome_arquivo=array_reverse(explode("/",$file));
-	$nome_arquivo=$nome_arquivo[0];
+$file = $_GET['file']; // pega o endereï¿½o do arquivo
+// ou o nome dele se o arquivo 
+// estiver na mesma pagina!! 
+foreach ($_GET as $link => $nada);
+$file = ".." . str_replace("_", ".", $link);
+if (strpos($file, ".csv") === false) { //teste se o arquivo ï¿½ a extenï¿½ï¿½o esperada, para nao baixar arquivos php por exemplo
+	echo "erro na importaÃ§Ã£o do arquivo!";
+} else {
+	$nome_arquivo = array_reverse(explode("/", $file));
+	$nome_arquivo = $nome_arquivo[0];
 	header("Content-Type: application/save");
-	header("Content-Length:".filesize($file)); 
-	header('Content-Disposition: attachment; filename="' . $nome_arquivo . '"'); 
+	header("Content-Length:" . filesize($file));
+	header('Content-Disposition: attachment; filename="' . $nome_arquivo . '"');
 	header("Content-Transfer-Encoding: binary");
-	header('Expires: 0'); 
-	header('Pragma: no-cache'); 
-	
+	header('Expires: 0');
+	header('Pragma: no-cache');
+
 	// nesse momento ele le o arquivo e envia
-	$fp = fopen("$file", "r"); 
-	fpassthru($fp); 
-	fclose($fp); 
+	$fp = fopen("$file", "r");
+	fpassthru($fp);
+	fclose($fp);
 }
 ?>
