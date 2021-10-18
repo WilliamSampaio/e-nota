@@ -29,7 +29,7 @@ function getSubdominio()
     } else {
         //return $dominioArray[0];
     }
-    return 'subdominio1';
+    return 'subdominio2';
     // return 'subdominio1';
 }
 

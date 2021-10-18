@@ -42,7 +42,7 @@ try {
 if ($_SESSION['login'] != "") {
 	$NOME = $_SESSION['nome'];
 	$CODIGO = $_SESSION['codempresa'];
-	$sql_codigo_empresa = $PDO->prepare("
+	$sql_codigo_empresa = $PDO->query("
 		SELECT codigo, ultimanota, senha 
 		FROM cadastro 
 		WHERE nome = '$NOME' AND codigo = '$CODIGO'");
@@ -50,11 +50,11 @@ if ($_SESSION['login'] != "") {
 		$CODIGO_DA_EMPRESA,
 		$ULTIMA_NOTA,
 		$SENHA_EMPRESA
-	) = $sql_codigo_empresa->fetchAll();
+	) = $sql_codigo_empresa->fetch();
 }
 
 // lista confguracoes
-$sql_configuracoes = $PDO->prepare("
+$sql_configuracoes = "
 	SELECT 
 		endereco, 
 		cidade, 
@@ -72,7 +72,7 @@ $sql_configuracoes = $PDO->prepare("
 		gerar_guia_site ,
 		codintegracao
 	FROM  
-		configuracoes");
+		configuracoes";
 list(
 	$CONF_ENDERECO,
 	$CONF_CIDADE,
@@ -89,22 +89,32 @@ list(
 	$DEC_ATRAZADAS,
 	$GERAR_GUIA_SITE,
 	$CODINTEGRACAO
-) = $sql_configuracoes->fetchAll();
+) = $PDO->query($sql_configuracoes)->fetch();
+
+// print("  
+// <script language=\"javascript\">
+// 	alert('" . var_dump($CONF_BRASAO) . "');
+// </script>");
+
+// print("  
+// <script language=\"javascript\">
+// 	alert('" . print_r($PDO->query($sql_configuracoes)->fetch(PDO::FETCH_ASSOC, 0)) . "');
+// </script>");
 
 if ($CODINTEGRACAO != 0) {
-	$sql_integracao = $PDO->prepare("
+	$sql_integracao = $PDO->query("
 		SELECT empresa,diretorio 
 		FROM integracao 
 		WHERE codigo=$CODINTEGRACAO");
 	list(
 		$EMPRESAINTEGRACAO,
 		$DIRETORIOINTEGRACAO
-	) = $sql_integracao->fetchAll();
+	) = $sql_integracao->fetch();
 }
 
-$sql_boleto_banco = $PDO->prepare("
+$sql_boleto_banco = $PDO->query("
 	SELECT bancos.boleto
 	FROM boleto
 	INNER JOIN bancos ON bancos.codigo = boleto.codbanco");
-list($BOLETO_BANCO) = $sql_boleto_banco->fetchAll();
+list($BOLETO_BANCO) = $sql_boleto_banco->fetch();
 ?>

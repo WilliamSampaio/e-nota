@@ -18,9 +18,9 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php 
-  $Link = $_SERVER['HTTP_HOST'];
- print("  
+<?php
+$Link = $_SERVER['HTTP_HOST'];
+print("  
 <script language=\"javascript\">
 	parent.location='site/';
 </script>");
