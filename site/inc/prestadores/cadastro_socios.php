@@ -18,32 +18,37 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
- <?php
- $nrosocios = 10;
- $cont = 1;
- 
- while($cont <= $nrosocios) {
- 
- ?>
-<!------------------- SÓCIO <?php echo $cont; ?>------------------------------------------------------------------------------------------> 
-  <tr id="linha01socio<?php echo $cont; ?>" style="display:none">	    	     	
-	<td height="1" bgcolor="#CCCCCC"></td>
-  </tr>
-  <tr id="campossocio<?php echo $cont; ?>" style="display:none">	    
-    <td align="left" bgcolor="#999999">&nbsp;<?php if($cont == 1){ echo "Nome do Responsável<br />";}else{ echo "Nome do Sócio<br>";}?>
-	 <input type="text" size="40" maxlength="100" name="txtNomeSocio<?php echo $cont; ?>" id="txtNomeSocio<?php echo $cont; ?>" class="texto" /> CPF 
-	 
-	 <input type="text" size="14" maxlength="14" name="txtCpfSocio<?php echo $cont; ?>" id="txtCpfSocio<?php echo $cont; ?>" class="texto" />
-	 
-     <?php if($cont>1){ ?>
-     	<input type="button" name="btexcluiSocio<?php echo $cont; ?>" class="botao" value="X" onclick="excluirSocio();"/></td>       
-  	 <?php } ?>
-  </tr>
-  <tr id="linha02socio<?php echo $cont; ?>" style="display:none">	    	     	
-	<td height="1" bgcolor="#CCCCCC"></td>
-  </tr>  
 <?php
-	$cont++;
+$nrosocios = 10;
+$cont = 1;
+
+while ($cont <= $nrosocios) {
+
+?>
+  <!------------------- Sï¿½CIO <?php echo $cont; ?>------------------------------------------------------------------------------------------>
+  <tr id="linha01socio<?php echo $cont; ?>" style="display:none">
+    <td height="1" bgcolor="#CCCCCC"></td>
+  </tr>
+  <tr id="campossocio<?php echo $cont; ?>" style="display:none">
+    <td align="left" bgcolor="#999999">&nbsp;<?php if ($cont == 1) {
+                                                echo "Nome do Responsï¿½vel<br />";
+                                              } else {
+                                                echo "Nome do Sï¿½cio<br>";
+                                              } ?>
+      <input type="text" size="40" maxlength="100" name="txtNomeSocio<?php echo $cont; ?>" id="txtNomeSocio<?php echo $cont; ?>" class="texto" /> CPF
+
+      <input type="text" size="14" maxlength="14" name="txtCpfSocio<?php echo $cont; ?>" id="txtCpfSocio<?php echo $cont; ?>" class="texto" />
+
+      <?php if ($cont > 1) { ?>
+        <input type="button" name="btexcluiSocio<?php echo $cont; ?>" class="botao" value="X" onclick="excluirSocio();" />
+    </td>
+  <?php } ?>
+  </tr>
+  <tr id="linha02socio<?php echo $cont; ?>" style="display:none">
+    <td height="1" bgcolor="#CCCCCC"></td>
+  </tr>
+<?php
+  $cont++;
 }
 
 ?>

@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
   
-  // arquivo de conexão com o banco
+  // arquivo de conexï¿½o com o banco
   include("../include/conect.php"); 
   
   // arquivo com funcoes uteis
@@ -77,8 +77,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php
-$sql = mysql_query("SELECT COUNT(codigo) FROM emissores WHERE estado = 'A'");
-list($empresas_ativas) = mysql_fetch_array($sql);
+$sql = $PDO->query("SELECT COUNT(codigo) FROM emissores WHERE estado = 'A'");
+list($empresas_ativas) = $sql->fetch();
 echo "<font color=#FF0000 size=4><strong>$empresas_ativas</strong></font>";
 	
 ?>
@@ -90,8 +90,8 @@ echo "<font color=#FF0000 size=4><strong>$empresas_ativas</strong></font>";
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<?php
-$sql = mysql_query("SELECT COUNT(codigo) FROM notas");
-list($notas_emitidas) = mysql_fetch_array($sql);
+$sql = $PDO->query("SELECT COUNT(codigo) FROM notas");
+list($notas_emitidas) = $sql->fetch();
 echo "<font color=#FF0000 size=4><strong>$notas_emitidas</strong></font>";
 	
 	?>

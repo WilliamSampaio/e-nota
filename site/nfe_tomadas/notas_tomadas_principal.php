@@ -19,11 +19,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	
-	$codLogado = $_SESSION['codempresa'];
+
+$codLogado = $_SESSION['codempresa'];
 ?>
-<form action="notas_tomadas.php" id="FormNotasTomadas" method="post" >
-	<input type="hidden" name="hdCodLogado" id="hdCodLogado" value="<?php echo $codLogado;?>" />
+<form action="notas_tomadas.php" id="FormNotasTomadas" method="post">
+	<input type="hidden" name="hdCodLogado" id="hdCodLogado" value="<?php echo $codLogado; ?>" />
 	<table width="100%" border="0" cellspacing="0" cellpadding="2">
 		<tr>
 			<td align="center">
@@ -34,11 +34,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</table>
 </form>
 <?php
-	if($_POST['btDeclararNotaTomada'] == "Declarar Nota Tomada"){
-		include("../site/nfe_tomadas/notas_tomadas_declarar.php");
-	}
-	
-	if($_POST['btPesquisar']){
-		include("../site/nfe_tomadas/notas_tomadas_pesquisar.php");
-	}
+if ($_POST['btDeclararNotaTomada'] == "Declarar Nota Tomada") {
+	include("../site/nfe_tomadas/notas_tomadas_declarar.php");
+}
+
+if ($_POST['btPesquisar']) {
+	include("../site/nfe_tomadas/notas_tomadas_pesquisar.php");
+}
 ?>

@@ -32,9 +32,9 @@ if ($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca) {
 	include("../funcoes/util.php");
 	$campologin = $_POST['txtLogin'];
 	$campo = tipoPessoa($campologin);
-	$sql = $PDO->prepare("SELECT * FROM cadastro WHERE $campo = '$campologin'");
+	$sql = $PDO->query("SELECT * FROM cadastro WHERE $campo = '$campologin'");
 	if ($campo && $sql->rowCount() > 0) {
-		$dados = $sql->fetchAll();
+		$dados = $sql->fetch();
 		//verifica se a empresa esta ativa
 
 		$login = $dados[$campo];

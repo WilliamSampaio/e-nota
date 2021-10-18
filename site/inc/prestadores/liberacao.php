@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <form method="post" name="frmCNPJ">
-	<input type="hidden" value="<?php echo $_POST['txtMenu'];?>" name="txtMenu">
+	<input type="hidden" value="<?php echo $_POST['txtMenu']; ?>" name="txtMenu">
 	<table border="0" cellspacing="1" cellpadding="0">
 		<tr>
 			<td width="10" height="10" bgcolor="#FFFFFF"></td>
@@ -43,27 +43,28 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<tr>
 						<td width="19%" align="left">CNPJ/CPF</td>
 						<td width="81%" align="left" valign="middle"><em>
-							<input class="texto" type="text" title="CNPJ" name="txtCNPJ"  id="txtCNPJ"  tabindex="1"/>
-							Somente n&uacute;meros</em></td>
+								<input class="texto" type="text" title="CNPJ" name="txtCNPJ" id="txtCNPJ" tabindex="1" />
+								Somente n&uacute;meros</em></td>
 					</tr>
 					<tr>
 						<td align="left">Senha</td>
 						<td align="left">
 							<input class="texto" type="password" title="Senha" name="txtSenha" id="txtSenha" tabindex="2" />
-							<a href="recuperarsenha.php" tabindex="9">Recuperar Senha</a> </td>
+							<a href="recuperarsenha.php" tabindex="9">Recuperar Senha</a>
+						</td>
 					</tr>
 					<tr>
 						<td align="left">Cod Verifica&ccedil;&atilde;o</td>
 						<td align="left">
 							<input class="texto" type="text" title="IM" name="codseguranca" id="codseguranca" size="5" maxlength="5" tabindex="3" />
-							<img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/botoes/num_key.jpg" title="Teclado Virtual" >&nbsp;
-							<?php include("inc/cod_verificacao.php");?>
+							<img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/botoes/num_key.jpg" title="Teclado Virtual">&nbsp;
+							<?php include("inc/cod_verificacao.php"); ?>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">&nbsp;</td>
 						<td align="left" valign="middle">
-							<input type="submit" value="Avançar" class="botao" onclick="return verificaCnpjCpfIm();" tabindex="5" />
+							<input type="submit" value="Avanï¿½ar" class="botao" onclick="return verificaCnpjCpfIm();" tabindex="5" />
 						</td>
 					</tr>
 				</table>

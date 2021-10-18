@@ -2,8 +2,8 @@
     include('../../funcoes/util.php');
     include('../../include/conect.php');
 
-    $sql = mysql_query("SELECT cidade,email,secretaria FROM configuracoes");
-    list($cidade,$to,$secretaria) = mysql_fetch_array($sql);
+    $sql = $PDO->query("SELECT cidade,email,secretaria FROM configuracoes");
+    list($cidade,$to,$secretaria) = $sql->fetch();
 
     foreach($_POST as $key =>$post){
         $_POST[$key] = trataString($_POST[$key]);
@@ -50,12 +50,12 @@
     for($key = 1; $key <= 5; $key++){
         if(!empty($_POST['cmbCategoria'.$key])){
             $cod = explode('|',$_POST['cmbCategoria'.$key]);
-            $sqlCat = mysql_query("SELECT nome FROM servicos_categorias WHERE codigo = '{$cod[0]}'");
-            list($categoria) = mysql_fetch_array($sqlCat);
+            $sqlCat = $PDO->query("SELECT nome FROM servicos_categorias WHERE codigo = '{$cod[0]}'");
+            list($categoria) =$sqlCat->fetch();
 
             $cod = explode('|',$_POST['cmbCodigo1'.$key]);
-            $sqlServ = mysql_query("SELECT descricao FROM servicos WHERE codservico = '{$cod[0]}'");
-            list($servico) = mysql_fetch_array($sqlServ);
+            $sqlServ = $PDO->query("SELECT descricao FROM servicos WHERE codservico = '{$cod[0]}'");
+            list($servico) =$sqlServ->fetch();
 
             $message .= "Servi&ccedil;o: ".$servico." - Categoria: ".$categoria."<br />";
         }
@@ -91,4 +91,3 @@
     mail($to,$subject,$message,$headers);
     Mensagem('Cadastro enviado');
     Redireciona('../prestadores.php');
-?>

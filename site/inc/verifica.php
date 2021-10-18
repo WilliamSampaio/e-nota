@@ -19,55 +19,43 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
- session_start(); 
+session_start();
 
-// recebe a variavel que contem o número de verificação e a variavel que contém o número que o usuário digitou.
+// recebe a variavel que contem o nï¿½mero de verificaï¿½ï¿½o e a variavel que contï¿½m o nï¿½mero que o usuï¿½rio digitou.
 $autenticacao = $_SESSION['autenticacao'];
-$cod_seguranca= $_POST['codseguranca'];
+$cod_seguranca = $_POST['codseguranca'];
 
-if($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca)
-{
+if ($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca) {
 
-include("conect.php");
-$sql = mysql_query("SELECT * FROM cadastro WHERE login = '".$_POST['txtLogin']."' and tipo = 'empresa'");	
- if(mysql_num_rows($sql) > 0) 
- { 
- 	$dados = mysql_fetch_array($sql);
-	//verifica se a empresa esta ativa
-	
-	$login = $dados['login'];
-	
-	$sql=mysql_query("SELECT estado FROM emissores WHERE cpf ='$login' OR cnpj='$login'");
-	
-	list($estado)=mysql_fetch_array($sql);
-	if($estado == "A")
-	{	
-	 //verifica se a senha digitada confere com a que está armazenada no banco	
-	 if(md5($txtSenha) == $dados['senha'])
-	  {	   
-		// inicia a sessão e direciona para index.		
-		$_SESSION['empresa'] = $dados['senha'];
-		$_SESSION['login'] = $login;
-		$_SESSION['nome'] = $dados['nome'];
-		print("<script language=JavaScript>parent.location='../login.php';</script>");
-     }	 
-	 else
-	 {
-	  print("<script language=JavaScript>alert('Senha não confere com a cadastrada no sistema! Favor verificar a senha.');parent.location='../login.php';</script>");	
-	 }
-	} 
-    else
-    {
-    print("<script language=JavaScript>alert('Empresa desativada! Contate a Prefeitura.');parent.location='../login.php';</script>");
-    }
-  	 
-} 
+	include("conect.php");
+	$sql = $PDO->query("SELECT * FROM cadastro WHERE login = '" . $_POST['txtLogin'] . "' and tipo = 'empresa'");
+	if ($sql->rowCount() > 0) {
+		$dados = $sql->fetch();
+		//verifica se a empresa esta ativa
 
- else {
-  print("<script language=JavaScript>alert('CPF/CNPJ não cadastrado no sistema! Favor verificar usuario.');parent.location='../login.php';</script>");
- } 
+		$login = $dados['login'];
 
-}else{
-  print("<script language=JavaScript>alert('Favor verificar código de segurança!');parent.location='../login.php';</script>");
-} 
+		$sql = $PDO->query("SELECT estado FROM emissores WHERE cpf ='$login' OR cnpj='$login'");
+
+		list($estado) = $sql->fetch();
+		if ($estado == "A") {
+			//verifica se a senha digitada confere com a que estï¿½ armazenada no banco	
+			if (md5($txtSenha) == $dados['senha']) {
+				// inicia a sessï¿½o e direciona para index.		
+				$_SESSION['empresa'] = $dados['senha'];
+				$_SESSION['login'] = $login;
+				$_SESSION['nome'] = $dados['nome'];
+				print("<script language=JavaScript>parent.location='../login.php';</script>");
+			} else {
+				print("<script language=JavaScript>alert('Senha nï¿½o confere com a cadastrada no sistema! Favor verificar a senha.');parent.location='../login.php';</script>");
+			}
+		} else {
+			print("<script language=JavaScript>alert('Empresa desativada! Contate a Prefeitura.');parent.location='../login.php';</script>");
+		}
+	} else {
+		print("<script language=JavaScript>alert('CPF/CNPJ nï¿½o cadastrado no sistema! Favor verificar usuario.');parent.location='../login.php';</script>");
+	}
+} else {
+	print("<script language=JavaScript>alert('Favor verificar cï¿½digo de seguranï¿½a!');parent.location='../login.php';</script>");
+}
 ?> 

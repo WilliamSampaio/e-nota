@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	$sql=mysql_query("SELECT cidade, estado FROM configuracoes");
-	list($CIDADE,$UF)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT cidade, estado FROM configuracoes");
+	list($CIDADE,$UF)=$sql->fetch();
 ?>
  <!-- Formul�rio de inser��o de empresa --> 
 	<table width="580" border="0" cellpadding="0" cellspacing="1">
@@ -110,8 +110,8 @@ A senha cadastrada &eacute; intransfer&iacute;vel e configura a assinatura eletr
                 <select name="txtInsUfEmpresa" id="txtInsUfEmpresa" onchange="buscaCidades(this,'txtInsMunicipioEmpresa')">
                     <option value=""></option>
                     <?php
-                    	$sql=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-                    	while(list($uf_busca)=mysql_fetch_array($sql)){
+                    	$sql=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+                    	while(list($uf_busca)=$sql->fetch()){
                     		echo "<option value=\"$uf_busca\"";if($uf_busca == $UF){ echo "selected=selected"; }echo ">$uf_busca</option>";
                     	}
                     ?>
@@ -124,8 +124,8 @@ A senha cadastrada &eacute; intransfer&iacute;vel e configura a assinatura eletr
                 <div  id="txtInsMunicipioEmpresa">
                     <select name="txtInsMunicipioEmpresa" id="txtInsMunicipioEmpresa" class="combo">
 						<?php
-                       		$sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$UF'");
-                        	while(list($nome) = mysql_fetch_array($sql_municipio)){
+                       		$sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$UF'");
+                        	while(list($nome) = $sql_municipio->fetch()){
                         		echo "<option value=\"$nome\"";if(strtolower($nome) == strtolower($CIDADE)){ echo "selected=selected";} echo ">$nome</option>";
                         	}//fim while 
                         ?>

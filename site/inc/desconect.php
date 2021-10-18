@@ -18,4 +18,8 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php mysql_close($conectar); ?>
+<?php 
+
+$PDO = null;
+
+?>

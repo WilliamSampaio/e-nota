@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
   session_start();
-  // arquivo de conexão com o banco
+  // arquivo de conexï¿½o com o banco
   include("../include/conect.php"); 
   
   // arquivo com funcoes uteis
@@ -77,8 +77,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <?php 	
 // lista noticias
-$sql = mysql_query("SELECT codigo, titulo, texto, data FROM noticias WHERE sistema = 'nfe' ORDER BY codigo DESC LIMIT 0,10");
-while(list($codigo, $titulo, $texto, $data) = mysql_fetch_array($sql)) {
+$sql = $PDO->query("SELECT codigo, titulo, texto, data FROM noticias WHERE sistema = 'nfe' ORDER BY codigo DESC LIMIT 0,10");
+while(list($codigo, $titulo, $texto, $data) = $sql->fetch()) {
 ?>
   <tr>
     <td width="20%"><a href="noticias.php?CODIGO=<?php echo $codigo; ?>"><?php echo substr($data,8,2)."/".substr($data,5,2)."/".substr($data,0,4); ?></a></td>
@@ -106,8 +106,8 @@ while(list($codigo, $titulo, $texto, $data) = mysql_fetch_array($sql)) {
 
 if(isset($_GET['CODIGO'])) {
 	$CODIGO = $_GET['CODIGO'];
-	$sql = mysql_query("SELECT titulo, texto, data FROM noticias WHERE codigo = '$CODIGO' AND sistema = 'nfe'");
-	list($titulo, $texto, $data) = mysql_fetch_array($sql);
+	$sql = $PDO->query("SELECT titulo, texto, data FROM noticias WHERE codigo = '$CODIGO' AND sistema = 'nfe'");
+	list($titulo, $texto, $data) = $sql->fetch();
 
 ?>	  
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding:5px;">

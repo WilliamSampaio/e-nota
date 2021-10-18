@@ -19,23 +19,26 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	if($_POST['btCancelar'] == "Cancelar"){
-		$codNotaTomada = $_POST['hdCodNotaTomada'];
-		$mensagem      = $_POST['txtMotivoCancelar'];
-		mysql_query("UPDATE notas_tomadas SET estado = 'C', motivo_cancelamento = '$mensagem' WHERE codigo = '$codNotaTomada'");
-		Mensagem_onload("Nota cancelada");
-	}
-	
-	
-	$codLogado = $CODIGO_DA_EMPRESA;
-	$sql_dados_logado = mysql_query("SELECT codtipo, razaosocial, cnpj, cpf FROM cadastro WHERE codigo = '$codLogado'");
-	$logado = mysql_fetch_object($sql_dados_logado);
-	$cnpjcpf = $logado->cnpj.$logado->cpf;
-	$codTipoContador = codtipo('contador');
+if ($_POST['btCancelar'] == "Cancelar") {
+	$codNotaTomada = $_POST['hdCodNotaTomada'];
+	$mensagem      = $_POST['txtMotivoCancelar'];
+	$PDO->query("
+		UPDATE notas_tomadas 
+		SET estado = 'C', motivo_cancelamento = '$mensagem' 
+		WHERE codigo = '$codNotaTomada'");
+	Mensagem_onload("Nota cancelada");
+}
+
+
+$codLogado = $CODIGO_DA_EMPRESA;
+$sql_dados_logado = $PDO->query("SELECT codtipo, razaosocial, cnpj, cpf FROM cadastro WHERE codigo = '$codLogado'");
+$logado = $sql_dados_logado->fetchObject();
+$cnpjcpf = $logado->cnpj . $logado->cpf;
+$codTipoContador = codtipo('contador');
 ?>
 <form action="notas_tomadas.php" id="frmPesquisaNotaTomada" method="post">
-	<input type="hidden" name="hdCodLogado" id="hdCodLogado" value="<?php echo $codLogado;?>" />
-	<input type="hidden" name="btPesquisar" value="<?php echo $_POST['btPesquisar'];?>" />
+	<input type="hidden" name="hdCodLogado" id="hdCodLogado" value="<?php echo $codLogado; ?>" />
+	<input type="hidden" name="btPesquisar" value="<?php echo $_POST['btPesquisar']; ?>" />
 	<table border="0" align="center" cellpadding="0" cellspacing="1">
 		<tr>
 			<td width="10" height="10" bgcolor="#FFFFFF"></td>
@@ -58,22 +61,22 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 				<table width="100%">
 					<?php
-					if($codTipoContador == $logado->codtipo){
+					if ($codTipoContador == $logado->codtipo) {
 					?>
-					<tr>
-						<td align="left" colspan="4">Selecione o emissor: 
-							<select name="cmbEmpresa" class="combo" style="width:270px;">
-								<option value="<?php echo $codLogado;?>"><?php echo "(próprio)".$logado->razaosocial." - ".$cnpjcpf;?></option>
-								<?php
-								$sql_lista_empresas = mysql_query("SELECT codigo, razaosocial, cnpj, cpf FROM cadastro WHERE codcontador = '$codLogado'");
-								while($listaEmpresa = mysql_fetch_object($sql_lista_empresas)){
-									$cnpjcpf = $listaEmpresa->cnpj.$listaEmpresa->cpf;
-									echo "<option value=\"{$listaEmpresa->codigo}\">{$listaEmpresa->razaosocial} - {$cnpjcpf}</option>";
-								}
-								?>
-							</select>
-						</td>
-					</tr>
+						<tr>
+							<td align="left" colspan="4">Selecione o emissor:
+								<select name="cmbEmpresa" class="combo" style="width:270px;">
+									<option value="<?php echo $codLogado; ?>"><?php echo "(prï¿½prio)" . $logado->razaosocial . " - " . $cnpjcpf; ?></option>
+									<?php
+									$sql_lista_empresas = $PDO->query("SELECT codigo, razaosocial, cnpj, cpf FROM cadastro WHERE codcontador = '$codLogado'");
+									while ($listaEmpresa = $sql_lista_empresas->fetchObject()) {
+										$cnpjcpf = $listaEmpresa->cnpj . $listaEmpresa->cpf;
+										echo "<option value=\"{$listaEmpresa->codigo}\">{$listaEmpresa->razaosocial} - {$cnpjcpf}</option>";
+									}
+									?>
+								</select>
+							</td>
+						</tr>
 					<?php
 					}
 					?>
@@ -82,9 +85,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<td align="left" colspan="3"><input name="txtCNPJ" type="text" class="texto" size="20" /></td>
 					</tr>
 					<tr>
-						<td align="left">N° da Nota: </td>
+						<td align="left">Nï¿½ da Nota: </td>
 						<td width="24%" align="left"><input name="txtNumeroNota" type="text" class="texto" size="10" /></td>
-						<td width="19%" align="left">Cód. Verificação: </td>
+						<td width="19%" align="left">Cï¿½d. Verificaï¿½ï¿½o: </td>
 						<td width="43%" align="left"><input name="txtCodVerificacao" type="text" class="texto" size="10" /></td>
 					</tr>
 					<tr>
@@ -95,8 +98,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</tr>
 					<tr>
 						<td align="left" colspan="4">
-							<input name="btBuscar" type="button" class="botao" value="Buscar" 
-							onClick="acessoAjax('../site/nfe_tomadas/notas_tomadas_lista.ajax.php','frmPesquisaNotaTomada','divPesquisaNotaTomada')" />
+							<input name="btBuscar" type="button" class="botao" value="Buscar" onClick="acessoAjax('../site/nfe_tomadas/notas_tomadas_lista.ajax.php','frmPesquisaNotaTomada','divPesquisaNotaTomada')" />
 							&nbsp;
 							<input type="reset" value="Limpar" class="botao" />
 						</td>

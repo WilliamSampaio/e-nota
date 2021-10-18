@@ -23,5 +23,3 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td align="center"><img src="../img/rodapes/rodape.jpg" /></td>
   </tr>
 </table>
-
-

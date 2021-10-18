@@ -19,51 +19,51 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	
-	//conecta o banco
-	include '../../include/nocache.php';
-	include("../../include/conect.php");
-	include("../../funcoes/util.php");
-	
-	//Aqui recebe os inputs por get com as informacoes sobre tabela e campo do BD
-	if(isset($_GET['txtCNPJ'])){
-		$cnpj   = $_GET['txtCNPJ'];
-		$aux    = explode(".",$_GET['hdParametros']);
-		$tabela = $aux[0];
-		$campo  = $aux[1];
-		if($cnpj == ""){
-			echo "<font color=\"#FF0000\" size=\"-2\"><b>Preencha o CNPJ</b></font><input name=\"hdCNPJ\" type=\"hidden\" id=\"hdCNPJ\" value=\"F\">";
-		}else{
-			//testa se o valor enviado é valido
-			if((strlen($cnpj) == 18) || (strlen($cnpj) == 14)){
-				//testa se o valor enviado é cnpj ou cpf
-				if(strlen($cnpj) == 18){ 
-					$msg   = "CNPJ";
-					$campo = "cnpj";
-				}else{
-					$msg   = "CPF";
-					$campo = "cpf";
-				}
-				
-				//sql que verifica se já existe algum registro com o valor enviado
-				$sql_testa_cnpj = mysql_query("SELECT codigo FROM cadastro WHERE $campo = '$cnpj'");
-				
-				//$sql_testa_cnpj = mysql_query("SELECT codigo FROM $tabela WHERE $campo = '$cnpj'");
-				if(mysql_num_rows($sql_testa_cnpj)>0){
-					//Este trecho verifica se o cnpj que existe no banco eh de um tomador podendo assim ser inserido
-					$codtipo_tomador = codtipo('tomador');
-					$sql_testa_tomador = mysql_query("SELECT codigo FROM cadastro WHERE $campo = '$cnpj' AND codtipo = '$codtipo_tomador'");
-					if(mysql_num_rows($sql_testa_tomador)){
-						echo "<font color=\"#00CC33\" size=\"-2\"><b>$msg valido!</b></font>";	
-					}else{
-						echo "<font color=\"#FF0000\" size=\"-2\"><b>Este $msg já existe!</b></font><input name=\"hdCNPJ\" type=\"hidden\" id=\"hdCNPJ\" value=\"F\">";
-					}
-				}else{
-					echo "<font color=\"#00CC33\" size=\"-2\"><b>$msg valido!</b></font>";
-				}
-			}else{
-				echo "<font color=\"#FF0000\" size=\"-2\"><b>Formato invalido!</b></font><input name=\"hdCNPJ\" type=\"hidden\" id=\"hdCNPJ\" value=\"F\">";
+
+//conecta o banco
+include '../../include/nocache.php';
+include("../../include/conect.php");
+include("../../funcoes/util.php");
+
+//Aqui recebe os inputs por get com as informacoes sobre tabela e campo do BD
+if (isset($_GET['txtCNPJ'])) {
+	$cnpj   = $_GET['txtCNPJ'];
+	$aux    = explode(".", $_GET['hdParametros']);
+	$tabela = $aux[0];
+	$campo  = $aux[1];
+	if ($cnpj == "") {
+		echo "<font color=\"#FF0000\" size=\"-2\"><b>Preencha o CNPJ</b></font><input name=\"hdCNPJ\" type=\"hidden\" id=\"hdCNPJ\" value=\"F\">";
+	} else {
+		//testa se o valor enviado ï¿½ valido
+		if ((strlen($cnpj) == 18) || (strlen($cnpj) == 14)) {
+			//testa se o valor enviado ï¿½ cnpj ou cpf
+			if (strlen($cnpj) == 18) {
+				$msg   = "CNPJ";
+				$campo = "cnpj";
+			} else {
+				$msg   = "CPF";
+				$campo = "cpf";
 			}
+
+			//sql que verifica se jï¿½ existe algum registro com o valor enviado
+			$sql_testa_cnpj = $PDO->query("SELECT codigo FROM cadastro WHERE $campo = '$cnpj'");
+
+			//$sql_testa_cnpj = mysql_query("SELECT codigo FROM $tabela WHERE $campo = '$cnpj'");
+			if ($sql_testa_cnpj->rowCount() > 0) {
+				//Este trecho verifica se o cnpj que existe no banco eh de um tomador podendo assim ser inserido
+				$codtipo_tomador = codtipo('tomador');
+				$sql_testa_tomador = $PDO->query("SELECT codigo FROM cadastro WHERE $campo = '$cnpj' AND codtipo = '$codtipo_tomador'");
+				if ($sql_testa_tomador->rowCount()) {
+					echo "<font color=\"#00CC33\" size=\"-2\"><b>$msg valido!</b></font>";
+				} else {
+					echo "<font color=\"#FF0000\" size=\"-2\"><b>Este $msg jï¿½ existe!</b></font><input name=\"hdCNPJ\" type=\"hidden\" id=\"hdCNPJ\" value=\"F\">";
+				}
+			} else {
+				echo "<font color=\"#00CC33\" size=\"-2\"><b>$msg valido!</b></font>";
+			}
+		} else {
+			echo "<font color=\"#FF0000\" size=\"-2\"><b>Formato invalido!</b></font><input name=\"hdCNPJ\" type=\"hidden\" id=\"hdCNPJ\" value=\"F\">";
 		}
 	}
+}
 ?>

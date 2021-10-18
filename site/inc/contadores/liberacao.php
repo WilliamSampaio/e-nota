@@ -19,50 +19,53 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-if(!$_POST['txtCNPJ']){
+if (!$_POST['txtCNPJ']) {
 ?>
-<form method="post" name="frmCNPJ">
-	<input type="hidden" value="<?php echo $_POST['txtMenu'];?>" name="txtMenu">
-	<table width="100%" border="0" cellspacing="1" cellpadding="0">
-		<tr>
-			<td width="10" height="10" bgcolor="#FFFFFF"></td>
-			<td width="185" align="center" bgcolor="#FFFFFF" rowspan="3">Contador - Informe seu dados</td>
-			<td width="385" bgcolor="#FFFFFF"></td>
-		</tr>
-		<tr>
-			<td height="1" bgcolor="#CCCCCC"></td>
-			<td bgcolor="#CCCCCC"></td>
-		</tr>
-		<tr>
-			<td height="10" bgcolor="#FFFFFF"></td>
-			<td bgcolor="#FFFFFF"></td>
-		</tr>
-		<tr>
-			<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
-		</tr>
-		<tr>
-			<td height="60" colspan="3" bgcolor="#CCCCCC"><table width="98%" height="100%" border="0" align="center" cellpadding="5" cellspacing="0">
-					<tr>
-						<td width="19%" align="left">CNPJ/CPF</td>
-						<td width="81%" align="left" valign="middle"><em>
-							<input class="texto" type="text" title="CNPJ" name="txtCNPJ"  id="txtCNPJ"  />
-							Somente n&uacute;meros</em></td>
-					</tr>
-					<tr>
-						<td align="center">&nbsp;</td>
-						<td align="left" valign="middle"><input name="btAvancar" type="submit" value="Avançar" class="botao" />
-							&nbsp;
-							<input type="button" name="btVoltar" value="Voltar" class="botao" onClick="window.location='contadores.php'"></td>
-					</tr>
-				</table></td>
-		</tr>
-		<tr>
-			<td height="1" colspan="3" bgcolor="#CCCCCC"></td>
-		</tr>
-	</table>
-</form>
+	<form method="post" name="frmCNPJ">
+		<input type="hidden" value="<?php echo $_POST['txtMenu']; ?>" name="txtMenu">
+		<table width="100%" border="0" cellspacing="1" cellpadding="0">
+			<tr>
+				<td width="10" height="10" bgcolor="#FFFFFF"></td>
+				<td width="185" align="center" bgcolor="#FFFFFF" rowspan="3">Contador - Informe seu dados</td>
+				<td width="385" bgcolor="#FFFFFF"></td>
+			</tr>
+			<tr>
+				<td height="1" bgcolor="#CCCCCC"></td>
+				<td bgcolor="#CCCCCC"></td>
+			</tr>
+			<tr>
+				<td height="10" bgcolor="#FFFFFF"></td>
+				<td bgcolor="#FFFFFF"></td>
+			</tr>
+			<tr>
+				<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
+			</tr>
+			<tr>
+				<td height="60" colspan="3" bgcolor="#CCCCCC">
+					<table width="98%" height="100%" border="0" align="center" cellpadding="5" cellspacing="0">
+						<tr>
+							<td width="19%" align="left">CNPJ/CPF</td>
+							<td width="81%" align="left" valign="middle"><em>
+									<input class="texto" type="text" title="CNPJ" name="txtCNPJ" id="txtCNPJ" />
+									Somente n&uacute;meros</em></td>
+						</tr>
+						<tr>
+							<td align="center">&nbsp;</td>
+							<td align="left" valign="middle"><input name="btAvancar" type="submit" value="Avanï¿½ar" class="botao" />
+								&nbsp;
+								<input type="button" name="btVoltar" value="Voltar" class="botao" onClick="window.location='contadores.php'">
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="1" colspan="3" bgcolor="#CCCCCC"></td>
+			</tr>
+		</table>
+	</form>
 <?php
-}else{
+} else {
 	include("consulta_situacao.php");
 }
 ?>

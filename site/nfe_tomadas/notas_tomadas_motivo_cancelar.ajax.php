@@ -19,13 +19,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	require_once("../../include/conect.php");
-	require_once("../../funcoes/util.php");
-	require_once("../../include/nocache.php");
-	
-	$codNotaTomada = $_GET['hdcod'];
+require_once("../../include/conect.php");
+require_once("../../funcoes/util.php");
+require_once("../../include/nocache.php");
+
+$codNotaTomada = $_GET['hdcod'];
 ?>
-<input name="hdCodNotaTomada" type="hidden" value="<?php echo $codNotaTomada;?>" />
+<input name="hdCodNotaTomada" type="hidden" value="<?php echo $codNotaTomada; ?>" />
 <table width="100%" align="center">
 	<tr>
 		<td align="left">Motivo do cancelamento: </td>
@@ -35,8 +35,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</tr>
 	<tr>
 		<td align="center">
-			<input name="btCancelar" type="submit" value="Cancelar" class="botao" 
-			onClick="return (ValidaFormulario('txtMotivoCancelar','Preencha o motivo do cancelamento!') && confirm('Deseja cancelar esta nota?'))" />
+			<input name="btCancelar" type="submit" value="Cancelar" class="botao" onClick="return (ValidaFormulario('txtMotivoCancelar','Preencha o motivo do cancelamento!') && confirm('Deseja cancelar esta nota?'))" />
 		</td>
 	</tr>
 </table>

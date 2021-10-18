@@ -25,27 +25,27 @@ $menus = array(
 	'Contadores' 			=> 'contadores.php',
 	'Tomadores' 			=> 'tomadores.php',
 	'RPS' 					=> 'rps.php',
-	'Benefícios' 			=> 'beneficios.php',
+	'BenefÃ­cios' 			=> 'beneficios.php',
 	'Perguntas e Respostas' => 'faq.php',
-	'Reclamações' 			=> 'ouvidoria.php',
-	'Notícias'				=> 'noticias.php',
-	'Legislação'			=> 'legislacao.php'
+	'ReclamaÃ§Ãµes' 			=> 'ouvidoria.php',
+	'NotÃ­cias'				=> 'noticias.php',
+	'LegislaÃ§Ã£o'			=> 'legislacao.php'
 );
 
 ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<?php
-foreach($menus as $menu => $link){
-?>
-	<tr>
-		<td height="20" class="menu">
-			<a class="menu" href=<?php echo $link; ?>>&nbsp;<?php echo $menu; ?></a>
-		</td>
-	</tr>
-	<tr>
-		<td height="1" bgcolor="#CCCCCC"></td>
-	</tr>
-<?php
-}
-?>
+	<?php
+	foreach ($menus as $menu => $link) {
+	?>
+		<tr>
+			<td height="20" class="menu">
+				<a class="menu" href=<?php echo $link; ?>>&nbsp;<?php echo $menu; ?></a>
+			</td>
+		</tr>
+		<tr>
+			<td height="1" bgcolor="#CCCCCC"></td>
+		</tr>
+	<?php
+	}
+	?>
 </table>
