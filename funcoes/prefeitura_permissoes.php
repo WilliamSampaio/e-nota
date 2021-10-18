@@ -18,23 +18,27 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php  
-  
-  //arquivo com a funcao de gerar logs
-  include("../prefeitura/inc/funcao_logs.php");  
-  // arquivo com funcoes uteis 
-  include("util.php");  
-  //Verifica qual o nivel de permissao que a pagina requere e qual o nivel do usuario logado
-  function PermissaoMenu($arquivo,$url){		
-  	//arquivo de conexao com o banco de dados, endereco muda de prefeitura, emissor ou contador
-  	include("../$url/inc/conect.php");
-	$sql=mysql_query("SELECT nivel FROM menus_prefeitura WHERE link='$arquivo'");
-	list($permissao)=mysql_fetch_array($sql);
-		if($_SESSION["nivel_de_acesso"]=="A"){$acesso="ok";}			
-		elseif(($_SESSION["nivel_de_acesso"]=="M") &&(($permissao=="M")||($permissao=="B"))){$acesso="ok";}			
-		elseif(($_SESSION["nivel_de_acesso"]=="B") &&($permissao=="B")){$acesso="ok";}			
-		else{
-			 Redireciona("../$url/login.php"); 
-		}		
-  }	
+<?php
+
+//arquivo com a funcao de gerar logs
+include("../prefeitura/inc/funcao_logs.php");
+// arquivo com funcoes uteis 
+include("util.php");
+//Verifica qual o nivel de permissao que a pagina requere e qual o nivel do usuario logado
+function PermissaoMenu($arquivo, $url)
+{
+	//arquivo de conexao com o banco de dados, endereco muda de prefeitura, emissor ou contador
+	include("../$url/inc/conect.php");
+	$sql = $PDO->query("SELECT nivel FROM menus_prefeitura WHERE link='$arquivo'");
+	list($permissao) = $sql->fetch();
+	if ($_SESSION["nivel_de_acesso"] == "A") {
+		$acesso = "ok";
+	} elseif (($_SESSION["nivel_de_acesso"] == "M") && (($permissao == "M") || ($permissao == "B"))) {
+		$acesso = "ok";
+	} elseif (($_SESSION["nivel_de_acesso"] == "B") && ($permissao == "B")) {
+		$acesso = "ok";
+	} else {
+		Redireciona("../$url/login.php");
+	}
+}
 ?>	
