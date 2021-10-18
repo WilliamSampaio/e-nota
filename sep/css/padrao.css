@@ -36,6 +36,9 @@ div.imprimirPaisagem {
 	font-size: 8pt;
 	color: #000000;
 	background-image: url(../img/wallpaper/03.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
 	margin: 0px;
 	padding: 0px;
 }
