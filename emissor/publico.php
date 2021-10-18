@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-// inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
+// inicia a sessï¿½o verificando se jah esta com o usuario logado, se estiver entra na pï¿½gina admin
 session_name("emissor");
 session_start();
 if(!(isset($_SESSION["empresa"])))
@@ -38,7 +38,7 @@ if(!(isset($_SESSION["empresa"])))
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>e-Nota</title><script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
 <script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
-<?php// include("scripts/java.php")?>
+<?php // include("scripts/java.php") ?>
 <link href="../css/padrao_emissor.css" rel="stylesheet" type="text/css" />
 </head>
 

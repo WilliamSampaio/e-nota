@@ -55,8 +55,15 @@
 						  `c`.`logo`,
 						  `c`.`pispasep`
 					 FROM cadastro c WHERE c.cnpj = '$CnpjPrestador' OR c.cpf = '$CnpjPrestador'";
-	$sql_prestador_res = mysql_query($sql_prestador) or die(mysql_error()." Erro prestador");
-	list($codemissor,$empresa_razaosocial, $empresa_nome, $empresa_cnpj, $empresa_cpf, $empresa_inscrmunicipal,$empresa_inscrestadual,$empresa_endereco, $empresa_numero, $empresa_municipio, $empresa_uf, $empresa_logo,$cadastropispasep) = mysql_fetch_array($sql_prestador_res);
+	try{
+		$sql_prestador_res = $PDO->query($sql_prestador);
+	}catch(PDOException $e){
+		echo 'Erro: ' . $e->getMessage();
+	}
+	list(
+		$codemissor,$empresa_razaosocial, $empresa_nome, $empresa_cnpj, $empresa_cpf, $empresa_inscrmunicipal,
+		$empresa_inscrestadual,$empresa_endereco, $empresa_numero, $empresa_municipio, $empresa_uf, 
+		$empresa_logo,$cadastropispasep) = $sql_prestador_res->fetch();
 	
 	//die($empresa_logo);
 	
@@ -64,10 +71,13 @@
 	$sql_notas = "SELECT n.codigo FROM notas n WHERE n.estado <> 'C' AND codemissor = $codemissor $wherep ORDER BY n.datahoraemissao DESC";
 	
 	//die($sql_notas);
-	
-	$sql_res_notas = mysql_query($sql_notas) or die(mysql_error()." Erro consultar notas");
-	$qtd_notas = mysql_num_rows($sql_res_notas);
-	while($n = mysql_fetch_array($sql_res_notas)){
+	try{
+		$sql_res_notas = $PDO->query($sql_notas);
+	}catch(PDOException $e){
+		echo 'Erro: ' . $e->getMessage();
+	}
+	$qtd_notas = $sql_res_notas->rowCount();
+	while($n = $sql_res_notas->fetch()){
 		$notas[] = $n['codigo'];
 	}
 ?>
@@ -94,7 +104,7 @@
 </head>
 
 <body>
-<div id="divPrincipalEmitidas" style="">
+<div id="divPrincipalEmitidas">
 	<div id="divCabecalhoEmitidas">	
     
     <table width="100%" border="0" cellpadding="5" cellspacing="0" align="center" style="margin: 0 auto;">
@@ -183,7 +193,7 @@
 		
     for($c=0;$c < sizeof($notas);$c++){
 	$codigo = $notas[$c];
-		$sql = mysql_query("
+		$sql = $PDO->query("
 		SELECT
 		  `notas`.`aliq_percentual`, 
 		  `notas`.`cofins`, 
@@ -236,7 +246,7 @@
 				$tomador_municipio, $tomador_uf, $tomador_email, $discriminacao, $valortotal,
 				$estado, $credito, $pispasep,$valordeducoes, $valoracrescimos, $basecalculo,
 				$valoriss,$valorinss,$aliqinss,$valorirrf,$aliqirrf, $deducao_irrf, $total_retencao,
-				$issretido,$observacao,$motivoCanc,$codservico,) = mysql_fetch_array($sql);
+				$issretido,$observacao,$motivoCanc,$codservico,) = $sql->fetch();
 				
 ?>
   <tr>

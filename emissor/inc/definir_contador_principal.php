@@ -22,12 +22,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$login = $_SESSION['login'];
 	$campo = tipoPessoa($login);	
 	if($_POST['btRemover']){
-		mysql_query("UPDATE cadastro SET codcontador = NULL WHERE $campo = '$login'");
+		$PDO->query("UPDATE cadastro SET codcontador = NULL WHERE $campo = '$login'");
 		add_logs('Removeu contador');
 	}
 	if($btAtualizar=="Atualizar"){
 		$cod = $_POST['txtCod'];
-		mysql_query("UPDATE cadastro SET 
+		$PDO->query("UPDATE cadastro SET 
 				contadornfe ='{$_POST['txtNfe']}',
 				contadorlivro ='{$_POST['txtLivro']}',
 				contadorguia='{$_POST['txtGuia']}',
@@ -38,19 +38,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 	
 	if($btDefinirContador!="")
 		{
-			$sql = mysql_query("UPDATE cadastro SET codcontador = '$cmbContador' WHERE $campo = '$login'");
+			$sql = $PDO->query("UPDATE cadastro SET codcontador = '$cmbContador' WHERE $campo = '$login'");
 			Mensagem_onload('Contador definido com sucesso!');
 			add_logs('Definido contador');
 		}	
-	$sql = mysql_query("SELECT codigo,contadornfe,contadorlivro,contadorguia,contadorrps FROM cadastro WHERE $campo = '$login'");
-	list($codempresa, $contnfe, $contlivro,$contguia, $contrps)=mysql_fetch_array($sql);
+	$sql = $PDO->query("SELECT codigo,contadornfe,contadorlivro,contadorguia,contadorrps FROM cadastro WHERE $campo = '$login'");
+	list($codempresa, $contnfe, $contlivro,$contguia, $contrps)=$sql->fetch();
 	
 		
 
-	$sql = mysql_query("SELECT codcontador FROM cadastro WHERE $campo = '$login'");
-	list($codcontador)=mysql_fetch_array($sql);
-	$sql = mysql_query("SELECT razaosocial FROM cadastro WHERE codigo = '$codcontador'");
-	list($nomecontador)=mysql_fetch_array($sql);
+	$sql = $PDO->query("SELECT codcontador FROM cadastro WHERE $campo = '$login'");
+	list($codcontador)=$sql->fetch();
+	$sql = $PDO->query("SELECT razaosocial FROM cadastro WHERE codigo = '$codcontador'");
+	list($nomecontador)=$sql->fetch();
 	if($nomecontador==""){
 		$mensagem = "Voc&eacute; ainda n&atilde;o possui contador autorizado";
 	}else {

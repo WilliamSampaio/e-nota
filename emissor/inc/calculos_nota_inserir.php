@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <input name="hdInputs" id="hdInputs" type="hidden" value="0" />
 <input name="hdCodemissor" id="hdCodemissor" type="hidden" value="<?php echo $CODIGO_DA_EMPRESA;?>" />
-<input name="hdLimite" id="hdLimite" type="hidden" value="<?php echo mysql_num_rows($sql_servicos);?>"  />
+<input name="hdLimite" id="hdLimite" type="hidden" value="<?php echo $sql_servicos->rowCount(); ?>"  />
 
 <table width="100%" id="tblServicos" cellpadding="3">
 	<tr>
@@ -34,7 +34,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<tr>
 		<td align="left">
 			<label><strong>Clique para informar os servi&ccedil;os<br /><br /></strong>
-			<input name="btServico" type="button" value="Serviços" class="botao" 
+			<input name="btServico" type="button" value="Serviï¿½os" class="botao" 
 			onclick="mostraDivServicos();" /></label>
 			<div id="divServicosNota" class="divServicosNota">
 				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC" height="100%">
@@ -57,7 +57,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<td>
 							<table width="100%">
 								<tr align="center" bgcolor="#999999">
-									<td width="23%" align="center"><b>Seleciona o Serviço</b></td>
+									<td width="23%" align="center"><b>Seleciona o Serviï¿½o</b></td>
 									<td width="10%" align="center"><b>Base Calc.(R$)</b></td>
 									<td width="10%" align="center"><b>Aliquota(%)</b></td>
 									<td width="10%" align="center"><b>ISS(R$)</b></td>
@@ -184,8 +184,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 </table>
 		</fieldset>
 	<?php
-  	$sql_verifica_creditos = mysql_query("SELECT ativar_creditos FROM configuracoes");
-	list($ativar_creditos) = mysql_fetch_array($sql_verifica_creditos);
+  	$sql_verifica_creditos = $PDO->query("SELECT ativar_creditos FROM configuracoes");
+	list($ativar_creditos) = $sql_verifica_creditos->fetch();
 	
 	if($ativar_creditos == "n"){
 		$display = "style=\"display:none\"";
@@ -201,7 +201,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			R$ <input name="txtValTotal" id="txtValTotal" type="text" size="10" onblur="ValorIss('<?php echo $regras_credito;?>')" class="texto" readonly="yes" style="text-align:right;" value="0,00">&nbsp;
 		</td>
 		<td width="13%" align="left">
-			Retenç&otilde;es		</td>
+			Retenï¿½&otilde;es		</td>
 		<td width="40%" align="left">
 			R$ 
 				<input name="txtValTotalRetencao" id="txtValTotalRetencao" onblur="ValorIss('<?php echo $regras_credito;?>')" type="text" class="texto" size="10" readonly="readonly" style="text-align:right" value="0,00" />

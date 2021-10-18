@@ -24,12 +24,12 @@ if($_POST['btAtualizar'] == "Atualizar"){
 }
 
 
- $sql = mysql_query("SELECT codigo, email, senha FROM cadastro WHERE nome = '$NOME'");
- list($codigo,$email,$senha) = mysql_fetch_array($sql); 
+ $sql = $PDO->query("SELECT codigo, email, senha FROM cadastro WHERE nome = '$NOME'");
+ list($codigo,$email,$senha) = $sql->fetch(); 
 ?>
 
 			
-<form method="post" name="frmCadUsuarios" enctype="multipart/form-data" onsubmit="return (comprimentoSenha(5,'txtSenha|txtConfirmacao')&&(ValidaFormulario('txtEmail','Preencha os campos obrigatórios'))&&(validaExtencao('arquivo')));">
+<form method="post" name="frmCadUsuarios" enctype="multipart/form-data" onsubmit="return (comprimentoSenha(5,'txtSenha|txtConfirmacao')&&(ValidaFormulario('txtEmail','Preencha os campos obrigatï¿½rios'))&&(validaExtencao('arquivo')));">
 <input name="hdCod" type="hidden" value="<?php echo $codigo;?>" />
     <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">
     	<tr>
@@ -60,7 +60,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
             <td align="left">Servi&ccedil;os</td>
             <td align="left">
 				<?php
-				$sql_serv = mysql_query("
+				$sql_serv = $PDO->query("
 						SELECT 
 							servicos.codservico,
 							servicos.descricao
@@ -71,7 +71,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
 					  	WHERE 
 							cadastro_servicos.codemissor = '$CODIGO_DA_EMPRESA'	
 					");
-				if(mysql_num_rows($sql_serv)){
+				if($sql_serv->rowCount()){
 				?>
              <table>
              	<tr align="left" bgcolor="#FFFFFF">
@@ -81,7 +81,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
 				<?php 
 					
 					
-						while(list($codServico,$descricao) = mysql_fetch_array($sql_serv)){
+						while(list($codServico,$descricao) = $sql_serv->fetch()){
 						?>
 							<tr align="left" bgcolor="#FFFFFF">
 								<td><?php echo $codServico;?></td>
@@ -111,8 +111,8 @@ if($_POST['btAtualizar'] == "Atualizar"){
                 Logomarca atual</td>
             <td align="left"><br />
                 <?php
-					$sql_logo = mysql_query("SELECT logo FROM cadastro WHERE nome = '$NOME'");
-					list($logo) = mysql_fetch_array($sql_logo);
+					$sql_logo = $PDO->query("SELECT logo FROM cadastro WHERE nome = '$NOME'");
+					list($logo) = $sql_logo->fetch();
                    if ($logo !="")
                      {
 				?>
@@ -120,7 +120,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
                 <?php }
                    else		
                      {	   
-                       print("<font color=red>Não possui logomarca</font>");
+                       print("<font color=red>Nï¿½o possui logomarca</font>");
                      }
                   ?>
                   <input name="bt" type="button" value="Alterar imagem" class="botao" onclick="document.getElementById('trempresa').style.visibility='visible'" />

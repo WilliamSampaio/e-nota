@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 /*function verificarNavegador(){
 	if(navigator.appName=='Microsoft Internet Explorer'){
-		alert('O sistema de nota fiscal eletrônica não é compatível com o Internet Explorer. Recomendamos o Mozilla Firefox');
+		alert('O sistema de nota fiscal eletrï¿½nica nï¿½o ï¿½ compatï¿½vel com o Internet Explorer. Recomendamos o Mozilla Firefox');
 		parent.location='http://br.mozdev.org';
 	}
 }
@@ -34,7 +34,7 @@ verificarNavegador();*/
 session_name("emissor");
 session_start(); 
 include("funcao_logs.php");
-// recebe a variavel que contem o número de verificação e a variavel que contém o número que o usuário digitou.
+// recebe a variavel que contem o nï¿½mero de verificaï¿½ï¿½o e a variavel que contï¿½m o nï¿½mero que o usuï¿½rio digitou.
 $autenticacao  = $_SESSION['autenticacao'];
 $cod_seguranca = $_POST['codseguranca'];
 
@@ -44,16 +44,16 @@ if($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca){
 	if($_POST['txtLogin']!=""){
 		$campologin = $_POST['txtLogin'];	
 		$campo = tipoPessoa($campologin);
-		$sql = mysql_query("SELECT * FROM cadastro WHERE $campo = '$campologin'");
+		$sql = $PDO->query("SELECT * FROM cadastro WHERE $campo = '$campologin'");
 	}
 	if($_POST['txtCodigo']!=""){
 		$campologin = $_POST['txtCodigo'];
-		$sql = mysql_query("SELECT * FROM cadastro WHERE codigo = '$campologin'");
+		$sql = $PDO->query("SELECT * FROM cadastro WHERE codigo = '$campologin'");
 	}
 	
 		
-	if(mysql_num_rows($sql) > 0){ 
-		$dados = mysql_fetch_array($sql);
+	if($sql->rowCount() > 0){ 
+		$dados = $sql->fetch();
 
 		if($_POST['txtCodigo']!=""){
 			if($dados['cnpj']!=""){
@@ -71,11 +71,11 @@ if($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca){
 		
 
 		if($estado == "A"){	
-			//verifica se a senha digitada confere com a que está armazenada no banco	
+			//verifica se a senha digitada confere com a que estï¿½ armazenada no banco	
 			if(md5($txtSenha) == $dados['senha']){	
 				if($dados['codtipo'] == 1){ 
 					if(($dados['nfe'] == "s") || ($dados['nfe'] == "S")){
-						// inicia a sessão e direciona para index.		
+						// inicia a sessï¿½o e direciona para index.		
 						$_SESSION['codempresa'] = $dados['codigo'];
 						$_SESSION['empresa'] = $dados['senha'];
 						$_SESSION['login'] = $login;
@@ -83,7 +83,7 @@ if($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca){
 						$nome = $dados['nome'];
 						print("<script language=JavaScript>parent.location='../login.php';</script>");
 					}else{
-						print("<script language=JavaScript>alert('O prestador referido não está apto a emitir nfe, por favor verifique juntamente com a prefeitura a liberação de nfe!');
+						print("<script language=JavaScript>alert('O prestador referido nï¿½o estï¿½ apto a emitir nfe, por favor verifique juntamente com a prefeitura a liberaï¿½ï¿½o de nfe!');
 						parent.location='../login.php';</script>");	
 					}
 				}else{
@@ -91,7 +91,7 @@ if($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca){
 					parent.location='../login.php';</script>");	
 				}
 			}else{
-				print("<script language=JavaScript>alert('Senha não confere com a cadastrada no sistema! Favor verificar a senha.');
+				print("<script language=JavaScript>alert('Senha nï¿½o confere com a cadastrada no sistema! Favor verificar a senha.');
 				parent.location='../login.php';</script>");	
 			}
 		}else{
@@ -99,10 +99,10 @@ if($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca){
 		}
 
 	}else {
-		print("<script language=JavaScript>alert('CPF/CNPJ ou Código não cadastrado no sistema! Favor verificar usuário.');parent.location='../login.php';</script>");
+		print("<script language=JavaScript>alert('CPF/CNPJ ou Cï¿½digo nï¿½o cadastrado no sistema! Favor verificar usuï¿½rio.');parent.location='../login.php';</script>");
 	} 
 
 }else{
-	print("<script language=JavaScript>alert('Favor verificar código de segurança!');parent.location='../login.php';</script>");
+	print("<script language=JavaScript>alert('Favor verificar cï¿½digo de seguranï¿½a!');parent.location='../login.php';</script>");
 } 
 ?>

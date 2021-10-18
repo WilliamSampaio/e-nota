@@ -101,14 +101,14 @@ Fith Floor, Boston, MA 02110-1301, USA
     background: #FFF;
    }
   --></style>
-  <script type="text/javascript"><!--
+  <script type='text/javascript'>
    function $(e) {
     return document.getElementById(e);
    }
-   function addEvent(obj, evType, fn) { //Função adaptada da original de Christian Heilmann, em http://www.onlinetools.org/articles/unobtrusivejavascript/chapter4.html
+   function addEvent(obj, evType, fn) { //Funï¿½ï¿½o adaptada da original de Christian Heilmann, em http://www.onlinetools.org/articles/unobtrusivejavascript/chapter4.html
     if (typeof obj == "string") {
      if (null == (obj = document.getElementById(obj))) {
-      throw new Error("Elemento HTML não encontrado. Não foi possível adicionar o evento.");
+      throw new Error("Elemento HTML nï¿½o encontrado. Nï¿½o foi possï¿½vel adicionar o evento.");
      }
     }
     if (obj.attachEvent) {
@@ -116,18 +116,18 @@ Fith Floor, Boston, MA 02110-1301, USA
     } else if (obj.addEventListener) {
      return obj.addEventListener(evType, fn, true);
     } else {
-     throw new Error("Seu browser não suporta adição de eventos.");
+     throw new Error("Seu browser nï¿½o suporta adiï¿½ï¿½o de eventos.");
     }
    }
    function init() {
     /*
-    msgbox_show('Título', 'Data inválida!', 'alert'); //alert com função padrão
-    msgbox_show('Título', 'Data inválida!', 'alert', funcao1); //alert passando a função que será executada no botão OK
-    msgbox_show('Título', 'Data inválida!', 'confirm'); //confirm com botões padrão
-    msgbox_show('Título', 'Data inválida!', 'confirm', funcao1); //confirm passando a função que será executada no botão SIM e deixando o botão NÃO padrão
-    msgbox_show('Título', 'Data inválida!', 'confirm', funcao1, funcao2); //confirm passando a função que será executada no botão SIM (funcao1) e no botão NÃO (funcao2)
+    msgbox_show('Tï¿½tulo', 'Data invï¿½lida!', 'alert'); //alert com funï¿½ï¿½o padrï¿½o
+    msgbox_show('Tï¿½tulo', 'Data invï¿½lida!', 'alert', funcao1); //alert passando a funï¿½ï¿½o que serï¿½ executada no botï¿½o OK
+    msgbox_show('Tï¿½tulo', 'Data invï¿½lida!', 'confirm'); //confirm com botï¿½es padrï¿½o
+    msgbox_show('Tï¿½tulo', 'Data invï¿½lida!', 'confirm', funcao1); //confirm passando a funï¿½ï¿½o que serï¿½ executada no botï¿½o SIM e deixando o botï¿½o Nï¿½O padrï¿½o
+    msgbox_show('Tï¿½tulo', 'Data invï¿½lida!', 'confirm', funcao1, funcao2); //confirm passando a funï¿½ï¿½o que serï¿½ executada no botï¿½o SIM (funcao1) e no botï¿½o Nï¿½O (funcao2)
     */
-    msgbox_show('Título', 'Data inválida!', 'alert'); //alert com função padrão
+    msgbox_show('Tï¿½tulo', 'Data invï¿½lida!', 'alert'); //alert com funï¿½ï¿½o padrï¿½o
     $('fechar').href = '#';
     addEvent('fechar', 'click', msgbox_hide);
    }
@@ -167,7 +167,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     }
    }
    addEvent(window, 'load', init);
-  --></script>
+  </script>
 </head>
 <body>
   <div id="msgbox" name="msgbox" class="hidden">
@@ -176,7 +176,7 @@ Fith Floor, Boston, MA 02110-1301, USA
      <p><a href="" name="fechar" id="fechar" title="Fechar">[X]</a></p>
     </span>
     <span id="tit" name="tit">
-     <p id="ptit" name="ptit">Título</p>
+     <p id="ptit" name="ptit">Tï¿½tulo</p>
     </span>
    </div>
    <div id="conteudo" name="conteudo">
@@ -185,7 +185,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     </div>
     <div id="botoes" name="botoes">
      <p id="pOk" name="pOk" class="hidden"><a href="" name="btnOk" id="btnOk" title="OK">Ok</a></p>
-     <p id="pSN" name="pSN" class="hidden"><a href="" name="btnSim" id="btnSim" title="Sim">Sim</a><a href="" name="btnNao" id="btnNao" title="Não">Não</a></p>
+     <p id="pSN" name="pSN" class="hidden"><a href="" name="btnSim" id="btnSim" title="Sim">Sim</a><a href="" name="btnNao" id="btnNao" title="Nï¿½o">Nï¿½o</a></p>
     </div>
    </div>
   </div>

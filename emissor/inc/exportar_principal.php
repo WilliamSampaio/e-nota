@@ -26,7 +26,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			$cmbMes="0".$cmbMes;
 		}
 	   $periodo = $cmbAno."-".$cmbMes;	   
-	   $sql = mysql_query("
+	   $sql = $PDO->query("
 		SELECT 
 			notas.numero,
 			notas.codverificacao,
@@ -69,10 +69,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 		// Gera o arquivo CSV para download
 		$arquivo = $CODIGO_DA_EMPRESA."arquivo.csv";
         $fp = fopen("tmp/".$arquivo, "w");
-		$cabecario = "Número da nota;Código de verificação;Data e hora de emissão;Número do  RPS;Data do RPS;Nome do Tomador de serviços;CPF/CNPJ do Tomador de serviços;Inscrição municipal do Tomador de serviços;Logradouro do Tomador de serviços;Número do Tomador de serviços;Complemento do Tomador de serviços;Bairro do Tomador de serviços;CEP do Tomador de serviços;Município do Tomador de serviços;UF do Tomador de serviços;Email do Tomador de serviços;Discriminação da nota;Valor total da nota;Valor de deduções;Base de Calculo;Valor ISS;ISS retido;Credito gerado;Estado da nota;Discriminação de Serviços\n";
+		$cabecario = "Nï¿½mero da nota;Cï¿½digo de verificaï¿½ï¿½o;Data e hora de emissï¿½o;Nï¿½mero do  RPS;Data do RPS;Nome do Tomador de serviï¿½os;CPF/CNPJ do Tomador de serviï¿½os;Inscriï¿½ï¿½o municipal do Tomador de serviï¿½os;Logradouro do Tomador de serviï¿½os;Nï¿½mero do Tomador de serviï¿½os;Complemento do Tomador de serviï¿½os;Bairro do Tomador de serviï¿½os;CEP do Tomador de serviï¿½os;Municï¿½pio do Tomador de serviï¿½os;UF do Tomador de serviï¿½os;Email do Tomador de serviï¿½os;Discriminaï¿½ï¿½o da nota;Valor total da nota;Valor de deduï¿½ï¿½es;Base de Calculo;Valor ISS;ISS retido;Credito gerado;Estado da nota;Discriminaï¿½ï¿½o de Serviï¿½os\n";
 		fwrite($fp, $cabecario);
 		
-		while($cadastro = mysql_fetch_array($sql)) {
+		while($cadastro = $sql->fetch()) {
 			switch($cadastro["estado"]){
 				case "C": $cadastro["estado"]= "Cancelada"; break;
 				case "N": $cadastro["estado"]= "Normal"; break;
@@ -91,11 +91,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 			fwrite($fp, $registros); // Grava a linha no arquivo
 		}
 		fclose($fp);
-		// Mensagem de concluído
+		// Mensagem de concluï¿½do
 		/*$display = "Arquivo gerado com sucesso.<bR>\n
-		Clique com o botão direito do mouse em cima de &quot;CLIQUE AQUI&quot; e depois em salvar destino.<br>*/
+		Clique com o botï¿½o direito do mouse em cima de &quot;CLIQUE AQUI&quot; e depois em salvar destino.<br>*/
 	  }else{
-	  	print("<script language=JavaScript>alert('Selecione um mês e um ano!!')</script>");
+	  	print("<script language=JavaScript>alert('Selecione um mï¿½s e um ano!!')</script>");
 	  }
   }
   ?>
@@ -122,12 +122,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td height="60" colspan="3" bgcolor="#CCCCCC">
   <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">	       
    <tr>
-	<td align="left" width="30%">Período das Notas</td>
+	<td align="left" width="30%">Perï¿½odo das Notas</td>
 	<td align="left" width="70%">
 	<select name="cmbMes" class="combo">
-	  <option value="">== Mês ==</option>
+	  <option value="">== Mï¿½s ==</option>
 	  <?php
-	  $meses=array(1 => "Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+	  $meses=array(1 => "Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 	  foreach($meses as $num => $mes){
 	  	echo "<option value='$num' "; 
 		if($cmbMes==$num){echo "selected=selected";}
@@ -156,7 +156,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<td colspan="2" align="center">
 	<?php if(($btExportar !="") && ($cmbMes !="") && ($cmbAno !=""))
 	{
-	  print("Exportação concluída com sucesso!<br>
+	  print("Exportaï¿½ï¿½o concluï¿½da com sucesso!<br>
 	  <a href='../download?/emissor/tmp/$arquivo'><img src='../img/imgcsv.jpg' border='0'></a> &nbsp; 
 	  <a href='../download?/emissor/tmp/$arquivo'>Clique aqui</a> para baixar o arquivo");
 	} ?>

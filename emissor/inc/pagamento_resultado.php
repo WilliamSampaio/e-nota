@@ -22,17 +22,17 @@ Fith Floor, Boston, MA 02110-1301, USA
  //Recebe a variavel com o codigo do banco selecionado pelo usuario
  $codbanco01 = $_POST["cmbBanco"];
  
- $sql=mysql_query("SELECT codigo,numero,tomador_nome,valoriss,estado FROM notas 
+ $sql=$PDO->query("SELECT codigo,numero,tomador_nome,valoriss,estado FROM notas 
 WHERE SUBSTRING(datahoraemissao,1,4) = '$cmbAno' AND SUBSTRING(datahoraemissao,6,2) = '$cmbMes' AND codemissor='$CODIGO_DA_EMPRESA' AND estado != 'C' AND estado != 'E'");
 
- $sql01=mysql_query("SELECT bancos.banco FROM bancos INNER JOIN boleto ON boleto.codbanco = bancos.codigo WHERE codbanco = '$codbanco01'");
- list($BANCOMONETARIO)=mysql_fetch_array($sql01);
+ $sql01=$PDO->query("SELECT bancos.banco FROM bancos INNER JOIN boleto ON boleto.codbanco = bancos.codigo WHERE codbanco = '$codbanco01'");
+ list($BANCOMONETARIO)=$sql01->fetch();
  
  if($BANCOMONETARIO =="")
  {
   print("<center>a Prefeitura n&atilde;o definiu qual o banco monet&aacute;rio, favor entre em contato com a prefeitura</center>");
  } 
- elseif(mysql_num_rows($sql) =="")
+ elseif($sql->rowCount() =="")
  {
   print("<center>Sem resultados</center>");
  }
@@ -60,7 +60,7 @@ WHERE SUBSTRING(datahoraemissao,1,4) = '$cmbAno' AND SUBSTRING(datahoraemissao,6
 			<?php
 			$total_iss=0;
 			$cont=0;
-			while(list($codigo,$numero,$tomador,$iss,$estadoNota)=mysql_fetch_array($sql))
+			while(list($codigo,$numero,$tomador,$iss,$estadoNota)=$sql->fetch())
 			{
 				
 				print"

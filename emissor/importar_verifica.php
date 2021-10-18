@@ -48,7 +48,7 @@ else {
 	if($import != "") {
 		$arq = $_FILES["import"]['name'];
 		$arq_tmp = $_FILES['import']['tmp_name'];   
-		$extensao = substr($arq,-3);// pega a extensão do arquivo 
+		$extensao = substr($arq,-3);// pega a extensï¿½o do arquivo 
   		//$randomico = rand(00000,99999);
 		$arq = $CODIGO_DA_EMPRESA.$arq;
 		if(($extensao =="xml")||($extensao =="XML")) {
@@ -56,38 +56,38 @@ else {
 			move_uploaded_file($arq_tmp,"importar/".$arq);
     		//verifica se o upload funcionou   
     		if(file_exists('importar/'.$arq)) {    
-	 			$sql=mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-	 			list($UltimaNota)=mysql_fetch_array($sql);
+	 			$sql=$PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+	 			list($UltimaNota)=$sql->fetch();
 				/*if(!validaXmlImportacao("./importar/$arq")){
 					die("<p align=\"center\"><strong>O arquivo de importa&ccedil;&atilde;o de RPS &eacute; incompat&iacute;vel com o modelo.</strong></p>");
 				}else{
-					$xml = simplexml_load_file("importar/$arq"); // lê o arquivo XML 
+					$xml = simplexml_load_file("importar/$arq"); // lï¿½ o arquivo XML 
 				}*/
-				$xml = simplexml_load_file("importar/$arq"); // lê o arquivo XML 
+				$xml = simplexml_load_file("importar/$arq"); // lï¿½ o arquivo XML 
      			$cont =0; 
 	 			$erro =0; 
 				$contServicos = 0;
 				$rps_invalidos = "";
 	 			
 				//Verifica se os creditos estao ativos
-				$sql_creditos_ativos = mysql_query("SELECT ativar_creditos FROM configuracoes");
-				list($situacaoCreditos) = mysql_fetch_array($sql_creditos_ativos);
+				$sql_creditos_ativos = $PDO->query("SELECT ativar_creditos FROM configuracoes");
+				list($situacaoCreditos) = $sql_creditos_ativos->fetch();
 				
-				$sql = mysql_query("SELECT ultimanota, codtipo FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-				list($notaNumero,$codtipo) = mysql_fetch_array($sql);
+				$sql = $PDO->query("SELECT ultimanota, codtipo FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+				list($notaNumero,$codtipo) = $sql->fetch();
 				$notaNumero++;
 				$codsimples = codtipo('simples');
-				$sql = mysql_query("SELECT cidade FROM configuracoes");
-				list($cidade) = mysql_fetch_array($sql);
+				$sql = $PDO->query("SELECT cidade FROM configuracoes");
+				list($cidade) = $sql->fetch();
 				$cidade = utf8_encode($cidade);
 
 				//busca os dados do arquivo XML 
     			foreach($xml->children() as $elemento => $valor) { 
-					$sql_verifica_servico = mysql_query("SELECT aliquota FROM servicos WHERE codigo = '".$xml->nota[$cont]->codservico."'");  
-					if(mysql_num_rows($sql_verifica_servico) != 1){
+					$sql_verifica_servico = $PDO->query("SELECT aliquota FROM servicos WHERE codigo = '".$xml->nota[$cont]->codservico."'");  
+					if($sql_verifica_servico->rowCount() != 1){
 						die("<center><b>N&atilde;o existe nenhum servi&ccedil;o com o c&oacute;digo ".$xml->nota[$cont]->codservico."</b></center>");
 					}else{
-						list($aliq) = mysql_fetch_array($sql_verifica_servico);
+						list($aliq) = $sql_verifica_servico->fetch();
 						if($codtipo == $codsimples){
 							$aliqeditavel = true;
 						}elseif($xml->nota[$cont]->tomador_municipio != $cidade){
@@ -101,21 +101,21 @@ else {
 					}
 					$rps_data = $xml->nota[$cont]->rps_data;
 					$rpsnum	  = $xml->nota[$cont]->rps_numero;
-					$sql_verifica_rps = mysql_query("SELECT COUNT(codigo) FROM notas WHERE rps_numero = '$rpsnum' AND codemissor = '".$_SESSION['codempresa']."'");
-					list($verifica_rps) = mysql_fetch_array($sql_verifica_rps);
+					$sql_verifica_rps = $PDO->query("SELECT COUNT(codigo) FROM notas WHERE rps_numero = '$rpsnum' AND codemissor = '".$_SESSION['codempresa']."'");
+					list($verifica_rps) = $sql_verifica_rps->fetch();
 					if($verifica_rps > 0){
 						die("<p align=\"center\"><strong>J&aacute; existe um RPS com este n&uacute;mero</strong></p>");
 					}
-					$sql_verifica_rps = mysql_query("SELECT COUNT(codigo) AS qtd, limite FROM rps_controle WHERE codcadastro = '".$_SESSION['codempresa']."'");					
-					$verifica_rps = mysql_fetch_array($sql_verifica_rps);
+					$sql_verifica_rps = $PDO->query("SELECT COUNT(codigo) AS qtd, limite FROM rps_controle WHERE codcadastro = '".$_SESSION['codempresa']."'");					
+					$verifica_rps = $sql_verifica_rps->fetch();
 					if($verifica_rps['qtd'] == 0){
 						die("<p align=\"center\"><strong>Prestador n&atilde;o autorizado para emiss&atilde;o de RPS</strong></p>");
 					}elseif($rpsnum > $verifica_rps['limite']){
-						die("<p align=\"center\"><strong>Seu limite de RPS é: ".$verifica_rps['limite']."</strong></p>");
+						die("<p align=\"center\"><strong>Seu limite de RPS ï¿½: ".$verifica_rps['limite']."</strong></p>");
 					}
 					
 					$tomador_cnpjcpf = $xml->nota[$cont]->tomador_cnpjcpf;
-					$sql_verifica_tomador = mysql_query("
+					$sql_verifica_tomador = $PDO->query("
 						SELECT 
 							nome,
 							inscrmunicipal,
@@ -132,8 +132,8 @@ else {
 						WHERE 
 							(cpf = '$tomador_cnpjcpf' OR cnpj = '$tomador_cnpjcpf')
 					");
-					if(mysql_num_rows($sql_verifica_tomador)){
-						$dadosTomador = mysql_fetch_array($sql_verifica_tomador);
+					if($sql_verifica_tomador->rowCount()){
+						$dadosTomador = $sql_verifica_tomador->fetch();
 						$tomador_inscrmunicipal =  $dadosTomador['inscrmunicipal'] == utf8_decode($xml->nota[$cont]->tomador_inscrmunicipal)
 							? $dadosTomador['inscrimunicipal']
 							: utf8_decode($xml->nota[$cont]->tomador_inscrmunicipal);
@@ -188,19 +188,19 @@ else {
 					$deducoes = $xml->nota[$cont]->deducoes;
 					$estado   = $xml->nota[$cont]->estado;
 					
-					//Verifica a validação do XML
+					//Verifica a validaï¿½ï¿½o do XML
 					include("inc/importar_erros.php") ;
-					$sql_verifica_rps = mysql_query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '$CODIGO_DA_EMPRESA'");
-					if(mysql_num_rows($sql_verifica_rps)){
-						echo "<center><b>A nota com o número de RPS $rps_numero, já foi emitida!</b></center>";
+					$sql_verifica_rps = $PDO->query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '$CODIGO_DA_EMPRESA'");
+					if($sql_verifica_rps->rowCount()){
+						echo "<center><b>A nota com o nï¿½mero de RPS $rps_numero, jï¿½ foi emitida!</b></center>";
 						exit;
 					}
 					$cont++;
 				}
 				
 				//Verifica se o prestador pode declarar todas as notas que estao no arquivo xml
-				$sql_verifica_ultimanota = mysql_query("SELECT ultimanota, notalimite, nome, razaosocial FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-				list($ultimaNota,$limite,$nomePrestador,$razaoPrestador) = mysql_fetch_array($sql_verifica_ultimanota);
+				$sql_verifica_ultimanota = $PDO->query("SELECT ultimanota, notalimite, nome, razaosocial FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+				list($ultimaNota,$limite,$nomePrestador,$razaoPrestador) = $sql_verifica_ultimanota->fetch();
 				if(($limite != 0) && ($limite)){
 					$proximoUltimanota = $ultimaNota + $cont;
 					if($proximoUltimanota > $limite){
@@ -213,8 +213,8 @@ else {
 				}
 				
 				//Verifica se o RPS das notas do xml estao ok
-				$sql_verifica_ultimorps = mysql_query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
-				list($ultimoRPS,$limite) = mysql_fetch_array($sql_verifica_ultimorps);
+				$sql_verifica_ultimorps = $PDO->query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+				list($ultimoRPS,$limite) = $sql_verifica_ultimorps->fetch();
 				if($limite > 0){
 					$proximoUltimoRPS = $ultimoRPS + $cont;
 					if($proximoUltimoRPS > $limite){
@@ -227,33 +227,33 @@ else {
 				if($erro > 0){
 					unlink("importar/$arq");
 				}
-				// verifica a formatação do arquivo XML
+				// verifica a formataï¿½ï¿½o do arquivo XML
 	 			if($erro ==1){
-					print ("<center><b>Arquivo contém dados inconsistentes fora do padrão</b></center>");
+					print ("<center><b>Arquivo contï¿½m dados inconsistentes fora do padrï¿½o</b></center>");
 				}	
 	 			elseif($erro ==2){
-	  				print ("<center><b>Arquivo contém código de servico inválido </b></center>");
+	  				print ("<center><b>Arquivo contï¿½m cï¿½digo de servico invï¿½lido </b></center>");
 	 			} // fim elseif
 				elseif($erro ==3){
-	  				print ("<center><b>Arquivo contém um código de serviço que a empresa não pode emitir nota</b></center>");
+	  				print ("<center><b>Arquivo contï¿½m um cï¿½digo de serviï¿½o que a empresa nï¿½o pode emitir nota</b></center>");
 				}
 	 			elseif($erro ==4){
-	  				print ("<center><b>CPF/CNPJ não contém uma formatação válida </b></center>");
+	  				print ("<center><b>CPF/CNPJ nï¿½o contï¿½m uma formataï¿½ï¿½o vï¿½lida </b></center>");
 	 			} 
 	 			elseif($erro ==5){
-					print ("<center><b>Data do RPS não contém uma formatação válida </b></center>");
+					print ("<center><b>Data do RPS nï¿½o contï¿½m uma formataï¿½ï¿½o vï¿½lida </b></center>");
 	 			} 
 	 			elseif($erro ==6){
-					print ("<center><b>CEP do tomador não contém uma formatação válida </b></center>");
+					print ("<center><b>CEP do tomador nï¿½o contï¿½m uma formataï¿½ï¿½o vï¿½lida </b></center>");
 	 			}elseif($erro == 7){
-					echo "<center><b>A nota com o número de RPS $rps_numero, já foi emitida!</b></center>";
+					echo "<center><b>A nota com o nï¿½mero de RPS $rps_numero, jï¿½ foi emitida!</b></center>";
 				}elseif($erro == 8){
-					echo "<center><b>O prestador <b>$razaoPrestador</b> já emitiu $ultimaNota nota(s), o xml contém $cont nota(s) e seu limite de AIDFe é de $limite nota(s)! Por favor solicite um limite de AIDFe maior.</b></center>";
+					echo "<center><b>O prestador <b>$razaoPrestador</b> jï¿½ emitiu $ultimaNota nota(s), o xml contï¿½m $cont nota(s) e seu limite de AIDFe ï¿½ de $limite nota(s)! Por favor solicite um limite de AIDFe maior.</b></center>";
 				}elseif($erro == 9){
-					echo "<center><b>O prestador já emitiu $ultimoRPS RPS(s), o xml contém $cont RPS(s) e seu limite de RPS é de $limite RPS(s)! 
+					echo "<center><b>O prestador jï¿½ emitiu $ultimoRPS RPS(s), o xml contï¿½m $cont RPS(s) e seu limite de RPS ï¿½ de $limite RPS(s)! 
 					Por favor solicite um limite de RPS maior.</b></center>";
 				}elseif($erro == 10){
-					echo "<center><b>É necessário solicitar um limite de RPS para poder declarar o xml.</b></center>";
+					echo "<center><b>ï¿½ necessï¿½rio solicitar um limite de RPS para poder declarar o xml.</b></center>";
 				}else {
 	  				$cont =0; 
       				//tabela que mostra os dados que vieram no XML 	 
@@ -264,7 +264,7 @@ else {
 			<table width="100%"> 
 				<tr>
 					<td colspan="20" class="cab01">
-						Verificação de dados do  arquivo XML da  empresa  <?php echo $NOME; ?>
+						Verificaï¿½ï¿½o de dados do  arquivo XML da  empresa  <?php echo $NOME; ?>
 					</td>
 				</tr>
 			</table>
@@ -279,7 +279,7 @@ else {
 		$rpsnum			= $xml->nota[$cont]->rps_numero;
 		$tomador_cnpjcpf = $xml->nota[$cont]->tomador_cnpjcpf;
 		
-		$sql_verifica_tomador = mysql_query("
+		$sql_verifica_tomador = $PDO->query("
 			SELECT 
 				nome,
 				inscrmunicipal,
@@ -296,8 +296,8 @@ else {
 			WHERE 
 				(cpf = '$tomador_cnpjcpf' OR cnpj = '$tomador_cnpjcpf')
 		");
-		if(mysql_num_rows($sql_verifica_tomador) > 0){	
-			$dadosTomador = mysql_fetch_array($sql_verifica_tomador);
+		if($sql_verifica_tomador->rowCount() > 0){	
+			$dadosTomador = $sql_verifica_tomador->fetch();
 			$tomador_inscrmunicipal =  $dadosTomador['inscrmunicipal'] == utf8_decode($xml->nota[$cont]->tomador_inscrmunicipal)
 				? $dadosTomador['inscrimunicipal']
 				: utf8_decode($xml->nota[$cont]->tomador_inscrmunicipal);
@@ -453,15 +453,15 @@ else {
 		</table>
 		<br />
 			<?php
-				$sql_descricao = mysql_query("SELECT descricao FROM servicos WHERE codservico = '$codservico'");
-				list($descricao) = mysql_fetch_array($sql_descricao);
+				$sql_descricao = $PDO->query("SELECT descricao FROM servicos WHERE codservico = '$codservico'");
+				list($descricao) = $sql_descricao->fetch();
 			?>
 			<table width="100%" style="border:1px solid #000" cellspacing="0">
 				<tr>
-					<td colspan="6" align="center" class="cab01">Serviço(s)</td>
+					<td colspan="6" align="center" class="cab01">Serviï¿½o(s)</td>
 				</tr>
 				<tr class="cab04">
-					<td align="center">Descrição</td>
+					<td align="center">Descriï¿½ï¿½o</td>
 					<td align="center">Al&iacute;quota</td>
 					<td align="center">Base de C&aacute;lc.</td>
 					<td align="center">ISS</td>
@@ -485,9 +485,9 @@ else {
 			<br />
 			<table width="100%" class="cab06">
 				<tr><td align="center" class="cab01" colspan="6">Dados da nota</td></tr>
-				<tr><td colspan="8">Discriminação:</td></tr>
+				<tr><td colspan="8">Discriminaï¿½ï¿½o:</td></tr>
 				<tr><td colspan="8" align="left" class="cab05"><?php echo nl2br($discriminacao);?></td></tr>
-				<tr><td colspan="8">Observações:</td></tr>
+				<tr><td colspan="8">Observaï¿½ï¿½es:</td></tr>
 				<tr><td colspan="8" align="left" class="cab05"><?php echo nl2br($observacoes);?></td></tr>
 				<?php
 					if($estado == "Cancelado"){
@@ -501,7 +501,7 @@ else {
 				<tr>
 					<td>Base de c&aacute;lculo:</td>
 					<td>R$ <?php echo DecToMoeda($basecalc); ?></td>
-					<td>Deduções da nota:</td>
+					<td>Deduï¿½ï¿½es da nota:</td>
 					<td>R$ <?php echo DecToMoeda($deducoes);?></td>
 				</tr>
 				<tr>
@@ -525,7 +525,7 @@ else {
 				<tr>
 					<td>Acr&eacute;scimos:</td>
 					<td>R$ <?php echo DecToMoeda($acrescimo);?></td>
-					<td>Retenções:</td>
+					<td>Retenï¿½ï¿½es:</td>
 					<td>R$ <?php echo DecToMoeda($totalretencoes);?></td>
 				</tr>
 				<tr>
@@ -540,7 +540,7 @@ else {
 				$cont++;	
 			} //fim foreach lista dados 
 				
-		}// If se não deu erro
+		}// If se nï¿½o deu erro
 		?>
 			<br />
 			<table width="100%">
@@ -558,13 +558,13 @@ else {
 	else{
 		print("<center><b>Falha ao tentar abrir o arquivo XML</b></center>");     
 	}
-	}// if entensão do arquivo
+	}// if entensï¿½o do arquivo
 	else{
-		print("<center><b>O arquivo Importado não tem a extensão XML</b></center>");    
+		print("<center><b>O arquivo Importado nï¿½o tem a extensï¿½o XML</b></center>");    
 	}   
 	}// end if campo text import
 	else {
-		print("<center><b>Insira o arquivo para a importação</b></center>");
+		print("<center><b>Insira o arquivo para a importaï¿½ï¿½o</b></center>");
 	}
 }  
 

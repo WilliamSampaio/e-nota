@@ -52,7 +52,7 @@ if(!(isset($_SESSION["empresa"]))){
 		$string .= " AND YEAR(datahoraemissao) = '$ano'";
 	}
 	
-	$sql = mysql_query("
+	$sql = $PDO->query("
 		SELECT 
 			numero, 
 			codverificacao, 
@@ -75,13 +75,13 @@ if(!(isset($_SESSION["empresa"]))){
 	?>
 	<table width="100%" border="0" cellpadding="2" cellspacing="2">
 	<?php
-		if(mysql_num_rows($sql)>0){
+		if($sql->rowCount()>0){
 	?>
 	  <tr>
-		<td colspan="10" align="left" class="cab01">RPS CONVERTIDOS EM NFE <?php if($string){ echo "- Período: $mes/$ano"; }?></td>
+		<td colspan="10" align="left" class="cab01">RPS CONVERTIDOS EM NFE <?php if($string){ echo "- Perï¿½odo: $mes/$ano"; }?></td>
 	  </tr>
 	  <tr>
-		<td>Total de RPS convertidos: <?php echo mysql_num_rows($sql);?></td>
+		<td>Total de RPS convertidos: <?php echo $sql->rowCount(); ?></td>
 	  </tr>
 	  <tr>
 		<td class="cab02" align="center">N&uacute;mero da NFe </td>
@@ -101,7 +101,9 @@ if(!(isset($_SESSION["empresa"]))){
 	<?php
 	
 	// imprime o resultado oo sql
-	while(list($numero, $codverificacao, $datahoraemissao, $rps_numero, $rps_data, $tomador_nome, $tomador_cnpjcpf, $tomador_municipio, $tomador_uf, $valortotal) = mysql_fetch_array($sql)) {
+	while(list(
+		$numero, $codverificacao, $datahoraemissao, $rps_numero, $rps_data, $tomador_nome, $tomador_cnpjcpf, $tomador_municipio, 
+		$tomador_uf, $valortotal) = $sql->fetch()) {
 	?>
 	  <tr>
 		<td align="center"><?php echo $numero; ?></td>
@@ -128,7 +130,7 @@ if(!(isset($_SESSION["empresa"]))){
 	}else{
 		?>
 			<tr>
-				<td align="center"><b>Não h&aacute; rps convertidos nesse per&iacute;odo!</b></td>
+				<td align="center"><b>Nï¿½o h&aacute; rps convertidos nesse per&iacute;odo!</b></td>
 			</tr>
 	<?php
 	}

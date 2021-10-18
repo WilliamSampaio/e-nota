@@ -25,10 +25,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 $cnpj=$_SESSION['login'];
 
 //determina o emissor
-$sql_login=mysql_query("SELECT * FROM cadastro WHERE cnpj='$cnpj' OR cpf='$cnpj'");
-$dados=mysql_fetch_array($sql_login);
+$sql_login=$PDO->query("SELECT * FROM cadastro WHERE cnpj='$cnpj' OR cpf='$cnpj'");
+$dados=$sql_login->fetch();
 
-if(mysql_num_rows($sql_login)<1){
+if($sql_login->rowCount()<1){
 	Mensagem("CNPJ/CPF ou senha inv&aacute;lidos");
 	Redireciona("site/des.php");
 }
@@ -65,15 +65,15 @@ function AbrirGuias(ano, mes){
 		<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
 	</tr>
 	<?php
-    $qryano=mysql_query("SELECT DISTINCT SUBSTRING(periodo,1,4) FROM livro WHERE codcadastro='{$dados['codigo']}' AND estado='N'");
+    $qryano=$PDO->query("SELECT DISTINCT SUBSTRING(periodo,1,4) FROM livro WHERE codcadastro='{$dados['codigo']}' AND estado='N'");
     $diaatual=date("Y-m-d");
     if($dados['datainicio']==NULL || $dados['datainicio']==0000-00-00){ $dados['datainicio'] = $diaatual; }
     $anoatual=date("Y");
     $anoempresa=substr($dados['datainicio'],0,-6);
     $anofimempresa=substr($dados['datafim'],0,-6);
     if($dados['datafim']<$dados['datainicio']){ $dados['datafim']=NULL; } if($dados['datafim']>$dados['diaatual']){ $dados['datafim']=NULL; }
-    if(mysql_num_rows($qryano)>0){
-    $qtdanos=mysql_num_rows($qryano);
+    if($qryano->rowCount()>0){
+    $qtdanos=$qryano->rowCount();
     $codcript=base64_encode('des');
     ?>
 	<tr>

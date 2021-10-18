@@ -37,11 +37,11 @@ if(!(isset($_SESSION["empresa"]))){
 		include("../include/conect.php");
 		include("../funcoes/util.php");
 		include("inc/funcao_logs.php");
-		$sql=mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-		list($UltimaNota)=mysql_fetch_array($sql);  
+		$sql=$PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+		list($UltimaNota)=$sql->fetch();  
 		
-		$sql=mysql_query("SELECT codigo FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'"); 
-		list($codigoEmpresa)=mysql_fetch_array($sql);  
+		$sql=$PDO->query("SELECT codigo FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'"); 
+		list($codigoEmpresa)=$sql->fetch();  
 		
 		$xml = simplexml_load_file("importar/$arquivo_xml"); // lê o arquivo XML 
 		$cont = 0; 
@@ -49,7 +49,7 @@ if(!(isset($_SESSION["empresa"]))){
 		foreach($xml->children() as $elemento => $valor){   
 					
 			$tomador_cnpjcpf = $xml->nota[$cont]->tomador_cnpjcpf;
-			$sql_verifica_tomador = mysql_query("
+			$sql_verifica_tomador = $PDO->query("
 				SELECT
 					cpf,
 					codtipo,
@@ -69,8 +69,8 @@ if(!(isset($_SESSION["empresa"]))){
 				WHERE 
 					(cpf = '$tomador_cnpjcpf' OR cnpj = '$tomador_cnpjcpf')
 			");
-			if(mysql_num_rows($sql_verifica_tomador)){
-				$dadosTomador = mysql_fetch_array($sql_verifica_tomador);
+			if($sql_verifica_tomador->rowCount()){
+				$dadosTomador = $sql_verifica_tomador->fetch();
 				$tomador_inscrmunicipal =  $dadosTomador['inscrmunicipal'] == utf8_decode($xml->nota[$cont]->tomador_inscrmunicipal)
 					? $dadosTomador['inscrimunicipal']
 					: utf8_decode($xml->nota[$cont]->tomador_inscrmunicipal);
@@ -145,8 +145,8 @@ if(!(isset($_SESSION["empresa"]))){
 		$rps_numero		= $xml->nota[$cont]->rps_numero;
 		$rps_data		= $xml->nota[$cont]->rps_data;
 			
-			$sql_verifica_rps = mysql_query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '$CODIGO_DA_EMPRESA'");
-			if(mysql_num_rows($sql_verifica_rps)){
+			$sql_verifica_rps = $PDO->query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '$CODIGO_DA_EMPRESA'");
+			if($sql_verifica_rps->rowCount()){
 				Mensagem("A nota com o número de RPS $rps_numero, já foi emitida!");
 				exit;
 			}
@@ -171,7 +171,7 @@ if(!(isset($_SESSION["empresa"]))){
 			$max = strlen($CaracteresAceitos)-1;
 			$password = null;
 			for($i=0; $i < 8; $i++){
-				$password .= $CaracteresAceitos{mt_rand(0, $max)}; 
+				$password .= $CaracteresAceitos[mt_rand(0, $max)]; 
 				$carac = strlen($password); 
 				if($carac ==4){ 
 					$password .= "-";
@@ -183,37 +183,17 @@ if(!(isset($_SESSION["empresa"]))){
 			$codTipoDec = coddeclaracao('DES Consolidada');
 			if($inserir_tomador == "S"){				
 				$datainicio = date("Y-m-d");
-				mysql_query("
-					INSERT INTO
-						cadastro
-					SET
-						nome              = '$tomador_nome',
-						codtipo           = '$codTipoTomador',
-						codtipodeclaracao = '$codTipoDec',
-						razaosocial       = '$tomador_nome',
-						$campo            = '$tomador_cnpjcpf',
-						inscrmunicipal    = '$tomador_inscrmunicipal',
-						logradouro        = '$tomador_logradouro',
-						numero            = '$tomador_numero',
-						bairro			  = '$tomador_bairro',
-						complemento       = '$tomador_complemento',
-						cep               = '$tomador_cep',
-						uf                = '$tomador_uf',
-						email             = '$tomador_email',
-						municipio         = '$tomador_municipio',
-						estado            = 'A',
-						datainicio        = '$datainicio'
-				")or die(mysql_error());
-			}else{
-				if($dadosTomador['codtipo'] == $codTipoTomador){
-					mysql_query("
-						UPDATE 
+				try
+				{
+					$PDO->query("
+						INSERT INTO
 							cadastro
 						SET
 							nome              = '$tomador_nome',
 							codtipo           = '$codTipoTomador',
 							codtipodeclaracao = '$codTipoDec',
 							razaosocial       = '$tomador_nome',
+							$campo            = '$tomador_cnpjcpf',
 							inscrmunicipal    = '$tomador_inscrmunicipal',
 							logradouro        = '$tomador_logradouro',
 							numero            = '$tomador_numero',
@@ -223,10 +203,44 @@ if(!(isset($_SESSION["empresa"]))){
 							uf                = '$tomador_uf',
 							email             = '$tomador_email',
 							municipio         = '$tomador_municipio',
-							estado            = 'A'
-						WHERE 
-							$campo = '$tomador_cnpjcpf'	
-					")or die(mysql_error());
+							estado            = 'A',
+							datainicio        = '$datainicio'
+					");
+				}
+				catch (PDOException $e)
+				{
+					echo 'Erro: ' . $e->getMessage();
+				}
+			}else{
+				if($dadosTomador['codtipo'] == $codTipoTomador){
+					try
+					{
+						$PDO->query("
+							UPDATE 
+								cadastro
+							SET
+								nome              = '$tomador_nome',
+								codtipo           = '$codTipoTomador',
+								codtipodeclaracao = '$codTipoDec',
+								razaosocial       = '$tomador_nome',
+								inscrmunicipal    = '$tomador_inscrmunicipal',
+								logradouro        = '$tomador_logradouro',
+								numero            = '$tomador_numero',
+								bairro			  = '$tomador_bairro',
+								complemento       = '$tomador_complemento',
+								cep               = '$tomador_cep',
+								uf                = '$tomador_uf',
+								email             = '$tomador_email',
+								municipio         = '$tomador_municipio',
+								estado            = 'A'
+							WHERE 
+								$campo = '$tomador_cnpjcpf'	
+						");
+					}
+					catch (PDOException $e)
+					{
+						echo 'Erro: ' . $e->getMessage();
+					}
 				}	
 			}
 			//Pega a data e a hora da emissao
@@ -234,72 +248,86 @@ if(!(isset($_SESSION["empresa"]))){
 			$horaAtual = date("H:i:s");
 			
 			//Pega o numero da ultima nota
-			$sql_numero = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-			list($max_numero) = mysql_fetch_array($sql_numero);
+			$sql_numero = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+			list($max_numero) = $sql_numero->fetch();
 			$max_numero++;
 			
 			//Insere os dados no banco
-			mysql_query("
-				INSERT INTO 
-					notas 
-				SET 
-					numero = '$max_numero', 
-					codverificacao = '$password', 
-					codemissor = '$CODIGO_DA_EMPRESA', 
-					rps_numero = '$rps_numero', 
-					rps_data = '$rps_data',
-					tomador_nome = '$tomador_nome', 
-					tomador_cnpjcpf = '$tomador_cnpjcpf',
-					tomador_inscrmunicipal = '$tomador_inscrmunicipal',		
-					tomador_logradouro = '$tomador_logradouro',
-					tomador_numero = '$tomador_numero',
-					tomador_bairro = '$tomador_bairro',
-					tomador_complemento = '$tomador_complemento', 
-					tomador_cep = '$tomador_cep', 
-					tomador_municipio = '$tomador_municipio',
-					tomador_uf = '$tomador_uf',
-					tomador_email = '$tomador_email', 
-					discriminacao = '$discriminacao',
-					valortotal = '$valortotal', 
-					valordeducoes = '$valordeducoes', 
-					basecalculo = '$basecalc',
-					valoriss = '$iss',  
-					estado = '$estado',
-					datahoraemissao = '$dataAtual $horaAtual', 
-					issretido = '$issretido', 
-					valorinss = '$inss', 
-					valorirrf = '$irrf', 
-					observacao = '$observacoes',
-					tipoemissao = 'importada',
-					pispasep = '$pispasep',
-					cofins = '$cofins',
-					contribuicaosocial = '$csocial',
-					aliq_percentual = '$aliqpercentual',
-					motivo_cancelamento = '$motivocancel',
-					total_retencao = '$totalretencoes',
-					valoracrescimos = '$acrescimo'
-			")or die(mysql_error());
+			try
+			{
+				$PDO->query("
+					INSERT INTO 
+						notas 
+					SET 
+						numero = '$max_numero', 
+						codverificacao = '$password', 
+						codemissor = '$CODIGO_DA_EMPRESA', 
+						rps_numero = '$rps_numero', 
+						rps_data = '$rps_data',
+						tomador_nome = '$tomador_nome', 
+						tomador_cnpjcpf = '$tomador_cnpjcpf',
+						tomador_inscrmunicipal = '$tomador_inscrmunicipal',		
+						tomador_logradouro = '$tomador_logradouro',
+						tomador_numero = '$tomador_numero',
+						tomador_bairro = '$tomador_bairro',
+						tomador_complemento = '$tomador_complemento', 
+						tomador_cep = '$tomador_cep', 
+						tomador_municipio = '$tomador_municipio',
+						tomador_uf = '$tomador_uf',
+						tomador_email = '$tomador_email', 
+						discriminacao = '$discriminacao',
+						valortotal = '$valortotal', 
+						valordeducoes = '$valordeducoes', 
+						basecalculo = '$basecalc',
+						valoriss = '$iss',  
+						estado = '$estado',
+						datahoraemissao = '$dataAtual $horaAtual', 
+						issretido = '$issretido', 
+						valorinss = '$inss', 
+						valorirrf = '$irrf', 
+						observacao = '$observacoes',
+						tipoemissao = 'importada',
+						pispasep = '$pispasep',
+						cofins = '$cofins',
+						contribuicaosocial = '$csocial',
+						aliq_percentual = '$aliqpercentual',
+						motivo_cancelamento = '$motivocancel',
+						total_retencao = '$totalretencoes',
+						valoracrescimos = '$acrescimo'
+				");
+			}
+			catch (PDOException $e)
+			{
+				echo 'Erro: ' . $e->getMessage();
+			}
 			//Pega o codigo da ultima nota inserida no banco
-			$codUltimaNota = mysql_insert_id();
+			$codUltimaNota = $PDO->lastInsertId();
 			
-			$sqlIsento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-			list($isento) = mysql_fetch_array($sqlIsento);
+			$sqlIsento = $PDO->query("SELECT isentoiss FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+			list($isento) = $sqlIsento->fetch();
 			if($isento == 'S'){
 				$iss       = 0;
 				$issretido = 0;
 			}
 
-			mysql_query("
-				INSERT INTO
-					notas_servicos
-				SET
-					codnota       = '$codUltimaNota',
-					codservico    = '$codservico',
-					basecalculo   = '$basecalculo',
-					issretido     = '$issretido',
-					iss           = '$iss',
-					discriminacao = '$discriminacao'
-			")or die(mysql_error());
+			try
+			{
+				$PDO->query("
+					INSERT INTO
+						notas_servicos
+					SET
+						codnota       = '$codUltimaNota',
+						codservico    = '$codservico',
+						basecalculo   = '$basecalculo',
+						issretido     = '$issretido',
+						iss           = '$iss',
+						discriminacao = '$discriminacao'
+				");
+			}
+			catch (PDOException $e)
+			{
+				echo 'Erro: ' . $e->getMessage();
+			}
 					
 			//Testa em quais modalidades de credito o tomador se encaixa
 			if (strlen($tomador_cnpjcpf) == 14){
@@ -328,7 +356,7 @@ if(!(isset($_SESSION["empresa"]))){
 			}elseif($issretido > 0){
 				$value = $issretido;
 			}
-			$sql_credito = mysql_query("
+			$sql_credito = $PDO->query("
 				SELECT 
 					credito 
 				FROM 
@@ -339,27 +367,48 @@ if(!(isset($_SESSION["empresa"]))){
 					issretido = '$iss_retido' AND
 					valor <= '$value'
 			");
-			if(mysql_num_rows($sql_credito) > 0){
-				list($creditoPercent) = mysql_fetch_array($sql_credito);
+			if($sql_credito->rowCount() > 0){
+				list($creditoPercent) = $sql_credito->fetch();
 				if($iss > 0){
 					$credito = $iss*$creditoPercent/100;
 				}elseif($issretido > 0){
-					$credito = $issretido*creditoPercent/100;
+					$credito = $issretido*$creditoPercent/100;
 				}
 				$credito = number_format($credito,2,'.','');
-				mysql_query("UPDATE notas SET credito = '$credito' WHERE codigo = '$codUltimaNota'") or die(mysql_error());
+				try 
+				{
+					$PDO->query("UPDATE notas SET credito = '$credito' WHERE codigo = '$codUltimaNota'");
+				}
+				catch (PDOException $e)
+				{
+					echo 'Erro: ' . $e->getMessage();
+				}
 			}
 			
 			//Atualiza a ultima nota
-			$sql = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-			list($ultimaNota) = mysql_fetch_array($sql);
+			$sql = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+			list($ultimaNota) = $sql->fetch();
 			$notificacao = notificaTomador($CODIGO_DA_EMPRESA,$ultimaNota);
 			
 			$ultimaNota += 1;
 			
-			$sql = mysql_query("UPDATE cadastro SET ultimanota = '$ultimaNota' WHERE codigo = '$CODIGO_DA_EMPRESA'")or die(mysql_error());
+			try 
+			{
+				$sql = $PDO->query("UPDATE cadastro SET ultimanota = '$ultimaNota' WHERE codigo = '$CODIGO_DA_EMPRESA'");
+			}
+			catch (PDOException $e)
+			{
+				echo 'Erro: ' . $e->getMessage();
+			}
 			
-			mysql_query("UPDATE rps_controle SET ultimorps = '$rps_numero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'")or die(mysql_error());
+			try 
+			{
+				$PDO->query("UPDATE rps_controle SET ultimorps = '$rps_numero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+			}
+			catch (PDOException $e)
+			{
+				echo 'Erro: ' . $e->getMessage();
+			}
 			
 			$cont++;
 		}// foreach

@@ -49,9 +49,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 					}
 				}
 				
-				$sql_rps_controle = mysql_query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
-				if(mysql_num_rows($sql_rps_controle)){
-					list($ultimoRPS,$limiteRPS) = mysql_fetch_array($sql_rps_controle);
+				$sql_rps_controle = $PDO->query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+				if($sql_rps_controle->rowCount()){
+					list($ultimoRPS,$limiteRPS) = $sql_rps_controle->fetch();
 				}else{
 					$ultimoRPS = 0;
 					$limiteRPS = 0;
@@ -59,8 +59,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 				}
 				
 				
-				$sql_testa_solicitacao = mysql_query("SELECT codigo FROM rps_solicitacoes WHERE codcadastro = '$CODIGO_DA_EMPRESA' AND estado = 'A'");
-				if(mysql_num_rows($sql_testa_solicitacao)){
+				$sql_testa_solicitacao = $PDO->query("SELECT codigo FROM rps_solicitacoes WHERE codcadastro = '$CODIGO_DA_EMPRESA' AND estado = 'A'");
+				if($sql_testa_solicitacao->rowCount()){
 					$disabled = "disabled=\"disabled\"";
 					$styleSpan = "";
 					$mensagem = "Aguarde libera&ccedil;&atilde;o da prefeitura";
@@ -129,10 +129,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 		
 			<?php
 			//SELECIONA A ULTIMA NOTA INSERIDA PELA EMPRESA
-			$sql_ultimanota = mysql_query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-			list($ultimanota,$notalimite)=mysql_fetch_array($sql_ultimanota);
+			$sql_ultimanota = $PDO->query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+			list($ultimanota,$notalimite)=$sql_ultimanota->fetch();
 			$proximaNota = $ultimanota + 1;
-			//Verifica se o prestador pode ou não emitir notas
+			//Verifica se o prestador pode ou nï¿½o emitir notas
 			if(($proximaNota > $notalimite) && ($notalimite != 0)){ 
 			  echo "<center><font color=\"#000000\"><b>Voc&ecirc; excedeu o limite de AIDFe, por favor solicite um limite maior!</b></font></center>";
 			?>
@@ -150,7 +150,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							$restante = $notalimite - $ultimanota;
 					?>
 					<tr>
-						<td align="left"><font color="#FF0000">Você ainda pode gerar:</font> </td>
+						<td align="left"><font color="#FF0000">Vocï¿½ ainda pode gerar:</font> </td>
 						<td align="left"><b><?php echo $restante;?></b> <font color="#FF0000"><?php if($restante == 1){ echo "nota"; }else{ echo "notas";}?></font>.</td>
 					</tr>
 					<?php

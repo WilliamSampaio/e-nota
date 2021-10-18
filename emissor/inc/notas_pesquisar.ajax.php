@@ -75,7 +75,7 @@ WHERE
 			<?php $sql = Paginacao($query,'frmPesquisar','Container',10);?>
 			<table width="100%" border="0" cellspacing="2" cellpadding="2">
 				<?php
-					if(mysql_num_rows($sql)>0){
+					if($sql->rowCount()>0){
 				?>
 				<tr>
 					<td width="5%" align="center">N&ordm;</td>
@@ -84,7 +84,7 @@ WHERE
 					<td width="36%" align="center">Tomador Nome </td>
 					<td width="10%" align="center">Estado</td>
 					<td width="10%" align="center">
-                    	<input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir seleção" onclick="document.getElementById('frmPesquisar').action='../site/imprimirnotas.php';document.getElementById('frmPesquisar').target='_blank';submit();" />
+                    	<input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir seleï¿½ï¿½o" onclick="document.getElementById('frmPesquisar').action='../site/imprimirnotas.php';document.getElementById('frmPesquisar').target='_blank';submit();" />
                     </td>
 				</tr>
 				<tr>
@@ -92,11 +92,13 @@ WHERE
 				</tr>
 				<?php	
 					$x = 0;
-					while(list($codigo, $numero, $codverificacao, $datahoraemissao, $codempresa, $tomador_nome, $tomador_cnpjcpf, $estado, $codtomador) = mysql_fetch_array($sql)) {
+					while(list(
+						$codigo, $numero, $codverificacao, $datahoraemissao, $codempresa, $tomador_nome, $tomador_cnpjcpf, 
+						$estado, $codtomador) = $sql->fetch()) {
 					
 					if($codtomador){
-						$sql_tomador = mysql_query("SELECT nome, razaosocial FROM cadastro WHERE codigo = '$codtomador'");
-						list($tomador_nome,$tomador_razaosocial) = mysql_fetch_array($sql_tomador);
+						$sql_tomador = $PDO->query("SELECT nome, razaosocial FROM cadastro WHERE codigo = '$codtomador'");
+						list($tomador_nome,$tomador_razaosocial) = $sql_tomador->fetch();
 						if(!$tomador_nome){
 							$tomador_nome = $tomador_razaosocial;
 						}

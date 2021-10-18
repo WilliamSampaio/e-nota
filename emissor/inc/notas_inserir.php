@@ -26,12 +26,12 @@ if($_POST["btInserirNota"] == "Emitir"){
 $tipopessoa = tipoPessoa($_SESSION['login']);//pega o tipo do prestador, se for cpf usa calculo de RPA
 
 //SELECIONA A ULTIMA NOTA INSERIDA PELA EMPRESA
-$sql = mysql_query("SELECT ultimanota, codtipo, codtipodeclaracao FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-list($ultimanota,$codtipo,$codtipodec)=mysql_fetch_array($sql);
+$sql = $PDO->query("SELECT ultimanota, codtipo, codtipodeclaracao FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+list($ultimanota,$codtipo,$codtipodec)=$sql->fetch();
 $ultimanota += 1;
 
-$sql = mysql_query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
-list($notalimite) = mysql_fetch_array($sql);
+$sql = $PDO->query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
+list($notalimite) = $sql->fetch();
 if($notalimite == 0){
 	$notalimite = "Liberado";
 }
@@ -49,7 +49,7 @@ $password = null;
  } 
 }
 
-$sql_servicos=mysql_query("
+$sql_servicos=$PDO->query("
 	SELECT 
 		cadastro_servicos.codigo,
 		servicos.codigo,
@@ -66,8 +66,8 @@ $sql_servicos=mysql_query("
 		cadastro_servicos.codemissor = '$CODIGO_DA_EMPRESA'
 ");
  
-$sql_lista_regrasdecredito = mysql_query("SELECT credito, tipopessoa, issretido, valor FROM nfe_creditos WHERE estado = 'A' ORDER BY valor DESC");
-while(list($nfe_cred,$nfe_tipo_pessoa,$nfe_issretido,$nfe_valor) = mysql_fetch_array($sql_lista_regrasdecredito)){
+$sql_lista_regrasdecredito = $PDO->query("SELECT credito, tipopessoa, issretido, valor FROM nfe_creditos WHERE estado = 'A' ORDER BY valor DESC");
+while(list($nfe_cred,$nfe_tipo_pessoa,$nfe_issretido,$nfe_valor) = $sql_lista_regrasdecredito->fetch()){
 	$array_regras_credito[] = $nfe_tipo_pessoa."|".$nfe_issretido."|".$nfe_valor."|".$nfe_cred;
 }
 
@@ -81,8 +81,8 @@ if(($ultimanota > $notalimite) && ($notalimite != 0)){
 <?php		
 }else{ 
 
-	$sql_rps = mysql_query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
-	list($ultimoRPS,$limiteRPS) = mysql_fetch_array($sql_rps);
+	$sql_rps = $PDO->query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+	list($ultimoRPS,$limiteRPS) = $sql_rps->fetch();
 	
 	if($ultimoRPS < 1){
 		$ultimoRPS = 0;
@@ -96,8 +96,8 @@ if(($ultimanota > $notalimite) && ($notalimite != 0)){
 <form name="frmInserir" method="post" action="notas.php?btPropria=T&btInserir=T" id="frmInserir">
 <input name="btInserir" type="hidden" value="Emitir Nota" class="botao" />
 <?php
-	$sql_municipio = mysql_query("SELECT cidade FROM configuracoes");
-	list($UF_MUNICIPIO) = mysql_fetch_array($sql_municipio);
+	$sql_municipio = $PDO->query("SELECT cidade FROM configuracoes");
+	list($UF_MUNICIPIO) = $sql_municipio->fetch();
 ?>
 <input type="hidden" id="hdMunicpio" name="hdMunicpio" value="<?php echo $UF_MUNICIPIO;?>" />
 <table border="0" align="center" cellpadding="0" cellspacing="1">
@@ -237,8 +237,8 @@ if(($ultimanota > $notalimite) && ($notalimite != 0)){
         <select name="txtTomadorUF" id="txtTomadorUF" onchange="buscaCidades(this,'divTomadorMunicipio');">
             <option value=""></option>
             <?php
-                $sqlcidades=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-                while(list($uf_busca)=mysql_fetch_array($sqlcidades)){
+                $sqlcidades=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+                while(list($uf_busca)=$sqlcidades->fetch()){
                     echo "<option value=\"$uf_busca\"";if($uf_busca == $UF_MUNICIPIO){ echo "selected=selected"; }echo ">$uf_busca</option>";
                 }
             ?>
@@ -252,8 +252,8 @@ if(($ultimanota > $notalimite) && ($notalimite != 0)){
         <div  id="divTomadorMunicipio">
             <select name="txtInsMunicipioEmpresa" id="txtInsMunicipioEmpresa" class="combo">
                 <?php
-                    $sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$uf_busca'");
-                    while(list($nome_municipio) = mysql_fetch_array($sql_municipio)){
+                    $sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$uf_busca'");
+                    while(list($nome_municipio) = $sql_municipio->fetch()){
                         echo "<option value=\"$nome_municipio\"";if(strtolower($nome_municipio) == strtolower($NOME_MUNICIPIO)){ echo "selected=selected";} echo ">$nome_municipio</option>";
                     }//fim while 
                 ?>

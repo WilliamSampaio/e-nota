@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <input name="hdInputs" id="hdInputs" type="hidden" value="0" />
 <input name="hdCodemissor" id="hdCodemissor" type="hidden" value="<?php echo $CODIGO_DA_EMPRESA;?>" />
-<input name="hdLimite" id="hdLimite" type="hidden" value="<?php echo mysql_num_rows($sql_servicos);?>"  />
+<input name="hdLimite" id="hdLimite" type="hidden" value="<?php echo $sql_servicos->rowCount(); ?>"  />
 
 <table width="100%" id="tblServicos" cellpadding="3">
 	<tr>
@@ -167,8 +167,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 </table>
 		</fieldset>
 	<?php
-  	$sql_verifica_creditos = mysql_query("SELECT ativar_creditos FROM configuracoes");
-	list($ativar_creditos) = mysql_fetch_array($sql_verifica_creditos);
+  	$sql_verifica_creditos = $PDO->query("SELECT ativar_creditos FROM configuracoes");
+	list($ativar_creditos) = $sql_verifica_creditos->fetch();
 	
 	if($ativar_creditos == "n"){
 		$display = "style=\"display:none\"";
@@ -184,7 +184,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			R$ <input name="txtValTotal" id="txtValTotal" type="text" size="10" class="texto" readonly="yes" style="text-align:right;" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" >&nbsp;
 		</td>
 		<td width="13%" align="left">
-			Retenç&otilde;es		</td>
+			Retenï¿½&otilde;es		</td>
 		<td width="40%" align="left">
 			R$ 
 				<input name="txtValTotalRetencao" id="txtValTotalRetencao" type="text" class="texto" size="10" readonly="readonly" style="text-align:right" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" />

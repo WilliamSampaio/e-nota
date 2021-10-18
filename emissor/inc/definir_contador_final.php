@@ -39,7 +39,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			}
 		}
 		
-		$sql = mysql_query("
+		$sql = $PDO->query("
 			SELECT 
 				codigo,
 				razaosocial
@@ -58,7 +58,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td width="1058">
 					<select name="cmbContador">
 							<?php
-								while(list($codcontador,$razaosocialcontador)=mysql_fetch_array($sql))
+								while(list($codcontador,$razaosocialcontador)=$sql))
 									{
 										echo "<option value=\"$codcontador\">$razaosocialcontador</option>";
 									}				  

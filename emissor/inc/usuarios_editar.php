@@ -23,8 +23,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 if($txtSenha !="")
 {
  $campo = tipoPessoa($login);
- $sql = mysql_query("UPDATE cadastro SET senha = '$txtSenha' WHERE $campo = '$login'");
- print("<script language=JavaScript>alert('Usuário atualizado com sucesso!!')</script>");
+ $sql = $PDO->query("UPDATE cadastro SET senha = '$txtSenha' WHERE $campo = '$login'");
+ print("<script language=JavaScript>alert('Usuï¿½rio atualizado com sucesso!!')</script>");
  add_logs('Alterou a senha');
 }
 else

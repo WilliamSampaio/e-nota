@@ -77,7 +77,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		}
 	}
 	
-	$sql_verifica_rps = mysql_query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '$CODIGO_DA_EMPRESA'");
+	$sql_verifica_rps = $PDO->query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '$CODIGO_DA_EMPRESA'");
 	if(mysql_num_rows($sql_verifica_rps)){
 		$erro = 7;
 	}

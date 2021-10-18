@@ -22,12 +22,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 require_once dirname(__FILE__).'/../../include/config.php';
 
 // Conectar ao banco de dados das prefeituras
-$conectar_pref = mysql_connect($HOST,$USUARIO, $SENHA); 
-if (!$conectar_pref) { die('N&atilde;o foi poss&iacute;vel conectar: ' . mysql_error()); } 
+// $conectar_pref = mysql_connect($HOST,$USUARIO, $SENHA); 
+// if (!$conectar_pref) { die('N&atilde;o foi poss&iacute;vel conectar: ' . mysql_error()); } 
 
 // Seleciona o banco de dados
-$db_selected_pref = mysql_select_db($BANCO, $conectar_pref);
-if (!$db_selected_pref) {die ('N&atilde;o foi poss&iacute;vel acessar a base: ' . mysql_error());}
+// $db_selected_pref = mysql_select_db($BANCO, $conectar_pref);
+// if (!$db_selected_pref) {die ('N&atilde;o foi poss&iacute;vel acessar a base: ' . mysql_error());}
 /*
 if($dadospref!=true){
 	//mysql_close($conectar);
@@ -35,19 +35,25 @@ if($dadospref!=true){
 */
 //SELECIONA O CODIGO DA EMPRESA
 
+  try {
+    $PDO = new PDO('mysql:host=' . $DB_HOST . ';dbname=' . $DB_DATABASE, $DB_USERNAME, $DB_PASSWORD);
+  } catch (PDOException $e) {
+    echo 'Erro ao conectar com o MySQL: ' . $e->getMessage();
+  }
+
  if($_SESSION['login'] != "")
  {
   $NOME = $_SESSION['nome'];
   $CODIGO = $_SESSION['codempresa'];
-  $sql_codigo_empresa = mysql_query("SELECT codigo, ultimanota,municipio,uf,logradouro,numero FROM cadastro WHERE nome = '$NOME' AND codigo = '$CODIGO'");
-  list($CODIGO_DA_EMPRESA,$ULTIMA_NOTA,$MUNICIPIO_DA_EMPRESA,$ESTADO_DA_EMPRESA,$ENDERECO_DA_EMPRESA,$NUMERO_DA_EMPRESA) = mysql_fetch_array($sql_codigo_empresa);
+  $sql_codigo_empresa = $PDO->query("SELECT codigo, ultimanota,municipio,uf,logradouro,numero FROM cadastro WHERE nome = '$NOME' AND codigo = '$CODIGO'");
+  list($CODIGO_DA_EMPRESA,$ULTIMA_NOTA,$MUNICIPIO_DA_EMPRESA,$ESTADO_DA_EMPRESA,$ENDERECO_DA_EMPRESA,$NUMERO_DA_EMPRESA) = $sql_codigo_empresa->fetch();
   
-  $sql_dadosprefeitura = mysql_query("SELECT cidade, estado, cnpj, endereco, topo_nfe, brasao_nfe, secretaria, codintegracao FROM configuracoes");
-  list($NOME_MUNICIPIO,$UF_MUNICIPIO,$CNPJ_MUNICIPIO,$ENDERECO_DA_PREFEITURA,$TOPO,$BRASAO,$SECRETARIA,$CODINTEGRACAO)=mysql_fetch_array($sql_dadosprefeitura);
+  $sql_dadosprefeitura = $PDO->query("SELECT cidade, estado, cnpj, endereco, topo_nfe, brasao_nfe, secretaria, codintegracao FROM configuracoes");
+  list($NOME_MUNICIPIO,$UF_MUNICIPIO,$CNPJ_MUNICIPIO,$ENDERECO_DA_PREFEITURA,$TOPO,$BRASAO,$SECRETARIA,$CODINTEGRACAO)=$sql_dadosprefeitura->fetch();
   
   if($CODINTEGRACAO!=0){
-  	$sql_integracao=mysql_query("SELECT empresa,diretorio FROM integracao WHERE codigo=$CODINTEGRACAO");
-	list($EMPRESAINTEGRACAO,$DIRETORIOINTEGRACAO)=mysql_fetch_array($sql_integracao);
+  	$sql_integracao=$PDO->query("SELECT empresa,diretorio FROM integracao WHERE codigo=$CODINTEGRACAO");
+	list($EMPRESAINTEGRACAO,$DIRETORIOINTEGRACAO)=$sql_integracao->fetch();
   }
   
  }

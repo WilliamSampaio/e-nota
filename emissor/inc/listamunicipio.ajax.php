@@ -19,13 +19,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	/* Não gravar em cache */
+	/* Nï¿½o gravar em cache */
 	include '../../include/nocache.php';
 	
 	include("../../include/conect.php");
 	echo "<select name=\"txtInsMunicipioEmpresa\" id=\"txtInsMunicipioEmpresa\" class=\"combo\">";
-	$sql = mysql_query("SELECT nome FROM municipios WHERE uf='".$_GET["UF"]."' ORDER BY nome");
-	while(list($municipio) = mysql_fetch_array($sql)) {
+	$sql = $PDO->query("SELECT nome FROM municipios WHERE uf='".$_GET["UF"]."' ORDER BY nome");
+	while(list($municipio) = $sql->fetch()) {
 		echo "<option value=\"$municipio\">$municipio</option>";
 	}
 	echo "</select>";

@@ -20,13 +20,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 $codDaSessao = $_SESSION['codempresa'];
-$sql_tipo_declaracao = mysql_query("SELECT codtipodeclaracao FROM cadastro WHERE codigo = '$codDaSessao'");
-list($codtipodeclaracao) = mysql_fetch_array($sql_tipo_declaracao);
+$sql_tipo_declaracao = $PDO->query("SELECT codtipodeclaracao FROM cadastro WHERE codigo = '$codDaSessao'");
+list($codtipodeclaracao) = $sql_tipo_declaracao->fetch();
 $codtipodec = coddeclaracao('Simples Nacional');
 
 if($codtipodeclaracao == $codtipodec){
 	// itens de menu
-	$menu = array("Cadastro","AIDF Eletrônico","Notas Eletrônicas"/*,"NF-e Tomadas"*/,"Relat&oacute;rio","Livro Digital","RPS","Contador","Exportar Notas","Ouvidoria","Utilitários","Sair");
+	$menu = array("Cadastro","AIDF Eletrï¿½nico","Notas Eletrï¿½nicas"/*,"NF-e Tomadas"*/,"Relat&oacute;rio","Livro Digital","RPS","Contador","Exportar Notas","Ouvidoria","Utilitï¿½rios","Sair");
 	$links = array("empresas.php","aidf.php","notas.php"/*,"notas_tomadas.php"*/,"relatorio.php","livro.php","importar.php","definir_contador.php","exportar.php","reclamacoes.php","utilitarios.php","logout.php");
 }else{
 	// itens de menu

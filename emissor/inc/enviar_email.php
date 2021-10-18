@@ -3,7 +3,7 @@
 	include("../../funcoes/util.php");
 
 	$codnota = $_POST['txtNotaEmail'];
-	$sql = mysql_query("
+	$sql = $PDO->query("
 		SELECT
 			notas.numero,
 			notas.codemissor
@@ -12,7 +12,7 @@
 		WHERE
 			codigo = '$codnota'		
 	");
-	$dados = mysql_fetch_array($sql);
+	$dados = $sql->fetch();
 	
 	if(notificaTomador($dados['codemissor'],$dados['numero'])){
 		Mensagem("Nota enviada ao tomador");

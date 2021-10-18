@@ -24,8 +24,8 @@ Fith Floor, Boston, MA 02110-1301, USA
   $cnpjcpf =$_GET['txtTomadorCNPJ'];
 
 	if($cnpjcpf!=""){
-		$query=mysql_query("SELECT nome,razaosocial,inscrmunicipal,inscrestadual,logradouro,numero,complemento,bairro,cep,municipio,email,uf,codtipo FROM cadastro WHERE cnpj='$cnpjcpf' or cpf='$cnpjcpf'");
-		$dados=mysql_fetch_object($query);
+		$query=$PDO->query("SELECT nome,razaosocial,inscrmunicipal,inscrestadual,logradouro,numero,complemento,bairro,cep,municipio,email,uf,codtipo FROM cadastro WHERE cnpj='$cnpjcpf' or cpf='$cnpjcpf'");
+		$dados=$query->fetchObject();
 		$disable = "";
 		
 		if(strlen($cnpjcpf) == 18){
@@ -82,8 +82,8 @@ Fith Floor, Boston, MA 02110-1301, USA
         <select name="txtTomadorUF" id="txtTomadorUF" onchange="buscaCidades(this,'divTomadorMunicipio')" <?php echo $select; ?>>
             <option value=""></option>
             <?php
-                $sqlcidades=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-                while(list($uf_busca)=mysql_fetch_array($sqlcidades)){
+                $sqlcidades=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+                while(list($uf_busca)=$sqlcidades->fetch()){
                     echo "<option value=\"$uf_busca\"";if($uf_busca == $dados->uf){ echo "selected=selected"; }echo ">$uf_busca</option>";
                 }
             ?>
@@ -98,8 +98,8 @@ Fith Floor, Boston, MA 02110-1301, USA
         	<input type="hidden" name="txtTomadorMunicipio" id="txtTomadorMunicipio" value="<?php echo $dados->municipio ;?>" />
             <select name="txtTomadorMunicipio" id="txtTomadorMunicipio" class="combo" <?php echo $select; ?>>
                 <?php
-                    $sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$dados->uf'");
-                    while(list($nome_municipio) = mysql_fetch_array($sql_municipio)){
+                    $sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$dados->uf'");
+                    while(list($nome_municipio) = $sql_municipio->fetch()){
                         echo "<option value=\"$nome_municipio\"";if(strtolower($nome_municipio) == strtolower($dados->municipio)){ echo "selected=selected";} echo ">$nome_municipio</option>";
                     }//fim while 
                 ?>

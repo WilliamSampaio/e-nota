@@ -52,13 +52,13 @@ if(false){?><table><?php }
 					<td align="left">C&oacute;digo do Servi&ccedil;o</td>
 					<td align="left">	  
 						<?php
-						//variaveis das regras de credito para usar na função de ValorIssRPA()
+						//variaveis das regras de credito para usar na funï¿½ï¿½o de ValorIssRPA()
 						?>
 						<!-- busca a relacao dos servicos por empresa -->
 						<select name="cmbCodServico" size="1" style="width:295px;" id="cmbCodServico" onchange="MostraValorRPA(); 
 						<?php print "ValorIssRPA($regra_cred_rpa)";?>" >
-						<option value="0">Selecione o Serviço</option>	   	        
-						<?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota,$issretido,$valor_rpa)=mysql_fetch_array($sql_servicos))
+						<option value="0">Selecione o Serviï¿½o</option>	   	        
+						<?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota,$issretido,$valor_rpa)=$sql_servicos->fetch())
 						{	   
 							print("<option value=\"$valor_rpa|$codigo|$issretido\"> $descricao </option>");
 						}	
@@ -193,14 +193,14 @@ if(false){?><table><?php }
   <tr>
     <td>
 		<?php
-		//variaveis das regras de credito para usar na função de ValorIssRPA()
+		//variaveis das regras de credito para usar na funï¿½ï¿½o de ValorIssRPA()
 		$regra_cred_rpa = "'$cred_pf_n','$val_pf_n','$cred_pf_s','$val_pf_s','$cred_pj_n','$val_pj_n','$cred_pj_s','$val_pj_s'";
 		?>
 		<!-- busca a relacao dos servicos por empresa -->
 		<select name="cmbCodServico" size="1" style="width:295px;" id="cmbCodServico" onchange="MostraValorRPA(); 
 		<?php print "ValorIssRPA($regra_cred_rpa)";?>" >
-		<option value="0">Selecione o Serviço</option>	   	        
-		<?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota,$issretido,$valor_rpa)=mysql_fetch_array($sql_servicos))
+		<option value="0">Selecione o Serviï¿½o</option>	   	        
+		<?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota,$issretido,$valor_rpa)=$sql_servicos))
 		{	   
 			print("<option value=\"$valor_rpa|$codigo|$issretido\"> $descricao </option>");
 		}	
@@ -220,7 +220,7 @@ if(false){?><table><?php }
   <tr>    
   <tr>
     <td align="left">
-	  Alíquota de INSS
+	  Alï¿½quota de INSS
 	</td>
     <td align="left">	
  	 <input name="txtAliquotaINSS" id="txtAliquotaINSS" type="text" size="5" class="texto" style="text-align:right;" onkeyup="MaskPercent(this)" 
@@ -233,7 +233,7 @@ if(false){?><table><?php }
   </tr> 
   <tr>
     <td align="left">
-	  Alíquota de IRRF
+	  Alï¿½quota de IRRF
 	</td>
     <td align="left">	
  	 <input name="txtIRRF" id="txtIRRF" type="text" size="5" class="texto" style="text-align:right;" onkeyup="MaskPercent(this)" 
@@ -287,8 +287,8 @@ if(false){?><table><?php }
   </tr>
   <?php */ ?>
   <?php
-  	$sql_verifica_creditos = mysql_query("SELECT ativar_creditos FROM configuracoes");
-	list($ativar_creditos) = mysql_fetch_array($sql_verifica_creditos);
+  	$sql_verifica_creditos = $PDO->query("SELECT ativar_creditos FROM configuracoes");
+	list($ativar_creditos) = $sql_verifica_creditos->fetch();
 	
 	if($ativar_creditos == "n"){
 		$display = "style=\"display:none\"";

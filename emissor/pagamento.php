@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-// inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
+// inicia a sessï¿½o verificando se jah esta com o usuario logado, se estiver entra na pï¿½gina admin
 
 session_name("emissor");
 session_start();
@@ -88,8 +88,8 @@ if($_POST["btBoleto"]){
 		
 		$codigolivro	= $_POST["hdLivro"];
 		$codemissor		= $_POST["txtEmissor"];
-		$sql_livro		= mysql_query("SELECT * FROM livro WHERE codigo = '$codigolivro'");
-		$dados_livro	= mysql_fetch_array($sql_livro);
+		$sql_livro		= $PDO->query("SELECT * FROM livro WHERE codigo = '$codigolivro'");
+		$dados_livro	= $sql_livro->fetch();
 		$hoje           = date("Y-m-d");
 		$dataem         = explode("-",$hoje);
 	
@@ -100,8 +100,8 @@ if($_POST["btBoleto"]){
 	
 		$multa = calculaMultaDes($dias, $dados_livro['valorisstotal']);
 	
-		$sql_banco=mysql_query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
-		list($codbanco,$boleto)=mysql_fetch_array($sql_banco);
+		$sql_banco=$PDO->query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
+		list($codbanco,$boleto)=$sql_banco->fetch();
 		
 		$vencimento 	= explode("-",$dados_livro['vencimento']);
 		$vencimentoguia = UltDiaUtil($vencimento[1],$vencimento[0],true);
@@ -134,21 +134,21 @@ if($_POST["btBoleto"]){
             ");
 
 
-			if(mysql_query($insere_guia)){
-				$sqlguia=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
-				list($codguiapag)=mysql_fetch_array($sqlguia);
+			if($PDO->query($insere_guia)){
+				$sqlguia=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
+				list($codguiapag)=$sqlguia->fetch();
 				
 				$nossonumero = gerar_nossonumero($codguiapag,$vencimentoguia);
 				$chavecontroledoc = gerar_chavecontrole($dados_livro["codigo"],$codguiapag);
 				
-				mysql_query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguiapag'");
+				$PDO->query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguiapag'");
 				
-				$sql_boleto=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
-				list($codigoboleto)=mysql_fetch_array($sql_boleto);	
+				$sql_boleto=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
+				list($codigoboleto)=$sql_boleto->fetch();	
 		
 					$atualiza_livro = ("UPDATE livro SET estado='B' WHERE codigo='$codigolivro'");
 					
-					if(mysql_query($atualiza_livro)){
+					if($PDO->query($atualiza_livro)){
 						Mensagem("Boleto gerado com sucesso");
 						imprimirGuia($codigoboleto);
 						Redireciona("pagamento.php");	

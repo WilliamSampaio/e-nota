@@ -23,15 +23,15 @@ session_name("emissor");
 session_start();
 $login = $_SESSION['login'];
 $campo = tipoPessoa($login);
-$sql = mysql_query("UPDATE notas SET estado = 'C', motivo_cancelamento = '$txtMotivoCancelar' WHERE codigo = '$txtCodigo'");
+$sql = $PDO->query("UPDATE notas SET estado = 'C', motivo_cancelamento = '$txtMotivoCancelar' WHERE codigo = '$txtCodigo'");
  
- $sql = mysql_query("
+ $sql = $PDO->query("
  SELECT notas.tomador_email,notas.numero,notas.rps_numero,cadastro.nome,cadastro.$campo,DATE_FORMAT(notas.datahoraemissao,'%d/%m/%Y %h:%i:%s'),notas.codverificacao,cadastro.email 
  FROM notas 
  INNER JOIN cadastro ON notas.codemissor = cadastro.codigo 
  WHERE notas.codigo = '$txtCodigo'");
  
- list($email,$num_nota,$num_rps,$nome_empresa,$cpfcnpf_empresa,$dataehora,$codverificacao,$empresa_email)=mysql_fetch_array($sql);
+ list($email,$num_nota,$num_rps,$nome_empresa,$cpfcnpf_empresa,$dataehora,$codverificacao,$empresa_email)=$sql->fetch();
  
 
 

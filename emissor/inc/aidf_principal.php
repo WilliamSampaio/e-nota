@@ -21,23 +21,23 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 	if($btSolicitar!="")
 		{
-			$sql=mysql_query("INSERT INTO aidfe_solicitacoes SET solicitante = '$CODIGO_DA_EMPRESA'");
-			echo "<script>alert('Uma solicitação de aumento de AIDF foi enviada &agrave; prefeitura!');</script>";
+			$sql=$PDO->query("INSERT INTO aidfe_solicitacoes SET solicitante = '$CODIGO_DA_EMPRESA'");
+			echo "<script>alert('Uma solicitaï¿½ï¿½o de aumento de AIDF foi enviada &agrave; prefeitura!');</script>";
 			add_logs('Solicitou um aumento no AIDF');
 		}
-	$sql=mysql_query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-	list($ultimanota,$notalimite)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+	list($ultimanota,$notalimite)=$sql->fetch();
 	if($notalimite==0){$notalimite="Liberado";}
 	
-	//faz a verificação se ja foi pedido um aumento no aidfe
-	$sql_aidfe = mysql_query("SELECT codigo FROM aidfe_solicitacoes WHERE solicitante = '$CODIGO_DA_EMPRESA'");
-	$numero_de_solicitacoes = mysql_num_rows($sql_aidfe);
+	//faz a verificaï¿½ï¿½o se ja foi pedido um aumento no aidfe
+	$sql_aidfe = $PDO->query("SELECT codigo FROM aidfe_solicitacoes WHERE solicitante = '$CODIGO_DA_EMPRESA'");
+	$numero_de_solicitacoes = $sql_aidfe->rowCount();
 ?>
 <form method="post">
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">AIDF Eletrônico</td>
+	  <td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">AIDF Eletrï¿½nico</td>
       <td width="470" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -72,7 +72,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <?php if($numero_de_solicitacoes>0){ echo "disabled=disabled";} ?>> 
                 <?php 
                     if($numero_de_solicitacoes>0){ 
-                        echo "<b>Sua solicitação ja foi enviada a prefeitura.</b>";
+                        echo "<b>Sua solicitaï¿½ï¿½o ja foi enviada a prefeitura.</b>";
                     } 
                 ?>
             </td>

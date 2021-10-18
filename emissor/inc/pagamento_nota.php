@@ -62,8 +62,8 @@ Fith Floor, Boston, MA 02110-1301, USA
      <td align="left">
 	 	<select name="cmbBanco" class="combo">
 			<?php
-				$sql_bancos = mysql_query("SELECT boleto.codbanco, bancos.banco FROM boleto INNER JOIN bancos ON boleto.codbanco = bancos.codigo");
-				while(list($codbanco,$nomebanco) = mysql_fetch_array($sql_bancos)){
+				$sql_bancos = $PDO->query("SELECT boleto.codbanco, bancos.banco FROM boleto INNER JOIN bancos ON boleto.codbanco = bancos.codigo");
+				while(list($codbanco,$nomebanco) = $sql_bancos->fetch()){
 					echo "<option value=\"$codbanco\">$nomebanco</option>";
 				}
 			?>
@@ -73,7 +73,7 @@ Fith Floor, Boston, MA 02110-1301, USA
    <tr>	  
 	<td colspan="2" align="center">
 	 <input type="hidden" name="btOp" value="Gerar Guia"/>
-	 <input type="submit" value="Pesquisar" name="btPesquisar" class="botao" onclick="return ValidaFormulario('cmbMes|cmbAno','Defina o mês e o ano')"></td>
+	 <input type="submit" value="Pesquisar" name="btPesquisar" class="botao" onclick="return ValidaFormulario('cmbMes|cmbAno','Defina o mï¿½s e o ano')"></td>
    </tr>   
   </table>   
   </form>

@@ -63,13 +63,13 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 		$cofins                  = MoedaToDec($_POST['txtCofins']);
 	
 		//Seleciona a ultima nota inserida pela empresa
-		$sql = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-		list($ultimanota)=mysql_fetch_array($sql);
+		$sql = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+		list($ultimanota)=$sql->fetch();
 		$ultimanota ++;
 		
 		//busca o limite de notas desse emissor
-		$sql=mysql_query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
-		list($notalimite)=mysql_fetch_array($sql);
+		$sql=$PDO->query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
+		list($notalimite)=$sql->fetch();
 		
 		//testa se o numero de notas limites ja foi ultrapassado se ja tiver ultrapassado avisa-o
 		if(($ultimanota>$notalimite)&&($notalimite!=0)) {
@@ -86,17 +86,17 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 				
 		
 				//Faz uma busca pelo tomador
-				$sql = mysql_query("SELECT * FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
+				$sql = $PDO->query("SELECT * FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
 				//Testa se o tomador o pessoa fisica ou pessoa juridica
 				$campo = tipoPessoa($tomadorCnpj);
 							
 				//Testa se o tomador existe caso nao exista cria-o no banco
-				if(mysql_num_rows($sql)<=0){
+				if($sql->rowCount()<=0){
 				
 					$codtipo = codtipo('tomador');
 					$codtipodec = coddeclaracao('DES Simplificada');
 					$diaatual = date("Y-m-d");
-					mysql_query("
+					$PDO->query("
 						INSERT INTO 
 							cadastro
 						SET 
@@ -117,10 +117,10 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 							datainicio = '$diaatual'
 					");
 					
-					$codtomador = mysql_insert_id();
+					$codtomador = $PDO->lastInsertId();
 			
 				}else{
-					mysql_query("
+					$PDO->query("
 						UPDATE
 							cadastro
 						SET
@@ -140,19 +140,19 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 						   $campo = '$tomadorCnpj'
 					");
 	
-					list($codtomador) = mysql_fetch_array($sql);
+					list($codtomador) = $sql->fetch();
 				}
 			
-				//verifica a isenção do prestador
-				$sqlIsento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
-				list($issIsento) = mysql_fetch_array($sqlIsento);
+				//verifica a isenï¿½ï¿½o do prestador
+				$sqlIsento = $PDO->query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
+				list($issIsento) = $sqlIsento->fetch();
 				if($issIsento == 'S'){
 					$notaTotalValorISS = 0;
 					$notaTotalValorISSRetido = 0;
 				}
 	
 				//Sql que insere os dados da nota emitida no banco
-				$sql = mysql_query("
+				$sql = $PDO->query("
 					INSERT INTO 
 						notas 
 					SET 
@@ -195,7 +195,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 				
 				//Variaveis com relecao aos servicos da nota
 				$quantidadeInputs = $_POST['hdInputs']; //numero de inputs de servicos
-				$codigoUltimaNota = mysql_insert_id();  //ultimo codigo que foi inserido no mysql
+				$codigoUltimaNota = $PDO->lastInsertId();  //ultimo codigo que foi inserido no mysql
 				$cont = 1;
 				
 				while($cont <= $quantidadeInputs){
@@ -215,7 +215,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 						$servicoISSRetido = 0;
 					}
 	
-					$sql_servicos_notas = mysql_query("
+					$sql_servicos_notas = $PDO->query("
 						INSERT INTO 
 							notas_servicos
 						SET
@@ -234,18 +234,18 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					$notaRpsData   = DataMysql($_POST['txtDataRps']);
 				
 					//Pega o ultimo rps emitido
-					$sql_rps_ultimo = mysql_query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
-					list($ultimoRPS) = mysql_fetch_array($sql_rps_ultimo);
+					$sql_rps_ultimo = $PDO->query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+					list($ultimoRPS) = $sql_rps_ultimo->fetch();
 					
 					$notaRpsNumero = $ultimoRPS + 1;
 					
-					mysql_query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$CODIGO_DA_EMPRESA' AND codigo = '$codigoUltimaNota'");
-					mysql_query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+					$PDO->query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$CODIGO_DA_EMPRESA' AND codigo = '$codigoUltimaNota'");
+					$PDO->query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
 				
 				}
 	
 				
-				$sql = mysql_query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$CODIGO_DA_EMPRESA'");
+				$sql = $PDO->query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$CODIGO_DA_EMPRESA'");
 				add_logs('Emitiu nota fiscal');
 				
 				//Envia o email informando o tomador que foi inserida uma nfe
@@ -268,7 +268,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 			}
 		}
 	}else{
-		print("<script language=JavaScript>alert('É necessário selecionar um serviço para a emissão da nota.')</script>");
+		print("<script language=JavaScript>alert('ï¿½ necessï¿½rio selecionar um serviï¿½o para a emissï¿½o da nota.')</script>");
 	}
 }
 ?>
