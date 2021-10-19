@@ -74,7 +74,7 @@ $query = ("
 
 $sql = Paginacao($query,'frmLivro','dvResultdoLivro');
 
-if (mysql_num_rows($sql) == 0) {
+if ($sql->rowCount() == 0) {
 	?><strong><center>Nenhum resultado encontrado.</center></strong><?php
 } else {
 	?>
@@ -91,7 +91,7 @@ if (mysql_num_rows($sql) == 0) {
 			<td bgcolor="#999999" width="150" align="center">A&ccedil;&atilde;o</td>
 		</tr>
 		<?php
-		while ($dados = mysql_fetch_array($sql)) {
+		while ($dados = $sql->fetch()) {
 		//junta o cnpj com o cpf para ficar no mesmo campo
 		$dados['cnpj'] .= $dados['cpf'];
 		?>

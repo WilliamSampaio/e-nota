@@ -1,11 +1,11 @@
 <script type="text/javascript" src="../scripts/padrao.js"></script>
 <?php 
 include("../include/conect.php");
-	$sql=mysql_query("SELECT codigo,nome,datainicio,datafim FROM cadastro WHERE cnpj='".$_POST['txtCnpjLivro']."' OR cpf='".$_POST['txtCnpjLivro']."'");
-	if(mysql_num_rows($sql)!=0){
-		$dado= mysql_fetch_object($sql);		
+	$sql=$PDO->query("SELECT codigo,nome,datainicio,datafim FROM cadastro WHERE cnpj='".$_POST['txtCnpjLivro']."' OR cpf='".$_POST['txtCnpjLivro']."'");
+	if($sql->rowCount()!=0){
+		$dado= $sql->fetchObject();		
 		echo $dado->nome."<br><br>";
-		$meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");		
+		$meses=array("1"=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");		
 		 ?>
          <form name="frmSep" id="frmSep" method="post" onsubmit="return ValidaFormulario('txtObs|cmbMes|cmbAno');">
          <input type="hidden" name="include" id="include" value="<?php echo $_POST["include"];?>" />
@@ -13,7 +13,7 @@ include("../include/conect.php");
 		 <table>
 			<tr>
 				<td>
-				 Período
+				 Perï¿½odo
 				</td>
 				<td>
 				<?php
@@ -70,6 +70,6 @@ include("../include/conect.php");
         </form>
 <?php
 }else{		
-		echo "<font style=\"color:#FF0000\">Contribuinte inválido, Informe um Cnpj ou CPF válido para gerar o livro do contribuinte</font>";
+		echo "<font style=\"color:#FF0000\">Contribuinte invï¿½lido, Informe um Cnpj ou CPF vï¿½lido para gerar o livro do contribuinte</font>";
 }?>            
 <!--<font style="font-size:10px;font-family:Verdana, Arial, Helvetica, sans-serif"><?php echo $retorno;?></font> -->

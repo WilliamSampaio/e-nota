@@ -5,10 +5,10 @@ if(!$_POST['cmbEmpresaCliente']){
 }else{
     $empresa = $_POST['cmbEmpresaCliente'];
 }
-$empresas=mysql_query("SELECT * FROM cadastro WHERE codigo='{$empresa}'");
-$dados=mysql_fetch_array($empresas);
+$empresas=$PDO->query("SELECT * FROM cadastro WHERE codigo='{$empresa}'");
+$dados=$empresas->fetch();
 ?>
-<?php $meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"); ?>
+<?php $meses=array("1"=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"); ?>
     <form method="post" id="FrmLivro" onsubmit="return ValidaFormulario('txtObs|cmbMes|cmbAno');">
 	<table border="0" align="center" cellpadding="0" cellspacing="1">
 		<tr>
@@ -36,7 +36,7 @@ $dados=mysql_fetch_array($empresas);
                  <table  width="100%">
                     <tr>
                         <td>
-                         Período
+                         Perï¿½odo
                         </td>
                         <td>
 				<?php
@@ -84,7 +84,7 @@ $dados=mysql_fetch_array($empresas);
                             <input type="submit" name="btGerar" value="Gerar Livro" class="botao">
                         </td>
                         <td align="right"> 
-				&nbsp;&nbsp;&nbsp;<font color="#FF0000">*</font>Campos Obrigatórios
+				&nbsp;&nbsp;&nbsp;<font color="#FF0000">*</font>Campos Obrigatï¿½rios
                         </td>
                     </tr>
                 </table>

@@ -1,6 +1,6 @@
 <?php 
 	$livro = base64_decode($_GET['cod']);
-	$sql_livro = mysql_query("
+	$sql_livro = $PDO->query("
 			SELECT 
 				cad.nome,
 				cad.inscrmunicipal, 
@@ -20,7 +20,7 @@
 				INNER JOIN cadastro as cad ON cad.codigo=livro.codcadastro				
 				WHERE livro.codigo = $livro");
 
-$livro = mysql_fetch_object($sql_livro);
+$livro = $sql_livro->fetchObject();
 ?>
 <br /><br />
 <table width="100%" style="border:1px solid #000000;">
@@ -37,7 +37,7 @@ $livro = mysql_fetch_object($sql_livro);
                 </tr>
                 <tr>	
                     <td>
-                        <b>Inscrição Municipal:</b>
+                        <b>Inscriï¿½ï¿½o Municipal:</b>
                     </td>
                     <td>
                         <?php echo $livro->inscmunicipal;?>
@@ -69,7 +69,7 @@ $livro = mysql_fetch_object($sql_livro);
                 </tr>
                 <tr>
                     <td>
-                        <b>Geração:</b>
+                        <b>Geraï¿½ï¿½o:</b>
                     </td>
                     <td>
                        <?php echo $livro->geracao;?>
@@ -109,7 +109,7 @@ $livro = mysql_fetch_object($sql_livro);
                 </tr>
                 <tr>
                     <td>
-                        <b>Observações</b>
+                        <b>Observaï¿½ï¿½es</b>
                     </td>
                     <td>
                         <?php echo $livro->obs;?>

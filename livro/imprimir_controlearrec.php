@@ -1,6 +1,6 @@
 <?php
 // busca livro
-$sql_livro = mysql_query("
+$sql_livro = $PDO->query("
 			SELECT 
 				cad.nome,
 				cad.inscrmunicipal, 
@@ -20,7 +20,7 @@ $sql_livro = mysql_query("
 				INNER JOIN cadastro as cad ON cad.codigo=livro.codcadastro				
 				WHERE livro.codigo = $livro");
 
-$livro = mysql_fetch_object($sql_livro);
+$livro = $sql_livro->fetchObject();
 		
 ?>
 <style type="text/css">

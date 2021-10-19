@@ -1,6 +1,6 @@
 <?php
 // busca livro
-$sql_topo = mysql_query("
+$sql_topo = $PDO->query("
 		    SELECT
   				 cadastro.razaosocial, 
 				 cadastro.cnpj, 
@@ -14,9 +14,9 @@ $sql_topo = mysql_query("
 				 INNER JOIN livro ON livro.codcadastro = cadastro.codigo
 				 WHERE livro.codigo = $livro"); 
 
-$topo = mysql_fetch_object($sql_topo);
+$topo = $sql_topo->fetchObject();
 
-$sql_notas = mysql_query("
+$sql_notas = $PDO->query("
 			 SELECT
 				 DATE_FORMAT(`notas_tomadas`.`data`, '%d/%m/%Y') as datahoraemissao, 
 				`notas_tomadas`.`numero`, `notas_tomadas`.`estado`, `cadastro`.`razaosocial`, `cadastro`.`cnpj`,
@@ -103,7 +103,7 @@ $sql_notas = mysql_query("
 	
 	</div>
 	<?php
-    if(mysql_num_rows($sql_notas)>0){
+    if($sql_notas->rowCount()>0){
     ?>    
 	<div id="divIssTomadas">
 <table width="1100" border="0" cellpadding="5" cellspacing="0" style="margin:0 auto;">
@@ -127,11 +127,11 @@ $sql_notas = mysql_query("
     <td width="15%">ISS Pr&oacute;prio </td>
     <td width="10%">ISS Retido </td>
   </tr>
-<?php while($notas = mysql_fetch_object($sql_notas)) { ?>
+<?php while($notas = $sql_notas->fetchObject()) { ?>
   <tr>
     <td align="center" class="field3"><?php echo $notas->datahoraemissao; ?> </td>   
     <td align="center" class="field3"><?php echo $notas->numero; ?> </td>
-    <td align="center" class="field3"><?php if($notas->estado == N){echo 'Normal';}
+    <td align="center" class="field3"><?php if($notas->estado == 'N'){echo 'Normal';}
 										elseif($notas->estado=='E') {echo 'Escriturada';}
 										elseif($notas->estado == 'B' ){echo 'Boleto';} 
 										elseif($notas->estado=='C'){echo 'Cancelada';} 
@@ -147,7 +147,7 @@ $sql_notas = mysql_query("
  
 <?php } // fecha while 
 
-$sql_totais = mysql_query("
+$sql_totais = $PDO->query("
 SELECT
  `livro`.`codigo`, 
   Sum(`notas_tomadas`.`total`) as basecalculo,
@@ -163,7 +163,7 @@ WHERE
 			  ");
 			 	
 		 
-$totais= mysql_fetch_object($sql_totais); 
+$totais= $sql_totais->fetchObject(); 
 
 
 ?> 

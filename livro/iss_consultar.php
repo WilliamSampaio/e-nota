@@ -45,8 +45,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                     }else{
                         $empresa = $_POST['cmbEmpresaCliente'];
                     }
-                    $sqlemp=mysql_query("SELECT if(cnpj is null, cpf, cnpj) as cnpj,datainicio,datafim,codigo FROM cadastro WHERE codigo='{$empresa}'");
-                    $empcnpj=mysql_fetch_object($sqlemp);
+                    $sqlemp=$PDO->query("SELECT if(cnpj is null, cpf, cnpj) as cnpj,datainicio,datafim,codigo FROM cadastro WHERE codigo='{$empresa}'");
+                    $empcnpj=$sqlemp->fetchObject();
                  ?>
                         <div id="DivAbas"></div>                           
                         <input type="hidden"  name="txtCodigoPrestador" value="<?php echo $empcnpj->codigo; ?>"/>
@@ -64,7 +64,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
                                     $anoempresa=substr($empcnpj->datainicio,0,-6);
                                     $anofimempresa=substr($empcnpj->datafim,0,-6);
-                                    $meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+                                    $meses=array("1"=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
                                     
                                     ?>
                                     <table cellpadding="0" cellspacing="0"><tr><td>
