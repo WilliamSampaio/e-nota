@@ -1,15 +1,15 @@
 <?php
  	include("funcoes.php");
 	include("inc/conect.php");
-	$sql=mysql_query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
-	list($agencia,$contacorrente,$convenio,$contrato,$carteira)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
+	list($agencia,$contacorrente,$convenio,$contrato,$carteira)=$sql->fetch();
     $codigoboleto=base64_decode($_GET['COD']);   
     echo $codigoboleto;
     //$codigoboleto=529;
 	if($codigoboleto) 
 	{
 
-	    $sql_tipo_guia=mysql_query("
+	    $sql_tipo_guia=$PDO->query("
 			SELECT 
 				guias_declaracoes.codrelacionamento, 
 				guias_declaracoes.relacionamento, 
@@ -26,11 +26,11 @@
 				guia_pagamento.codigo='$codigoboleto'
 		");	
 		
-		list($codrel,$tipoguia,$emissao,$valorbl,$nossonumero,$vencimento,$ValMulta)=mysql_fetch_array($sql_tipo_guia);    
+		list($codrel,$tipoguia,$emissao,$valorbl,$nossonumero,$vencimento,$ValMulta)=$sql_tipo_guia->fetch();    
 		
 		switch ($tipoguia){	
 			case 'des':	
-				$sql_des=mysql_query("
+				$sql_des=$PDO->query("
 					SELECT emissores.cnpjcpf , 
 						   emissores.razaosocial,
 						   emissores.endereco,
@@ -39,10 +39,10 @@
 					INNER JOIN des ON des.codemissor = emissores.codigo					
 					WHERE des.codigo='$codrel'
 				");	
-				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=mysql_fetch_array($sql_des);		
-				$Atividades="Prestação de serviço(s)";
+				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();		
+				$Atividades="Prestaï¿½ï¿½o de serviï¿½o(s)";
 
-				$sql_receita=mysql_query("
+				$sql_receita=$PDO->query("
 					SELECT
 						sum(des.total) 
 					FROM
@@ -53,11 +53,11 @@
 				    	guias_declaracoes.codguia=$codigoboleto AND
 				    	guias_declaracoes.relacionamento = 'des'
 				");
-				list($Receita)=mysql_fetch_array($sql_receita);
+				list($Receita)=$sql_receita->fetch();
 				break;	
 				
 			case 'des_temp':	
-				$sql_des=mysql_query("
+				$sql_des=$PDO->query("
 					SELECT 
 						emissores_temp.cnpj , 
 						emissores_temp.razaosocial,
@@ -70,10 +70,10 @@
 					WHERE 
 						des_temp.codigo='$codrel'
 				");	
-				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=mysql_fetch_array($sql_des);		
-				$Atividades="Prestação de serviço(s)";
+				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();		
+				$Atividades="Prestaï¿½ï¿½o de serviï¿½o(s)";
 
-				$sql_receita=mysql_query("
+				$sql_receita=$PDO->query("
 					SELECT
 						des_temp.base 
 					FROM
@@ -84,11 +84,11 @@
 				    	guias_declaracoes.codguia=$codigoboleto AND
 				    	guias_declaracoes.relacionamento = 'des_temp'
 				");
-				list($Receita)=mysql_fetch_array($sql_receita);
+				list($Receita)=$sql_receita->fetch();
 				break;	
 					
 			case 'des_issretido':	
-				$sql_des=mysql_query("
+				$sql_des=$PDO->query("
 					SELECT tomadores.cnpjcpf , 
 						   tomadores.nome,
 						   tomadores.endereco,
@@ -98,9 +98,9 @@
 					INNER JOIN des_issretido ON des_issretido.codtomador = tomadores.codigo
 					WHERE des_issretido.codigo='$codrel'
 				");			
-				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=mysql_fetch_array($sql_des);
+				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();
 				
-				$sql_receita=mysql_query("
+				$sql_receita=$PDO->query("
 					SELECT
 						sum(des_issretido.total) 
 					FROM
@@ -112,8 +112,8 @@
 					    guias_declaracoes.relacionamento = 'des_issretido'
 				");
 				
-				list($Receita)=mysql_fetch_array($sql_receita);
-				$Atividades="Serviço Tomado";
+				list($Receita)=$sql_receita->fetch();
+				$Atividades="Serviï¿½o Tomado";
 							
 				break;	
 				
@@ -121,7 +121,7 @@
 				break;	
 					
 			case 'dif_des':	
-				$sql_des=mysql_query("
+				$sql_des=$PDO->query("
 					SELECT inst_financeiras.cnpj , 
 						   inst_financeiras.razaosocial,
 						   inst_financeiras.endereco,
@@ -129,10 +129,10 @@
 					FROM inst_financeiras 
 					INNER JOIN dif_des ON dif_des.codinst_financeira = inst_financeiras.codigo
 					WHERE dif_des.codigo='$codrel'");		
-				$Atividades="Instituição financeira";								
-				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=mysql_fetch_array($sql_des);
+				$Atividades="Instituiï¿½ï¿½o financeira";								
+				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();
 				
-				$sql_receita=mysql_query("
+				$sql_receita=$PDO->query("
 					SELECT
 						sum(dif_des.total) 
 					FROM
@@ -144,13 +144,13 @@
 					    guias_declaracoes.relacionamento = 'dif_des'
 				");
 				
-				list($Receita)=mysql_fetch_array($sql_receita);
+				list($Receita)=$sql_receita->fetch();
 							
 				break;	
 				
 				
 			case 'dop_des':
-				$sql_des=mysql_query("
+				$sql_des=$PDO->query("
 					SELECT
 						   orgaospublicos.cnpj, 
 						   orgaospublicos.razaosocial,
@@ -163,10 +163,10 @@
 					WHERE 
 						   dop_des.codigo='$codrel'
 				");		
-				$Atividades="Operadora de crédito";	
-				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=mysql_fetch_array($sql_des);
+				$Atividades="Operadora de crï¿½dito";	
+				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();
 				
-				$sql_receita=mysql_query("
+				$sql_receita=$PDO->query("
 					SELECT
 						sum(dop_des.total) 
 					FROM
@@ -178,7 +178,7 @@
 					    guias_declaracoes.relacionamento = 'dop_des'
 				");
 				
-				list($Receita)=mysql_fetch_array($sql_receita);
+				list($Receita)=$sql_receita->fetch();
 
 				
 				
@@ -190,7 +190,7 @@
 			 	
 			 	
 			case 'doc_des':
-				$sql_des=mysql_query("
+				$sql_des=$PDO->query("
 					SELECT operadoras_creditos.cnpj, 
 						   operadoras_creditos.razaosocial,
 						   operadoras_creditos.endereco,
@@ -199,10 +199,10 @@
 					INNER JOIN doc_des ON doc_des.codopr_credito = operadoras_creditos.codigo
 					WHERE doc_des.codigo='$codrel'
 				");		
-				$Atividades="Operação de cartório";	
-				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=mysql_fetch_array($sql_des);	
+				$Atividades="Operaï¿½ï¿½o de cartï¿½rio";	
+				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();	
 
-				$sql_receita=mysql_query("
+				$sql_receita=$PDO->query("
 					SELECT
 						 sum(doc_des.total) 
 					FROM
@@ -214,7 +214,7 @@
 					    guias_declaracoes.relacionamento = 'doc_des'
 				");
 				
-				list($Receita)=mysql_fetch_array($sql_receita);
+				list($Receita)=$sql_receita->fetch();
 				
 				break;			
 
@@ -222,7 +222,7 @@
 
 				
 			case 'decc_des':
-				$sql_des=mysql_query("
+				$sql_des=$PDO->query("
 					SELECT empreiteiras.cnpj, 
 						   empreiteiras.razaosocial,
 						   empreiteiras.endereco,
@@ -233,9 +233,9 @@
 				");		
 				
 				$Atividades="Empreiteira";	
-				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=mysql_fetch_array($sql_des);	
+				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();	
 
-				$sql_receita=mysql_query("
+				$sql_receita=$PDO->query("
 					SELECT
 						sum(decc_des.total) 
 					FROM
@@ -247,7 +247,7 @@
 					    guias_declaracoes.relacionamento = 'decc_des'
 				");
 				
-				list($Receita)=mysql_fetch_array($sql_receita);
+				list($Receita)=$sql_receita->fetch();
 				
 				break;						
 		}
@@ -256,9 +256,9 @@
 	$taxa_boleto =0;	
 	
 	//DEFINE OS 3 PRIMEIROS CARACTERES DA LINHA DIGITAVEL
-	$tipoProduto="8"; // para definir como arrecadação
+	$tipoProduto="8"; // para definir como arrecadaï¿½ï¿½o
 	$tipoSegmento="1"; //para definir como prefeitura
-	$tipoValor="9"; // Define o modulo de geração do digito verificador
+	$tipoValor="9"; // Define o modulo de geraï¿½ï¿½o do digito verificador
 		
 	
 	//$CONF_CNPJ

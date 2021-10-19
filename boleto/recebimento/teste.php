@@ -59,7 +59,7 @@ function modulo_11($num, $base=9, $r=0)  {
         {
             for ($i=0;$i<strlen($str); $i++)
             {
-                $out = $out . Ord(substr($str,$i,1));
+                $out = Ord(substr($str,$i,1));
             }
         }
         else
@@ -78,7 +78,7 @@ function modulo_11($num, $base=9, $r=0)  {
             $v=$m*substr($out, $i, 1);
             if ($v>9)
                 $v=(substr($v, 0, 1)+substr($v, 1, 1));
-            $sum = $sum + $v;
+            $sum = $v;
         }
 
         // what is the check digit??

@@ -7,7 +7,7 @@ $_SESSION['nome'] = $txtNome;
 
 include("../inc/conect.php");
 
-$sql=mysql_query("SELECT endereco,cidade,estado,cnpj FROM configuracoes");
+$sql=$PDO->query("SELECT endereco,cidade,estado,cnpj FROM configuracoes");
 list($enderdco_pref,$cidade_pref,$estado_pref,$cnpj_pref)=mysql_fetch_array($sql);
 
 
@@ -21,10 +21,10 @@ $maior =0;
 while($cont >= 0)
 {  
   $codnota = $_POST['txtCodNota'.$cont];  
-  $sql=mysql_query("SELECT numero FROM notas WHERE codigo ='$codnota'");  
+  $sql=$PDO->query("SELECT numero FROM notas WHERE codigo ='$codnota'");  
   list($numeronota)=mysql_fetch_array($sql);
   
-  mysql_query("UPDATE notas SET estado='B' WHERE codigo='$codnota'");  
+  $PDO->query("UPDATE notas SET estado='B' WHERE codigo='$codnota'");  
   if($numeronota > $maior)
   {
     $maior=$numeronota;
@@ -32,7 +32,7 @@ while($cont >= 0)
   $cont--;
 }
 //seleiona os dados monetarios da prefeitura
-$sql=mysql_query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
+$sql=$PDO->query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
 list($agencia,$contacorrente,$convenio,$contrato,$carteira)=mysql_fetch_array($sql);
 $txtTotalIss = explode(".",$txtTotalIss);
 $valor =implode(",",$txtTotalIss); 
@@ -52,14 +52,14 @@ while(strlen($CODIGO_DA_EMPRESA)< 4)
 
 include("../inc/conect.php");
 
-$sql01=mysql_query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
-list($agencia,$contacorrente,$convenio,$contrato,$carteira)=mysql_fetch_array($sql01);
+$sql01=$PDO->query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
+list($agencia,$contacorrente,$convenio,$contrato,$carteira)=$sql01->fetch();
 
-$sql=mysql_query("SELECT dataemissao,valor,chavecontroledoc,datavencimento FROM guia_pagamento WHERE chavecontroledoc='80$chave' GROUP BY chavecontroledoc");
-list($DataEmissao,$Valor,$NossoNumero,$DataVenc)=mysql_fetch_array($sql);
+$sql=$PDO->query("SELECT dataemissao,valor,chavecontroledoc,datavencimento FROM guia_pagamento WHERE chavecontroledoc='80$chave' GROUP BY chavecontroledoc");
+list($DataEmissao,$Valor,$NossoNumero,$DataVenc)=$sql->fetch();
 
-// ------------------------- DADOS DINÂMICOS DO SEU CLIENTE PARA A GERAÇÃO DO BOLETO (FIXO OU VIA GET) -------------------- //
-// Os valores abaixo podem ser colocados manualmente ou ajustados p/ formulário c/ POST, GET ou de BD (MySql,Postgre,etc)	//
+// ------------------------- DADOS DINï¿½MICOS DO SEU CLIENTE PARA A GERAï¿½ï¿½O DO BOLETO (FIXO OU VIA GET) -------------------- //
+// Os valores abaixo podem ser colocados manualmente ou ajustados p/ formulï¿½rio c/ POST, GET ou de BD (MySql,Postgre,etc)	//
 
 // DADOS DO BOLETO PARA O SEU CLIENTE
 $dias_de_prazo_para_pagamento = 5;
@@ -70,12 +70,12 @@ $valor_cobrado = str_replace(",", ".",$valor_cobrado);
 $valor_boleto=number_format($valor_cobrado+$taxa_boleto, 2, ',', '');
 
 $dadosboleto["inicio_nosso_numero"] = "";  // Carteira SR: 80, 81 ou 82  -  Carteira CR: 90 (Confirmar com gerente qual usar)
-$dadosboleto["nosso_numero"] =  $NossoNumero;  // Nosso numero sem o DV - REGRA: Máximo de 8 caracteres!
+$dadosboleto["nosso_numero"] =  $NossoNumero;  // Nosso numero sem o DV - REGRA: Mï¿½ximo de 8 caracteres!
 $dadosboleto["numero_documento"] =$NossoNumero;	// Num do pedido ou do documento
 $dadosboleto["data_vencimento"] = $data_venc; // Data de Vencimento do Boleto - REGRA: Formato DD/MM/AAAA
-$dadosboleto["data_documento"] = date("d/m/Y"); // Data de emissão do Boleto
+$dadosboleto["data_documento"] = date("d/m/Y"); // Data de emissï¿½o do Boleto
 $dadosboleto["data_processamento"] = date("d/m/Y"); // Data de processamento do boleto (opcional)
-$dadosboleto["valor_boleto"] = $valor_boleto; 	// Valor do Boleto - REGRA: Com vírgula e sempre com duas casas depois da virgula
+$dadosboleto["valor_boleto"] = $valor_boleto; 	// Valor do Boleto - REGRA: Com vï¿½rgula e sempre com duas casas depois da virgula
 
 // DADOS DO SEU CLIENTE
 $dadosboleto["sacado"] = $NOME;
@@ -87,10 +87,10 @@ $dadosboleto["demonstrativo1"] = "GUIA DE RECOLHIMENTO DE ISS";
 $dadosboleto["demonstrativo2"] = "SISTEMA ISS DIGITAL ";
 $dadosboleto["demonstrativo3"] = "PREFEITURA MUNICIPAL DE ".$PREFEITURA;
 
-// INSTRUÇÕES PARA O CAIXA
+// INSTRUï¿½ï¿½ES PARA O CAIXA
 $dadosboleto["instrucoes1"] = "";
 $dadosboleto["instrucoes2"] = "";
-$dadosboleto["instrucoes3"] = "- Em caso de dúvidas entre em contato com a Prefeitura Municipal.";
+$dadosboleto["instrucoes3"] = "- Em caso de dï¿½vidas entre em contato com a Prefeitura Municipal.";
 $dadosboleto["instrucoes4"] = "&nbsp; Emitido pelo sistema de ISS DIGITAL";
 
 // DADOS OPCIONAIS DE ACORDO COM O BANCO OU CLIENTE
@@ -101,7 +101,7 @@ $dadosboleto["especie"] = "R$";
 $dadosboleto["especie_doc"] = "";
 
 
-// ---------------------- DADOS FIXOS DE CONFIGURAÇÃO DO SEU BOLETO --------------- //
+// ---------------------- DADOS FIXOS DE CONFIGURAï¿½ï¿½O DO SEU BOLETO --------------- //
 
 
 // DADOS DA SUA CONTA - CEF
@@ -110,9 +110,9 @@ $dadosboleto["conta"] = $contacorrente; 	// Num da conta, sem digito
 $dadosboleto["conta_dv"] = "3"; 	// Digito do Num da conta
 
 // DADOS PERSONALIZADOS - CEF
-$dadosboleto["conta_cedente"] = ""; // ContaCedente do Cliente, sem digito (Somente Números)
+$dadosboleto["conta_cedente"] = ""; // ContaCedente do Cliente, sem digito (Somente Nï¿½meros)
 $dadosboleto["conta_cedente_dv"] = ""; // Digito da ContaCedente do Cliente
-$dadosboleto["carteira"] = "SR";  // Código da Carteira: pode ser SR (Sem Registro) ou CR (Com Registro) - (Confirmar com gerente qual usar)
+$dadosboleto["carteira"] = "SR";  // Cï¿½digo da Carteira: pode ser SR (Sem Registro) ou CR (Com Registro) - (Confirmar com gerente qual usar)
 
 // SEUS DADOS
 $dadosboleto["identificacao"] = "PREFEITURA MUNICIPAL DE ".$PREFEITURA;
@@ -134,7 +134,7 @@ $DataVencimentoBoleto = implode('-', array_reverse(explode('/',$dadosboleto["dat
 
 
 
-// NÃO ALTERAR!
+// Nï¿½O ALTERAR!
 include("include/funcoes_cef.php"); 
 include("include/layout_cef.php");
 ?>

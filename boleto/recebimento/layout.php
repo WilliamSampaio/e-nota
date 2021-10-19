@@ -26,7 +26,7 @@
       <tr>
         <td style="border:#000000 solid 2px;">CNPJ/Inscr. Municipal/CPF:<br><?php echo $Cnpj.$cpf; ?></td>
         <td></td>
-        <td style="border:#000000 solid 2px;">Código da Arrecadação<br><?php echo $codigoboleto; ?></td>
+        <td style="border:#000000 solid 2px;">Cï¿½digo da Arrecadaï¿½ï¿½o<br><?php echo $codigoboleto; ?></td>
       </tr>
     </table>    
     </td>
@@ -44,7 +44,7 @@
     <td align="center">
     <table width="100%" border="0" cellspacing="0" cellpadding="2">
       <tr>
-        <td style="border:#000000 solid 2px;">ENDEREÇO:<br><?php echo strtoupper($EndSacado.", ".$Numero); ?></td>
+        <td style="border:#000000 solid 2px;">ENDEREï¿½O:<br><?php echo strtoupper($EndSacado.", ".$Numero); ?></td>
       </tr>
     </table>       
     </td>
@@ -55,7 +55,7 @@
       <tr>
         <td style="border:#000000 solid 2px;">ATIVADE(S):<br><?php
 		$contservicos = 1;
-		while(list($Atividades)=mysql_fetch_array($queryatividades)){
+		while(list($Atividades)=$queryatividades->fetch()){
 			if ($contservicos<=9){$contservicos="0".$contservicos;}
 			if(strlen($Atividades)>45) { 
 				  echo $contservicos." - ".substr(strtoupper($Atividades),0,45)."...<br />";
@@ -72,11 +72,11 @@
     <td align="center">
     <table width="100%" border="0" cellspacing="0" cellpadding="2">
       <tr>
-        <td style="border:#000000 solid 2px;" align="center"><span class="cab02">INSTRUÇÕES PARA RECEBIMENTO</span><br><br>
+        <td style="border:#000000 solid 2px;" align="center"><span class="cab02">INSTRUï¿½ï¿½ES PARA RECEBIMENTO</span><br><br>
 		<?php echo $Instrucoes_boleto;?>
 		<br><br>
-        VALOR VÁLIDO PARA PAGAMENTO ATÉ <?php echo $vencimento;?>.<br>
-		APÓS ESSA DATA, EMITA UMA GUIA ATUALIZADA.
+        VALOR Vï¿½LIDO PARA PAGAMENTO ATï¿½ <?php echo $vencimento;?>.<br>
+		APï¿½S ESSA DATA, EMITA UMA GUIA ATUALIZADA.
         </td>
       </tr>
     </table>           
@@ -87,7 +87,7 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="2">
       <tr>
         <td style="border:#000000 solid 2px;" align="center"><span class="cab02">GUIA PARA PAGAMENTO DE ISSQN</span><br><br>
-        Competência: <?php echo DataPt($Competencia);?>&nbsp;&nbsp;&nbsp;&nbsp;
+        Competï¿½ncia: <?php echo DataPt($Competencia);?>&nbsp;&nbsp;&nbsp;&nbsp;
 		Vencimento: <?php echo $vencimento;?></td>
       </tr>
     </table>           

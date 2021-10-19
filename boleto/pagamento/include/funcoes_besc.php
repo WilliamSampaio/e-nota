@@ -1,11 +1,11 @@
 <?php
 // +----------------------------------------------------------------------+
-// | BoletoPhp - Versão Beta                                              |
+// | BoletoPhp - Versï¿½o Beta                                              |
 // +----------------------------------------------------------------------+
-// | Este arquivo está disponível sob a Licença GPL disponível pela Web   |
+// | Este arquivo estï¿½ disponï¿½vel sob a Licenï¿½a GPL disponï¿½vel pela Web   |
 // | em http://pt.wikipedia.org/wiki/GNU_General_Public_License           |
-// | Você deve ter recebido uma cópia da GNU Public License junto com     |
-// | esse pacote; se não, escreva para:                                   |
+// | Vocï¿½ deve ter recebido uma cï¿½pia da GNU Public License junto com     |
+// | esse pacote; se nï¿½o, escreva para:                                   |
 // |                                                                      |
 // | Free Software Foundation, Inc.                                       |
 // | 59 Temple Place - Suite 330                                          |
@@ -13,16 +13,16 @@
 // +----------------------------------------------------------------------+
 
 // +----------------------------------------------------------------------+
-// | Originado do Projeto BBBoletoFree que tiveram colaborações de Daniel |
+// | Originado do Projeto BBBoletoFree que tiveram colaboraï¿½ï¿½es de Daniel |
 // | William Schultz e Leandro Maniezo que por sua vez foi derivado do	  |
-// | PHPBoleto de João Prado Maia e Pablo Martins F. Costa		      		  |
+// | PHPBoleto de Joï¿½o Prado Maia e Pablo Martins F. Costa		      		  |
 // | 														                                   			  |
 // | Se vc quer colaborar, nos ajude a desenvolver p/ os demais bancos :-)|
 // | Acesse o site do Projeto BoletoPhp: www.boletophp.com.br             |
 // +----------------------------------------------------------------------+
 
 // +----------------------------------------------------------------------+
-// | Equipe Coordenação Projeto BoletoPhp: <boletophp@boletophp.com.br>   |
+// | Equipe Coordenaï¿½ï¿½o Projeto BoletoPhp: <boletophp@boletophp.com.br>   |
 // | Desenvolvimento Boleto BESC: Lucas Ferreira                          |
 // +----------------------------------------------------------------------+
 
@@ -33,7 +33,7 @@ $nummoeda = "9";
 $fator_vencimento = fator_vencimento($dadosboleto["data_vencimento"]);
 //valor tem 10 digitos, sem virgula
 $valor = formata_numero($dadosboleto["valor_boleto"],10,0,"valor");
-//carteira é CNR
+//carteira ï¿½ CNR
 $carteira = $dadosboleto["carteira"];
 //codigocedente deve possuir 7 caracteres
 $codigocedente = formata_numero($dadosboleto["codigo_cedente"],5,0);
@@ -41,15 +41,15 @@ $codigocedente = formata_numero($dadosboleto["codigo_cedente"],5,0);
 $ndoc = $dadosboleto["numero_documento"];
 $vencimento = $dadosboleto["data_vencimento"];
 
-// número do documento (sem dvs) é 13 digitos
+// nï¿½mero do documento (sem dvs) ï¿½ 13 digitos
 $nnum = formata_numero($dadosboleto["nosso_numero"],13,0);
-// nosso número (com dvs) é 16 digitos
+// nosso nï¿½mero (com dvs) ï¿½ 16 digitos
 $nossonumero = geraNossoNumero($nnum);
 
 $chave = substr($codigocedente,0,5) . substr($nnum,0,3) . $carteira . substr($nnum,3,10) . $codigobanco;
 $barra = "$codigobanco$nummoeda$fator_vencimento$valor$chave";
 
-// Digitos Verificadores da Chave de 25 posições
+// Digitos Verificadores da Chave de 25 posiï¿½ï¿½es
 $dv1 = m10dv1($chave);
 $dv2 = m10dv2($chave . $dv1);
 $barra = $barra . $dv1 . $dv2;
@@ -105,7 +105,7 @@ function digitoVerificador_barra($numero) {
 }
 
 
-// FUNÇÕES
+// FUNï¿½ï¿½ES
 // Algumas foram retiradas do Projeto PhpBoleto e modificadas para atender as particularidades de cada banco
 
 function formata_numero($numero,$loop,$insert,$tipo = "geral") {
@@ -208,7 +208,7 @@ src=imagens/p.png width=<?php echo $largo?> height=<?php echo $altura?> border=0
 src=imagens/b.png width=<?php echo $fino?> height=<?php echo $altura?> border=0><img 
 src=imagens/p.png width=<?php echo 1?> height=<?php echo $altura?> border=0> 
   <?php
-} //Fim da função
+} //Fim da funï¿½ï¿½o
 
 function esquerda($entra,$comp){
 	return substr($entra,0,$comp);
@@ -219,7 +219,7 @@ function direita($entra,$comp){
 }
 
 function fator_vencimento($data) {
-	$data = split("/",$data);
+	$data = preg_split("/",$data);
 	$ano = $data[2];
 	$mes = $data[1];
 	$dia = $data[0];
@@ -246,7 +246,7 @@ function _dateToDays($year,$month,$day) {
                 $day +  1721119);
 }
 
-//DÍGITOS   VERIFICADORES  DA  CHAVE  DE   25 POSIÇÕES - Digito V1
+//Dï¿½GITOS   VERIFICADORES  DA  CHAVE  DE   25 POSIï¿½ï¿½ES - Digito V1
 function m10dv1($num)
 {
 	$soma = 0; $fator = 2;
@@ -266,7 +266,7 @@ function m10dv1($num)
 	return $digito;	
 }
 
-//DÍGITOS   VERIFICADORES  DA  CHAVE  DE   25 POSIÇÕES - Digito V2
+//Dï¿½GITOS   VERIFICADORES  DA  CHAVE  DE   25 POSIï¿½ï¿½ES - Digito V2
 function m10dv2($num, $ftini=7)
 { 
 	$fator = $ftini;
@@ -314,7 +314,7 @@ function modulo_10($num) {
             // pega cada numero isoladamente
             $numeros[$i] = substr($num,$i-1,1);
             // Efetua multiplicacao do numero pelo (falor 10)
-            // 2002-07-07 01:33:34 Macete para adequar ao Mod10 do Itaú
+            // 2002-07-07 01:33:34 Macete para adequar ao Mod10 do Itaï¿½
             $temp = $numeros[$i] * $fator; 
             $temp0=0;
             foreach (preg_split('//',$temp,-1,PREG_SPLIT_NO_EMPTY) as $k=>$v){ $temp0+=$v; }
@@ -328,7 +328,7 @@ function modulo_10($num) {
             }
         }
 		
-        // várias linhas removidas, vide função original
+        // vï¿½rias linhas removidas, vide funï¿½ï¿½o original
         // Calculo do modulo 10
         $resto = $numtotal10 % 10;
         $digito = 10 - $resto;
@@ -368,22 +368,22 @@ function modulo_11($num, $base=9, $r=0)
      *   Autor:
      *           Pablo Costa <pablo@users.sourceforge.net>
      *
-     *   Função:
+     *   Funï¿½ï¿½o:
      *    Calculo do Modulo 11 para geracao do digito verificador 
      *    de boletos bancarios conforme documentos obtidos 
      *    da Febraban - www.febraban.org.br 
      *
      *   Entrada:
-     *     $num: string numérica para a qual se deseja calcularo digito verificador;
+     *     $num: string numï¿½rica para a qual se deseja calcularo digito verificador;
      *     $base: valor maximo de multiplicacao [2-$base]
      *     $r: quando especificado um devolve somente o resto
      *
-     *   Saída:
+     *   Saï¿½da:
      *     Retorna o Digito verificador.
      *
-     *   Observações:
-     *     - Script desenvolvido sem nenhum reaproveitamento de código pré existente.
-     *     - Assume-se que a verificação do formato das variáveis de entrada é feita antes da execução deste script.
+     *   Observaï¿½ï¿½es:
+     *     - Script desenvolvido sem nenhum reaproveitamento de cï¿½digo prï¿½ existente.
+     *     - Assume-se que a verificaï¿½ï¿½o do formato das variï¿½veis de entrada ï¿½ feita antes da execuï¿½ï¿½o deste script.
      */                                        
 
     $soma = 0;
@@ -418,7 +418,7 @@ function modulo_11($num, $base=9, $r=0)
     }
 }
 
-function modulo_11_invertido($num)  { // Calculo de Modulo 11 "Invertido" (com pesos de 9 a 2  e não de 2 a 9)
+function modulo_11_invertido($num)  { // Calculo de Modulo 11 "Invertido" (com pesos de 9 a 2  e nï¿½o de 2 a 9)
     $ftini = 0;
 		$ftfim = 9;
 		$fator = $ftfim;
@@ -436,25 +436,25 @@ function modulo_11_invertido($num)  { // Calculo de Modulo 11 "Invertido" (com p
 }
 
 function monta_linha_digitavel($codigo) {
-	// Posição 	Conteúdo
-	// 1 a 3    Número do banco
-	// 4        Código da Moeda - 9 para Real
-	// 5        Digito verificador do Código de Barras
+	// Posiï¿½ï¿½o 	Conteï¿½do
+	// 1 a 3    Nï¿½mero do banco
+	// 4        Cï¿½digo da Moeda - 9 para Real
+	// 5        Digito verificador do Cï¿½digo de Barras
 	// 6 a 9    Fator de Vencimento
 	// 10 a 19  Valor (8 inteiros e 2 decimais)
 	//          Campo Livre definido por cada banco (25 caracteres)
-	// 20 a 26  Código do Cedente
-	// 27 a 39  Código do Documento
+	// 20 a 26  Cï¿½digo do Cedente
+	// 27 a 39  Cï¿½digo do Documento
 	// 40 a 43  Data de Vencimento em Juliano (mmmy)
-	// 44       Código do aplicativo CNR = 2
+	// 44       Cï¿½digo do aplicativo CNR = 2
 	
-	// 1. Campo - composto pelo código do banco, código da moéda, as cinco primeiras posições
+	// 1. Campo - composto pelo cï¿½digo do banco, cï¿½digo da moï¿½da, as cinco primeiras posiï¿½ï¿½es
 	// do campo livre e DV (modulo10) deste campo
 	$campo1 = substr($codigo,0,4) . substr($codigo,19,5);
 	$campo1 = $campo1 . modulo_10($campo1);
 	$campo1 = substr($campo1,0,5) . '.' . substr($campo1,5,5);
 	
-	// 2. Campo - composto pelas posiçoes 6 a 15 do campo livre
+	// 2. Campo - composto pelas posiï¿½oes 6 a 15 do campo livre
 	// e livre e DV (modulo10) deste campo
 	$campo2 = substr($codigo,24,2) . substr($codigo,26,8);
 	$campo2 = $campo2 . modulo_10($campo2);

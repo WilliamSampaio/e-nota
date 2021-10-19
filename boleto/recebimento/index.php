@@ -1,16 +1,16 @@
 	<?php
  	include("funcoes.php");
 	include("../../include/conect.php");
-	$sql = mysql_query("SELECT agencia, contacorrente, convenio, contrato, carteira FROM boleto");
-	list($agencia,$contacorrente,$convenio,$contrato,$carteira) = mysql_fetch_array($sql);
+	$sql = $PDO->query("SELECT agencia, contacorrente, convenio, contrato, carteira FROM boleto");
+	list($agencia,$contacorrente,$convenio,$contrato,$carteira) = $sql->fetch();
     $codigoboleto = base64_decode($_GET['COD']);   
     //$codigoboleto=589;
 	if($codigoboleto) 
 	{
-		$sqlguiapagamento = mysql_query("SELECT codlivro, codnota FROM guia_pagamento WHERE guia_pagamento.codigo = '$codigoboleto'");
-		$dados=mysql_fetch_array($sqlguiapagamento);
+		$sqlguiapagamento = $PDO->query("SELECT codlivro, codnota FROM guia_pagamento WHERE guia_pagamento.codigo = '$codigoboleto'");
+		$dados=$sqlguiapagamento->fetch();
 		if($dados['codlivro']!=NULL){
-			$sql_tipo_guia=mysql_query("
+			$sql_tipo_guia=$PDO->query("
 			SELECT
 				cadastro.codigo,
 				cadastro.codtipo,
@@ -37,7 +37,7 @@
 				guia_pagamento.codigo = '$codigoboleto'
 			");
 		}else{
-			$sql_tipo_guia=mysql_query("
+			$sql_tipo_guia=$PDO->query("
 			SELECT
 				cadastro.codigo,
 				cadastro.codtipo,
@@ -66,29 +66,31 @@
 		}
 	    
 		
-		list($CodigoEmpresa,$CodTipo,$Cnpj,$cpf,$RazaoSocial,$EndSacado,$Numero,$codrel,$Competencia,$Receita,$emissao,$valorbl,$valormulta,$nossonumero,$vencimento) = mysql_fetch_array($sql_tipo_guia);
+		list(
+			$CodigoEmpresa,$CodTipo,$Cnpj,$cpf,$RazaoSocial,$EndSacado,$Numero,$codrel,$Competencia,$Receita,$emissao,$valorbl,$valormulta,
+			$nossonumero,$vencimento) = $sql_tipo_guia->fetch();
 		 
 	if($dados['codlivro']!=NULL){
 		
-		$queryatividades = mysql_query("SELECT servicos.descricao FROM cadastro_servicos INNER JOIN servicos ON cadastro_servicos.codservico=servicos.codigo WHERE cadastro_servicos.codemissor = '$CodigoEmpresa'");
+		$queryatividades = $PDO->query("SELECT servicos.descricao FROM cadastro_servicos INNER JOIN servicos ON cadastro_servicos.codservico=servicos.codigo WHERE cadastro_servicos.codemissor = '$CodigoEmpresa'");
 	}else{
 		$codigotipo = codtipo('tomador');
 		if($codigotipo==$CodTipo){
-			$nometomador = mysql_query("SELECT tomador_nome, issretido FROM notas WHERE codigo = '{$dados['codnota']}'");
-			list($TomadorNome, $IssRetido)=mysql_fetch_array($nometomador);
+			$nometomador = $PDO->query("SELECT tomador_nome, issretido FROM notas WHERE codigo = '{$dados['codnota']}'");
+			list($TomadorNome, $IssRetido)=$nometomador->fetch();
 			$RazaoSocial = $TomadorNome;
 			$valorbl = $IssRetido;
 			$valormulta=0;
 		}
-		$queryatividades = mysql_query("SELECT servicos.descricao FROM servicos INNER JOIN notas_servicos ON notas_servicos.codservico = servicos.codigo WHERE notas_servicos.codnota = '{$dados['codnota']}'");
+		$queryatividades = $PDO->query("SELECT servicos.descricao FROM servicos INNER JOIN notas_servicos ON notas_servicos.codservico = servicos.codigo WHERE notas_servicos.codnota = '{$dados['codnota']}'");
 	}
 		
 	$taxa_boleto =0;	
 	
 	//DEFINE OS 3 PRIMEIROS CARACTERES DA LINHA DIGITAVEL
-	$tipoProduto="8"; // para definir como arrecadação
+	$tipoProduto="8"; // para definir como arrecadaï¿½ï¿½o
 	$tipoSegmento="1"; //para definir como prefeitura
-	$tipoValor="6"; // Define o modulo de geração do digito verificador
+	$tipoValor="6"; // Define o modulo de geraï¿½ï¿½o do digito verificador
 		
 	
 	//$CONF_CNPJ
@@ -105,8 +107,8 @@
 	$valor = formata_numero($valor_boleto,11,0,"valor");
 	
 	// FORMATA O CNPJ DEIXANDO-O SOMENTE COM NUMEROS
-	$sqlfebraban=mysql_query("SELECT codfebraban FROM boleto");
-	$febraban=mysql_fetch_object($sqlfebraban);
+	$sqlfebraban=$PDO->query("SELECT codfebraban FROM boleto");
+	$febraban=$sqlfebraban->fetchObject();
 	$identificacao=$febraban->codfebraban;
 			
 	
@@ -142,8 +144,8 @@
 	//echo$nossonumero."<br>";
 	//echo strlen($nossonumero)."<br>";
 	//geraCodigoDeBarras($linha);
-	$sql_instrucoes_boleto = mysql_query("SELECT instrucoes FROM boleto");
-	list($Instrucoes_boleto) = mysql_fetch_array($sql_instrucoes_boleto);
+	$sql_instrucoes_boleto = $PDO->query("SELECT instrucoes FROM boleto");
+	list($Instrucoes_boleto) = $sql_instrucoes_boleto->fetch();
 	
 	// INCLUDE DO LAYOUT	
 	include("layout.php");

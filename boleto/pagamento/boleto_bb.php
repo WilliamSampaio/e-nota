@@ -1,31 +1,31 @@
 	<?php
 session_start();
 include("../../include/conect.php");
-$sql=mysql_query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
-list($agencia,$contacorrente,$convenio,$contrato,$carteira)=mysql_fetch_array($sql); 
+$sql=$PDO->query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
+list($agencia,$contacorrente,$convenio,$contrato,$carteira)=$sql->fetch(); 
 if($_GET['COD']) 
 {
     $codigoboleto=base64_decode($_GET['COD']);   
     
-	$guiap = mysql_query("SELECT c.razaosocial,c.logradouro,c.numero,c.bairro,if(cpf,cpf,cnpj) as cnpjcpf,gp.codigo, DATE_FORMAT(gp.datavencimento,'%d/%m/%Y')as
+	$guiap = $PDO->query("SELECT c.razaosocial,c.logradouro,c.numero,c.bairro,if(cpf,cpf,cnpj) as cnpjcpf,gp.codigo, DATE_FORMAT(gp.datavencimento,'%d/%m/%Y')as
 						  vencimento,gp.nossonumero,gp.valor FROM guia_pagamento as gp
 						  INNER JOIN livro as l ON l.codigo=gp.codlivro 
 						  INNER JOIN cadastro as c on c.codigo=l.codcadastro
 						  WHERE gp.codigo= $codigoboleto");
-	$dados = mysql_fetch_object($guiap);	
+	$dados = $guiap->fetchObject();	
 	$nossoN= $dados->codigo;
 	
 	while(strlen($nossoN) < 5){
 		$nossoN = '0'.$nossoN;
 	}
 
-	mysql_query("UPDATE guia_pagamento SET nossonumero='$nossoN' WHERE codigo= $codigoboleto");
+	$PDO->query("UPDATE guia_pagamento SET nossonumero='$nossoN' WHERE codigo= $codigoboleto");
 }		
 
 $valor= str_replace('.',',',$valor);
 
-// ------------------------- DADOS DINÂMICOS DO SEU CLIENTE PARA A GERAÇÃO DO BOLETO (FIXO OU VIA GET) -------------------- //
-// Os valores abaixo podem ser colocados manualmente ou ajustados p/ formulário c/ POST, GET ou de BD (MySql,Postgre,etc)	//
+// ------------------------- DADOS DINï¿½MICOS DO SEU CLIENTE PARA A GERAï¿½ï¿½O DO BOLETO (FIXO OU VIA GET) -------------------- //
+// Os valores abaixo podem ser colocados manualmente ou ajustados p/ formulï¿½rio c/ POST, GET ou de BD (MySql,Postgre,etc)	//
 
 // DADOS DO BOLETO PARA O SEU CLIENTE
 $dias_de_prazo_para_pagamento = 5;
@@ -38,9 +38,9 @@ $valor_boleto=number_format($valor_cobrado+$taxa_boleto, 2, ',', '');
 $dadosboleto["nosso_numero"] = $nossoN;
 $dadosboleto["numero_documento"] = $nossoN;	// Num do pedido ou do documento
 $dadosboleto["data_vencimento"] = $dados->vencimento; // Data de Vencimento do Boleto - REGRA: Formato DD/MM/AAAA
-$dadosboleto["data_documento"] = date("d/m/Y"); // Data de emissão do Boleto
+$dadosboleto["data_documento"] = date("d/m/Y"); // Data de emissï¿½o do Boleto
 $dadosboleto["data_processamento"] = date("d/m/Y"); // Data de processamento do boleto (opcional)
-$dadosboleto["valor_boleto"] = $valor_boleto; 	// Valor do Boleto - REGRA: Com vírgula e sempre com duas casas depois da virgula
+$dadosboleto["valor_boleto"] = $valor_boleto; 	// Valor do Boleto - REGRA: Com vï¿½rgula e sempre com duas casas depois da virgula
 
 // DADOS DO SEU CLIENTE
 $dadosboleto["sacado"] = $dados->razaosocial;
@@ -48,11 +48,11 @@ $dadosboleto["endereco1"] = $dados->logradouro.' , '.$dados->numero.' '.$dados->
 $dadosboleto["endereco2"] = $dados->cnpjcpf;
 
 // INFORMACOES PARA O CLIENTE
-$dadosboleto["demonstrativo1"] = "Pagamento referente a declaração eletrônica de serviços";
-$dadosboleto["demonstrativo2"] = //"Mensalidade referente a nonon nonooon nononon<br>Taxa bancária - R$ ".number_format($taxa_boleto, 2, ',', '');
+$dadosboleto["demonstrativo1"] = "Pagamento referente a declaraï¿½ï¿½o eletrï¿½nica de serviï¿½os";
+$dadosboleto["demonstrativo2"] = //"Mensalidade referente a nonon nonooon nononon<br>Taxa bancï¿½ria - R$ ".number_format($taxa_boleto, 2, ',', '');
 $dadosboleto["demonstrativo3"] = "";
 
-// INSTRUÇÕES PARA O CAIXA
+// INSTRUï¿½ï¿½ES PARA O CAIXA
 $dadosboleto["instrucoes1"] = " ";
 $dadosboleto["instrucoes2"] = " ";
 $dadosboleto["instrucoes3"] = " ";
@@ -66,7 +66,7 @@ $dadosboleto["especie"] = "R$";
 $dadosboleto["especie_doc"] = "RC";
 
 
-// ---------------------- DADOS FIXOS DE CONFIGURAÇÃO DO SEU BOLETO --------------- //
+// ---------------------- DADOS FIXOS DE CONFIGURAï¿½ï¿½O DO SEU BOLETO --------------- //
 
 
 // DADOS DA SUA CONTA - BANCO DO BRASIL
@@ -74,29 +74,29 @@ $dadosboleto["agencia"] = $agencia; // Num da agencia, sem digito
 $dadosboleto["conta"] = $contacorrente; 	// Num da conta, sem digito
 
 // DADOS PERSONALIZADOS - BANCO DO BRASIL
-$dadosboleto["convenio"] = $convenio;  // Num do convênio - REGRA: 6 ou 7 ou 8 dígitos
+$dadosboleto["convenio"] = $convenio;  // Num do convï¿½nio - REGRA: 6 ou 7 ou 8 dï¿½gitos
 $dadosboleto["contrato"] = $contrato; // Num do seu contrato
 $dadosboleto["carteira"] = $carteira;
-$dadosboleto["variacao_carteira"] = "-019";  // Variação da Carteira, com traço (opcional)
+$dadosboleto["variacao_carteira"] = "-019";  // Variaï¿½ï¿½o da Carteira, com traï¿½o (opcional)
 
 // TIPO DO BOLETO
-$dadosboleto["formatacao_convenio"] = "6"; // REGRA: 8 p/ Convênio c/ 8 dígitos, 7 p/ Convênio c/ 7 dígitos, ou 6 se Convênio c/ 6 dígitos
-$dadosboleto["formatacao_nosso_numero"] = "2"; // REGRA: Usado apenas p/ Convênio c/ 6 dígitos: informe 1 se for NossoNúmero de até 5 dígitos ou 2 para opção de até 17 dígitos
+$dadosboleto["formatacao_convenio"] = "6"; // REGRA: 8 p/ Convï¿½nio c/ 8 dï¿½gitos, 7 p/ Convï¿½nio c/ 7 dï¿½gitos, ou 6 se Convï¿½nio c/ 6 dï¿½gitos
+$dadosboleto["formatacao_nosso_numero"] = "2"; // REGRA: Usado apenas p/ Convï¿½nio c/ 6 dï¿½gitos: informe 1 se for NossoNï¿½mero de atï¿½ 5 dï¿½gitos ou 2 para opï¿½ï¿½o de atï¿½ 17 dï¿½gitos
 
 /*
 #################################################
 DESENVOLVIDO PARA CARTEIRA 18
 
 - Carteira 18 com Convenio de 8 digitos
-  Nosso número: pode ser até 9 dígitos
+  Nosso nï¿½mero: pode ser atï¿½ 9 dï¿½gitos
 
 - Carteira 18 com Convenio de 7 digitos
-  Nosso número: pode ser até 10 dígitos
+  Nosso nï¿½mero: pode ser atï¿½ 10 dï¿½gitos
 
 - Carteira 18 com Convenio de 6 digitos
-  Nosso número:
-  de 1 a 99999 para opção de até 5 dígitos
-  de 1 a 99999999999999999 para opção de até 17 dígitos
+  Nosso nï¿½mero:
+  de 1 a 99999 para opï¿½ï¿½o de atï¿½ 5 dï¿½gitos
+  de 1 a 99999999999999999 para opï¿½ï¿½o de atï¿½ 17 dï¿½gitos
 
 #################################################
 */
@@ -109,7 +109,7 @@ $dadosboleto["endereco"] = "$CONF_ENDERECO";
 $dadosboleto["cidade_uf"] = "$CONF_CIDADE / $CONF_ESTADO";
 $dadosboleto["cedente"] = "Prefeitura Municipal de $CONF_CIDADE";
 
-// NÃO ALTERAR!
+// Nï¿½O ALTERAR!
 include("include/funcoes_bb.php"); 
 include("include/layout_bb.php");
 ?>
