@@ -33,11 +33,18 @@ function getSubdominio()
     // return 'subdominio1';
 }
 
-$config = parse_ini_file('../.config.ini');
+$config = parse_ini_file(dirname(__DIR__) . '/.config.ini', TRUE);
 
-$DB_HOST = $config[getSubdominio() . '.DB_HOST'];
-$DB_DATABASE = $config[getSubdominio() . '.DB_DATABASE'];
-$DB_USERNAME = $config[getSubdominio() . '.DB_USERNAME'];
-$DB_PASSWORD = $config[getSubdominio() . '.DB_PASSWORD'];
+// $str  = $config[getSubdominio()]['DB_HOST'];
+// $str .= $config[getSubdominio()]['DB_DATABASE'];
+// $str .= $config[getSubdominio()]['DB_USERNAME'];
+// $str .= $config[getSubdominio()]['DB_PASSWORD'];
+
+// print("<script language=JavaScript>alert('". dirname(__DIR__) . '/.config.ini' ."');</script>");
+
+$DB_HOST = $config[getSubdominio()]['DB_HOST'];
+$DB_DATABASE = $config[getSubdominio()]['DB_DATABASE'];
+$DB_USERNAME = $config[getSubdominio()]['DB_USERNAME'];
+$DB_PASSWORD = $config[getSubdominio()]['DB_PASSWORD'];
 
 ?>

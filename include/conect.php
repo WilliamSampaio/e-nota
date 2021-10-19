@@ -54,7 +54,7 @@ if ($_SESSION['login'] != "") {
 }
 
 // lista confguracoes
-$sql_configuracoes = "
+$sql_configuracoes = $PDO->query("
 	SELECT 
 		endereco, 
 		cidade, 
@@ -72,7 +72,7 @@ $sql_configuracoes = "
 		gerar_guia_site ,
 		codintegracao
 	FROM  
-		configuracoes";
+		configuracoes");
 list(
 	$CONF_ENDERECO,
 	$CONF_CIDADE,
@@ -89,7 +89,7 @@ list(
 	$DEC_ATRAZADAS,
 	$GERAR_GUIA_SITE,
 	$CODINTEGRACAO
-) = $PDO->query($sql_configuracoes)->fetch();
+) = $sql_configuracoes->fetch();
 
 // print("  
 // <script language=\"javascript\">
