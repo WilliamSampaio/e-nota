@@ -6,7 +6,7 @@
 <link href="css/padrao.css" rel="stylesheet" type="text/css">
 </head>
 <body> 
-<table width="500" border="0" align="center" cellpadding="0" cellspacing="5">
+<table width="600" border="0" align="center" cellpadding="0" cellspacing="5">
   <tr>
     <td align="center" height="100">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -26,7 +26,7 @@
       <tr>
         <td style="border:#000000 solid 2px;">CNPJ/Inscr. Municipal/CPF:<br><?php echo $Cnpj.$cpf; ?></td>
         <td></td>
-        <td style="border:#000000 solid 2px;">C�digo da Arrecada��o<br><?php echo $codigoboleto; ?></td>
+        <td style="border:#000000 solid 2px;">Código da Arrecadação<br><?php echo $codigoboleto; ?></td>
       </tr>
     </table>    
     </td>
@@ -44,7 +44,7 @@
     <td align="center">
     <table width="100%" border="0" cellspacing="0" cellpadding="2">
       <tr>
-        <td style="border:#000000 solid 2px;">ENDERE�O:<br><?php echo strtoupper($EndSacado.", ".$Numero); ?></td>
+        <td style="border:#000000 solid 2px;">ENDEREÇO:<br><?php echo strtoupper($EndSacado.", ".$Numero); ?></td>
       </tr>
     </table>       
     </td>
@@ -72,11 +72,11 @@
     <td align="center">
     <table width="100%" border="0" cellspacing="0" cellpadding="2">
       <tr>
-        <td style="border:#000000 solid 2px;" align="center"><span class="cab02">INSTRU��ES PARA RECEBIMENTO</span><br><br>
+        <td style="border:#000000 solid 2px;" align="center"><span class="cab02">INSTRUÇÕES PARA RECEBIMENTO</span><br><br>
 		<?php echo $Instrucoes_boleto;?>
 		<br><br>
-        VALOR V�LIDO PARA PAGAMENTO AT� <?php echo $vencimento;?>.<br>
-		AP�S ESSA DATA, EMITA UMA GUIA ATUALIZADA.
+        VALOR VÁLIDO PARA PAGAMENTO ATÉ <?php echo $vencimento;?>.<br>
+		APÓS ESSA DATA, EMITA UMA GUIA ATUALIZADA.
         </td>
       </tr>
     </table>           
@@ -87,7 +87,7 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="2">
       <tr>
         <td style="border:#000000 solid 2px;" align="center"><span class="cab02">GUIA PARA PAGAMENTO DE ISSQN</span><br><br>
-        Compet�ncia: <?php echo DataPt($Competencia);?>&nbsp;&nbsp;&nbsp;&nbsp;
+        Competência: <?php echo DataPt($Competencia);?>&nbsp;&nbsp;&nbsp;&nbsp;
 		Vencimento: <?php echo $vencimento;?></td>
       </tr>
     </table>           
@@ -134,7 +134,7 @@
         <td align="right">
 		  <table width="100%" border="0" cellspacing="2" cellpadding="0">		
 		  <tr>
-            <td align="center">Autentica&ccedil;&atilde;o Mec&acirc;nica<br><?php echo $linhad; ?></td>
+            <td align="center">Autenticação Mecânica<br><?php echo $linhad; ?></td>
           </tr>
           <tr>
             <td align="center"><?php geraCodigoDeBarras($linha); ?></td>
@@ -152,7 +152,7 @@
         <table width="100%" border="0" cellspacing="2" cellpadding="0">
           <tr>
         		<td>
-        			<img src="img/cortar.gif" width="450" height="60">
+        			<img src="img/cortar.gif" width="600" height="60">
 				</td>		
       		</tr>
         </table>        
@@ -172,7 +172,7 @@
         <td style="border:#000000 solid 2px;">CNPJ/Inscr. Municipal/CPF:<br>
             <?php echo $Cnpj.$cpf; ?></td>
         <td></td>
-        <td style="border:#000000 solid 2px;">C&oacute;digo da Arrecada&ccedil;&atilde;o<br>
+        <td style="border:#000000 solid 2px;">Código da Arrecadação<br>
             <?php echo $codigoboleto; ?></td>
       </tr>
     </table>
@@ -201,7 +201,7 @@
         <td align="right">
 		  <table width="100%" border="0" cellspacing="2" cellpadding="0">		
 		  <tr>
-            <td align="center">Autentica&ccedil;&atilde;o Mec&acirc;nica<br><?php echo $linhad; ?></td>
+            <td align="center">Autenticação Mecânica<br><?php echo $linhad; ?></td>
           </tr>
           <tr>
             <td align="center"><?php geraCodigoDeBarras($linha); ?></td>

@@ -1,6 +1,6 @@
 <?php
- 	include("funcoes.php");
-	include("inc/conect.php");
+ 	require_once("funcoes.php");
+	require_once("inc/conect.php");
 	$sql=$PDO->query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
 	list($agencia,$contacorrente,$convenio,$contrato,$carteira)=$sql->fetch();
     $codigoboleto=base64_decode($_GET['COD']);   
@@ -40,7 +40,7 @@
 					WHERE des.codigo='$codrel'
 				");	
 				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();		
-				$Atividades="Presta��o de servi�o(s)";
+				$Atividades="Prestação de serviço(s)";
 
 				$sql_receita=$PDO->query("
 					SELECT
@@ -71,7 +71,7 @@
 						des_temp.codigo='$codrel'
 				");	
 				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();		
-				$Atividades="Presta��o de servi�o(s)";
+				$Atividades="Prestação de serviço(s)";
 
 				$sql_receita=$PDO->query("
 					SELECT
@@ -113,7 +113,7 @@
 				");
 				
 				list($Receita)=$sql_receita->fetch();
-				$Atividades="Servi�o Tomado";
+				$Atividades="Serviço Tomado";
 							
 				break;	
 				
@@ -129,7 +129,7 @@
 					FROM inst_financeiras 
 					INNER JOIN dif_des ON dif_des.codinst_financeira = inst_financeiras.codigo
 					WHERE dif_des.codigo='$codrel'");		
-				$Atividades="Institui��o financeira";								
+				$Atividades="Instituição financeira";								
 				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();
 				
 				$sql_receita=$PDO->query("
@@ -163,7 +163,7 @@
 					WHERE 
 						   dop_des.codigo='$codrel'
 				");		
-				$Atividades="Operadora de cr�dito";	
+				$Atividades="Operadora de crédito";	
 				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();
 				
 				$sql_receita=$PDO->query("
@@ -199,7 +199,7 @@
 					INNER JOIN doc_des ON doc_des.codopr_credito = operadoras_creditos.codigo
 					WHERE doc_des.codigo='$codrel'
 				");		
-				$Atividades="Opera��o de cart�rio";	
+				$Atividades="Operação de cartório";	
 				list($Cnpj,$RazaoSocial,$EndSacado,$Competencia)=$sql_des->fetch();	
 
 				$sql_receita=$PDO->query("
@@ -256,9 +256,9 @@
 	$taxa_boleto =0;	
 	
 	//DEFINE OS 3 PRIMEIROS CARACTERES DA LINHA DIGITAVEL
-	$tipoProduto="8"; // para definir como arrecada��o
+	$tipoProduto="8"; // para definir como arrecadação
 	$tipoSegmento="1"; //para definir como prefeitura
-	$tipoValor="9"; // Define o modulo de gera��o do digito verificador
+	$tipoValor="9"; // Define o modulo de geração do digito verificador
 		
 	
 	//$CONF_CNPJ
@@ -313,7 +313,7 @@
 	//geraCodigoDeBarras($linha);
 	
 	// INCLUDE DO LAYOUT	
-	include("layout.php");
+	require_once("layout.php");
 ?>	
 
 

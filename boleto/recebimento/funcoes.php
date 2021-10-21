@@ -71,7 +71,7 @@ src=img/p.gif width=<?=$largo?> height=<?=$altura?> border=0><img
 src=img/b.gif width=<?=$fino?> height=<?=$altura?> border=0><img 
 src=img/p.gif width=<?=1?> height=<?=$altura?> border=0> 
   <?
-} //Fim da fun��o
+} //Fim da função
 
 function esquerda($entra,$comp){
 	return substr($entra,0,$comp);
@@ -90,7 +90,7 @@ function modulo_10($num) {
             // pega cada numero isoladamente
             $numeros[$i] = substr($num,$i-1,1);
             // Efetua multiplicacao do numero pelo (falor 10)
-            // 2002-07-07 01:33:34 Macete para adequar ao Mod10 do Ita�
+            // 2002-07-07 01:33:34 Macete para adequar ao Mod10 do Itaú
             $temp = $numeros[$i] * $fator; 
             $temp0=0;
             foreach (preg_split('//',$temp,-1,PREG_SPLIT_NO_EMPTY) as $k=>$v){ $temp0+=$v; }
@@ -104,7 +104,7 @@ function modulo_10($num) {
             }
         }
                 
-        // v�rias linhas removidas, vide fun��o original
+        // várias linhas removidas, vide função original
         // Calculo do modulo 10
         $resto = $numtotal10 % 10;
         $digito = 10 - $resto;

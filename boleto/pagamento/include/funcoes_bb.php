@@ -1,11 +1,11 @@
 <?php 
 // +----------------------------------------------------------------------+
-// | BoletoPhp - Vers�o Beta                                              |
+// | BoletoPhp - Versão Beta                                              |
 // +----------------------------------------------------------------------+
-// | Este arquivo est� dispon�vel sob a Licen�a GPL dispon�vel pela Web   |
+// | Este arquivo está disponível sob a Licença GPL disponível pela Web   |
 // | em http://pt.wikipedia.org/wiki/GNU_General_Public_License           |
-// | Voc� deve ter recebido uma c�pia da GNU Public License junto com     |
-// | esse pacote; se n�o, escreva para:                                   |
+// | Você deve ter recebido uma cópia da GNU Public License junto com     |
+// | esse pacote; se não, escreva para:                                   |
 // |                                                                      |
 // | Free Software Foundation, Inc.                                       |
 // | 59 Temple Place - Suite 330                                          |
@@ -13,17 +13,17 @@
 // +----------------------------------------------------------------------+
 
 // +----------------------------------------------------------------------+
-// | Originado do Projeto BBBoletoFree que tiveram colabora��es de Daniel |
+// | Originado do Projeto BBBoletoFree que tiveram colaborações de Daniel |
 // | William Schultz e Leandro Maniezo que por sua vez foi derivado do	  |
-// | PHPBoleto de Jo�o Prado Maia e Pablo Martins F. Costa				  |
+// | PHPBoleto de João Prado Maia e Pablo Martins F. Costa				  |
 // | 																	  |
 // | Se vc quer colaborar, nos ajude a desenvolver p/ os demais bancos :-)|
 // | Acesse o site do Projeto BoletoPhp: www.boletophp.com.br             |
 // +----------------------------------------------------------------------+
 
 // +-------------------------------------------------------------------------------------------------------------------------+
-// | Equipe Coordena��o Projeto BoletoPhp: <boletophp@boletophp.com.br>              					                               |
-// | Desenvolvimento Boleto Banco do Brasil: Daniel William Schultz / Leandro Maniezo / Rog�rio Dias Pereira / Romeu Medeiros|
+// | Equipe Coordenação Projeto BoletoPhp: <boletophp@boletophp.com.br>              					                               |
+// | Desenvolvimento Boleto Banco do Brasil: Daniel William Schultz / Leandro Maniezo / Rogério Dias Pereira / Romeu Medeiros|
 // +-------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -34,9 +34,9 @@ $fator_vencimento = fator_vencimento($dadosboleto["data_vencimento"]);
 
 //valor tem 10 digitos, sem virgula
 $valor = formata_numero($dadosboleto["valor_boleto"],10,0,"valor");
-//agencia � sempre 4 digitos
+//agencia é sempre 4 digitos
 $agencia = formata_numero($dadosboleto["agencia"],4,0);
-//conta � sempre 8 digitos
+//conta é sempre 8 digitos
 $conta = formata_numero($dadosboleto["conta"],8,0);
 
 //carteira 18
@@ -48,17 +48,17 @@ $agencia_codigo = $agencia."-". modulo_11($agencia) ." / ". $conta ."-". modulo_
 //Zeros: usado quando convenio de 7 digitos
 $livre_zeros='000000';
 
-// Carteira 18 com Conv�nio de 8 d�gitos
+// Carteira 18 com Convênio de 8 dígitos
 if ($dadosboleto["formatacao_convenio"] == "8") {
 	$convenio = formata_numero($dadosboleto["convenio"],8,0,"convenio");
-	// Nosso n�mero de at� 9 d�gitos
+	// Nosso número de até 9 dígitos
 	$nossonumero = formata_numero($dadosboleto["nosso_numero"],9,0);
 	//$dv=modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$livre_zeros$convenio$nossonumero$carteira");
 	//$linha="$codigobanco$nummoeda$dv$fator_vencimento$valor$livre_zeros$convenio$nossonumero$carteira";
 	$dv=modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$livre_zeros$convenio$nossonumero$carteira");
 	$linha="$codigobanco$nummoeda$dv$fator_vencimento$valor$livre_zeros$convenio$nossonumero$carteira";
 	//echo $codigobanco.'-'.$nummoeda.'-'.$dv.'-'.$fator_vencimento.'-'.$valor.'-'.$livre_zeros.'-'.$convenio.'-'.$nossonumero.'-'.$carteira;
-	//montando o nosso numero que aparecer� no boleto
+	//montando o nosso numero que aparecerá no boleto
 	$nossonumero = $nossonumero ."-". modulo_11($nossonumero);
 	echo 'convenio - '.$convenio.'<br>';
 	echo 'codbanco - '.$codigobanco.'<br>';
@@ -67,38 +67,38 @@ if ($dadosboleto["formatacao_convenio"] == "8") {
 	echo $linha;
 }
 
-// Carteira 18 com Conv�nio de 7 d�gitos
+// Carteira 18 com Convênio de 7 dígitos
 if ($dadosboleto["formatacao_convenio"] == "7") {
 	$convenio = formata_numero($dadosboleto["convenio"],7,0,"convenio");
-	// Nosso n�mero de at� 10 d�gitos
+	// Nosso número de até 10 dígitos
 	$nossonumero = formata_numero($dadosboleto["nosso_numero"],10,0);
 	//$dv=modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$livre_zeros$convenio$nossonumero$carteira");
 	//$linha="$codigobanco$nummoeda$dv$fator_vencimento$valor$livre_zeros$convenio$nossonumero$carteira";
 	$dv=modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$livre_zeros$convenio$nossonumero$carteira");
 	$linha="$codigobanco$nummoeda$dv$fator_vencimento$valor$livre_zeros$convenio$nossonumero$carteira";
   $nossonumero = $nossonumero;
-	//N�o existe DV na composi��o do nosso-n�mero para conv�nios de sete posi��es
+	//Não existe DV na composição do nosso-número para convênios de sete posições
 }
 
-// Carteira 18 com Conv�nio de 6 d�gitos
+// Carteira 18 com Convênio de 6 dígitos
 if ($dadosboleto["formatacao_convenio"] == "6") {
 	$convenio = formata_numero($dadosboleto["convenio"],6,0,"convenio");
 	
 	if ($dadosboleto["formatacao_nosso_numero"] == "1") {
 		
-		// Nosso n�mero de at� 5 d�gitos
+		// Nosso número de até 5 dígitos
 		$nossonumero = formata_numero($dadosboleto["nosso_numero"],5,0);
 		//$dv = modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$convenio$nossonumero$agencia$conta$carteira");
 		//$linha = "$codigobanco$nummoeda$dv$fator_vencimento$valor$convenio$nossonumero$agencia$conta$carteira";
 		$dv = modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$convenio$nossonumero$agencia$conta$carteira");
 		$linha = "$codigobanco$nummoeda$dv$fator_vencimento$valor$convenio$nossonumero$agencia$conta$carteira";
-		//montando o nosso numero que aparecer� no boleto
+		//montando o nosso numero que aparecerá no boleto
 		$nossonumero = $nossonumero ."-". modulo_11($nossonumero);
 	}
 	
 	if ($dadosboleto["formatacao_nosso_numero"] == "2") {
 		
-		// Nosso n�mero de at� 17 d�gitos
+		// Nosso número de até 17 dígitos
 		$nservico = "21";
 		$nossonumero = formata_numero($dadosboleto["nosso_numero"],17,0);
 		//$dv = modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$convenio$nossonumero$nservico");
@@ -115,7 +115,7 @@ $dadosboleto["nosso_numero"] = $nossonumero;
 $dadosboleto["codigo_banco_com_dv"] = $codigo_banco_com_dv;
 
 
-// FUN��ES
+// FUNÇÕES
 // Algumas foram retiradas do Projeto PhpBoleto e modificadas para atender as particularidades de cada banco
 
 function formata_numero($numero,$loop,$insert,$tipo = "geral") {
@@ -218,7 +218,7 @@ src=imagens/p.png width=<?php echo $largo?> height=<?php echo $altura?> border=0
 src=imagens/b.png width=<?php echo $fino?> height=<?php echo $altura?> border=0><img 
 src=imagens/p.png width=<?php echo 1?> height=<?php echo $altura?> border=0> 
   <?php
-} //Fim da fun��o
+} //Fim da função
 
 function esquerda($entra,$comp){
 	return substr($entra,0,$comp);
@@ -259,10 +259,10 @@ function _dateToDays($year,$month,$day) {
 
 /*
 #################################################
-FUN��O DO M�DULO 10 RETIRADA DO PHPBOLETO
+FUNÇÃO DO MÓDULO 10 RETIRADA DO PHPBOLETO
 
-ESTA FUN��O PEGA O D�GITO VERIFICADOR DO PRIMEIRO, SEGUNDO
-E TERCEIRO CAMPOS DA LINHA DIGIT�VEL
+ESTA FUNÇÃO PEGA O DÍGITO VERIFICADOR DO PRIMEIRO, SEGUNDO
+E TERCEIRO CAMPOS DA LINHA DIGITÁVEL
 #################################################
 */
 function modulo_10($num) { 
@@ -297,16 +297,16 @@ function modulo_10($num) {
 
 /*
 #################################################
-FUN��O DO M�DULO 11 RETIRADA DO PHPBOLETO
+FUNÇÃO DO MÓDULO 11 RETIRADA DO PHPBOLETO
 
 MODIFIQUEI ALGUMAS COISAS...
 
-ESTA FUN��O PEGA O D�GITO VERIFICADOR:
+ESTA FUNÇÃO PEGA O DÍGITO VERIFICADOR:
 
 NOSSONUMERO
 AGENCIA
 CONTA
-CAMPO 4 DA LINHA DIGIT�VEL
+CAMPO 4 DA LINHA DIGITÁVEL
 #################################################
 */
 
@@ -336,28 +336,28 @@ function modulo_11($num, $base=9, $r=0) {
 
 		Vamos explicar:
 
-		O m�dulo 11 s� gera os digitos verificadores do nossonumero,
-		agencia, conta e digito verificador com codigo de barras (aquele que fica sozinho e triste na linha digit�vel)
-		s� que � foi um rolo...pq ele nao podia resultar em 0, e o pessoal do phpboleto se esqueceu disso...
+		O módulo 11 só gera os digitos verificadores do nossonumero,
+		agencia, conta e digito verificador com codigo de barras (aquele que fica sozinho e triste na linha digitável)
+		só que é foi um rolo...pq ele nao podia resultar em 0, e o pessoal do phpboleto se esqueceu disso...
 		
-		No BB, os d�gitos verificadores podem ser X ou 0 (zero) para agencia, conta e nosso numero,
-		mas nunca pode ser X ou 0 (zero) para a linha digit�vel, justamente por ser totalmente num�rica.
+		No BB, os dígitos verificadores podem ser X ou 0 (zero) para agencia, conta e nosso numero,
+		mas nunca pode ser X ou 0 (zero) para a linha digitável, justamente por ser totalmente numérica.
 
-		Quando passamos os dados para a fun��o, fica assim:
+		Quando passamos os dados para a função, fica assim:
 
 		Agencia = sempre 4 digitos
-		Conta = at� 8 d�gitos
-		Nosso n�mero = de 1 a 17 digitos
+		Conta = até 8 dígitos
+		Nosso número = de 1 a 17 digitos
 
-		A unica vari�vel que passa 17 digitos � a da linha digitada, justamente por ter 43 caracteres
+		A unica variável que passa 17 digitos é a da linha digitada, justamente por ter 43 caracteres
 
 		Entao vamos definir ai embaixo o seguinte...
 
-		se (strlen($num) == 43) { n�o deixar dar digito X ou 0 }
+		se (strlen($num) == 43) { não deixar dar digito X ou 0 }
 		*/
 		
 		if (strlen($num) == "43") {
-			//ent�o estamos checando a linha digit�vel
+			//então estamos checando a linha digitável
 			if ($digito == "0" or $digito == "X" or $digito > 9) {
 					$digito = 1;
 			}
@@ -371,18 +371,18 @@ function modulo_11($num, $base=9, $r=0) {
 }
 
 /*
-Montagem da linha digit�vel - Fun��o tirada do PHPBoleto
-N�o mudei nada
+Montagem da linha digitável - Função tirada do PHPBoleto
+Não mudei nada
 */
 function monta_linha_digitavel($linha) {
-    // Posi��o 	Conte�do
-    // 1 a 3    N�mero do banco
-    // 4        C�digo da Moeda - 9 para Real
-    // 5        Digito verificador do C�digo de Barras
+    // Posição 	Conteúdo
+    // 1 a 3    Número do banco
+    // 4        Código da Moeda - 9 para Real
+    // 5        Digito verificador do Código de Barras
     // 6 a 19   Valor (12 inteiros e 2 decimais)
     // 20 a 44  Campo Livre definido por cada banco
 
-    // 1. Campo - composto pelo c�digo do banco, c�digo da mo�da, as cinco primeiras posi��es
+    // 1. Campo - composto pelo código do banco, código da moéda, as cinco primeiras posições
     // do campo livre e DV (modulo10) deste campo
     $p1 = substr($linha, 0, 4);
     $p2 = substr($linha, 19, 5);
@@ -392,7 +392,7 @@ function monta_linha_digitavel($linha) {
     $p6 = substr($p4, 5);
     $campo1 = "$p5.$p6";
 
-    // 2. Campo - composto pelas posi�oes 6 a 15 do campo livre
+    // 2. Campo - composto pelas posições 6 a 15 do campo livre
     // e livre e DV (modulo10) deste campo
     $p1 = substr($linha, 24, 10);
     $p2 = modulo_10($p1);

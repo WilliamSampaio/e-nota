@@ -5,7 +5,7 @@
 $_SESSION['login'] = $txtLogin; 
 $_SESSION['nome'] = $txtNome;
 
-include("../inc/conect.php");
+require_once("../inc/conect.php");
 
 $sql=$PDO->query("SELECT endereco,cidade,estado,cnpj FROM configuracoes");
 list($enderdco_pref,$cidade_pref,$estado_pref,$cnpj_pref)=mysql_fetch_array($sql);
@@ -50,7 +50,7 @@ while(strlen($CODIGO_DA_EMPRESA)< 4)
  }
  $NossoNumero = $maior.$CODIGO_DA_EMPRESA ; */
 
-include("../inc/conect.php");
+require_once("../inc/conect.php");
 
 $sql01=$PDO->query("SELECT agencia,contacorrente,convenio,contrato,carteira FROM boleto");
 list($agencia,$contacorrente,$convenio,$contrato,$carteira)=$sql01->fetch();
@@ -58,8 +58,8 @@ list($agencia,$contacorrente,$convenio,$contrato,$carteira)=$sql01->fetch();
 $sql=$PDO->query("SELECT dataemissao,valor,chavecontroledoc,datavencimento FROM guia_pagamento WHERE chavecontroledoc='80$chave' GROUP BY chavecontroledoc");
 list($DataEmissao,$Valor,$NossoNumero,$DataVenc)=$sql->fetch();
 
-// ------------------------- DADOS DIN�MICOS DO SEU CLIENTE PARA A GERA��O DO BOLETO (FIXO OU VIA GET) -------------------- //
-// Os valores abaixo podem ser colocados manualmente ou ajustados p/ formul�rio c/ POST, GET ou de BD (MySql,Postgre,etc)	//
+// ------------------------- DADOS DINÂMICOS DO SEU CLIENTE PARA A GERAÇÃO DO BOLETO (FIXO OU VIA GET) -------------------- //
+// Os valores abaixo podem ser colocados manualmente ou ajustados p/ formulário c/ POST, GET ou de BD (MySql,Postgre,etc)	//
 
 // DADOS DO BOLETO PARA O SEU CLIENTE
 $dias_de_prazo_para_pagamento = 5;
@@ -70,12 +70,12 @@ $valor_cobrado = str_replace(",", ".",$valor_cobrado);
 $valor_boleto=number_format($valor_cobrado+$taxa_boleto, 2, ',', '');
 
 $dadosboleto["inicio_nosso_numero"] = "";  // Carteira SR: 80, 81 ou 82  -  Carteira CR: 90 (Confirmar com gerente qual usar)
-$dadosboleto["nosso_numero"] =  $NossoNumero;  // Nosso numero sem o DV - REGRA: M�ximo de 8 caracteres!
+$dadosboleto["nosso_numero"] =  $NossoNumero;  // Nosso numero sem o DV - REGRA: Máximo de 8 caracteres!
 $dadosboleto["numero_documento"] =$NossoNumero;	// Num do pedido ou do documento
 $dadosboleto["data_vencimento"] = $data_venc; // Data de Vencimento do Boleto - REGRA: Formato DD/MM/AAAA
-$dadosboleto["data_documento"] = date("d/m/Y"); // Data de emiss�o do Boleto
+$dadosboleto["data_documento"] = date("d/m/Y"); // Data de emissão do Boleto
 $dadosboleto["data_processamento"] = date("d/m/Y"); // Data de processamento do boleto (opcional)
-$dadosboleto["valor_boleto"] = $valor_boleto; 	// Valor do Boleto - REGRA: Com v�rgula e sempre com duas casas depois da virgula
+$dadosboleto["valor_boleto"] = $valor_boleto; 	// Valor do Boleto - REGRA: Com vírgula e sempre com duas casas depois da virgula
 
 // DADOS DO SEU CLIENTE
 $dadosboleto["sacado"] = $NOME;
@@ -87,10 +87,10 @@ $dadosboleto["demonstrativo1"] = "GUIA DE RECOLHIMENTO DE ISS";
 $dadosboleto["demonstrativo2"] = "SISTEMA ISS DIGITAL ";
 $dadosboleto["demonstrativo3"] = "PREFEITURA MUNICIPAL DE ".$PREFEITURA;
 
-// INSTRU��ES PARA O CAIXA
+// INSTRUÇÕES PARA O CAIXA
 $dadosboleto["instrucoes1"] = "";
 $dadosboleto["instrucoes2"] = "";
-$dadosboleto["instrucoes3"] = "- Em caso de d�vidas entre em contato com a Prefeitura Municipal.";
+$dadosboleto["instrucoes3"] = "- Em caso de dúvidas entre em contato com a Prefeitura Municipal.";
 $dadosboleto["instrucoes4"] = "&nbsp; Emitido pelo sistema de ISS DIGITAL";
 
 // DADOS OPCIONAIS DE ACORDO COM O BANCO OU CLIENTE
@@ -101,7 +101,7 @@ $dadosboleto["especie"] = "R$";
 $dadosboleto["especie_doc"] = "";
 
 
-// ---------------------- DADOS FIXOS DE CONFIGURA��O DO SEU BOLETO --------------- //
+// ---------------------- DADOS FIXOS DE CONFIGURAÇÃO DO SEU BOLETO --------------- //
 
 
 // DADOS DA SUA CONTA - CEF
@@ -110,9 +110,9 @@ $dadosboleto["conta"] = $contacorrente; 	// Num da conta, sem digito
 $dadosboleto["conta_dv"] = "3"; 	// Digito do Num da conta
 
 // DADOS PERSONALIZADOS - CEF
-$dadosboleto["conta_cedente"] = ""; // ContaCedente do Cliente, sem digito (Somente N�meros)
+$dadosboleto["conta_cedente"] = ""; // ContaCedente do Cliente, sem digito (Somente Números)
 $dadosboleto["conta_cedente_dv"] = ""; // Digito da ContaCedente do Cliente
-$dadosboleto["carteira"] = "SR";  // C�digo da Carteira: pode ser SR (Sem Registro) ou CR (Com Registro) - (Confirmar com gerente qual usar)
+$dadosboleto["carteira"] = "SR";  // Código da Carteira: pode ser SR (Sem Registro) ou CR (Com Registro) - (Confirmar com gerente qual usar)
 
 // SEUS DADOS
 $dadosboleto["identificacao"] = "PREFEITURA MUNICIPAL DE ".$PREFEITURA;
@@ -134,7 +134,7 @@ $DataVencimentoBoleto = implode('-', array_reverse(explode('/',$dadosboleto["dat
 
 
 
-// N�O ALTERAR!
-include("include/funcoes_cef.php"); 
-include("include/layout_cef.php");
+// NÃO ALTERAR!
+require_once("include/funcoes_cef.php"); 
+require_once("include/layout_cef.php");
 ?>
