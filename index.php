@@ -19,9 +19,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-$Link = $_SERVER['HTTP_HOST'];
-print("  
-<script language=\"javascript\">
-	parent.location='site/';
-</script>");
+
+require_once 'autoload.php';
+
+header("Location: " . BASE_URL . 'site/');
+die();
+
 ?>
