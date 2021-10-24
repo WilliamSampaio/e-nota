@@ -18,102 +18,78 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<table width="580" border="0" cellpadding="0" cellspacing="1">
-	<tr>
-		<td width="5%" height="10" bgcolor="#FFFFFF"></td>
-		<td width="30%" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta de Reclama��es</td>
-		<td width="65%" bgcolor="#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td height="1" bgcolor="#CCCCCC"></td>
-		<td bgcolor="#CCCCCC"></td>
-	</tr>
-	<tr>
-		<td height="10" bgcolor="#FFFFFF"></td>
-		<td bgcolor="#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
-	</tr>
-	<tr>
-		<td height="60" colspan="3" bgcolor="#CCCCCC">
 
-			<form method="post">
-				<input type="hidden" name="txtMenu" value="<?php echo $_POST['txtMenu']; ?>" />
-				<table width="500" border="0" cellspacing="0" cellpadding="5">
-					<tr>
-						<td align="left" width="300" background="../../img/index/index_oquee_fundo.jpg">
-							CPF/CNPJ do Tomador
-						</td>
-						<td align="left" width="300" background="../../img/index/index_oquee_fundo.jpg">
-							<input type="text" name="txtCpfCnpjTomador" id="txtCpfCnpjTomador" onkeydown="stopMsk( event );" onkeypress="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" class="texto">
-						</td>
-					</tr>
-					<tr>
-						<td align="center" background="../../img/index/index_oquee_fundo.jpg" colspan="2">
-							<input type="submit" name="btConsultar" value="Consultar" class="botao">
-						</td>
-					</tr>
-				</table>
-			</form>
+<h2>Consulta de Reclamações</h2>
+<hr><br>
 
-			<?php if ($_POST['btConsultar'] != "") {
-				$sql = $PDO->query("SELECT rps_numero,datareclamacao,estado FROM reclamacoes WHERE  tomador_cnpj='$txtCpfCnpjTomador'");
-				$verifica = $sql->rowCount();
+<form method="post">
 
+	<input type="hidden" name="txtMenu" value="<?php echo $_POST['txtMenu']; ?>">
 
-				if ($verifica > 0) {
-			?>
-					<table width="500" border="0" cellspacing="0" cellpadding="5">
-						<tr>
-							<td background="../../img/index/index_oquee_fundo.jpg" align="center">
-								<b>N�mero RPS</b>
-							</td>
-							<td background="../../img/index/index_oquee_fundo.jpg" align="center">
-								<b>Data da reclama��o</b>
-							</td>
-							<td background="../../img/index/index_oquee_fundo.jpg" align="center">
-								<b>Estado da reclama��o</b>
-							</td>
-						</tr>
-						<?php
-						while (list($numerorps, $data, $estado) = $sql->fetch()) {
-							$data = implode("/", array_reverse(explode("-", $data))); ?>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="txtCpfCnpjTomador" class="col-form-label">CPF/CNPJ do Tomador</label>
+		</div>
+		<div class="col-auto">
+			<input class="form-control" type="text" name="txtCpfCnpjTomador" id="txtCpfCnpjTomador" onkeydown="stopMsk( event );" onkeypress="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" class="texto">
+		</div>
+		<div class="col-auto">
+			<input type="submit" name="btConsultar" value="Consultar" class="btn btn-primary">
+		</div>
+	</div>
 
-							<tr>
-								<td background="../../img/index/index_oquee_fundo.jpg" align="center">
-									<?php echo $numerorps; ?>
-								</td>
-								<td background="../../img/index/index_oquee_fundo.jpg" align="center">
-									<?php echo $data; ?>
-								</td>
-								<td background="../../img/index/index_oquee_fundo.jpg" align="center">
-									<?php echo $estado; ?>
-								</td>
-							</tr>
-						<?php
-						}
-						?>
-					</table>
+</form>
+<br>
 
-				<?php
-				} else { ?>
-					<table width="500" border="0" cellspacing="0" cellpadding="5">
-						<tr>
-							<td background="../../img/index/index_oquee_fundo.jpg">
-								<b>Reclama��es n�o encontradas! Verifique os dados.</b>
-							</td>
-						</tr>
-					</table>
-			<?php
-				}
-			} ?>
+<?php 
 
+if ($_POST['btConsultar'] != "") {
+	$sql = $PDO->query("SELECT rps_numero,datareclamacao,estado FROM reclamacoes WHERE  tomador_cnpj='" . $_POST['txtCpfCnpjTomador'] . "'");
+	$verifica = $sql->rowCount();
 
+	if ($verifica > 0) {
 
-		</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="#CCCCCC"></td>
-	</tr>
+?>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Número RPS</th>
+			<th scope="col">Data da reclamação</th>
+			<th scope="col">Estado da reclamação</th>
+		</tr>
+	</thead>
+  	<tbody>
+
+  	<?php
+	  	
+	while (list($numerorps, $data, $estado) = $sql->fetch()) {
+		$data = implode("/", array_reverse(explode("-", $data))); 
+		
+	?>
+
+		<tr>
+			<td><?php echo $numerorps; ?></td>
+			<td><?php echo $data; ?></td>
+			<td><?php echo $estado; ?></td>
+		</tr>
+	
+	<?php
+		}
+	?>
+
+  	</tbody>
 </table>
+
+<?php
+	} else { 
+?>
+
+<div class="alert alert-danger" role="alert">
+	<p>Reclamações não encontradas! Verifique os dados.</p>
+</div>
+
+<?php
+		}
+	}
+?>

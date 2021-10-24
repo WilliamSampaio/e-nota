@@ -18,6 +18,10 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
+
+<h2>Cadastro de Reclamações</h2>
+<hr><br>
+
 <?php
 $cpfcnpj_tomador   = $_POST['txtCpfCnpjTomador'];
 $numero_rps        = $_POST['txtRpsNumero'];
@@ -39,118 +43,79 @@ if ($_POST['btCadastrar'] == "Cadastrar") {
 		$sql_verifica_prestador = $PDO->query("SELECT codigo FROM cadastro WHERE $campo = '$cpfcnpj_prestador'");
 		if ($sql_verifica_prestador->rowCount() > 0) {
 			$data = DataMysql($data_rps);
-			$PDO->query("INSERT INTO reclamacoes SET assunto = 'Nota Fiscal Eletr�nica de Servi�os', descricao='$descricao', especificacao = '$especificacao',
+			$PDO->query("INSERT INTO reclamacoes SET assunto = 'Nota Fiscal Eletrônica de Serviços ', descricao='$descricao', especificacao = '$especificacao',
 			tomador_cnpj = '$cpfcnpj_tomador', rps_numero = '$numero_rps', rps_data = '$data', rps_valor = '$valor_rps',
 			emissor_cnpjcpf = '$cpfcnpj_prestador', estado = 'pendente', datareclamacao = NOW(),tomador_email = '$email_tomador'");
-			Mensagem("Sua reclama&ccedil;&atilde;o foi enviada com sucesso!");
-			Redireciona("ouvidoria.php");
+			$_SESSION['cad_result'] = 'Sua reclamação foi enviada com sucesso';
+			header('Location: ' . BASE_URL . 'site/ouvidoria.php');
 		} else {
-			Mensagem("Prestador de servi&ccedil;os inexistente! Certifique-se de que o CPF/CNPJ do prestador de servi&ccedil;os est&aacute; correto");
+			Mensagem("Prestador de serviços inexistente! Certifique-se de que o CPF/CNPJ do prestador de serviços está correto");
 		}
 	} else {
-		Mensagem("Digite um CPF/CNPJ de prestador vest&aacute;lido!");
+		Mensagem("Digite um CPF/CNPJ de prestador vestálido!");
 	}
 }
 ?>
 
 <form method="post">
-	<input type="hidden" name="txtMenu" value="<?php echo $_POST['txtMenu']; ?>" />
-	<table width="580" border="0" cellpadding="0" cellspacing="1">
-		<tr>
-			<td width="5%" height="10" bgcolor="#FFFFFF"></td>
-			<td width="30%" align="center" bgcolor="#FFFFFF" rowspan="3">Cadastro de Reclama&ccedil;&otilde;es</td>
-			<td width="65%" bgcolor="#FFFFFF"></td>
-		</tr>
-		<tr>
-			<td height="1" bgcolor="#CCCCCC"></td>
-			<td bgcolor="#CCCCCC"></td>
-		</tr>
-		<tr>
-			<td height="10" bgcolor="#FFFFFF"></td>
-			<td bgcolor="#FFFFFF"></td>
-		</tr>
-		<tr>
-			<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
-		</tr>
-		<tr>
-			<td height="60" colspan="3" bgcolor="#CCCCCC">
-				<table width="99%" border="0" align="center" cellpadding="5" cellspacing="0">
-					<tr>
-						<td align="left" background="../../img/index/index_oquee_fundo.jpg"> Assunto </td>
-						<td align="left" background="../../img/index/index_oquee_fundo.jpg"> Nota Fiscal Eletr�nica de Servi�os </td>
-					</tr>
-					<tr>
-						<td align="left" background="../../img/index/index_oquee_fundo.jpg"> Especifica��o </td>
-						<td align="left" background="../../img/index/index_oquee_fundo.jpg">
-							<select name="cmbEspecificacao" id="cmbEspecificacao" class="combo">
-								<option value="Convers�o de NFE">N&atilde;o convers&atilde;o de RPS</option>
-								<option value="Diferen&ccedil;a de valores RPS/NFE">Diferen&ccedil;a de valores RPS/NFE</option>
-								<option value="Nota Cancelada">Nota Cancelada</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left">Descri&ccedil;&atilde;o <b>
-								<font color="#FF0000">*</font>
-							</b></td>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left">
-							<textarea name="txtDescricao" id="txtDescricao" rows="4" cols="25"></textarea>
-					</tr>
-					<tr>
-						<td width="222" align="left" background="../../img/index/index_oquee_fundo.jpg"> Cpf/Cnpj do Tomador de servi�os<font color="#FF0000">*</font>
-						</td>
-						<td width="258" align="left" background="../../img/index/index_oquee_fundo.jpg">
-							<input type="text" name="txtCpfCnpjTomador" id="txtCpfCnpjTomador" class="texto" onkeydown="stopMsk( event ); return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );">
-					</tr>
-					<tr>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left"> Tomador Email<b>
-								<font color="#FF0000">*</font>
-							</b> </td>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left">
-							<input type="text" class="email" name="txtEmailtomador" id="txtEmailtomador">
-						</td>
-					</tr>
-					<tr>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left"> N�mero do RPS ou NFe<b>
-								<font color="#FF0000">*</font>
-							</b> </td>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left">
-							<input type="text" class="texto" name="txtRpsNumero" id="txtRpsNumero">
-					</tr>
-					<tr>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left"> Data de Emiss�o do RPS ou NFe<b>
-								<font color="#FF0000">*</font>
-							</b> </td>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left">
-							<input type="text" class="texto" name="txtDataRps" id="txtDataRps" maxlength="10">
-					</tr>
-					<tr>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left"> Valor do RPS ou NFe<b>
-								<font color="#FF0000">*</font>
-							</b> </td>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left">
-							<input type="text" class="texto" name="txtValorRps" id="txtValorRps">
-					</tr>
-					<tr>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left"> CPF/CNPJ do Prestador de servi�os<b>
-								<font color="#FF0000">*</font>
-							</b> </td>
-						<td background="../../img/index/index_oquee_fundo.jpg" align="left">
-							<input type="text" class="texto" name="txtCpfCnpjPrestador" id="txtCpfCnpjPrestador" onkeydown="stopMsk( event );" onkeypress="return NumbersOnly( event );">
-					</tr>
-					<tr>
-						<td align="center" background="../../img/index/index_oquee_fundo.jpg">
-							<input type="submit" name="btCadastrar" value="Cadastrar" class="botao" onclick="return ValidaFormulario('cmbEspecificacao|txtCpfCnpjTomador|txtEmailtomador|txtRpsNumero|txtDataRps|txtValorRps|txtCpfCnpjPrestador|txtDescricao')">
-						</td>
-						<td align="right" background="../../img/index/index_oquee_fundo.jpg"> <b>
-								<font color="#FF0000">*</font>
-							</b> Campos com preenchimento obrig�torio. </td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td height="1" colspan="3" bgcolor="#CCCCCC"></td>
-		</tr>
-	</table>
+
+	<input type="hidden" name="txtMenu" value="<?php echo $_POST['txtMenu']; ?>">
+
+	<div class="mb-3">
+		<p>Assunto: Nota Fiscal Eletrônica de Serviços</p>
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="especificacao">Especificação</span>
+		<select name="cmbEspecificacao" id="cmbEspecificacao" class="form-select" aria-label="Default select example">
+			<option value="Conversão de NFE">Não conversão de RPS</option>
+			<option value="Diferença de valores RPS/NFE">Diferença de valores RPS/NFE</option>
+			<option value="Nota Cancelada">Nota Cancelada</option>
+		</select>
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text">Descrição<span style="font-weight: bold; color: red;">*</span></span>
+		<textarea name="txtDescricao" id="txtDescricao" class="form-control" aria-label="With textarea" required></textarea>
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="basic-addon1">CPF/CNPJ do Tomador de serviços<span style="font-weight: bold; color: red;">*</span></span>
+		<input name="txtCpfCnpjTomador" id="txtCpfCnpjTomador" type="text" class="form-control" onkeydown="stopMsk( event ); return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" required>
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="basic-addon1">Tomador e-mail<span style="font-weight: bold; color: red;">*</span></span>
+		<input name="txtEmailtomador" id="txtEmailtomador" type="email" class="form-control" required>
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="basic-addon1">Número do RPS ou NFe<span style="font-weight: bold; color: red;">*</span></span>
+		<input name="txtRpsNumero" id="txtRpsNumero" type="text" class="form-control" required>
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="basic-addon1">Data de Emissão do RPS ou NFe<span style="font-weight: bold; color: red;">*</span></span>
+		<input name="txtDataRps" id="txtDataRps" maxlength="10" type="text" class="form-control" required>
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="basic-addon1">Valor do RPS ou NFe<span style="font-weight: bold; color: red;">*</span></span>
+		<input name="txtValorRps" id="txtValorRps" type="text" class="form-control" required>
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="basic-addon1">CPF/CNPJ do Prestador de serviços<span style="font-weight: bold; color: red;">*</span></span>
+		<input name="txtCpfCnpjPrestador" id="txtCpfCnpjPrestador" onkeydown="stopMsk( event );" onkeypress="return NumbersOnly( event );" type="text" class="form-control" required>
+	</div>
+	
+	<br>
+
+	<div class="input-group mb-3">
+		<button type="submit" class="btn btn-primary" name="btCadastrar" value="Cadastrar" onclick="return ValidaFormulario('cmbEspecificacao|txtCpfCnpjTomador|txtEmailtomador|txtRpsNumero|txtDataRps|txtValorRps|txtCpfCnpjPrestador|txtDescricao')">Cadastrar</button>
+	</div>
+
+	<hr>
+	<div id="help" class="form-text"><span style="font-weight: bold; color: red;">*</span> : Campos com preenchimento obrigatório.</div>
+
 </form>

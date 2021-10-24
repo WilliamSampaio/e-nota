@@ -20,66 +20,30 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <!-- box de conteúdos -->
 <form name="frmOuvidoriaBox" method="post" action="ouvidoria.php" id="frmOuvidoriaBox">
-  <input type="hidden" name="txtMenu" id="txtMenu" />
-  <input type="hidden" name="txtCNPJ" id="txtCNPJ" />
+    
+    <input type="hidden" name="txtMenu" id="txtMenu" />
+    <input type="hidden" name="txtCNPJ" id="txtCNPJ" />
 
-  <table border="0" cellspacing="5" cellpadding="0">
-    <tr>
-      <td width="190" align="center" valign="top">
-        <!-- quadro da esquerda acima -->
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="3" bgcolor="#CCCCCC"></td>
-          </tr>
-          <tr>
-            <td height="10" bgcolor="#999999"></td>
-          </tr>
-          <tr>
-            <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-              <font class="boxTitulo">Reclama&ccedil;&otilde;es</font><br />
-              <br />
-              Se o seu prestador n&atilde;o efetuou a convers&atilde;o de RPS em NF-e, ou o valor da NFe n&atilde;o confere.<br />
-              <br />
-            </td>
-          </tr>
-          <tr>
-            <td height="1"></td>
-          </tr>
-          <tr>
-            <td height="20" align="left" bgcolor="#859CAD">&nbsp;<img src="../img/box/web.png" width="14" height="14" /> <a onclick="document.getElementById('txtMenu').value='cadastro';frmOuvidoriaBox.submit();" href="#" class="box">Servi&ccedil;o on-line</a></td>
-          </tr>
-        </table>
-      </td>
-      <td width="190" align="center" valign="top">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="3" bgcolor="#CCCCCC"></td>
-          </tr>
-          <tr>
-            <td height="10" bgcolor="#999999"></td>
-          </tr>
-          <tr>
-            <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-              <font class="boxTitulo">Consulta</font><br />
-              <br />
-              Consulte o andamento da reclama&ccedil;&atilde;o feita junto a Prefeitura Municipal.<br />
-              <br />
-              <div align="center"></div>
-            </td>
-          </tr>
-          <tr>
-            <td height="1"></td>
-          </tr>
-          <tr>
-            <td height="20" align="left" bgcolor="#859CAD">&nbsp;<img src="../img/box/web.png" alt="" width="14" height="14" /> <a onclick="document.getElementById('txtMenu').value='consulta';frmOuvidoriaBox.submit();" href="#" class="box">Servi&ccedil;o on-line</a></td>
-          </tr>
-        </table>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Reclamações</h5>
+            <p class="card-text">Se o seu prestador não efetuou a conversão de RPS em NF-e, ou o valor da NFe não confere.</p>
+        </div>
+        <div class="card-footer">
+            <img src="../img/box/web.png" width="14" height="14">
+            <a onclick="document.getElementById('txtMenu').value='cadastro';frmOuvidoriaBox.submit();" href="#" class="box">Serviço online</a>
+        </div>
+    </div>
+    <br>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Consulta</h5>
+            <p class="card-text">Consulte o andamento da reclamação feita junto a Prefeitura Municipal.</p>
+        </div>
+        <div class="card-footer">
+            <img src="../img/box/web.png" alt="" width="14" height="14">
+            <a onclick="document.getElementById('txtMenu').value='consulta';frmOuvidoriaBox.submit();" href="#" class="box">Serviço online</a>
+        </div>
+    </div>
 
-        <!-- Quadro do meio acima -->
-      </td>
-      <td width="190" align="center" valign="top">
-        <!-- quadro direita acima -->
-      </td>
-    </tr>
-  </table>
 </form>

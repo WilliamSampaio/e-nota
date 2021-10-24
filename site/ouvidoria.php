@@ -20,73 +20,55 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
-// arquivo de conex�o com o banco
-include("../include/conect.php");
+session_start();
 
-// arquivo com funcoes uteis
-include("../funcoes/util.php");
-//print("<a href=index.php target=_parent><img src=../img/topos/$TOPO></a>");
+require_once '../autoload.php';
+require_once 'inc/header.php';
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <title>e-Nota</title>
-  <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
-  <script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
-  <script type="text/javascript" src="../scripts/lightbox/prototype.js"></script>
-  <script type="text/javascript" src="../scripts/lightbox/scriptaculous.js?load=effects,builder"></script>
-  <script type="text/javascript" src="../scripts/lightbox/lightbox.js"></script>
-  <link rel="stylesheet" href="../css/lightbox.css" type="text/css" media="screen" />
-
-  <link href="../css/padrao_site.css" rel="stylesheet" type="text/css" />
-</head>
-
 <body>
-  <table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
-    <tr>
-      <td><?php include("inc/topo.php"); ?></td>
-    </tr>
-    <tr>
-      <td bgcolor="#FFFFFF" valign="top" align="center">
 
-        <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="170" rowspan="2" align="left" valign="top" background="../img/menus/menu_fundo.jpg"><?php include("inc/menu.php"); ?>
-            </td>
-            <td align="right" valign="top" width="590"><img src="../img/cabecalhos/ouvidoria.jpg" width="590" height="100" /></td>
-          </tr>
-          <tr>
-            <td align="center" valign="top">
+    <?php require_once 'inc/navbar.php'; ?>
 
+    <div class="container">
+        <div class="row align-items-start">
+            <!-- MENU -->
+            <div class="col-3">
+                <?php require_once 'inc/menu.php' ?>
+            </div>
 
-              <!-- box de conte�dos -->
+            <!-- CONTEÚDO -->
+            <div class="col-9">
 
+                <!-- NFE LOGO -->
+                <!-- <div class="row text-center">
+                    <div class="col-12">
+                        <img style="width: 80%;" src="../img/cabecalhos/noticias.jpg" class="img-fluid" alt="...">
+                    </div>
+                </div> -->
 
-              <?php
-              if ($_POST["txtMenu"]) {
-                include("inc/ouvidoria/" . $_POST["txtMenu"] . ".php");
-              } else {
-                include("inc/ouvidoria/links.php");
-              } // fim else
-              ?>
+                <br>
+                <h1>Ouvidoria</h1>
+                <h5 class="card-title">Tomador, se houver discrepâncias em sua NFe entre em contato com a Prefeitura Municipal</h5>
+                <hr><br>
 
+                <?php
 
+                if (isset($_SESSION['cad_result'])) {
+                    echo '<div class="alert alert-success" role="alert"><p>' . $_SESSION['cad_result'] . '</p></div>';
+                    unset($_SESSION['cad_result']);
+                }
 
-            </td>
-          </tr>
-        </table>
+                if ($_POST["txtMenu"]) {
+                    require_once("inc/ouvidoria/" . $_POST["txtMenu"] . ".php");
+                } else {
+                    require_once("inc/ouvidoria/links.php");
+                } // fim else
+                ?>
 
+            </div>
+        </div>
+    </div>
 
-
-      </td>
-    </tr>
-  </table>
-  <?php include("inc/rodape.php"); ?>
-
-</body>
-
-</html>
+    <?php include_once 'inc/footer.php' ?>
