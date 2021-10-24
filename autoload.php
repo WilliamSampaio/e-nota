@@ -1,7 +1,5 @@
 <?php
 
-require_once 'config/constants.php';
-require_once 'config/config.php';
 require_once 'config/functions.php';
 
 spl_autoload_register(
