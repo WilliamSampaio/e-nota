@@ -18,34 +18,30 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php
-//array com os menus e seus respectivos links
-$menus = array(
-	'Prestadores' 			=> 'prestadores.php',
-	'Contadores' 			=> 'contadores.php',
-	'Tomadores' 			=> 'tomadores.php',
-	'RPS' 					=> 'rps.php',
-	'Benefícios' 			=> 'beneficios.php',
-	'Perguntas e Respostas' => 'faq.php',
-	'Reclamações' 			=> 'ouvidoria.php',
-	'Notícias'				=> 'noticias.php',
-	'Legislação'			=> 'legislacao.php'
-);
 
-?>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<ul class="nav flex-column">
+
 	<?php
-	foreach ($menus as $menu => $link) {
-	?>
-		<tr>
-			<td height="20" class="menu">
-				<a class="menu" href=<?php echo $link; ?>>&nbsp;<?php echo $menu; ?></a>
-			</td>
-		</tr>
-		<tr>
-			<td height="1" bgcolor="#CCCCCC"></td>
-		</tr>
-	<?php
-	}
-	?>
-</table>
+
+	$menus = array(
+		'Início'       => 'index.php',
+		'Prestadores'       => 'prestadores.php',
+		'Contadores'       => 'contadores.php',
+		'Tomadores'       => 'tomadores.php',
+		'RPS'           => 'rps.php',
+		'Benefícios'       => 'beneficios.php',
+		'Perguntas e Respostas' => 'faq.php',
+		'Reclamações'       => 'ouvidoria.php',
+		'Notícias'        => 'noticias.php',
+		'Legislação'      => 'legislacao.php'
+	);
+
+	foreach ($menus as $menu => $link) { ?>
+
+		<li class="nav-item">
+			<a class="nav-link" aria-current="page" href="<?php echo $link ?>">&nbsp;<?php echo $menu ?></a>
+		</li>		
+
+	<?php } ?>
+
+</ul>

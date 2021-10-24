@@ -19,155 +19,121 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-session_start();
-// arquivo de conex�o com o banco
-include("../include/conect.php");
 
-// arquivo com funcoes uteis
-include("../funcoes/util.php");
-//print("<a href=index.php target=_parent><img src=../img/topos/$TOPO></a>");
+session_start();
+
+require_once '../autoload.php';
+require_once 'inc/header.php';
 
 ?>
 
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <title>e-Nota</title>
-  <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
-  <link href="../css/padrao_site.css" rel="stylesheet" type="text/css" />
-</head>
-
 <body>
-  <table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
-    <tr>
-      <td><?php include("inc/topo.php"); ?></td>
-    </tr>
-    <tr>
-      <td bgcolor="#FFFFFF" height="400" valign="top" align="center">
 
-        <!-- frame central inicio -->
-        <table border="0" cellspacing="0" cellpadding="0" height="100%">
-          <tr>
-            <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php include("inc/menu.php"); ?></td>
-            <td width="590" valign="top">
+    <?php require_once 'inc/navbar.php'; ?>
 
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td width="530"><img src="../img/cabecalhos/legislacao.jpg" width="590" height="100" /></td>
-                </tr>
-                <tr>
-                  <td align="center"><br />
+    <div class="container">
+        <div class="row align-items-start">
+            <!-- MENU -->
+            <div class="col-3">
+                <?php require_once 'inc/menu.php' ?>
+            </div>
 
+            <!-- CONTEÚDO -->
+            <div class="col-9">
 
-                    <table width="99%" border="0" cellspacing="0" cellpadding="0" style="padding:5px;">
-                      <tr>
-                        <td height="3" bgcolor="#CCCCCC"></td>
-                      </tr>
-                      <tr>
-                        <td height="10" bgcolor="#999999"></td>
-                      </tr>
-                      <tr>
-                        <td height="20" align="left" bgcolor="#CCCCCC">
+                <!-- NFE LOGO -->
+                <!-- <div class="row text-center">
+                    <div class="col-12">
+                        <img style="width: 80%;" src="../img/cabecalhos/legislacao.jpg" class="img-fluid" alt="...">
+                    </div>
+                </div> -->
 
-                          Voc� pode visualizar os manuais fazendo o download dos arquivos em formato PDF.
+                <br>
+                <h1>Legislação</h1>
+                <h5 class="card-title">Conheça o embasamento legal e jurídico</h5>
+                <hr><br>
 
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="1"></td>
-                      </tr>
-                      <tr>
-                        <td height="5" align="left" bgcolor="#859CAD"></td>
-                      </tr>
-                    </table>
-                    <br />
+                <!-- ITENS -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-success" role="alert">
+                            <p>Você pode visualizar os manuais fazendo o download dos arquivos em formato PDF.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
                     <?php
-                    // lista leis e afins
+
                     $sql = $PDO->query("
-	SELECT 
-		titulo,
-		texto, 
-		data, 
-		arquivo 
-	FROM 
-		legislacao 
-	WHERE 
-		tipo = 'N' OR
-		tipo = 'T'
-	ORDER BY 
-		codigo
-");
+                        SELECT titulo, texto, data, arquivo	
+                        FROM legislacao
+                        WHERE tipo = 'N' OR tipo = 'T' 
+                        ORDER BY codigo");
+
+                    if ($sql->rowCount() > 0) {
+
                     ?>
-                    <table width="99%" border="0" cellspacing="0" cellpadding="0" style="padding:5px;">
-                      <tr>
-                        <td height="3" bgcolor="#CCCCCC"></td>
-                      </tr>
-                      <tr>
-                        <td height="10" bgcolor="#999999"></td>
-                      </tr>
-                      <tr>
-                        <td align="left" valign="top" bgcolor="#CCCCCC">
-                          <?php
-                          if ($sql->rowCount() > 0) {
-                            while (list($titulo, $texto, $data, $arquivo) = $sql->fetch()) {
-                          ?>
 
-                              <table width="95%" border="0" cellspacing="2" cellpadding="0">
-                                <tr>
-                                  <td colspan="2"><strong><?php echo $titulo; ?></strong></td>
-                                </tr>
-                                <tr>
-                                  <td colspan="2"><?php echo $texto; ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Data: <?php echo substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4); ?></td>
-                                  <td align="right"><a href="../legislacao/<?php echo $BANCO . "/" . $arquivo; ?>" target="_blank"><img src="../img/pdf.jpg" title="Download do pdf" /></a></td>
-                                </tr>
-                              </table>
-                          <?php
-                            } // fim while
-                          } else {
-                            echo "
-		<table width=\"95%\" border=\"0\" cellspacing=\"2\" cellpadding=\"0\">
-			<tr>
-				<td>N�o h� nenhuma lei cadastrada</td>
-			</tr>
-		</table>
-		";
-                          }
-                          ?>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="1"></td>
-                      </tr>
-                      <tr>
-                        <td height="5" align="left" bgcolor="#859CAD"></td>
-                      </tr>
-                    </table>
+                    <div class="accordion" id="accordionExample">
 
+                    <?php
+                    
+                    $count = 1;
+                    while (list($titulo, $texto, $data, $arquivo) = $sql->fetch()) {
 
-                    <br />
-                  </td>
-                </tr>
-              </table>
+                    ?>
 
-            </td>
-          </tr>
-        </table>
-        <!-- frame central fim -->
+                        <div class="accordion-item" style="text-align: justify;">
+                            <h2 class="accordion-header" id="headingOne-<?php echo $count ?>">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-<?php echo $count ?>" aria-expanded="true" aria-controls="collapseOne-<?php echo $count ?>">
+                                    <?php
+                                    echo substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4) . ' - ' . $titulo;
+                                    ?>
+                                </button>
+                            </h2>
+                            <div id="collapseOne-<?php echo $count ?>" class="accordion-collapse collapse" aria-labelledby="headingOne-<?php echo $count ?>" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <h4><?php echo $titulo ?></h4>
+                                    <p><?php echo $texto ?></p>
+                                    <p>
+                                        <?php
 
-      </td>
-    </tr>
-  </table>
-  <?php
-  include("inc/rodape.php");
-  ?>
+                                        $data_formatada = substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4);
+                                        echo $data_formatada . ' | ';
 
-</body>
+                                        ?>
+                                    <a href=" ../legislacao/<?php echo isTenancyAppBySubdomain() . "/" . $arquivo; ?>" target="_blank"> [Download] <img src="../img/pdf.jpg" title="Download do pdf" /></a>
 
-</html>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php
+                            $count++;
+                        } // fim while
+
+                    ?>
+
+                    </div>
+
+                    <?php
+                    } else {
+                    ?>
+
+                        <div class="col-12">
+                            <div class="alert alert-danger" role="alert">
+                                <p>Não há nenhuma lei cadastrada.</p>
+                            </div>
+                        </div>
+
+                    <?php } ?>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php require_once 'inc/footer.php'; ?>

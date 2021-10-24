@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../../funcoes/util.php");
+require_once("../../funcoes/util.php");
 session_start();
 session_destroy();
 Redireciona("../certidoes.php");

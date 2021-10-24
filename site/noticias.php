@@ -19,144 +19,85 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-  session_start();
-  // arquivo de conex�o com o banco
-  include("../include/conect.php"); 
-  
-  // arquivo com funcoes uteis
-  include("../funcoes/util.php");
-  //print("<a href=index.php target=_parent><img src=../img/topos/$TOPO></a>");
-  
+
+session_start();
+
+require_once '../autoload.php';
+require_once 'inc/header.php';
+
 ?>
-
-
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>e-Nota</title>
-<script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
-<link href="../css/padrao_site.css" rel="stylesheet" type="text/css" />
-</head>
 
 <body>
-<center>
-<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td><?php include("inc/topo.php"); ?></td>
-  </tr>
-  <tr>
-    <td bgcolor="#FFFFFF" height="400" valign="top" align="center">
-	
-<!-- frame central inicio --> 	
-<table border="0" cellspacing="0" cellpadding="0" height="100%" >
-  <tr>
-    <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php include("inc/menu.php"); ?></td>
-    <td width="590" height="100" bgcolor="#FFFFFF" valign="top" align="center">
 
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="590"><img src="../img/cabecalhos/noticias.jpg" width="590" height="100" /></td>
-        </tr>
-        <tr>
-          <td align="center" valign="top"><br />
-		  
-		  
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding:5px;">
-      <tr>
-        <td height="3" bgcolor="#CCCCCC"></td>
-      </tr>
-      <tr>
-        <td height="10" bgcolor="#999999"></td>
-      </tr>
-  <tr>
-    <td align="center" bgcolor="#CCCCCC">
-		<table width="98%" border="0" cellspacing="2" cellpadding="0">
+    <?php require_once 'inc/navbar.php'; ?>
 
-<?php 	
-// lista noticias
-$sql = $PDO->query("SELECT codigo, titulo, texto, data FROM noticias WHERE sistema = 'nfe' ORDER BY codigo DESC LIMIT 0,10");
-while(list($codigo, $titulo, $texto, $data) = $sql->fetch()) {
-?>
-  <tr>
-    <td width="20%"><a href="noticias.php?CODIGO=<?php echo $codigo; ?>"><?php echo substr($data,8,2)."/".substr($data,5,2)."/".substr($data,0,4); ?></a></td>
-    <td width="80%" align="left"><a href="noticias.php?CODIGO=<?php echo $codigo; ?>"><?php echo $titulo; ?></a></td>
-  </tr>
+    <div class="container">
+        <div class="row align-items-start">
+            <!-- MENU -->
+            <div class="col-3">
+                <?php require_once 'inc/menu.php' ?>
+            </div>
 
+            <!-- CONTEÚDO -->
+            <div class="col-9">
 
-<?php
-} // fim while	
-?>
-		</table>
+                <!-- NFE LOGO -->
+                <!-- <div class="row text-center">
+                    <div class="col-12">
+                        <img style="width: 80%;" src="../img/cabecalhos/noticias.jpg" class="img-fluid" alt="...">
+                    </div>
+                </div> -->
 
-	</td>
-    </tr>
-      <tr>
-        <td height="1"></td>
-      </tr>
-      <tr>
-        <td height="5" align="left" bgcolor="#859CAD"></td>
-      </tr>
-</table>
-<br />
+                <br>
+                <h1>Notícias</h1>
+                <h5 class="card-title">Fique por dentro das novidades sobre o e-Nota</h5>
+                <hr><br>
 
-<?php
+                <!-- ITENS -->
+                <div class="row text-center">
 
-if(isset($_GET['CODIGO'])) {
-	$CODIGO = $_GET['CODIGO'];
-	$sql = $PDO->query("SELECT titulo, texto, data FROM noticias WHERE codigo = '$CODIGO' AND sistema = 'nfe'");
-	list($titulo, $texto, $data) = $sql->fetch();
+                    <div class="accordion" id="accordionExample">
 
-?>	  
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding:5px;">
-      <tr>
-        <td height="3" bgcolor="#CCCCCC"></td>
-      </tr>
-      <tr>
-        <td height="10" bgcolor="#999999"></td>
-      </tr>
-    <td height="76" align="left" bgcolor="#CCCCCC">
-	
-<table width="100%" border="0" cellspacing="2" cellpadding="0">
-  <tr>
-    <td><strong><?php echo $titulo; ?></strong></td>
-  </tr>
-  <tr>
-    <td><?php echo $texto; ?></td>
-  </tr>
-  <tr>
-    <td><?php echo substr($data,8,2)."/".substr($data,5,2)."/".substr($data,0,4); ?></td>
-  </tr>
-</table>
-	
-	
-	</td>
-  </tr>
-      <tr>
-        <td height="1"></td>
-      </tr>
-      <tr>
-        <td height="5" align="left" bgcolor="#859CAD"></td>
-      </tr>
-</table>
-<?php
-} // fim if
-?>
-<br /></td>
-        </tr>		
-      </table>	
-	
-	</td>
-  </tr>
-</table>
-<!-- frame central fim --> 	
+                        <?php
+                        // lista noticias
+                        $sql = $PDO->query("SELECT codigo, titulo, texto, data FROM noticias WHERE sistema = 'nfe' ORDER BY codigo DESC LIMIT 0,10");
+                        $first_loop = true;
+                        while (list($codigo, $titulo, $texto, $data) = $sql->fetch()) {
 
-	</td>
-  </tr>
-</table>
-<?php include("inc/rodape.php");?>
+                        ?>
 
-</body>
-</html>
+                            <div class="accordion-item" style="text-align: justify;">
+                                <h2 class="accordion-header" id="headingOne-<?php echo $codigo ?>">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-<?php echo $codigo ?>" aria-expanded="true" aria-controls="collapseOne-<?php echo $codigo ?>">
+                                        <?php
+                                        echo substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4) . ' - ' . $titulo;
+                                        ?>
+                                    </button>
+                                </h2>
+                                <div id="collapseOne-<?php echo $codigo ?>" class="accordion-collapse collapse" aria-labelledby="headingOne-<?php echo $codigo ?>" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <h4><?php echo $titulo ?></h4>
+                                        <p><?php echo $texto ?></p>
+                                        <p>
+                                            <?php
+
+                                            $noticia_data_formatada = substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4);
+                                            echo 'PREFEITURA MUNICIPAL DE ' . $CONF_CIDADE . ' | ' . $noticia_data_formatada;
+
+                                            ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php
+                        } // fim while
+                        ?>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php require_once 'inc/footer.php' ?>

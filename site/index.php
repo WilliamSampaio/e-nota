@@ -20,297 +20,225 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
-// arquivo de conex�o com o banco
-include("../include/conect.php");
-
-// arquivo com funcoes uteis
-include("../funcoes/util.php");
-//print("<a href=index.php target=_parent><img src=../img/topos/$TOPO></a>");
+require_once '../autoload.php';
+require_once 'inc/header.php';
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <title>e-Nota</title>
-
-  <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
-
-  <script type="text/javascript" src="../scripts/lightbox/prototype.js"></script>
-  <script type="text/javascript" src="../scripts/lightbox/scriptaculous.js?load=effects,builder"></script>
-  <script type="text/javascript" src="../scripts/lightbox/lightbox.js"></script>
-  <script type="text/javascript" src="../scripts/padrao.js"></script>
-  <link rel="stylesheet" href="../css/lightbox.css" type="text/css" media="screen" />
-
-  <link href="../css/padrao_site.css" rel="stylesheet" type="text/css" />
-  <style type="text/css">
-    <!--
-    #apDiv1 {
-      position: absolute;
-      left: 40%;
-      top: 45%;
-      width: 400px;
-      height: 160px;
-      z-index: 1;
-      background-image: url(../img/index/indicativos.jpg);
-    }
-
-    .style1 {
-      font-size: 12pt;
-      color: #FF0000;
-      font-weight: bold;
-    }
-    -->
-  </style>
-</head>
 
 <body>
-  <div id="apDiv1" style="visibility:hidden" onclick="javascript:changeProp('apDiv1','','visibility','hidden','DIV')"><br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <?php
-    $sql = $PDO->query("SELECT COUNT(codigo) FROM cadastro WHERE estado = 'A'");
-    list($empresas_ativas) = $sql->fetch();
-    echo "<font color=#FF0000 size=4><strong>$empresas_ativas</strong></font>";
 
-    ?>
-    <br />
-    <br />
-    <br />
+    <?php require_once 'inc/navbar.php'; ?>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <?php
-    $sql = $PDO->query("SELECT COUNT(codigo) FROM notas");
-    list($notas_emitidas) = $sql->fetch();
-    echo "<font color=#FF0000 size=4><strong>$notas_emitidas</strong></font>";
+    <div class="container">
+        <div class="row align-items-start">
+            <!-- MENU -->
+            <div class="col-3">
+                <?php require_once 'inc/menu.php' ?>
+            </div>
 
-    ?>
-  </div>
-  <table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
-    <tr>
-      <td align="left"><?php include("inc/topo.php"); ?></td>
-    </tr>
-    <tr>
-      <td bgcolor="#FFFFFF" height="400" valign="top" align="center">
+            <!-- CONTEÚDO -->
+            <div class="col-9">
 
-        <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="170" rowspan="2" align="left" valign="top" background="../img/menus/menu_fundo.jpg"><?php include("inc/menu.php"); ?></td>
-            <td align="right" valign="top" width="590"><img src="../img/nfelogo.jpg" width="590" height="161" /></td>
-          </tr>
-          <tr>
-            <td align="center" valign="top">
+                <!-- NFE LOGO -->
+                <!-- <div class="row text-center">
+                    <div class="col-12">
+                        <img style="width: 80%;" src="../img/nfelogo.jpg" class="img-fluid" alt="...">
+                    </div>
+                </div> -->
 
-              <table border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="190" align="center" valign="top">
-                    <!-- quadro da esquerda acima -->
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td height="3" bgcolor="#CCCCCC"></td>
-                      </tr>
-                      <tr>
-                        <td height="10" bgcolor="#999999"></td>
-                      </tr>
-                      <tr>
-                        <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-                          <font class="boxTitulo">Como funciona?</font><br />
-                          <br />
-                          Clique e veja o funcionamento da NFeletr&ocirc;nica de ISS.<br />
-                          <br />
-                          <div align="center"><a href="../img/como_funciona.jpg" rel="lightbox[roadtrip]"><img src="../img/index/iconehowto.jpg" width="170" height="50" /></a></div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="1"></td>
-                      </tr>
-                      <tr>
-                        <td height="5" align="left" bgcolor="#859CAD"></td>
-                      </tr>
-                    </table>
-                  </td>
-                  <td width="190" align="center" valign="top">
 
-                    <!-- Quadro do meio acima -->
 
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td height="3" bgcolor="#CCCCCC"></td>
-                      </tr>
-                      <tr>
-                        <td height="10" bgcolor="#999999"></td>
-                      </tr>
-                      <tr>
-                        <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-                          <font class="boxTitulo">Emita sua NFe</font><br />
-                          <br />
-                          Acessa o sistema e emita suas Notas Fiscais Eletr&ocirc;nicas.<br />
-                          <br />
-                          <div align="center"><a href="prestadores.php"><img src="../img/index/iconeemitirnf.jpg" width="170" height="50" /></a></div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="1"></td>
-                      </tr>
-                      <tr>
-                        <td height="5" align="left" bgcolor="#859CAD"></td>
-                      </tr>
-                    </table>
-                  </td>
-                  <td width="190" align="center" valign="top">
+                <!-- <br>
+                <h1>e-Nota</h1>
+                <hr><br>
+                <h5>
+                    Documento emitido e armazenado eletronicamente com o objetivo de registrar as operações de prestação de serviços e será utilizada em
+                    substituição às notas fiscais de serviços convencionais.
+                </h5>
+                <hr><br> -->
 
-                    <!-- quadro direita acima -->
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td height="3" bgcolor="#CCCCCC"></td>
-                      </tr>
-                      <tr>
-                        <td height="10" bgcolor="#999999"></td>
-                      </tr>
-                      <tr>
-                        <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-                          <font class="boxTitulo"> Indicativos</font>
-                          <br />
-                          <br />
-                          Acesse e compare os n&uacute;meros de aprova&ccedil;&atilde;o da NFe de ISS.<br />
-                          <br />
-                          <div align="center"><a href="javascript:changeProp('apDiv1','','visibility','visible','DIV')"><img src="../img/index/iconeindicativos.jpg" /></a></div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="1"></td>
-                      </tr>
-                      <tr>
-                        <td height="5" align="left" bgcolor="#859CAD"></td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="190" align="center" valign="top">
-                    <!-- quadro da esquerda acima -->
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td height="3" bgcolor="#CCCCCC"></td>
-                      </tr>
-                      <tr>
-                        <td height="10" bgcolor="#999999"></td>
-                      </tr>
-                      <tr>
-                        <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-                          <font class="boxTitulo">Autenticade de NF</font>e<br />
-                          <br />
-                          Verifique a autenticidade da sua NFe.<br />
-                          <br />
-                          <div align="center"><a href="tomadores.php"><img src="../img/index/iconeautenticidade.jpg" alt="" width="170" height="50" /></a></div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="1"></td>
-                      </tr>
-                      <tr>
-                        <td height="5" align="left" bgcolor="#859CAD"></td>
-                      </tr>
-                    </table>
-                  </td>
-                  <?php
-                  $sql = $PDO->query("SELECT ativar_creditos FROM configuracoes");
-                  if ($sql->rowCount()) {
+                <br>
+                <h1>e-Nota</h1>
+                <h5 class="card-title">Documento emitido e armazenado eletronicamente com o objetivo de registrar as operações de prestação de serviços e será utilizada em substituição às notas fiscais de serviços convencionais.</h5>
+                <hr><br>
+
+                <!-- ITENS -->
+                <div class="card-group">
+
+                    <div class="card">
+                        <img src="../img/como_funciona.jpg" class="img-fluid" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Como funciona?</h5>
+                            <p class="card-text">Clique e veja o funcionamento da NF eletrônica de ISS.</p>
+                        </div>
+                        <div class="card-footer">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                Saiba mais!
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Como funciona?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="../img/como_funciona.jpg" class="img-fluid" alt="...">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="../img/index/iconeemitirnf.jpg" class="img-fluid" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Emita sua NFe</h5>
+                            <p class="card-text"> Acessa o sistema e emita suas Notas Fiscais Eletrônicas.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a type="button" href="prestadores.php" class="btn btn-primary">
+                                Saiba mais!
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="../img/index/iconeindicativos.jpg" class="img-fluid" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Indicativos</h5>
+                            <p class="card-text">Acesse e compare os números de aprovação da NFe de ISS.</p>
+                        </div>
+                        <div class="card-footer">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                Saiba mais!
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Indicativos</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?php
+                                            $sql_contribuintes = $PDO->query("SELECT COUNT(codigo) FROM cadastro WHERE estado = 'A'");
+                                            list($empresas_ativas) = $sql_contribuintes->fetch();
+
+                                            $sql_nfeemididas = $PDO->query("SELECT COUNT(codigo) FROM notas");
+                                            list($notas_emitidas) = $sql_nfeemididas->fetch();
+                                            ?>
+
+                                            <p>Contribuintes autorizados à emissão de NFe:
+                                                <span style="color: red; font-weight: bold;"><?php echo $empresas_ativas ?></span>
+                                            </p>
+
+                                            <p>NFe já emitidas:
+                                                <span style="color: red; font-weight: bold;"><?php echo $notas_emitidas ?></span>
+                                            </p>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <?php
+                $sql = $PDO->query("SELECT ativar_creditos FROM configuracoes");
+                if ($sql->rowCount()) {
                     $ativar_creditos = $sql->fetch()[0];
-                  } else {
+                } else {
                     $ativar_creditos = 'n';
-                  }
+                }
 
-                  if ($ativar_creditos == 's') {
-                  ?>
-                    <td width="190" align="center" valign="top">
+                if ($ativar_creditos == 's') {
+                    // if (false) {
+                ?>
 
-                      <!-- Quadro do meio acima -->
+                    <div class="card-group">
 
-                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                          <td height="3" bgcolor="#CCCCCC"></td>
-                        </tr>
-                        <tr>
-                          <td height="10" bgcolor="#999999"></td>
-                        </tr>
-                        <tr>
-                          <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-                            <font class="boxTitulo">Publicidade</font><br />
-                            <br />
-                            Veja o v&iacute;deo da campanha da NFeletr&ocirc;nica de ISS.<br />
-                            <br />
-                            <div align="center"><img src="../img/index/iconemidia.jpg" alt="" width="170" height="50" /></div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="1"></td>
-                        </tr>
-                        <tr>
-                          <td height="5" align="left" bgcolor="#859CAD"></td>
-                        </tr>
-                      </table>
-                    </td>
-                    <td width="190" align="center" valign="top">
+                        <div class="card">
+                            <img src="../img/index/iconeautenticidade.jpg" class="img-fluid" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Autenticade de NF</h5>
+                                <p class="card-text">Verifique a autenticidade da sua nota fiscal eletrônica.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a type="button" href="tomadores.php" class="btn btn-primary">
+                                    Saiba mais!
+                                </a>
+                            </div>
+                        </div>
 
-                      <!-- quadro direita acima -->
-                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                          <td height="3" bgcolor="#CCCCCC"></td>
-                        </tr>
-                        <tr>
-                          <td height="10" bgcolor="#999999"></td>
-                        </tr>
-                        <tr>
-                          <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-                            <font class="boxTitulo"> Seus Cr&eacute;ditos</font>
-                            <br />
-                            <br />
-                            Consulte seus cr&eacute;ditos obtidos at&eacute; o momento.<br />
-                            <br />
-                            <div align="center"><a href="tomadores.php"><img src="../img/index/iconecreditos.jpg" alt="" width="170" height="50" /></a></div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="1"></td>
-                        </tr>
-                        <tr>
-                          <td height="5" align="left" bgcolor="#859CAD"></td>
-                        </tr>
-                      </table>
-                    </td>
-                  <?php
-                  } //fom if ativar_creditos
-                  ?>
-                </tr>
-              </table>
+                        <div class="card">
+                            <img src="../img/index/iconemidia.jpg" class="img-fluid" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Publicidade</h5>
+                                <p class="card-text">Veja o vídeo da campanha da NFeletrônica de ISS.</p>
+                            </div>
+                            <div class="card-footer">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                                    Saiba mais!
+                                </button>
 
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Publicidade</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Em breve!</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="card">
+                            <img src="../img/index/iconecreditos.jpg" class="img-fluid" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Seus Créditos</h5>
+                                <p class="card-text">Consulte seus créditos obtidos até o momento.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a type="button" href="tomadores.php" class="btn btn-primary">
+                                    Saiba mais!
+                                </a>
+                            </div>
+                        </div>
 
+                    </div>
 
+                <?php
+                } //fom if ativar_creditos
+                ?>
 
+            </div>
+        </div>
+    </div>
 
-
-            </td>
-          </tr>
-        </table>
-
-
-
-      </td>
-    </tr>
-  </table>
-  <?php include("inc/rodape.php"); ?>
-
-</body>
-
-</html>
+    <?php require_once 'inc/footer.php'; ?>

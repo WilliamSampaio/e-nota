@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 function add_logs($acao)
 {
-    include('../../include/conect.php');
+    require_once('../../include/conect.php');
     $usuario = $_SESSION["nome"];
     $ip = getenv("REMOTE_ADDR");
     $sql = $PDO->query("INSERT INTO logs SET usuario='$usuario', ip='$ip', datas=NOW(),acao = '$acao'");
