@@ -19,6 +19,6 @@ function isTenancyAppBySubdomain()
 {
 	if(SUBDOMAIN)
 	{
-		return getSubdominio();
+		return getSubdominio() . '/';
 	}
 }
