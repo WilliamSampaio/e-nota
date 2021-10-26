@@ -66,11 +66,13 @@ require_once 'inc/header.php';
 					</div>
 
 				</form>
-				<br>
 
 				<?php
-
+				
 				if ($_POST['btConsultar'] != "") {
+					
+					echo '<hr>';
+
 					$sql = $PDO->query("SELECT rps_numero,datareclamacao,estado FROM reclamacoes WHERE  tomador_cnpj='" . $_POST['txtCpfCnpjTomador'] . "'");
 					$verifica = $sql->rowCount();
 

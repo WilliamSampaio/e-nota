@@ -39,8 +39,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<a class="nav-link <? echo isActive('index.php') ?>" aria-current="page" href="index.php">Início</a>
 	</li>
 
-	<li class="nav-item">
+	<li class="nav-item dropdown">
 		<a class="nav-link <? echo isActive('prestadores.php') ?>" aria-current="page" href="prestadores.php">Prestadores</a>
+		<ul>
+			<li><a class="nav-link <? echo isActive('prestadores-cadastro.php') ?>" href="prestadores-cadastro.php">Cadastro</a></li>
+			<li><a class="nav-link <? echo isActive('prestadores-consulta.php') ?>" href="prestadores-consulta.php">Consulta</a></li>
+		</ul>
 	</li>
 
 	<li class="nav-item">

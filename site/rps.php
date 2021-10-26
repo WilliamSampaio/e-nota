@@ -39,13 +39,6 @@ require_once 'inc/header.php';
             <!-- CONTEÚDO -->
             <div class="col-sm-12 col-xl-9">
 
-                <!-- NFE LOGO -->
-                <!-- <div class="row text-center">
-                    <div class="col-12">
-                        <img style="width: 80%;" src="../img/cabecalhos/noticias.jpg" class="img-fluid" alt="...">
-                    </div>
-                </div> -->
-
                 <br>
                 <h1>Recibo Provisório de serviço (RPS)</h1>
                 <h5 class="card-title">RPS é o documento que deverá ser usado por emitentes da NF-e no eventual impedimento da emissão "online da NFe"</h5>
