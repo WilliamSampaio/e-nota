@@ -31,40 +31,25 @@ require_once 'inc/header.php';
 
     <?php require_once 'inc/navbar.php'; ?>
 
-    <div class="container">
+    <div class="container bg-light">
         <div class="row align-items-start">
             <!-- MENU -->
-            <div class="col-3">
+            <div class="col-sm-12 col-md-3 col-lg-3">
                 <?php require_once 'inc/menu.php' ?>
             </div>
 
             <!-- CONTEÚDO -->
-            <div class="col-9">
+            <div class="col-sm-12 col-md-9 col-lg-9">
 
                 <br>
                 <h1>Ouvidoria</h1>
                 <h5 class="card-title">Tomador, se houver discrepâncias em sua NFe entre em contato com a Prefeitura Municipal</h5>
                 <hr><br>
 
-                <?php
-                /*if (isset($_SESSION['cad_result'])) {
-                    echo '<div class="alert alert-success" role="alert"><p>' . $_SESSION['cad_result'] . '</p></div>';
-                    unset($_SESSION['cad_result']);
-                }
-
-                if ($_POST["txtMenu"]) {
-                    require_once("inc/ouvidoria/" . $_POST["txtMenu"] . ".php");
-                } else {
-                    require_once("inc/ouvidoria/links.php");
-                } // fim else
-                */
-                ?>
-
-
                 <!-- ITENS -->
                 <div class="row">
 
-                    <div class="col-6" style="height: 100%;">
+                    <div class="col-sm-12 col-md-6" style="height: 100%;">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Reclamações</h5>
@@ -75,9 +60,10 @@ require_once 'inc/header.php';
                                 <a href="ouvidoria-cadastro.php" class="box">Serviço online</a>
                             </div>
                         </div>
+                        <br>
                     </div>
 
-                    <div class="col-6" style="height: 100%;">
+                    <div class="col-sm-12 col-md-6" style="height: 100%;">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Consulta</h5>
@@ -88,11 +74,15 @@ require_once 'inc/header.php';
                                 <a href="ouvidoria-consulta.php" class="box">Serviço online</a>
                             </div>
                         </div>
+                        <br>
                     </div>
                 </div>
                 <br>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 
-    <?php include_once 'inc/footer.php' ?>
+    <?php require_once 'inc/footer.php'; ?>

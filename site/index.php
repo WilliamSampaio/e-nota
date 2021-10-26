@@ -29,15 +29,15 @@ require_once 'inc/header.php';
 
     <?php require_once 'inc/navbar.php'; ?>
 
-    <div class="container">
+    <div class="container bg-light">
         <div class="row align-items-start">
             <!-- MENU -->
-            <div class="col-3">
+            <div class="col-sm-12 col-md-3 col-lg-3">
                 <?php require_once 'inc/menu.php' ?>
             </div>
 
             <!-- CONTEÚDO -->
-            <div class="col-9">
+            <div class="col-sm-12 col-md-9 col-lg-9">
 
                 <br>
                 <h1>e-Nota</h1>
@@ -47,7 +47,7 @@ require_once 'inc/header.php';
                 <!-- ITENS -->
                 <div class="row">
 
-                    <div class="col-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Como funciona?</h5>
@@ -78,9 +78,10 @@ require_once 'inc/header.php';
                                 </div>
                             </div>
                         </div>
+                        <br>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Emita sua NFe</h5>
@@ -92,9 +93,10 @@ require_once 'inc/header.php';
                                 </a>
                             </div>
                         </div>
+                        <br>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Indicativos</h5>
@@ -140,23 +142,21 @@ require_once 'inc/header.php';
                                 </div>
                             </div>
                         </div>
+                        <br>
                     </div>
-                </div><br>
 
-                <?php
-                $sql = $PDO->query("SELECT ativar_creditos FROM configuracoes");
-                if ($sql->rowCount()) {
-                    $ativar_creditos = $sql->fetch()[0];
-                } else {
-                    $ativar_creditos = 'n';
-                }
+                    <?php
+                    $sql = $PDO->query("SELECT ativar_creditos FROM configuracoes");
+                    if ($sql->rowCount()) {
+                        $ativar_creditos = $sql->fetch()[0];
+                    } else {
+                        $ativar_creditos = 'n';
+                    }
 
-                if ($ativar_creditos == 's') {
-                ?>
-                
-                <div class="row">
+                    if ($ativar_creditos == 's') {
+                    ?>
 
-                    <div class="col-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Autenticade de NF</h5>
@@ -168,9 +168,10 @@ require_once 'inc/header.php';
                                 </a>
                             </div>
                         </div>
+                        <br>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Publicidade</h5>
@@ -201,9 +202,10 @@ require_once 'inc/header.php';
                                 </div>
                             </div>
                         </div>
+                        <br>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Seus Créditos</h5>
@@ -215,15 +217,15 @@ require_once 'inc/header.php';
                                 </a>
                             </div>
                         </div>
+                        <br>
                     </div>
                 </div>
-
-                <?php
-                } //fom if ativar_creditos
-                ?>
-
+                <?php } //fom if ativar_creditos ?>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 
     <?php require_once 'inc/footer.php'; ?>

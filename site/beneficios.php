@@ -29,15 +29,15 @@ require_once 'inc/header.php';
 
     <?php require_once 'inc/navbar.php'; ?>
 
-    <div class="container">
+    <div class="container bg-light">
         <div class="row align-items-start">
             <!-- MENU -->
-            <div class="col-3">
+            <div class="col-sm-12 col-md-3 col-lg-3">
                 <?php require_once 'inc/menu.php' ?>
             </div>
 
             <!-- CONTEÚDO -->
-            <div class="col-9">
+            <div class="col-sm-12 col-md-9 col-lg-9">
 
                 <br>
                 <h1>Benefícios</h1>
@@ -45,12 +45,10 @@ require_once 'inc/header.php';
                 <hr><br>
 
                 <!-- ITENS -->
-                <!-- <div class="card-group"> -->
                 <div class="row">
 
-                    <div class="col-4">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="card">
-                            <!-- <img src="../img/como_funciona.jpg" class="img-fluid" alt="..."> -->
                             <div class="card-body">
                                 <h5 class="card-title">Prestador Emissor</h5>
                                 <p class="card-text">Clique e veja o funcionamento da NF eletrônica de ISS.</p>
@@ -80,11 +78,11 @@ require_once 'inc/header.php';
                                 </div>
                             </div>
                         </div>
+                        <br>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="card">
-                            <!-- <img src="../img/index/iconeindicativos.jpg" class="img-fluid" alt="..."> -->
                             <div class="card-body">
                                 <h5 class="card-title">Tomador de Serviços</h5>
                                 <p class="card-text">Veja o vídeo da campanha da NFeletrônica de ISS.</p>
@@ -114,11 +112,11 @@ require_once 'inc/header.php';
                                 </div>
                             </div>
                         </div>
+                        <br>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="card">
-                            <!-- <img src="../img/index/iconeindicativos.jpg" class="img-fluid" alt="..."> -->
                             <div class="card-body">
                                 <h5 class="card-title">Prefeitura Municipal</h5>
                                 <p class="card-text">Acesse e compare os números de aprovação da NFe de ISS.</p>
@@ -148,12 +146,16 @@ require_once 'inc/header.php';
                                 </div>
                             </div>
                         </div>
+                        <br>
                     </div>
 
                 </div>
 
             </div>
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 
     <?php require_once 'inc/footer.php'; ?>

@@ -20,58 +20,63 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 
 <br>
-<ul class="nav nav-pills flex-column">
-
+<ul class="nav nav-pills flex-column bg-light">
 	<?php
 
-	$final_url_part = end(explode('/', $_SERVER['REQUEST_URI']));
-	$final_url_part == '' ? $final_url_part = 'index.php' : '';
+	function isActive($href)
+	{
+		$final_url_part = end(explode('/', $_SERVER['REQUEST_URI']));
+		$final_url_part == '' ? $final_url_part = 'index.php' : '';
 
-	$menus = array(
-		'Início'       => 'index.php',
-		'Prestadores'       => 'prestadores.php',
-		'Contadores'       => 'contadores.php',
-		'Tomadores'       => 'tomadores.php',
-		'RPS'           => 'rps.php',
-		'Benefícios'       => 'beneficios.php',
-		'Perguntas e Respostas' => 'faq.php',
-		'Reclamações'       => 'ouvidoria.php',
-		'Notícias'        => 'noticias.php',
-		'Legislação'      => 'legislacao.php'
-	);
+		if($href == $final_url_part){
+			return 'active';
+		}
+	}
 
-	$menus_ouvidoria = array(
-		'- Cadastro'       => 'ouvidoria-cadastro.php',
-		'- Consulta'       => 'ouvidoria-consulta.php'
-	);
+	?>
 
-	foreach ($menus as $menu => $link) { ?>
+	<li class="nav-item">
+		<a class="nav-link <? echo isActive('index.php') ?>" aria-current="page" href="index.php">Início</a>
+	</li>
 
-		<li class="nav-item">
-			<a class="nav-link <?php
-				if ($link == $final_url_part) {
-					echo 'active';
-				}
-				?>" aria-current="page" href="<?php echo $link ?>"><?php echo $menu ?>
-			</a>
-			<?php
-			foreach ($menus_ouvidoria as $menu => $sub_link) {
-				if ($final_url_part == $sub_link) { ?>
-					<ul class="nav nav-pills flex-column" style="padding-left: 8px;">
-						<li class="nav-item">
-							<a class="nav-link <?php
-								if ($sub_link == $final_url_part) {
-									echo 'active';
-								}
-								?>" aria-current="page" href="<?php echo $sub_link ?>"><?php echo $menu ?>
-							</a>
-						</li>
-					</ul>
-			<?php }
-			}
-			?>
-		</li>
+	<li class="nav-item">
+		<a class="nav-link <? echo isActive('prestadores.php') ?>" aria-current="page" href="prestadores.php">Prestadores</a>
+	</li>
 
-	<?php } ?>
+	<li class="nav-item">
+		<a class="nav-link <? echo isActive('contadores.php') ?>" aria-current="page" href="contadores.php">Contadores</a>
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link <? echo isActive('tomadores.php') ?>" aria-current="page" href="tomadores.php">Tomadores</a>
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link <? echo isActive('rps.php') ?>" aria-current="page" href="rps.php">RPS</a>
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link <? echo isActive('beneficios.php') ?>" aria-current="page" href="beneficios.php">Benefícios</a>
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link <? echo isActive('faq.php') ?>" aria-current="page" href="faq.php">Perguntas e Respostas</a>
+	</li>
+
+	<li class="nav-item dropdown">
+		<a class="nav-link <? echo isActive('ouvidoria.php') ?>" aria-current="page" href="ouvidoria.php">Reclamações</a>
+		<ul>
+			<li><a class="nav-link <? echo isActive('ouvidoria-cadastro.php') ?>" href="ouvidoria-cadastro.php">Cadastro</a></li>
+			<li><a class="nav-link <? echo isActive('ouvidoria-consulta.php') ?>" href="ouvidoria-consulta.php">Consulta</a></li>
+		</ul>
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link <? echo isActive('noticias.php') ?>" aria-current="page" href="noticias.php">Notícias</a>
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link <? echo isActive('legislacao.php') ?>" aria-current="page" href="legislacao.php">Legislação</a>
+	</li>
 
 </ul>

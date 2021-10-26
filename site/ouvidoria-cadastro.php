@@ -31,15 +31,15 @@ require_once 'inc/header.php';
 
 	<?php require_once 'inc/navbar.php'; ?>
 
-	<div class="container">
+	<div class="container bg-light">
 		<div class="row align-items-start">
 			<!-- MENU -->
-			<div class="col-3">
+			<div class="col-sm-12 col-md-3 col-lg-3">
 				<?php require_once 'inc/menu.php' ?>
 			</div>
 
 			<!-- CONTEÚDO -->
-			<div class="col-9">
+			<div class="col-sm-12 col-md-9 col-lg-9">
 
 				<br>
 				<h1>Ouvidoria</h1>
@@ -51,12 +51,12 @@ require_once 'inc/header.php';
 
 				<?php
 
-                if (isset($_SESSION['cad_result'])) {
-                    echo '<div class="alert alert-success" role="alert"><p>' . $_SESSION['cad_result'] . '</p></div>';
-                    unset($_SESSION['cad_result']);
-                }elseif(isset($_SESSION['error_result'])){
+				if (isset($_SESSION['cad_result'])) {
+					echo '<div class="alert alert-success" role="alert"><p>' . $_SESSION['cad_result'] . '</p></div>';
+					unset($_SESSION['cad_result']);
+				} elseif (isset($_SESSION['error_result'])) {
 					echo '<div class="alert alert-danger" role="alert"><p>' . $_SESSION['error_result'] . '</p></div>';
-                    unset($_SESSION['error_result']);
+					unset($_SESSION['error_result']);
 				}
 
 				$cpfcnpj_tomador   = $_POST['txtCpfCnpjTomador'];
@@ -160,6 +160,9 @@ require_once 'inc/header.php';
 
 			</div>
 		</div>
+		<br>
+		<br>
+		<br>
 	</div>
 
-	<?php include_once 'inc/footer.php' ?>
+	<?php require_once 'inc/footer.php'; ?>

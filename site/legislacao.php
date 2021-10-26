@@ -31,22 +31,15 @@ require_once 'inc/header.php';
 
     <?php require_once 'inc/navbar.php'; ?>
 
-    <div class="container">
+    <div class="container bg-light">
         <div class="row align-items-start">
             <!-- MENU -->
-            <div class="col-3">
+            <div class="col-sm-12 col-md-3 col-lg-3">
                 <?php require_once 'inc/menu.php' ?>
             </div>
 
             <!-- CONTEÚDO -->
-            <div class="col-9">
-
-                <!-- NFE LOGO -->
-                <!-- <div class="row text-center">
-                    <div class="col-12">
-                        <img style="width: 80%;" src="../img/cabecalhos/legislacao.jpg" class="img-fluid" alt="...">
-                    </div>
-                </div> -->
+            <div class="col-sm-12 col-md-9 col-lg-9">
 
                 <br>
                 <h1>Legislação</h1>
@@ -76,48 +69,48 @@ require_once 'inc/header.php';
 
                     ?>
 
-                    <div class="accordion" id="accordionExample">
+                        <div class="accordion" id="accordionExample">
 
-                    <?php
-                    
-                    $count = 1;
-                    while (list($titulo, $texto, $data, $arquivo) = $sql->fetch()) {
+                            <?php
 
-                    ?>
+                            $count = 1;
+                            while (list($titulo, $texto, $data, $arquivo) = $sql->fetch()) {
 
-                        <div class="accordion-item" style="text-align: justify;">
-                            <h2 class="accordion-header" id="headingOne-<?php echo $count ?>">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-<?php echo $count ?>" aria-expanded="true" aria-controls="collapseOne-<?php echo $count ?>">
-                                    <?php
-                                    echo substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4) . ' - ' . $titulo;
-                                    ?>
-                                </button>
-                            </h2>
-                            <div id="collapseOne-<?php echo $count ?>" class="accordion-collapse collapse" aria-labelledby="headingOne-<?php echo $count ?>" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <h4><?php echo $titulo ?></h4>
-                                    <p><?php echo $texto ?></p>
-                                    <p>
-                                        <?php
+                            ?>
 
-                                        $data_formatada = substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4);
-                                        echo $data_formatada . ' | ';
+                                <div class="accordion-item" style="text-align: justify;">
+                                    <h2 class="accordion-header" id="headingOne-<?php echo $count ?>">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-<?php echo $count ?>" aria-expanded="true" aria-controls="collapseOne-<?php echo $count ?>">
+                                            <?php
+                                            echo substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4) . ' - ' . $titulo;
+                                            ?>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne-<?php echo $count ?>" class="accordion-collapse collapse" aria-labelledby="headingOne-<?php echo $count ?>" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <h4><?php echo $titulo ?></h4>
+                                            <p><?php echo $texto ?></p>
+                                            <p>
+                                                <?php
 
-                                        ?>
-                                    <a href=" ../legislacao/<?php echo isTenancyAppBySubdomain() . "/" . $arquivo; ?>" target="_blank"> [Download] <img src="../img/pdf.jpg" title="Download do pdf" /></a>
+                                                $data_formatada = substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4);
+                                                echo $data_formatada . ' | ';
 
-                                    </p>
+                                                ?>
+                                                <a href=" ../legislacao/<?php echo isTenancyAppBySubdomain() . "/" . $arquivo; ?>" target="_blank"> [Download] <img src="../img/pdf.jpg" title="Download do pdf" /></a>
+
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
+                            <?php
+                                $count++;
+                            } // fim while
+
+                            ?>
+
                         </div>
-
-                    <?php
-                            $count++;
-                        } // fim while
-
-                    ?>
-
-                    </div>
 
                     <?php
                     } else {
@@ -130,10 +123,13 @@ require_once 'inc/header.php';
                         </div>
 
                     <?php } ?>
-                   
+
                 </div>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 
     <?php require_once 'inc/footer.php'; ?>
