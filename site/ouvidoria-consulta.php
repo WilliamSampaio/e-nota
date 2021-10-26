@@ -120,7 +120,9 @@ require_once 'inc/header.php';
 					}
 				}
 				?>
-
+				
+				<hr>
+				<a class="btn btn-primary" href="ouvidoria.php">Voltar</a>
 			</div>
 		</div>
 		<br>
