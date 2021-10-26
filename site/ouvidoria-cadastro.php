@@ -157,7 +157,8 @@ require_once 'inc/header.php';
 					<div id="help" class="form-text"><span style="font-weight: bold; color: red;">*</span> : Campos com preenchimento obrigatório.</div>
 
 				</form>
-
+				<hr>
+				<a class="btn btn-primary" href="ouvidoria.php">Voltar</a>
 			</div>
 		</div>
 		<br>
