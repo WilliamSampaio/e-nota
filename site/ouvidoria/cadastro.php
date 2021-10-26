@@ -31,15 +31,15 @@ require_once 'inc/header.php';
 
 	<?php require_once 'inc/navbar.php'; ?>
 
-	<div class="container">
+	<div class="container bg-light">
 		<div class="row align-items-start">
 			<!-- MENU -->
-			<div class="col-3">
+			<div class="col-sm-12 col-md-3 col-lg-3">
 				<?php require_once 'inc/menu.php' ?>
 			</div>
 
 			<!-- CONTEÚDO -->
-			<div class="col-9">
+			<div class="col-sm-12 col-md-9 col-lg-9">
 
 				<br>
 				<h1>Ouvidoria</h1>

@@ -16,22 +16,9 @@
 
     <link rel="icon" type="image/png" href="../../img/brasoes/<?php echo rawurlencode($CONF_BRASAO) ?>">
 
-    <style type="text/css">
-        #apDiv1 {
-            position: absolute;
-            left: 40%;
-            top: 45%;
-            width: 400px;
-            height: 160px;
-            z-index: 1;
-            background-image: url(../img/index/indicativos.jpg);
-        }
-
-        .style1 {
-            font-size: 12pt;
-            color: #FF0000;
-            font-weight: bold;
+    <style>
+        body {
+            background-color: lightgray;
         }
     </style>
-
 </head>

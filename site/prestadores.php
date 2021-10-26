@@ -29,7 +29,7 @@ require_once 'inc/header.php';
 
     <?php require_once 'inc/navbar.php'; ?>
 
-    <div class="container">
+    <div class="container bg-light">
         <div class="row align-items-start">
             <!-- MENU -->
             <div class="col-3 col-xl-3">
@@ -65,6 +65,9 @@ require_once 'inc/header.php';
 
             </div>
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 
-    <?php include_once 'inc/footer.php' ?>
+    <?php require_once 'inc/footer.php'; ?>
