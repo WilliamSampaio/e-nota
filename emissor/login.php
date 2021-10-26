@@ -25,7 +25,6 @@ session_start();
 
 require_once '../autoload.php';
 require_once '../site/inc/header.php';
-require_once 'inc/cod_verificacao.php';
 
 if (!(isset($_SESSION["empresa"]))) {
 
