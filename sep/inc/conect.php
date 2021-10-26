@@ -20,18 +20,24 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php 
 //arquivo com as configuracoes de HOST, USUARIO, SENHA e BANCO
-require_once dirname(__FILE__).'/../../include/config.php';
+require_once('../../include/config.php');
 
 // Conectar ao banco de dados das prefeituras
-$conectar_pref = mysql_connect($HOST,$USUARIO, $SENHA); 
-if (!$conectar_pref) { die('N&atilde;o foi poss&iacute;vel conectar: ' . mysql_error()); } 
+// $conectar_pref = mysql_connect($HOST,$USUARIO, $SENHA); 
+// if (!$conectar_pref) { die('Não foi possível conectar: ' . mysql_error()); } 
 
 // Seleciona o banco de dados
-$db_selected_pref = mysql_select_db($BANCO, $conectar_pref);
-if (!$db_selected_pref) {die ('N&atilde;o foi poss&iacute;vel acessar a base: ' . mysql_error());}
+// $db_selected_pref = mysql_select_db($BANCO, $conectar_pref);
+// if (!$db_selected_pref) {die ('Não foi possível acessar a base: ' . mysql_error());}
+
+try {
+	$PDO = new PDO('mysql:host=' . $DB_HOST . ';dbname=' . $DB_DATABASE, $DB_USERNAME, $DB_PASSWORD);
+} catch (PDOException $e) {
+	echo 'Erro ao conectar com o MySQL: ' . $e->getMessage();
+}
 
 // lista confguracoes
-$sql_configuracoes = mysql_query("
+$sql_configuracoes = $PDO->query("
 	SELECT 
 		endereco, 
 		cidade, 
@@ -50,7 +56,9 @@ $sql_configuracoes = mysql_query("
 	FROM  
 		configuracoes
 ");
-list($CONF_ENDERECO, $CONF_CIDADE, $CONF_ESTADO, $CONF_CNPJ, $CONF_EMAIL, $CONF_SECRETARIA, $CONF_LEI, $CONF_DECRETO, $CONF_TOPO, $CONF_LOGO,$CONF_BRASAO, $CONF_CODLAYOUT,$DEC_ATRAZADAS,$GERAR_GUIA_SITE) = mysql_fetch_array($sql_configuracoes);
+list(
+	$CONF_ENDERECO, $CONF_CIDADE, $CONF_ESTADO, $CONF_CNPJ, $CONF_EMAIL, $CONF_SECRETARIA, $CONF_LEI, $CONF_DECRETO, $CONF_TOPO, 
+	$CONF_LOGO,$CONF_BRASAO, $CONF_CODLAYOUT,$DEC_ATRAZADAS,$GERAR_GUIA_SITE) = $sql_configuracoes->fetch();
 $PREFEITURA = $MUNICIPIO = $NOME_MUNICIPIO = $CONF_CIDADE;
 $SECRETARIA = $CONF_SECRETARIA;
 ?>

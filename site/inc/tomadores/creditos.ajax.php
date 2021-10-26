@@ -20,24 +20,23 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 require_once("../../../include/conect.php");
-require_once("../../../funcoes/util.php");
 $txtTomCpfCnpj = $_GET['txtTomCpfCnpj'];
 	if($txtTomCpfCnpj !=""){
 		$campo = tipoPessoa($txtTomCpfCnpj);
-		$sql = mysql_query("SELECT codigo, $campo, credito, nome  FROM cadastro WHERE $campo = '$txtTomCpfCnpj'");
-		if(mysql_num_rows($sql)>0){
-			$nrocreditos=mysql_num_rows($sql);
+		$sql = $PDO->query("SELECT codigo, $campo, credito, nome  FROM cadastro WHERE $campo = '$txtTomCpfCnpj'");
+		if($sql->rowCount()>0){
+			$nrocreditos=$sql->rowCount();
 				?>
                 	
 					<table bgcolor="#CCCCCC" width="100%" border="0" align="center" cellpadding="2" cellspacing="2">
 						<tr bgcolor="#999999">
-							<td align="center">N° da Nota</td>
+							<td align="center">NÂº da Nota</td>
 							<td align="center">CPF/CNPJ</td>
-							<td align="center">Créditos</td>
-							<td width="40" align="center">Ações</td>
+							<td align="center">CrÃ©ditos</td>
+							<td width="40" align="center">AÃ§Ãµes</td>
 						</tr>
 				<?php
-				list($codtom, $cpfcnpj, $credito, $nro)=mysql_fetch_array($sql);
+				list($codtom, $cpfcnpj, $credito, $nro)=$sql->fetch();
 				echo "<input type=\"hidden\" value=\"$codtom\" name=\"hdCod\" />";
 				$crd_tomador = DecToMoeda($credito);
 				echo "
@@ -45,13 +44,13 @@ $txtTomCpfCnpj = $_GET['txtTomCpfCnpj'];
 						<td align=\"center\">$nro</td>
 						<td align=\"center\">$cpfcnpj</td>
 						<td align=\"center\">R$ $crd_tomador</td>
-						<td width=\"40\"><input type=\"button\" name=\"btUsarCreditos\" class=\"botao\" onclick=\"acessoAjax('inc/tomadores/creditos_usar.ajax.php?cod=".$codtom."&','frmCreditos','divUsarCreditosR')\" id=\"btUsarCreditos\" value=\"Utilizar Créditos\" /></td>
+						<td width=\"40\"><input type=\"button\" name=\"btUsarCreditos\" class=\"botao\" onclick=\"acessoAjax('inc/tomadores/creditos_usar.ajax.php?cod=".$codtom."&','frmCreditos','divUsarCreditosR')\" id=\"btUsarCreditos\" value=\"Utilizar CrÃ©ditos\" /></td>
 					</tr>
 				";
 				echo "</table><div id=\"divUsarCreditosR\" style=\"background:#CCC\"></div>";
 		}
 		else{
-			Mensagem('Nenhum crédito relacionado a este tomador');
+			Mensagem('Nenhum crÃ©dito relacionado a este tomador');
 		}
 	}	
 	else{

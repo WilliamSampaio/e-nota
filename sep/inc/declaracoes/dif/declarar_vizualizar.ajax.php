@@ -28,7 +28,8 @@ require_once("../../../funcoes/util.php");
 //recebe o codigo que veio por get
 $codigo = $_GET['hdcod'];
 //sql buscando informacoes sobre o usuario
-$sql_info = mysql_query("
+try{
+	$sql_info = $PDO->query("
 	SELECT 
 		DATE_FORMAT(dif_des.data,'%d/%m/%Y') as data,
 		DATE_FORMAT(dif_des.competencia,'%m/%Y') as competencia,
@@ -53,8 +54,11 @@ $sql_info = mysql_query("
 		dif_des.codigo = '$codigo'
 	GROUP BY
 		dif_des.codigo
-	") or die(mysql_error());
-	$info = mysql_fetch_array($sql_info);
+	");
+}catch(PDOException $e){
+	echo 'Erro: ' . $e->getMessage();
+}
+	$info = $sql_info->fetch();
 	$info['endereco'] = $info['logradouro'].', '.$info['numero'];
 	
 	$aux = explode(" ",$info['data']);
@@ -87,13 +91,13 @@ $sql_info = mysql_query("
         <td align="left"><?php echo $info['uf'];?></td>
     </tr>
     <tr bgcolor="#FFFFFF">
-    	<td align="left">Data de geração</td>
+    	<td align="left">Data de geraÃ§Ã£o</td>
         <td align="left"><?php echo $info['data'];?></td>
-        <td align="right">Competência</td>
+        <td align="right">CompetÃªncia</td>
         <td align="left"><?php echo $info['competencia'];?></td>
     </tr>
     <tr bgcolor="#FFFFFF">
-    	<td align="left">Cod. Verificação</td>
+    	<td align="left">Cod. VerificaÃ§Ã£o</td>
         <td align="left"><?php echo $info['codverificacao'];?></td>
         <td align="right">ISS</td>
         <td align="left"><?php echo DecToMoeda($info['iss']);?></td>

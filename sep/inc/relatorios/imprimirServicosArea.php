@@ -1,16 +1,16 @@
-<!-- In�cio da Tabela -->
+<!-- In�cio da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
     <tr style="background-color:#999999; font-weight:bold" align="center">
-        <td width="50%" align="center">Descri&ccedil;&atilde;o</td>
-        <td width="12%" align="center">Base de C&aacute;lculo</td>
-        <td width="10%" align="center">Al&iacute;quota</td>
-        <td width="10%" align="center">Al&iacute;quota Ret.</td>
-        <td width="10%" align="center">Cod. Servi&ccedil;o</td>
+        <td width="50%" align="center">Descrição</td>
+        <td width="12%" align="center">Base de Cálculo</td>
+        <td width="10%" align="center">Alíquota</td>
+        <td width="10%" align="center">Alíquota Ret.</td>
+        <td width="10%" align="center">Cod. Serviço</td>
         <td width="8%" align="center">Estado</td>
     </tr>
-  <?php  //comando sql que mostrar� as categorias e os servi�os 
+  <?php  //comando sql que mostrar� as categorias e os serviços 
 					
-	$sql_serv = mysql_query("
+	$sql_serv = $PDO->query("
         SELECT
             servicos.descricao,
             servicos.aliquota,

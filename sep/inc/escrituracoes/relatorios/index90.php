@@ -20,8 +20,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php 
 
-include("../../inc/conect.php");
-include("../../funcoes/util.php");
+require_once("../../inc/conect.php");
+require_once("../../funcoes/util.php");
 // variaveis vindas do conect.php
 // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF
 
@@ -29,9 +29,9 @@ include("../../funcoes/util.php");
 ?>
 
 
-  <?php  //comando sql que mostrará as categorias e a quantidade de cada um (Lista Estatística)
+  <?php  //comando sql que mostrarï¿½ as categorias e a quantidade de cada um (Lista Estatï¿½stica)
 
-$sql_categ = mysql_query("SELECT
+$sql_categ = $PDO->query("SELECT
 						  servicos.codcategoria, servicos_categorias.nome, COUNT(servicos_categorias.nome)
 						 FROM
 						  servicos_categorias 
@@ -40,7 +40,7 @@ $sql_categ = mysql_query("SELECT
 						 ON servicos.codcategoria = servicos_categorias.codigo
 						 GROUP BY servicos.codcategoria"); 
 $cont=0;
-while(list($nome,$qtd) = mysql_fetch_array($sql_categ)){
+while(list($nome,$qtd) = $sql_categ->fetch()){
 
 echo"$nome: ]  $qtd";
 								

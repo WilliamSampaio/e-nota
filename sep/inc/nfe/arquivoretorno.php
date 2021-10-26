@@ -6,18 +6,21 @@
  */
 class ArquivoRetorno {
 	function codigoGuiaPeloNossonumero($nossonumero){
-		$sql = mysql_query("SELECT codigo FROM guia_pagamento WHERE nossonumero = '$nossonumero' AND pago <> 'S'");
-		if (mysql_num_rows($sql) == 0) {
+		require_once '../../../autoload.php';
+		$sql = $PDO->query("SELECT codigo FROM guia_pagamento WHERE nossonumero = '$nossonumero' AND pago <> 'S'");
+		if ($sql->rowCount() == 0) {
 			return false;
 		}
-		list($cod_guia) = mysql_fetch_array($sql);
+		list($cod_guia) = $sql->fetch();
 		return $cod_guia;
 	}
 	
 	function registrarPagamentoGuia($codguia){
-		mysql_query("UPDATE guia_pagamento SET pago = 'S' WHERE codigo = '$codguia'");
+		require_once '../../../autoload.php';
+
+		$PDO->query("UPDATE guia_pagamento SET pago = 'S' WHERE codigo = '$codguia'");
 				
-		$sql_codguia = mysql_query("
+		$sql_codguia = $PDO->query("
 			SELECT 
 				n.codnota 
 			FROM 
@@ -29,27 +32,29 @@ class ArquivoRetorno {
 				gp.codigo = '$codguia' 
 		");
 		
-		while (list($cod_nota) = mysql_fetch_array($sql_codguia) ){
+		while (list($cod_nota) = $sql_codguia->fetch()){
 			//echo "$codguia - $cod_nota<br>";
-			mysql_query("UPDATE notas SET estado = 'E' WHERE codigo = '$cod_nota'");
-			$sqlcredito = mysql_query("SELECT codtomador,credito FROM notas WHERE codigo='$cod_nota'");
-			$dadoscred= mysql_fetch_object($sqlcredito);
-			mysql_query("UPDATE cadastro SET credito = credito+{$dadoscred->credito} WHERE codigo = '$dadoscred->codtomador'");
+			$PDO->query("UPDATE notas SET estado = 'E' WHERE codigo = '$cod_nota'");
+			$sqlcredito = $PDO->query("SELECT codtomador,credito FROM notas WHERE codigo='$cod_nota'");
+			$dadoscred= $sqlcredito->fetchObject();
+			$PDO->query("UPDATE cadastro SET credito = credito+{$dadoscred->credito} WHERE codigo = '$dadoscred->codtomador'");
 			
 			
 			
 		}
-		return mysql_num_rows($sql_codguia);
+		return $sql_codguia->rowCount();
 	}
 	
 	function registrarPagamentoManual($nossonumero, $valor){
+		require_once '../../../autoload.php';
+
 		$valor = MoedaToDec($valor);
-		$sql = mysql_query("SELECT codigo FROM guia_pagamento WHERE nossonumero = '$nossonumero' AND valor = $valor");
-		if (mysql_num_rows($sql) == 0) {
+		$sql = $PDO->query("SELECT codigo FROM guia_pagamento WHERE nossonumero = '$nossonumero' AND valor = $valor");
+		if ($sql->rowCount() == 0) {
 			return false;
 		} else {
-			list($cod_guia) = mysql_fetch_array($sql);
-			return self::registrarPagamentoGuia($cod_guia);
+			list($cod_guia) = $sql->fetch();
+			return $this->registrarPagamentoGuia($cod_guia);
 		}
 	}
 	
@@ -78,7 +83,7 @@ class ArquivoRetorno {
 		//le o arquivo em forma de array
 		$arq_array = file($target_path);
 		
-		//tira a primeira linha que é a identificacao do banco
+		//tira a primeira linha que Ã© a identificacao do banco
 		$dados_banco = array_shift($arq_array);
 		
 		//tira a ultima que nao sei para que serve
@@ -93,10 +98,10 @@ class ArquivoRetorno {
 		foreach ($arq_array as $lin) if ($lin) {
 			//o nosso numero esta na posisao 56 e tem 25 caracteres de tamanho
 			$nossonumero = substr($lin,56,25);
-			$cod_guia = self::codigoGuiaPeloNossonumero($nossonumero);
+			$cod_guia = $this->codigoGuiaPeloNossonumero($nossonumero);
 			
 			//conta as guias atualizadas com sucesso
-			$reg_guias = self::registrarPagamentoGuia($cod_guia);
+			$reg_guias = $this->registrarPagamentoGuia($cod_guia);
 			
 			if ($reg_guias > 0) {
 				$cont_guias++;
@@ -115,4 +120,3 @@ class ArquivoRetorno {
 		);
 	}
 }
-?>

@@ -66,7 +66,7 @@ if($_POST["btInserir"] == "Inserir"){
 					break;
 			}
 			
-			$sql = mysql_query("
+			$sql = $PDO->query("
 				INSERT INTO legislacao SET 
 					titulo = '$titulo', 
 					data = '$data',
@@ -78,17 +78,17 @@ if($_POST["btInserir"] == "Inserir"){
 			Mensagem("Lei inserida!");
 		}//fim if
 	}else{
-		Mensagem("Preencher todos os campos para realizar a inserção");	
+		Mensagem("Preencher todos os campos para realizar a inserÃ§Ã£o");	
 	}//fim else   
 }//fim if
 
 if($_POST["btDeletar"] == "Excluir"){
 	$codlei = $_POST["hdCodLei"];
-	$sql_busca_arquivo = mysql_query("SELECT arquivo FROM legislacao WHERE codigo = '$codlei'");
-	list($exc_arquivo) = mysql_fetch_array($sql_busca_arquivo);
+	$sql_busca_arquivo = $PDO->query("SELECT arquivo FROM legislacao WHERE codigo = '$codlei'");
+	list($exc_arquivo) = $sql_busca_arquivo->fetch();
 	excluiArquivo("legislacao/$BANCO",$exc_arquivo);
 	excluiArquivo("../legislacao/$BANCO",$exc_arquivo);
-	mysql_query("DELETE FROM legislacao WHERE codigo = '$codlei'"); 
+	$PDO->query("DELETE FROM legislacao WHERE codigo = '$codlei'"); 
 	Mensagem("Lei excluida!");
 }//fim if
 
@@ -97,7 +97,7 @@ if($_POST["btDeletar"] == "Excluir"){
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Utilit&aacute;rios - Legisla&ccedil;&atilde;o</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">UtilitÃ¡rios - LegislaÃ§Ã£o</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -106,7 +106,7 @@ if($_POST["btDeletar"] == "Excluir"){
 		<form method="post" id="frmLegislacao" enctype="multipart/form-data">
 			<input type="hidden" name="include" id="include" value="<?php echo $_POST["include"];?>" />
 			<input type="hidden" name="hdTipo" value="nfe" />
-			<fieldset><legend>Inserção de Lei</legend>
+			<fieldset><legend>InserÃ¡ï¿½o de Lei</legend>
 				<table border="0" cellspacing="2" cellpadding="2" width="95%">
 					<tr>
 						<td width="12%" align="left">Titulo</td>
@@ -121,15 +121,15 @@ if($_POST["btDeletar"] == "Excluir"){
 						<td align="left">
                         	<input type="file" name="txtArq" id="txtArq" size="31" class="texto"/>
                             	<font color="#FF0000">
-                                	<br />O arquivo PDF não poderá estar nomeado com acentos , ç e caracteres especias.
+                                	<br />O arquivo PDF nÃ£o poderï¿½ estar nomeado com acentos , Ã© e caracteres especias.
                                 </font>
                         </td>
 					</tr>     
 					<tr>
-						<td align="left" colspan="2">Descrição:</td>
+						<td align="left" colspan="2">DescriÃ§Ã£o:</td>
 					</tr>
 					<tr>
-						<td>&nbsp;</td>
+						<td></td>
 						<td align="left"><textarea name="txtTexto" id="txtTexto" cols="49" rows="6" class="texto"></textarea></td>
 					</tr>
 					<tr>       

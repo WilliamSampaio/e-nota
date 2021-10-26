@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 <tr>
 	<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-	<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - Hist&oacute;rico de NFE </td>
+	<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Histórico de NFE </td>
 	<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg">
 		<a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a>
 	</td>
@@ -33,7 +33,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<form id="frmNFE" name="frmNFE" method="post" target="_blank" action="inc/relatorios/imprimirHistoricoNFE.php">
 		<fieldset>
 		<legend>
-			<strong>Hist&oacute;rico de NFE</strong>
+			<strong>Histórico de NFE</strong>
 		</legend>
 		<table align="left" width="100%">
 			<tr>
@@ -41,8 +41,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 					Por:
 				</td>
 				<td>
-					<label><input type="radio" name="rdbTipo" value="codemissor" checked >Prestador </label>&nbsp;
-                    <label><input type="radio" name="rdbTipo" value="codtomador" >Tomador</label>&nbsp;
+					<label><input type="radio" name="rdbTipo" value="codemissor" checked >Prestador </label>
+                    <label><input type="radio" name="rdbTipo" value="codtomador" >Tomador</label>
 			  </td>
 			</tr>
        	</table>

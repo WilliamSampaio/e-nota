@@ -30,7 +30,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC" width="890">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="850" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Nf-e - Liberar </td>
+		<td width="850" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Nf-e - Liberar </td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -42,7 +42,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<legend>Liberar Cadastro</legend>
 				<table width="100%">
 					<tr>
-						<td width="24%" align="left">Número do Documento: </td>
+						<td width="24%" align="left">Nï¿½mero do Documento: </td>
 						<td width="76%" align="left">
 							<input type="text" class="texto" name="txtNumero" />
 						</td>

@@ -18,7 +18,7 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<!-- Formulário de insercao de tomadores  --> 
+<!-- FormulÃ¡rio de insercao de tomadores  --> 
 <style type="text/css">
 <!--
 #divBuscaOrgaos {
@@ -32,19 +32,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 }
 -->
 </style>
-<div id="divBuscaOrgaos" ><?php include("inc/orgaospublicos/visualizar.php"); ?></div>
+<div id="divBuscaOrgaos" ><?php require_once("inc/orgaospublicos/visualizar.php"); ?></div>
 <?php
 		// busca a cidade e o estado do banco
-		$sqlestadocidade=mysql_query("SELECT cidade, estado FROM configuracoes");
-		list($CIDADE,$ESTADO)=mysql_fetch_array($sqlestadocidade);
+		$sqlestadocidade=$PDO->query("SELECT cidade, estado FROM configuracoes");
+		list($CIDADE,$ESTADO)=$sqlestadocidade->fetch();
 			
 		if($_POST["CODORGAOPUBLICO"])
 			{
 				$codigo=$_POST["CODORGAOPUBLICO"];
 				
-				$sqlorgao=mysql_query("SELECT nome, razaosocial, cnpj, endereco, municipio, uf, email, telefone, telefone_adicional, responsavel_nome, responsavel_cpf, diretor_nome, diretor_cpf, admpublica, nivel, estado FROM orgaospublicos WHERE codigo=$codigo");
+				$sqlorgao=$PDO->query("SELECT nome, razaosocial, cnpj, endereco, municipio, uf, email, telefone, telefone_adicional, responsavel_nome, responsavel_cpf, diretor_nome, diretor_cpf, admpublica, nivel, estado FROM orgaospublicos WHERE codigo=$codigo");
 				
-				list($nome, $razaosocial, $cnpj, $endereco, $municipio, $uf,  $email, $telefone, $telefone_adicional, $responsavel_nome,  $responsavel_cpf, $diretor_nome, $diretor_cpf, $admpublica, $nivel, $estado) = mysql_fetch_array($sqlorgao);
+				list($nome, $razaosocial, $cnpj, $endereco, $municipio, $uf,  $email, $telefone, $telefone_adicional, $responsavel_nome,  
+				$responsavel_cpf, $diretor_nome, $diretor_cpf, $admpublica, $nivel, $estado) = $sqlorgao->fetch();
 				
 				switch($admpublica){
 				case "D": $admpublica ="Direta"; break;
@@ -61,7 +62,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;&Oacute;rg&atilde;os P&uacute;blicos - Cadastro</td>  
+    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Ã“rgÃ£os PÃºblicos - Cadastro</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -69,14 +70,14 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td align="left">
 			<form method="post" name="frmCadastroOrgao" id="frmCadastroOrgao">
 			<input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
-				<fieldset><legend>Dados do &Oacute;rg&atilde;o P&uacute;blico</legend>
+				<fieldset><legend>Dados do Ã“rgÃ£o PÃºblico</legend>
 					<table width="100%">
 						<tr>
 							<td align="left" width="150"><font color="#FF0000">*</font> Nome</td><td></td>
 							<td align="left"><input <?php if($codigo) echo "readonly=\"true\""; ?> name="txtNome" id="txtNome" type="text" class="texto" size="60" maxlength="60"  value="<?php echo $nome; ?>"></td>
 						</tr>
 						<tr>
-							<td align="left"><font color="#FF0000">*</font>Razão Social </td><td></td>
+							<td align="left"><font color="#FF0000">*</font>RazÃ£o Social </td><td></td>
 							<td align="left"><input <?php if($codigo) echo "readonly=\"true\""; ?> name="txtRazaoSocial" id="txtRazaoSocial" type="text" class="texto" size="60" maxlength="60"  value="<?php echo $razaosocial; ?>"></td>
 						</tr>
 						<tr>
@@ -84,7 +85,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td align="left"><input <?php if($codigo) echo "readonly=\"true\""; ?> name="txtCnpj" id="txtCnpj" type="text" onkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" class="texto" size="18" maxlength="18"  value="<?php echo $cnpj; ?>"></td>
 						</tr>
 						<tr>
-							<td align="left"><font color="#FF0000">*</font> Endereço</td><td></td>
+							<td align="left"><font color="#FF0000">*</font> EndereÃ§o</td><td></td>
 							<td align="left"><input <?php if($codigo) echo "readonly=\"true\""; ?> name="txtEndereco" id="txtEndereco" type="text" class="texto" size="40" maxlength="40"  value="<?php echo $endereco; ?>"></td>
 						</tr>
 						<tr>
@@ -96,7 +97,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td align="left"><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" size="20" maxlength="15" name="txtFoneAdicional"  value="<?php echo $telefone_adicional; ?>" /></td>
 						</tr>
 								<tr align="left">
-									<td><font color="#FF0000">*</font> Município:</td><td></td>
+									<td><font color="#FF0000">*</font> Municï¿½pio:</td><td></td>
 									<td colspan="2"><input type="text" class="texto" size="40" name="txtInsMunicipioOrgao" <?php if($codigo){ echo "value=\"$municipio\" readonly=\"true\"";} else { echo "value=\"$CIDADE\"";}?>/></td>
 								</tr>
 								<tr align="left">
@@ -104,7 +105,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td colspan="2"><input type="text" class="texto" size="40" name="txtUfOrgao" <?php if($codigo){ echo "value=\"$uf\" readonly=\"true\"";} else { echo "value=\"$ESTADO\"";}?>/></td>
 								</tr>
 						<tr>
-							<td><font color="#FF0000">*</font> Administração Pública</td><td></td>
+							<td><font color="#FF0000">*</font> Administraï¿½ï¿½o Pï¿½blica</td><td></td>
 							<td>
 								<?php if ($codigo) echo "<input type=\"text\" readonly=\"true\" class=\"texto\" size=\"40\" maxlength=\"15\" value=\"$admpublica\" />";?>
 								<select <?php if($codigo) echo "style=\"visibility:hidden\"" ?> name="cmbAdmPublica" id="cmbAdmPublica">
@@ -114,7 +115,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							</td>
 						</tr>
 						<tr>
-							<td><font color="#FF0000">*</font> Nível</td><td></td>
+							<td><font color="#FF0000">*</font> Nï¿½vel</td><td></td>
 							<td>
 								<?php if ($codigo) echo "<input type=\"text\" readonly=\"true\" class=\"texto\" size=\"40\" maxlength=\"15\" value=\"$nivel\" />";?>
 								<select <?php if($codigo) echo "style=\"visibility:hidden\"" ?> name="cmbNivel" id="cmbNivel">
@@ -142,7 +143,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						</tr>
 				</table>
 				</fieldset>
-				<fieldset><legend>Dados do Respons&aacute;vel</legend>
+				<fieldset><legend>Dados do ResponsÃ¡vel</legend>
 				<table width="100%">
 						<tr>
 							<td align="left" width="150"><font color="#FF0000">*</font> Nome</td><td></td>
@@ -152,31 +153,31 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td align="left"><font color="#FF0000">*</font> Cpf</td><td></td>
 							<td align="left"><input <?php if($codigo) echo "readonly=\"true\""; ?> name="txtCpfResponsavel" id="txtCpfResponsavel" type="text" onkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" class="texto" size="18" maxlength="18" value="<?php echo $responsavel_cpf; ?>"></td>
 						</tr>
-						<tr align="right"><td colspan="3"><font color="#FF0000">* Campos Obrigatórios</font></td></tr>
+						<tr align="right"><td colspan="3"><font color="#FF0000">* Campos Obrigatï¿½rios</font></td></tr>
 			
                 </table>
 				</fieldset>
 					                
-				<fieldset><legend>Ações</legend>
+				<fieldset><legend>AÃ§Ãµes</legend>
 				<table>
 				<tr>
 				<td>
 				<input type="button" value="Buscar" name="btAcao" class="botao" onclick="document.getElementById('divBuscaOrgaos').style.visibility='visible'" />
-				<?php if ($codigo) echo "<input type=\"submit\" class=\"botao\" value=\"Voltar\" onclick=\"LimpaCampos('frmCadastroInst');Redireciona('cadastro.php');\" />&nbsp;";
+				<?php if ($codigo) echo "<input type=\"submit\" class=\"botao\" value=\"Voltar\" onclick=\"LimpaCampos('frmCadastroInst');Redireciona('cadastro.php');\" />";
 				if($codigo){
 				echo "<input type=\"hidden\" name=\"hdDesativar\" id=\"hdDesativar\" value=\"$codigo\"/>";
 					if($estado == "A"){
-						echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar Órgão\" />";
+						echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar ï¿½rgï¿½o\" />";
 					}
 					elseif($estado == "I"){
-					echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar Órgão\" />";
+					echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar ï¿½rgï¿½o\" />";
 					}
 				}
 				?>
 				</td>
 				<td>			
 				<?php
-				if ($codigo) echo "<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir Órgão\" onclick=\"return Confirma('Deseja Excluir Órgão Público?');\" />";
+				if ($codigo) echo "<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir ï¿½rgï¿½o\" onclick=\"return Confirma('Deseja Excluir ï¿½rgï¿½o Pï¿½blico?');\" />";
 				?>
 				</td>
 				<td>
@@ -218,31 +219,31 @@ Fith Floor, Boston, MA 02110-1301, USA
 				}
 				else
 				{
-				include("inc/orgaospublicos/inserir.php");
+				require_once("inc/orgaospublicos/inserir.php");
 				}		
 				}
 				
 				if($_POST['btDesativar'])
 				{
 				 $codigo=$_POST['hdDesativar'];
-				 mysql_query("UPDATE orgaospublicos SET estado = 'I' WHERE codigo=$codigo");
-				 Mensagem("Órgão Público desativado!");
+				 $PDO->query("UPDATE orgaospublicos SET estado = 'I' WHERE codigo=$codigo");
+				 Mensagem("ï¿½rgï¿½o Pï¿½blico desativado!");
 				 ?><script>LimpaCampos('frmCadastroOrgao');</script><?php
 				}
 				
 				if($_POST['btAtivar'])
 				{
 				 $codigo=$_POST['hdDesativar'];
-				 mysql_query("UPDATE orgaospublicos SET estado = 'A' WHERE codigo='$codigo'");
-				 Mensagem("Órgão Público ativado!");
+				 $PDO->query("UPDATE orgaospublicos SET estado = 'A' WHERE codigo='$codigo'");
+				 Mensagem("ï¿½rgï¿½o Pï¿½blico ativado!");
 				 ?><script>LimpaCampos('frmCadastroOrgao');</script><?php
 				}
 				
 				if($_POST['btExcluir'])
 				{
 			 	 $codigo=$_POST["hdDesativar"];
-				 mysql_query("DELETE FROM orgaospublicos WHERE codigo=$codigo");
-				 Mensagem("Órgão Público excluído com sucesso!");
+				 $PDO->query("DELETE FROM orgaospublicos WHERE codigo=$codigo");
+				 Mensagem("ï¿½rgï¿½o Pï¿½blico excluï¿½do com sucesso!");
 				 ?><script>LimpaCampos('frmCadastroOrgao');</script><?php
 				}
 			?>

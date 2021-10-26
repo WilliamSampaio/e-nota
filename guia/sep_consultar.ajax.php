@@ -84,16 +84,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 					?>
 		<table width="100%" border="0" cellspacing="2" cellpadding="2">
 			<tr>
-				<td bgcolor="#999999" align="center">C&oacute;digo</td>
-				<td bgcolor="#999999" align="center">Data Emiss&atilde;o</td>
+				<td bgcolor="#999999" align="center">Código</td>
+				<td bgcolor="#999999" align="center">Data Emissão</td>
 				<td bgcolor="#999999" align="center">Data do vencimento</td>
 				<td bgcolor="#999999" align="center">CNPJ / CPF</td>
 				<td bgcolor="#999999" align="center">Valor Guia</td>
 				<td bgcolor="#999999" align="center">Valor Multa</td>
 				<td bgcolor="#999999" align="center">Pago</td>
 				<td bgcolor="#999999" align="center">Estado</td>
-				<td bgcolor="#999999" align="center">Nosso N&deg;</td>
-				<td bgcolor="#999999" align="center">A&ccedil;&atilde;o</td>
+				<td bgcolor="#999999" align="center">Nosso Nº</td>
+				<td bgcolor="#999999" align="center">Ação</td>
 
 			</tr>
 			<?php
@@ -111,7 +111,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<td bgcolor="#FFFFFF" align="right"><?php echo ($dados['pago']); ?></td>
 					<td bgcolor="#FFFFFF" align="right"><?php echo ($dados['estado']); ?></td>
 					<td bgcolor="#FFFFFF" align="right"><?php echo ($dados['nossonumero']); ?></td>
-					<td><input type="submit" class="botao" id="btnImprimirr" name="btnImprimir" onclick="document.getElementById('frmGuia').action='../guia/imprimirguia.php?guia=<?php echo base64_encode($dados['codigo']); ?>';document.getElementById('frmGuia').target='_blank'" value="Imprimir" />&nbsp;</td>
+					<td><input type="submit" class="botao" id="btnImprimirr" name="btnImprimir" onclick="document.getElementById('frmGuia').action='../guia/imprimirguia.php?guia=<?php echo base64_encode($dados['codigo']); ?>';document.getElementById('frmGuia').target='_blank'" value="Imprimir" /></td>
 
 				</tr>
 			<?php

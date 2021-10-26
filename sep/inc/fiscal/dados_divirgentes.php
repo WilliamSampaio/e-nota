@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Fiscal Inteligente - Inconsist&ecirc;ncias</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Fiscal Inteligente - Inconsistências</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg">
 		<a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a>
 	</td>
@@ -39,9 +39,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$dataInicial = $_POST['txtDataInicial'];
 		$dataFinal   = $_POST['txtDataFinal'];
 		
-		include("divirgentes_dados.php");
+		require_once("divirgentes_dados.php");
 	}else{
-		include("divirgentes_dados.php");
+		require_once("divirgentes_dados.php");
 	}
 ?>
 <form method="post" id="frmDivirgenciasA1">
@@ -58,7 +58,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td width="9%" align="center"><input type="submit" name="btBuscar" id="btBuscar" value="Buscar" class="botao" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="left">N&uacute;mero de NFe divirgentes: </td>
+		<td colspan="2" align="left">Número de NFe divirgentes: </td>
 		<td align="left"><input name="txtNfEmitidas" type="text" id="txtNfEmitidas" size="20" class="texto" value="<?php echo $nf_emitidas?>" /></td>
 		<td align="left" colspan="2"><input name="btNfEmitidas" type="button" id="btNfEmitidas" value="Detalhes" class="botao"
 		onclick="document.getElementById('tipo').value=1;acessoAjax('inc/fiscal/divirgencias_lista.ajax.php','frmDivirgencias','divDivirgenciasDetalhes')" /></td>

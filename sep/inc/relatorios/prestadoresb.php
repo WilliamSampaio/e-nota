@@ -44,7 +44,7 @@ if (mysql_num_rows($sql) == 0) {
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
     	<td width="19" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-        <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - Devedores </td>
+        <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Devedores </td>
         <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg">
             <a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a>
         </td>
@@ -59,7 +59,7 @@ if (mysql_num_rows($sql) == 0) {
                         <tr>
                             <td width="70%" bgcolor="#999999" align="center">Nome</td>
                             <td width="15%" bgcolor="#999999" align="center">Total</td>
-                            <td width="15%" bgcolor="#999999" align="center">N&deg; Meses</td></tr>
+                            <td width="15%" bgcolor="#999999" align="center">Nº Meses</td></tr>
                     </table>
                 </fieldset>
             </form>

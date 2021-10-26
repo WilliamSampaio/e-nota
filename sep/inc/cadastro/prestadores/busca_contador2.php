@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;SEPISS - Pesquisar Contadores</td>
+		<td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">SEPISS - Pesquisar Contadores</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg">
 			<img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" 
 			onclick="document.getElementById('divBuscaContador').style.visibility='hidden'" title="Fechar" />
@@ -50,7 +50,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     </tr>
 					
                     <tr>
-                        <td colspan="2">Raz&atilde;o Social</td>
+                        <td colspan="2">Raz√£o Social</td>
                     </tr>
 					
                     <tr>
@@ -74,14 +74,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 									$where=" AND razaosocial LIKE'%$nome%' AND $campo = '$cpfcnpj' AND estado <> 'NL'";
 								}
 								
-								if($nome != '' && $cpfcnpj == ''){ //Se vier sÛ o nome preenchido
+								if($nome != '' && $cpfcnpj == ''){ //Se vier s√≥ o nome preenchido
 									$where=" AND razaosocial LIKE'%$nome%' AND estado <> 'NL'";
 								}
 								
-								if($nome == '' && $cpfcnpj != ''){ //Se vier sÛ o cpf/cnjp preenchido
+								if($nome == '' && $cpfcnpj != ''){ //Se vier s√≥ o cpf/cnjp preenchido
 									$where=" AND $campo = '$cpfcnpj' AND estado <> 'NL'";
 								}
-								$sql=mysql_query("
+								$sql=$PDO->query("
 										SELECT 
 											codigo,
 											nome, 
@@ -108,7 +108,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 											razaosocial
 										");		
 										
-								while(list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe) = mysql_fetch_array($sql)){
+								while(list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe) = $sql->fetch()){
 									switch($notalimite){
 										case 0:	 $aidf = "Liberado";  break;
 										default: $aidf = $notalimite; break;

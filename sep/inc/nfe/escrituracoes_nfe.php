@@ -18,17 +18,17 @@ if ($_POST['btConfirmar']) {
 		if ($notas) {
 			Mensagem_onload("{$notas} notas escrituradas");
 		} else {
-			Mensagem_onload("Verifique o Nosso Número e o Valor");
+			Mensagem_onload("Verifique o Nosso NÃºmero e o Valor");
 		}
 	} else {
-		Mensagem_onload("Digite o Nosso Número e o Valor");
+		Mensagem_onload("Digite o Nosso NÃºmero e o Valor");
 	}
 }
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Nfe - Escritura&ccedil;&otilde;es</td>
+		<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Nfe - EscrituraÃ§Ãµes</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -40,7 +40,7 @@ if ($_POST['btConfirmar']) {
 				<fieldset><legend>Pagamento Manual</legend>
 					<table width="100%">
 						<tr>
-							<td width="120">Nosso Número<font color="#FF0000">*</font></td>
+							<td width="120">Nosso NÃºmero<font color="#FF0000">*</font></td>
 							<td><input class="texto" size="30" name="txtNossoNumero" id="txtNossoNumero" type="text" /></td>
 						</tr>
 						<tr>	
@@ -49,8 +49,8 @@ if ($_POST['btConfirmar']) {
 							<td><input class="texto" onkeyup="MaskMoeda(this)" size="20" name="txtValorBoleto" id="txtValorBoleto" type="text" /></td>
 						</tr>
 						<tr>
-							<td><input class="botao" value="Confirmar" name="btConfirmar" type="submit" onclick="return ValidaFormulario('txtNossoNumero|txtValorBoleto','Digite o Nosso Número e o Valor')"></td>
-							<td align="right"><font color="#FF0000">*</font>Campos obrigatórios</td>
+							<td><input class="botao" value="Confirmar" name="btConfirmar" type="submit" onclick="return ValidaFormulario('txtNossoNumero|txtValorBoleto','Digite o Nosso NÃºmero e o Valor')"></td>
+							<td align="right"><font color="#FF0000">*</font>Campos obrigatÃ³rios</td>
 						</tr>
 					</table>
 				</fieldset>

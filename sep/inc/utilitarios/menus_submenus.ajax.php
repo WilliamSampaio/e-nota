@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	require_once("../../funcoes/util.php");
 	$codigo = $_GET['hdcod'];
 	
-	$sql_busca = mysql_query("
+	$sql_busca = $PDO->query("
 		SELECT 
 			menus_prefeitura_submenus.codigo, 
 			submenus_prefeitura.menu, 
@@ -43,9 +43,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <table width="100%">
 <?php
-	$linhas = mysql_num_rows($sql_busca);
+	$linhas = $sql_busca->rowCount();
 	$x = 0;
-	while(list($cod_sub,$menu_sub,$nivel_sub,$ordem) = mysql_fetch_array($sql_busca)){
+	while(list($cod_sub,$menu_sub,$nivel_sub,$ordem) = $sql_busca->fetch()){
 ?>
 			<tr>
 				<td align="left"><?php echo $menu_sub;?></td>

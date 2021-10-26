@@ -47,24 +47,24 @@ Fith Floor, Boston, MA 02110-1301, USA
  -->
 </style>
 <div id="divBuscaPrestador"  >
-	<?php include("inc/cadastro/prestadores/busca_prestador_cont.php"); ?>
+	<?php require_once("inc/cadastro/prestadores/busca_prestador_cont.php"); ?>
 </div>
 <div id="divBuscaContador"  >
-	<?php include("inc/cadastro/prestadores/busca_contador.php"); ?>
+	<?php require_once("inc/cadastro/prestadores/busca_contador.php"); ?>
 </div>
 <?php
-	//Testa se o usuario acionou o botao de inserÁ„o de novo contador se sim direciona para o cadastro de prestadores
+	//Testa se o usuario acionou o botao de inser√ß√£o de novo contador se sim direciona para o cadastro de prestadores
 	if($_POST['btNovoContador']){
 		RedirecionaPost("principal.php?include=inc/cadastro/prestadores/cadastro.php");
 		die();
 	}
 
 
-	//Testa se algum dos botıes foi acionado
+	//Testa se algum dos botÔøΩes foi acionado
 	if(($_POST['btAdcionar'] == "Adcionar Contador") || ($_POST['btAtualizar'] == "Atualizar Contador")){
 		$cod_prest = $_POST['CODPRESTADOR'];
 		$cod_cont  = $_POST['CODCONTADOR'];
-		mysql_query("UPDATE cadastro SET 
+		$PDO->query("UPDATE cadastro SET 
 						contadornfe ='{$_POST['txtNfe']}',
 						contadorlivro ='{$_POST['txtLivro']}',
 						contadorguia='{$_POST['txtGuia']}',
@@ -80,11 +80,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 		}
 	}
 		
-	//Verifica se foi feita uma busca pelo prestador se sim traz as informaÁıes do banco sobre o mesmo
+	//Verifica se foi feita uma busca pelo prestador se sim traz as informaÔøΩÔøΩes do banco sobre o mesmo
 	if($_POST['CODPRESTADOR']){
 		$codigo_prestador = $_POST['CODPRESTADOR'];
 		$codigo_contador  = $_POST['CODCONTADOR'];
-		$sql_prestador = mysql_query("
+		$sql_prestador = $PDO->query("
 			SELECT
 				nome,
 				razaosocial,
@@ -99,15 +99,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 			WHERE 
 				codigo = '$codigo_prestador'
 		");
-		list($nome,$razaosocial,$cnpjcpf,$codcontador,$contnfe,$contlivro,$contguia,$contrps) = mysql_fetch_array($sql_prestador);
+		list($nome,$razaosocial,$cnpjcpf,$codcontador,$contnfe,$contlivro,$contguia,$contrps) = $sql_prestador->fetch();
 		
 		//testa se o prestador ja possui um contador
 		if(!$codigo_contador){
 			$codigo_contador = $codcontador;
 		}
 		
-		//busca as informaÁıes do contador referente ao prestador ou informaÁıes referentes ao contador buscado pelo usuario
-		$sql_contador = mysql_query("
+		//busca as informaÔøΩÔøΩes do contador referente ao prestador ou informaÔøΩÔøΩes referentes ao contador buscado pelo usuario
+		$sql_contador = $PDO->query("
 			SELECT
 				razaosocial,
 				IF(cnpj <> '',cnpj,cpf) AS cnpjcpf,
@@ -117,13 +117,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 			WHERE 
 				codigo = '$codigo_contador'
 		");
-		list($nome_cont,$cnpjcpf_cont,$fone_cont) = mysql_fetch_array($sql_contador);
+		list($nome_cont,$cnpjcpf_cont,$fone_cont) = $sql_contador->fetch();
 	}
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Prestadores / Contadores</td>
+		<td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Prestadores / Contadores</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -134,10 +134,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<input type="hidden" name="include" id="include" value="<?php echo $_POST['include'];?>" />
 				<input type="hidden" name="CODPRESTADOR" value="<?php echo $_POST['CODPRESTADOR'];?>" />
 				<input type="hidden" name="CODCONTADOR" value="<?php echo $_POST['CODCONTADOR'];?>" />
-				<fieldset><legend>Inser&ccedil;&atilde;o do contador para o Prestador</legend>
+				<fieldset><legend>Inser√ß√£o do contador para o Prestador</legend>
 					<table width="100%">
 						<tr>
-							<td align="left" colspan="2"><b>Informa&ccedil;&atilde;es da Empresa</b></td>
+							<td align="left" colspan="2"><b>Informa√ß√£es da Empresa</b></td>
 						</tr>
 						<tr>
 							<td align="left"> Nome </td>
@@ -146,7 +146,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							</td>
 						</tr>
 						<tr>
-							<td align="left"> Raz&atilde;o Social </td>
+							<td align="left"> Raz√£o Social </td>
 							<td align="left">
 								<input type="text" size="70" maxlength="100" name="txtRazaoEmp" class="texto" 
 								value="<?php if(isset($razaosocial)){echo $razaosocial;} ?>">
@@ -169,7 +169,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td colspan="2"><hr size="1" color="#000000"></td>
 						</tr>
 						<tr>
-							<td align="left" colspan="2"><b>Informa&ccedil;&otilde;es do Contador</b></td>
+							<td align="left" colspan="2"><b>Informa√ß√µes do Contador</b></td>
 						</tr>
 						<tr>
 							<td align="left"> Nome<font color="#FF0000">*</font> </td>
@@ -194,33 +194,33 @@ Fith Floor, Boston, MA 02110-1301, USA
 						</tr>
                          <tr>
                             <td> 
-                                NFE: &nbsp;</td>
+                                NFE: </td>
                             
                             <td>Sim
                             
                               <input type="radio" name="txtNfe"  value="S" id="txtNfe" <?php if($contnfe == 'S'){ echo "checked=checked"; } ?> />
-                    N&atilde;o
+                    N√£o
                                 <input type="radio" name="txtNfe"  value="N" id="txtNfe" <?php if($contnfe == 'N'){ echo "checked=checked"; } ?> /></td>
                         </tr>
                         <tr>
-                            <td>Livro: &nbsp;</td>
+                            <td>Livro: </td>
                             <td>Sim		
                               <input type="radio" name="txtLivro" value="S"  id="txtLivro" <?php if($contlivro == 'S'){ echo "checked=checked"; } ?> />
-                    N&atilde;o
+                    N√£o
                     <input type="radio" name="txtLivro" value="N"  id="txtLivro" <?php if($contlivro == 'N'){ echo "checked=checked"; } ?> /></td>
                         </tr>
                             <tr>
-                                <td>Guia: &nbsp;</td>
+                                <td>Guia: </td>
                                 <td>Sim
                                  <input type="radio" name="txtGuia" value="S" id="txtGuia" <?php if($contguia == 'S'){ echo "checked=checked"; } ?> />
-                    N&atilde;o
+                    N√£o
                     <input type="radio" name="txtGuia" value="N" id="txtGuia" <?php if($contguia == 'N'){ echo "checked=checked"; } ?> /></td>
                             </tr>
                             <tr>
-                                <td>RPS: &nbsp;</td>
+                                <td>RPS: </td>
                                 <td>Sim
                                   <input type="radio" name="txtRps" value="S" id="txtRps" <?php if($contrps == 'S'){ echo "checked=checked"; } ?> />
-                    N&atilde;o
+                    N√£o
                                 <input type="radio" name="txtRps" value="N" id="txtRps" <?php if($contrps == 'N'){ echo "checked=checked"; } ?> /></td>
                             </tr>
 					</table>
@@ -231,7 +231,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td width="23%" align="left">
 								<?php if(!isset($codcontador)){?>
 									<input name="btAdcionar" type="submit" class="botao" value="Adcionar Contador" <?php if(!isset($_POST['CODPRESTADOR'])){ echo "disabled=\"disabled\"";}?>
-									onclick="return ValidaFormulario('txtNomeCont|txtCNPJEmp|txtFoneComercial|txtNfe|txtLivro|txtGuia|txtRps','VocÍ deve buscar algum contador cadastrado no sistema!')">
+									onclick="return ValidaFormulario('txtNomeCont|txtCNPJEmp|txtFoneComercial|txtNfe|txtLivro|txtGuia|txtRps','Voc√™ deve buscar algum contador cadastrado no sistema!')">
 								<?php }?>
 								<?php if(isset($codcontador)){?><input name="btAtualizar" type="submit" class="botao" value="Atualizar Contador" /><?php }?>
 							</td>

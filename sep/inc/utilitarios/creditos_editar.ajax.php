@@ -23,24 +23,24 @@ Fith Floor, Boston, MA 02110-1301, USA
 	require_once("../../funcoes/util.php");
 	$codigo = $_GET['hdcod'];
 	
-	$sql_cred = mysql_query("SELECT codigo, credito, tipopessoa, issretido, valor, estado FROM nfe_creditos WHERE codigo = '$codigo'");
-	list($codigo,$credito,$tipopessoa,$issretido,$valor,$estado) = mysql_fetch_array($sql_cred);
+	$sql_cred = $PDO->query("SELECT codigo, credito, tipopessoa, issretido, valor, estado FROM nfe_creditos WHERE codigo = '$codigo'");
+	list($codigo,$credito,$tipopessoa,$issretido,$valor,$estado) = $sql_cred->fetch();
 ?>
 <input type="hidden" name="hdCodCredito" value="<?php echo $codigo;?>">
 <table width="100%">
 	<tr bgcolor="#FFFFFF">
-		<td width="3%" bgcolor="#CCCCCC">&nbsp;</td>
+		<td width="3%" bgcolor="#CCCCCC"></td>
 		<td width="13%" align="center">
 			<select name="cmbTipoPessoaEdit" class="combo">
 				<option value="PF"<?php if($tipopessoa == "PF"){ echo "selected=selected";}?>>Pessoa Fisica</option>
-				<option value="PJ"<?php if($tipopessoa == "PJ"){ echo "selected=selected";}?>>Pessoa Jurídica</option>
+				<option value="PJ"<?php if($tipopessoa == "PJ"){ echo "selected=selected";}?>>Pessoa Jurï¿½dica</option>
 				<option value="PFPJ"<?php if($tipopessoa == "PFPJ"){ echo "selected=selected";}?>>Ambas</option>
 			</select>
 		</td>
 		<td width="10%" align="center">
 			<select name="cmbISSRetidoEdit">
 				<option value="S"<?php if($issretido == "S"){ echo "selected=selected";}?>>Sim</option>
-				<option value="N"<?php if($issretido == "N"){ echo "selected=selected";}?>>Não</option>
+				<option value="N"<?php if($issretido == "N"){ echo "selected=selected";}?>>NÃ£o</option>
 			</select>
 		</td>
 		<td width="13%" align="center">

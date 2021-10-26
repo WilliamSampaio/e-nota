@@ -44,16 +44,16 @@ if($cnpj){
 	$str_where .= " AND cnpj = '$cnpj'";
 }
 
-	$sql_empreiteiras = mysql_query("SELECT nome, razaosocial, cnpj, municipio, uf, estado, codigo FROM empreiteiras WHERE nome LIKE '$nome%' $str_where ORDER BY nome ASC");
+	$sql_empreiteiras = $PDO->query("SELECT nome, razaosocial, cnpj, municipio, uf, estado, codigo FROM empreiteiras WHERE nome LIKE '$nome%' $str_where ORDER BY nome ASC");
 	
-if(mysql_num_rows($sql_empreiteiras)>0){
+if($sql_empreiteiras->rowCount()>0){
 ?>
 <title>Imprimir</title>
 <link href="../../../css/padrao.css" rel="stylesheet" type="text/css">
 <title>Imprimir</title><input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
 <table width="750">
 	<tr>
-    	<td><b><font size="4">Relatório de Declarações</font></b></td>
+    	<td><b><font size="4">Relatï¿½rio de DeclaraÃ§Ãµes</font></b></td>
     </tr>
 <?php
 	if($nome){
@@ -83,15 +83,15 @@ if(mysql_num_rows($sql_empreiteiras)>0){
     <tr>
         <td align="center" width="170"><b>Nome</b></td>
         <td align="center" width="110"><b>CNPJ</b></td>
-        <td align="center" width="130"><b>Município</b></td>
+        <td align="center" width="130"><b>Municï¿½pio</b></td>
         <td align="center" width="30"><b>UF</b></td>
-        <?php if(!$estado){?><td align="center" width="90"><b>Liberação</b></td><?php }?>
+        <?php if(!$estado){?><td align="center" width="90"><b>Liberaï¿½ï¿½o</b></td><?php }?>
     </tr>
     <tr>
     	<td colspan="5"><hr color="#000000" size="2"></td>
     </tr>
     <?php
-    while(list($nome,$razaosocial,$cnpj,$municipio,$uf,$estado_emp,$codigo) = mysql_fetch_array($sql_empreiteiras)){										
+    while(list($nome,$razaosocial,$cnpj,$municipio,$uf,$estado_emp,$codigo) = $sql_empreiteiras->fetch()){										
         switch($estado_emp){
             case "NL": $estado_emp = "Aguardando"; break;
             case "A" : $estado_emp = "Liberado";   break;
@@ -112,7 +112,7 @@ if(mysql_num_rows($sql_empreiteiras)>0){
 <?php
 
 	}else{
-		echo "<center><b>Não há empreiteiras cadastradas</b></center>";
+		echo "<center><b>NÃ£o hÃ¡ empreiteiras cadastradas</b></center>";
 	}
 
 ?>

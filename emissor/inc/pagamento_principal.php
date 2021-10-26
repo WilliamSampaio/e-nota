@@ -19,12 +19,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    $login = $_SESSION['login']; //$publicarBtn = array("s" => "Não Publicar", "n" => "Publicar");
+    $login = $_SESSION['login']; //$publicarBtn = array("s" => "NÃ£o Publicar", "n" => "Publicar");
 ?>
 	<form method="post">
 		<table width="100%">
 			<tr>
-				<td align="center"><input type="submit" class="botao" name="btOp" value="Gerar Guia">&nbsp;<input type="submit" name="btOp" class="botao" value="Guias Emitidas"></td>
+				<td align="center"><input type="submit" class="botao" name="btOp" value="Gerar Guia"><input type="submit" name="btOp" class="botao" value="Guias Emitidas"></td>
 			</tr>
 		</table>
 	</form>
@@ -34,12 +34,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 	if($_POST['btOp'] == "Gerar Guia")
 	{
-	  include("guia_pagamento.php");
+	  require_once("guia_pagamento.php");
 	}
 	
 	elseif($_POST['btOp'] == "Guias Emitidas")
 	{
-	  include("pagamento_emitidas.php");
+	  require_once("pagamento_emitidas.php");
 	
 	}
 	
@@ -47,7 +47,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	//codigo para impressao do boleto
     if($btEnviaBoleto =="Boleto")
     {
-      include("pagamento_boleto.php");
+      require_once("pagamento_boleto.php");
     } 
 
 	?>

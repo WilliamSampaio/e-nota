@@ -18,10 +18,10 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<fieldset><legend>Relatório de Declaração de Operadoras de Créditos</legend>
+<fieldset><legend>Relatï¿½rio de Declaraï¿½ï¿½o de Operadoras de CrÃ©ditos</legend>
 	<table width="100%">
 		<tr>
-			<td width="17%" align="left">Nome/Raz&atilde;o Social</td>
+			<td width="17%" align="left">Nome/RazÃ£o Social</td>
 		  	<td width="83%" align="left"><input name="txtNome" type="text" class="texto" size="60" maxlength="100" /></td>
 	  	</tr>
 		<tr>
@@ -29,17 +29,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<td align="left"><input name="txtCNPJ" type="text" class="texto" size="20" maxlength="18" /></td>
 		</tr>
 		<tr>
-			<td align="left">N° da DOC</td>
+			<td align="left">Nï¿½ da DOC</td>
 			<td align="left"><input name="txtNroDop" type="text" class="texto" size="10" maxlength="10" /></td>
 		</tr>
 		<tr>
-			<td align="left">Compet&ecirc;cia</td>
+			<td align="left">CompetÃªcia</td>
 			<td align="left">
 				<select name="cmbMes" class="combo">
 					<option value=""></option>
 					<?php
-					//array dos meses comecando na posição 1 ate 12 e faz um for listando os meses no combo
-					$meses = array(1=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+					//array dos meses comecando na posiÃ§Ã£o 1 ate 12 e faz um for listando os meses no combo
+					$meses = array(1=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 					for($x=1;$x<=12;$x++){
 						echo "<option value='$x'>$meses[$x]</option>";
 					}//fim for meses
@@ -49,8 +49,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<option value=""></option>
 					<?php
 					//lista os anos que existem declaracoes
-					$sql_ano = mysql_query("SELECT SUBSTRING(competencia,1,4) FROM doc_des GROUP BY SUBSTRING(competencia,1,4) ORDER BY SUBSTRING(competencia,1,4) DESC");
-					while(list($ano) = mysql_fetch_array($sql_ano)){
+					$sql_ano = $PDO->query("SELECT SUBSTRING(competencia,1,4) FROM doc_des GROUP BY SUBSTRING(competencia,1,4) ORDER BY SUBSTRING(competencia,1,4) DESC");
+					while(list($ano) = $sql_ano->fetch()){
 						echo "<option value='$ano'>$ano</option>";
 					}
 					?>

@@ -20,13 +20,13 @@
 ?>
 
 <?php //Includes
-	include("../../inc/conect.php");
-	include("../../funcoes/util.php");
+	require_once("../../inc/conect.php");
+	require_once("../../funcoes/util.php");
 ?>
 
 <?php //Pega o brasão
-	$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
-	list($BRASAO) = mysql_fetch_array($sql_brasao);
+	$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
+	list($BRASAO) = $sql_brasao->fetch();
 ?>
 
 <?php //Define o título do relatório de acordo com o que vem do rdbServicos
@@ -73,12 +73,12 @@
 <!-- Fim do css da Impressão da página -->
 
 
-<title>Relat&oacute;rio de Contribuintes</title>
+<title>Relatório de Contribuintes</title>
 
 <div class="pagina"> <!-- Início div página -->
 	<div id="DivImprimir">
 		<input type="button" onClick="print();" value="Imprimir" /><br />
-		<i><b>Este relat&oacute;rio &eacute; melhor visualizado em formato de impress&atilde;o em paisagem.</b></i>
+		<i><b>Este relatório é melhor visualizado em formato de impressão em paisagem.</b></i>
 	</div>
 	<br />
 	<!-- Início do topo com as informações -->
@@ -93,7 +93,7 @@
 				<td width="584" height="33" colspan="2">
 					<span class="style1">
 						<center>
-							<p>RELAT&Oacute;RIO - CONTRIBUINTES <?php print strtoupper($titulo); ?> </p>
+							<p>RELATÓRIO - CONTRIBUINTES <?php print strtoupper($titulo); ?> </p>
 							<p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 							<p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 						</center>
@@ -108,9 +108,9 @@
 
 <?php //Verifica a opção marcada e chama o arquivo que vai gerar o relarório
 	if ($_POST['rdbContribuinte'] == 'vinculados'){
-		include("imprimirVinculados.php");
+		require_once("imprimirVinculados.php");
 	}else{
-		include("imprimirOmissos.php");
+		require_once("imprimirOmissos.php");
 	}
 ?>
 </div> <!-- Fim div página -->

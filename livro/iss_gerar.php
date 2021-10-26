@@ -36,7 +36,7 @@ $dados=$empresas->fetch();
                  <table  width="100%">
                     <tr>
                         <td>
-                         Per�odo
+                         Período
                         </td>
                         <td>
 				<?php
@@ -84,7 +84,7 @@ $dados=$empresas->fetch();
                             <input type="submit" name="btGerar" value="Gerar Livro" class="botao">
                         </td>
                         <td align="right"> 
-				&nbsp;&nbsp;&nbsp;<font color="#FF0000">*</font>Campos Obrigat�rios
+				<font color="#FF0000">*</font>Campos Obrigat�rios
                         </td>
                     </tr>
                 </table>

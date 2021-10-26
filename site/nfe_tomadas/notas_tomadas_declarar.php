@@ -45,7 +45,7 @@ if ($_POST['btDeclarar'] == "Declarar") {
 		");
 	if ($sql_verifica_duplicidade->rowCount()) {
 
-		Mensagem_onload("Esta nota tomada, j� foi declarada. Para redeclarar cancele a anterior!");
+		Mensagem_onload("Esta nota tomada, já foi declarada. Para redeclarar cancele a anterior!");
 	} else {
 
 		$PDO->query("
@@ -130,7 +130,7 @@ $codTipoContador = codtipo('contador');
 						<tr>
 							<td align="left" colspan="4">Selecione o emissor:
 								<select name="cmbEmpresa" class="combo" style="width:270px;">
-									<option value="<?php echo $codLogado; ?>"><?php echo "(pr�prio)" . $logado->razaosocial . " - " . $cnpjcpf; ?></option>
+									<option value="<?php echo $codLogado; ?>"><?php echo "(próprio)" . $logado->razaosocial . " - " . $cnpjcpf; ?></option>
 									<?php
 									$sql_lista_empresas = $PDO->query("SELECT codigo, razaosocial, cnpj, cpf FROM cadastro WHERE codcontador = '$codLogado'");
 									while ($listaEmpresa = $sql_lista_empresas->fetchObject()) {
@@ -145,11 +145,11 @@ $codTipoContador = codtipo('contador');
 					}
 					?>
 					<tr>
-						<td width="13%" align="left">N&deg; da nota: </td>
+						<td width="13%" align="left">Nº da nota: </td>
 						<td width="32%" align="left">
 							<font color="#FF0000">*</font> <input name="txtNumero" id="txtNumero" type="text" class="texto" size="10" />
 						</td>
-						<td width="19%" align="left">C&oacute;d. Verifica&ccedil;&atilde;o: </td>
+						<td width="19%" align="left">Cód. Verificação: </td>
 						<td width="36%" align="left">
 							<font color="#FF0000">*</font>
 							<input name="txtCodVerificacao" id="txtCodVerificacao" type="text" class="texto" size="12" style="text-transform:uppercase" maxlength="9" />
@@ -165,7 +165,7 @@ $codTipoContador = codtipo('contador');
 						<td align="left">CNPJ: </td>
 						<td align="left" colspan="3">
 							<font color="#FF0000">*</font>
-							<input name="txtCNPJ" id="txtCNPJ" type="text" class="texto" size="20" onBlur="buscaInfoPrestador(this)" />&nbsp;<span id="erroPrestador"></span>
+							<input name="txtCNPJ" id="txtCNPJ" type="text" class="texto" size="20" onBlur="buscaInfoPrestador(this)" /><span id="erroPrestador"></span>
 						</td>
 					</tr>
 					<tr>
@@ -175,10 +175,10 @@ $codTipoContador = codtipo('contador');
 					</tr>
 					<tr>
 						<td align="left">
-							<input name="btDeclarar" type="submit" class="botao" value="Declarar" onClick="return (ValidaFormulario('txtNumero|txtCodVerificacao|txtData|hdCNPJ','Preencha os campos obrig�torios corretamente!') && confirm('Deseja declarar esta nota tomada?'))" />
+							<input name="btDeclarar" type="submit" class="botao" value="Declarar" onClick="return (ValidaFormulario('txtNumero|txtCodVerificacao|txtData|hdCNPJ','Preencha os campos obrigatórios corretamente!') && confirm('Deseja declarar esta nota tomada?'))" />
 						</td>
 						<td align="right" colspan="3">
-							<font color="#FF0000">*</font>Preencha os campos obrig�torios
+							<font color="#FF0000">*</font>Preencha os campos obrigatórios
 						</td>
 					</tr>
 				</table>

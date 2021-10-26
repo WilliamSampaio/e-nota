@@ -22,19 +22,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 if ($_GET['txtInscMunicipal']){
 	$tomador_IM = $_GET['txtInscMunicipal'];
 	$codtipo = codtipo("prestador");
-	$sql_IM_tomador = mysql_query("SELECT cnpj,cpf
+	$sql_IM_tomador = $PDO->query("SELECT cnpj,cpf
 								  FROM cadastro 
 								  WHERE inscrmunicipal = '$tomador_IM' AND codtipo = $codtipo");
-	if(!mysql_num_rows($sql_IM_tomador)){
-		Mensagem("InscriÁ„o Municipal n„o encontrada, verifique os dados ou tente pelo CNPJ/CPF");
+	if(!$sql_IM_tomador->rowCount()){
+		Mensagem("InscriÔøΩÔøΩo Municipal n√£o encontrada, verifique os dados ou tente pelo CNPJ/CPF");
 	}else{
-		list($tomador_CNPJ,$tomador_CPF) = mysql_fetch_array($sql_IM_tomador);
+		list($tomador_CNPJ,$tomador_CPF) = $sql_IM_tomador->fetch();
 	}
 }
 if ($_GET['txtCNPJ']){
 	$tomador_CNPJ = $_GET['txtCNPJ'];
 }
-$sql_emissor = mysql_query("
+$sql_emissor = $PDO->query("
 	SELECT 
 		codigo, 
 		cnpj,
@@ -55,27 +55,27 @@ $sql_emissor = mysql_query("
 		cnpj='$tomador_CNPJ' OR 
 		cpf='$tomador_CNPJ'
 ");
-if (mysql_num_rows($sql_emissor)){
+if ($sql_emissor->rowCount()){
 	list($cod_emissor,$cnpj_emissor,$cpf_emissor,$nome_emissor,$email_emissor,$inscrmunicipal_emissor,$logradouro_emissor,$numero_emissor,$complemento_emissor,
-		$bairro_emissor,$cep_emissor,$municipio_emissor,$uf_emissor)=mysql_fetch_array($sql_emissor);
+		$bairro_emissor,$cep_emissor,$municipio_emissor,$uf_emissor)=$sql_emissor->fetch();
 }
-$sql_tomador=mysql_query("SELECT codigo, cnpj,cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
+$sql_tomador=$PDO->query("SELECT codigo, cnpj,cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
 
-if(mysql_num_rows($sql_tomador)<=0){
+if($sql_tomador->rowCount()<=0){
 	/*$tipopessoa = strlen($tomador_CNPJ)==18? 'cnpj':'cpf';
-	mysql_query("
+	$PDO->query("
 		INSERT INTO 
 			cadastro 
 		SET 
 			$tipopessoa = '$tomador_CNPJ'
 	");
-	$sql_tomador=mysql_query("SELECT codigo, cnpj,cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
-	//Mensagem("Tomador n„o cadastrado no sistema, preencha os campos obrigatÛrios");
+	$sql_tomador=$PDO->query("SELECT codigo, cnpj,cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
+	//Mensagem("Tomador n√£o cadastrado no sistema, preencha os campos obrigat√≥rios");
 	*/
-	echo ("<b>Tomador n„o cadastrado</b>");
+	echo ("<b>Tomador n√£o cadastrado</b>");
 }else{				  
 	
-	list($cod_tomador,$cnpj,$cpf,$nome,$email)=mysql_fetch_array($sql_tomador);
+	list($cod_tomador,$cnpj,$cpf,$nome,$email)=$sql_tomador->fetch();
 	?>
 
 <form method="post" name="frmDesTomadores">
@@ -83,14 +83,14 @@ if(mysql_num_rows($sql_tomador)<=0){
 	<?php campoHidden("hdCodTomador",$cod_tomador);?>
 	<table width="98%" height="100%" border="0" align="center" cellpadding="5" cellspacing="0">
 		<tr>
-			<td colspan="2" align="left"><strong>TOMADOR: Declare suas Notas Fiscais de servi&ccedil;os tomados, para aquisi&ccedil;&atilde;o de cr&eacute;ditos no IPTU.</strong></td>
+			<td colspan="2" align="left"><strong>TOMADOR: Declare suas Notas Fiscais de servi√ßos tomados, para aquisi√ß√£o de cr√©ditos no IPTU.</strong></td>
 		</tr>
 		<tr>
 			<td width="27%" align="left" valign="middle">CNPJ/CPF:</td>
-			<td width="73%" align="left" valign="middle"><font color="#FF0000">*</font>&nbsp;<b><?php echo $tomador_CNPJ;?></b></td>
+			<td width="73%" align="left" valign="middle"><font color="#FF0000">*</font><b><?php echo $tomador_CNPJ;?></b></td>
 		</tr>
 		<tr>
-			<td align="left" valign="middle">Raz&atilde;o Social/Nome:</td>
+			<td align="left" valign="middle">Raz√£o Social/Nome:</td>
 			<td align="left" valign="middle"><font color="#FF0000">*</font>
 				<input name="txtNome" class="texto" id="txtNome" value="<?php echo $nome;?>" size="50">
 			</td>
@@ -105,11 +105,11 @@ if(mysql_num_rows($sql_tomador)<=0){
 			<td colspan="2" align="center" valign="top">
 				<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#CCCCCC" bgcolor="#FFFFFF">
 					<tr>
-						<td width="20%" align="center" bgcolor="#CCCCCC">N&ordm; do Documento</td>
-						<td width="16%" align="center" bgcolor="#CCCCCC">Data Emiss„o</td>
+						<td width="20%" align="center" bgcolor="#CCCCCC">N¬∫ do Documento</td>
+						<td width="16%" align="center" bgcolor="#CCCCCC">Data Emiss√£o</td>
 						<td width="30%" align="center" bgcolor="#CCCCCC">Prestador (CNPJ/CPF)</td>
 						<td width="15%" align="center" bgcolor="#CCCCCC">Valor</td>
-						<td width="19%" align="center" bgcolor="#CCCCCC" style="display: none">CrÈdito</td>
+						<td width="19%" align="center" bgcolor="#CCCCCC" style="display: none">Cr√©dito</td>
 					</tr>
 					<?php 
 	                 	campoHidden("hdTomadorCNPJCPF",$tomador_CNPJ);
@@ -158,7 +158,7 @@ if(mysql_num_rows($sql_tomador)<=0){
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="left" valign="middle"><font color="#FF0000">*</font><em> Campos com preenchimento obrigatÛrio<br />
+			<td colspan="2" align="left" valign="middle"><font color="#FF0000">*</font><em> Campos com preenchimento obrigatÔøΩrio<br />
 				** Desabilite seu bloqueador de pop-up</em></td>
 		</tr>
 		<tr>

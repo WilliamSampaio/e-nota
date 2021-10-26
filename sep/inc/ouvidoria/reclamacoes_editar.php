@@ -45,14 +45,14 @@ WHERE
   `reclamacoes`.`codigo` = '$CODIGO';");
   
 
-list($codigo, $assunto, $especificacao, $tomador_cnpj, $tomador_email, $rps_numero, $rps_data, $rps_valor, $empresas_nome, $empresas_cnpjcpf, $datareclamacao, $estado, $responsavel, $dataatendimento) = mysql_fetch_array($sql);
+list($codigo, $assunto, $especificacao, $tomador_cnpj, $tomador_email, $rps_numero, $rps_data, $rps_valor, $empresas_nome, $empresas_cnpjcpf, $datareclamacao, $estado, $responsavel, $dataatendimento) = $sql->fetch();
 
 ?>
 
 
-<!-- cabeçalho da pesquisa-----> 
+<!-- cabeï¿½alho da pesquisa-----> 
 
-			<fieldset style="width:730;"><legend>Cadastro de Reclamação</legend>      
+			<fieldset style="width:730;"><legend>Cadastro de ReclamaÃ§Ã£o</legend>      
 			<form name="frmCadastroReclamcao" method="post">
 			<input type="hidden" name="include" id="include" value="<?php echo $_POST['include'];?>">
 			<input name="txtCodigo" type="hidden" value="<?php echo $CODIGO; ?>" />
@@ -62,7 +62,7 @@ list($codigo, $assunto, $especificacao, $tomador_cnpj, $tomador_email, $rps_nume
 				<td width="70%" align="left"><input value="<?php echo $assunto; ?>" class="texto" size="55" readonly="yes" /></td>
 			  </tr>
 			  <tr>
-				<td align="left">Especificação</td>
+				<td align="left">EspecificaÃ§Ã£o</td>
 				<td align="left"><input value="<?php echo $especificacao; ?>" class="texto" size="55" readonly="yes" /></td>
 			  </tr>
 			  <tr>
@@ -70,7 +70,7 @@ list($codigo, $assunto, $especificacao, $tomador_cnpj, $tomador_email, $rps_nume
 				<td align="left"><input value="<?php echo $tomador_cnpj; ?>" class="texto" size="55" readonly="yes" /></td>
 			  </tr>
 			  <tr>
-				<td align="left">RPS - Número</td>
+				<td align="left">RPS - NÃºmero</td>
 				<td align="left"><input value="<?php echo $rps_numero; ?>" class="texto" size="20" readonly="yes" /></td>
 			  </tr>
 			  <tr>
@@ -86,7 +86,7 @@ list($codigo, $assunto, $especificacao, $tomador_cnpj, $tomador_email, $rps_nume
 				<td align="left"><input value="<?php echo $empresas_nome." - ".$empresas_cnpjcpf; ?>" class="texto" size="55" readonly="yes" /></td>
 			  </tr>
 			  <tr>
-				<td align="left">Data Reclamação</td>
+				<td align="left">Data ReclamaÃ§Ã£o</td>
 				<td align="left"><input value="<?php echo substr($datareclamacao,8,2)."/".substr($datareclamacao,5,2)."/".substr($datareclamacao,0,4); ?>" class="texto" size="20" readonly="yes" /></td>
 			  </tr>
 			  <tr>
@@ -97,7 +97,7 @@ list($codigo, $assunto, $especificacao, $tomador_cnpj, $tomador_email, $rps_nume
 				</td>
 			  </tr>
 			  <tr>
-				<td align="left">Responsável <font color="#FF0000">*</font></td>
+				<td align="left">ResponsÃ¡vel <font color="#FF0000">*</font></td>
 				<td align="left"><input name="txtResponsavel" value="<?php echo $responsavel; ?>" width="30" class="texto" /></td>
 			  </tr>
 			  <tr>
@@ -107,12 +107,12 @@ list($codigo, $assunto, $especificacao, $tomador_cnpj, $tomador_email, $rps_nume
 				<input name="txtDataAtendimento" value="<?php echo $dataatendimentoF; ?>" class="texto" size="20" onkeypress="formatar(this,'00/00/0000')" maxlength="10" /> <em>formato (29/02/2010)</em></td>
 			  </tr>
 			  <tr>
-				<td>&nbsp;</td>
-				<td align="right"><font color="#FF0000">*</font> Campos com permissão de alteração!</td>
+				<td></td>
+				<td align="right"><font color="#FF0000">*</font> Campos com permissï¿½o de alteraÃ§Ã£o!</td>
 			  </tr>
 			  <tr>
 				<td><input name="btSalvar" type="submit" value="Salvar" class="botao" style="width:120px;" /></td>
-				<td>&nbsp;</td>
+				<td></td>
 			  </tr>
 			  <tr>
 				<td>
@@ -123,11 +123,11 @@ list($codigo, $assunto, $especificacao, $tomador_cnpj, $tomador_email, $rps_nume
 				echo ("<input type=\"button\" class=\"botao\" value=\"Comunicar Partes\" onclick=\"window.open('inc/reclamacoes_email.php?CODIGO=$crypto');\"></a>");
 				?>
 				</td>
-				<td>&nbsp;</td>
+				<td></td>
 			  </tr>
 			  <tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
+				<td></td>
+				<td></td>
 			  </tr>
 			</table>			
 			</form>

@@ -22,10 +22,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" /> 
 </form>
 <?php
-	include("../conect.php");
+	require_once("../conect.php");
 	require_once("../../funcoes/util.php");
-	$sql=mysql_query("UPDATE servicos_categorias SET nome='$txtEditarCategoria' WHERE codigo='$txtCodCategoria'");
-	add_logs('Alterou uma categoria de ServiÁo');	
+	$sql=$PDO->query("UPDATE servicos_categorias SET nome='$txtEditarCategoria' WHERE codigo='$txtCodCategoria'");
+	add_logs('Alterou uma categoria de Servi√ßo');	
 	echo "
 		<script>
 			alert('Categoria alterada com sucesso');									

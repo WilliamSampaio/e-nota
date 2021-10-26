@@ -4,7 +4,7 @@
 	
 	$codSolicitacao = $_GET['codRPS'];
 		
-	$sql_dados_emissor = mysql_query("
+	$sql_dados_emissor = $PDO->query("
 		SELECT 
 			cadastro.nome,
 			cadastro.razaosocial,
@@ -17,11 +17,11 @@
 		WHERE
 			rps_solicitacoes.codigo = '$codSolicitacao'
 	");
-	list($nome,$razaoSocial,$email,$estadoRPS) = mysql_fetch_array($sql_dados_emissor);
+	list($nome,$razaoSocial,$email,$estadoRPS) = $sql_dados_emissor->fetch();
 	
 	switch($estadoRPS){
 		case "A":
-			$str_estado = "está em analise";
+			$str_estado = "estÃ¡ em analise";
 		  break;
 		case "L":
 			$str_estado = "foi liberada pela prefeitura";
@@ -38,14 +38,14 @@
 	$msg = "
 		".$razaoSocial.",<br />
 		<br />
-		Esta é uma notificação, informando que sua solicitação de aumento do limite de RPS, ".$str_estado.".<br />
+		Esta Ã© uma notificaï¿½ï¿½o, informando que sua solicitaÃ§Ã£o de aumento do limite de RPS, ".$str_estado.".<br />
 		<br />
 		para maiores detalhes favor entrar em contato com a prefeitura.
 	";
 	
-	$retorno = envia_email($email,"Solicitação de RPS",$msg);
+	$retorno = envia_email($email,"Solicitaï¿½ï¿½o de RPS",$msg);
 	if($retorno == 1){
-		mysql_query("UPDATE rps_solicitacoes SET comunicado = 'S' WHERE codigo = '$codSolicitacao'");
+		$PDO->query("UPDATE rps_solicitacoes SET comunicado = 'S' WHERE codigo = '$codSolicitacao'");
 	}
 	echo $retorno;
 		

@@ -57,7 +57,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     
 <fieldset><legend>Resultados</legend>
 <?php	
-	//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
+	//Sql buscando as informaï¿½ï¿½es que o usuario pediu e com o limit estipulado pela funÃ§Ã£o
 	$query = ("
 			SELECT 
 				decc_des.codigo,
@@ -93,8 +93,8 @@ if(mysql_num_rows($sql_declaracoes)){
     </table>
 <table width="100%">
     <tr bgcolor="#999999">
-        <td width="6%" align="center">N&deg; Dec</td>
-        <td width="12%" align="center">Cod verificação</td>
+        <td width="6%" align="center">NÂº Dec</td>
+        <td width="12%" align="center">Cod verificaÃ§Ã£o</td>
         <td width="35%" align="center">Nome</td>
         <td width="8%" align="center">Total</td>
         <td width="7%" align="center">Iss</td>
@@ -103,7 +103,7 @@ if(mysql_num_rows($sql_declaracoes)){
         <td width="10%" align="center">Estado</td>
     </tr>
     <?php
-		while(list($codigo,$data,$total,$iss,$codverificacao,$estado,$competencia,$nome) = mysql_fetch_array($sql_declaracoes)){
+		while(list($codigo,$data,$total,$iss,$codverificacao,$estado,$competencia,$nome) = $sql_declaracoes)){
 			switch($estado){
 				case "B": $estado = "Boleto";      break;
 				case "N": $estado = "Normal";      break;
@@ -127,7 +127,7 @@ if(mysql_num_rows($sql_declaracoes)){
 </table>
 <?php
 }else{
-	echo "<center><b>Não há resultados!</b></center>";
+	echo "<center><b>NÃ£o hÃ¡ resultados!</b></center>";
 }
 ?>
 </fieldset>

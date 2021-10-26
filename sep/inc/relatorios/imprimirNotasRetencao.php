@@ -23,14 +23,14 @@
 		WHERE notas.issretido > 0 $where
 	");
 	
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa); //Pega quantos resultados voltaram
 	
 	if($result){ //Se existir algum registro, mostra na tabela
 ?>
 
 
-<!-- In�cio da Tabela -->
+<!-- In�cio da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999">
 		<?php
@@ -44,15 +44,15 @@
 	<tr style="background-color:#999999; font-weight:bold" align="center">
 		<td>Prestador</td>
 		<td width="150">CPF/CNPJ</td>
-		<td width="70">N&uacute;mero</td>
-		<td width="100">Data Emiss&atilde;o</td>
+		<td width="70">Número</td>
+		<td width="100">Data Emissão</td>
 		<td width="80">ISS Retido</td>
-		<td width="120">Base de C&aacute;lculo</td>
-		<td width="120">L&iacute;quido</td>
+		<td width="120">Base de Cálculo</td>
+		<td width="120">Líquido</td>
 	</tr>
 	
 <?php
-while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+while($dados_pesquisa = $sql_pesquisa->fetch()){
 	$explode = explode(" ",$dados_pesquisa['datahoraemissao']);
 	$separa = explode("-",$explode[0]);
 ?>
@@ -66,7 +66,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 		<td><?php echo 'R$ '.DecToMoeda($dados_pesquisa['valortotal']);?></td>
 	</tr>
 <?php
-}//Fim do while($dados_pesquisa = mysql_fetch_array($sql_pesquisa))
+}//Fim do while($dados_pesquisa = $sql_pesquisa))
 ?>
 </table>
 <!-- Fim da Tabela -->
@@ -77,7 +77,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>Não há resultados!</td>
 	</tr>
 </table>
 <?php

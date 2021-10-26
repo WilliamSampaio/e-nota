@@ -19,5 +19,5 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("ouvidoria/reclamacoes.php");
+require_once("ouvidoria/reclamacoes.php");
 ?>

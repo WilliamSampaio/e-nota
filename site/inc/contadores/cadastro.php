@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 $sql = $PDO->query("SELECT cidade, estado FROM configuracoes");
 list($CIDADE, $UF) = $sql->fetch();
 ?>
-<!-- Formul�rio de inser��o de empresa -->
+<!-- Formulário de inserção de empresa -->
 
 <table width="580" border="0" cellpadding="0" cellspacing="1">
 	<tr>
@@ -46,14 +46,14 @@ list($CIDADE, $UF) = $sql->fetch();
 
 			<br />
 			<br />
-			<strong>Prezado Contador/Escrit&oacute;rio de Contabilidade</strong><br /><br />
-			A nossa Prefeitura Municipal vem empreendendo esfor&ccedil;os para aprimorar continuamente a qualidade dos servi&ccedil;os oferecidos aos contribuintes. Neste sentido, a internet apresenta-se como um importante instrumento capaz de atende-los com agilidade e seguran&ccedil;a.
+			<strong>Prezado Contador/Escritório de Contabilidade</strong><br /><br />
+			A nossa Prefeitura Municipal vem empreendendo esforços para aprimorar continuamente a qualidade dos serviços oferecidos aos contribuintes. Neste sentido, a internet apresenta-se como um importante instrumento capaz de atende-los com agilidade e segurança.
 			<br /><br />
-			E por falar em seguran&ccedil;a, o contribuinte dever&aacute; cadastrar uma senha individual que permitir&aacute; o acesso &agrave; &aacute;rea restrita, de seu exclusivo interesse, no endere&ccedil;o eletr&ocirc;nico da Prefeitura.
+			E por falar em segurança, o contribuinte deverá cadastrar uma senha individual que permitirá o acesso à área restrita, de seu exclusivo interesse, no endereço eletrônico da Prefeitura.
 			<br /><br />
-			A senha cadastrada &eacute; intransfer&iacute;vel e configura a assinatura eletr&ocirc;nica da pessoa f&iacute;sica ou jur&iacute;dica que a cadastrou.
+			A senha cadastrada é intransferível e configura a assinatura eletrônica da pessoa física ou jurídica que a cadastrou.
 			<br /><br />
-			<strong>ALERTAMOS QUE CABER&Aacute; EXCLUSIVAMENTE AO CONTRIBUINTE TODA RESPONSABILIDADE DECORRENTE DO USO INDEVIDO DA SENHA, QUE DEVER&Aacute; SER GUARDADA EM TOTAL SEGURAN&Ccedil;A.</strong>
+			<strong>ALERTAMOS QUE CABER&Aacute; EXCLUSIVAMENTE AO CONTRIBUINTE TODA RESPONSABILIDADE DECORRENTE DO USO INDEVIDO DA SENHA, QUE DEVER&Aacute; SER GUARDADA EM TOTAL SEGURANÇA.</strong>
 			<br /><br />
 			<!--action="inc/prestadores/inserir.php"-->
 			<form action="inc/contadores/inserir.php" method="post" name="frmCadastroEmpresa" id="frmCadastroEmpresa">
@@ -64,7 +64,7 @@ list($CIDADE, $UF) = $sql->fetch();
 						<td align="left"><input type="text" size="60" maxlength="100" name="txtInsNomeEmpresa" id="txtInsNomeEmpresa" class="texto"></td>
 					</tr>
 					<tr>
-						<td width="135" align="left">Raz&atilde;o Social<font color="#FF0000">*</font>
+						<td width="135" align="left">Razão Social<font color="#FF0000">*</font>
 						</td>
 						<td align="left"><input type="text" size="60" maxlength="100" name="txtInsRazaoSocial" id="txtInsRazaoSocial" class="texto"></td>
 					</tr>
@@ -84,7 +84,7 @@ list($CIDADE, $UF) = $sql->fetch();
 						<td align="left"><input type="text" size="40" maxlength="100" name="txtLogradouro" id="txtLogradouro" class="texto" /></td>
 					</tr>
 					<tr>
-						<td align="left">N&uacute;mero<font color="#FF0000">*</font>
+						<td align="left">Número<font color="#FF0000">*</font>
 						</td>
 						<td align="left"><input type="text" size="10" maxlength="10" name="txtNumero" id="txtNumero" class="texto" /></td>
 					</tr>
@@ -131,7 +131,7 @@ list($CIDADE, $UF) = $sql->fetch();
 						</td>
 					</tr>
 					<tr>
-						<td align="left">Munic&iacute;pio<font color="#FF0000">*</font>
+						<td align="left">Município<font color="#FF0000">*</font>
 						</td>
 						<td align="left">
 							<div id="txtInsMunicipioEmpresa">
@@ -181,17 +181,17 @@ list($CIDADE, $UF) = $sql->fetch();
 						<td colspan="3" align="left">
 							<br /><input type="checkbox" value="S" name="txtSimplesNacional" id="txtSimplesNacional" />
 							<font size="-2" id="ftDesc">
-								Esta empresa est&aacute; enquadrada no Simples Nacional, conforme Lei Complementar n&deg; 123/2006
+								Esta empresa está enquadrada no Simples Nacional, conforme Lei Complementar nº 123/2006
 							</font>
 							<br /><br />
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" align="left">&nbsp;</td>
+						<td colspan="2" align="left"></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="left">
-							<input type="button" value="Adicionar Respons&aacute;vel/S&oacute;cio" name="btAddSocio" class="botao" onclick="incluirSocio()" />
+							<input type="button" value="Adicionar Responsável/Sócio" name="btAddSocio" class="botao" onclick="incluirSocio()" />
 							<font color="#FF0000">*</font>
 						</td>
 					</tr>
@@ -199,7 +199,7 @@ list($CIDADE, $UF) = $sql->fetch();
 						<td colspan="2" align="center">
 							<table width="480" border="0" cellspacing="1" cellpadding="2">
 
-								<?php include("inc/contadores/cadastro_socios.php") ?>
+								<?php require_once("inc/contadores/cadastro_socios.php") ?>
 								<script>
 									incluirSocio();
 								</script>
@@ -208,11 +208,11 @@ list($CIDADE, $UF) = $sql->fetch();
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" align="left">&nbsp;</td>
+						<td colspan="2" align="left"></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="left">
-							<input type="button" value="Adicionar Servi&ccedil;os" name="btAddServicos" class="botao" onclick="incluirServico()" />
+							<input type="button" value="Adicionar Serviços" name="btAddServicos" class="botao" onclick="incluirServico()" />
 							<font color="#FF0000">*</font>
 						</td>
 					</tr>
@@ -222,7 +222,7 @@ list($CIDADE, $UF) = $sql->fetch();
 
 							<table width="480" border="0" cellspacing="1" cellpadding="2">
 
-								<?php include("inc/contadores/cadastro_servicos.php") ?>
+								<?php require_once("inc/contadores/cadastro_servicos.php") ?>
 								<script>
 									incluirServico();
 								</script>
@@ -240,8 +240,8 @@ list($CIDADE, $UF) = $sql->fetch();
 					</tr>
 					<tr>
 						<td align="right" colspan="2">
-							<font color="#FF0000">*</font> Campos Obrigat&oacute;rios<br /> <strong>
-								<font color="#FF0000">**</font> Voc&ecirc; deve desligar o bloqueador de pop-ups para cadastrar
+							<font color="#FF0000">*</font> Campos Obrigatórios<br /> <strong>
+								<font color="#FF0000">**</font> Você deve desligar o bloqueador de pop-ups para cadastrar
 							</strong>
 						</td>
 					</tr>
@@ -257,4 +257,4 @@ list($CIDADE, $UF) = $sql->fetch();
 	</tr>
 </table>
 
-<!-- Formul�rio de inser��o de servi�os Fim--->
+<!-- Formulário de inserção de serviços Fim--->

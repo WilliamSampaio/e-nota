@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    include("../conect.php");
-    include("../../funcoes/util.php");
+    require_once("../conect.php");
+    require_once("../../funcoes/util.php");
 
     //recebe os dados
     $razaosocial=strip_tags(addslashes($_GET['txtRazao']));
@@ -70,17 +70,17 @@ Fith Floor, Boston, MA 02110-1301, USA
         ?>
             <table width="100%" align="center">
                 <tr align="center" bgcolor="999999">
-                    <td>Cód. de Verificação</td>
-                    <td>Cartório</td>                    
-                    <td>Data de Emissão</td>
-                    <td>Competência</td>
+                    <td>CÃ³d. de VerificaÃ§Ã£o</td>
+                    <td>Cartï¿½rio</td>                    
+                    <td>Data de EmissÃ£o</td>
+                    <td>CompetÃªncia</td>
                     <td>Valor Total</td>
                     <td>ISS</td>
                     <td>Estado</td>
                     <td>Motivo Cancelamento</td>
                 </tr>
                <?php
-                   while($dados=mysql_fetch_array($sql)){
+                   while($dados=$sql->fetch()){
                        if($dados['estado']=="N"){
                            $dados['estado']="Normal";
                        }elseif($dados['estado']=="B"){

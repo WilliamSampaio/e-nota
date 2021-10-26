@@ -25,8 +25,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$codobra=$_POST["txtCodObra"];
 	
 	//busca os dados e exibe na tela
-	$sql_obra=mysql_query("SELECT codempreiteira, obra, alvara, endereco, proprietario, proprietario_cnpjcpf, dataini, datafim, estado FROM obras WHERE codigo=$codobra");
-	$dados_obra=mysql_fetch_array($sql_obra);
+	$sql_obra=$PDO->query("SELECT codempreiteira, obra, alvara, endereco, proprietario, proprietario_cnpjcpf, dataini, datafim, estado FROM obras WHERE codigo=$codobra");
+	$dados_obra=$sql_obra->fetch();
 	$dados_obra['dataini']=DataPt($dados_obra['dataini']);
     if($dados_obra['estado']=="C"){
         $dados_obra['datafim']=DataPt($dados_obra['datafim']);
@@ -38,19 +38,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo $dados_obra['obra']; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Alvará Nº:</td>
+		<td>AlvarÃ¡ NÂº:</td>
 		<td><?php echo $dados_obra['alvara']; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Endereço:</td>
+		<td>EndereÃ§o:</td>
 		<td><?php echo $dados_obra['endereco']; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Proprietário:</td>
+		<td>ProprietÃ¡rio:</td>
 		<td><?php echo $dados_obra['proprietario']; ?></td>
 	</tr>
 	<tr align="left">
-		<td>CNPJ/CPF Proprietário:</td>
+		<td>CNPJ/CPF ProprietÃ¡rio:</td>
 		<td><?php echo $dados_obra['proprietario_cnpjcpf']; ?></td>
 	</tr>
 	<tr align="left">
@@ -58,7 +58,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo $dados_obra['dataini']; ?></td>
 	</tr>
     <tr align="left">
-        <td>Data de Conclusão</td>
+        <td>Data de Conclusï¿½o</td>
         <td>
             <?php
                 if($dados_obra['estado']=="C"){

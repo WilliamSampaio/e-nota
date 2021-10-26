@@ -53,7 +53,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<td width="8%" align="center"></td>
 		</tr>
 		<?php
-		while(list($codigo,$titulo,$texto,$data,$arquivo,$tipo) = mysql_fetch_array($sql_leis)){
+		while(list($codigo,$titulo,$texto,$data,$arquivo,$tipo) = $sql_leis)){
 			switch($tipo){
 				case 'N': 
 					$tipo = 'NFe';
@@ -88,6 +88,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 </fieldset>
 <?php
 	}else{
-		echo "<center><b>N„o h· nenhuma lei cadastrada</b></center>";
+		echo "<center><b>N√£o h√° nenhuma lei cadastrada</b></center>";
 	}
 ?>

@@ -29,7 +29,7 @@ require_once("../../../funcoes/util.php");
 $codigo = $_GET['hdcod'];
 
 //sql buscando informacoes sobre o usuario
-$sql_info = mysql_query("
+$sql_info = $PDO->query("
 	SELECT 
 		des.data_gerado,
 		DATE_FORMAT(des.competencia,'%m/%Y') as competencia,
@@ -51,7 +51,7 @@ $sql_info = mysql_query("
 		cadastro ON des.codcadastro = cadastro.codigo
 	WHERE 
 		des.codigo = '$codigo'");
-	$info = mysql_fetch_array($sql_info);
+	$info = $sql_info->fetch();
 	$info['endereco'] = $info['logradouro'].', '.$info['numero'];
 	$info['cnpj'] .= $info['cpf'];
 	//Altera o estado para seu valor por extenso
@@ -80,13 +80,13 @@ $sql_info = mysql_query("
         <td align="left"><?php echo $info['uf'];?></td>
     </tr>
     <tr bgcolor="#FFFFFF">
-    	<td align="left">Data de geração</td>
+    	<td align="left">Data de geraÃ§Ã£o</td>
         <td align="left"><?php echo DataPt($info['data_gerado']);?></td>
-        <td align="right">Competência</td>
+        <td align="right">CompetÃªncia</td>
         <td align="left"><?php echo $info['competencia'];?></td>
     </tr>
     <tr bgcolor="#FFFFFF">
-    	<td align="left">Cod. Verificação</td>
+    	<td align="left">Cod. VerificaÃ§Ã£o</td>
         <td align="left"><?php echo $info['codverificacao'];?></td>
     	<td align="left">Valor ISS</td>
         <td align="left"><?php echo DecToMoeda($info['iss']);?></td>

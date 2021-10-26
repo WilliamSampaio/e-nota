@@ -39,7 +39,7 @@
 		LIMIT 10
 	");
 	
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa); //Pega quantos resultados voltaram
 	
 	if($result){ //Se existir algum registro, mostra na tabela
@@ -59,21 +59,21 @@
 	</tr>
 	
 	<tr style="background-color:#999999; font-weight:bold" align="center">
-		<td>Raz&atilde;o Social</td>
+		<td>Razão Social</td>
 		<td>CPF/CNPJ</td>
-		<td>Declara&ccedil;&atilde;o</td>
+		<td>Declaração</td>
 		<td>Isento</td>
-		<td>Munic&iacute;pio</td>
+		<td>Município</td>
 	</tr>
 
 
 <?php
 $x = 0;
-while($dados_pesquisa = mysql_fetch_array($sql_pesquisa) and $x<10){
+while($dados_pesquisa = $sql_pesquisa->fetch() and $x<10){
 	if($dados_pesquisa['isentoiss'] == "S")
 		$dados_pesquisa['isentoiss'] = "Sim";
 	else
-		$dados_pesquisa['isentoiss'] = "N&atilde;o";
+		$dados_pesquisa['isentoiss'] = "Não";
 ?>
 	<tr>
 		<td><?php echo $dados_pesquisa['razaosocial'];?></td>
@@ -84,7 +84,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa) and $x<10){
 	</tr>
 <?php
 $x++;
-}//Fim do while($dados_pesquisa = mysql_fetch_array($sql_pesquisa))
+}//Fim do while($dados_pesquisa = $sql_pesquisa))
 ?>
 </table>
 <!-- Fim da Tabela -->
@@ -94,7 +94,7 @@ $x++;
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>Não há resultados!</td>
 	</tr>
 </table>
 <?php

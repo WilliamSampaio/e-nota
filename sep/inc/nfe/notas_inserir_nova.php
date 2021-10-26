@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 $sessioncnpj = $_SESSION['login'];
 if($sessioncnpj==$_POST['txtTomadorCNPJ']){
-	Mensagem('O tomador nao pode ser o próprio prestador');
+	Mensagem('O tomador nao pode ser o prÃ³prio prestador');
 }else{
 	//Variaveis com os valores preenchidos da nota
 	$tomadorCnpj             = $_POST['txtTomadorCNPJ'];
@@ -64,13 +64,13 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
     $dataehora               = date("Y-m-d H:i:s");
 
     //Seleciona a ultima nota inserida pela empresa
-	$sql = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-	list($ultimanota)=mysql_fetch_array($sql);
+	$sql = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+	list($ultimanota)=$sql->fetch();
 	$ultimanota ++;
 	
 	//busca o limite de notas desse emissor
-	$sql=mysql_query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
-	list($notalimite)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
+	list($notalimite)=$sql->fetch();
 	
 	//testa se o numero de notas limites ja foi ultrapassado se ja tiver ultrapassado avisa-o
 	if(($ultimanota>$notalimite)&&($notalimite!=0)) {
@@ -87,7 +87,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 			
 	
 			//Faz uma busca pelo tomador
-			$sql = mysql_query("SELECT codigo FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
+			$sql = $PDO->query("SELECT codigo FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
 			//Testa se o tomador o pessoa fisica ou pessoa juridica
 			$campo = tipoPessoa($tomadorCnpj);
 						
@@ -96,7 +96,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 				$codtipo = codtipo('tomador');
 				$codtipodec = coddeclaracao('DES Simplificada');
 				$diaatual = date("Y-m-d");
-				mysql_query("
+				$PDO->query("
 					INSERT INTO 
 						cadastro
 					SET 
@@ -118,7 +118,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 				$codtomador = mysql_insert_id();
 		
 			}else{
-                mysql_query("
+                $PDO->query("
 					UPDATE
 						cadastro
 					SET
@@ -140,11 +140,11 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
                        $campo = '$tomadorCnpj'
 				");
 
-				list($codtomador) = mysql_fetch_array($sql);
+				list($codtomador) = $sql->fetch();
 			}
 		
             //Sql que insere os dados da nota emitida no banco
-			$sql = mysql_query("
+			$sql = $PDO->query("
                 INSERT INTO
                     notas
                 SET
@@ -177,18 +177,18 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 				$notaRpsData   = DataMysql($_POST['txtDataRps']);
 			
 				//Pega o ultimo rps emitido
-				$sql_rps_ultimo = mysql_query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
-				list($ultimoRPS) = mysql_fetch_array($sql_rps_ultimo);
+				$sql_rps_ultimo = $PDO->query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+				list($ultimoRPS) = $sql_rps_ultimo->fetch();
 				
 				$notaRpsNumero = $ultimoRPS + 1;
 				
-				mysql_query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$CODIGO_DA_EMPRESA' AND codigo = '$codigoUltimaNota'");
-				mysql_query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+				$PDO->query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$CODIGO_DA_EMPRESA' AND codigo = '$codigoUltimaNota'");
+				$PDO->query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
 			
 			}
 
 			
-			$sql = mysql_query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$CODIGO_DA_EMPRESA'");
+			$sql = $PDO->query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$CODIGO_DA_EMPRESA'");
 			add_logs('Emitiu nota fiscal');
 			
 			//Envia o email informando o tomador que foi inserida uma nfe
@@ -207,7 +207,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 				print("<script language=JavaScript>alert('Nota Emitida com sucesso!!')</script>");
 			}
 		}else{
-			print("<script language=JavaScript>alert('Favor preencher campos obrigatórios')</script>");
+			print("<script language=JavaScript>alert('Favor preencher campos obrigatÃ³rios')</script>");
 		}
 	}
 }

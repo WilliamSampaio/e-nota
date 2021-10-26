@@ -19,24 +19,24 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-$sql_municipio=mysql_query("SELECT cidade, estado FROM configuracoes");
-$dados_municipio=mysql_fetch_array($sql_municipio);
+$sql_municipio=$PDO->query("SELECT cidade, estado FROM configuracoes");
+$dados_municipio=$sql_municipio->fetch();
 
-//Verifica se foi inserido alguma empresa nova, se for vai para o arquivo de inser��o
+//Verifica se foi inserido alguma empresa nova, se for vai para o arquivo de inserção
  if(($_POST['btCadastrar'] =="Salvar")&&($_POST['hdAtualizar'] ==''))
  {   
-   include("inserir.php");
+   require_once("inserir.php");
  }
  if(($_POST['btCadastrar'] =="Salvar")&&($_POST['hdAtualizar']=='sim'))
  { 
- 	include("editar.php"); 
+ 	require_once("editar.php"); 
  }
  if($_POST['btGerar'] == "Gerar senha"){
- 	include("gera_senha.php");
+ 	require_once("gera_senha.php");
  }
  if($_POST["btExcluir"]){
  	$CODIGO = $_POST['CODEMISSOR'];
-	mysql_query("UPDATE cadastro SET estado = 'I' WHERE codigo = '$CODIGO'");
+	$PDO->query("UPDATE cadastro SET estado = 'I' WHERE codigo = '$CODIGO'");
 	add_logs('Desativou um Prestador');
 	Mensagem("Prestador desativado");
  }
@@ -55,7 +55,7 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 		}
 	}
 </script>
-<!-- Formul�rio de inser��o de empresa  -->
+<!-- Formulário de inserção de empresa  -->
 <style type="text/css">
 <!--
 #divBusca {
@@ -75,12 +75,12 @@ input[type*="text"]{
 -->
 </style>
 <div id="divBusca"  >
-	<?php include("inc/cadastro/prestadores/busca.php"); ?>
+	<?php require_once("inc/cadastro/prestadores/busca.php"); ?>
 </div>
 <?php	
 	if(($_POST['CODEMISSOR'])){		   
 		$codigo=$_POST['CODEMISSOR'];	
-		$sql=mysql_query("
+		$sql=$PDO->query("
 						SELECT 
 							codigo,
 							codtipo,
@@ -115,7 +115,7 @@ input[type*="text"]{
 						WHERE
 							codigo='$codigo'
 						");
-		list($codigo,$codtipo,$codtipodec,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$inscricaoestadual, $logradouro,$numero,$complemento,$bairro,$fone,$celular,$cep,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$codcontador,$nfe,$pispasep,$datafim,$datainicio,$isentoiss)= mysql_fetch_array($sql);
+		list($codigo,$codtipo,$codtipodec,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$inscricaoestadual, $logradouro,$numero,$complemento,$bairro,$fone,$celular,$cep,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$codcontador,$nfe,$pispasep,$datafim,$datainicio,$isentoiss)= $sql->fetch();
 		
 		// verifica se o prestador é simples nacional
 		$simples = coddeclaracao("Simples Nacional");
@@ -128,20 +128,20 @@ input[type*="text"]{
 		//Busca os dados adcionais da tabela
 		$codcargo_gerente = codcargo('Gerente');
 		$codcargo_diretor = codcargo('Diretor');
-		$sql_resp = mysql_query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = '$codigo' AND 
+		$sql_resp = $PDO->query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = '$codigo' AND 
 		(codcargo = '$codcargo_gerente' OR codcargo = '$codcargo_diretor')");
-		list($nome_responsavel,$cpf_responsavel) = mysql_fetch_array($sql_resp);
+		list($nome_responsavel,$cpf_responsavel) = $sql_resp->fetch();
 		
 		
-		//Busca as informa��es que s�o extra para cada tipo de prestador
-		$sql_info_instituicoes = mysql_query("SELECT agencia, codbanco FROM inst_financeiras WHERE codcadastro = '$codigo'");
-		list($agencia_inst,$codbanco_inst) = mysql_fetch_array($sql_info_instituicoes);
+		//Busca as informa��es que são extra para cada tipo de prestador
+		$sql_info_instituicoes = $PDO->query("SELECT agencia, codbanco FROM inst_financeiras WHERE codcadastro = '$codigo'");
+		list($agencia_inst,$codbanco_inst) = $sql_info_instituicoes->fetch();
 		
-		$sql_info_operadoras = mysql_query("SELECT agencia, codbanco FROM operadoras_creditos WHERE codcadastro = '$codigo'");
-		list($agencia_opr,$codbanco_opr) = mysql_fetch_array($sql_info_operadoras);
+		$sql_info_operadoras = $PDO->query("SELECT agencia, codbanco FROM operadoras_creditos WHERE codcadastro = '$codigo'");
+		list($agencia_opr,$codbanco_opr) = $sql_info_operadoras->fetch();
 		
-		$sql_info_cartorios = mysql_query("SELECT admpublica, nivel FROM cartorios WHERE codcadastro = '$codigo'");
-		list($admpublica_cart,$nivel_cart) = mysql_fetch_array($sql_info_cartorios);
+		$sql_info_cartorios = $PDO->query("SELECT admpublica, nivel FROM cartorios WHERE codcadastro = '$codigo'");
+		list($admpublica_cart,$nivel_cart) = $sql_info_cartorios->fetch();
 		
 	}
 
@@ -149,7 +149,7 @@ input[type*="text"]{
 <table border="0" cellspacing="0" cellpadding="0" class="form">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Prestadores - Cadastro</td>
+		<td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Prestadores - Cadastro</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -169,7 +169,7 @@ input[type*="text"]{
 		<table border="0" align="center" id="tblEmpresa">
         	<? if($codigo){ ?>
                 <tr>
-                    <td align="left"  style="text-indent:5px">C&oacute;d Cadastro<font color="#FF0000">*</font></td>
+                    <td align="left"  style="text-indent:5px">Cód Cadastro<font color="#FF0000">*</font></td>
                     <td colspan="3">
 					  <input type="text" size="15" style="background-color:#CCCCCC;" maxlength="100" name="txtInsCodCadastro" id="txtInsCodCadastro" readonly="readonly" class="texto" value="<?php echo $codigo; ?>">		
                     </td>
@@ -183,8 +183,8 @@ input[type*="text"]{
 					<select name="cmbCodtipo" id="cmbCodtipo" class="combo" onchange="alternaCampos('cmbCodtipo')">
 						<option value=""></option>
 						<?php
-							$sql_codtipo = mysql_query("SELECT codigo, tipo, nome FROM tipo WHERE (tipo = 'prestador' OR tipo = 'tomador' OR tipo = 'contador') ORDER BY nome");
-							while(list($codigo_tipo,$tipo,$nome_tipo) = mysql_fetch_array($sql_codtipo)){
+							$sql_codtipo = $PDO->query("SELECT codigo, tipo, nome FROM tipo WHERE (tipo = 'prestador' OR tipo = 'tomador' OR tipo = 'contador') ORDER BY nome");
+							while(list($codigo_tipo,$tipo,$nome_tipo) = $sql_codtipo->fetch()){
 								echo "<option value=\"$codigo_tipo|$tipo\"";if($codigo_tipo == $codtipo){ echo "selected = selected";}echo ">$nome_tipo</option>";
 							}
 						?>
@@ -198,7 +198,7 @@ input[type*="text"]{
 					 >				</td>
 			</tr>
 			<tr>
-                            <td align="left" style="text-indent:5px"> Raz&atilde;o Social<font color="#FF0000">*</font> </td>
+                            <td align="left" style="text-indent:5px"> Razão Social<font color="#FF0000">*</font> </td>
 				<td colspan="3" align="left">
 					<input type="text" size="70" maxlength="100" name="txtInsRazaoSocial" id="txtInsRazaoSocial" class="texto" value="<?php if(isset($razaosocial)){echo $razaosocial;} ?>"
 					>				</td>
@@ -253,7 +253,7 @@ input[type*="text"]{
                 
             </tr>
             <tr>
-                <td align="left" style="text-indent:5px">Telefone <br />&nbsp;Comercial<font color="#FF0000">*</font></td>
+                <td align="left" style="text-indent:5px">Telefone <br />Comercial<font color="#FF0000">*</font></td>
                 <td align="left">
 					<input type="text" class="texto" size="20" maxlength="15" name="txtFoneComercial" id="txtFoneComercial"
 				     value="<?php if(isset($fone)){echo $fone;} ?>"/></td>
@@ -266,7 +266,7 @@ input[type*="text"]{
              <td align="left">
 					<input type="text" class="texto"size="12" maxlength="10" name="txtDtInicio" id="txtDtInicio"  value="<?php if(isset($datainicio)){echo DataPt($datainicio);} ?>" onkeyup="MaskData(this)" /></td>
 
-                <td align="left" style="text-indent:5px">Data de<br />&nbsp;Encerramento</td>
+                <td align="left" style="text-indent:5px">Data de<br />Encerramento</td>
                 <td align="left"><input type="text" class="texto" size="12" maxlength="10" name="txtDataFim" id="txtDataFim" value="<?php if(isset($datafim)){echo DataPt($datafim);} ?>" onkeyup="MaskData(this)" /></td>
                 
                
@@ -278,7 +278,7 @@ input[type*="text"]{
 					
 					<table width="100%" border="0" cellspacing="1" cellpadding="2" align="left" id="tbl_inst_opr" style="display:none; margin:0px">
 						<?php
-							include("inc/cadastro/prestadores/cadastro/cadastro_inst_opr.php");
+							require_once("inc/cadastro/prestadores/cadastro/cadastro_inst_opr.php");
 						?>
 					</table>
 					
@@ -286,7 +286,7 @@ input[type*="text"]{
 					
 					<table width="100%" border="0" cellspacing="1" cellpadding="2" align="left" id="tbl_cart" style="display:none; margin:0px">
 						<?php
-							include("inc/cadastro/prestadores/cadastro/cadastro_cart.php");
+							require_once("inc/cadastro/prestadores/cadastro/cadastro_cart.php");
 						?>
 					</table>				
 					
@@ -306,8 +306,8 @@ input[type*="text"]{
 					<select name="txtInsUfEmpresa" id="txtInsUfEmpresa" onchange="buscaCidades(this,'txtInsMunicipioEmpresa')">
 						<option value=""></option>
 						<?php
-							$sql=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-							while(list($uf_busca)=mysql_fetch_array($sql)){
+							$sql=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+							while(list($uf_busca)=$sql->fetch()){
 								echo "<option value=\"$uf_busca\"";if($uf_busca == $uf_teste){ echo "selected=selected"; }echo ">$uf_busca</option>";
 							}
 						?>
@@ -317,18 +317,18 @@ input[type*="text"]{
 				<td colspan="2"><input name="txtPISPASEP" class="texto" type="text" maxlength="20" value="<?php echo $pispasep;?>" /></td>
 			</tr>
 			<tr>
-                            <td align="left" style="text-indent:5px">Munic&iacute;pio<font color="#FF0000">*</font></td>
+                            <td align="left" style="text-indent:5px">Município<font color="#FF0000">*</font></td>
 				<td colspan="3" align="left">
 					<div  id="txtInsMunicipioEmpresa">
 						<select name="txtInsMunicipioEmpresa" id="txtInsMunicipioEmpresa" class="combo">
 							<?php
-								$sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$uf_teste'");
+								$sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$uf_teste'");
 								if(!isset($municipio)){
-									while(list($nome_municipio) = mysql_fetch_array($sql_municipio)){
+									while(list($nome_municipio) = $sql_municipio->fetch()){
 										echo "<option value=\"$nome_municipio\"";if((strtolower($nome_municipio) == strtolower($dados_municipio['cidade'])) || (strtolower($nome_municipio) == strtolower($municipio))){ echo "selected=selected";} echo ">$nome_municipio</option>";
 									}//fim while
 								}else{
-									while(list($nome_municipio) = mysql_fetch_array($sql_municipio)){
+									while(list($nome_municipio) = $sql_municipio->fetch()){
 										echo "<option value=\"$nome_municipio\"";if( (strtolower($nome_municipio) == strtolower($municipio)) ){ echo "selected=selected";} echo ">$nome_municipio</option>";
 									}//fim while
 								}
@@ -348,28 +348,28 @@ input[type*="text"]{
 			<tr>
 				<td align="left"></td>
 				<td align="left" colspan="3">
-					<input name="btGerar" value="Gerar senha" class="botao" type="submit" <?php if(!$email){ echo "disabled=\"disabled\"";}?> /><?php if(!$email){?><b>&Eacute; necessario ter um e-mail para gerar a senha</b><?php }?>
+					<input name="btGerar" value="Gerar senha" class="botao" type="submit" <?php if(!$email){ echo "disabled=\"disabled\"";}?> /><?php if(!$email){?><b>É necessario ter um e-mail para gerar a senha</b><?php }?>
 				</td>
 			</tr>
 			<?php }?>
 			<tr>
-                            <td align="left" style="text-indent:5px">Tipo de <br />&nbsp;declara&ccedil;&atilde;o<font color="#FF0000">*</font></td>
+                            <td align="left" style="text-indent:5px">Tipo de <br />declaração<font color="#FF0000">*</font></td>
 				<td align="left" id="tdTipoDec">
 					<select name="cmbTipoDec" id="cmbTipoDec" class="combo">
 						<option value=""></option>
 						<?php
-							$sql_tipodec = mysql_query("SELECT codigo, declaracao FROM declaracoes");
-							while(list($codigo_dec,$declaracoes) = mysql_fetch_array($sql_tipodec)){
+							$sql_tipodec = $PDO->query("SELECT codigo, declaracao FROM declaracoes");
+							while(list($codigo_dec,$declaracoes) = $sql_tipodec->fetch()){
 								echo "<option value=\"$codigo_dec\"";if($codigo_dec == $codtipodec){ echo "selected = selected";} echo " id=\"$declaracoes\">$declaracoes</option>";
 							}
 						?>
 					</select>				
                 </td>
-                <td align="left">NFe N&uacute;mero</td>
+                <td align="left">NFe Número</td>
                 <td align="left">
                     <?php
-                        $sqlValidaNumNota = mysql_query("SELECT COUNT(codigo) FROM notas WHERE codemissor = '$codigo'");
-                        list($validaNumNota) = mysql_fetch_array($sqlValidaNumNota);
+                        $sqlValidaNumNota = $PDO->query("SELECT COUNT(codigo) FROM notas WHERE codemissor = '$codigo'");
+                        list($validaNumNota) = $sqlValidaNumNota->fetch();
                         if($validaNumNota > 0){
                             $readOnly = "readonly='readonly'";
                         }else{
@@ -384,7 +384,7 @@ input[type*="text"]{
 				<td align="left" style="text-indent:5px">NFe</td>
 				<td colspan="3" align="left">
                     <label for="txtNfe"><input type="checkbox" value="S"  name="txtNfe" id="txtNfe" <?php if(($nfe == 'S') || ($nfe == "s")){echo "checked=\"checked\"";} ?>/>
-					<em>Esta empresa emite Nota Fiscal eletr&ocirc;nica</em></label>
+					<em>Esta empresa emite Nota Fiscal eletrônica</em></label>
                 </td>
 			</tr>
             <tr>
@@ -392,7 +392,7 @@ input[type*="text"]{
                 <td colspan="3" align="left">
                     <label for="chkIsentoIss">
                         <input type="checkbox" value="S" name="chkIsentoIss" id="chkIsentoIss" <?php if(($isentoiss == 'S')||($isentoiss == 's')){echo "checked=\"checked\""; } ?> />
-                        <i>Esta empresa &eacute; isenta de ISS</i>
+                        <i>Esta empresa é isenta de ISS</i>
                     </label>
                 </td>
             </tr>
@@ -401,14 +401,14 @@ input[type*="text"]{
 				<td align="left" style="text-indent:5px">Estado</td>
 				<td colspan="3" align="left">
 					<input type="radio" name="rgEstado" value="A" id="rgEstado_0"  <?php if($estado =='A'){echo "checked=\"checked\"";} ?> />
-					&nbsp;Ativo
+					Ativo
 					<input type="radio" name="rgEstado" value="I" id="rgEstado_1" <?php if($estado =='I'){echo "checked=\"checked\"";} ?>/>
-					&nbsp;Inativo
+					Inativo
                 </td>
 			</tr>
 			<?php }?>
 			<tr>
-				<td colspan="4" align="left">&nbsp;</td>
+				<td colspan="4" align="left"></td>
 			</tr>
 			<tr>
 				<td colspan="4" align="left">
@@ -422,23 +422,23 @@ input[type*="text"]{
 						<?php
 				if(($_POST['CODEMISSOR'])){
 					$COD = $_POST['CODEMISSOR'];	   	
-					$sql=mysql_query("SELECT codigo, nome, cpf FROM cadastro_resp WHERE codemissor = '$COD' AND codcargo <> '$codcargo_gerente' AND codcargo <> '$codcargo_diretor'");
-					$contsocios = mysql_num_rows($sql);
+					$sql=$PDO->query("SELECT codigo, nome, cpf FROM cadastro_resp WHERE codemissor = '$COD' AND codcargo <> '$codcargo_gerente' AND codcargo <> '$codcargo_diretor'");
+					$contsocios = $sql->rowCount();
 					$cont_aux_socios = $contsocios;	  
 					print("<tr>
 							  <td colspan=4 align=left>
-							   <b>Respons&aacute;vel/S&oacute;cio</b>
+							   <b>Responsável/Sócio</b>
 							  </td>
 							 </tr>
 							");
-					while(list($CodigoSocio,$nomesocio,$cpfsocio)=mysql_fetch_array($sql))
+					while(list($CodigoSocio,$nomesocio,$cpfsocio)=$sql->fetch())
 					{
 						print("	    
 						<tr>
 						   <td align=left colspan=4>
 							<input type=hidden name=txtCodigoSocio$contsocios value=$CodigoSocio>
-							Nome&nbsp; <input type=text name=txtnomesocio$contsocios value=\"$nomesocio\" size=40 maxlength=100 class=texto>&nbsp;
-							CPF&nbsp;<input type=text name=txtcpfsocio$contsocios value=$cpfsocio size=14 maxlength=14 class=texto 
+							Nome <input type=text name=txtnomesocio$contsocios value=\"$nomesocio\" size=40 maxlength=100 class=texto>
+							CPF<input type=text name=txtcpfsocio$contsocios value='$cpfsocio' size=14 maxlength=14 class=texto 
 							onkeyup=\"CNPJCPFMsk( this );\">");
 							print("<input type=checkbox name=checkExcluiSocio$contsocios value=$CodigoSocio>Excluir"); 				
 						print("</td>		   
@@ -450,15 +450,15 @@ input[type*="text"]{
 			</tr>
 			<tr>
 				<td colspan="4" align="left">
-					<!-- bot�o que chama a fun��o JS e mostra + um s�cio-->
-					<input type="button" value="Adicionar Respons&aacute;vel/S&oacute;cio" name="btAddSocio" class="botao" onclick="incluirSocio()" />
+					<!-- bot�o que chama a função JS e mostra + um s�cio-->
+					<input type="button" value="Adicionar Responsável/Sócio" name="btAddSocio" class="botao" onclick="incluirSocio()" />
 					<font color="#FF0000">*</font></td>
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
 					<!--CAMPO S�CIOS --------------------------------------------------------------------------->
 					<table width="100%" border="0" cellspacing="1" cellpadding="2">
-						<?php include("socios.php")?>
+						<?php require_once("socios.php")?>
 					</table>
 					<!-- CAMPO S�CIOS FIM -->				</td>
 			</tr>
@@ -469,23 +469,23 @@ input[type*="text"]{
 				<table width="100%" border="0" cellspacing="1" cellpadding="2" id="tblServicos">
 					<tr>
 						<td align="left" colspan="4">
-                                                    <b>Servi&ccedil;os</b> <br />						</td>					
+                                                    <b>Serviços</b> <br />						</td>					
 						<td></td>
 					</tr>
 					<!---------------- LISTAGEM DOS SERVICOS A SEREM EDITADOS ------------------------------------------------------->
 					<?php
 					  $COD = $_POST['CODEMISSOR'];
-					  $sql_servicos=mysql_query("
+					  $sql_servicos=$PDO->query("
 					  SELECT cadastro_servicos.codigo,servicos.codigo,servicos.codservico,servicos.descricao,servicos.aliquota, servicos.codcategoria 
 					  FROM servicos
 					  INNER JOIN cadastro_servicos ON servicos.codigo = cadastro_servicos.codservico
 					  WHERE cadastro_servicos.codemissor = '$COD'");
 					  
-					 $contservicos = mysql_num_rows($sql_servicos);
+					 $contservicos = $sql_servicos->rowCount();
 					 $cont_aux_servicos = $contservicos;
 					 $numservicos = $contservicos;
 					 ?>
-					<?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota,$CodCateg)=mysql_fetch_array($sql_servicos))
+					<?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota,$CodCateg)=$sql_servicos->fetch())
 					  {
 						print("	 
 						 <tr>	
@@ -493,15 +493,15 @@ input[type*="text"]{
 							 <input type=hidden value=$codigo_empresas_servicos name=servico$contservicos >	
 							 <select name=cmbEditaServico$contservicos style=width:400px;>
 							   <option value=$codigo>$codservico | $descricao | $aliquota</option>");	
-							   	$sql_all_servicos=mysql_query("SELECT codigo,codservico,descricao,aliquota FROM servicos WHERE estado= 'A' AND codcategoria = '$CodCateg'");
-							  while(list($CODigo,$CODservico,$Descricao,$Aliquota)=mysql_fetch_array($sql_all_servicos))			    
+							   	$sql_all_servicos=$PDO->query("SELECT codigo,codservico,descricao,aliquota FROM servicos WHERE estado= 'A' AND codcategoria = '$CodCateg'");
+							  while(list($CODigo,$CODservico,$Descricao,$Aliquota)=$sql_all_servicos->fetch())			    
 							  {
 							   if ($codigo != $CODigo)
 							   {
 								print("<option value=$CODigo>$CODservico |$Descricao | $Aliquota</option>");
 							   }
 							  }	
-						print("</select>&nbsp;");
+						print("</select>");
 							   print("<input type=checkbox name=checkExcluiServico$contservicos value=$codigo>Excluir");
 					  print("</td>		  	  
 						  </tr> ");
@@ -512,20 +512,20 @@ input[type*="text"]{
 			
 			<tr id="trBotao">
 				<td colspan="4" align="left">
-					<!-- bot�o que chama a fun��o JS e mostra + um servi�o-->
-                                        <input type="button" value="Adicionar Servi&ccedil;os" name="btAddServicos" class="botao" onclick="incluirServico()" />
+					<!-- bot�o que chama a função JS e mostra + um serviço-->
+                                        <input type="button" value="Adicionar Serviços" name="btAddServicos" class="botao" onclick="incluirServico()" />
 					<font color="#FF0000">*</font></td>
 			</tr>
 			<tr id="trCombos">
 				<td colspan="4" align="center">
 					<!--CAMPO SERVICOS -->
 					<table width="100%" border="0" cellspacing="1" cellpadding="2">
-						<?php include("servicos.php")?>
+						<?php require_once("servicos.php")?>
 					</table>
 					<!-- CAMPO SERVICOS FIM -->				</td>
 			</tr>
             <tr>
-                <td colspan="4" align="right"><strong><font color="#FF0000">*</font> Campos Obrigat&oacute;rios</strong></td>
+                <td colspan="4" align="right"><strong><font color="#FF0000">*</font> Campos Obrigatórios</strong></td>
          	</tr>
 		</table>
 		</fieldset>
@@ -560,7 +560,7 @@ input[type*="text"]{
 		<td align="right" background="img/form/rodape_fundo.jpg"><img src="img/form/rodape_cantodir.jpg" /></td>
 	</tr>
 </table>
-<!-- Formul�rio de inser��o de servi�os Fim-->
+<!-- Formulário de inserção de serviços Fim-->
 <script>
 	if(document.getElementById('cmbCodtipo')){
 		alternaCampos('cmbCodtipo');

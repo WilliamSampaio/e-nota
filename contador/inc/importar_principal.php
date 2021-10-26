@@ -24,7 +24,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Solicita&ccedil;&atilde;o de RPS</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">SolicitaÃ§Ã£o de RPS</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -43,7 +43,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<?php
 				if(isset($_POST['btSolicitarRPS'])){
 					if($_POST['btSolicitarRPS'] == "Solicitar RPS"){
-						include("solicitar_rps.php");
+						require_once("solicitar_rps.php");
 					}
 				}
 				
@@ -53,7 +53,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				}else{
 					$ultimoRPS = 0;
 					$limiteRPS = 0;
-					$mensagem  = "Faça uma solicitação de RPS";
+					$mensagem  = "Faï¿½a uma solicitaï¿½ï¿½o de RPS";
 				}
 				
 				
@@ -61,7 +61,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				if(mysql_num_rows($sql_testa_solicitacao)){
 					$disabled = "disabled=\"disabled\"";
 					$styleSpan = "";
-					$mensagem = "Aguarde liberação da prefeitura";
+					$mensagem = "Aguarde liberaï¿½ï¿½o da prefeitura";
 				}else{
 					$disabled = "";
 					if($limiteRPS > 0){
@@ -103,7 +103,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Arquivo para Importa&ccedil;&atilde;o</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Arquivo para ImportaÃ§Ã£o</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -129,9 +129,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 			$sql_ultimanota = mysql_query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$codLogado'");
 			list($ultimanota,$notalimite)=mysql_fetch_array($sql_ultimanota);
 			$proximaNota = $ultimanota + 1;
-			//Verifica se o prestador pode ou não emitir notas
+			//Verifica se o prestador pode ou nÃ£o emitir notas
 			if(($proximaNota > $notalimite) && ($notalimite != 0)){ 
-			  echo "<center><font color=\"#000000\"><b>Voc&ecirc; excedeu o limite de AIDFe, por favor solicite um limite maior!</b></font></center>";
+			  echo "<center><font color=\"#000000\"><b>VocÃª excedeu o limite de AIDFe, por favor solicite um limite maior!</b></font></center>";
 			?>
 			
 			<?php		
@@ -147,7 +147,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							$restante = $notalimite - $ultimanota;
 					?>
 					<tr>
-						<td align="left"><font color="#FF0000">Você ainda pode gerar:</font> </td>
+						<td align="left"><font color="#FF0000">VocÃª ainda pode gerar:</font> </td>
 						<td align="left"><b><?php echo $restante;?></b> <font color="#FF0000"><?php if($restante == 1){ echo "nota"; }else{ echo "notas";}?></font>.</td>
 					</tr>
 					<?php
@@ -184,7 +184,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Gerar Relat&oacute;rio</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Gerar RelatÃ³rio</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -207,13 +207,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<input name="codLogado" type="hidden" value="<?php echo $codLogado;?>" />
     <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">
         <tr>
-            <td align="left" width="30%"> Defina o período: </td>
+            <td align="left" width="30%"> Defina o perï¿½odo: </td>
             <td align="left" width="70%">
                 <select name="cmbMes" class="combo">
-                    <option value=""> selecione m&ecirc;s </option>
+                    <option value=""> selecione mÃªs </option>
                     <option value="01">janeiro</option>
                     <option value="02">fevereiro</option>
-                    <option value="03">mar&ccedil;o</option>
+                    <option value="03">marÃ§o</option>
                     <option value="04">abril</option>
                     <option value="05">maio</option>
                     <option value="06">junho</option>
@@ -239,7 +239,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             </td>
         </tr>
         <td colspan="2" align="center">
-                <input name="btGerarRelatorio" type="submit" class="botao" id="btGerarRelatorio" value="Gerar Relat&oacute;rio">
+                <input name="btGerarRelatorio" type="submit" class="botao" id="btGerarRelatorio" value="Gerar RelatÃ³rio">
             </td>
         </tr>
     </table>
@@ -256,7 +256,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Padr&atilde;o XML</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">PadrÃ£o XML</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -275,7 +275,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">
     <tr>
-        <td align="center"> Documento referencial do arquivo XML, para importa&ccedil;&atilde;o do Sistema NF-e da Prefeitura Municipal.<br />
+        <td align="center"> Documento referencial do arquivo XML, para importaÃ§Ã£o do Sistema NF-e da Prefeitura Municipal.<br />
             <br />
             <a href="xml/padraoxml.pdf" target="_blank">Download</a> </td>
     </tr>
@@ -296,7 +296,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Impress&atilde;o de RPS</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">ImpressÃ£o de RPS</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>

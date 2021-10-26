@@ -22,7 +22,7 @@
 		<td colspan="2">
 			<span class="style1">
 				<center>
-					<p>RELAT&Oacute;RIO DE NOTAS INCONSIST&Ecirc;NCIAS </p>
+					<p>RELATÃ“RIO DE NOTAS INCONSIST&Ecirc;NCIAS </p>
 					<p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 					<p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 				</center>
@@ -111,11 +111,11 @@ if(!$codprestador){
 	
 	}
 	
-    $sql_lista = mysql_query($query);
+    $sql_lista = $PDO->query($query);
 	//cria a lista de campos	
-	if(mysql_num_rows($sql_lista)){
+	if($sql_lista->rowCount()){
 		?>
-		<center><strong>Foram encontrado(s) <?php echo mysql_num_rows($sql_lista);?> resultado(s)</strong></center>
+		<center><strong>Foram encontrado(s) <?php echo $sql_lista->rowCount() ?> resultado(s)</strong></center>
 		<table width="95%" border="2" cellspacing="0" class="tabela">
 			<tr bgcolor="#999999">
 				<td width="4%" align="center">CNPJ</td>
@@ -124,9 +124,9 @@ if(!$codprestador){
 				if($tipo == "3"){
 				?>
 				<td width="4%" align="center">Data</td>
-				<td width="6%" align="center">N&deg; Nota</td>
+				<td width="6%" align="center">NÂº Nota</td>
 				<td width="6%" align="center">Valor (R$)</td>
-				<td width="25%" align="center">Inconsistência(s)</td>
+				<td width="25%" align="center">Inconsistï¿½ncia(s)</td>
 				<?php
 				}else{
 				?>
@@ -138,9 +138,12 @@ if(!$codprestador){
 				?>
 			</tr>
 		<?php
-		while(list($codigo, $codemissor, $data, $numero, $valor, $iss, $codverificacao, $totalTomada, $issTomada, $codverificacaoTomada) = mysql_fetch_array($sql_lista)){
-			$sql_busca_info_emissor = mysql_query("SELECT nome, razaosocial, cnpj, cpf FROM cadastro WHERE codigo = $codemissor");
-			list($nome, $razao, $cnpj, $cpf) = mysql_fetch_array($sql_busca_info_emissor);
+		while(
+			list(
+				$codigo, $codemissor, $data, $numero, $valor, $iss, $codverificacao, $totalTomada, 
+				$issTomada, $codverificacaoTomada) = $sql_lista->fetch()){
+			$sql_busca_info_emissor = $PDO->query("SELECT nome, razaosocial, cnpj, cpf FROM cadastro WHERE codigo = $codemissor");
+			list($nome, $razao, $cnpj, $cpf) = $sql_busca_info_emissor->fetch();
 			if(!$razao){
 				$nome_prestador = $nome;
 			}else{
@@ -157,7 +160,7 @@ if(!$codprestador){
 			}
 			
 			if($codverificacao != $codverificacaoTomada){
-				$inconsistencia[] = "Codigo de verificação incorreto";
+				$inconsistencia[] = "Codigo de verificaÃ§Ã£o incorreto";
 			}
 			
 			if($iss != $issTomada){
@@ -169,7 +172,7 @@ if(!$codprestador){
 		?>
 			<tr bgcolor="#FFFFFF">
 				<td align="center"><?php echo $cnpjcpf;?></td>
-				<td align="left" title="<?php echo nome_prestador;?>"><?php echo $nome_curto;?></td>
+				<td align="left" title="<?php echo $nome_prestador ?>"><?php echo $nome_curto;?></td>
 				<td align="center"><?php echo DataPt($data);?></td>
 				<?php 
 				if($tipo == "3"){
@@ -217,7 +220,7 @@ if(!$codprestador){
 					cadastro.nome				
 			");
 			
-			$inconsistencia = "Nota não foi declarada pelo tomador";
+			$inconsistencia = "Nota nÃ£o foi declarada pelo tomador";
 		  break;
 		case 2:
 			$query = ("
@@ -240,7 +243,7 @@ if(!$codprestador){
 				ORDER BY
 					cadastro.nome				
 			");
-			$inconsistencia = "Nota não foi emitida pelo prestador";
+			$inconsistencia = "Nota nÃ£o foi emitida pelo prestador";
 		  break;
 		case 3:
 			$query = ("
@@ -277,25 +280,25 @@ if(!$codprestador){
 			");
 		  break;
 	}
-	$sql_lista = mysql_query($query);
-	if(mysql_num_rows($sql_lista)){
+	$sql_lista = $PDO->query($query);
+	if($sql_lista->rowCount()){
 	?>
-	<center><strong>Foram encontrado(s) <?php echo mysql_num_rows($sql_lista);?> resultado(s)</strong></center>
+	<center><strong>Foram encontrado(s) <?php echo $sql_lista->rowCount() ?> resultado(s)</strong></center>
 	<table width="95%" border="2" cellspacing="0" class="tabela">
 		<tr bgcolor="#999999">
 			<td width="11%" align="center">CNPJ</td>
 			<td width="38%" align="center">Emissor</td>
 			<td width="6%" align="center">Data</td>
-			<td width="5%" align="center">N&deg; nota</td>
+			<td width="5%" align="center">NÂº nota</td>
 			<td width="10%" align="center">Valor (R$)</td>
-            <td width="8%" align="center">Situaçao</td>
-			<td width="30%" align="center">Inconsistência(s)</td>
+            <td width="8%" align="center">Situaï¿½ao</td>
+			<td width="30%" align="center">Inconsistï¿½ncia(s)</td>
 		</tr>
 	
 		<?php
-		while($dadosImprimir = mysql_fetch_object($sql_lista)){
-			$sql_busca_info_emissor = mysql_query("SELECT nome, razaosocial, cnpj, cpf FROM cadastro WHERE codigo = '{$dadosImprimir->codemissor}'");
-			list($nome, $razao, $cnpj, $cpf) = mysql_fetch_array($sql_busca_info_emissor);
+		while($dadosImprimir = $sql_lista->fetchObject()){
+			$sql_busca_info_emissor = $PDO->query("SELECT nome, razaosocial, cnpj, cpf FROM cadastro WHERE codigo = '{$dadosImprimir->codemissor}'");
+			list($nome, $razao, $cnpj, $cpf) = $sql_busca_info_emissor->fetch();
 			if(!$razao){
 				$nome_prestador = $nome;
 			}else{
@@ -329,7 +332,7 @@ if(!$codprestador){
 	?>
 		<table width="95%" border="2" cellspacing="0" class="tabela">
 			<tr>
-				<td align="center">Não foram encontradas notas para esta competencia</td>
+				<td align="center">NÃ£o foram encontradas notas para esta competencia</td>
 			</tr>
 		</table>
 	<?php

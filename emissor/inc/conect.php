@@ -23,11 +23,11 @@ require_once dirname(__FILE__).'/../../include/config.php';
 
 // Conectar ao banco de dados das prefeituras
 // $conectar_pref = mysql_connect($HOST,$USUARIO, $SENHA); 
-// if (!$conectar_pref) { die('N&atilde;o foi poss&iacute;vel conectar: ' . mysql_error()); } 
+// if (!$conectar_pref) { die('Não foi possível conectar: ' . mysql_error()); } 
 
 // Seleciona o banco de dados
 // $db_selected_pref = mysql_select_db($BANCO, $conectar_pref);
-// if (!$db_selected_pref) {die ('N&atilde;o foi poss&iacute;vel acessar a base: ' . mysql_error());}
+// if (!$db_selected_pref) {die ('Não foi possível acessar a base: ' . mysql_error());}
 /*
 if($dadospref!=true){
 	//mysql_close($conectar);

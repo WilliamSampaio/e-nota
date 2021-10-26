@@ -3,8 +3,8 @@
 <body>
 <center><input type="button" value="Imprimir" onClick="javascript:window.print()"></center>
 <?php 
-	include("../../include/conect.php");
-	include("../../funcoes/util.php");
+	require_once("../../include/conect.php");
+	require_once("../../funcoes/util.php");
 	
 	//$notas = $_POST['hdNota'];
 	
@@ -117,7 +117,7 @@
 			}else echo "sem imagem";
 			?>
 			</td>
-			<td colspan="4" class="titulo1" align="center">PRESTADOR DE SERVI&Ccedil;OS</td>
+			<td colspan="4" class="titulo1" align="center">PRESTADOR DE SERVIÇOS</td>
             <td rowspan="7" width="120" align="center">
 			<?php
 			if($CONF_BRASAO ==NULL) {echo 'sem imagem';} else {echo "<img src=\"../../img/brasoes/".rawurlencode($CONF_BRASAO)."\" width=\"120\" height=\"120\"/>";}; ?>
@@ -125,21 +125,21 @@
             </tr>
             <tr>
 			<td align="left" class="field1">CNPJ/CPF: </td><td><?php print $empresa_cnpj.$empresa_cpf; ?></td>
-			<td align="left" class="field1">Inscri&ccedil;&atilde;o Estadual:</td><td><?php print verificaCampo($empresa_inscrestadual); ?></td>
+			<td align="left" class="field1">Inscrição Estadual:</td><td><?php print verificaCampo($empresa_inscrestadual); ?></td>
 		  </tr>
 		  <tr>
 			<td align="left" class="field1">Nome:</td><td><?php print $empresa_razaosocial; ?></td>
-			<td align="left" class="field1">Inscri&ccedil;&atilde;o Municipal:</td><td><?php print verificaCampo($empresa_inscrmunicipal); ?></td>
+			<td align="left" class="field1">Inscrição Municipal:</td><td><?php print verificaCampo($empresa_inscrmunicipal); ?></td>
 		  </tr>
 		  <tr>
-			<td align="left" class="field1">Raz&atilde;o Social:</td><td><?php echo $empresa_nome; ?></td>
+			<td align="left" class="field1">Razão Social:</td><td><?php echo $empresa_nome; ?></td>
             <td align="left" class="field1">PIS/PASEP:</td><td><?php echo verificaCampo($cadastropispasep); ?></td>
 		  </tr>
 		  <tr>
-			<td align="left" class="field1">Endere&ccedil;o:</td><td colspan="3"><?php print $empresa_endereco; if($empresa_numero != '')echo ", $empresa_numero"; ?></td>
+			<td align="left" class="field1">Endereço:</td><td colspan="3"><?php print $empresa_endereco; if($empresa_numero != '')echo ", $empresa_numero"; ?></td>
 		  </tr>
 		  <tr>
-			<td align="left" class="field1">Munic&iacute;pio:</td><td><?php print $empresa_municipio; ?></td>
+			<td align="left" class="field1">Município:</td><td><?php print $empresa_municipio; ?></td>
 			<td align="left" class="field1">UF:</td><td><?php print $empresa_uf; ?></td>
 		  </tr>
 		</table>
@@ -149,9 +149,9 @@
     
     <div id="divTotais">
         <table align="center" border="1" cellspacing="5" cellpadding="5">
-        	<th align="center" colspan="2"><b>Informa&ccedil;&otilde;es</b></th>
+        	<th align="center" colspan="2"><b>Informações</b></th>
         	<tr>
-            	<td class="field1">Per&iacute;odo</td>
+            	<td class="field1">Período</td>
                 <td><?php echo $periodo;  ?></td>
             </tr>
            <tr>
@@ -167,24 +167,24 @@
         <td colspan="12" align="center" class="titulo1">NOTAS FISCAIS ELETR&Ocirc;NICAS EMITIDAS </td>
         </tr>
       <tr>
-        <td colspan="3" align="center" class="field2">NFEletr&ocirc;nica</td>
+        <td colspan="3" align="center" class="field2">NFEletrônica</td>
         <td colspan="2" align="center" class="field2">Tomador</td>
-        <td colspan="3" align="center" class="field2">Servi&ccedil;os</td>
-        <td colspan="2" align="center" class="field2">Imposto Pr&oacute;prio </td>
+        <td colspan="3" align="center" class="field2">Serviços</td>
+        <td colspan="2" align="center" class="field2">Imposto Próprio </td>
         <td colspan="2" align="center" class="field2">Imposto Retido </td>
       </tr>
       <tr align="center">
         <td width="5%">Data</td>
-        <td width="3%">N&uacute;mero</td>
+        <td width="3%">Número</td>
         <td width="3%">Estado</td>
         <td width="12%">CNPJ/CPF</td>
         <td width="12%">Inscr. Municipal </td>
-        <td width="6%">C&oacute;d. Servi&ccedil;o </td>
-        <td width="6%">Valor Servi&ccedil;os </td>
-        <td width="6%">Valor L&iacute;quido </td>
-        <td width="10%">Base C&aacute;lculo </td>
+        <td width="6%">Cód. Serviço </td>
+        <td width="6%">Valor Serviços </td>
+        <td width="6%">Valor Líquido </td>
+        <td width="10%">Base Cálculo </td>
         <td width="6%">Valor ISS </td>
-        <td width="12%">Base C&aacute;lculo </td>
+        <td width="12%">Base Cálculo </td>
         <td width="17%">Valor ISS </td>
       </tr>
     

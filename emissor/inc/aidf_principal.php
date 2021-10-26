@@ -22,14 +22,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($btSolicitar!="")
 		{
 			$sql=$PDO->query("INSERT INTO aidfe_solicitacoes SET solicitante = '$CODIGO_DA_EMPRESA'");
-			echo "<script>alert('Uma solicita��o de aumento de AIDF foi enviada &agrave; prefeitura!');</script>";
+			echo "<script>alert('Uma solicitação de aumento de AIDF foi enviada à prefeitura!');</script>";
 			add_logs('Solicitou um aumento no AIDF');
 		}
 	$sql=$PDO->query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 	list($ultimanota,$notalimite)=$sql->fetch();
 	if($notalimite==0){$notalimite="Liberado";}
 	
-	//faz a verifica��o se ja foi pedido um aumento no aidfe
+	//faz a verificação se ja foi pedido um aumento no aidfe
 	$sql_aidfe = $PDO->query("SELECT codigo FROM aidfe_solicitacoes WHERE solicitante = '$CODIGO_DA_EMPRESA'");
 	$numero_de_solicitacoes = $sql_aidfe->rowCount();
 ?>
@@ -37,7 +37,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">AIDF Eletr�nico</td>
+	  <td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">AIDF Eletrônico</td>
       <td width="470" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -56,7 +56,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <table align="center" width="100%">
     <tr align="left" bgcolor="#FFFFFF">
-        <td>N&uacute;mero da &uacute;ltima nota emitida:</td>
+        <td>Número da última nota emitida:</td>
         <td><?php echo $ultimanota; ?></td>
     </tr>
     <tr align="left" bgcolor="#FFFFFF">
@@ -72,7 +72,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <?php if($numero_de_solicitacoes>0){ echo "disabled=disabled";} ?>> 
                 <?php 
                     if($numero_de_solicitacoes>0){ 
-                        echo "<b>Sua solicita��o ja foi enviada a prefeitura.</b>";
+                        echo "<b>Sua solicitação ja foi enviada a prefeitura.</b>";
                     } 
                 ?>
             </td>

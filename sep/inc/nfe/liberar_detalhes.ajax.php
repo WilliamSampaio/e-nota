@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Detalhes </td>
+		<td background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Detalhes </td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a onclick="document.getElementById('divDetalhes').style.display='none'"><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -35,7 +35,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				//Variavel vinda do arquivo liberar_lista.ajax.php
 				$codigo = $_GET['cod'];
 				
-				$sql_detalhes = mysql_query("
+				$sql_detalhes = $PDO->query("
 					SELECT 
 						codigo,
 						codtipo,
@@ -61,11 +61,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 						codigo = '$codigo'
 				");
 				if(mysql_num_rows($sql_detalhes)){
-					$cadastro = mysql_fetch_array($sql_detalhes);
+					$cadastro = $sql_detalhes->fetch();
 					
 					//Pega o nome por exetenso do tipo da tabela tipo
-					$sql_tipo = mysql_query("SELECT nome FROM tipo WHERE codigo = '{$cadastro['codtipo']}'");
-						$tipo = mysql_fetch_array($sql_tipo);
+					$sql_tipo = $PDO->query("SELECT nome FROM tipo WHERE codigo = '{$cadastro['codtipo']}'");
+						$tipo = $sql_tipo->fetch();
 				?>
 					<table width="100%" cellpadding="5" style="border:medium; border-bottom-color:#000000;">
 						<tr bgcolor="#FFFFFF">
@@ -73,7 +73,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td colspan="5"><?php echo $cadastro['nome'];?></td>
 						</tr>
 						<tr bgcolor="#FFFFFF">
-							<td><b>Razão Social:</b></td>
+							<td><b>RazÃ£o Social:</b></td>
 							<td colspan="5"><?php echo $cadastro['razaosocial'];?></td>
 						</tr>
 						<tr bgcolor="#FFFFFF">
@@ -91,7 +91,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td colspan="5"><?php echo $cadastro['logradouro'];?></td>
 						</tr>
 						<tr bgcolor="#FFFFFF">
-							<td><b>Número: </b></td>
+							<td><b>NÃºmero: </b></td>
 							<td><?php echo $cadastro['numero'];?></td>
 							<td><b>Complemento: </b></td>
 							<td><?php echo verificacampo($cadastro['complemento']);?></td>
@@ -127,12 +127,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 								<input name="btRemover" type="button" value="Remover pedido*" class="botao" 
 								onclick="removerCadastro('<?php echo $codigo;?>','divlistanfe');" />
 							</td>
-							<td colspan="4" align="right"><font color="#FF0000">*</font>Removerá o cadastro</td>
+							<td colspan="4" align="right"><font color="#FF0000">*</font>Removerï¿½ o cadastro</td>
 						</tr>
 					</table>
 				<?php
 				}else{
-					echo "<b>Não foram encontrados detalhes sobre este cadastro!<b>";
+					echo "<b>NÃ£o foram encontrados detalhes sobre este cadastro!<b>";
 				}
 			?>
 		</td>

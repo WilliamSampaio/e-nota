@@ -20,11 +20,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
-// arquivo de conex�o com o banco
-include("../include/conect.php");
+// arquivo de conexão com o banco
+require_once("../include/conect.php");
 
 // arquivo com funcoes uteis
-include("../funcoes/util.php");
+require_once("../include/util.php");
 //print("<a href=index.php target=_parent><img src=../img/topos/$TOPO></a>");
 
 ?>
@@ -43,14 +43,14 @@ include("../funcoes/util.php");
 <body>
 	<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
 		<tr>
-			<td><?php include("inc/topo.php"); ?></td>
+			<td><?php require_once 'inc/navbar.php'; ?></td>
 		</tr>
 		<tr>
 			<td bgcolor="#FFFFFF" height="400" valign="top" align="center">
 
 				<table height="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
-						<td align="left" background="../img/menus/menu_fundo.jpg" valign="top" width="170"><?php include("inc/menu.php"); ?></td>
+						<td align="left" background="../img/menus/menu_fundo.jpg" valign="top" width="170"><?php require_once("inc/menu.php"); ?></td>
 						<td align="right" valign="top" width="590">
 
 							<form method="post" name="frmRecuperarSenha" onsubmit="return (ValidaFormulario('txtCNPJ','cnpj') && ValidaFormulario('txtEmail','senha'));">
@@ -78,7 +78,7 @@ include("../funcoes/util.php");
 													<td width="19%" align="left">CNPJ/CPF</td>
 													<td width="81%" align="left" valign="middle"><em>
 															<input class="texto" type="text" title="CNPJ" name="txtCNPJ" id="txtCNPJ" />
-															Somente n&uacute;meros</em></td>
+															Somente números</em></td>
 												</tr>
 												<tr>
 													<td align="left">Email</td>
@@ -87,8 +87,8 @@ include("../funcoes/util.php");
 													</td>
 												</tr>
 												<tr>
-													<td align="center">&nbsp;</td>
-													<td align="left" valign="middle"><input type="submit" value="Avan�ar" class="botao" /></td>
+													<td align="center"></td>
+													<td align="left" valign="middle"><input type="submit" value="Avançar" class="botao" /></td>
 												</tr>
 											</table>
 
@@ -109,14 +109,14 @@ include("../funcoes/util.php");
 					$email_confirmacao = $_POST['txtEmail'];
 					$sql = $PDO->query("SELECT nome, email FROM cadastro WHERE (cnpj='$cnpj' OR cpf='$cnpj')");
 					if (!$sql->rowCount()) {
-						Mensagem("CNPJ/CPF n�o cadastrado! Favor verificar");
+						Mensagem("CNPJ/CPF não cadastrado! Favor verificar");
 						Redireciona("recuperarsenha.php");
 					}
 
 					list($nome, $email) = $sql->fetch();
 
 					if ($email != $email_confirmacao) {
-						Mensagem("Email n�o confere com o cadastrado!");
+						Mensagem("Email não confere com o cadastrado!");
 						Redireciona("recuperarsenha.php");
 					} else {
 						$senha = rand(000000, 999999);
@@ -143,8 +143,8 @@ include("../funcoes/util.php");
 			</td>
 		</tr>
 	</table>
-	<?php include("inc/rodape.php"); ?>
-	<?php include("inc/teclado.php"); ?>
+	<?php require_once("inc/rodape.php"); ?>
+	<?php require_once("inc/teclado.php"); ?>
 </body>
 
 </html>

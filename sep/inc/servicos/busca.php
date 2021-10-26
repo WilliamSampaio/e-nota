@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-//Recebe as variaveis do formul·rio
+//Recebe as variaveis do formul√°rio
 $buscadescservicos = $_POST['txtBuscaDescServicos'];
 $buscacodservicos =  $_POST['txtBuscaCodServicos'];
 $buscacategoria=$_POST['cmbCategorias'];
@@ -71,7 +71,7 @@ if($estado){
 if($sql_where){
 	$sql_where="WHERE ".implode($sql_where," AND ");
 }
-$sql=mysql_query("
+$sql=$PDO->query("
 				SELECT
 					estado,
 					codservico,
@@ -88,14 +88,14 @@ $sql=mysql_query("
 				");
 if(mysql_num_rows($sql)>0){
 ?> 
-<!-- cabeÁalho da pesquisa --> 
+<!-- cabeÔøΩalho da pesquisa --> 
 <fieldset><legend>Resultado da Pesquisa</legend>      
 <input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
 <input type="hidden" name="COD" id="COD" />
  <table width="100%" border="0" cellpadding="0" cellspacing="0" >  
   <tr>
-    <td align="center"><b>C&oacute;digo</b></td>
-    <td align="center"><b>Servi&ccedil;o</b></td>
+    <td align="center"><b>C√≥digo</b></td>
+    <td align="center"><b>Servi√ßo</b></td>
     <td align="center"><b>Aliq %</b></td>
 	<td align="center"><b>Aliq IR%</b></td>
     <td align="center"><b>Estado</b></td>
@@ -107,8 +107,8 @@ if(mysql_num_rows($sql)>0){
 <?php 
 
 
-while(list($estado,$codservico,$descricao,$aliquota,$aliquotair,$codigo)=mysql_fetch_array($sql)){ 
-	//Renomeia o estado do serviÁo 
+while(list($estado,$codservico,$descricao,$aliquota,$aliquotair,$codigo)=$sql->fetch()){ 
+	//Renomeia o estado do servi√ßo 
 	if($estado == 'A'){
 	 $estado = "Ativo";
 	}
@@ -142,7 +142,7 @@ while(list($estado,$codservico,$descricao,$aliquota,$aliquotair,$codigo)=mysql_f
 	echo "
 		<table width=\"100%\">
 			<tr>
-				<td align=\"center\"><b>N&atilde;o houve resultados</b></td>
+				<td align=\"center\"><b>N√£o houve resultados</b></td>
 			</tr>
 		</table>";
 }

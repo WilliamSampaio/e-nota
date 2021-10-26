@@ -19,29 +19,29 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-	include("../../../conect.php");
-	include("../../../../funcoes/util.php");
+	require_once("../../../conect.php");
+	require_once("../../../../funcoes/util.php");
 	
 	//recebe os dados
 	$cnpj = $_GET["txtCNPJ"];
 	
 	//determina o emissor
 	$codtipo = codtipo("instituicao_financeira");
-	$sql_login = mysql_query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj' AND codtipo = '$codtipo'");
-	list($codemissor) = mysql_fetch_array($sql_login);
+	$sql_login = $PDO->query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj' AND codtipo = '$codtipo'");
+	list($codemissor) = $sql_login->fetch();
 	
-	if(mysql_num_rows($sql_login)){
+	if($sql_login->rowCount()){
 		// carrega as regras de multa por ataso
 		listaRegrasMultaDes();
 ?>
 <input type="hidden" value="<?php echo $codemissor;?>" name="CODEMISSOR" id="CODEMISSOR" />
-<p align="center">Escolha o período</p>
+<p align="center">Escolha o perï¿½odo</p>
 <table>
     <tr>
         <td>
     <?php
     //array de meses comencando em 1 ate 12
-    $meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+    $meses=array("1"=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
     $mes = date("n");
     $ano = date("Y");						
     ?>
@@ -72,6 +72,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 <div id="divBuscarGuias"></div>
 <?php
 	}else{
-		echo "<b>Este cnpj não é uma instituição financeira ou não está cadastrado!</b>";
+		echo "<b>Este cnpj nÃ£o Ã© uma instituiï¿½ï¿½o financeira ou nÃ£o estÃ¡ cadastrado!</b>";
 	}
 ?>

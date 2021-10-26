@@ -9,7 +9,7 @@
 	$mes= $_POST['cmbMes'];
 	$ano= $_POST['cmbAno'];
 	if ($mes==date("m") && $ano==date("Y")){
-                Mensagem("O livro s� pode ser gerado ao m�s anterior do atual!");
+                Mensagem("O livro só pode ser gerado ao m�s anterior do atual!");
         }else{
             $dataemissao    = date("Y-m-d");
             $data           = explode("-",$dataemissao);
@@ -74,10 +74,10 @@
 
                     NovaJanela("../livro/imprimirlivrogeral.php?livro=$codlivro");
                     }else{
-                            Mensagem("Para gerar o livro, � preciso ter notas tomadas ou emitidas. A competencia selecionada nao possui nenhuma nota.");
+                            Mensagem("Para gerar o livro, é preciso ter notas tomadas ou emitidas. A competencia selecionada nao possui nenhuma nota.");
                     }
             }else{
-                    Mensagem("Livro deste contribuinte neste per�odo j� foi gerado anteriormente. Informe outro contribuinte ou outro per�odo");
+                    Mensagem("Livro deste contribuinte neste per�odo já foi gerado anteriormente. Informe outro contribuinte ou outro per�odo");
             }
         }
 ?>

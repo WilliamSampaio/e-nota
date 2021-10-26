@@ -30,10 +30,10 @@ while ($cont <= $nrosocios) {
     <td height="1" bgcolor="#CCCCCC"></td>
   </tr>
   <tr id="campossocio<?php echo $cont; ?>" style="display:none">
-    <td align="left" bgcolor="#999999">&nbsp;<?php if ($cont == 1) {
-                                                echo "Nome do Respons�vel<br />";
+    <td align="left" bgcolor="#999999"><?php if ($cont == 1) {
+                                                echo "Nome do Responsável<br />";
                                               } else {
-                                                echo "Nome do S�cio<br>";
+                                                echo "Nome do Sócio<br>";
                                               } ?>
       <input type="text" size="40" maxlength="100" name="txtNomeSocio<?php echo $cont; ?>" id="txtNomeSocio<?php echo $cont; ?>" class="texto" /> CPF
 

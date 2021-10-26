@@ -32,15 +32,15 @@ $aliquotair = $_POST['txtInsAliquotaIR'];
 
 if(($descricao !="") &&($aliquota !="") &&($aliquotair !="")){
   if(is_numeric($aliquota) || is_numeric($aliquotair)){
-	  $sql_codservico = mysql_query("SELECT codigo FROM servicos WHERE codservico = '$codservico'");
-	  $sql_descricao = mysql_query("SELECT codigo FROM servicos WHERE descricao = '$descricao'");
+	  $sql_codservico = $PDO->query("SELECT codigo FROM servicos WHERE codservico = '$codservico'");
+	  $sql_descricao = $PDO->query("SELECT codigo FROM servicos WHERE descricao = '$descricao'");
 	  
 	  if(mysql_num_rows($sql_codservico) > 0){
-	  	print("<script language=JavaScript> alert('Já existe um servico com este código de serviço');</script>"); 
+	  	print("<script language=JavaScript> alert('JÃ¡ existe um servico com este cÃ³digo de serviÃ§o');</script>"); 
 	  }elseif(mysql_num_rows($sql_descricao) > 0){
-		print("<script language=JavaScript> alert('Já existe um servico com esta descrição');</script>"); 	  
+		print("<script language=JavaScript> alert('JÃ¡ existe um servico com esta descriï¿½ï¿½o');</script>"); 	  
 	  }else{
-		  $sql=mysql_query("
+		  $sql=$PDO->query("
 			  INSERT INTO servicos
 				  SET codservico='$codservico',
 				  descricao= '$descricao',
@@ -54,18 +54,18 @@ if(($descricao !="") &&($aliquota !="") &&($aliquotair !="")){
 				  datavenc='$venc',
 				  docfiscal='$docfiscal'
 		  ");
-		  print("<script language=JavaScript> alert('Serviço inserido com sucesso');</script>");   
-		  add_logs('Inseriu novo serviço');	
+		  print("<script language=JavaScript> alert('ServiÃ§o inserido com sucesso');</script>");   
+		  add_logs('Inseriu novo serviÃ§o');	
 	 }	  
   }
   else
   {
-   print("<script language=JavaScript> alert('Ambas aliquotas devem ser preenchidas com números e ponto, verifique exemplo');</script>");
+   print("<script language=JavaScript> alert('Ambas aliquotas devem ser preenchidas com nÃºmeros e ponto, verifique exemplo');</script>");
   }
 }
 else
 {
-  print("<script language=JavaScript> alert('Favor preencher campos obrigatórios');</script>");
+  print("<script language=JavaScript> alert('Favor preencher campos obrigatÃ³rios');</script>");
 }
 
 

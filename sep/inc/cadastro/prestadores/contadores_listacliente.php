@@ -20,8 +20,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php 
 $codcontador=$_POST['COD'];
-$sql_contador=mysql_query("SELECT nome FROM emissores WHERE codigo='$codcontador'");
-list($nome)=mysql_fetch_array($sql_contador);
+$sql_contador=$PDO->query("SELECT nome FROM emissores WHERE codigo='$codcontador'");
+list($nome)=$sql_contador->fetch();
 
 ?>   
    <fieldset><legend>Contador: <font color="#FF0000"><?php echo $nome; ?></font></legend>
@@ -34,13 +34,13 @@ list($nome)=mysql_fetch_array($sql_contador);
 	 <td width="20%" align="center">Cpf/Cnpj</td>
     </tr>	
 	<?php 
-	$sql=mysql_query("SELECT nome,cnpjcpf FROM emissores WHERE codcontador='$codcontador'");
-	while(list($nome,$cpfcnpj)=mysql_fetch_array($sql)) 
+	$sql=$PDO->query("SELECT nome,cnpjcpf FROM emissores WHERE codcontador='$codcontador'");
+	while(list($nome,$cpfcnpj)=$sql->fetch()) 
 	{	
 	 ?>
      <tr> 
 	  <td align="left" bgcolor="#FFFFFF">     
-	    &nbsp;<?php echo $nome; ?>      </td>
+	    <?php echo $nome; ?>      </td>
 	  <td align="center" bgcolor="#FFFFFF"> 
 	    <?php echo $cpfcnpj; ?>
       </td>	  

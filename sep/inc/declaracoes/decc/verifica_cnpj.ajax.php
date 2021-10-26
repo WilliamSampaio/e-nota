@@ -32,10 +32,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 </script>-->
 <?php
-	include("../../conect.php");
-	include("../../../funcoes/util.php");
+	require_once("../../conect.php");
+	require_once("../../../funcoes/util.php");
 	
-	/*$sql_empreiteira=mysql_query("SELECT codigo,
+	/*$sql_empreiteira=$PDO->query("SELECT codigo,
                                   nome,
                                   razaosocial,
                                   logradouro,
@@ -48,7 +48,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                   estado
                                   FROM cadastro
                                   WHERE cnpj='".$_SESSION['login']."'");
-	$dados=mysql_fetch_array($sql_empreiteira);
+	$dados=$sql_empreiteira);
 
     $endereco=$dados['logradouro'];
     $endereco.=" ".$dados['numero'];
@@ -64,7 +64,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<input type="hidden" name="hdCodOrgao" value="<?php echo $dados['codigo']; ?>" />
 	<table width="100%" height="100%" border="0" align="center" cellpadding="5" cellspacing="0">
 		<tr>
-			<td colspan="3" align="left"><strong>Calculo para declaração dos documentos obrigatórios. </strong></td>
+			<td colspan="3" align="left"><strong>Calculo para declaraÃ§Ã£o dos documentos obrigatÃ³rios. </strong></td>
 		</tr>
 		<tr>
 			<td width="15%" align="left" valign="middle">CNPJ:</td>

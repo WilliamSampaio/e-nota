@@ -27,7 +27,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	//recebe o codigo do registro a ser auditado
 	$codigo = $_GET['hdCodSolicitacao'];
 	
-	$sql_info = mysql_query("
+	$sql_info = $PDO->query("
 			SELECT
 				doc_des.codigo,
 				doc_des.codverificacao,
@@ -53,7 +53,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 			WHERE
 				doc_des.codigo = '$codigo'
 	");
-		list($codigo,$codverificacao,$total,$estado,$competencia,$data,$contaoficial,$contacontabil,$titulo,$saldo_mesanterior,$saldo_mesatual,$receita,$aliquota,$iss,$nomeporextenso) = mysql_fetch_array($sql_info);
+		list(
+			$codigo,$codverificacao,$total,$estado,$competencia,$data,$contaoficial,$contacontabil,$titulo,$saldo_mesanterior,
+			$saldo_mesatual,$receita,$aliquota,$iss,$nomeporextenso) = $sql_info->fetch();
 		
 		$nome = ResumeString($nomeporextenso,27);
 		
@@ -71,19 +73,19 @@ Fith Floor, Boston, MA 02110-1301, USA
         <td align="left" colspan="3"><?php echo $titulo;?></td>
     </tr>
     <tr>
-    	<td align="left">Cod. verificação</td>
+    	<td align="left">Cod. verificaÃ§Ã£o</td>
         <td align="left" colspan="3"><?php echo $codverificacao;?></td>
     </tr>
 	<tr>
     	<td align="left">Conta oficial</td>
         <td align="left"><?php echo $contaoficial;?></td>
-        <td align="left">Conta contábil</td>
+        <td align="left">Conta contï¿½bil</td>
         <td align="left"><?php echo $contacontabil;?></td>
     </tr>
     <tr>
-    	<td align="left">Saldo mês anterior</td>
+    	<td align="left">Saldo mï¿½s anterior</td>
         <td align="left"><?php echo "R$ ".DecToMoeda($saldo_mesanterior);?></td>
-        <td align="left">Saldo mês atual</td>
+        <td align="left">Saldo mï¿½s atual</td>
         <td align="left"><?php echo "R$ ".DecToMoeda($saldo_mesatual);?></td>
     </tr>
     <tr>
@@ -91,7 +93,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         <td align="left" colspan="3"><?php echo $competencia;?></td>
     </tr>
     <tr>
-    	<td align="left">Data de geração:</td>
+    	<td align="left">Data de geraÃ§Ã£o:</td>
         <td align="left" colspan="3"><?php echo $data;?></td>
     </tr>
     <tr>
@@ -103,7 +105,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <fieldset><legend>Nota</legend>
 	<table width="100%">
     	<tr bgcolor="#999999">
-        	<td align="center">Número</td>
+        	<td align="center">NÃºmero</td>
             <td align="center">Valor</td>
             <td align="center">Emissor</td>
         </tr>

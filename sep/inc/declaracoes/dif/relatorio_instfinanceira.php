@@ -18,30 +18,30 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<fieldset><legend>Informações sobre as Int. Fiinanceiras</legend>
+<fieldset><legend>Informaï¿½ï¿½es sobre as Int. Fiinanceiras</legend>
     <?php
-        // chama os dados por estado para relatórios mais detalhados
-        $sql_ativas=mysql_query("SELECT razaosocial FROM inst_financeiras WHERE estado='A'");
-        $sql_inativas=mysql_query("SELECT razaosocial FROM inst_financeiras WHERE estado='I'");
-        $sql_nl=mysql_query("SELECT razaosocial FROM inst_financeiras WHERE estado='NL'");
-        $sql_todas=mysql_query("SELECT razaosocial FROM inst_financeiras");
+        // chama os dados por estado para relatï¿½rios mais detalhados
+        $sql_ativas=$PDO->query("SELECT razaosocial FROM inst_financeiras WHERE estado='A'");
+        $sql_inativas=$PDO->query("SELECT razaosocial FROM inst_financeiras WHERE estado='I'");
+        $sql_nl=$PDO->query("SELECT razaosocial FROM inst_financeiras WHERE estado='NL'");
+        $sql_todas=$PDO->query("SELECT razaosocial FROM inst_financeiras");
     ?>
     <table width="30%" align="left">
         <tr align="left">
             <td>Cadastradas:</td>
-            <td><?php echo mysql_num_rows($sql_todas); ?></td>
+            <td><?php echo $sql_todas->rowCount(); ?></td>
         </tr>
         <tr align="left">
             <td>Ativas:</td>
-            <td><?php echo mysql_num_rows($sql_ativas); ?></td>
+            <td><?php echo $sql_ativas->rowCount(); ?></td>
         </tr>
         <tr align="left">
             <td>Inativas:</td>
-            <td><?php echo mysql_num_rows($sql_inativas); ?></td>
+            <td><?php echo $sql_inativas->rowCount(); ?></td>
         </tr>
         <tr align="left">
-            <td>Aguardando Liberação:</td>
-            <td><?php echo mysql_num_rows($sql_nl); ?></td>
+            <td>Aguardando LiberaÃ§Ã£o:</td>
+            <td><?php echo $sql_nl->rowCount(); ?></td>
         </tr>
     </table>
 </fieldset>
@@ -58,7 +58,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     <option value=""></option>
                     <option value="A">Ativos</option>
                     <option value="I">Inativos</option>
-                    <option value="NL">Não Liberados</option>
+                    <option value="NL">NÃ£o Liberados</option>
                 </select>
             </td>
         </tr>
@@ -68,8 +68,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <select name="cmbMunicipio">
                     <option value=""></option>
                     <?php
-                        $sql=mysql_query("SELECT municipio FROM inst_financeiras GROUP BY municipio ORDER BY municipio");
-                        while($dados=mysql_fetch_array($sql)){
+                        $sql=$PDO->query("SELECT municipio FROM inst_financeiras GROUP BY municipio ORDER BY municipio");
+                        while($dados=$sql->fetch()){
                             echo "<option value=\"".$dados['municipio']."\">".$dados['municipio']."</option>";
                         }
                     ?>
@@ -82,8 +82,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <select name="cmbUf">
                     <option value=""></option>
                     <?php
-                        $sql=mysql_query("SELECT uf FROM inst_financeiras GROUP BY uf ORDER BY uf");
-                        while($dados=mysql_fetch_array($sql)){
+                        $sql=$PDO->query("SELECT uf FROM inst_financeiras GROUP BY uf ORDER BY uf");
+                        while($dados=$sql->fetch()){
                             echo "<option value=\"".$dados['uf']."\">".$dados['uf']."</option>";
                         }
                     ?>

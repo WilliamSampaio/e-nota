@@ -19,13 +19,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../conect.php");
+require_once("../conect.php");
 
 //recebimento de variaveis por get
 $codigo = $_GET["hdcod"];
 
-$sql_texto = mysql_query("SELECT texto FROM noticias WHERE codigo = '$codigo'");
-list($texto) = mysql_fetch_array($sql_texto);
+$sql_texto = $PDO->query("SELECT texto FROM noticias WHERE codigo = '$codigo'");
+list($texto) = $sql_texto->fetch();
 ?>
 <fieldset style="background-color:#FFFFFF"><legend>Texto</legend>
     <table width="100%">

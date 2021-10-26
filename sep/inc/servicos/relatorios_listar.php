@@ -22,22 +22,22 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($codservico){
 		$wherecodservico = "WHERE emissores_servicos.codservico='$codservico'";
 	}
-	$sql=mysql_query("SELECT emissores.razaosocial, emissores.endereco, emissores.email FROM emissores INNER JOIN emissores_servicos ON emissores.codigo=emissores_servicos.codemissor $wherecodservico");
+	$sql=$PDO->query("SELECT emissores.razaosocial, emissores.endereco, emissores.email FROM emissores INNER JOIN emissores_servicos ON emissores.codigo=emissores_servicos.codemissor $wherecodservico");
 	if(mysql_num_rows($sql)>0)
 		{
 			?>
-				<fieldset><legend><?php echo mysql_num_rows($sql); ?> Prestadores deste servi&ccedil;o encontrados</legend>	
+				<fieldset><legend><?php echo mysql_num_rows($sql); ?> Prestadores deste serviço encontrados</legend>	
 					<table width="100%">
 						<tr bgcolor="#999999">
 							<td width="33%">Emissor</td>
-							<td width="33%">Endere&ccedil;o</td>
+							<td width="33%">Endereço</td>
 							<td width="33%">E-mail</td>
 						</tr>
 					</table>
 					<div id="detalhes" style="height:250px; overflow:auto;">
 						<table width="100%">
 							<?php
-								while(list($razaosocial,$endereco,$email)=mysql_fetch_array($sql))
+								while(list($razaosocial,$endereco,$email)=$sql->fetch())
 									{
 										echo "
 											<tr bgcolor=\"#FFFFFF\">
@@ -55,6 +55,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 		}
 	else
 		{
-			echo "Nenhum prestador deste servi&ccedil;o encontrado!";
+			echo "Nenhum prestador deste serviço encontrado!";
 		}		
 	?>

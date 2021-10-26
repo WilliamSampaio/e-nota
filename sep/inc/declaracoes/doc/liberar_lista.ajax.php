@@ -26,8 +26,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if(isset($_GET["hdCodSolicitacao"])){
 		//Ativa os usuarios mudando no banco de NL para A
 		$codigo = $_GET["hdCodSolicitacao"];
-		mysql_query("UPDATE cadastro SET estado = 'A' WHERE codigo = '$codigo'");
-		add_logs('Atualizou uma Solicitação: Ativada');
+		$PDO->query("UPDATE cadastro SET estado = 'A' WHERE codigo = '$codigo'");
+		add_logs('Atualizou uma Solicitaï¿½ï¿½o: Ativada');
 		//Mensagem("Cadastro ativado");
 	}
 
@@ -38,17 +38,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 	}
 	$query = ("SELECT codigo, nome, cnpj FROM cadastro WHERE estado = 'NL' AND codtipo = '8' $string ORDER BY nome");
 	$sql_pedidos = Paginacao($query,'frmLiberarDoc','divlistadoc',15);
-	if(mysql_num_rows($sql_pedidos)>0){
+	if($sql_pedidos->rowCount()>0){
 ?>
 	<table width="100%">
         <tr bgcolor="#999999">
-            <td width="260" align="center">Número do Documento</td>
+            <td width="260" align="center">NÃºmero do Documento</td>
             <td width="622" align="center">Nome</td>
             <td width="179" align="center">Cnpj</td>
             <td width="76" align="center"></td>
         </tr>
 		<?php
-			while(list($codigo,$nome,$cnpj,$estado) = mysql_fetch_array($sql_pedidos)){
+			while(list($codigo,$nome,$cnpj,$estado) = $sql_pedidos->fetch()){
 		?>
 		<tr bgcolor="#FFFFFF">
 			<td width="260" align="center"><?php echo $codigo;?></td>
@@ -70,7 +70,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			echo "
 				<table width=\"\">
 					<tr>
-						<td align=\"center\">Não há solicitações de ativação</td>
+						<td align=\"center\">NÃ£o hÃ¡ solicitaï¿½ï¿½es de ativaï¿½ï¿½o</td>
 					</tr>
 				</table>
 			";

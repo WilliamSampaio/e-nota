@@ -76,7 +76,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <title>Imprimir</title><input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
 	<table width="850">
     	<tr>
-        	<td><b><font size="4">Relatório de Declarações</font></b></td>
+        	<td><b><font size="4">Relatï¿½rio de DeclaraÃ§Ãµes</font></b></td>
         </tr>
         <?php
 			if($nome){
@@ -96,17 +96,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 		if(($compmes)&&($compano)){
 		?>
 		<tr>
-			<td><b>Competência:</b> <?php echo "$compmes/$compano"; ?></td>
+			<td><b>CompetÃªncia:</b> <?php echo "$compmes/$compano"; ?></td>
 		</tr>
 		<?php
 		}else{
 			if($compmes){ ?>
 		<tr>
-			<td><b>Mês de competência:</b> <?php echo $compmes; ?></td>
+			<td><b>Mï¿½s de competï¿½ncia:</b> <?php echo $compmes; ?></td>
 		</tr>
 		<?php } if($compano){ ?>
 		<tr>
-			<td><b>Ano de competência:</b> <?php echo $compano; ?></td>
+			<td><b>Ano de competï¿½ncia:</b> <?php echo $compano; ?></td>
 		</tr>
 		<?php }
 		}//fim if compmes e compano
@@ -134,14 +134,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 			if($numero){
 		?>
         <tr>
-        	<td width="132"><b>Número Decc: </b><?php echo $numero;?></td>
+        	<td width="132"><b>NÃºmero Decc: </b><?php echo $numero;?></td>
         </tr>
         <?php
         	}
 		?>
     </table>
     <?php
-	$sql_pesquisa = mysql_query("
+	$sql_pesquisa = $PDO->query("
 						SELECT 
 							decc_des.codigo,
 							decc_des.data,
@@ -162,12 +162,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 						DESC
 						");
 						
-if(mysql_num_rows($sql_pesquisa)){
+if($sql_pesquisa->rowCount()){
 ?>
 <table width="850" bordercolor="#000000" border="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; border-width:thin;">
     <tr>
-        <td width="6%" align="center"><b>N&deg; Dec</b></td>
-        <td width="14%" align="center"><b>Cod verificação</b></td>
+        <td width="6%" align="center"><b>NÂº Dec</b></td>
+        <td width="14%" align="center"><b>Cod verificaÃ§Ã£o</b></td>
         <td width="33%" align="center"><b>Nome</b></td>
         <td width="8%" align="center"><b>Total</b></td>
         <td width="7%" align="center"><b>Iss</b></td>
@@ -179,7 +179,7 @@ if(mysql_num_rows($sql_pesquisa)){
     	<td colspan="8"><hr color="#000000" size="2" /></td>
     </tr>
     <?php
-		while(list($codigo,$data,$total,$iss,$codverificacao,$estado,$competencia,$nome) = mysql_fetch_array($sql_pesquisa)){
+		while(list($codigo,$data,$total,$iss,$codverificacao,$estado,$competencia,$nome) = $sql_pesquisa->fetch()){
 			switch($estado){
 				case "B": $estado = "Boleto";      break;
 				case "N": $estado = "Normal";      break;
@@ -206,7 +206,7 @@ if(mysql_num_rows($sql_pesquisa)){
 
 <?php
 }else{
-	echo "<center><b>Não há resultados!</b></center>";
+	echo "<center><b>NÃ£o hÃ¡ resultados!</b></center>";
 }
 ?>
 

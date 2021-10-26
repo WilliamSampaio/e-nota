@@ -19,16 +19,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	include("../conect.php");
-	include("../../funcoes/util.php");
+	require_once("../conect.php");
+	require_once("../../funcoes/util.php");
 	$codigo=$_POST["txtCodCart"];
 	
 	// busca os dados do municipio
-	$sql=mysql_query("SELECT cidade, secretaria, logo FROM configuracoes");
-	list($CIDADE,$SECRETARIA,$LOGO)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT cidade, secretaria, logo FROM configuracoes");
+	list($CIDADE,$SECRETARIA,$LOGO)=$sql->fetch();
 	// busca os dados da inst. financeira
-	$sql_inst=mysql_query("SELECT codigo, razaosocial, endereco, cnpj FROM cartorios WHERE codigo='$codigo'");
-	list($codigo,$razaosocial,$endereco, $cnpj)=mysql_fetch_array($sql_inst);
+	$sql_inst=$PDO->query("SELECT codigo, razaosocial, endereco, cnpj FROM cartorios WHERE codigo='$codigo'");
+	list($codigo,$razaosocial,$endereco, $cnpj)=$sql_inst->fetch();
 ?>
 <div id="imprimir">
 	<input type="button" onClick="document.getElementById('imprimir').style.display='none'; print(); document.getElementById('imprimir').style.display='block';" value="Imprimir" />
@@ -42,20 +42,20 @@ Fith Floor, Boston, MA 02110-1301, USA
         <td width="520" style="border:0px;" align="left" valign="middle">
 		<font class="prefeitura">Prefeitura Municipal de <?php echo $CIDADE; ?></font><br>
 		<font class="secretaria"><?php echo $SECRETARIA; ?><br>
-		Comprovante de Cadastro de Cartório </font></td>
+		Comprovante de Cadastro de Cartï¿½rio </font></td>
       </tr>
     </table></td>
   </tr>
   <tr>
-    <td align="center" width="50%" bgcolor="#CCCCCC" colspan="2"><strong>Número do Documento </strong></td>
-    <td align="center" bgcolor="#CCCCCC" colspan="2"><strong>Data de Emiss&atilde;o </strong></td>
+    <td align="center" width="50%" bgcolor="#CCCCCC" colspan="2"><strong>NÃºmero do Documento </strong></td>
+    <td align="center" bgcolor="#CCCCCC" colspan="2"><strong>Data de EmissÃ£o </strong></td>
   </tr>
   <tr>
     <td align="center" colspan="2" width="50%"><font class="prefeitura"><?php echo $codigo ?></font></td>
     <td align="center" colspan="2"><font class="prefeitura"><?php echo DataPtExt(); ?></font></td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICA&Ccedil;&Atilde;O DO SUJEITO PASSIVO </strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICAÃ‡ÃƒO DO SUJEITO PASSIVO </strong></td>
   </tr>
   <tr>
     <td height="50" colspan="3" valign="top">Nome<br>
@@ -64,20 +64,20 @@ Fith Floor, Boston, MA 02110-1301, USA
     <font class="prefeitura"><?php echo $cnpj; ?></font></td>
   </tr>
   <tr>
-    <td height="75" colspan="4" valign="top">Endere&ccedil;o<br>
+    <td height="75" colspan="4" valign="top">EndereÃ§o<br>
     <font class="prefeitura"><?php echo $endereco; ?></font></td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>CERTIFICA&Ccedil;&Atilde;O</strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>CERTIFICAÃ‡ÃƒO</strong></td>
   </tr>
   <tr>
-    <td height="200" colspan="4" align="center" valign="middle"><span class="style1">A Prefeitura Municipal de <font class="prefeitura"><?php echo $CIDADE; ?></font> certifica que o Cartório citado acima foi devidamente cadastrado no sistema de ISSDigital do município<font class="prefeitura"><?php e ?></font>.</span>   </td>
+    <td height="200" colspan="4" align="center" valign="middle"><span class="style1">A Prefeitura Municipal de <font class="prefeitura"><?php echo $CIDADE; ?></font> certifica que o Cartï¿½rio citado acima foi devidamente cadastrado no sistema de ISSDigital do municÃ­pio<font class="prefeitura"><?php echo $CIDADE ?></font>.</span>   </td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>OBSERVA&Ccedil;&Otilde;ES</strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>OBSERVAÃ‡Ã•ES</strong></td>
   </tr>
   <tr>
-    <td colspan="4"><p>- A senha de acesso do Cartório ao sistema de ISSDigital do município é de uso exclusivo e intransferível do Cartório, bem como a responsabilidade sobre o uso indevido da mesma.
+    <td colspan="4"><p>- A senha de acesso do Cartï¿½rio ao sistema de ISSDigital do municÃ­pio Ã© de uso exclusivo e intransferÃ­vel do Cartï¿½rio, bem como a responsabilidade sobre o uso indevido da mesma.
     </p></td>
   </tr>
   <tr>

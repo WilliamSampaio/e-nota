@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 require_once("../conect.php");
 require_once("../../funcoes/util.php"); 
 /*if(isset($_POST['btImprimir'])){
-	include("../../../../sepiss/inc/utilitarios/logs_imprimir.php");
+	require_once("../../../../sepiss/inc/utilitarios/logs_imprimir.php");
 }*/
 
 if(isset($_POST)){
@@ -49,14 +49,14 @@ if(($nome != "") && ($data == "")){
 	$string = "logs.usuario LIKE '$nome%' AND SUBSTRING(logs.data,1,10) = '$data' AND";
 }//fim elseif
 
-$query = mysql_query("SELECT usuarios.nome, logs.ip, logs.data , logs.acao FROM logs INNER JOIN usuarios ON logs.codusuario = usuarios.codigo WHERE ".$string." usuarios.tipo ='$tipo' ORDER BY logs.codigo DESC");
+$query = $PDO->query("SELECT usuarios.nome, logs.ip, logs.data , logs.acao FROM logs INNER JOIN usuarios ON logs.codusuario = usuarios.codigo WHERE ".$string." usuarios.tipo ='$tipo' ORDER BY logs.codigo DESC");
 
 ?>
 
 <?php
-$sql_logs = mysql_fetch_row($query);
+$sql_logs = $query->rowCount();
 
-$result = mysql_num_rows($query);
+$result = $query->rowCount();
 if($result>0){
 ?><head>
 <link href="../../css/imprimir_aidf.css" rel="stylesheet" type="text/css">
@@ -74,16 +74,16 @@ if($result>0){
 		<td align="center">
 			<table width="885" border="0" cellpadding="4" cellspacing="2" style="border:dotted thin">
 				<tr>
-					<td height="25" colspan="5" align="center" valign="middle" bgcolor="#CCCCCC" class="tblTitulo">REGISTRO DE A&Ccedil;&Otilde;ES</td>
+					<td height="25" colspan="5" align="center" valign="middle" bgcolor="#CCCCCC" class="tblTitulo">REGISTRO DE AÃ‡Ã•ES</td>
 				</tr>
 				<tr bgcolor="#999999"> 
-					<td width="156" align="center">Usuário</td>
+					<td width="156" align="center">Usuï¿½rio</td>
 					<td width="130" align="center">IP</td>
 					<td width="155" align="center">Data e Hora</td>
-					<td align="center">Ação</td>   
+					<td align="center">Aï¿½ï¿½o</td>   
 				</tr>
 					<?php
-					while(list($usuario, $ip,$data, $acao) = mysql_fetch_array($query)){
+					while(list($usuario, $ip,$data, $acao) = $query->fetch()){
 								$datahora = explode(" ",$data);
 								$data     = DataPt($datahora[0]);
 								$hora     = $datahora[1];

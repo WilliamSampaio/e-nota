@@ -46,7 +46,7 @@ function tipoPessoa($cnpjcpf){
 // escapa as aspas e apostrofes e retira todas as tags html
 function trataString($texto){
     $texto = strip_tags(trim($texto));
-    $texto = str_replace("'","´",$texto);
+    $texto = str_replace("'","ï¿½",$texto);
     $texto = str_replace('"','',$texto);
     return $texto;
 }
@@ -117,8 +117,8 @@ function DecToMoeda($valor){
 
 //gera nossonumero de acordo com o banco da prefeitura
 function gerar_nossonumero($codigo,$datavc=NULL){
-	$sql_boleto = mysql_query("SELECT codbanco, IF(convenio <> '', convenio, codfebraban) FROM boleto");
-	list($codbanco,$convenio)=mysql_fetch_array($sql_boleto);
+	$sql_boleto = $PDO->query("SELECT codbanco, IF(convenio <> '', convenio, codfebraban) FROM boleto");
+	list($codbanco,$convenio)=$sql_boleto->fetch();
 	$vencimento = DataVencimento();
 	$vencimento = DataMysql($vencimento);
 	$vencimento = str_replace("-","","$vencimento");
@@ -149,8 +149,8 @@ function gerar_nossonumero($codigo,$datavc=NULL){
 
 /*
 function gerar_nossonumero($codigo){
-	$sql_boleto = mysql_query("SELECT codbanco, IF(convenio <> '', convenio, codfebraban) FROM boleto");
-	list($codbanco,$convenio)=mysql_fetch_array($sql_boleto);
+	$sql_boleto = $PDO->query("SELECT codbanco, IF(convenio <> '', convenio, codfebraban) FROM boleto");
+	list($codbanco,$convenio)=$sql_boleto);
 	$vencimento = DataVencimento();
 	$vencimento = DataMysql($vencimento);
 	$vencimento = str_replace("-","","$vencimento");
@@ -209,13 +209,13 @@ function diasDecorridos($dataInicio,$dataFim){
 	return $dias_diferenca; 
 }
 
-//GERA O CÓDIGO DE VERIFICAÇÃO
+//GERA O Cï¿½DIGO DE VERIFICAï¿½ï¿½O
 function gera_codverificacao(){
 	$CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
 	$max = strlen($CaracteresAceitos)-1;
 	$codverificacao = null;
 	for($i=0; $i < 8; $i++) {
-		$codverificacao .= $CaracteresAceitos{mt_rand(0, $max)}; 
+		$codverificacao .= $CaracteresAceitos[mt_rand(0, $max)]; 
 		$carac = strlen($codverificacao); 
 		if($carac ==4)
 			$codverificacao .= "-";
@@ -224,7 +224,7 @@ function gera_codverificacao(){
 }
 
 function calculaMultaDes($diasDec,$valor){
-	$sql_multas = mysql_query(" 
+	$sql_multas = $PDO->query(" 
 					SELECT 
 						codigo, 
 						dias, 
@@ -240,7 +240,7 @@ function calculaMultaDes($diasDec,$valor){
 				");
 	$nroMultas = mysql_num_rows($sql_multas);
 	$n = 0;
-	while(list($multa_cod, $multa_dias, $multa_valor, $multa_juros) = mysql_fetch_array($sql_multas)){
+	while(list($multa_cod, $multa_dias, $multa_valor, $multa_juros) = $sql_multas->fetch()){
 		$multadias[$n] = $multa_dias;
 		$multavalor[$n] = $multa_valor;
 		$multajuros[$n] = $multa_juros;
@@ -275,9 +275,9 @@ function calculaMultaDes($diasDec,$valor){
 
 function listaRegrasMultaDes(){
 	//pega o dia pra tributacao do mes da tabela configucacoes
-	$sql_data_trib = mysql_query("SELECT data_tributacao FROM configuracoes");
+	$sql_data_trib = $PDO->query("SELECT data_tributacao FROM configuracoes");
 	
-	list($dia_mes)=mysql_fetch_array($sql_data_trib);
+	list($dia_mes)=$sql_data_trib->fetch();
 	campoHidden("hdDia",$dia_mes);
 	//echo "<input type=\"hidden\" name=\"hdDia\" id=\"hdDia\" value=\"$dia_mes\" />";
 	
@@ -285,14 +285,14 @@ function listaRegrasMultaDes(){
 	campoHidden("hdDataAtual",$dataatual);
 	//echo "<input type=\"hidden\" name=\"hdDataAtual\" id=\"hdDataAtual\" value=\"$dataatual\" />\n";
 	//pega a regra de multas do banco
-	$sql_multas = mysql_query(" SELECT codigo, dias, multa, juros_mora
+	$sql_multas = $PDO->query(" SELECT codigo, dias, multa, juros_mora
 								FROM des_multas_atraso 
 								WHERE estado='A'
 								ORDER BY dias ASC");
 	$nroMultas = mysql_num_rows($sql_multas);
 	echo "<input type=\"hidden\" name=\"hdnroMultas\" id=\"hdNroMultas\" value=\"$nroMultas\" />\n";
 	$n = 0;
-	while(list($multa_cod, $multa_dias, $multa_valor, $multa_juros) = mysql_fetch_array($sql_multas)){
+	while(list($multa_cod, $multa_dias, $multa_valor, $multa_juros) = $sql_multas->fetch()){
 		campoHidden("hdMulta_dias$n",$multa_dias);
 		campoHidden("hdMulta_valor$n",$multa_valor);
 		campoHidden("hdMulta_juros$n",$multa_juros);
@@ -306,9 +306,9 @@ function DataPtExt(){
 	$dia = date("d"); //pega dia do mes
 	$m = date("n");   //pega o mes em numero
 	$ano = date("Y"); //pega o ano atual
-	$semana = array("Sun" => "Domingo", "Mon" => "Segunda-feira", "Tue" => "Terça-feira", "Wed" => "Quarta-feira", "Thu" => "Quinta-feira", "Fri" => "Sexta-feira", "Sat" => "Sábado"); 
+	$semana = array("Sun" => "Domingo", "Mon" => "Segunda-feira", "Tue" => "Terï¿½a-feira", "Wed" => "Quarta-feira", "Thu" => "Quinta-feira", "Fri" => "Sexta-feira", "Sat" => "Sï¿½bado"); 
 	/* Dias da Semana.  troca o valor da semana em ingles para portugues*/
-	$mes = array(1 =>"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"); 
+	$mes = array(1 =>"Janeiro", "Fevereiro", "Marï¿½o", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"); 
 	/* Meses troca o valor de numero pelo seu valor por extenso*/
 	return $semana[$s].", ".$dia." de ".$mes[$m]." de ".$ano; //imprime na tela a data concatenada por extenso  
 }//by lucas.
@@ -321,10 +321,10 @@ function print_array($array){
 
 function codcargo($cargo){
 	if($cargo=='responsavel'){
-		$sql_cargo = mysql_query("SELECT codigo FROM cargos WHERE cargo LIKE '$cargo' OR cargo LIKE '%diretor' OR cargo LIKE '%gerente'");
+		$sql_cargo = $PDO->query("SELECT codigo FROM cargos WHERE cargo LIKE '$cargo' OR cargo LIKE '%diretor' OR cargo LIKE '%gerente'");
 		return mysql_result($sql_cargo,0);
 	}else{
-		$sql_cargo = mysql_query("SELECT codigo FROM cargos WHERE cargo LIKE '$cargo'");
+		$sql_cargo = $PDO->query("SELECT codigo FROM cargos WHERE cargo LIKE '$cargo'");
 		if(mysql_num_rows($sql_cargo)>0){
 			return mysql_result($sql_cargo,0);
 		}
@@ -332,19 +332,19 @@ function codcargo($cargo){
 }//pega o codigo do cargo solicitado de acordo com o banco
 
 function codtipo($tipo){
-	$sql_cargo = mysql_query("SELECT codigo FROM tipo WHERE tipo LIKE '$tipo'");
+	$sql_cargo = $PDO->query("SELECT codigo FROM tipo WHERE tipo LIKE '$tipo'");
 	return mysql_result($sql_cargo,0);
 }//pega o codigo do tipo solicitado de acordo com o banco
 
 function coddeclaracao($dec){
-	$sql_cargo = mysql_query("SELECT codigo FROM declaracoes WHERE declaracao LIKE '$dec'");
+	$sql_cargo = $PDO->query("SELECT codigo FROM declaracoes WHERE declaracao LIKE '$dec'");
 	return mysql_result($sql_cargo,0);
 }//pega o codigo do tipo solicitado de acordo com o banco
 
 function verificacampo($campo){
-	if($campo == ""){$campo = "<b>Não Informado</b>";}
+	if($campo == ""){$campo = "<b>NÃ£o Informado</b>";}
 return $campo;
-}//verifica o resultado do banco se esta vazio, se estiver, acrescenta informação
+}//verifica o resultado do banco se esta vazio, se estiver, acrescenta informaÃ§Ã£o
 
 //redireciona para o link indicado sem os parametros de get adicionais
 //e criando um form com hiddens baseado nos parametros de get
@@ -379,7 +379,7 @@ function Uploadimagem($campo,$destino,$cod=NULL){
 		$imagem['extensao'] = strtolower(end(explode('.', $_FILES[$campo]['name'])));
 		//varre o array verificando se a variavel extensao entra na condicional
 		if(array_search($imagem['extensao'], $extpermitidas) === false){
-			Mensagem("Por favor, envie arquivos com as seguintes extensões: jpeg, jpg, gif");
+			Mensagem("Por favor, envie arquivos com as seguintes extensï¿½es: jpeg, jpg, gif");
 		}else{
 			//Verifica qual metodo de upload veio pelo parametro
 			if($cod == "rand"){
@@ -414,15 +414,15 @@ function UploadGenerico($destino,$campo,$extensoes=NULL){
 	}//fim if
 	 
 	// Array com os tipos de erros de upload do PHP
-	$array_upload['erros'][0] = 'Não houve erro';
-	$array_upload['erros'][1] = 'O arquivo no upload é maior do que o limite do PHP';
+	$array_upload['erros'][0] = 'NÃ£o houve erro';
+	$array_upload['erros'][1] = 'O arquivo no upload Ã© maior do que o limite do PHP';
 	$array_upload['erros'][2] = 'O arquivo ultrapassa o limite de tamanho especifiado no HTML';
 	$array_upload['erros'][3] = 'O upload do arquivo foi feito parcialmente';
-	$array_upload['erros'][4] = 'Não foi feito o upload do arquivo';
+	$array_upload['erros'][4] = 'NÃ£o foi feito o upload do arquivo';
 	 
 	// Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
 	if($_FILES[$campo]['error'] != 0) {
-		Mensagem("Não foi possível fazer o upload, erro: ". $array_upload['erros'][$_FILES[$campo]['error']]);
+		Mensagem("NÃ£o foi possï¿½vel fazer o upload, erro: ". $array_upload['erros'][$_FILES[$campo]['error']]);
 		exit; // Para a execucao do script
 	}//fim if
 	
@@ -431,33 +431,33 @@ function UploadGenerico($destino,$campo,$extensoes=NULL){
 		$extensao = strtolower(end(explode('.', $_FILES[$campo]['name'])));
 		//varre o array verificando se a variavel extensao entra na condicional
 		if(array_search($extensao, $array_upload['extensoes']) === false){
-			Mensagem("Por favor, envie arquivos com as seguintes extensões: ". str_replace("|",", ",$extensoes));
+			Mensagem("Por favor, envie arquivos com as seguintes extensï¿½es: ". str_replace("|",", ",$extensoes));
 		}//fim if
 	
 	 
 		// Faz a verificacao do tamanho do arquivo
 		elseif($array_upload['tamanho'] < $_FILES[$campo]['size']){
-			Mensagem("O arquivo enviado é muito grande, envie arquivos de até 2Mb.");
+			Mensagem("O arquivo enviado Ã© muito grande, envie arquivos de atÃ© 2Mb.");
 		}else{ 
-			// O arquivo passou em todas as verificações, agora tenta movelo para a pasta
+			// O arquivo passou em todas as verificaï¿½ï¿½es, agora tenta movelo para a pasta
 			//acrescenta numeros randomicos ao nome do arquivo
 			$rand = rand(00000,99999);
 			$ext = explode(".",$_FILES[$campo]['name']);
 			$nome_final = $rand.".".$ext[1];
 			
-			// Depois verifica se e possível mover o arquivo para a pasta escolhida
+			// Depois verifica se e possï¿½vel mover o arquivo para a pasta escolhida
 			if(move_uploaded_file($_FILES[$campo]['tmp_name'], $array_upload['pasta'] .$nome_final)){
 				//se tudo der certo retorna o nome do arquivo que foi salvo no diretorio informado
 				return $nome_final;
 			}else{
-			// Não foi possível fazer o upload, provavelmente a pasta está incorreta
-			Mensagem("Não foi possível enviar o arquivo, tente novamente");
+			// NÃ£o foi possï¿½vel fazer o upload, provavelmente a pasta estÃ¡ incorreta
+			Mensagem("NÃ£o foi possï¿½vel enviar o arquivo, tente novamente");
 			}//fim else
 		}//fim else
 	}//fim if
 }
 
-function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test é para os botoes
+function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test Ã© para os botoes
 	if($_GET["hdPagina"]&&$_GET["hdPrimeiro"]){
 		$pagina = $_GET["hdPagina"];
 	}else{
@@ -470,10 +470,10 @@ function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test é par
 	}
 	
 	//Executa o sql que foi enviado por parametro para que se possa fazer os calculos de paginas e quantidade
-	$sql_pesquisa = mysql_query("$query");
+	$sql_pesquisa = $PDO->query("$query");
 	
 
-	//Verifica se há erros de sintaxe
+	//Verifica se hÃ¡ erros de sintaxe
 	if(!$sql_pesquisa){ 
 		return $sql_pesquisa;
 	}
@@ -482,7 +482,7 @@ function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test é par
 	$total_sql      = mysql_num_rows($sql_pesquisa);    //Recebe o total de resultados gerados pelo sql
 	$total_paginas  = ceil($total_sql/$quantporpagina); //Usa o total para calcular quantas paginas de resultado tera a pesquisa sql
 	
-	//Verifica se não tem a variavel pagina, ou se ela é menor que o total ou se ela é menor que 1
+	//Verifica se nÃ£o tem a variavel pagina, ou se ela Ã© menor que o total ou se ela Ã© menor que 1
 	if((!isset($pagina)) || ($pagina > $total_paginas) || ($pagina < 1)){
 		$pagina = 1;
 	}
@@ -490,27 +490,27 @@ function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test é par
 	$pagina_sql = ($pagina-1)*$quantporpagina;          //Calcula a variavel que vai ter o incio do limit
 	$pagina_sql .= ",$quantporpagina";                  //Concatena a quantidade de paginas escolhida com o inicio do limit do sql
 	
-	//Sql buscando as informações e o limit estipulado pela função
-	$sql_pesquisa = mysql_query("$query LIMIT $pagina_sql");
+	//Sql buscando as informaï¿½ï¿½es e o limit estipulado pela funÃ§Ã£o
+	$sql_pesquisa = $PDO->query("$query LIMIT $pagina_sql");
 	if(!$sql_pesquisa){ 
 		return $sql_pesquisa;
 	}
 	
-	//Aqui identifica em qual arquivo está localizado para que o ajax possa voltar para o mesmo
+	//Aqui identifica em qual arquivo estÃ¡ localizado para que o ajax possa voltar para o mesmo
 	$arquivo = $_SERVER['PHP_SELF'];
 	
 	$GLOBALS['pagina']=$pagina;
-	//Monta a table com os botoes onde chamou a função
+	//Monta a table com os botoes onde chamou a funÃ§Ã£o
 	if(mysql_num_rows($sql_pesquisa)>0){
 		$botoes= "
 		<table width=\"100%\">
 			<tr>
 				<td align=\"center\">
-					<b>";if($total_sql == 1){ $botoes.= "1 Resultado";}else{ $botoes.= "$total_sql Resultados";} $botoes.= ", página: $pagina de $total_paginas</b>
+					<b>";if($total_sql == 1){ $botoes.= "1 Resultado";}else{ $botoes.= "$total_sql Resultados";} $botoes.= ", pÃ¡gina: $pagina de $total_paginas</b>
 					<input type=\"button\" name=\"btAnterior\" value=\"Anterior\" class=\"botao\" 
 					onclick=\"document.getElementById('hdPrimeiro').value=1;
 					mudarpagina('a','hdPagina','$arquivo','$form','$retorno');\" "; if($pagina == 1){ $botoes.= "disabled = disabled";} $botoes.= " />
-					<input type=\"button\" name=\"btProximo\" value=\"Próximo\" class=\"botao\" 
+					<input type=\"button\" name=\"btProximo\" value=\"Prï¿½ximo\" class=\"botao\" 
 					onclick=\"document.getElementById('hdPrimeiro').value=1;
 					mudarpagina('p','hdPagina','$arquivo','$form','$retorno');\" "; if($pagina == $total_paginas){ $botoes.= "disabled = disabled";} $botoes.= " />
 					<input type=\"hidden\" name=\"hdPagina\" id=\"hdPagina\" value=\"$pagina\" />
@@ -586,7 +586,7 @@ function imprimirGuia($codguia,$pasta=NULL,$mesmajanela=NULL){
 	}
 	
 	$codguia=base64_encode($codguia);
-	$sql_tipo_boleto=mysql_query("SELECT tipo FROM boleto");
+	$sql_tipo_boleto=$PDO->query("SELECT tipo FROM boleto");
 	$result=mysql_fetch_object($sql_tipo_boleto);
 	if($mesmajanela==true){
 		if($result->tipo <>"R"){
@@ -626,34 +626,34 @@ function notificaTomador($codigo_empresa,$ultimanota){
 	$tomador_email_enviado = "";
 	
 	//Pega o link do site da prefeitura que foi inserido no banco
-	$sql_url_site = mysql_query("SELECT site, cidade, email, secretaria, brasao  FROM configuracoes");
-	list($LINK_ACESSO, $CONF_CIDADE, $CONF_EMAIL, $CONF_SECRETARIA, $CONF_BRASAO) = mysql_fetch_array($sql_url_site);
+	$sql_url_site = $PDO->query("SELECT site, cidade, email, secretaria, brasao  FROM configuracoes");
+	list($LINK_ACESSO, $CONF_CIDADE, $CONF_EMAIL, $CONF_SECRETARIA, $CONF_BRASAO) = $sql_url_site->fetch();
 	
 	//Busca a razao social da empresa que emitiu a nota
-	$sql_dados_empresa = mysql_query("SELECT razaosocial FROM cadastro WHERE codigo = '$codigo_empresa'");
-	list($empresa_razaosocial) = mysql_fetch_array($sql_dados_empresa);
+	$sql_dados_empresa = $PDO->query("SELECT razaosocial FROM cadastro WHERE codigo = '$codigo_empresa'");
+	list($empresa_razaosocial) = $sql_dados_empresa->fetch();
 	
 	//Pega o codigo da nota e gera o link de acesso externo para que o tomador possa visualizar a nota
-	$sql_codigo_nota = mysql_query("SELECT codigo, tomador_nome, tomador_email FROM notas WHERE codemissor = '$codigo_empresa' AND numero = '$ultimanota'");
-	list($codigo_nota_visualizar, $tomador_nome, $tomador_email) = mysql_fetch_array($sql_codigo_nota);
+	$sql_codigo_nota = $PDO->query("SELECT codigo, tomador_nome, tomador_email FROM notas WHERE codemissor = '$codigo_empresa' AND numero = '$ultimanota'");
+	list($codigo_nota_visualizar, $tomador_nome, $tomador_email) = $sql_codigo_nota->fetch();
 	
 	$crypto = base64_encode($codigo_nota_visualizar);
 	$link = $_SERVER['HTTP_HOST']."/site/imprimir_nota.php?cod=$crypto";
 	
 	$imagemTratada = $_SERVER['HTTP_HOST']."/img/brasoes/".rawurlencode($CONF_BRASAO);
 	$msg = ("
-	<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Brasão Prefeitura\" title=\"Brasão\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
+	<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Brasï¿½o Prefeitura\" title=\"Brasï¿½o\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
 	Este e-mail foi enviado, para notificar que a empresa ". strtoupper($empresa_razaosocial) .",<br>
 	emitiu uma NF-e com ". strtoupper($tomador_nome) .", como tomador.<br>
 	Abaixo segue o link para visualizar esta NF-e:<br>
 	<br>
 	<a href=\"$link\" target=\"blank\">$link</a><br><br>
-	Caso o link não funcione copie e cole no navegador.<br>
+	Caso o link nÃ£o funcione copie e cole no navegador.<br>
 	<br>
 	$CONF_SECRETARIA de $CONF_CIDADE.
 	");
 	
-	$assunto = "Notificação de emissão de NF-e.";
+	$assunto = "Notificaï¿½ï¿½o de emissÃ£o de NF-e.";
 
 	$headers  = "MIME-Version: 1.0\r\n";
 

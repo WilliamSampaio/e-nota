@@ -6,8 +6,8 @@
 
 <body>
 	<?php
-	include("../include/conect.php");
-	include("funcoes.php");
+	require_once("../include/conect.php");
+	require_once("funcoes.php");
 
 	$guia = base64_decode($_GET['guia']);
 
@@ -106,7 +106,7 @@
 		list($Instrucoes_boleto) = $sql_instrucoes_boleto->fetch();
 
 		// INCLUDE DO LAYOUT	
-		include("imprimir_controlearrec.php");
+		require_once("imprimir_controlearrec.php");
 	}
 
 	//require("imprimir_controlearrec.php");

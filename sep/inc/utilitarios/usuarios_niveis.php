@@ -27,16 +27,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 			if($baixo != ""){$valor = "B";}
 			elseif(($baixo == "") && ($medio != "")){$valor = "M";}
 			elseif(($baixo == "")&&($medio == "")){$valor = "A";}
-			$sql = mysql_query("UPDATE menus_prefeitura_submenus SET nivel = '$valor' WHERE codigo='$codigo'");
+			$sql = $PDO->query("UPDATE menus_prefeitura_submenus SET nivel = '$valor' WHERE codigo='$codigo'");
 		}
-		add_logs('Atualizou o Nível de Usuários');
+		add_logs('Atualizou o Nï¿½vel de Usuï¿½rios');
 		echo "<script>alert('Dados alterados com sucesso');</script>";
 	}
 ?>
-<fieldset><legend>Defina as opções do menu para cada nível de usuário</legend>
-	<p align="center">Os usuários com nível de permissão Alto tem acesso a todos os menus </p>
+<fieldset><legend>Defina as opï¿½ï¿½es do menu para cada nï¿½vel de usuÃ¡rio</legend>
+	<p align="center">Os usuÃ¡rios com nï¿½vel de permissï¿½o Alto tem acesso a todos os menus </p>
 	<?php
-		$sql = mysql_query("
+		$sql = $PDO->query("
 			SELECT 
 				m.codigo, 
 				m.menu,
@@ -62,7 +62,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<table width="100%">
 		<?php
 		$cont = 0;
-		while(list($codigo,$menu,$nivel)=mysql_fetch_array($sql)){
+		while(list($codigo,$menu,$nivel)=$sql->fetch()){
 			?>
 			<tr id="conteudo<?php echo $cont?>">
 				<td width="15%" align="left">

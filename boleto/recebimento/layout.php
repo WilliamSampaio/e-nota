@@ -87,7 +87,7 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="2">
       <tr>
         <td style="border:#000000 solid 2px;" align="center"><span class="cab02">GUIA PARA PAGAMENTO DE ISSQN</span><br><br>
-        Competência: <?php echo DataPt($Competencia);?>&nbsp;&nbsp;&nbsp;&nbsp;
+        Competência: <?php echo DataPt($Competencia);?>
 		Vencimento: <?php echo $vencimento;?></td>
       </tr>
     </table>           
@@ -120,7 +120,7 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="2">
       <tr>
         <td></td>
-        <td class="cab02" align="right">VALOR A PAGAR&nbsp;&nbsp;</td>
+        <td class="cab02" align="right">VALOR A PAGAR</td>
         <td class="cab02" height="40" align="right" bgcolor="#CCCCCC" style="border:1px solid;">R$ <?php echo DecToMoeda($valorbl); ?></td>
       </tr>
     </table>    
@@ -186,7 +186,7 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="2">
             <tr>
               <td>Vencimento: <?php echo $vencimento;?></td>
-              <td class="cab02" align="right">VALOR A PAGAR&nbsp;&nbsp;</td>
+              <td class="cab02" align="right">VALOR A PAGAR</td>
               <td class="cab02" align="right" style="border:1px solid;" bgcolor="#CCCCCC">R$ <?php echo DecToMoeda($valorbl); ?></td>
             </tr>
           </table></td>
@@ -211,7 +211,7 @@
     </table></td>
   </tr>
   <tr>
-    <td align="center">&nbsp;</td>
+    <td align="center"></td>
   </tr>
 </table>
 

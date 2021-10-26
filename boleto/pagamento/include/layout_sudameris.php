@@ -1,11 +1,11 @@
 <?php
 // +----------------------------------------------------------------------+
-// | BoletoPhp - Versão Beta                                              |
+// | BoletoPhp - Versï¿½o Beta                                              |
 // +----------------------------------------------------------------------+
-// | Este arquivo está disponível sob a Licença GPL disponível pela Web   |
+// | Este arquivo estï¿½ disponï¿½vel sob a Licenï¿½a GPL disponï¿½vel pela Web   |
 // | em http://pt.wikipedia.org/wiki/GNU_General_Public_License           |
-// | Você deve ter recebido uma cópia da GNU Public License junto com     |
-// | esse pacote; se não, escreva para:                                   |
+// | Vocï¿½ deve ter recebido uma cï¿½pia da GNU Public License junto com     |
+// | esse pacote; se nï¿½o, escreva para:                                   |
 // |                                                                      |
 // | Free Software Foundation, Inc.                                       |
 // | 59 Temple Place - Suite 330                                          |
@@ -13,17 +13,17 @@
 // +----------------------------------------------------------------------+
 
 // +----------------------------------------------------------------------+
-// | Originado do Projeto BBBoletoFree que tiveram colaborações de Daniel |
+// | Originado do Projeto BBBoletoFree que tiveram colaboraï¿½ï¿½es de Daniel |
 // | William Schultz e Leandro Maniezo que por sua vez foi derivado do	  |
-// | PHPBoleto de João Prado Maia e Pablo Martins F. Costa				  |
+// | PHPBoleto de Joï¿½o Prado Maia e Pablo Martins F. Costa				  |
 // | 																	  |
 // | Se vc quer colaborar, nos ajude a desenvolver p/ os demais bancos :-)|
 // | Acesse o site do Projeto BoletoPhp: www.boletophp.com.br             |
 // +----------------------------------------------------------------------+
 
 // +----------------------------------------------------------------------+
-// | Equipe Coordenação Projeto BoletoPhp: <boletophp@boletophp.com.br>   |
-// | Desenvolvimento Boleto Sudameris: Flávio Yutaka Nakamura         	  |
+// | Equipe Coordenaï¿½ï¿½o Projeto BoletoPhp: <boletophp@boletophp.com.br>   |
+// | Desenvolvimento Boleto Sudameris: Flï¿½vio Yutaka Nakamura         	  |
 // +----------------------------------------------------------------------+
 ?>
 
@@ -32,7 +32,7 @@
 <HEAD>
 <TITLE><?php echo $dadosboleto["identificacao"]; ?></TITLE>
 <META http-equiv=Content-Type content=text/html charset=ISO-8859-1>
-<meta name="Generator" content="Projeto BoletoPHP - www.boletophp.com.br - Licença GPL" />
+<meta name="Generator" content="Projeto BoletoPHP - www.boletophp.com.br - Licenï¿½a GPL" />
 <style type=text/css>
 <!--.cp {  font: bold 10px Arial; color: black}
 <!--.ti {  font: 9px Arial, Helvetica, sans-serif}
@@ -45,17 +45,17 @@
 </head>
 
 <BODY text=#000000 bgColor=#ffffff topMargin=0 rightMargin=0>
-<table width=666 cellspacing=0 cellpadding=0 border=0><tr><td valign=top class=cp><DIV ALIGN="CENTER">Instruções 
-de Impressão</DIV></TD></TR><TR><TD valign=top class=cp><DIV ALIGN="left">
+<table width=666 cellspacing=0 cellpadding=0 border=0><tr><td valign=top class=cp><DIV ALIGN="CENTER">Instruï¿½ï¿½es 
+de Impressï¿½o</DIV></TD></TR><TR><TD valign=top class=cp><DIV ALIGN="left">
 <p>
-<li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo econômico).<br>
-<li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita do formulário.<br>
-<li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de barras.<br>
-<li>Caso não apareça o código de barras no final, clique em F5 para atualizar esta tela.
-<li>Caso tenha problemas ao imprimir, copie a seqüencia numérica abaixo e pague no caixa eletrônico ou no internet banking:<br><br>
+<li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Nï¿½o use modo econï¿½mico).<br>
+<li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mï¿½nimas ï¿½ esquerda e ï¿½ direita do formulï¿½rio.<br>
+<li>Corte na linha indicada. Nï¿½o rasure, risque, fure ou dobre a regiï¿½o onde se encontra o cï¿½digo de barras.<br>
+<li>Caso nï¿½o apareï¿½a o cï¿½digo de barras no final, clique em F5 para atualizar esta tela.
+<li>Caso tenha problemas ao imprimir, copie a seqï¿½encia numï¿½rica abaixo e pague no caixa eletrï¿½nico ou no internet banking:<br><br>
 <span class="ld2">
-&nbsp;&nbsp;&nbsp;&nbsp;Linha Digitável: &nbsp;<?php echo $dadosboleto["linha_digitavel"]?><br>
-&nbsp;&nbsp;&nbsp;&nbsp;Valor: &nbsp;&nbsp;R$ <?php echo $dadosboleto["valor_boleto"]?><br>
+Linha Digitï¿½velp;<?php echo $dadosboleto["linha_digitavel"]?><br>
+Valor: R$ <?php echo $dadosboleto["valor_boleto"]?><br>
 </span>
 </DIV></td></tr></table><br><table cellspacing=0 cellpadding=0 width=666 border=0><TBODY><TR><TD class=ct width=666><img height=1 src=imagens/6.png width=665 border=0></TD></TR><TR><TD class=ct width=666><div align=right><b class=cp>Recibo 
 do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cellpadding=0 border=0><tr><td width=41></TD></tr></table>
@@ -66,7 +66,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 	<?php echo $dadosboleto["endereco"]; ?><br>
 	<?php echo $dadosboleto["cidade_uf"]; ?><br>
     </td>
-    <td align=RIGHT width=150 class=ti>&nbsp;</td>
+    <td align=RIGHT width=150 class=ti></td>
   </tr>
 </table>
 <br>
@@ -99,7 +99,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td colspan=7 class=ct>Cedente</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Agência/Código do Cedente</td>
+		<td class=ct>Agï¿½ncia/Cï¿½digo do Cedente</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Vencimento</td>
 	</tr>
@@ -116,9 +116,9 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>CPF/CNPJ</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Número do documento</td>
+		<td class=ct>Nï¿½mero do documento</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Espécie</td>
+		<td class=ct>Espï¿½cie</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Quantidade</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
@@ -145,32 +145,32 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>(-) Desconto / Abatimentos</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>(-) Outras deduções</td>
+		<td class=ct>(-) Outras deduï¿½ï¿½es</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td colspan=3 class=ct>(+) Mora / Multa</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>(+) Outros acréscimos</td>
+		<td class=ct>(+) Outros acrï¿½scimos</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>(=) Valor cobrado</td>
 	</tr>
 	<tr>
 		<td height=12><img src=imagens/1.png width=1 height=12></td>
-		<td class=cp>&nbsp;</td>
+		<td class=cp></td>
 		<td><img src=imagens/1.png width=1 height=12></td>
-		<td class=cp>&nbsp;</td>
+		<td class=cp></td>
 		<td><img src=imagens/1.png width=1 height=12></td>
-		<td colspan=3 class=cp>&nbsp;</td>
+		<td colspan=3 class=cp></td>
 		<td><img src=imagens/1.png width=1 height=12></td>
-		<td class=cp align=right>&nbsp;</td>
+		<td class=cp align=right></td>
 		<td><img src=imagens/1.png width=1 height=12></td>
-		<td class=cp align=right>&nbsp;</td>
+		<td class=cp align=right></td>
 	</tr>
 	<tr><td colspan=12 height=1><img src=imagens/2.png width=666 height=1></td></tr>
 	<tr>
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td colspan=9 class=ct>Sacado</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Nosso número</td>
+		<td class=ct>Nosso nï¿½mero</td>
 	</tr>
 	<tr>
 		<td height=12><img src=imagens/1.png width=1 height=12></td>
@@ -182,21 +182,21 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 </table>
 <table cellspacing=0 cellpadding=0 border=0>
 	<tr>
-		<td width=7 height=12 class=ct>&nbsp;</td>
+		<td width=7 height=12 class=ct></td>
 		<td width=564 class=ct>Demonstrativo</td>
-		<td width=7 class=ct>&nbsp;</td>
-		<td width=88 class=ct>Autenticação mecânica</td>
+		<td width=7 class=ct></td>
+		<td width=88 class=ct>Autenticaï¿½ï¿½o mecï¿½nica</td>
 	</tr>
 	<tr>
-		<td>&nbsp;</td>
-		<td class=cp><?php echo $dadosboleto["demonstrativo1"] . '<br>' . $dadosboleto["demonstrativo2"] . '<br>' . $dadosboleto["demonstrativo3"]?><br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
+		<td></td>
+		<td class=cp><?php echo $dadosboleto["demonstrativo1"] . '<br>' . $dadosboleto["demonstrativo2"] . '<br>' . $dadosboleto["demonstrativo3"]?><br><br><br></td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr><td colspan=4 class=ct align=right>Corte na linha pontilhada</td></tr>
 	<tr><td colspan=4><img src=imagens/6.png width=665 height=1></td></tr>
 </table>
-&nbsp;<br>
+<br>
 <table cellspacing=0 cellpadding=0 border=0>
 	<tr>
 		<td width=160 class=cp><img src="imagens/logosudameris.jpg" alt="Sudameris" width="150" height="27"></td>
@@ -232,7 +232,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 	</tr>
 	<tr>
 		<td height=12><img src=imagens/1.png width=1 height=12></td>
-		<td colspan=11 class=cp>Pagável em qualquer Banco até o vencimento.</td>
+		<td colspan=11 class=cp>Pagï¿½vel em qualquer Banco atï¿½ o vencimento.</td>
 		<td><img src=imagens/1.png width=1 height=12></td>
 		<td class=cp align=right><?php echo $dadosboleto["data_vencimento"]?></td>
 	</tr>
@@ -241,7 +241,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td colspan=11 class=ct>Cedente</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Agência/Código cedente</td>
+		<td class=ct>Agï¿½ncia/Cï¿½digo cedente</td>
 	</tr>
 	<tr>
 		<td height=12><img src=imagens/1.png width=1 height=12></td>
@@ -254,15 +254,15 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Data do documento</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td colspan=3 class=ct>Número do documento</td>
+		<td colspan=3 class=ct>Nï¿½mero do documento</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Espécie doc.</td>
+		<td class=ct>Espï¿½cie doc.</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Aceite</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Data processamento</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Nosso número</td>
+		<td class=ct>Nosso nï¿½mero</td>
 	</tr>
 	<tr>
 		<td height=12><img src=imagens/1.png width=1 height=12></td>
@@ -285,7 +285,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Carteira</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Espécie</td>
+		<td class=ct>Espï¿½cie</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td colspan=3 class=ct>Quantidade</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
@@ -295,7 +295,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 	</tr>
 	<tr>
 		<td height=12><img src=imagens/1.png width=1 height=12></td>
-		<td class=cp height=12>&nbsp;</td>
+		<td class=cp height=12></td>
 		<td><img src=imagens/1.png width=1 height=12></td>
 		<td class=cp><?php echo $dadosboleto["carteira"]?></td>
 		<td><img src=imagens/1.png width=1 height=12></td>
@@ -313,8 +313,8 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 	<tr>
 		<td width=7 height=26><img src=imagens/1.png width=1 height=26></td>
 		<td width=472 rowspan=9 valign=top>
-			<span class=ct>Instruções (Texto de responsabilidade do cedente)</span><br>
-			&nbsp;<br>
+			<span class=ct>Instruï¿½ï¿½es (Texto de responsabilidade do cedente)</span><br>
+			<br>
 			<span class=cp><?php echo $dadosboleto["instrucoes1"] . '<br>' . $dadosboleto["instrucoes2"] . '<br>' . $dadosboleto["instrucoes3"] . '<br>' . $dadosboleto["instrucoes4"]?></span>
 		</td>
 		<td width=7><img src=imagens/2.png width=1 height=26></td>
@@ -324,7 +324,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 	<tr>
 		<td height=26><img src=imagens/1.png width=1 height=26></td>
 		<td><img src=imagens/2.png width=1 height=26></td>
-		<td class=ct>(-) Outras deduções</td>
+		<td class=ct>(-) Outras deduï¿½ï¿½es</td>
 	</tr>
 	<tr><td height=1><img src=imagens/1.png width=1 height=1></td><td><img src=imagens/2.png width=7 height=1></td><td><img src=imagens/2.png width=180 height=1></td></tr>
 	<tr>
@@ -336,7 +336,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 	<tr>
 		<td height=26><img src=imagens/1.png width=1 height=26></td>
 		<td><img src=imagens/2.png width=1 height=26></td>
-		<td class=ct>(+) Outros acréscimos</td>
+		<td class=ct>(+) Outros acrï¿½scimos</td>
 	</tr>
 	<tr><td height=1><img src=imagens/1.png width=1 height=1></td><td><img src=imagens/2.png width=7 height=1></td><td><img src=imagens/2.png width=180 height=1></td></tr>
 	<tr>
@@ -355,14 +355,14 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=39><img src=imagens/1.png width=1 height=39></td>
 		<td class=cp><?php echo $dadosboleto["sacado"] . '<br>' . $dadosboleto["endereco1"] . '<br>' . $dadosboleto["endereco2"]?></td>
 		<td valign=bottom><img src=imagens/1.png width=1 height=13></td>
-		<td valign=bottom><span class=ct>Cód. baixa</span></td>
+		<td valign=bottom><span class=ct>Cï¿½d. baixa</span></td>
 	</tr>
 	<tr><td colspan=4 height=1><img src=imagens/2.png width=666 height=1></td></tr>
 </table>
 <table cellspacing=0 cellpadding=0 border=0>
 	<tr>
 		<td width=333 class=ct>Sacador/Avalista</td>
-		<td width=333 class=ct align=right>Autenticação mecânica - <span class=cp>Ficha de Compensação</span></td>
+		<td width=333 class=ct align=right>Autenticaï¿½ï¿½o mecï¿½nica - <span class=cp>Ficha de Compensaï¿½ï¿½o</span></td>
 	</tr>
 	<tr><td height=50 colspan=2><?php fbarcode($dadosboleto["codigo_barras"]); ?></td></tr>
 	<tr><td colspan=2 class=ct align=right>Corte na linha pontilhada</td></tr>

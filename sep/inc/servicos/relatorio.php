@@ -21,13 +21,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Servi&ccedil;os - Relat&oacute;rios</td>  
+    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Serviços - Relatórios</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
     <td width="18" background="img/form/lateralesq.jpg"></td>
     <td align="left">
-			<fieldset><legend>Relat&oacute;rios de Servi&ccedil;os</legend>
+			<fieldset><legend>Relatórios de Serviços</legend>
 				<div id="teste"></div>
 				<form method="post" id="frmServicos">	
 					<table>
@@ -37,8 +37,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 								<select name="cmbCategoria" style="width:200" onchange="acessoAjax('inc/servicos/relatorios_listaservico.ajax.php','frmServicos','cmbServico')">
 									<option value=""></option>
 									<?php
-										$sql=mysql_query("SELECT codigo, nome FROM servicos_categorias");
-										while(list($codcategoria,$categoria)=mysql_fetch_array($sql))
+										$sql=$PDO->query("SELECT codigo, nome FROM servicos_categorias");
+										while(list($codcategoria,$categoria)=$sql->fetch())
 											{
 												echo "<option value=\"$codcategoria\">$categoria</option>";
 											}
@@ -47,7 +47,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							</td>
 						</tr>
 						<tr>
-							<td>Servi�o:</td>
+							<td>Serviço:</td>
 							<td>
 								<select name="cmbServico" style="width:200" id="cmbServico">
 								</select>
@@ -65,7 +65,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<table>
 						<tr>
 							<td><input type="submit" class="botao" name="btBuscar" value="Buscar" /></td>
-							<td><input type="submit" class="botao" name="btServico" value="Prestadores por servi�o" /></td>
+							<td><input type="submit" class="botao" name="btServico" value="Prestadores por serviço" /></td>
 							<td><input type="submit" class="botao" name="btCategoria" value="Prestadores por categoria" /></td>
 						</tr>
 					</table>
@@ -80,15 +80,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 					$issretido=$_POST["cmbIssRetido"];
 					if($_POST["btBuscar"] == "Buscar")
 						{
-							include("inc/servicos/relatorios_detalhes.php");
+							require_once("inc/servicos/relatorios_detalhes.php");
 						}
-					elseif($_POST["btServico"] == "Prestadores por servi�o")
+					elseif($_POST["btServico"] == "Prestadores por serviço")
 						{
-							include("inc/servicos/relatorios_listar.php");
+							require_once("inc/servicos/relatorios_listar.php");
 						}
 					elseif($_POST["btCategoria"] == "Prestadores por categoria")
 						{
-							include("inc/servicos/relatorios_categorias.php");
+							require_once("inc/servicos/relatorios_categorias.php");
 						}		
 				?>
 			</fieldset>

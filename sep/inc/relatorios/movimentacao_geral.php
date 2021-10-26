@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - Movimenta&ccedil;&atilde;o Geral </td>
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Movimentação Geral </td>
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -30,17 +30,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <form id="frmMovimentacao" method="post" target="_blank" action="inc/relatorios/imprimir_movimentacao_geral.php">
 <fieldset>
-<legend><strong>Pesquisa de Movimenta&ccedil;&atilde;o Geral</strong></legend>
+<legend><strong>Pesquisa de Movimentação Geral</strong></legend>
 <table align="left" width="50%">
 <tbody>
     <tr>
         <td>
-            Escolha o Per�odo
+            Escolha o Período
         </td>
         <td>
 			<?php
   		  	//array de meses comencando em 1 ate 12
-    		$meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+    		$meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
     		$mes = date("n");
     		$ano = date("Y");
     		?>
@@ -74,8 +74,8 @@ Fith Floor, Boston, MA 02110-1301, USA
             <select style="width: 150px" name="cmbPrestador" id="cmbPrestador">
                 <option value="">Selecione o prestador</option>
                     <?php
-                        $sql_categoria=mysql_query("SELECT codigo,nome FROM cadastro WHERE nfe = 'S' AND codtipodeclaracao = 3 ORDER BY nome ASC");
-                        while(list($cod,$nome)=mysql_fetch_array($sql_categoria)){
+                        $sql_categoria=$PDO->query("SELECT codigo,nome FROM cadastro WHERE nfe = 'S' AND codtipodeclaracao = 3 ORDER BY nome ASC");
+                        while(list($cod,$nome)=$sql_categoria->fetch()){
                             print("<option value=\"$cod\">$nome</option>");
                         }
                     ?>

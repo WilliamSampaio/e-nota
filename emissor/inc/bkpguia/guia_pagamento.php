@@ -132,7 +132,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								</tr>
                                 <tr bgcolor="#FFFFFF" align="center">
                                     <td width="100" align="center">Data Gerado</td>
-                                	<td width="110" align="center">Cod. Verifica��o</td>
+                                	<td width="110" align="center">Cod. Verificação</td>
                                     <td width="60" align="center">Valor</td>
                                     <td align="center"></td>
                                 </tr>

@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - MovimentaÁ„o </td>
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relat√≥rios - Movimenta√ß√£o </td>
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -30,7 +30,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <form id="frmDevedores" method="post" target="_blank" action="inc/relatorios/imprimir_inadimplentes.php">
 <fieldset>
-    <legend><strong>Pesquisa de Prestadores com D&eacute;bitos Atrasados</strong></legend>
+    <legend><strong>Pesquisa de Prestadores com D√©bitos Atrasados</strong></legend>
 
 </fieldset>
 
@@ -39,7 +39,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         $meses = array(
             1  => "Janeiro",
             2  => "Fevereiro",
-            3  => "MarÁo",
+            3  => "MarÔøΩo",
             4  => "Abril",
             5  => "Maio",
             6  => "Junho",
@@ -51,7 +51,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             12 => "Dezembro",
         );
 
-        $sql = mysql_query("
+        $sql = $PDO->query("
             SELECT
                 MAX(DATE_FORMAT(datahoraemissao, '%Y')) AS fim,
                 MIN(DATE_FORMAT(datahoraemissao, '%Y')) AS ini
@@ -62,7 +62,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     <table width="40%">
         <tr>
             <td>
-                Per&iacute;odo:
+                Per√≠odo:
             </td>
             <td>
                 <select name="cmbAno" id="cmbAno">
@@ -77,7 +77,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                         }
                     ?>
                 </select>
-                &nbsp;
+                
                 <select name="cmbMes" id="cmbMes">
                     <option></option>
                     <?php
@@ -97,7 +97,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <select name="cmbPrestador" id="cmbPrestadores">
                     <option></option>
                     <?php
-                        $sql = mysql_query("
+                        $sql = $PDO->query("
                             SELECT codigo,
                             razaosocial,
                             if(cnpj<>'',cnpj,cpf) AS numdoc

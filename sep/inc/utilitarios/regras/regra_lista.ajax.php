@@ -20,8 +20,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <fieldset>
 <?php
-	include("../../conect.php");
-	include("../../../funcoes/util.php");
+	require_once("../../conect.php");
+	require_once("../../../funcoes/util.php");
 	
 	$query = ("SELECT codigo, dias, multa, estado FROM multas");
 	$sql_lista = Paginacao($query,'formMultas','divMultasLista',10);
@@ -36,7 +36,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</tr>
 	<?php
 	$x = 0;
-	while(list($codigo,$dias,$multa,$estado) = mysql_fetch_array($sql_lista)){
+	while(list($codigo,$dias,$multa,$estado) = $sql_lista)){
 		switch($estado){
 			case "A": $estado_str = "Ativo";   break;
 			case "I": $estado_str = "Inativo"; break;
@@ -70,7 +70,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 </table>
 <?php
 	}else{
-		echo "<center><b>Não há regras cadastradas!</b></center>";
+		echo "<center><b>NÃ£o hÃ¡ regras cadastradas!</b></center>";
 	}
 ?>
 </fieldset>

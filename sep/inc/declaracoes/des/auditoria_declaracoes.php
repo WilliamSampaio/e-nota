@@ -33,18 +33,18 @@ Fith Floor, Boston, MA 02110-1301, USA
 						   ORDER BY competencia DESC");
 						   
 	$sql_decc = Paginacao($query,'frmAuditoria','divauditoria',10);
-	if(mysql_num_rows($sql_decc)){
+	if($sql_decc->rowCount()){
 ?>
         <table width="100%">
             <tr bgcolor="#999999">
-                <td width="320px" align="center">Código de Verificação</td>
+                <td width="320px" align="center">CÃ³digo de VerificaÃ§Ã£o</td>
                 <td width="80px" align="center">Data Gerado</td>
                 <td width="80px" align="center">Competencia</td>
-                <td width="" align="center">Ações</td>
+                <td width="" align="center">AÃ§Ãµes</td>
             </tr>
             <?php
                 $cont = 1;
-                while(list($codigo,$data_gerado, $competencia, $codverificacao) = mysql_fetch_array($sql_decc)){
+                while(list($codigo,$data_gerado, $competencia, $codverificacao) = $sql_decc->fetch()){
                     $competencia=str_replace("-", "/", $competencia);
                 ?>
                 <tr bgcolor="#FFFFFF">
@@ -66,12 +66,12 @@ Fith Floor, Boston, MA 02110-1301, USA
             }else{
                 echo "
                     <tr>
-                        <td align=\"center\"><b>Não há declarações de Empreiteiras</b></td>
+                        <td align=\"center\"><b>NÃ£o hÃ¡ declaraï¿½ï¿½es de Empreiteiras</b></td>
                     </tr>
                 ";
             }//fim if
          
          ?>
 <!--if($_GET['btAuditar']=="Auditar"){
-             include("inc/empreiteiras/auditar.php");
+             require_once("inc/empreiteiras/auditar.php");
          }-->

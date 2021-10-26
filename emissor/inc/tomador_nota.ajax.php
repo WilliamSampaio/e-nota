@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-  include("../../include/conect.php");
-  include("../../funcoes/util.php");
+  require_once("../../include/conect.php");
+  require_once("../../funcoes/util.php");
   $cnpjcpf =$_GET['txtTomadorCNPJ'];
 
 	if($cnpjcpf!=""){
@@ -41,7 +41,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <table width="100%" border="0" cellspacing="2" cellpadding="2"> 
 <tr>
-    <td width="25%" align="left">Nome/Raz&atilde;o Social<font color="#FF0000">*</font></td>
+    <td width="25%" align="left">Nome/Razão Social<font color="#FF0000">*</font></td>
     <td width="75%" align="left"><input name="txtTomadorNome" id="txtTomadorNome"  type="text" size="55" class="texto" value="<?php echo $tomador ;?>">
 </td>
   </tr>
@@ -52,17 +52,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</td>
   </tr>
   <tr>
-      <td align="left">Inscri&ccedil;&atilde;o Municipal</td>
+      <td align="left">Inscrição Municipal</td>
     <td align="left"><input name="txtTomadorIM" type="text" id="txtTomadorIM" size="30" onkeydown="return NumbersOnly( event );" class="texto" value="<?php echo $dados->inscrmunicipal ;?>"<?php echo $disable; ?>></td>
   </tr>
   <tr>
-      <td align="left">Inscri&ccedil;&atilde;o Estadual</td>
+      <td align="left">Inscrição Estadual</td>
     <td align="left"><input name="txtTomadorIE" type="text" size="30" onkeydown="return NumbersOnly( event );" class="texto" value="<?php echo $dados->inscrestadual ;?>"<?php echo $disable; ?>></td>
   </tr>
   <tr>
     <td align="left">Logradouro</td>
     <td align="left"><input name="txtTomadorLogradouro" id="txtTomadorLogradouro" type="text" size="30" class="texto" value="<?php echo $dados->logradouro ;?>" <?php echo $disable; ?>>
-        &nbsp;&nbsp;N&uacute;mero <input name="txtTomadorNumero" type="text" onkeydown="return NumbersOnly( event );" size="5" class="texto" maxlength="5" value="<?php echo $dados->numero ;?>" <?php echo $disable; ?>/>
+        Número <input name="txtTomadorNumero" type="text" onkeydown="return NumbersOnly( event );" size="5" class="texto" maxlength="5" value="<?php echo $dados->numero ;?>" <?php echo $disable; ?>/>
 	</td>
   </tr>
   <tr>
@@ -92,7 +92,7 @@ Fith Floor, Boston, MA 02110-1301, USA
   </tr>
   <tr>
     <td align="left">
-		Munic&iacute;pio<font color="#FF0000">*</font></td>
+		Município<font color="#FF0000">*</font></td>
     <td align="left">
         <div  id="divTomadorMunicipio">
         	<input type="hidden" name="txtTomadorMunicipio" id="txtTomadorMunicipio" value="<?php echo $dados->municipio ;?>" />

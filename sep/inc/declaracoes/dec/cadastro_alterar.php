@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	mysql_query("UPDATE cadastro SET nome='$nome', razaosocial='$razaosocial', cnpj='$cnpj', logradouro='$logradouro', municipio='$municipio', uf='$uf', email='$email', fonecomercial='$fonecomercial', fonecelular='$fonecelular', estado='$estado' WHERE codigo='$cod'"); 
+	$PDO->query("UPDATE cadastro SET nome='$nome', razaosocial='$razaosocial', cnpj='$cnpj', logradouro='$logradouro', municipio='$municipio', uf='$uf', email='$email', fonecomercial='$fonecomercial', fonecelular='$fonecelular', estado='$estado' WHERE codigo='$cod'"); 
 	
 	Mensagem("Dados alterados com sucesso!");				
 ?>							

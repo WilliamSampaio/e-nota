@@ -26,7 +26,7 @@
 			ORDER BY 
 				servicos.descricao
 		");
-	}else{ //Se mes não tiver sido selecionado
+	}else{ //Se mes nÃ£o tiver sido selecionado
 		$query =("
 			SELECT
 				servicos.codigo,
@@ -42,14 +42,14 @@
 		");
 	}//Fim do else
 	
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa); //Pega quantos resultados voltaram
 	
 	if($result){ //Se existir algum registro, mostra na tabela
 ?>
 
 
-<!-- Início da Tabela -->
+<!-- Inï¿½cio da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999">
 		<?php
@@ -61,16 +61,16 @@
 	</tr>
 		
 	<tr style="background-color:#999999; font-weight:bold" align="center">
-		<td>Descri&ccedil;&atilde;o</td>
+		<td>DescriÃ§Ã£o</td>
 		<td>Regime Fixo</td>
-		<td>Al&iacute;quota</td>
-		<td>Incid&ecirc;ncia</td>
+		<td>AlÃ­quota</td>
+		<td>IncidÃªncia</td>
 		<td>Estado</td>
 	</tr>
 	
 <?php
-while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
-	switch($dados_pesquisa['estado']){ //Define estado como Ativo, Inativo ou não liberado
+while($dados_pesquisa = $sql_pesquisa->fetch()){
+	switch($dados_pesquisa['estado']){ //Define estado como Ativo, Inativo ou nÃ£o liberado
 		case "A":
 			$dados_pesquisa['estado'] = "Ativo";
 			break;
@@ -82,12 +82,12 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 			break;
 	}//Fim do switch
 	
-	if(strlen($dados_pesquisa['descricao']) > 55) //Contas os caracteres da descrição; se passar de 55, coloca "..."
+	if(strlen($dados_pesquisa['descricao']) > 55) //Contas os caracteres da descriï¿½ï¿½o; se passar de 55, coloca "..."
 		$desc = ResumeString($dados_pesquisa['descricao'],55);
 	else
 		$desc = $dados_pesquisa['descricao'];
 	
-	//pega a incindencia caso não tenha vindo mes
+	//pega a incindencia caso nÃ£o tenha vindo mes
 	if($mes<1 || $mes>12){
 		$cod = $dados_pesquisa['codigo'];
 		$query_incidencia =("
@@ -104,10 +104,10 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 			WHERE 
 				notas_servicos.codservico = $cod
 		");
-		$sql_incidencia = mysql_query ($query_incidencia);
+		$sql_incidencia = $PDO->query($query_incidencia);
 		$result_incidencia = mysql_num_rows($sql_incidencia);
 		if($result_incidencia)
-			$incidencia = mysql_fetch_array($sql_incidencia);
+			$incidencia = $sql_incidencia->fetch();
 		else
 			$incidencia = 0;
 	}else
@@ -121,7 +121,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 		<td><?php echo $dados_pesquisa['estado'];?></td>
 	</tr>
 <?php
-}//Fim do while($dados_pesquisa = mysql_fetch_array($sql_pesquisa))
+}//Fim do while($dados_pesquisa = $sql_pesquisa))
 ?>
 </table>
 <!-- Fim da Tabela -->
@@ -132,7 +132,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>NÃ£o hÃ¡ resultados!</td>
 	</tr>
 </table>
 <?php

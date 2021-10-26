@@ -1,15 +1,15 @@
-<!-- InÌcio da Tabela -->
+<!-- InÔøΩcio da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
       <tr style="background-color:#999999; font-weight:bold" align="center">
           <td align="center">Categoria</td>
-          <td align="center">Quantidade de Servi&ccedil;os</td>
+          <td align="center">Quantidade de Servi√ßos</td>
           <td align="center">Percentual</td>
       </tr>
-      <?php  //comando sql que mostrar· as categorias e a quantidade de cada um (Lista EstatÌstica)
-        $sqlTotal = mysql_query("SELECT COUNT(codigo) FROM servicos");
-        list($total) = mysql_fetch_array($sqlTotal);
+      <?php  //comando sql que mostrarÔøΩ as categorias e a quantidade de cada um (Lista EstatÔøΩstica)
+        $sqlTotal = $PDO->query("SELECT COUNT(codigo) FROM servicos");
+        list($total) = $sqlTotal->fetch();
 
-        $sql_categ = mysql_query("
+        $sql_categ = $PDO->query("
             SELECT
                 servicos_categorias.nome, COUNT(servicos_categorias.nome), servicos_categorias.codigo
             FROM
@@ -20,7 +20,7 @@
          ");
         $cont = 0;
         $percentual = 0;
-        while(list($nome,$qtd,$codCategoria)=mysql_fetch_array($sql_categ)){
+        while(list($nome,$qtd,$codCategoria)=$sql_categ->fetch()){
             $percent = $qtd*100/$total;
             echo "
                 <tr>
@@ -29,12 +29,12 @@
                     <td align=\"center\">".DecToMoeda($percent)."%</td>
                 </tr>
                 <tr style=\"background-color:#999999; font-weight:bold\" align=\"center\">
-                    <td align=\"center\" colspan=\"2\">Servi&ccedil;os da categoria $nome</td>
+                    <td align=\"center\" colspan=\"2\">Servi√ßos da categoria $nome</td>
                     <td align=\"center\">Quantidade de Prestadores</td>
                 </tr>
             ";
 
-            $sqlServicos = mysql_query("
+            $sqlServicos = $PDO->query("
                SELECT servicos.descricao, COUNT(cadastro_servicos.codigo) AS qtdPrestadores
                FROM servicos INNER JOIN servicos_categorias
                ON servicos.codcategoria = servicos_categorias.codigo

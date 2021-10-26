@@ -20,19 +20,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
     <?php
 
-    include("../../inc/conect.php");
-    include("../../funcoes/util.php");
+    require_once("../../inc/conect.php");
+    require_once("../../funcoes/util.php");
     // variaveis vindas do conect.php
     // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF
 
-    $sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+    $sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
     //preenche a variavel com os valores vindos do banco
-    list($BRASAO) = mysql_fetch_array($sql_brasao);
+    list($BRASAO) = $sql_brasao->fetch();
 
     $meses = array(
         1  => "Janeiro",
         2  => "Fevereiro",
-        3  => "Mar&ccedil;o",
+        3  => "Mar√ßo",
         4  => "Abril",
         5  => "Maio",
         6  => "Junho",
@@ -98,7 +98,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td width="584" height="33" colspan="2">
               <span class="style1">
                   <center>
-                     <p>RELAT&Oacute;RIO DE <b>ACOMPANHAMENTO DE ISSQN</b> </p>
+                     <p>RELAT√ìRIO DE <b>ACOMPANHAMENTO DE ISSQN</b> </p>
                      <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
                      <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
                   </center>
@@ -115,7 +115,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             $nomeMes      = $meses[$mes];
 
            
-            $sqlValores1 = mysql_query("
+            $sqlValores1 = $PDO->query("
                SELECT  					
 					SUM(g.valor) AS valor,
 					SUM(l.valorisstotal) AS totaliss
@@ -128,7 +128,7 @@ Fith Floor, Boston, MA 02110-1301, USA
            ");
            $valores1 = mysql_fetch_object($sqlValores1);
 		   
-		   $sqlValores2 = mysql_query("
+		   $sqlValores2 = $PDO->query("
                SELECT  					
 					SUM(g.valor) AS valor,
 					SUM(l.valorisstotal) AS totaliss
@@ -144,11 +144,11 @@ Fith Floor, Boston, MA 02110-1301, USA
         <table width="95%" border="1" cellspacing="0" class="tabelameio"  >
             <tr>
                 <td width="32%">
-                   <?php if(mysql_num_rows($sqlValores1) > 0)echo "<b>Per&iacute;odo:</b> ".date("d/m/Y",strtotime("-$nromeses month"))." - ".date("d/m/Y")." ($nromeses meses)"; ?>
+                   <?php if(mysql_num_rows($sqlValores1) > 0)echo "<b>Per√≠odo:</b> ".date("d/m/Y",strtotime("-$nromeses month"))." - ".date("d/m/Y")." ($nromeses meses)"; ?>
                 </td>
                 <td>
                     <?php
-                       echo "<b>Total de ISS n„o pago:</b> R$ ".DecToMoeda($valores1->totaliss);
+                       echo "<b>Total de ISS n√£o pago:</b> R$ ".DecToMoeda($valores1->totaliss);
                     ?>
                 </td>
                 <td>
@@ -159,7 +159,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             </tr>
         </table>
         <?php
-            //Sql buscando as informaÁıes que o usuario pediu e com o limit estipulado pela funÁ„o
+            //Sql buscando as informaÔøΩÔøΩes que o usuario pediu e com o limit estipulado pela fun√ß√£o
             $varcont= $_POST['hdContador'];
 
             $query = ("
@@ -174,7 +174,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				WHERE g.datavencimento BETWEEN DATE_SUB(NOW(), INTERVAL $nromeses MONTH) AND NOW() 
 				AND l.codcadastro = $codPrestador
             ");
-            $sql = mysql_query($query);
+            $sql = $PDO->query($query);
             $result = mysql_num_rows($sql);
             $x = 0;
             if($result == 1){
@@ -191,14 +191,14 @@ Fith Floor, Boston, MA 02110-1301, USA
                       <td align="center"><strong>Prestador</strong></td>
                       <td align="center"><strong>CPF / CNPJ</strong></td>
                       <td align="center"><strong>Pago</strong></td>
-                      <td align="center"><strong>Per&iacute;odo</strong></td>
+                      <td align="center"><strong>Per√≠odo</strong></td>
                       <td align="center"><strong>ISS</strong></td>
 
                   </tr>
                 <?php
             }
             $cont = 0;
-            while($dados_pesquisa = mysql_fetch_array($sql)){
+            while($dados_pesquisa = $sql->fetch()){
                 if(strlen($dados_pesquisa['nome']) > 40){
                     $descricao = ResumeString($dados_pesquisa['nome'],40);
                 }else{
@@ -208,7 +208,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <tr id="trDecc<?php echo $x;?>">
                 <td bgcolor="white" align="center" title="<?php echo $dados_pesquisa['nome'];?>"><?php echo $descricao;?></td>
                 <td bgcolor="white" align="center"><?php echo $dados_pesquisa['doc'];?></td>
-                <td bgcolor="white" align="center"><?php if($dados_pesquisa['pago'] == 'N')echo 'N&atilde;o'; else echo 'Sim'; ?></td>
+                <td bgcolor="white" align="center"><?php if($dados_pesquisa['pago'] == 'N')echo 'N√£o'; else echo 'Sim'; ?></td>
                 <td bgcolor="white" align="center"><?php echo implode("/",array_reverse(explode("-",$dados_pesquisa['periodo']))); ?></td>
                 <td bgcolor="white" align="center">R$ <?php echo DecToMoeda($dados_pesquisa['totaliss']);?></td>
 

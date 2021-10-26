@@ -23,6 +23,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$tolerancia = $_POST['txtDias'];
 	$juros      = $_POST['txtJuros'];
 	$estado     = $_POST['cmbEstado'];
-	mysql_query("INSERT INTO juros SET dias = '$tolerancia', juro = '$juros', estado = '$estado'");
+	$PDO->query("INSERT INTO juros SET dias = '$tolerancia', juro = '$juros', estado = '$estado'");
 	Mensagem_onload("Regra de Juros inserida!");
 ?>

@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../conect.php");
-include("../../funcoes/util.php");
+require_once("../conect.php");
+require_once("../../funcoes/util.php");
 //recebimento por get das variaveis
 $combo = $_GET["cmbLogs"];
 
@@ -38,7 +38,7 @@ if($combo){
 <fieldset><legend>Logs <?php echo $legend;?></legend>
 	<table width="100%">
 		<tr>
-		  <td width="91">Usuário:</td>
+		  <td width="91">Usuï¿½rio:</td>
 		  <td width="1286"><input name="txtNome" id="txtNome" type="text" class="texto" size="30" /></td>
 		</tr>
 		<tr>

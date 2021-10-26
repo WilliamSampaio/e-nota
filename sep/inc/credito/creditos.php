@@ -38,17 +38,17 @@ if($_POST['btConfirma']=="Confirmar"){
 	if($_POST['hdCodImovel'.$x]!=""){
 		$codimovel = $_POST['hdCodImovel'.$x];	
 	}
-	$imoveis = new Postgre_Smabas01();
-	$imoveis->setNumCad($codimovel);
-	$imoveis->CarregaNumCad();
-	$imoveis->setVlrDesc($imoveis->getVlrDesc()+$valorcredito);
-	$imoveis->AtualizaValor();
+	// $imoveis = new Postgre_Smabas01();
+	// $imoveis->setNumCad($codimovel);
+	// $imoveis->CarregaNumCad();
+	// $imoveis->setVlrDesc($imoveis->getVlrDesc()+$valorcredito);
+	// $imoveis->AtualizaValor();
 	$creditonovo = $creditocadastro - $valorcredito;
-	mysql_query("UPDATE cadastro SET credito='$creditonovo' WHERE codigo = '$codcadastro'");
+	$PDO->query("UPDATE cadastro SET credito='$creditonovo' WHERE codigo = '$codcadastro'");
 	$hoje = date("Y-m-d H:i:s");
-	mysql_query("INSERT INTO creditos_imoveis_usado (codcadastro, creditousado, creditoanterior, creditoatual, data) VALUES ('$codcadastro','$valorcredito','$creditocadastro','$creditonovo','$hoje')");
-	mysql_query("UPDATE creditos_imoveis SET estado = 'U' WHERE codigo='$codigoimoveis'");
-	Mensagem("Cr&eacute;ditos usados");
+	$PDO->query("INSERT INTO creditos_imoveis_usado (codcadastro, creditousado, creditoanterior, creditoatual, data) VALUES ('$codcadastro','$valorcredito','$creditocadastro','$creditonovo','$hoje')");
+	$PDO->query("UPDATE creditos_imoveis SET estado = 'U' WHERE codigo='$codigoimoveis'");
+	Mensagem("Créditos usados");
 }
 ?>
 <script>
@@ -65,7 +65,7 @@ function atualizacreditos(valormaximo,valortotal){
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - cr&eacute;ditos gerados </td>
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - créditos gerados </td>
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -75,15 +75,15 @@ function atualizacreditos(valormaximo,valortotal){
 <form id="frmCreditos" name="frmCreditos" method="post">
 <input name="include" id="include" type="hidden" value="<?php echo $_POST["include"];?>" />
 <fieldset>
-<legend><strong>Solicita&ccedil;&otilde;es</strong></legend>
+<legend><strong>Solicitações</strong></legend>
 <table align="left" width="50%">
 <tbody>
     <tr>
         <td>
             <select style="width: 350px" name="cmbTomador" id="cmbTomador">
-                <option value="">Selecione o tomador com cr�ditos</option>
+                <option value="">Selecione o tomador com créditos</option>
                     <?php
-                        $sql_categoria=mysql_query("
+                        $sql_categoria=$PDO->query("
                             SELECT
                                 cadastro.nome,
                                 IF(
@@ -93,7 +93,7 @@ function atualizacreditos(valormaximo,valortotal){
                                 ) AS doc
                             FROM cadastro WHERE credito > 0
                         ");
-                        while(list($nome,$doc)=mysql_fetch_array($sql_categoria)){
+                        while(list($nome,$doc)=$sql_categoria->fetch()){
                             print("<option value=\"$doc\">$nome</option>");
                         }
                     ?>
@@ -104,7 +104,7 @@ function atualizacreditos(valormaximo,valortotal){
     	<td colspan="5"><input type="submit" name="btnBuscar" id="btnBuscar" value="Buscar" class="botao" onclick="btnBuscarCred_click(); return false;" /></td>
     </tr>
     <tr>
-    	<td colspan="5"><label><input name="ckUsados" type="checkbox" value="S" /> Listar cr&eacute;ditos usados.</label></td>
+    	<td colspan="5"><label><input name="ckUsados" type="checkbox" value="S" /> Listar créditos usados.</label></td>
     </tr>
 </tbody>
 </table>

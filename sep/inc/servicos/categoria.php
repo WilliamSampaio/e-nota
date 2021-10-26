@@ -28,16 +28,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 			$categoria = $_POST["txtCategoria"];
 			if($categoria != "")
 				{
-					$sql_verifica = mysql_query("SELECT codigo FROM servicos_categorias WHERE nome='$categoria'");
+					$sql_verifica = $PDO->query("SELECT codigo FROM servicos_categorias WHERE nome='$categoria'");
 					if(mysql_num_rows($sql_verifica)>0)
 						{
-							Mensagem("J� existe uma categoria com esse nome!");
+							Mensagem("Já existe uma categoria com esse nome!");
 						}
 					else
 						{	
 							
-							$sql = mysql_query("INSERT INTO servicos_categorias SET nome='$categoria', tipo = '$tipo'");
-							add_logs('Inseriu uma categoria de Servi�o');
+							$sql = $PDO->query("INSERT INTO servicos_categorias SET nome='$categoria', tipo = '$tipo'");
+							add_logs('Inseriu uma categoria de Serviço');
 							Mensagem("Categoria inserida com sucesso!");
 						}	
 				}
@@ -49,14 +49,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($_POST["btSalvar"] == "Salvar"){
 		$desc = $_POST["txtServicoEdit"];
 		$codserv = $_POST["hdCodServ"];
-		mysql_query("UPDATE servicos_categorias SET nome = '$desc' WHERE codigo = '$codserv'");
+		$PDO->query("UPDATE servicos_categorias SET nome = '$desc' WHERE codigo = '$codserv'");
 		Mensagem("Categoria atualizada");
 	}//fim if
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Servi&ccedil;os - Categorias</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Serviços - Categorias</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -70,7 +70,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 					<table>
 						<tr>
-							<td>Nome da sess&atilde;o</td>
+							<td>Nome da sessão</td>
 							<td><input type="text" class="texto" name="txtCategoria" id="txtCategoria" size="50" /></td>
 							<td><input type="submit" class="botao" name="btInserirCategoria" value="Inserir" onclick="return ValidaFormulario('txtCategoria|cmbTipo')" /></td>
 						</tr>
@@ -81,9 +81,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<br />
 				<table width="100%" border="0" cellspacing="0" cellpadding="1">
 						<?php
-							$sql = mysql_query("SELECT codigo, nome FROM servicos_categorias");
+							$sql = $PDO->query("SELECT codigo, nome FROM servicos_categorias");
 							$x = 0;
-							while(list($codigo,$nome) = mysql_fetch_array($sql))
+							while(list($codigo,$nome) = $sql->fetch())
 								{
 						?>			<tr>	
 										<td width="86%" bgcolor="#FFFFFF">

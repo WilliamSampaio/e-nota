@@ -30,8 +30,8 @@ $total           = 0;
 $codverificacao  = gera_codverificacao();
 $codobra         = $_POST['cmbObra'];
 
-$sql_busca_cod = mysql_query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj'");
-list($cod_orgao) = mysql_fetch_array($sql_busca_cod);
+$sql_busca_cod = $PDO->query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj'");
+list($cod_orgao) = $sql_busca_cod->fetch();
 
 for($c=1;$c<=$num_servicos;$c++){
 	$CNPJPrestador[$c] = $_POST['txtCNPJPrestador'.$c];
@@ -46,7 +46,7 @@ for($c=1;$c<=$num_servicos;$c++){
 $multaJuros = MoedaToDec($_POST['txtMultaJuros']);
 $totalPagar = MoedaToDec($_POST['txtImpostoTotal']);
 
-mysql_query("INSERT INTO decc_des
+$PDO->query("INSERT INTO decc_des
 			 SET codempreiteira='$cod_orgao',
              codobra='$codobra',
              competencia='$dataCompetencia',
@@ -54,12 +54,12 @@ mysql_query("INSERT INTO decc_des
              total='$total',
              iss='$totalPagar',
              codverificacao='$codverificacao'");
-$sql_des = mysql_query("SELECT MAX(codigo)FROM decc_des");
-list($cod_des)=mysql_fetch_array($sql_des);
+$sql_des = $PDO->query("SELECT MAX(codigo)FROM decc_des");
+list($cod_des)=$sql_des->fetch();
 
 for($c=1;$c<=$num_servicos;$c++){
 	if($baseCalculo[$c]!=""&&$codigoServico[$c]!=""){
-        mysql_query("INSERT INTO decc_des_notas
+        $PDO->query("INSERT INTO decc_des_notas
                      SET coddecc_des='$cod_des',
                      codservico='".$codigoServico[$c]."',
                      valornota='".$baseCalculo[$c]."',

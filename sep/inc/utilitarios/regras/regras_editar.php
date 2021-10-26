@@ -25,6 +25,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$estado     = $_POST['cmbEstadoEdit'];
 	$cod_update = $_POST['hdCodMultaAtualizar'];
 	
-	mysql_query("UPDATE multas SET dias = '$tolerancia', multa = '$multa', estado = '$estado' WHERE codigo = '$cod_update'");
+	$PDO->query("UPDATE multas SET dias = '$tolerancia', multa = '$multa', estado = '$estado' WHERE codigo = '$cod_update'");
 	Mensagem_onload("Regra de multa atualizada!");
 ?>

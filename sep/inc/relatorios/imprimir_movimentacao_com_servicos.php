@@ -18,7 +18,7 @@ $query = ("
                 AND notas.estado <> 'C'
 			");
 			
-$sql_pesquisa = mysql_query($query);
+$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa);
 	
 	
@@ -38,8 +38,8 @@ if(mysql_num_rows($sql_pesquisa)){
 	{
 		echo "<b>Foram encontrados $result  Resultados</b>";
 	} ?>
-      <td width="40%" align="center"><strong>ServiÁo</strong></td>
-      <td width="25%" align="center"><strong>MovimentaÁ„o Financeira</strong></td>
+      <td width="40%" align="center"><strong>Servi√ßo</strong></td>
+      <td width="25%" align="center"><strong>Movimenta√ß√£o Financeira</strong></td>
       <td width="15%" align="center"><strong>ISS</strong></td>
       <td width="20%" align="center"><strong>ISS Retido</strong></td>
 
@@ -50,16 +50,16 @@ if(mysql_num_rows($sql_pesquisa)){
 		$tipos_extenso = array(
 			"prestador"              => "Prestador",
 			"empreiteira"            => "Empreiteira",
-			"instituicao_financeira" => "InstituiÁ„o Financeira",
-			"cartorio"               => "CartÛrio",
-			"operadora_credito"      => "Operadora de CrÈdito",
-			"grafica"                => "Gr·fica",
+			"instituicao_financeira" => "Institui√ß√£o Financeira",
+			"cartorio"               => "CartÔøΩrio",
+			"operadora_credito"      => "Operadora de Cr√©dito",
+			"grafica"                => "GrÔøΩfica",
 			"contador"               => "Contador",
 			"tomador"                => "Tomador",
-			"orgao_publico"          => "Org„o P˙blico",
+			"orgao_publico"          => "OrgÔøΩo PÔøΩblico",
 			"simples"                => "Simples"
 		);
-		while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+		while($dados_pesquisa = $sql_pesquisa->fetch()){
 			$declaracoes = $dados_pesquisa['declaracao'];
 		//print_array($dados_pesquisa);
 
@@ -71,8 +71,8 @@ if(mysql_num_rows($sql_pesquisa)){
 					WHERE
 						codigo = $codServ
 					";
-			$varnome=mysql_query($nomeServico);
-			$resposta=mysql_fetch_array($varnome);
+			$varnome=$PDO->query($nomeServico);
+			$resposta=$varnome->fetch();
 			$resposta['resumo']=substr($resposta['descricao'], 0, 40);
 
 	if ($dados_pesquisa['movimentacao']=="")
@@ -112,8 +112,8 @@ if(mysql_num_rows($sql_pesquisa)){
 <table width="700px" class="tabela">
 <?php
 }else{
- //caso n„o encontre resultados, a mensagem 'N„o h· resultados!' ser· mostrada na tela
-	echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">N„o h· resultados!</font></center></td></b></tr>";
+ //caso n√£o encontre resultados, a mensagem 'N√£o h√° resultados!' ser√° mostrada na tela
+	echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">N√£o h√° resultados!</font></center></td></b></tr>";
 }
 ?>
 </table>

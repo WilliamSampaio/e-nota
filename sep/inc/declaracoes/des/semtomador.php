@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php 
 //$emissor_CNPJ vem do gerarguia.php
 
-$sql_emissor = mysql_query ("
+$sql_emissor = $PDO->query("
 		SELECT 
 			codigo, 
 			nome, 
@@ -45,9 +45,9 @@ $sql_emissor = mysql_query ("
 $tipopessoa = tipoPessoa($emissor_CNPJ);
 
 list($cod_emissor,$nome_emissor,$razao_emissor,$im_emissor,$logradouro_emissor,$numero_emissor,$complemento_emissor,
-		$bairro_emissor,$cep_emissor,$municipio_emissor,$uf_emissor,$email_emissor)=mysql_fetch_array($sql_emissor);
+		$bairro_emissor,$cep_emissor,$municipio_emissor,$uf_emissor,$email_emissor)=$sql_emissor->fetch();
 
-if(mysql_num_rows($sql_emissor)){
+if($sql_emissor->rowCount()){
 ?>
 
 <form method="post" name="frmDesSemTomador">
@@ -58,37 +58,37 @@ if(mysql_num_rows($sql_emissor)){
 
 		<table width="100%" height="100%" border="0" align="center" cellpadding="3" cellspacing="2">
 <tr>
-				<td colspan="2" align="left"><em><strong>C&aacute;lculo de Receita Bruta sem Discrimina&ccedil;&atilde;o de Tomadores<br>
-  Guia destinada SOMENTE para tributa&ccedil;&atilde;o de receitas PR&Oacute;PRIAS. </strong></em></td>
+				<td colspan="2" align="left"><em><strong>Cálculo de Receita Bruta sem Discriminação de Tomadores<br>
+  Guia destinada SOMENTE para tributação de receitas PRÓPRIAS. </strong></em></td>
 		</tr>
 			<tr>
 				<td width="27%" align="left" valign="middle">CNPJ:</td>
 			    <td width="73%" align="left" valign="middle" bgcolor="#FFFFFF"><?php echo $emissor_CNPJ; ?></td>
 		  </tr>
 			<tr>
-			  <td align="left" valign="middle">Inscri&ccedil;&atilde;o Municipal:</td>
+			  <td align="left" valign="middle">Inscrição Municipal:</td>
 			  <td align="left" valign="middle" bgcolor="#FFFFFF"><?php echo $im_emissor;?></td>
 		  </tr>
 			<tr>
-			  <td align="left" valign="middle">Raz&atilde;o Social:</td>
+			  <td align="left" valign="middle">Razão Social:</td>
 			  <td align="left" valign="middle" bgcolor="#FFFFFF"><?php echo $razao_emissor;?></td>
 		  </tr>
 			<tr>
-			  <td align="left" valign="middle">Endere&ccedil;o:</td>
+			  <td align="left" valign="middle">Endereço:</td>
 			  <td align="left" valign="middle" bgcolor="#FFFFFF"><?php echo "$logradouro_emissor - $numero_emissor - $complemento_emissor - $municipio_emissor - $uf_emissor";?></td>
 		  </tr>
 			<tr>
-			  <td align="left" valign="middle">&nbsp;</td>
-			  <td align="left" valign="middle">&nbsp;</td>
+			  <td align="left" valign="middle"></td>
+			  <td align="left" valign="middle"></td>
 		  </tr>
 			<tr>
-			  <td align="left" valign="middle">Per&iacute;odo</td>
+			  <td align="left" valign="middle">Período</td>
 			  <td align="left" valign="middle">
 				  	<?php
 					$mes_atual = date('n');
 					$ano_atual = date('Y');
 					//array de meses comencando em 1 ate 12
-					$meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+					$meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 					?>
 					  <select name="cmbMes" id="cmbMes" onchange="SomaImpostosDes();CalculaMultaDes();">
 						  <option value=""></option>
@@ -114,22 +114,22 @@ if(mysql_num_rows($sql_emissor)){
 			  <td colspan="2" align="center" valign="top">
 <?php
 //pega o dia pra tributacao do mes da tabela configucacoes
-$sql_data_trib = mysql_query("SELECT data_tributacao FROM configuracoes");
+$sql_data_trib = $PDO->query("SELECT data_tributacao FROM configuracoes");
 
-list($dia_mes)=mysql_fetch_array($sql_data_trib);
+list($dia_mes)=$sql_data_trib->fetch();
 campoHidden("hdDia",$dia_mes);
 
 $dataatual = date("d/m/Y");
 campoHidden("hdDataAtual",$dataatual);
 //pega a regra de multas do banco
-$sql_multas = mysql_query(" SELECT codigo, dias, multa, juros_mora
+$sql_multas = $PDO->query(" SELECT codigo, dias, multa, juros_mora
 							FROM des_multas_atraso 
 							WHERE estado='A'
 							ORDER BY dias ASC");
-$nroMultas = mysql_num_rows($sql_multas);
+$nroMultas = $sql_multas->rowCount();
 echo "<input type=\"hidden\" name=\"hdnroMultas\" id=\"hdNroMultas\" value=\"$nroMultas\" />\n";
 $n = 0;
-while(list($multa_cod, $multa_dias, $multa_valor, $multa_juros) = mysql_fetch_array($sql_multas)){
+while(list($multa_cod, $multa_dias, $multa_valor, $multa_juros) = $sql_multas->fetch()){
 	echo "<input type=\"hidden\" name=\"hdMulta_dias$n\" id=\"hdMulta_dias$n\" value=\"$multa_dias\" />
 		  <input type=\"hidden\" name=\"hdMulta_valor$n\" id=\"hdMulta_valor$n\" value=\"$multa_valor\" />
 		  <input type=\"hidden\" name=\"hdMulta_juros$n\" id=\"hdMulta_juros$n\" value=\"$multa_juros\" />\n";
@@ -139,17 +139,17 @@ unset($n);
 
 
 //pega o numero de servicos do emissor
-$sql_servicos = mysql_query("SELECT codservico 
+$sql_servicos = $PDO->query("SELECT codservico 
 							 FROM cadastro_servicos
 							 WHERE codemissor='$cod_emissor'");
-$num_servicos = mysql_num_rows($sql_servicos);
+$num_servicos = $sql_servicos->rowCount();
 
 ?>
 			    <table border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#CCCCCC" bgcolor="#FFFFFF">
                 <tr>
-                  <td width="200" align="center" bgcolor="#CCCCCC">Servi&ccedil;o</td>
-                  <td width="70" align="center" bgcolor="#CCCCCC">Al&iacute;q (%)</td>
-                  <td width="150" align="center" bgcolor="#CCCCCC">Base de C&aacute;lculo (R$)</td>
+                  <td width="200" align="center" bgcolor="#CCCCCC">Serviço</td>
+                  <td width="70" align="center" bgcolor="#CCCCCC">Alíq (%)</td>
+                  <td width="150" align="center" bgcolor="#CCCCCC">Base de Cálculo (R$)</td>
 				  <td align="center" bgcolor="#CCCCCC">ISS Retido (R$)</td>
                   <td width="150" align="center" bgcolor="#CCCCCC">Imposto (R$)</td>
                 </tr>
@@ -170,7 +170,7 @@ for($c=1;$c<=$num_servicos;$c++){
 								CalculaImpostoDes(txtBaseCalculo<?php echo $c;?>,txtAliquota<?php echo $c;?>,txtImposto<?php echo $c;?>);">
                     <option></option>
                     <?php
-						$sql_servicos2 = mysql_query("
+						$sql_servicos2 = $PDO->query("
 							SELECT 
 								servicos.codigo, 
 								servicos.descricao, 
@@ -186,11 +186,11 @@ for($c=1;$c<=$num_servicos;$c++){
 						");
 						
 						
-						if(!mysql_num_rows($sql_servicos2)){					
-							$sql_servicos2 = mysql_query("SELECT servicos.codigo, servicos.descricao, servicos.aliquota FROM servicos ORDER BY descricao");
+						if(!$sql_servicos2->rowCount()){					
+							$sql_servicos2 = $PDO->query("SELECT servicos.codigo, servicos.descricao, servicos.aliquota FROM servicos ORDER BY descricao");
 						}				 
 										 
-						while(list($cod_serv, $desc_serv, $aliq_serv) = mysql_fetch_array($sql_servicos2))
+						while(list($cod_serv, $desc_serv, $aliq_serv) = $sql_servicos2->fetch())
 						{
 							if(strlen($desc_serv)>100)
 								$desc_serv = substr($desc_serv,0,100)."...";
@@ -250,13 +250,13 @@ for($c=1;$c<=$num_servicos;$c++){
 			  <td align="left" valign="middle"><input type="text" name="txtTotalPagar" id="txtTotalPagar" value="0,00" style="text-align:right;" readonly="readonly" size="16" class="texto" /></td>
 		  </tr>
 		  <tr>
-			  <td align="left" valign="middle">&nbsp;</td>
+			  <td align="left" valign="middle"></td>
 			  <td align="left" valign="middle"><em>* Confira seus dados antes de continuar<br>
               ** Desabilite seu bloqueador de pop-up</em></td>
 		  </tr>
 		  <tr>
 			  <td align="right" valign="middle">
-			  	<input type="submit" value="Declarar" name="btDeclararSemtomador" class="botao" onclick="return (ValidaFormulario('cmbMes|cmbAno|cmbCodServico1|txtBaseCalculo1','O Per�odo e pelo menos um servi�o devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
+			  	<input type="submit" value="Declarar" name="btDeclararSemtomador" class="botao" onclick="return (ValidaFormulario('cmbMes|cmbAno|cmbCodServico1|txtBaseCalculo1','O Período e pelo menos um serviço devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
 			  </td>
 			  <td align="left" valign="middle"><input type="submit" name="btVoltar" id="btVoltar" class="botao" value="Voltar" /></td>
 		  </tr>
@@ -265,6 +265,6 @@ for($c=1;$c<=$num_servicos;$c++){
 </form>
 <?php
 }else{
-	echo "<b>CNPJ/CPF n�o cadastrado ou n�o foi liberado!</b>";
+	echo "<b>CNPJ/CPF não cadastrado ou não foi liberado!</b>";
 }
 ?>

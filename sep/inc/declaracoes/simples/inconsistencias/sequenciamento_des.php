@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
-	$query=mysql_query("SELECT MAX(nota_nro) as maxnota FROM inconsistencias 
+	$query=$PDO->query("SELECT MAX(nota_nro) as maxnota FROM inconsistencias 
 					    WHERE codemissor='{$cod_emissor}' AND tipo='sequencia'");			
 	if(mysql_num_rows($query)>0){
 		$min=mysql_fetch_object($query);	
@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$minimo = 1;
 	}	
 
-	$sql=mysql_query("SELECT cad.codigo,MIN(ds.nota_nro) as minnro,MAX(ds.nota_nro)as maxnro,simples_des.codigo as coddec 
+	$sql=$PDO->query("SELECT cad.codigo,MIN(ds.nota_nro) as minnro,MAX(ds.nota_nro)as maxnro,simples_des.codigo as coddec 
 						 	 FROM cadastro as cad
 						 	 INNER JOIN simples_des ON simples_des.codemissor=cad.codigo
 							 INNER JOIN simples_des_servicos as ds ON ds.codsimples_des=simples_des.codigo							  
@@ -38,14 +38,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 			
 			while($dados=mysql_fetch_object($sql)){				
 				for($cont = $minimo ;$cont < $dados->maxnro;$cont++){
-					$query=mysql_query("SELECT cad.nome FROM cadastro as cad
+					$query=$PDO->query("SELECT cad.nome FROM cadastro as cad
 					 					INNER JOIN simples_des ON simples_des.codemissor=cad.codigo
 					 					INNER JOIN simples_des_servicos as ds ON ds.codsimples_des=simples_des.codigo					 					
 					 					WHERE ds.nota_nro='$cont' AND cad.codigo={$cod_emissor}");
 	
 					
 					if(mysql_num_rows($query)==0){											
-						$query=mysql_query("INSERT INTO inconsistencias SET codemissor='{$cod_emissor}',
+						$query=$PDO->query("INSERT INTO inconsistencias SET codemissor='{$cod_emissor}',
 						nota_nro='{$cont}',estado='A',tipo='sequencia',datahorainconsistencia=NOW()");				
 					}			
 				}

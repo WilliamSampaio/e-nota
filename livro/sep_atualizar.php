@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Utilit&aacute;rios - Usu&aacute;rios</td>  
+    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Utilit√°rios - Usu√°rios</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -33,10 +33,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<table width="100%">
 					<tr>
 						<td width="38%" align="right">
-							<input type="submit" class="botao" name="btUsuarios" value="Usu·rios" />
+							<input type="submit" class="botao" name="btUsuarios" value="UsuÔøΩrios" />
 						</td>
 						<td width="24%" align="center">
-							<input type="submit" class="botao" name="btNivel" value="NÌveis de Permiss„o" />
+							<input type="submit" class="botao" name="btNivel" value="NÔøΩveis de PermissÔøΩo" />
 						</td>
 						<td width="38%" align="left">
 							<input type="submit" class="botao" name="btOrdem" value="Ordem dos menus" />
@@ -46,12 +46,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 			</fieldset>
 		</form>
 			<?php
-				if($_POST["btUsuarios"] == "Usu·rios"){
-					include("inc/utilitarios/usuarios_inserir.php");
-				}elseif($_POST["btNivel"] == "NÌveis de Permiss„o"){
-					include("inc/utilitarios/usuarios_niveis.php");
+				if($_POST["btUsuarios"] == "UsuÔøΩrios"){
+					require_once("inc/utilitarios/usuarios_inserir.php");
+				}elseif($_POST["btNivel"] == "NÔøΩveis de PermissÔøΩo"){
+					require_once("inc/utilitarios/usuarios_niveis.php");
 				}elseif($_POST["btOrdem"] == "Ordem dos menus"){
-					include("inc/utilitarios/menus_ordem.php");
+					require_once("inc/utilitarios/menus_ordem.php");
 				}//fim elseif
 			?>
 	</td>

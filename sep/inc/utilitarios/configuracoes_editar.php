@@ -113,9 +113,9 @@ if(($brasao != "") && ($logo == "") && ($topo == "")){
 }elseif(($brasao != "") && ($logo != "") && ($topo != "")){
 	$string = ",brasao_nfe = '$brasao', logo_nfe = '$logo', topo_nfe = '$topo'";
 }//fim elseif
-$sql=mysql_query("SELECT * FROM configuracoes");
+$sql=$PDO->query("SELECT * FROM configuracoes");
 if(!mysql_num_rows($sql)){
-		mysql_query("
+		$PDO->query("
 			INSERT INTO 
 				configuracoes SET 
 				endereco = '$endereco', 
@@ -135,7 +135,7 @@ if(!mysql_num_rows($sql)){
 		");
 
 }else{
-		mysql_query("
+		$PDO->query("
 			UPDATE configuracoes SET 
 				endereco = '$endereco', 
 				cidade = '$cidade', 
@@ -153,10 +153,10 @@ if(!mysql_num_rows($sql)){
 				gerar_guia_site='$gerar_guia_site'
 		");
 }		
-add_logs('Atualizou uma Configuração');
+add_logs('Atualizou uma Configuraï¿½ï¿½o');
 if($alerta != 1){
 	Mensagem_onload("Dados atualizados");
 }else{
-	Mensagem_onload("O Logo, Brasão e Topo devem ter, no máximo, 100 pixels de altura por 100 pixels de largura cada.");
+	Mensagem_onload("O Logo, Brasï¿½o e Topo devem ter, no mÃ¡ximo, 100 pixels de altura por 100 pixels de largura cada.");
 }
 ?>

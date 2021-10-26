@@ -50,7 +50,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			ORDER BY
 				cadastro.razaosocial
 			");
-		if(mysql_num_rows($sql)>0){			  
+		if($sql->rowCount()>0){			  
 	?>
 	<table width="100%" border="0" cellpadding="2" cellspacing="2" align="left">
 			<tr>
@@ -58,7 +58,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td width="1058">
 					<select name="cmbContador">
 							<?php
-								while(list($codcontador,$razaosocialcontador)=$sql))
+								while(list($codcontador,$razaosocialcontador)=$sql->fetch())
 									{
 										echo "<option value=\"$codcontador\">$razaosocialcontador</option>";
 									}				  

@@ -24,8 +24,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	//Pega o codigo passado do arquivo regra_lista.ajax.php
 	$codigo = $_GET['hdcod'];
 	
-	$sql_multa = mysql_query("SELECT codigo, dias, multa , estado FROM multas WHERE codigo = '$codigo'");
-	list($codigo,$dias,$multa,$estado) = mysql_fetch_array($sql_multa);
+	$sql_multa = $PDO->query("SELECT codigo, dias, multa , estado FROM multas WHERE codigo = '$codigo'");
+	list($codigo,$dias,$multa,$estado) = $sql_multa->fetch();
 ?>
 <input name="hdCodMultaAtualizar" value="<?php echo $codigo;?>" type="hidden">
 <table width="100%">
@@ -43,7 +43,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		</td>
 		<td width="14%" bgcolor="#CCCCCC">
 			<input name="btEditar" type="submit" value="Salvar" class="botao" 
-			onclick="return (ValidaFormulario('txtDiasEdit|txtMultaEdit|cmbEstadoEdit','Os campos não podem estar vazios!'))">
+			onclick="return (ValidaFormulario('txtDiasEdit|txtMultaEdit|cmbEstadoEdit','Os campos nÃ£o podem estar vazios!'))">
 		</td>
 	</tr>
 </table>

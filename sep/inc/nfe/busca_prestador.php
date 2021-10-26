@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Prestador - Pesquisar</td>  
+    <td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Prestador - Pesquisar</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" onclick="document.getElementById('divBusca').style.visibility='hidden'" title="Fechar" /></td>
   </tr>
   <tr>
@@ -55,7 +55,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td background="img/busca_fundo.jpg" align="center" colspan="2">	
 		<select name="codprestador" id="codprestador" size="18" style="width:400px; background-color:#255b8f;color:#FFFFFF;" class="combo" onchange="document.frmbusca.submit();">   		
 			<?php 
-				$tipo = mysql_query("SELECT codigo FROM tipo WHERE tipo = 'prestador'");
+				$tipo = $PDO->query("SELECT codigo FROM tipo WHERE tipo = 'prestador'");
 				$codtipo = mysql_fetch_object($tipo);
 			if(isset($_POST['txtBuscaNome']))
 				{
@@ -73,7 +73,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					//$nome?$cpfcnpj?$where=" WHERE nome LIKE'%$nome%' AND $campo = '$cpfcnpj' AND estado <> 'NL'":$where=" WHERE nome LIKE'%$nome%' AND estado <> 'NL'":NULL;
 					//$cpfcnpj?$where=" WHERE $campo = '$cpfcnpj' AND estado <> 'NL'":NULL;
 					
-					$sql=mysql_query("
+					$sql=$PDO->query("
 					SELECT 
 						codigo,
 						nome, 
@@ -99,7 +99,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					ORDER BY
 						nome
 					");
-					while(list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe) = mysql_fetch_array($sql)){
+					while(list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe) = $sql->fetch()){
 						if(!$razaosocial){
 							$razaosocial = $nome;
 						}

@@ -2,7 +2,7 @@
 /*
 LICENÇA PÚBLICA GERAL GNU
 Versão 3, 29 de junho de 2007
-    Copyright (C) <2010>  <PORTAL PÚBLICO INFORM�?TICA LTDA>
+    Copyright (C) <2010>  <PORTAL PÚBLICO INFORM�?TICA LTDA>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ Esta é uma tradução não oficial em português da Licença Pública Geral GNU
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - Notas escrituradas </td>  
+    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Notas escrituradas </td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -48,7 +48,7 @@ Esta é uma tradução não oficial em português da Licença Pública Geral GNU
 		<form method="post" name="frmRelatorio" id="frmRelatorio" action="inc/relatorios/imprimir_notas_escrituradas.php" target="_blank">
 		<input type="hidden" name="include" value="<?php echo $_POST['include']; ?>" />
 		<fieldset>
-			<legend>Relat&oacute;rio de notas escrituradas</legend>
+			<legend>Relatório de notas escrituradas</legend>
 			<table align="left">
 				<tr>
 					<td>Data Inicial</td>

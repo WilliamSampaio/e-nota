@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../include/conect.php");
-include("../funcoes/util.php");
+require_once("../include/conect.php");
+require_once("../include/util.php");
 $codigo = base64_decode($_GET["COD"]);
 
 
@@ -55,7 +55,7 @@ list($cnpj, $razaosocial, $logradouro, $numero, $municipio, $uf) = $sql_inst->fe
   </tr>
   <tr>
     <td align="center" width="50%" bgcolor="#CCCCCC" colspan="2"><strong>N&Uacute;MERO DO DOCUMENTO</strong></td>
-    <td align="center" bgcolor="#CCCCCC" colspan="2"><strong>DATA DE EMISS&Atilde;O </strong></td>
+    <td align="center" bgcolor="#CCCCCC" colspan="2"><strong>DATA DE EMISSÃO </strong></td>
   </tr>
   <tr>
     <td align="center" colspan="2" width="50%">
@@ -66,10 +66,10 @@ list($cnpj, $razaosocial, $logradouro, $numero, $municipio, $uf) = $sql_inst->fe
     </td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICA&Ccedil;&Atilde;O DO SUJEITO PASSIVO </strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICAÇÃO DO SUJEITO PASSIVO </strong></td>
   </tr>
   <tr>
-    <td height="50" colspan="3" valign="top">Raz�o Social:<br>
+    <td height="50" colspan="3" valign="top">Razão Social:<br>
       <font class="prefeitura"><?php echo $razaosocial; ?></font>
     </td>
     <td width="25%" valign="top">CNPJ/CPF<br>
@@ -77,26 +77,26 @@ list($cnpj, $razaosocial, $logradouro, $numero, $municipio, $uf) = $sql_inst->fe
     </td>
   </tr>
   <tr>
-    <td height="75" colspan="4" valign="top">Endere&ccedil;o<br>
+    <td height="75" colspan="4" valign="top">Endereço<br>
       <font class="prefeitura"><?php echo "$logradouro, $numero, $municipio, $uf"; ?></font>
     </td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>CERTIFICA&Ccedil;&Atilde;O</strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>CERTIFICAÇÃO</strong></td>
   </tr>
   <tr>
     <td height="200" colspan="4" align="center" valign="middle">
       <div class="style1">
-        <blockquote>A Prefeitura Municipal de <font class="prefeitura"><?php echo $CONF_CIDADE; ?></font> certifica que a Empresa citada acima foi devidamente cadastrada no sistema de NF-e do munic�pio.</blockquote>
+        <blockquote>A Prefeitura Municipal de <font class="prefeitura"><?php echo $CONF_CIDADE; ?></font> certifica que a Empresa citada acima foi devidamente cadastrada no sistema de NF-e do município.</blockquote>
       </div>
     </td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>OBSERVA&Ccedil;&Otilde;ES</strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>OBSERVAÇÕES</strong></td>
   </tr>
   <tr>
     <td colspan="4">
-      <p>- A senha de acesso da Empresa ao sistema de NF-e do munic�pio � de uso exclusivo e intransfer�vel da Empresa, bem como a responsabilidade sobre o uso indevido da mesma.
+      <p>- A senha de acesso da Empresa ao sistema de NF-e do município é de uso exclusivo e intransferível da Empresa, bem como a responsabilidade sobre o uso indevido da mesma.
       </p>
     </td>
   </tr>

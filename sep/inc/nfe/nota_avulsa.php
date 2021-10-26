@@ -2,14 +2,14 @@
 include 'inc/conect.php';
 
 if($_POST["btInserirNota"] == "Emitir"){
-	include("nota_avulsa_nova.php");//arquivo que executa o script de insercao no banco de dados
+	require_once("nota_avulsa_nova.php");//arquivo que executa o script de insercao no banco de dados
 }
 ?>
 <div id="DivAbas"></div>    
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Nota Avulsa</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Nota Avulsa</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>

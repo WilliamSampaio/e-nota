@@ -1,8 +1,8 @@
 <?php
 /*
-LICENÇA PÚBLICA GERAL GNU
-Versão 3, 29 de junho de 2007
-    Copyright (C) <2010>  <PORTAL PÚBLICO INFORMÁTICA LTDA>
+LICENï¿½A Pï¿½BLICA GERAL GNU
+VersÃ£o 3, 29 de junho de 2007
+    Copyright (C) <2010>  <PORTAL Pï¿½BLICO INFORMï¿½TICA LTDA>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,22 +17,22 @@ Versão 3, 29 de junho de 2007
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Este programa é software livre: você pode redistribuí-lo e / ou modificar sob os termos da GNU General Public License como publicado pela Free Software Foundation, tanto a versão 3 da Licença, ou (por sua opção) qualquer versão posterior.
+Este programa Ã© software livre: vocÃª pode redistribuï¿½-lo e / ou modificar sob os termos da GNU General Public License como publicado pela Free Software Foundation, tanto a versÃ£o 3 da LicenÃ§a, ouï¿½(por sua opÃ§Ã£o) qualquer versÃ£o posterior.
 
-Este programa é distribuído na esperança que possa ser útil, mas SEM QUALQUER GARANTIA, sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO PROPÓSITO. Veja a GNU General Public License para mais detalhes.
+Este programa Ã© distribuï¿½do na esperanï¿½a que possa ser ï¿½til, mas SEM QUALQUER GARANTIA, sem mesmo a garantia implï¿½cita de COMERCIALIZAï¿½ï¿½O ou ADEQUAï¿½ï¿½O A UM DETERMINADO PROPï¿½SITO. Veja a GNU General Public License para mais detalhes.
 
-Você deve ter recebido uma cópia da GNU General Public License  junto com este programa. Se não, veja <http://www.gnu.org/licenses/>.
-
-
-This is an unofficial translation of the GNU General Public License into Portuguese. It was not published by the Free Software Foundation, and does not legally state the distribution terms for software that uses the GNU GPL — only the original English text of the GNU GPL does that. However, we hope that this translation will help Portuguese speakers understand the GNU GPL better.
-
-Esta é uma tradução não oficial em português da Licença Pública Geral GNU (da sigla em inglês GNU GPL). Ela não é publicada pela Free Software Foundation e não declara legalmente os termos de distribuição para softwares que a utilizam — somente o texto original da licença, escrita em inglês, faz isto. Entretanto, acreditamos que esta tradução ajudará aos falantes do português a entendê-la melhor.
+VocÃª deve ter recebido uma cÃ³pia da GNU General Public Licenseï¿½ï¿½junto com este programa. Se nÃ£o, veja <http://www.gnu.org/licenses/>.
 
 
-// Originado do Projeto ISS Digital – Portal Público que tiveram colaborações de Vinícius Kampff, 
+This is an unofficial translation of the GNU General Public License into Portuguese. It was not published by the Free Software Foundation, and does not legally state the distribution terms for software that uses the GNU GPL Ã© only the original English text of the GNU GPL does that. However, we hope that this translation will help Portuguese speakers understand the GNU GPL better.
+
+Esta Ã© uma traduï¿½ï¿½o nÃ£o oficial em portuguï¿½s da LicenÃ§a Pï¿½blica Geral GNU (da sigla em inglï¿½s GNU GPL). Ela nÃ£o Ã© publicada pela Free Software Foundation e nÃ£o declara legalmente os termos de distribuiï¿½ï¿½o para softwares que a utilizam Ã© somente o texto original da licenï¿½a, escrita em inglï¿½s, faz isto. Entretanto, acreditamos que esta traduï¿½ï¿½o ajudarï¿½ aos falantes do portuguï¿½s a entendï¿½-la melhor.
+
+
+// Originado do Projeto ISS Digital Ã© Portal Pï¿½blico que tiveram colaboraÃ§Ãµes de Vinï¿½cius Kampff, 
 // Rafael Romeu, Lucas dos Santos, Guilherme Flores, Maikon Farias, Jean Farias e Daniel Bohn
 // Acesse o site do Projeto www.portalpublico.com.br             |
-// Equipe Coordenação Projeto ISS Digital: <informatica@portalpublico.com.br>   |
+// Equipe CoordenaÃ§Ã£o Projeto ISS Digital: <informatica@portalpublico.com.br>   |
 
 */
 ?>
@@ -49,11 +49,11 @@ require_once("../../funcoes/util.php");
 if($_GET["txtCodigoCancela"]){ 
 	$codigo_nota = base64_decode($_GET["txtCodigoCancela"]);
 	$motivoCancel = $_GET['txtMotivoCancela'];
-	mysql_query("UPDATE notas SET estado = 'C', motivo_cancelamento = '$motivoCancel' WHERE codigo = '$codigo_nota'"); 
-	$sql_verifica_notaavulsa = mysql_query("SELECT codigo FROM guia_pagamento WHERE codnota = '$codigo_nota'");
+	$PDO->query("UPDATE notas SET estado = 'C', motivo_cancelamento = '$motivoCancel' WHERE codigo = '$codigo_nota'"); 
+	$sql_verifica_notaavulsa = $PDO->query("SELECT codigo FROM guia_pagamento WHERE codnota = '$codigo_nota'");
 	if(mysql_num_rows($sql_verifica_notaavulsa)){
 		$guia = mysql_fetch_object($sql_verifica_notaavulsa);
-		mysql_query("UPDATE guia_pagamento SET estado = 'C', motivo_cancelamento = '$motivoCancel' WHERE codigo = '{$guia->codigo}'");
+		$PDO->query("UPDATE guia_pagamento SET estado = 'C', motivo_cancelamento = '$motivoCancel' WHERE codigo = '{$guia->codigo}'");
 	}
 }//fim if se cancela uma nota.
 
@@ -135,24 +135,24 @@ $sql=Paginacao($query,'frmNfe','divResultado');
 	<?php 
 	if(mysql_num_rows($sql)>0){ ?>
 	  <tr>
-		<td width="45" align="center">N&ordm;</td>
-		<td width="80" align="center">Cód Verif</td>
-		<td width="70" align="center">D/H Emissão</td>
+		<td width="45" align="center">NÂº</td>
+		<td width="80" align="center">Cï¿½d Verif</td>
+		<td width="70" align="center">D/H EmissÃ£o</td>
 		<td width="200" align="center">Nome Prestador</td>
 		<td width="200" align="center">Nome Tomador</td>
         <td align="center">Avulsa</td>
 		<td width="70" align="center">Estado</td>
-		<td width="75">&nbsp;</td>
+		<td width="75"></td>
 	  </tr>
 	  <tr>
 		<td colspan="8" height="1" bgcolor="#999999"></td>
 	  </tr>
 	<?php
-	while(list($codigo, $numero, $codverificacao, $datahoraemissao, $codempresa, $tomador_nome, $tomador_cnpjcpf, $estado, $emissor_nome,$emissor_cnpj,$gp_cod_nota) = mysql_fetch_array($sql)) {
+	while(list($codigo, $numero, $codverificacao, $datahoraemissao, $codempresa, $tomador_nome, $tomador_cnpjcpf, $estado, $emissor_nome,$emissor_cnpj,$gp_cod_nota) = $sql->fetch()) {
 		if($gp_cod_nota){
 			$nota_avulsa = "Sim";
 		}else{
-			$nota_avulsa = "Não";
+			$nota_avulsa = "NÃ£o";
 		}
 		// mascara o codigo com cripto base64 
 		$crypto = base64_encode($codigo);
@@ -183,7 +183,7 @@ $sql=Paginacao($query,'frmNfe','divResultado');
 		?>
 		
 		<img style="cursor:pointer;" title="Cancelar Nota" src="img/botoes/botao_cancelar.jpg" 
-		onclick="CancelaNota('<?php echo $crypto;?>','Cancelar nota N° <?php echo "$numero de $emissor_nome"; ?>?');" />
+		onclick="CancelaNota('<?php echo $crypto;?>','Cancelar nota Nï¿½ <?php echo "$numero de $emissor_nome"; ?>?');" />
 		<?php
 		} // fecha if
 		?>

@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	include("../../../conect.php");
-	include("../../../../funcoes/util.php");
+	require_once("../../../conect.php");
+	require_once("../../../../funcoes/util.php");
 	
 ?>
 <fieldset>
@@ -28,7 +28,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<input type="hidden" name="include" id="include" value="<?php echo $_GET['include'];?>" />
 	<table width="100%" height="100%" border="0" align="center" cellpadding="5" cellspacing="0">
 		<tr>
-			<td colspan="3" align="left"><strong>Emiss&atilde;o da guia de pagamento </strong></td>
+			<td colspan="3" align="left"><strong>Emissão da guia de pagamento </strong></td>
 		</tr>
 		<tr>
 			<td width="15%" align="left" valign="middle">CNPJ:</td>

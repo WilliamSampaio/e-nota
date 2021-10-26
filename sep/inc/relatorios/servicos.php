@@ -17,7 +17,7 @@ junto com este sistema, se nao, acesse o Portal do Software Publico Brasileiro n
 www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 51 Franklin St,
 Fith Floor, Boston, MA 02110-1301, USA
 */
-?><title>Relat&oacute;rio de Servi&ccedil;os</title>
+?><title>Relatório de Serviços</title>
 
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 <tr>
@@ -25,7 +25,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<img src="img/form/cabecalho_icone.jpg" />
 	</td>
 	<td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">
-		&nbsp;Relat&oacute;rios - Servi&ccedil;os
+		Relatórios - Serviços
 	</td>
 	<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg">
 		<a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a>
@@ -37,7 +37,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<form id="frmRelatorios" method="post" target="_blank" action="inc/relatorios/imprimirServicos.php">
 		<fieldset>
 		<legend>
-			<strong>Relat&oacute;rios de Servi&ccedil;os</strong>
+			<strong>Relatórios de Serviços</strong>
 		</legend>
 		<table align="left" width="100%">
 			<tr>
@@ -45,7 +45,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					Gerar:
 				</td>
 				<td>
-					<label><input type="radio" name="rdbServicos" value="lista" checked >Lista de Servi&ccedil;os </label>
+					<label><input type="radio" name="rdbServicos" value="lista" checked >Lista de Serviços </label>
 				</td>
 			</tr>
 			<tr>
@@ -59,14 +59,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td>
 				</td>
 				<td>
-					<label><input type="radio" name="rdbServicos" value="media" >Comparativo por M&eacute;dia de Todas as Atividades</label>
+					<label><input type="radio" name="rdbServicos" value="media" >Comparativo por Média de Todas as Atividades</label>
 				</td>
 			</tr>
 			<tr>
 				<td>
 				</td>
 				<td>
-					<label><input type="radio" name="rdbServicos" value="municipio" >Atividades Adquiridas de Empresas de Fora do Munic&iacute;pio</label>
+					<label><input type="radio" name="rdbServicos" value="municipio" >Atividades Adquiridas de Empresas de Fora do Município</label>
 				</td>
 			</tr>
 			<tr>
@@ -80,26 +80,26 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td>
 				</td>
 				<td>
-					<label><input type="radio" name="rdbServicos" value="area" >Lista por Categoria e Servi&ccedil;o</label>
+					<label><input type="radio" name="rdbServicos" value="area" >Lista por Categoria e Serviço</label>
 				</td>
 			</tr>
              <tr>
 				<td>
 				</td>
 				<td>
-					<label><input type="radio" name="rdbServicos" value="categ" >Lista Estat&iacute;stica</label>
+					<label><input type="radio" name="rdbServicos" value="categ" >Lista Estatística</label>
 				</td>
 			</tr>
 			<!--<tr>
 				<td>
-					M&ecirc;s:
+					Mês:
 				</td>
 				<td>
 					<select name="cmbMes">
 						<option>Selecione!</option>
 						<option value="01">Janeiro</option>
 						<option value="02">Fevereiro</option>
-						<option value="03">Mar&ccedil;o</option>
+						<option value="03">Março</option>
 						<option value="04">Abril</option>
 						<option value="05">Maio</option>
 						<option value="06">Junho</option>

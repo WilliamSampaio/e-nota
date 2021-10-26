@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($_POST["cmbCategoria"]){
 		$wherecmbcategoria = "WHERE servicos_categorias.codigo='".$_POST["cmbCategoria"]."'";
 	}
-	$sql=mysql_query("SELECT emissores.razaosocial, emissores.endereco, emissores.email FROM emissores INNER JOIN emissores_servicos ON emissores.codigo=emissores_servicos.codemissor INNER JOIN servicos ON emissores_servicos.codservico=servicos.codigo INNER JOIN servicos_categorias ON servicos.codcategoria=servicos_categorias.codigo $wherecmbcategoria");	
+	$sql=$PDO->query("SELECT emissores.razaosocial, emissores.endereco, emissores.email FROM emissores INNER JOIN emissores_servicos ON emissores.codigo=emissores_servicos.codemissor INNER JOIN servicos ON emissores_servicos.codservico=servicos.codigo INNER JOIN servicos_categorias ON servicos.codcategoria=servicos_categorias.codigo $wherecmbcategoria");	
 	if(mysql_num_rows($sql)>0)
 		{
 			?>
@@ -30,14 +30,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<table width="100%">
 						<tr bgcolor="#999999" align="center">
 							<td width="33%">Emissor</td>
-							<td width="33%">Endere&ccedil;o</td>
+							<td width="33%">Endereço</td>
 							<td width="33%">Email</td>
 						</tr>
 					</table>	
 					<div style="height:250px; overflow:auto">
 						<table width="100%">
 							<?php
-								while(list($emissor,$endereco,$email)=mysql_fetch_array($sql))
+								while(list($emissor,$endereco,$email)=$sql->fetch())
 									{
 										?>
 											<tr bgcolor="#FFFFFF" align="center">

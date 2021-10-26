@@ -26,9 +26,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$ValorNota =  $_POST['txtValorNota'];
 	$Valor = 	  $_POST['txtValor'];
 		if(($ValorNota)	&& ($Valor)){
-			mysql_query("INSERT INTO nfe_creditos SET credito='$Valor',tipopessoa='$TipoPessoa',issretido='$ISSRetido',valor='$ValorNota'");
-			add_logs('Inseriu uma Nota de Crédito');
-			Mensagem("Crédito Cadastrado com sucesso !!");
+			$PDO->query("INSERT INTO nfe_creditos SET credito='$Valor',tipopessoa='$TipoPessoa',issretido='$ISSRetido',valor='$ValorNota'");
+			add_logs('Inseriu uma Nota de CrÃ©dito');
+			Mensagem("CrÃ©dito Cadastrado com sucesso !!");
 		}else{
 			Mensagem("Informe o valor da nota");
 		}
@@ -39,34 +39,34 @@ Fith Floor, Boston, MA 02110-1301, USA
 <form method="post" onsubmit="return MoedaToDecimal('txtValorNota');return ValidaForm('ckTipoPessoa|ckISSRetido|txtValorNota|txtValor');">
 <input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
 <fieldset style="margin-left:10px; margin-right:10px;">
-<legend>Inser&ccedil;&atilde;o de Regras </legend>
+<legend>InserÃ§Ã£o de Regras </legend>
 <br>
 <table width="100%" border="0">	
 	<tr>
 		<td width="23%" align="left">	      Tipo de Pessoa:		 </td>
    <td align="left">  
 		   <input type="hidden" name="btRegra" value="Inserir Regra">
-		   <input type="radio" name="rdTipoPessoa" id="rdTipoPessoa" value="PF">Pessoa Física&nbsp;		
-		   <input type="radio" name="rdTipoPessoa" id="rdTipoPessoa" value="PJ" checked="checked">Pessoa Jurídica&nbsp;
+		   <input type="radio" name="rdTipoPessoa" id="rdTipoPessoa" value="PF">Pessoa Fï¿½sica		
+		   <input type="radio" name="rdTipoPessoa" id="rdTipoPessoa" value="PJ" checked="checked">Pessoa Jurï¿½dica
 		</td>	
 	</tr>
 	<tr>
 		<td width="23%" align="left">	      Iss Retido:		</td>  
    <td align="left">
-		   <input type="radio" name="rdISSRetido" id="rdISSRetido" value="S">Sim&nbsp;
-		   <input type="radio" name="rdISSRetido" id="rdISSRetido" value="N" checked="checked">Não&nbsp;
+		   <input type="radio" name="rdISSRetido" id="rdISSRetido" value="S">Sim
+		   <input type="radio" name="rdISSRetido" id="rdISSRetido" value="N" checked="checked">NÃ£o
 		</td>	
 	</tr>
 	<tr>
 		<td width="23%" align="left">	      Valor da Nota		</td>	
    <td align="left">
 		   <input type="text" name="txtValorNota" size="10" class="texto" id="txtValorNota" onkeypress="return MascaraMoeda(this,'.',',',event)"> 
-		   <em>(somente n&uacute;meros)</em> </td>	
+		   <em>(somente nÃºmeros)</em> </td>	
 	</tr>
 	<tr>
-		<td width="23%" align="left">	      % de crédito </td>	
+		<td width="23%" align="left">	      % de crÃ©dito </td>	
    <td align="left">
-		   <input type="text" name="txtValor" id="txtValor" size="5" class="texto" onBlur="ControlePercentatagem('txtValor')">&nbsp;<em>(Exemplo: 2.5 %)
+		   <input type="text" name="txtValor" id="txtValor" size="5" class="texto" onBlur="ControlePercentatagem('txtValor')"><em>(Exemplo: 2.5 %)
         </em></td>	
 	</tr>
 	<tr>

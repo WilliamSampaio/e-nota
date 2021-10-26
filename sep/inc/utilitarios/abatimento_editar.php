@@ -21,6 +21,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 	//Recebe as variaveis de post vindas do arquivo abatimento.php e insere no banco
 	$multa      = $_POST['txtPorc'];
-	mysql_query("UPDATE configuracoes SET abatimento_iptu = '$multa'");
+	$PDO->query("UPDATE configuracoes SET abatimento_iptu = '$multa'");
 	Mensagem_onload("Porcentagem de abatimento modificada");
 ?>

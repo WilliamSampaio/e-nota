@@ -35,10 +35,10 @@ $codLogado = $_SESSION['codempresa'];
 </form>
 <?php
 if ($_POST['btDeclararNotaTomada'] == "Declarar Nota Tomada") {
-	include("../site/nfe_tomadas/notas_tomadas_declarar.php");
+	require_once("../site/nfe_tomadas/notas_tomadas_declarar.php");
 }
 
 if ($_POST['btPesquisar']) {
-	include("../site/nfe_tomadas/notas_tomadas_pesquisar.php");
+	require_once("../site/nfe_tomadas/notas_tomadas_pesquisar.php");
 }
 ?>

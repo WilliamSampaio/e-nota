@@ -1,13 +1,12 @@
  <br/>
 <?php
-	include("../../../include/conect.php"); 
-	include("../../../funcoes/util.php");
+	require_once("../../../include/conect.php"); 
 	
 	$cnpj = $_GET['cnpj'];
 	$ano  = $_GET['cmbAno'];
 	$mes  = $_GET['cmbMes'];
 	
-    $sql = mysql_query("
+    $sql = $PDO->query("
         SELECT 
             cadastro.cpf,
             cadastro.cnpj,
@@ -28,7 +27,7 @@
 			MONTH(notas.datahoraemissao) = '$mes' AND 
 			YEAR(notas.datahoraemissao) = '$ano'
     ");
-    if(mysql_num_rows($sql)){
+    if($sql->rowCount()){
  ?>
 <table width="100%" border="0" cellspacing="1">
 	<tr bgcolor="#999999">
@@ -36,13 +35,13 @@
 	</tr>
 	<tr bgcolor="#999999">
 		<td align="center"> Cnpj/Cpf </td>
-		<td align="center"> N�mero Nota </td>
+		<td align="center"> Número Nota </td>
 		<td align="center"> Valor Nota </td>
 		<td align="center"> ISS Retido </td>
 		<td></td>
 	</tr>
 	<?php
-    while(list($cad_cpf,$cad_cnpj,$codigo,$numero,$valortotal,$issretido,$codemissor,$estadonota) = mysql_fetch_array($sql)){
+    while(list($cad_cpf,$cad_cnpj,$codigo,$numero,$valortotal,$issretido,$codemissor,$estadonota) = $sql->fetch()){
         $cad_cnpjcpf = $cad_cpf.$cad_cnpj;
 		
 		$bgcolor = "bgcolor=\"#FFFFFF\"";
@@ -72,7 +71,7 @@
 </table>
 <?php
     }else{
-        echo "<center><b>N&atilde;o h&aacute; declara&ccedil;&otilde;es de servi&ccedil;os tomados!</b></center>";
+        echo "<center><b>Não há declarações de serviços tomados!</b></center>";
     }
   ?>
 </br>

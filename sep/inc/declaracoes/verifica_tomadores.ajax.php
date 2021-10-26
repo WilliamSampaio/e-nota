@@ -23,13 +23,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 	require_once("../conect.php");
 	
 	$cnpj = $_GET['valor'];	
-	$sql_buscatomador = mysql_query("SELECT razaosocial FROM cadastro WHERE cnpj = '$cnpj' OR cpf = '$cnpj'");
-	list($razao) = mysql_fetch_array($sql_buscatomador);
+	$sql_buscatomador = $PDO->query("SELECT razaosocial FROM cadastro WHERE cnpj = '$cnpj' OR cpf = '$cnpj'");
+	list($razao) = $sql_buscatomador->fetch();
 	
 	if(mysql_num_rows($sql_buscatomador)>0){
 		echo $razao;
 	}else{
-		echo "Tomador n&atilde;o cadastrado!";
+		echo "Tomador não cadastrado!";
 	}
 	
 	// Acentuação

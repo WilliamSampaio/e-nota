@@ -32,7 +32,7 @@ $adminPOST = $_GET['cmbAdmin'];
 $nivelPOST = $_GET['cmbNivel'];
 
 //faz um where de acordo com oque foi preenchido no from
-$sql_where=" ";//comeca a var do where como um espaço
+$sql_where=" ";//comeca a var do where como um espaï¿½o
 if($cnpjPOST){
 	$sql_where.=" AND orgaospublicos.cnpj='$cnpjPOST'";
 }//fim if cnpj
@@ -77,21 +77,21 @@ $query = ("
 <legend>Resultado</legend>
 <?php
 $sql=Paginacao($query,'frmRelatorio','divBuscar',10);//paginacao substitui o mysql query, pois volta o resultado limitado por pagina e com os botoes de paginacao
-if(mysql_num_rows($sql)>0){
+if($sql->rowCount()>0){
 ?>
 <div align="left"><input type="submit" name="btImprimir" value="Imprimir" class="botao" onclick="cancelaAction('frmRelatorio','inc/orgaospublicos/relatorios/imprimir_relatorios_orgaospublicos.php','_blank')" /></div>
 <table width="100%">
 	<tr bgcolor="#999999">
 		<td align="center" width="240">Nome</td>
 		<td align="center" width="130">CNPJ</td>
-		<td align="center" width="130">Município</td>
+		<td align="center" width="130">Municï¿½pio</td>
 		<td align="center" width="30">UF</td>
-		<td align="center" width="100">Administração</td>
-		<td align="center" width="60">Nível</td>
-		<td align="center">Situação</td>	
+		<td align="center" width="100">Administraï¿½ï¿½o</td>
+		<td align="center" width="60">Nï¿½vel</td>
+		<td align="center">Situaï¿½ï¿½o</td>	
 	</tr>
 	<?php
-	while(list($codigo,$nome,$razaosocial,$cnpj,$municipio,$uf,$admpublica,$nivel,$estado) = mysql_fetch_array($sql)){										
+	while(list($codigo,$nome,$razaosocial,$cnpj,$municipio,$uf,$admpublica,$nivel,$estado) = $sql->fetch()){										
 		switch($admpublica){
 			case 'D': $admpublica = "Direta";break;
 			case 'I': $admpublica = "Indireta";break;
@@ -102,7 +102,7 @@ if(mysql_num_rows($sql)>0){
 			case 'F': $nivel = "Federal";break;
 		}//fim switch nivel
 		switch($estado){
-			case "NL": $estado = "Não Liberado"; break;
+			case "NL": $estado = "NÃ£o Liberado"; break;
 			case "A" : $estado = "Ativo";   break;
 			case "I" : $estado = "Inativo";    break;
 		}//fim switch estado

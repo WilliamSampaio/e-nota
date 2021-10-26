@@ -864,7 +864,7 @@ Object.extend(Array.prototype, {
   without: function() {
     var values = $A(arguments);
     return this.select(function(value) {
-      return !values.include(value);
+      return !values.require_once(value);
     });
   },
 
@@ -878,7 +878,7 @@ Object.extend(Array.prototype, {
 
   uniq: function(sorted) {
     return this.inject([], function(array, value, index) {
-      if (0 == index || (sorted ? array.last() != value : !array.include(value)))
+      if (0 == index || (sorted ? array.last() != value : !array.require_once(value)))
         array.push(value);
       return array;
     });
@@ -1089,7 +1089,7 @@ var ObjectRange = Class.create(Enumerable, {
 
   _each: function(iterator) {
     var value = this.start;
-    while (this.include(value)) {
+    while (this.require_once(value)) {
       iterator(value);
       value = value.succ();
     }
@@ -1128,7 +1128,7 @@ Ajax.Responders = {
   },
 
   register: function(responder) {
-    if (!this.include(responder))
+    if (!this.require_once(responder))
       this.responders.push(responder);
   },
 
@@ -1190,7 +1190,7 @@ Ajax.Request = Class.create(Ajax.Base, {
     this.method = this.options.method;
     var params = Object.clone(this.options.parameters);
 
-    if (!['get', 'post'].include(this.method)) {
+    if (!['get', 'post'].require_once(this.method)) {
       // simulate other verbs over post
       params['_method'] = this.method;
       this.method = 'post';
@@ -1201,7 +1201,7 @@ Ajax.Request = Class.create(Ajax.Base, {
     if (params = Object.toQueryString(params)) {
       // when GET, append parameters to URL
       if (this.method == 'get')
-        this.url += (this.url.include('?') ? '&' : '?') + params;
+        this.url += (this.url.require_once('?') ? '&' : '?') + params;
       else if (/Konqueror|Safari|KHTML/.test(navigator.userAgent))
         params += '&_=';
     }
@@ -1411,7 +1411,7 @@ Ajax.Response = Class.create({
   _getResponseJSON: function() {
     var options = this.request.options;
     if (!options.evalJSON || (options.evalJSON != 'force' &&
-      !(this.getHeader('Content-type') || '').include('application/json')) ||
+      !(this.getHeader('Content-type') || '').require_once('application/json')) ||
         this.responseText.blank())
           return null;
     try {
@@ -1777,7 +1777,7 @@ Element.Methods = {
       var t = Element._attributeTranslations.read;
       if (t.values[name]) return t.values[name](element, name);
       if (t.names[name]) name = t.names[name];
-      if (name.include(':')) {
+      if (name.require_once(':')) {
         return (!element.attributes || !element.attributes[name]) ? null :
          element.attributes[name].value;
       }
@@ -1912,7 +1912,7 @@ Element.Methods = {
     var elementStyle = element.style, match;
     if (Object.isString(styles)) {
       element.style.cssText += ';' + styles;
-      return styles.include('opacity') ?
+      return styles.require_once('opacity') ?
         element.setOpacity(styles.match(/opacity:\s*(\d?\.?\d*)/)[1]) : element;
     }
     for (var property in styles)
@@ -2710,7 +2710,7 @@ var Selector = Class.create({
 
     // Safari 3 chokes on :*-of-type and :empty
     if (Prototype.Browser.WebKit &&
-     (e.include("-of-type") || e.include(":empty")))
+     (e.require_once("-of-type") || e.require_once(":empty")))
       return false;
 
     // XPath can't do namespaced attributes, nor can it read
@@ -2804,7 +2804,7 @@ var Selector = Class.create({
           } else {
             // reluctantly do a document-wide search
             // and look for a match in the array
-            return this.findElements(document).include(element);
+            return this.findElements(document).require_once(element);
           }
         }
       }
@@ -3147,7 +3147,7 @@ Object.extend(Selector, {
       for (var i = 0, results = [], node, nodeClassName; node = nodes[i]; i++) {
         nodeClassName = node.className;
         if (nodeClassName.length == 0) continue;
-        if (nodeClassName == className || (' ' + nodeClassName + ' ').include(needle))
+        if (nodeClassName == className || (' ' + nodeClassName + ' ').require_once(needle))
           results.push(node);
       }
       return results;
@@ -3310,9 +3310,9 @@ Object.extend(Selector, {
     '!=': function(nv, v) { return nv != v; },
     '^=': function(nv, v) { return nv.startsWith(v); },
     '$=': function(nv, v) { return nv.endsWith(v); },
-    '*=': function(nv, v) { return nv.include(v); },
-    '~=': function(nv, v) { return (' ' + nv + ' ').include(' ' + v + ' '); },
-    '|=': function(nv, v) { return ('-' + nv.toUpperCase() + '-').include('-' + v.toUpperCase() + '-'); }
+    '*=': function(nv, v) { return nv.require_once(v); },
+    '~=': function(nv, v) { return (' ' + nv + ' ').require_once(' ' + v + ' '); },
+    '|=': function(nv, v) { return ('-' + nv.toUpperCase() + '-').require_once('-' + v.toUpperCase() + '-'); }
   },
 
   split: function(expression) {
@@ -3455,7 +3455,7 @@ Form.Methods = {
     }).sortBy(function(element) { return element.tabIndex }).first();
 
     return firstByIndex ? firstByIndex : elements.find(function(element) {
-      return ['input', 'select', 'textarea'].include(element.tagName.toLowerCase());
+      return ['input', 'select', 'textarea'].require_once(element.tagName.toLowerCase());
     });
   },
 
@@ -3539,7 +3539,7 @@ Form.Element.Methods = {
     try {
       element.focus();
       if (element.select && (element.tagName.toLowerCase() != 'input' ||
-          !['button', 'reset', 'submit'].include(element.type)))
+          !['button', 'reset', 'submit'].require_once(element.type)))
         element.select();
     } catch (e) { }
     return element;
@@ -3602,7 +3602,7 @@ Form.Element.Serializers = {
             return;
           }
         }
-        else opt.selected = index.include(value);
+        else opt.selected = index.require_once(value);
       }
     }
   },
@@ -3850,7 +3850,7 @@ Object.extend(Event, (function() {
   }
 
   function getDOMEventName(eventName) {
-    if (eventName && eventName.include(':')) return "dataavailable";
+    if (eventName && eventName.require_once(':')) return "dataavailable";
     return eventName;
   }
 
@@ -3866,7 +3866,7 @@ Object.extend(Event, (function() {
   function createWrapper(element, eventName, handler) {
     var id = getEventID(element);
     var c = getWrappersForEventName(id, eventName);
-    if (c.pluck("handler").include(handler)) return false;
+    if (c.pluck("handler").require_once(handler)) return false;
 
     var wrapper = function(event) {
       if (!Event || !Event.extend ||
@@ -4167,9 +4167,9 @@ if (!document.getElementsByClassName) document.getElementsByClassName = function
     className = ' ' + className + ' ';
 
     for (var i = 0, child, cn; child = nodes[i]; i++) {
-      if (child.className && (cn = ' ' + child.className + ' ') && (cn.include(className) ||
+      if (child.className && (cn = ' ' + child.className + ' ') && (cn.require_once(className) ||
           (classNames && classNames.all(function(name) {
-            return !name.toString().blank() && cn.include(' ' + name + ' ');
+            return !name.toString().blank() && cn.require_once(' ' + name + ' ');
           }))))
         elements.push(Element.extend(child));
     }
@@ -4200,12 +4200,12 @@ Element.ClassNames.prototype = {
   },
 
   add: function(classNameToAdd) {
-    if (this.include(classNameToAdd)) return;
+    if (this.require_once(classNameToAdd)) return;
     this.set($A(this).concat(classNameToAdd).join(' '));
   },
 
   remove: function(classNameToRemove) {
-    if (!this.include(classNameToRemove)) return;
+    if (!this.require_once(classNameToRemove)) return;
     this.set($A(this).without(classNameToRemove).join(' '));
   },
 

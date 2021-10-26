@@ -39,7 +39,7 @@
 	");
 	
 	$sql_lista_rps = Paginacao($query,"frmRPS","divLista",10);
-	if(mysql_num_rows($sql_lista_rps)){
+	if($sql_lista_rps->rowCount()){
 ?>
 	<style>
 		#divDetalhesRPS{
@@ -52,7 +52,7 @@
 	<div id="divDetalhesRPS"></div>
 	<table width="100%">
 		<tr bgcolor="#999999">
-			<td width="4%" align="center">N&deg;</td>
+			<td width="4%" align="center">NÂº</td>
 			<td width="44%" align="center">Emissor</td>
 			<td width="12%" align="center">CNPJ</td>
 			<td width="10%" align="center">Data</td>
@@ -60,7 +60,7 @@
 			<td width="21%"></td>
 		</tr>
 		<?php
-			while(list($nome,$razaosocial,$cnpj,$cpf,$codRPS,$dataRPS,$estadoRPS,$comunicado) = mysql_fetch_array($sql_lista_rps)){
+			while(list($nome,$razaosocial,$cnpj,$cpf,$codRPS,$dataRPS,$estadoRPS,$comunicado) = $sql_lista_rps->fetch()){
 				$cnpjcpf = $cnpj.$cpf;
 				if(!$razaosocial){
 					$razaosocial = $nome;
@@ -92,7 +92,7 @@
 				?>
 					<input name="btLiberar" type="button" class="botao" value="Liberar" 
 					onclick="mostraDetalhesRPS('inc/nfe/rps_detalhes.ajax.php?codRPS=<?php echo $codRPS;?>','divDetalhesRPS')" />
-					&nbsp;
+					
 					<input name="btRecusar" type="button" class="botao" value="Recusar" 
 					onclick="recusaRPS('inc/nfe/rps_liberar_recusar.ajax.php?tipo=R&codigo=<?php echo $codRPS;?>')" />
 				<?php
@@ -113,7 +113,7 @@
 	</table>
 <?php
 	}else{
-		echo "<center><strong>Não há solicitações de RPS</strong></center>";
+		echo "<center><strong>NÃ£o hÃ¡ solicitaï¿½ï¿½es de RPS</strong></center>";
 	}
 ?>
 </fieldset>

@@ -46,8 +46,8 @@ require_once("../nocache.php");
 require_once("../../funcoes/util.php");
 
 $codarquivo = $_GET['codarquivo'];
-$sql_arquivo = mysql_query("SELECT codigo, arquivo, competencia FROM notas_arquivos WHERE codigo = '$codarquivo'");
-list($codigo, $arquivo, $competencia) = mysql_fetch_array($sql_arquivo);
+$sql_arquivo = $PDO->query("SELECT codigo, arquivo, competencia FROM notas_arquivos WHERE codigo = '$codarquivo'");
+list($codigo, $arquivo, $competencia) = $sql_arquivo->fetch();
 ?>
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
 	<tr>
@@ -58,7 +58,7 @@ list($codigo, $arquivo, $competencia) = mysql_fetch_array($sql_arquivo);
 		<td width="89%" align="left"><strong><?php echo $arquivo;?></strong></td>
 	</tr>
 	<tr>
-		<td align="left">Compet&ecirc;ncia: </td>
+		<td align="left">Competência: </td>
 		<td align="left"><strong><?php echo DataPt($competencia);?></strong></td>
 	</tr>
 </table>
@@ -91,25 +91,25 @@ $query = ("
 
 $sql = Paginacao($query,'frmRelEscrituracoes','divResultado');
 
-if (mysql_num_rows($sql) == 0) {
+if ($sql->rowCount() == 0) {
 	?><strong><center>Nenhum resultado encontrado.</center></strong><?php
 } else {
 	?>
 	<form method="post" id="frmLivro">
 	<table width="100%" border="0" cellspacing="2" cellpadding="2">
 		<tr>
-			<td bgcolor="#999999" align="center">C&oacute;digo</td>
-			<td bgcolor="#999999" align="center">Per&iacute;odo</td>
+			<td bgcolor="#999999" align="center">Código</td>
+			<td bgcolor="#999999" align="center">Período</td>
             <td bgcolor="#999999" align="center">Estado</td>
 			<td bgcolor="#999999" align="center">CNPJ prestador</td>
 			<td bgcolor="#999999" align="center">Base de calculo</td>
 			<td bgcolor="#999999" align="center">Iss</td>
 			<td bgcolor="#999999" align="center">Iss retido</td>
 			<td bgcolor="#999999" align="center">Iss total</td>
-			<td bgcolor="#999999" width="150" align="center">A&ccedil;&atilde;o</td>
+			<td bgcolor="#999999" width="150" align="center">Ação</td>
 		</tr>
 		<?php
-		while ($dados = mysql_fetch_array($sql)) {
+		while ($dados = $sql->fetch()) {
 		//junta o cnpj com o cpf para ficar no mesmo campo
 		$dados['cnpj'] .= $dados['cpf'];
 		?>
@@ -132,7 +132,7 @@ if (mysql_num_rows($sql) == 0) {
 			<td bgcolor="#FFFFFF" align="right"><?php echo DecToMoeda($dados['valorisstotal']); ?></td>
 			<td bgcolor="#FFFFFF" align="center">				
                 <input type="submit" class="botao" id="btnImprimirr" name="btnImprimir" 
-            onclick="document.getElementById('frmLivro').action='../livro/imprimirlivrogeral.php?livro=<?php echo base64_encode($dados['codigo']); ?>';document.getElementById('frmLivro').target='_blank'" value="Imprimir"/>&nbsp;              
+            onclick="document.getElementById('frmLivro').action='../livro/imprimirlivrogeral.php?livro=<?php echo base64_encode($dados['codigo']); ?>';document.getElementById('frmLivro').target='_blank'" value="Imprimir"/>              
 			</td>
 		</tr>
 		<?php

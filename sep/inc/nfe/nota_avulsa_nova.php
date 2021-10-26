@@ -27,11 +27,11 @@ $periodomysql=$ano."-".$mes;
 
 
 if($ano==NULL || $mes==NULL){
-	Mensagem("Escolha Ano e Mês para gerar a Nota Avulsa.");
+	Mensagem("Escolha Ano e Mï¿½s para gerar a Nota Avulsa.");
 }else{
 	$sessioncnpj = $_POST['txtCnpjPrestador'];
 	if($sessioncnpj==$_POST['txtTomadorCNPJ']){
-		Mensagem('O tomador nao pode ser o próprio prestador');
+		Mensagem('O tomador nao pode ser o prÃ³prio prestador');
 	}else{
 		//Variaveis com os valores preenchidos da nota
 		$tomadorCnpj             = $_POST['txtTomadorCNPJ'];
@@ -76,13 +76,13 @@ if($ano==NULL || $mes==NULL){
 		$aliquotapercentual      = MoedaToDec($_POST['txtAliqServico1']);
 			
 			//Seleciona a ultima nota inserida pela empresa
-			$sql = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '$_POST[codempresa]'");
-			list($ultimanota)=mysql_fetch_array($sql);
+			$sql = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$_POST[codempresa]'");
+			list($ultimanota)=$sql->fetch();
 			$ultimanota ++;
 			
 			//busca o limite de notas desse emissor
-			$sql=mysql_query("SELECT notalimite FROM cadastro WHERE codigo = '$_POST[codempresa]'");
-			list($notalimite)=mysql_fetch_array($sql);
+			$sql=$PDO->query("SELECT notalimite FROM cadastro WHERE codigo = '$_POST[codempresa]'");
+			list($notalimite)=$sql->fetch();
 			
 			//testa se o numero de notas limites ja foi ultrapassado se ja tiver ultrapassado avisa-o
 			
@@ -94,7 +94,7 @@ if($ano==NULL || $mes==NULL){
 					
 			
 					//Faz uma busca pelo tomador
-					$sql = mysql_query("SELECT * FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
+					$sql = $PDO->query("SELECT * FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
 					//Testa se o tomador o pessoa fisica ou pessoa juridica
 					$campo = tipoPessoa($tomadorCnpj);
 					$codtipo = codtipo('tomador');
@@ -103,7 +103,7 @@ if($ano==NULL || $mes==NULL){
 					//Testa se o tomador existe caso nao exista cria-o no banco
 					if(mysql_num_rows($sql)<=0){
 					
-						mysql_query("
+						$PDO->query("
 							INSERT INTO 
 								cadastro
 							SET 
@@ -129,7 +129,7 @@ if($ano==NULL || $mes==NULL){
 				
 					}else{
 						if($tomadorCnpj!=""){
-							mysql_query("
+							$PDO->query("
 								UPDATE
 									cadastro
 								SET
@@ -153,19 +153,19 @@ if($ano==NULL || $mes==NULL){
 							");
 						}
 		
-						list($codtomador) = mysql_fetch_array($sql);
+						list($codtomador) = $sql->fetch();
 					}
 				
-					//verifica a isenção do prestador
-					$sqlIsento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo='$_POST[codempresa]'");
-					list($issIsento) = mysql_fetch_array($sqlIsento);
+					//verifica a isenï¿½ï¿½o do prestador
+					$sqlIsento = $PDO->query("SELECT isentoiss FROM cadastro WHERE codigo='$_POST[codempresa]'");
+					list($issIsento) = $sqlIsento->fetch();
 					if($issIsento == 'S'){
 						$notaTotalValorISS = 0;
 						$notaTotalValorISSRetido = 0;
 					}
 		
 					//Sql que insere os dados da nota emitida no banco
-					$sql = mysql_query("
+					$sql = $PDO->query("
 						INSERT INTO 
 							notas 
 						SET 
@@ -218,7 +218,7 @@ if($ano==NULL || $mes==NULL){
 						$servicoISSRetido = MoedaToDec($_POST['txtISSRetidoManual'.$cont]);
 						$servicoDiscr     = htmlentities($_POST['txtDiscriminacaoServico'.$cont]);
 						
-						if($servicoDiscr == htmlentities("Discriminação do serviço")){
+						if($servicoDiscr == htmlentities("DiscriminaÃ§Ã£o do serviÃ§o")){
 							$servicoDiscr = "";
 						}
 		
@@ -227,7 +227,7 @@ if($ano==NULL || $mes==NULL){
 							$servicoISSRetido = 0;
 						}
 		
-						$sql_servicos_notas = mysql_query("
+						$sql_servicos_notas = $PDO->query("
 							INSERT INTO 
 								notas_servicos
 							SET
@@ -244,18 +244,18 @@ if($ano==NULL || $mes==NULL){
 						$notaRpsData   = DataMysql($_POST['txtDataRps']);
 					
 						//Pega o ultimo rps emitido
-						$sql_rps_ultimo = mysql_query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$_POST[codempresa]'");
-						list($ultimoRPS) = mysql_fetch_array($sql_rps_ultimo);
+						$sql_rps_ultimo = $PDO->query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$_POST[codempresa]'");
+						list($ultimoRPS) = $sql_rps_ultimo->fetch();
 						
 						$notaRpsNumero = $ultimoRPS + 1;
 						
-						mysql_query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$_POST[codempresa]' AND codigo = '$codigoUltimaNota'");
-						mysql_query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$_POST[codempresa]'");
+						$PDO->query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$_POST[codempresa]' AND codigo = '$codigoUltimaNota'");
+						$PDO->query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$_POST[codempresa]'");
 					
 					}
 		
 					
-					$sql = mysql_query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$_POST[codempresa]'");
+					$sql = $PDO->query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$_POST[codempresa]'");
 					add_logs('Emitiu nota fiscal');
 					
 					//Envia o email informando o tomador que foi inserida uma nfe
@@ -275,8 +275,8 @@ if($ano==NULL || $mes==NULL){
 					
 					$codigoguia		= $codigoUltimaNota;
 					$codemissor		= $_POST['codempresa'];
-					$sql_guia		= mysql_query("SELECT * FROM notas WHERE codigo = '$codigoguia'");
-					$dados_guia		= mysql_fetch_array($sql_guia);
+					$sql_guia		= $PDO->query("SELECT * FROM notas WHERE codigo = '$codigoguia'");
+					$dados_guia		= $sql_guia->fetch();
 					$hoje           = date("Y-m-d");
 					$dataem         = explode("-",$hoje);
 					
@@ -289,8 +289,8 @@ if($ano==NULL || $mes==NULL){
 				
 					$multa = calculaMultaDes($dias, $dados_guia['valoriss']);
 				
-					$sql_banco=mysql_query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
-					list($codbanco,$boleto)=mysql_fetch_array($sql_banco);
+					$sql_banco=$PDO->query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
+					list($codbanco,$boleto)=$sql_banco->fetch();
 				
 					if($DIRETORIOINTEGRACAO){
 						chdir('../');
@@ -318,21 +318,21 @@ if($ano==NULL || $mes==NULL){
 						");
 			
 			
-						if(mysql_query($insere_guia)){
-							$sqlguia=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
-							list($codguiapag)=mysql_fetch_array($sqlguia);
+						if($PDO->query($insere_guia)){
+							$sqlguia=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
+							list($codguiapag)=$sqlguia->fetch();
 							
 							$nossonumero = gerar_nossonumero($dados_guia['codigo'],date("Y-m-d", time() + (7 * 86400)));
 							$chavecontroledoc = gerar_chavecontrole($dados_guia["codigo"],$codguiapag);
 							
-							mysql_query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguiapag'");
+							$PDO->query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguiapag'");
 							
-							$sql_boleto=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
-							list($codigoboleto)=mysql_fetch_array($sql_boleto);	
+							$sql_boleto=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
+							list($codigoboleto)=$sql_boleto->fetch();	
 					
 								$atualiza_livro = ("UPDATE notas SET estado='B' WHERE codigo='$codigoguia'");
 								
-								if(mysql_query($atualiza_livro)){
+								if($PDO->query($atualiza_livro)){
 									Mensagem("Nota Avulsa emitida e boleto gerado com sucesso");
 									imprimirGuia($codigoboleto);
 									Redireciona("principal.php");
@@ -346,7 +346,7 @@ if($ano==NULL || $mes==NULL){
 					}
 				
 					}else{
-						print("<script language=JavaScript>alert('Favor preencher campos obrigatórios')</script>");
+						print("<script language=JavaScript>alert('Favor preencher campos obrigatÃ³rios')</script>");
 				}
 	}
 }

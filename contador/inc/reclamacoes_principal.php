@@ -25,12 +25,12 @@ $campo   = tipoPessoa($cnpjcpf);
 
 $sql = mysql_query("SELECT $campo FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 list($prestador_cnpjcpf) = mysql_fetch_array($sql);
-//SQL de filtragem de serviços
+//SQL de filtragem de serviÃ§os
 $sql_listaPendentes = mysql_query("SELECT codigo, especificacao, datareclamacao, responsavel, tomador_cnpj FROM reclamacoes WHERE estado = 'pendente' AND emissor_cnpjcpf = '$prestador_cnpjcpf' ORDER BY datareclamacao DESC LIMIT 0,10");
 
 ?>
  
-<!-- cabeçalho da pesquisa --> 
+<!-- cabeï¿½alho da pesquisa --> 
 <?php
 if(mysql_num_rows($sql_listaPendentes)>0){
 ?>   
@@ -38,7 +38,7 @@ if(mysql_num_rows($sql_listaPendentes)>0){
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">10 últimas pendentes</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">10 Ãºltimas pendentes</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -58,10 +58,10 @@ if(mysql_num_rows($sql_listaPendentes)>0){
         
     <table width="100%" border="0" cellspacing="2" cellpadding="2">
     <tr>
-      <td width="30%">Especificação</td>
+      <td width="30%">EspecificaÃ§Ã£o</td>
       <td width="40%">Tomador</td>
       <td width="5%">Dta Recl</td>
-      <td width="20%">Responsável</td>
+      <td width="20%">Responsï¿½vel</td>
       <td width="5%"></td>
     </tr>
     <tr>
@@ -82,7 +82,7 @@ if(mysql_num_rows($sql_listaPendentes)>0){
         if(($btDetalhes=="Detalhes")&&($codigo==$y))
             {
                 echo "<tr><td colspan=\"5\">";
-                include("inc/reclamacoes_detalhes.php");
+                require_once("inc/reclamacoes_detalhes.php");
                 echo "</td></tr>";
             }
     ?>
@@ -104,7 +104,7 @@ if(mysql_num_rows($sql_listaPendentes)>0){
 </form>
 <?php
 }else{
-	echo "<center>Não há reclamações pendentes</center>";
+	echo "<center>NÃ£o hÃ¡ reclamaï¿½ï¿½es pendentes</center>";
 }
 ?>
 <?php
@@ -120,7 +120,7 @@ LIMIT 0,10");
 
 ?>
  
-<!-- cabeçalho da pesquisa --> 
+<!-- cabeï¿½alho da pesquisa --> 
 <?php
 if(mysql_num_rows($sql_listaAtendidas)>0){
 ?>
@@ -128,7 +128,7 @@ if(mysql_num_rows($sql_listaAtendidas)>0){
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">10 últimas atendidas</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">10 Ãºltimas atendidas</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -146,10 +146,10 @@ if(mysql_num_rows($sql_listaAtendidas)>0){
 		<td height="60" colspan="3" bgcolor="#CCCCCC">
   <table width="99%" border="0" cellspacing="2" cellpadding="2">
     <tr>
-      <td width="30%">Especificação</td>
+      <td width="30%">EspecificaÃ§Ã£o</td>
       <td width="40%">Tomador</td>
       <td width="5%">Dta Atend</td>
-      <td width="20%">Responsável</td>
+      <td width="20%">Responsï¿½vel</td>
       <td width="5%"></td>
     </tr>
     <tr>
@@ -170,7 +170,7 @@ if(mysql_num_rows($sql_listaAtendidas)>0){
 		if(($btDetalhes=="Detalhes")&&($codigo==$y))
 			{
 				echo "<tr><td colspan=\"5\">";
-				include("inc/reclamacoes_detalhes.php");
+				require_once("inc/reclamacoes_detalhes.php");
 				echo "</td></tr>";
 			}
 	?>
@@ -190,6 +190,6 @@ if(mysql_num_rows($sql_listaAtendidas)>0){
 </form>
 <?php
 }else{
-	echo "<center>Não há reclamações atendidas</center>";
+	echo "<center>NÃ£o hÃ¡ reclamaï¿½ï¿½es atendidas</center>";
 }
 ?>

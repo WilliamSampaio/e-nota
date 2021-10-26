@@ -28,13 +28,13 @@ Fith Floor, Boston, MA 02110-1301, USA
   <form  method="post" name="frmPagamento">   
   <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">	       
    <tr>
-	<td align="left" width="30%">Período do Imposto</td>
+	<td align="left" width="30%">PerÃ­odo do Imposto</td>
 	<td align="left" width="70%">
 	<select name="cmbMes" id="cmbMes" class="combo">
-	  <option value="">== Mês ==</option>
+	  <option value="">== Mï¿½s ==</option>
 	  <option value="01">Janeiro</option>
 	  <option value="02">Fevereiro</option>
-	  <option value="03">Março</option>
+	  <option value="03">Marï¿½o</option>
 	  <option value="04">Abril</option>
 	  <option value="05">Maio</option>
 	  <option value="06">Junho</option>
@@ -73,12 +73,12 @@ Fith Floor, Boston, MA 02110-1301, USA
    <tr>	  
 	<td colspan="2" align="center">
 	 <input type="hidden" name="btOp" value="Gerar Guia"/>
-	 <input type="submit" value="Pesquisar" name="btPesquisar" class="botao" onclick="return ValidaFormulario('cmbMes|cmbAno','Defina o mês e o ano')"></td>
+	 <input type="submit" value="Pesquisar" name="btPesquisar" class="botao" onclick="return ValidaFormulario('cmbMes|cmbAno','Defina o mï¿½s e o ano')"></td>
    </tr>   
   </table>   
   </form>
   
-  <?php  if($btPesquisar =="Pesquisar"){include("pagamento_resultado.php");} ?>  
+  <?php  if($btPesquisar =="Pesquisar"){require_once("pagamento_resultado.php");} ?>  
   
   </fieldset>
  </td>

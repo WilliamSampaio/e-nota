@@ -39,8 +39,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 				}else{
 					$codbanco_sql = $codbanco_opr;
 				}
-				$sql_banco = mysql_query("SELECT codigo, banco FROM bancos ORDER BY banco ASC");
-				while(list($codigo_banco, $banco) = mysql_fetch_array($sql_banco)){
+				$sql_banco = $PDO->query("SELECT codigo, banco FROM bancos ORDER BY banco ASC");
+				while(list($codigo_banco, $banco) = $sql_banco->fetch()){
 					echo "<option value=\"$codigo_banco\"";if($codbanco_sql == $codigo_banco){ echo "selected=selected"; } echo ">$banco</option>";
 				}
 			?>

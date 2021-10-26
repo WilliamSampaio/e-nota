@@ -21,9 +21,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <link href="../../css/padrao_emissor.css" rel="stylesheet" type="text/css" />
 <?php
-include("conect.php");
-include("../../funcoes/util.php");
-include("nocache.php");
+require_once("conect.php");
+require_once("../../funcoes/util.php");
+require_once("nocache.php");
 	$CODIGO_DA_EMPRESA=$_GET['hdcodempresa'];	
 	$numero = $_GET['txtNumeroNota'];
 	$codverificacao = $_GET['txtCodigoVerificacao'];
@@ -82,13 +82,13 @@ WHERE
 						if(mysql_num_rows($sql)>0){
 					?>
 					<tr>
-						<td width="5%" align="center">N&ordm;</td>
-						<td width="13%" align="center">Cód Verif</td>
-						<td width="16%" align="center">D/H Emissão</td>
+						<td width="5%" align="center">NÂº</td>
+						<td width="13%" align="center">Cï¿½d Verif</td>
+						<td width="16%" align="center">D/H EmissÃ£o</td>
 						<td width="40%" align="center">Tomador Nome </td>
 						<td width="13%" align="center">Estado</td>
 						<td width="10%" align="center">
-                    		<input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir seleção" onclick="document.getElementById('frmPesquisar').action='../site/imprimirnotas.php';document.getElementById('frmPesquisar').target='_blank';submit();"/>
+                    		<input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir seleï¿½ï¿½o" onclick="document.getElementById('frmPesquisar').action='../site/imprimirnotas.php';document.getElementById('frmPesquisar').target='_blank';submit();"/>
                     	</td>
 					</tr>
 					<tr>
@@ -163,7 +163,7 @@ WHERE
 					}else{
 					?>
 					<tr>
-						<td align="center" colspan="9">Não houve nenhum resultado!</td>
+						<td align="center" colspan="9">NÃ£o houve nenhum resultado!</td>
 					</tr>
 					<?php
 					}

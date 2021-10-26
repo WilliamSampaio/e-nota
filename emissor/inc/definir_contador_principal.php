@@ -52,9 +52,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$sql = $PDO->query("SELECT razaosocial FROM cadastro WHERE codigo = '$codcontador'");
 	list($nomecontador)=$sql->fetch();
 	if($nomecontador==""){
-		$mensagem = "Voc&eacute; ainda n&atilde;o possui contador autorizado";
+		$mensagem = "Vocé ainda não possui contador autorizado";
 	}else {
-		$mensagem="Seu contador atual &eacute; <font color=\"#FF0000\"><b>".$nomecontador."</b></font>";
+		$mensagem="Seu contador atual é <font color=\"#FF0000\"><b>".$nomecontador."</b></font>";
 	}
 
 ?>
@@ -98,7 +98,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     <?php
 		if($btBuscar!=""){
 		
-			include("definir_contador_final.php");
+			require_once("definir_contador_final.php");
 		}
 	?>	
 
@@ -111,7 +111,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Permiss&otilde;es do Contador</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Permissões do Contador</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -139,33 +139,33 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</tr>
     <tr>
 		<td> 
-			NFE: &nbsp;</td>
+			NFE: </td>
         
         <td>Sim
 		
           <input type="radio" name="txtNfe"  value="S" id="txtNfe" <?php if($contnfe == 'S'){ echo "checked=checked"; } ?> />
-N&atilde;o
+Não
 			<input type="radio" name="txtNfe"  value="N" id="txtNfe" <?php if($contnfe == 'N'){ echo "checked=checked"; } ?> /></td>
     </tr>
     <tr>
-		<td>Livro: &nbsp;</td>
+		<td>Livro: </td>
         <td>Sim		
           <input type="radio" name="txtLivro" value="S"  id="txtLivro" <?php if($contlivro == 'S'){ echo "checked=checked"; } ?> />
-N&atilde;o
+Não
 <input type="radio" name="txtLivro" value="N"  id="txtLivro" <?php if($contlivro == 'N'){ echo "checked=checked"; } ?> /></td>
     </tr>
     	<tr>
-			<td>Guia: &nbsp;</td>
+			<td>Guia: </td>
 		    <td>Sim
 			 <input type="radio" name="txtGuia" value="S" id="txtGuia" <?php if($contguia == 'S'){ echo "checked=checked"; } ?> />
-N&atilde;o
+Não
 <input type="radio" name="txtGuia" value="N" id="txtGuia" <?php if($contguia == 'N'){ echo "checked=checked"; } ?> /></td>
     	</tr>
 		<tr>
-			<td>RPS: &nbsp;</td>
+			<td>RPS: </td>
 		    <td>Sim
 		      <input type="radio" name="txtRps" value="S" id="txtRps" <?php if($contrps == 'S'){ echo "checked=checked"; } ?> />
-N&atilde;o
+Não
 			<input type="radio" name="txtRps" value="N" id="txtRps" <?php if($contrps == 'N'){ echo "checked=checked"; } ?> /></td>
 		</tr>
     <tr>
@@ -178,7 +178,7 @@ N&atilde;o
 </table>
     <?php
 		/*if($btAtualizar!=""){
-			include("definir_contador_final.php");
+			require_once("definir_contador_final.php");
 		}*/
 	?>	
 

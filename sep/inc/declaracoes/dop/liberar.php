@@ -21,15 +21,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 	if($_POST["btLiberar"] == "Liberar"){
 		$codigo = $_POST["hdCodSolicitacao"];
-		mysql_query("UPDATE orgaospublicos SET estado = 'A' WHERE codigo = '$codigo'");
-		Mensagem("Liberação de Órgão Ativada");
+		$PDO->query("UPDATE orgaospublicos SET estado = 'A' WHERE codigo = '$codigo'");
+		Mensagem("Liberaï¿½ï¿½o de ï¿½rgï¿½o Ativada");
 	}
 ?>
 
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;&Oacute;rg&atilde;os P&uacute;blicos - Liberar </td>  
+    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Ã“rgÃ£os PÃºblicos - Liberar </td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -40,18 +40,18 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<fieldset><legend>Liberar Cadastro</legend>
 				<table width="790">
 				<?php
-					$sql_pedidos = mysql_query("SELECT codigo, nome, cnpj, razaosocial, nivel FROM orgaospublicos WHERE estado = 'NL' ORDER BY codigo");
-					if(mysql_num_rows($sql_pedidos)>0){
+					$sql_pedidos = $PDO->query("SELECT codigo, nome, cnpj, razaosocial, nivel FROM orgaospublicos WHERE estado = 'NL' ORDER BY codigo");
+					if($sql_pedidos->rowCount()>0){
 				?>
 					<tr bgcolor="#999999">
 						<td width="180" align="center">Nome</td>
 						<td width="130" align="center">Cnpj</td>
-						<td width="200" align="center">Razão Social</td>
-						<td width="130" align="center">Nível</td>
-						<td align="center" width="50">Ações</td>
+						<td width="200" align="center">RazÃ£o Social</td>
+						<td width="130" align="center">Nï¿½vel</td>
+						<td align="center" width="50">AÃ§Ãµes</td>
 					</tr>
 					<?php
-						while(list($codigo,$nome,$cnpj, $razaosocial, $nivel, $estado) = mysql_fetch_array($sql_pedidos)){
+						while(list($codigo,$nome,$cnpj, $razaosocial, $nivel, $estado) = $sql_pedidos->fetch()){
 					switch($nivel){
 					case "E": $nivel = "Estadual"; break;
 					case "M": $nivel = "Municipal"; break;
@@ -72,7 +72,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					}else{
 						echo "
 							<tr>
-								<td align=\"center\">Não há solicitações de ativação</td>
+								<td align=\"center\">NÃ£o hÃ¡ solicitaï¿½ï¿½es de ativaï¿½ï¿½o</td>
 							</tr>
 						";
 					}//fim if

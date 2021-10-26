@@ -41,21 +41,13 @@ require_once 'inc/header.php';
             <!-- CONTEÚDO -->
             <div class="col-9">
 
-                <!-- NFE LOGO -->
-                <!-- <div class="row text-center">
-                    <div class="col-12">
-                        <img style="width: 80%;" src="../img/cabecalhos/noticias.jpg" class="img-fluid" alt="...">
-                    </div>
-                </div> -->
-
                 <br>
                 <h1>Ouvidoria</h1>
                 <h5 class="card-title">Tomador, se houver discrepâncias em sua NFe entre em contato com a Prefeitura Municipal</h5>
                 <hr><br>
 
                 <?php
-
-                if (isset($_SESSION['cad_result'])) {
+                /*if (isset($_SESSION['cad_result'])) {
                     echo '<div class="alert alert-success" role="alert"><p>' . $_SESSION['cad_result'] . '</p></div>';
                     unset($_SESSION['cad_result']);
                 }
@@ -65,8 +57,40 @@ require_once 'inc/header.php';
                 } else {
                     require_once("inc/ouvidoria/links.php");
                 } // fim else
+                */
                 ?>
 
+
+                <!-- ITENS -->
+                <div class="row">
+
+                    <div class="col-6" style="height: 100%;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Reclamações</h5>
+                                <p class="card-text">Se o seu prestador não efetuou a conversão de RPS em NF-e, ou o valor da NFe não confere.</p>
+                            </div>
+                            <div class="card-footer">
+                                <img src="../img/box/web.png" width="14" height="14">
+                                <a href="ouvidoria-cadastro.php" class="box">Serviço online</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6" style="height: 100%;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Consulta</h5>
+                                <p class="card-text">Consulte o andamento da reclamação feita junto a Prefeitura Municipal.</p>
+                            </div>
+                            <div class="card-footer">
+                                <img src="../img/box/web.png" alt="" width="14" height="14">
+                                <a href="ouvidoria-consulta.php" class="box">Serviço online</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
             </div>
         </div>
     </div>

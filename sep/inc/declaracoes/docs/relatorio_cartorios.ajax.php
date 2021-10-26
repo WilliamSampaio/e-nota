@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    include("../conect.php");
-    include("../../funcoes/util.php");
+    require_once("../conect.php");
+    require_once("../../funcoes/util.php");
 
     //recebe os dados
     $nome=strip_tags(addslashes($_GET['txtNome']));
@@ -44,24 +44,24 @@ Fith Floor, Boston, MA 02110-1301, USA
     $sql_cartorios=Paginacao($query,'frmRelatorio','detalhes_cartorios',10);
 
     //caso encontre resultados, exibe. caso contrario retorna uma mensagem pro usuario
-    if(mysql_num_rows($sql_cartorios)>0){
+    if($sql_cartorios->rowCount()>0){
         ?>
         <table width="100%">
             <tr bgcolor="999999" align="center">
                 <td>Nome</td>
                 <td>CNPJ</td>
                 <td>Diretor</td>
-                <td>Respons·vel</td>
+                <td>Respons√°vel</td>
                 <td>Estado</td>
             </tr>
             <?php
-                while($dados = mysql_fetch_array($sql_cartorios)){
+                while($dados = $sql_cartorios->fetch()){
                     if($dados['estado']=="A"){
                         $dados['estado']="Ativo";
                     }elseif($dados['estado']=="I"){
                         $dados['estado']="Inativo";
                     }else{
-                        $dados['estado']="N„o Liberado";
+                        $dados['estado']="N√£o Liberado";
                     }
                     echo "
                         <tr bgcolor=\"FFFFFF\">

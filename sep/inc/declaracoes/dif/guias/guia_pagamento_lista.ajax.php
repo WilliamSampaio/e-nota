@@ -19,13 +19,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../../../conect.php");
-include("../../../../funcoes/util.php");
+require_once("../../../conect.php");
+require_once("../../../../funcoes/util.php");
 
 $ano = $_GET["cmbAno"];
 $mes = $_GET["cmbMes"];
 $codemissor = $_GET['codemissor'];
-$sql = mysql_query("
+$sql = $PDO->query("
 	SELECT 
 		dif_des.codigo,
 		dif_des.data,
@@ -44,7 +44,7 @@ $sql = mysql_query("
 	GROUP BY 
 		dif_des.codigo
 ");
-if(mysql_num_rows($sql) > 0)
+if($sql->rowCount() > 0)
 	{
 		?>
 			<form method="post">	
@@ -62,17 +62,17 @@ if(mysql_num_rows($sql) > 0)
 					</tr>
 					<tr bgcolor="#FFFFFF">
 						<td width="100" align="center">Data Gerado</td>
-						<td width="90" align="center">Compet&ecirc;ncia</td>
-						<td width="110" align="center">Cod. Verifica&ccedil;&atilde;o</td>
+						<td width="90" align="center">Competência</td>
+						<td width="110" align="center">Cod. Verificação</td>
 						<td width="60" align="center">Valor</td>
 						<td align="center"></td>
 					</tr>
 				</table>
-			   <div style=" width:70%; <?php if(mysql_num_rows($sql)>13){ echo "height:300px; overflow:auto";}?>">
+			   <div style=" width:70%; <?php if($sql->rowCount()>13){ echo "height:300px; overflow:auto";}?>">
 				<table width="100%">
 					<?php
 						$cont = 0;
-						while(list($codigo,$data,$codverificacao,$total,$data_comp) = mysql_fetch_array($sql)){
+						while(list($codigo,$data,$codverificacao,$total,$data_comp) = $sql->fetch()){
 							$datahora = explode(" ",$data);
 							$data = DataPt($datahora[0]);
 							$hora = $datahora[1];

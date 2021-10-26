@@ -23,13 +23,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 //recebe o include que mantem a pagina
 $include = $_GET['include'];
 //conecta ao banco
-include("../conect.php");
+require_once("../conect.php");
 //recebe o codigo que veio por get
 $codigo = $_GET['hdcod'];
 
 //sql buscando informacoes sobre o usuario
-$sql_info = mysql_query("SELECT tipocartorio FROM cartorios_tipo WHERE codigo = '$codigo'");
-list($descricao) = mysql_fetch_array($sql_info);
+$sql_info = $PDO->query("SELECT tipocartorio FROM cartorios_tipo WHERE codigo = '$codigo'");
+list($descricao) = $sql_info->fetch();
 ?>
 <input type="hidden" name="hdCodServ" value="<?php echo $codigo;?>">
 <table width="100%">

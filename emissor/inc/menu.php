@@ -22,15 +22,18 @@ Fith Floor, Boston, MA 02110-1301, USA
 $codDaSessao = $_SESSION['codempresa'];
 $sql_tipo_declaracao = $PDO->query("SELECT codtipodeclaracao FROM cadastro WHERE codigo = '$codDaSessao'");
 list($codtipodeclaracao) = $sql_tipo_declaracao->fetch();
-$codtipodec = coddeclaracao('Simples Nacional');
+
+$sql_cargo = $PDO->query("SELECT codigo FROM declaracoes WHERE declaracao LIKE 'Simples Nacional'");
+
+$codtipodec = $sql_cargo->fetchColumn();
 
 if($codtipodeclaracao == $codtipodec){
 	// itens de menu
-	$menu = array("Cadastro","AIDF Eletr�nico","Notas Eletr�nicas"/*,"NF-e Tomadas"*/,"Relat&oacute;rio","Livro Digital","RPS","Contador","Exportar Notas","Ouvidoria","Utilit�rios","Sair");
+	$menu = array("Cadastro","AIDF Eletrônico","Notas Eletr�nicas"/*,"NF-e Tomadas"*/,"Relatório","Livro Digital","RPS","Contador","Exportar Notas","Ouvidoria","Utilit�rios","Sair");
 	$links = array("empresas.php","aidf.php","notas.php"/*,"notas_tomadas.php"*/,"relatorio.php","livro.php","importar.php","definir_contador.php","exportar.php","reclamacoes.php","utilitarios.php","logout.php");
 }else{
 	// itens de menu
-	$menu = array("Cadastro","AIDF Eletr&ocirc;nico","Notas Eletr&ocirc;nicas"/*,"NF-e Tomadas"*/,"Relat&oacute;rio","Livro Digital","Guia de Pagamento","RPS","Contador","Exportar Notas","Ouvidoria","Utilit&aacute;rios","Sair");
+	$menu = array("Cadastro","AIDF Eletrônico","Notas Eletrônicas"/*,"NF-e Tomadas"*/,"Relatório","Livro Digital","Guia de Pagamento","RPS","Contador","Exportar Notas","Ouvidoria","Utilitários","Sair");
 	$links = array("empresas.php","aidf.php","notas.php"/*,"notas_tomadas.php"*/,"relatorio.php","livro.php","pagamento.php","importar.php","definir_contador.php","exportar.php","reclamacoes.php","utilitarios.php","logout.php");
 }
 // contador do vetor
@@ -49,7 +52,7 @@ while($aux < $cont) {
   <tr>
     <td height="20" class="menu">
 		<?php 
-			print(" <a class=\"menu\" href=$links[$aux] target=_parent>&nbsp;$menu[$aux]</a>"); 
+			print(" <a class=\"menu\" href=$links[$aux] target=_parent>$menu[$aux]</a>"); 
 		?>
 	</td>
   </tr>

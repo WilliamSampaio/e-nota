@@ -40,13 +40,13 @@ switch($nivelPOST){
 	case 'F': $nivel = "Federal";break;
 }//fim switch nivel
 switch($estadoPOST){
-	case "NL": $estado = "Não Liberado"; break;
+	case "NL": $estado = "NÃ£o Liberado"; break;
 	case "A" : $estado = "Ativo";   break;
 	case "I" : $estado = "Inativo";    break;
 }//fim switch estado
 
 //faz um where de acordo com oque foi preenchido no from
-$sql_where=" ";//comeca a var do where como um espaço
+$sql_where=" ";//comeca a var do where como um espaï¿½o
 if($cnpjPOST){
 	$sql_where.=" AND orgaospublicos.cnpj='$cnpjPOST'";
 }//fim if cnpj
@@ -66,7 +66,7 @@ if($nivelPOST){
 	$sql_where.=" AND orgaospublicos.nivel='$nivelPOST'";
 }//fim if estado
 
-$sql = mysql_query("
+$sql = $PDO->query("
 				SELECT 
 					nome, 
 					razaosocial, 
@@ -86,9 +86,9 @@ $sql = mysql_query("
 				");
 
 ?>
-<script src="../../scripts/padrao.js" type="text/javascript"></script><title>Relatorios - Órgãos Públicos</title>
+<script src="../../scripts/padrao.js" type="text/javascript"></script><title>Relatorios - ï¿½rgï¿½os Pï¿½blicos</title>
 <div id="DivImprimir"><input type="button" onClick="EscondeDiv('DivImprimir'); print();" value="Imprimir" /></div>
-<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relatório de Órgãos Públicos</b></p>
+<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relatï¿½rio de ï¿½rgï¿½os Pï¿½blicos</b></p>
 <table>
 	<?php if($nomePOST){?>
 	<tr>
@@ -117,7 +117,7 @@ $sql = mysql_query("
 	</tr>
 	<?php } if($adminPOST){ ?>
 	<tr>
-		<td><b>Administração:</b></td>
+		<td><b>Administraï¿½ï¿½o:</b></td>
 		<td><?php echo $admpublica; ?></td>
 	</tr>
 	<?php } if($nivelPOST){ ?>
@@ -129,24 +129,24 @@ $sql = mysql_query("
 </table>
 <table>
 	<tr>
-		<td colspan="2"><strong><?php echo mysql_num_rows($sql); ?> Órgãos Públicos registrados</strong></td>
+		<td colspan="2"><strong><?php echo $sql->rowCount(); ?> ï¿½rgï¿½os Pï¿½blicos registrados</strong></td>
 	</tr>
 </table>
 <table width="700" style="font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif">
 	<tr>
 		<td align="center" width="240"><b>Nome</b></td>
 		<td align="center" width="130"><b>CNPJ</b></td>
-		<td align="center" width="130"><b>Município</b></td>
+		<td align="center" width="130"><b>Municï¿½pio</b></td>
 		<td align="center" width="30"><b>UF</b></td>
-		<td align="center" width="100"><b>Administração</b></td>
-		<td align="center" width="60"><b>Nível</b></td>
-		<td align="center"><b>Situação</b></td>	
+		<td align="center" width="100"><b>Administraï¿½ï¿½o</b></td>
+		<td align="center" width="60"><b>Nï¿½vel</b></td>
+		<td align="center"><b>Situaï¿½ï¿½o</b></td>	
 	</tr>
 	<tr>
 		<td colspan="7"><hr size="1px" color="#000000"/></td>
 	</tr>
 	<?php
-	while(list($nome, $razao, $cnpj, $municipio, $uf, $admpublica, $nivel, $estado)=mysql_fetch_array($sql)){
+	while(list($nome, $razao, $cnpj, $municipio, $uf, $admpublica, $nivel, $estado)=$sql->fetch()){
 		switch($admpublica){
 			case 'D': $admpublica = "Direta";break;
 			case 'I': $admpublica = "Indireta";break;
@@ -157,7 +157,7 @@ $sql = mysql_query("
 			case 'F': $nivel = "Federal";break;
 		}//fim switch nivel
 		switch($estado){
-			case "NL": $estado = "Não Liberado"; break;
+			case "NL": $estado = "NÃ£o Liberado"; break;
 			case "A" : $estado = "Ativo";   break;
 			case "I" : $estado = "Inativo";    break;
 		}//fim switch estado

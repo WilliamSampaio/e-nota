@@ -27,10 +27,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$cod_remover = $_GET['codremover'];
 	if($cod_remover){
 		//Remove os cadastros do banco
-		mysql_query("DELETE FROM cadastro WHERE codigo = '$cod_remover'");
-		mysql_query("DELETE FROM cadastro_resp WHERE codemissor = '$cod_remover'");
-		mysql_query("DELETE FROM cadastro_servicos WHERE codemissor = '$cod_remover'");
+		$PDO->query("DELETE FROM cadastro WHERE codigo = '$cod_remover'");
+		$PDO->query("DELETE FROM cadastro_resp WHERE codemissor = '$cod_remover'");
+		$PDO->query("DELETE FROM cadastro_servicos WHERE codemissor = '$cod_remover'");
 	}
 	
-	include("liberar_lista.ajax.php");
+	require_once("liberar_lista.ajax.php");
 ?>

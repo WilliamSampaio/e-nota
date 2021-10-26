@@ -21,9 +21,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 
 function valorPorExtenso($valor) {
-	$singular = array("centavo", "real", "mil", "milhão", "bilhão", "trilhão", "quatrilhão");
-	$plural = array("centavos", "reais", "mil", "milhões", "bilhões", "trilhões",
-"quatrilhões");
+	$singular = array("centavo", "real", "mil", "milhï¿½o", "bilhï¿½o", "trilhï¿½o", "quatrilhï¿½o");
+	$plural = array("centavos", "reais", "mil", "milhï¿½es", "bilhï¿½es", "trilhï¿½es",
+"quatrilhï¿½es");
 
 	$c = array("", "cem", "duzentos", "trezentos", "quatrocentos",
 "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos");
@@ -31,7 +31,7 @@ function valorPorExtenso($valor) {
 "sessenta", "setenta", "oitenta", "noventa");
 	$d10 = array("dez", "onze", "doze", "treze", "quatorze", "quinze",
 "dezesseis", "dezesete", "dezoito", "dezenove");
-	$u = array("", "um", "dois", "três", "quatro", "cinco", "seis",
+	$u = array("", "um", "dois", "trï¿½s", "quatro", "cinco", "seis",
 "sete", "oito", "nove");
 
 	$z=0;
@@ -42,7 +42,7 @@ function valorPorExtenso($valor) {
 		for($ii=strlen($inteiro[$i]);$ii<3;$ii++)
 			$inteiro[$i] = "0".$inteiro[$i];
 
-	// $fim identifica onde que deve se dar junção de centenas por "e" ou por "," ;)
+	// $fim identifica onde que deve se dar junï¿½ï¿½o de centenas por "e" ou por "," ;)
 	$fim = count($inteiro) - ($inteiro[count($inteiro)-1] > 0 ? 1 : 2);
 	for ($i=0;$i<count($inteiro);$i++) {
 		$valor = $inteiro[$i];
@@ -56,7 +56,7 @@ $ru) ? " e " : "").$ru;
 		$r .= $r ? " ".($valor > 1 ? $plural[$t] : $singular[$t]) : "";
 		if ($valor == "000")$z++; elseif ($z > 0) $z--;
 		if (($t==1) && ($z>0) && ($inteiro[0] > 0)) $r .= (($z>1) ? " de " : "").$plural[$t]; 
-		if ($r) $rt = $rt . ((($i > 0) && ($i <= $fim) &&
+		if ($r) $rt = ((($i > 0) && ($i <= $fim) &&
 ($inteiro[0] > 0) && ($z < 1)) ? ( ($i < $fim) ? ", " : " e ") : "") . $r;
 	}
 

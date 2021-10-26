@@ -53,12 +53,12 @@ if(mysql_num_rows($sql_empreiteiras)>0)
     <tr bgcolor="#999999">
         <td align="center" width="170">Nome</td>
         <td align="center" width="110">CNPJ</td>
-        <td align="center" width="130">Município</td>
+        <td align="center" width="130">Municï¿½pio</td>
         <td align="center" width="30">UF</td>
-        <?php if(!$estado){?><td align="center" width="90">Liberação</td><?php }?>
+        <?php if(!$estado){?><td align="center" width="90">Liberaï¿½ï¿½o</td><?php }?>
     </tr>
     <?php
-    while(list($nome,$razaosocial,$cnpj,$municipio,$uf,$estado_emp,$codigo) = mysql_fetch_array($sql_empreiteiras)){										
+    while(list($nome,$razaosocial,$cnpj,$municipio,$uf,$estado_emp,$codigo) = $sql_empreiteiras)){										
         switch($estado_emp){
             case "NL": $estado_emp = "Aguardando"; break;
             case "A" : $estado_emp = "Liberado";   break;
@@ -79,7 +79,7 @@ if(mysql_num_rows($sql_empreiteiras)>0)
 <?php
 
 	}else{
-		echo "<center><b>Não há empreiteiras cadastradas</b></center>";
+		echo "<center><b>NÃ£o hÃ¡ empreiteiras cadastradas</b></center>";
 	}
 
 ?>

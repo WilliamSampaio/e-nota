@@ -26,8 +26,8 @@ V1.1 (Oct 28, 2003) - Added numbers above bars. 3 options to choose from.
 
 header("Content-type: image/jpeg");
 
-include("../conect.php");
-$sql = mysql_query("SELECT tomador_nome, SUM(valortotal) FROM notas GROUP BY tomador_nome ORDER BY SUM(valortotal) DESC LIMIT 20");
+require_once("../conect.php");
+$sql = $PDO->query("SELECT tomador_nome, SUM(valortotal) FROM notas GROUP BY tomador_nome ORDER BY SUM(valortotal) DESC LIMIT 20");
 $sql_rows=mysql_num_rows($sql);
 if($sql_rows<=4){$largura=400;}else{$largura=200+$sql_rows*50;}
 /* Settings */
@@ -46,19 +46,19 @@ $use_logo=0; //Add logo to the bottom of your graph? 1-Yes 0-No
 $full_img_url=$_SERVER["DOCUMENT_ROOT"] . "sepiss/inc/nfe/logo.png"; //You may change this to your own logo
 
 
-while(list($tomador, $valor)=mysql_fetch_array($sql)){
+while(list($tomador, $valor)=$sql->fetch()){
 	$bar_data[$tomador]=$valor;
 }
 /* Data */
 /*
-$bar_data=array( //array de teste, nao é inportante.
-                  "João" => 52,
+$bar_data=array( //array de teste, nao Ã© inportante.
+                  "JoÃ£o" => 52,
                   "Jean" => 45,
                   "Lucas" => 25,
                   "Dani" => 0.25,
                   "Rodrigo" => 58,
                   "Guilherme" => 174,
-                  "João" => 52,
+                  "JoÃ£o" => 52,
                   "Jean" => 45,
                   "Lucas" => 25,
                   "Dani" => 0.25,
@@ -67,7 +67,7 @@ $bar_data=array( //array de teste, nao é inportante.
                   "Maikon" => 58,
                   "Rafa" => 25,
                   "Vini" => 45,
-                  "Alguém" => 17
+                  "Alguï¿½m" => 17
                );
 */
 /* Find highest number */

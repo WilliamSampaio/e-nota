@@ -11,10 +11,10 @@ codcategoria = ".$codcategoria[0];
 ?>
 
 <select id="cmbServicos<?php echo $cont;?>" name="cmbServicos<?php echo $cont;?>" style="width:150px" >
-	<option value="">Escolha o Serviço </option>
+	<option value="">Escolha o ServiÃ§o </option>
      <?php
-		$respo=mysql_query($result);
-		while($dados=mysql_fetch_array($respo)){
+		$respo=$PDO->query($result);
+		while($dados=$respo->fetch()){
 			echo "<option value='".$dados['codigo']."'>".$dados['descricao']."</option>";
 		}
 	?>

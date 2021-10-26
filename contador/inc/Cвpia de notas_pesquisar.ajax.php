@@ -21,8 +21,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 session_name("contador");
 session_start();
-include("conect.php");
-include("../../funcoes/util.php");
+require_once("conect.php");
+require_once("../../funcoes/util.php");
 	$numero = $_GET['txtNumeroNota'];
 	$codverificacao = $_GET['txtCodigoVerificacao'];
 	$tomador_cnpjcpf = $_GET['txtTomadorCPF'];
@@ -76,9 +76,9 @@ WHERE
 						if(mysql_num_rows($sql)>0){
 					?>
 					<tr>
-						<td width="5%" align="center">N&ordm;</td>
-						<td width="13%" align="center">Cód Verif</td>
-						<td width="16%" align="center">D/H Emissão</td>
+						<td width="5%" align="center">NÂº</td>
+						<td width="13%" align="center">Cï¿½d Verif</td>
+						<td width="16%" align="center">D/H EmissÃ£o</td>
 						<td width="40%" align="center">Tomador Nome </td>
 						<td width="13%" align="center">Estado</td>
 						<td width="4%"></td>
@@ -134,7 +134,7 @@ WHERE
 					}else{
 					?>
 					<tr>
-						<td align="center" colspan="9">Não houve nenhum resultado!</td>
+						<td align="center" colspan="9">NÃ£o houve nenhum resultado!</td>
 					</tr>
 					<?php
 					}?>

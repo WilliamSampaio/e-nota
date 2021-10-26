@@ -24,6 +24,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 //assim reduz muita a chance de dar um erros,
 //e isso esta aki no util porque tem que estar em todas as paginas
 
+function getConnection(){
+	return new Connection(CONFIG_FILE);
+}
+
 function validaXmlImportacao($xml)
 {
 	libxml_use_internal_errors(true);
@@ -170,7 +174,7 @@ function DecToMoeda($valor)
 //gera nossonumero de acordo com o banco da prefeitura
 function gerar_nossonumero($codigo, $datavc = NULL)
 {
-	$sql_boleto = $PDO->query("SELECT codbanco, IF(convenio <> '', convenio, codfebraban) FROM boleto");
+	$sql_boleto = getConnection()->query("SELECT codbanco, IF(convenio <> '', convenio, codfebraban) FROM boleto");
 	list($codbanco, $convenio) = $sql_boleto->fetch();
 	$vencimento = DataVencimento();
 	$vencimento = DataMysql($vencimento);
@@ -295,7 +299,7 @@ function gera_codverificacao()
 function calculaMultaDes($diasDec, $valor)
 {
 
-	$sql_multas = $PDO->query(" 
+	$sql_multas = getConnection()->query(" 
 					SELECT 
 						codigo, 
 						dias, 
@@ -331,6 +335,9 @@ function calculaMultaDes($diasDec, $valor)
 		} //end if
 	} //end for
 
+	$multatotal = null;
+	$totalpagar = null;
+
 	if ($multa >= 0) {
 		$multatotal += $valor * ($multavalor[$multa - 1] / 100);
 		$totalpagar += $multatotal + $valor;
@@ -339,7 +346,7 @@ function calculaMultaDes($diasDec, $valor)
 
 
 	// calcula juros
-	$sql_juros = $PDO->query(" 
+	$sql_juros = getConnection()->query(" 
 					SELECT 
 						codigo, 
 						dias, 
@@ -378,7 +385,7 @@ function calculaMultaDes($diasDec, $valor)
 	} //end for
 
 	if ($juros >= 0) {
-
+		$jurostotal = null;
 		for ($m = 0; $m < $n; $m++) {
 			$jurostotal += $valor * ($jurosvalor[$m] / 100);
 		}
@@ -404,7 +411,7 @@ function calculaMultaDes($diasDec, $valor)
 function listaRegrasMultaDes()
 {
 	//pega o dia pra tributacao do mes da tabela configucacoes
-	$sql_data_trib = $PDO->query("SELECT data_tributacao FROM configuracoes");
+	$sql_data_trib = getConnection()->query("SELECT data_tributacao FROM configuracoes");
 
 	list($dia_mes) = $sql_data_trib->fetch();
 	campoHidden("hdDia", $dia_mes);
@@ -414,7 +421,7 @@ function listaRegrasMultaDes()
 	campoHidden("hdDataAtual", $dataatual);
 	//echo "<input type=\"hidden\" name=\"hdDataAtual\" id=\"hdDataAtual\" value=\"$dataatual\" />\n";
 	//pega a regra de multas do banco
-	$sql_multas = $PDO->query(" SELECT codigo, dias, multa
+	$sql_multas = getConnection()->query(" SELECT codigo, dias, multa
 								FROM multas
 								WHERE estado='A'
 								ORDER BY dias ASC");
@@ -452,10 +459,10 @@ function print_array($array)
 function codcargo($cargo)
 {
 	if ($cargo == 'responsavel') {
-		$sql_cargo = $PDO->query("SELECT codigo FROM cargos WHERE cargo LIKE '$cargo' OR cargo LIKE '%diretor' OR cargo LIKE '%gerente'");
+		$sql_cargo = getConnection()->query("SELECT codigo FROM cargos WHERE cargo LIKE '$cargo' OR cargo LIKE '%diretor' OR cargo LIKE '%gerente'");
 		return $sql_cargo->fetchColumn();
 	} else {
-		$sql_cargo = $PDO->query("SELECT codigo FROM cargos WHERE cargo LIKE '$cargo'");
+		$sql_cargo = getConnection()->query("SELECT codigo FROM cargos WHERE cargo LIKE '$cargo'");
 		if ($sql_cargo->rowCount() > 0) {
 			return $sql_cargo->fetchColumn();
 		}
@@ -464,23 +471,23 @@ function codcargo($cargo)
 
 function codtipo($tipo)
 {
-	$sql_cargo = $PDO->query("SELECT codigo FROM tipo WHERE tipo LIKE '$tipo'");
+	$sql_cargo = getConnection()->query("SELECT codigo FROM tipo WHERE tipo LIKE '$tipo'");
 	return $sql_cargo->fetchColumn();
 } //pega o codigo do tipo solicitado de acordo com o banco
 
 function coddeclaracao($dec)
 {
-	$sql_cargo = $PDO->query("SELECT codigo FROM declaracoes WHERE declaracao LIKE '$dec'");
+	$sql_cargo = getConnection()->query("SELECT codigo FROM declaracoes WHERE declaracao LIKE '$dec'");
 	return $sql_cargo->fetchColumn();
 } //pega o codigo do tipo solicitado de acordo com o banco
 
 function verificacampo($campo)
 {
 	if ($campo == "") {
-		$campo = "<b>N�o Informado</b>";
+		$campo = "<b>Não Informado</b>";
 	}
 	return $campo;
-} //verifica o resultado do banco se esta vazio, se estiver, acrescenta informa��o
+} //verifica o resultado do banco se esta vazio, se estiver, acrescenta informação
 
 //redireciona para o link indicado sem os parametros de get adicionais
 //e criando um form com hiddens baseado nos parametros de get
@@ -553,15 +560,15 @@ function UploadGenerico($destino, $campo, $extensoes = NULL)
 	} //fim if
 
 	// Array com os tipos de erros de upload do PHP
-	$array_upload['erros'][0] = 'N�o houve erro';
-	$array_upload['erros'][1] = 'O arquivo no upload � maior do que o limite do PHP';
+	$array_upload['erros'][0] = 'Não houve erro';
+	$array_upload['erros'][1] = 'O arquivo no upload é maior do que o limite do PHP';
 	$array_upload['erros'][2] = 'O arquivo ultrapassa o limite de tamanho especifiado no HTML';
 	$array_upload['erros'][3] = 'O upload do arquivo foi feito parcialmente';
-	$array_upload['erros'][4] = 'N�o foi feito o upload do arquivo';
+	$array_upload['erros'][4] = 'Não foi feito o upload do arquivo';
 
 	// Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
 	if ($_FILES[$campo]['error'] != 0) {
-		Mensagem("N�o foi poss�vel fazer o upload, erro: " . $array_upload['erros'][$_FILES[$campo]['error']]);
+		Mensagem("Não foi poss�vel fazer o upload, erro: " . $array_upload['erros'][$_FILES[$campo]['error']]);
 		exit; // Para a execucao do script
 	} //fim if
 
@@ -576,7 +583,7 @@ function UploadGenerico($destino, $campo, $extensoes = NULL)
 
 		// Faz a verificacao do tamanho do arquivo
 		elseif ($array_upload['tamanho'] < $_FILES[$campo]['size']) {
-			Mensagem("O arquivo enviado � muito grande, envie arquivos de at� 2Mb.");
+			Mensagem("O arquivo enviado é muito grande, envie arquivos de até 2Mb.");
 		} else {
 			// O arquivo passou em todas as verifica��es, agora tenta movelo para a pasta
 			//acrescenta numeros randomicos ao nome do arquivo
@@ -589,15 +596,15 @@ function UploadGenerico($destino, $campo, $extensoes = NULL)
 				//se tudo der certo retorna o nome do arquivo que foi salvo no diretorio informado
 				return $nome_final;
 			} else {
-				// N�o foi poss�vel fazer o upload, provavelmente a pasta est� incorreta
-				Mensagem("N�o foi poss�vel enviar o arquivo, tente novamente");
+				// Não foi poss�vel fazer o upload, provavelmente a pasta está incorreta
+				Mensagem("Não foi poss�vel enviar o arquivo, tente novamente");
 			} //fim else
 		} //fim else
 	} //fim if
 }
 
 function Paginacao($query, $form, $retorno, $quant = NULL, $test = false)
-{ // $test � para os botoes
+{ // $test é para os botoes
 	if ($_GET["hdPagina"] && $_GET["hdPrimeiro"]) {
 		$pagina = $_GET["hdPagina"];
 	} else {
@@ -610,10 +617,10 @@ function Paginacao($query, $form, $retorno, $quant = NULL, $test = false)
 	}
 
 	//Executa o sql que foi enviado por parametro para que se possa fazer os calculos de paginas e quantidade
-	$sql_pesquisa = $PDO->query("$query");
+	$sql_pesquisa = getConnection()->query("$query");
 
 
-	//Verifica se h� erros de sintaxe
+	//Verifica se há erros de sintaxe
 	if (!$sql_pesquisa) {
 		return $sql_pesquisa;
 	}
@@ -622,7 +629,7 @@ function Paginacao($query, $form, $retorno, $quant = NULL, $test = false)
 	$total_sql      = $sql_pesquisa->rowCount();    //Recebe o total de resultados gerados pelo sql
 	$total_paginas  = ceil($total_sql / $quantporpagina); //Usa o total para calcular quantas paginas de resultado tera a pesquisa sql
 
-	//Verifica se n�o tem a variavel pagina, ou se ela � menor que o total ou se ela � menor que 1
+	//Verifica se não tem a variavel pagina, ou se ela é menor que o total ou se ela é menor que 1
 	if ((!isset($pagina)) || ($pagina > $total_paginas) || ($pagina < 1)) {
 		$pagina = 1;
 	}
@@ -630,17 +637,17 @@ function Paginacao($query, $form, $retorno, $quant = NULL, $test = false)
 	$pagina_sql = ($pagina - 1) * $quantporpagina;          //Calcula a variavel que vai ter o incio do limit
 	$pagina_sql .= ",$quantporpagina";                  //Concatena a quantidade de paginas escolhida com o inicio do limit do sql
 
-	//Sql buscando as informa��es e o limit estipulado pela fun��o
-	$sql_pesquisa = $PDO->query("$query LIMIT $pagina_sql");
+	//Sql buscando as informa��es e o limit estipulado pela função
+	$sql_pesquisa = getConnection()->query("$query LIMIT $pagina_sql");
 	if (!$sql_pesquisa) {
 		return $sql_pesquisa;
 	}
 
-	//Aqui identifica em qual arquivo est� localizado para que o ajax possa voltar para o mesmo
+	//Aqui identifica em qual arquivo está localizado para que o ajax possa voltar para o mesmo
 	$arquivo = $_SERVER['PHP_SELF'];
 
 	$GLOBALS['pagina'] = $pagina;
-	//Monta a table com os botoes onde chamou a fun��o
+	//Monta a table com os botoes onde chamou a função
 	if ($sql_pesquisa->rowCount() > 0) {
 		$botoes = "
 		<table width=\"100%\">
@@ -652,7 +659,7 @@ function Paginacao($query, $form, $retorno, $quant = NULL, $test = false)
 		} else {
 			$botoes .= "$total_sql Resultados";
 		}
-		$botoes .= ", p�gina: $pagina de $total_paginas</b>
+		$botoes .= ", página: $pagina de $total_paginas</b>
 					<input type=\"button\" name=\"btAnterior\" value=\"Anterior\" class=\"botao\" 
 					onclick=\"document.getElementById('hdPrimeiro').value=1;
 					mudarpagina('a','hdPagina','$arquivo','$form','$retorno');\" ";
@@ -701,7 +708,8 @@ function UltDiaUtil($mes, $ano, $var = NULL)
 		$mes -= 12;
 		$ano = $ano + 1;
 	}
-	$dias = cal_days_in_month(CAL_GREGORIAN, $mes, $ano);
+	// $dias = cal_days_in_month(CAL_GREGORIAN, $mes, $ano);
+	$dias = date('t', mktime(0, 0, 0, $mes, 1, $ano));
 	$ultimo = mktime(0, 0, 0, $mes, $dias, $ano);
 	$dia = date("j", $ultimo);
 	$dia_semana = date("w", $ultimo);
@@ -740,13 +748,13 @@ function imprimirGuia($codguia, $pasta = NULL, $mesmajanela = NULL)
 	if ($pasta === true) {
 		$pasta = '../';
 	}
-
+	$boleto = null;
 	$codguia = base64_encode($codguia);
-	$sql_tipo_boleto = $PDO->query("SELECT tipo,codbanco FROM boleto");
+	$sql_tipo_boleto = getConnection()->query("SELECT tipo,codbanco FROM boleto");
 	$result = $sql_tipo_boleto->fetchObject();
 	if ($mesmajanela == true) {
 		if ($result->tipo <> "R") {
-			$sql_link = $PDO->query("SELECT boleto FROM bancos WHERE codigo='{$result->codbanco}'");
+			$sql_link = getConnection()->query("SELECT boleto FROM bancos WHERE codigo='{$result->codbanco}'");
 			list($link) = $sql_link->fetch();
 			echo "<script>window.location='{$pasta}../boleto/pagamento/$link/$boleto?COD=$codguia';</script>";
 		} else {
@@ -755,7 +763,7 @@ function imprimirGuia($codguia, $pasta = NULL, $mesmajanela = NULL)
 		exit;
 	} else {
 		if ($result->tipo <> "R") {
-			$sql_link = $PDO->query("SELECT boleto FROM bancos WHERE codigo='{$result->codbanco}'");
+			$sql_link = getConnection()->query("SELECT boleto FROM bancos WHERE codigo='{$result->codbanco}'");
 			list($link) = $sql_link->fetch();
 			echo "<script>window.open('{$pasta}../boleto/pagamento/$link/$boleto?COD=$codguia')</script>";
 		} else {
@@ -821,15 +829,15 @@ function notificaTomador($codigo_empresa, $ultimanota)
 	$tomador_email_enviado = "";
 
 	//Pega o link do site da prefeitura que foi inserido no banco
-	$sql_url_site = $PDO->query("SELECT site, cidade, email, secretaria, brasao  FROM configuracoes");
+	$sql_url_site = getConnection()->query("SELECT site, cidade, email, secretaria, brasao  FROM configuracoes");
 	list($LINK_ACESSO, $CONF_CIDADE, $CONF_EMAIL, $CONF_SECRETARIA, $CONF_BRASAO) = $sql_url_site->fetch();
 
 	//Busca a razao social da empresa que emitiu a nota
-	$sql_dados_empresa = $PDO->query("SELECT razaosocial FROM cadastro WHERE codigo = '$codigo_empresa'");
+	$sql_dados_empresa = getConnection()->query("SELECT razaosocial FROM cadastro WHERE codigo = '$codigo_empresa'");
 	list($empresa_razaosocial) = $sql_dados_empresa->fetch();
 
 	//Pega o codigo da nota e gera o link de acesso externo para que o tomador possa visualizar a nota
-	$sql_codigo_nota = $PDO->query("SELECT codigo, tomador_nome, tomador_email FROM notas WHERE codemissor = '$codigo_empresa' AND numero = '$ultimanota'");
+	$sql_codigo_nota = getConnection()->query("SELECT codigo, tomador_nome, tomador_email FROM notas WHERE codemissor = '$codigo_empresa' AND numero = '$ultimanota'");
 	list($codigo_nota_visualizar, $tomador_nome, $tomador_email) = $sql_codigo_nota->fetch();
 
 	$crypto = base64_encode($codigo_nota_visualizar);
@@ -843,12 +851,12 @@ function notificaTomador($codigo_empresa, $ultimanota)
 	Abaixo segue o link para visualizar esta NF-e:<br>
 	<br>
 	<a href=\"$link\" target=\"blank\">$link</a><br><br>
-	Caso o link n�o funcione copie e cole no navegador.<br>
+	Caso o link não funcione copie e cole no navegador.<br>
 	<br>
 	$CONF_SECRETARIA de $CONF_CIDADE.
 	");
 
-	$assunto = "Notifica��o de emiss�o de NF-e.";
+	$assunto = "Notifica��o de emissão de NF-e.";
 
 	$headers  = "MIME-Version: 1.0\r\n";
 

@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-//Utiliza a função para obter o codigo de verificação
+//Utiliza a funÃ§Ã£o para obter o codigo de verificaÃ§Ã£o
 $codverificacao = gera_codverificacao();
 
 $cod_emissor = $_POST['hdCodEmissor'];
@@ -35,7 +35,7 @@ for($c=1;$c<=$num_servicos;$c++){
 	//verificar cnpj da prefeitura aki (falta fazer)
 	
 	//Verifica se todos os tomadores que foram passados pelo usuario existem no banco
-	$sql_tomador = mysql_query("
+	$sql_tomador = $PDO->query("
 		SELECT 
 			codigo 
 		FROM 
@@ -44,8 +44,8 @@ for($c=1;$c<=$num_servicos;$c++){
 			cnpj = '{$tomadorCnpjCpf[$c]}' OR 
 			cpf = '{$tomadorCnpjCpf[$c]}'
 	");
-	if(!mysql_num_rows($sql_tomador)>0){
-		Mensagem("O tomador referente ao cnpj/cpf: {$tomadorCnpjCpf[$c]} não está cadastrado no sistema");
+	if(!$sql_tomador->rowCount()>0){
+		Mensagem("O tomador referente ao cnpj/cpf: {$tomadorCnpjCpf[$c]} nÃ£o estÃ¡ cadastrado no sistema");
 		//Redireciona("../../principal.php");
 		//exit();
 		$erro = 1;
@@ -66,8 +66,8 @@ for($c=1;$c<=$num_servicos;$c++){
 if($erro != 1){
 	$multaJuros = MoedaToDec($_POST['txtMultaJuros']);
 	$totalPagar = MoedaToDec($_POST['txtImpostoTotal']);	
-	
-	mysql_query("
+	try{
+		$PDO->query("
 		INSERT INTO des SET 
 			codcadastro		='$cod_emissor', 
 			competencia		='$dataCompetencia', 
@@ -77,15 +77,19 @@ if($erro != 1){
 			iss				='$totalPagar',
 			tomador			='s',
 			codverificacao	='$codverificacao'
-	") or die(mysql_error()); 		 
+		");
+	}catch(PDOException $e){
+		echo 'Erro: ' . $e->getMessage();
+	}		 
 	
-	$sql_des = mysql_query("SELECT MAX(codigo) FROM des");
+	$sql_des = $PDO->query("SELECT MAX(codigo) FROM des");
 									 
-	list($cod_des)=mysql_fetch_array($sql_des);
+	list($cod_des)=$sql_des->fetch();
 	
 	for($c=1;$c<=$num_servicos;$c++){
 		if($baseCalculo[$c]!=""&&$codigoServico[$c]!=""){
-			mysql_query("
+			try{
+				$PDO->query("
 				INSERT INTO des_servicos SET 
 					coddes			='{$cod_des}',
 					codservico		='{$codigoServico[$c]}',
@@ -94,7 +98,10 @@ if($erro != 1){
 					iss				='{$impostoServico[$c]}',
 					tomador_cnpjcpf	='{$tomadorCnpjCpf[$c]}',
 					nota_nro		='{$nroNota[$c]}'
-			") or die(mysql_error());
+				");
+			}catch(PDOException $e){
+				echo 'Erro: ' . $e->getMessage();
+			}
 		}
 	}
 	
@@ -102,15 +109,15 @@ if($erro != 1){
 	require("inc/declaracoes/des/inconsistencias/duplicacoes_des.php");		
 	//funcao de teste de autos de infracao
 	function registraAutoInfracao($codcadastro,$origem,$assunto){
-		mysql_query("INSERT INTO autos_infracao SET codcadastro='$codcadastro',origem='$origem', assunto='$assunto',data_hora=NOW()");
+		$PDO->query("INSERT INTO autos_infracao SET codcadastro='$codcadastro',origem='$origem', assunto='$assunto',data_hora=NOW()");
 	}
 	
-	registraAutoInfracao($cod_emissor,"DES Consolidada","Declaração com tomador emitida");
+	registraAutoInfracao($cod_emissor,"DES Consolidada","Declaraï¿½ï¿½o com tomador emitida");
 		
-	$sql_guia = mysql_query("SELECT MAX(codigo) 
+	$sql_guia = $PDO->query("SELECT MAX(codigo) 
 							 FROM guia_pagamento;");
 	
-	list($cod_guia)=mysql_fetch_array($sql_guia);
+	list($cod_guia)=$sql_guia->fetch();
 	
 	
 	$nossonumero = gerar_nossonumero($cod_guia);
@@ -119,7 +126,7 @@ if($erro != 1){
 	$cod_guia =base64_encode($cod_guia);
 	$cod_des = base64_encode($cod_des); 
 	
-	Mensagem("Declaração efetuada com sucesso!");
+	Mensagem("Declaraï¿½ï¿½o efetuada com sucesso!");
 	echo"<script>window.open('reports/des_prestadores_comprovante.php?COD=$cod_des');</script>"; 
 	//Redireciona("../../boleto/boleto_bb.php?COD=$cod_guia");   
 }

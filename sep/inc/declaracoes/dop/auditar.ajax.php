@@ -19,12 +19,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../conect.php");
-include("../../funcoes/util.php");
+require_once("../conect.php");
+require_once("../../funcoes/util.php");
 
 $cod_dop=$_GET['hdCodSolicitacao'];
 
-$sql=mysql_query("
+$sql=$PDO->query("
 			SELECT 
 				orgaospublicos.nome,
 				orgaospublicos.razaosocial,
@@ -47,7 +47,7 @@ $sql=mysql_query("
 
 
 //lista os dados da declaracao e do oegao publico
-list($nome,$razaosocial,$cnpj,$municipio,$uf,$competencia,$data,$total,$iss,$codverificacao,$estado)=mysql_fetch_array($sql);
+list($nome,$razaosocial,$cnpj,$municipio,$uf,$competencia,$data,$total,$iss,$codverificacao,$estado)=$sql->fetch();
 switch($estado){
 	case "N": $estado="Normal";break;
 	case "C": $estado="Cancelada";break;
@@ -80,11 +80,11 @@ switch($estado){
 		<td><?php echo $uf; ?></td>
 	</tr>
 	<tr>
-		<td>Compet&ecirc;ncia</td>
+		<td>Competência</td>
 		<td><?php echo $competencia; ?></td>
 	</tr>
 	<tr>
-		<td>Data da declara&ccedil;&atilde;o</td>
+		<td>Data da declaração</td>
 		<td><?php echo $data; ?></td>
 	</tr>
 	<tr>
@@ -96,7 +96,7 @@ switch($estado){
 		<td><?php echo "R$ ".DecToMoeda($iss); ?></td>
 	</tr>
 	<tr>
-		<td>Codigo de Verifica&ccedil;&atilde;o</td>
+		<td>Codigo de Verificação</td>
 		<td><?php echo $codverificacao; ?></td>
 	</tr>
 	<tr>
@@ -109,13 +109,13 @@ switch($estado){
 <legend>Notas declaradas</legend>
 	<table>
 		<tr bgcolor="#999999">
-			<td>N� da nota</td>
+			<td>N� da nota</td>
 			<td>Valor da nota</td>
 			<td>Emissor</td>
-			<td>Servi�o</td>
+			<td>Serviço</td>
 		</tr>
 		<?php
-		$sql_notas=mysql_query("
+		$sql_notas=$PDO->query("
 							SELECT 
 								servicos.descricao,
 								dop_des_notas.valornota,
@@ -131,7 +131,7 @@ switch($estado){
 								coddop_des='$cod_dop'
 							");
 	
-		while(list($servico, $valor, $nro, $emissor)=mysql_fetch_array($sql_notas)){
+		while(list($servico, $valor, $nro, $emissor)=$sql_notas->fetch()){
 		?>
 		<tr bgcolor="#FFFFFF">
 			<td align="right"><?php echo $nro; ?></td>

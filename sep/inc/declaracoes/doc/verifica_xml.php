@@ -30,20 +30,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 	   $CompAno = $_POST['cmbAno'];
 	   $competencia = "$CompAno-$CompMes-01";
 	   $codtipo = codtipo("operadora_credito");
-	   $sql=mysql_query("SELECT razaosocial FROM cadastro WHERE cnpj = '$opr_creditos' AND codtipo = '$codtipo'");
-	   list($razao)=mysql_fetch_array($sql);
+	   $sql=$PDO->query("SELECT razaosocial FROM cadastro WHERE cnpj = '$opr_creditos' AND codtipo = '$codtipo'");
+	   list($razao)=$sql->fetch();
 	   
-	   if(mysql_num_rows($sql)>0){
+	   if($sql->rowCount()>0){
 		   $arq = $razao.$data.'.xml';		
 		   move_uploaded_file($arq_tmp,"xmls/doc/".$arq);   	   	
-		   $xml = simplexml_load_file("xmls/doc/".$arq); // lê o arquivo XML      							   	   	   
+		   $xml = simplexml_load_file("xmls/doc/".$arq); // lï¿½ o arquivo XML      							   	   	   
 	
 		   if($xml){
 			   $verifica=0;
 			   foreach($xml ->CONTA as $conta)
 			   {
-					$sql=mysql_query("SELECT conta FROM doc_contas");
-					while(list($docconta)=mysql_fetch_array($sql)){	
+					$sql=$PDO->query("SELECT conta FROM doc_contas");
+					while(list($docconta)=$sql->fetch()){	
 						if($docconta == $conta->CONTAOFICIAL)
 						{	
 							$verifica=1;						
@@ -54,9 +54,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 			   if($verifica ==1)
 			   {
 				   //$competencia=date('Y-m-d');
-				   $sql=mysql_query("SELECT codigo FROM cadastro WHERE cnpj = '$opr_creditos'");
-				   list($codopr)=mysql_fetch_array($sql);		   
-				   mysql_query("
+				   $sql=$PDO->query("SELECT codigo FROM cadastro WHERE cnpj = '$opr_creditos'");
+				   list($codopr)=$sql->fetch();		   
+				   $PDO->query("
 						INSERT INTO 
 							doc_des 
 						SET 
@@ -65,12 +65,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 							competencia = '$competencia', 
 							codverificacao = '$codverificacao'
 				   ");
-				   $sql=mysql_query("SELECT MAX(codigo) FROM doc_des WHERE codopr_credito = '$codopr'");
-				   list($CodDocDes)=mysql_fetch_array($sql);		   
+				   $sql=$PDO->query("SELECT MAX(codigo) FROM doc_des WHERE codopr_credito = '$codopr'");
+				   list($CodDocDes)=$sql->fetch();		   
 				   foreach($xml ->CONTA as $conta)
 				   {
-						$sql=mysql_query("SELECT conta FROM doc_contas");
-						while(list($docconta)=mysql_fetch_array($sql)){			
+						$sql=$PDO->query("SELECT conta FROM doc_contas");
+						while(list($docconta)=$sql->fetch()){			
 							if($docconta == $conta->CONTAOFICIAL){	
 								
 								$CONTAOFICIAL = $conta->CONTAOFICIAL;	   
@@ -84,7 +84,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								$RECEITADOMES = $conta->RECEITADOMES;
 								$ALIQUOTA = $conta->ALIQUOTA;
 								$VALORISS = $conta->VALORISS;
-								mysql_query("
+								$PDO->query("
 									INSERT INTO 
 										doc_des_contas 
 									SET
@@ -106,7 +106,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						}				
 					}		
 					
-					mysql_query("
+					$PDO->query("
 						UPDATE  
 							doc_des 
 						SET 
@@ -115,9 +115,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 							codigo='$CodDocDes'
 					");
 					
-				 Mensagem("Declaração efetuada com sucesso!!")			 	;
+				 Mensagem("Declaraï¿½ï¿½o efetuada com sucesso!!")			 	;
 				 /*$vencimento = DataVencimento();
-				 mysql_query("
+				 $PDO->query("
 					INSERT INTO 
 						guia_pagamento 
 					SET 
@@ -127,12 +127,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 						datavencimento = '$vencimento',
 						pago = 'N'");
 						
-				 $sql_guia = mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
-				 list($CodGuia)=mysql_fetch_array($sql_guia);
+				 $sql_guia = $PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
+				 list($CodGuia)=$sql_guia);
 				 $nossonumero = gerar_nossonumero($CodGuia);
 				 $chave = gerar_chavecontrole($CodDocDes,$CodGuia); 
-				 $sql_guia_update = mysql_query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chave' WHERE codigo = '$CodGuia'");
-				 mysql_query("INSERT INTO guias_declaracoes SET codguia = '$CodGuia', codrelacionamento = '$CodDocDes', relacionamento = 'doc_des'");
+				 $sql_guia_update = $PDO->query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chave' WHERE codigo = '$CodGuia'");
+				 $PDO->query("INSERT INTO guias_declaracoes SET codguia = '$CodGuia', codrelacionamento = '$CodDocDes', relacionamento = 'doc_des'");
 				 */
 				 
 				 $COD = base64_encode($CodGuia);
@@ -142,7 +142,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				 unlink("xmls/doc/".$arq);
 	
 				 // busca o codigo do banco e o arquivo q gera o boleto
-						$sql=mysql_query("
+						$sql=$PDO->query("
 							SELECT 
 								bancos.boleto, 
 								boleto.tipo 
@@ -151,7 +151,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							INNER JOIN 
 								bancos ON bancos.codigo = boleto.codbanco
 						");
-						list($boleto,$tipoboleto)=mysql_fetch_array($sql);
+						list($boleto,$tipoboleto)=$sql->fetch();
 						if($tipoboleto=="R"){
 							$tipoboleto="recebimento";
 							$boleto="index.php";
@@ -164,12 +164,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 				 NovaJanela("reports/doc_comprovante.php?COD=$CodDocDes");
 				 
 				 }else{		 
-					Mensagem("Conteúdo do arquivo não contém Conta Oficial válida.");
+					Mensagem("ConteÃºdo do arquivo nÃ£o contÃ©m Conta Oficial vï¿½lida.");
 				 }			 
 			}else{		 
-				Mensagem("O arquivo enviado contém erros. Favor verificar!!");
+				Mensagem("O arquivo enviado contÃ©m erros. Favor verificar!!");
 			}		
 	}else{
-		Mensagem("Este cnpj não está cadastrado ou não é uma operadora de crédito!");
+		Mensagem("Este cnpj nÃ£o estÃ¡ cadastrado ou nÃ£o Ã© uma operadora de crÃ©dito!");
 	}
 ?>		 

@@ -19,9 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-require_once("../../include/conect.php");
-require_once("../../funcoes/util.php"); 
-	
+require_once '../../include/conect.php';
 
 $cod_guia = $_GET['hdCodGuia'];
 //$cod_guia = base64_encode($cod_guia);
@@ -36,8 +34,6 @@ if($tipoboleto == "R"){
 }else{
 	$tipoboleto = "pagamento";
 }
-
-
 
 imprimirGuia($cod_guia,true,true);
 ?>

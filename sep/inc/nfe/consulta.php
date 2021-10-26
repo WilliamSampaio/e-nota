@@ -1,8 +1,8 @@
 <?php
 /*
-LICENÇA PÚBLICA GERAL GNU
-Versão 3, 29 de junho de 2007
-    Copyright (C) <2010>  <PORTAL PÚBLICO INFORMÁTICA LTDA>
+LICENï¿½A Pï¿½BLICA GERAL GNU
+VersÃ£o 3, 29 de junho de 2007
+    Copyright (C) <2010>  <PORTAL Pï¿½BLICO INFORMï¿½TICA LTDA>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,22 +17,22 @@ Versão 3, 29 de junho de 2007
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Este programa é software livre: você pode redistribuí-lo e / ou modificar sob os termos da GNU General Public License como publicado pela Free Software Foundation, tanto a versão 3 da Licença, ou (por sua opção) qualquer versão posterior.
+Este programa Ã© software livre: vocÃª pode redistribuï¿½-lo e / ou modificar sob os termos da GNU General Public License como publicado pela Free Software Foundation, tanto a versÃ£o 3 da LicenÃ§a, ouï¿½(por sua opÃ§Ã£o) qualquer versÃ£o posterior.
 
-Este programa é distribuído na esperança que possa ser útil, mas SEM QUALQUER GARANTIA, sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO PROPÓSITO. Veja a GNU General Public License para mais detalhes.
+Este programa Ã© distribuï¿½do na esperanï¿½a que possa ser ï¿½til, mas SEM QUALQUER GARANTIA, sem mesmo a garantia implï¿½cita de COMERCIALIZAï¿½ï¿½O ou ADEQUAï¿½ï¿½O A UM DETERMINADO PROPï¿½SITO. Veja a GNU General Public License para mais detalhes.
 
-Você deve ter recebido uma cópia da GNU General Public License  junto com este programa. Se não, veja <http://www.gnu.org/licenses/>.
-
-
-This is an unofficial translation of the GNU General Public License into Portuguese. It was not published by the Free Software Foundation, and does not legally state the distribution terms for software that uses the GNU GPL — only the original English text of the GNU GPL does that. However, we hope that this translation will help Portuguese speakers understand the GNU GPL better.
-
-Esta é uma tradução não oficial em português da Licença Pública Geral GNU (da sigla em inglês GNU GPL). Ela não é publicada pela Free Software Foundation e não declara legalmente os termos de distribuição para softwares que a utilizam — somente o texto original da licença, escrita em inglês, faz isto. Entretanto, acreditamos que esta tradução ajudará aos falantes do português a entendê-la melhor.
+VocÃª deve ter recebido uma cÃ³pia da GNU General Public Licenseï¿½ï¿½junto com este programa. Se nÃ£o, veja <http://www.gnu.org/licenses/>.
 
 
-// Originado do Projeto ISS Digital – Portal Público que tiveram colaborações de Vinícius Kampff, 
+This is an unofficial translation of the GNU General Public License into Portuguese. It was not published by the Free Software Foundation, and does not legally state the distribution terms for software that uses the GNU GPL Ã© only the original English text of the GNU GPL does that. However, we hope that this translation will help Portuguese speakers understand the GNU GPL better.
+
+Esta Ã© uma traduï¿½ï¿½o nÃ£o oficial em portuguï¿½s da LicenÃ§a Pï¿½blica Geral GNU (da sigla em inglï¿½s GNU GPL). Ela nÃ£o Ã© publicada pela Free Software Foundation e nÃ£o declara legalmente os termos de distribuiï¿½ï¿½o para softwares que a utilizam Ã© somente o texto original da licenï¿½a, escrita em inglï¿½s, faz isto. Entretanto, acreditamos que esta traduï¿½ï¿½o ajudarï¿½ aos falantes do portuguï¿½s a entendï¿½-la melhor.
+
+
+// Originado do Projeto ISS Digital Ã© Portal Pï¿½blico que tiveram colaboraÃ§Ãµes de Vinï¿½cius Kampff, 
 // Rafael Romeu, Lucas dos Santos, Guilherme Flores, Maikon Farias, Jean Farias e Daniel Bohn
 // Acesse o site do Projeto www.portalpublico.com.br             |
-// Equipe Coordenação Projeto ISS Digital: <informatica@portalpublico.com.br>   |
+// Equipe CoordenaÃ§Ã£o Projeto ISS Digital: <informatica@portalpublico.com.br>   |
 
 */
 ?>
@@ -54,12 +54,12 @@ input[type*="text"]{
 -->
 </style>
 <div id="divBusca"  >
-	<?php include("inc/nfe/busca_prestador.php"); ?>
+	<?php require_once("inc/nfe/busca_prestador.php"); ?>
 </div>
 <?php 
 	if(($_POST['codprestador'])){		   
 		$codigo=$_POST['codprestador'];	
-		$sql=mysql_query("SELECT IF(cnpj <> '',cnpj,cpf) AS cnpjcpf FROM cadastro WHERE codigo='$codigo'");
+		$sql=$PDO->query("SELECT IF(cnpj <> '',cnpj,cpf) AS cnpjcpf FROM cadastro WHERE codigo='$codigo'");
 		$cpfcnpj = mysql_fetch_object($sql);
 	}
 ?>
@@ -87,7 +87,7 @@ input[type*="text"]{
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;NFe - Pesquisa </td>
+		<td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">NFe - Pesquisa </td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -99,13 +99,13 @@ input[type*="text"]{
 				<legend>Pesquisar Nota</legend>
 				<table width="100%" border="0" cellspacing="2" cellpadding="2">
 					<tr>
-						<td align="left" width="22%">Número da Nota</td>
+						<td align="left" width="22%">NÃºmero da Nota</td>
 						<td align="left" width="78%">
 							<input name="txtNumeroNota" type="text" size="10" class="texto" />
 						</td>
 					</tr>
 					<tr>
-						<td align="left">Código de Verificação</td>
+						<td align="left">CÃ³digo de VerificaÃ§Ã£o</td>
 						<td align="left">
 							<input name="txtCodigoVerificacao" type="text" size="10" class="texto" style="text-transform:uppercase;" />
 						</td>

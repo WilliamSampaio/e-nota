@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php  
-//Recebe os dados do Formulário de alteração e faz o UPDATE no banco
+//Recebe os dados do FormulÃ¡rio de alteraÃ§Ã£o e faz o UPDATE no banco
 if ($_POST['btCadastrar'] !=""){
 	$Cod = $_POST['COD'];
 	$Servicos =$_POST['txtEdDescServicos'];      
@@ -28,7 +28,7 @@ if ($_POST['btCadastrar'] !=""){
    
 	
 	   
-	$sql=mysql_query("
+	$sql=$PDO->query("
 		SELECT 
 			servicos,
 			aliquota,
@@ -39,11 +39,11 @@ if ($_POST['btCadastrar'] !=""){
 			codigo ='$Cod'
 	"); 
    
-   list($servicos,$aliquota,$estado)=mysql_fetch_array($sql);
+   list($servicos,$aliquota,$estado)=$sql->fetch();
 	if(($servicos != $Servicos) || 
 		($aliquota != $Aliquota) || 
 		($estado != $Estado)){   
-	    $sql=mysql_query("
+	    $sql=$PDO->query("
 		    UPDATE 
 		    	cartorios_servicos
 		    SET 
@@ -53,24 +53,24 @@ if ($_POST['btCadastrar'] !=""){
 			WHERE 
 				codigo= '$Cod'
 		");
-		add_logs('Atualizou Serviço de Cartório');	
-		Mensagem("Alterações concluídas com sucesso!"); 
+		add_logs('Atualizou ServiÃ§o de Cartï¿½rio');	
+		Mensagem("AlteraÃ§Ãµes concluï¿½das com sucesso!"); 
 	} else {
-		/*print "<script language=JavaScript> alert('É necessário no mínimo uma alteração nos campos.');</script>";*/
-		Mensagem('É necessário no mínimo uma alteração nos campos');
+		/*print "<script language=JavaScript> alert('ï¿½ necessï¿½rio no mï¿½nimo uma alteraÃ§Ã£o nos campos.');</script>";*/
+		Mensagem('ï¿½ necessï¿½rio no mï¿½nimo uma alteraÃ§Ã£o nos campos');
 	}  
 	
 }
 $nossonumero = $_POST['COD'];
  
-$sqlEditar=mysql_query("SELECT servicos,aliquota,estado FROM cartorios_servicos WHERE codigo ='$nossonumero'"); 
-list($servicos,$aliquota,$estado)=mysql_fetch_array($sqlEditar); 
+$sqlEditar=$PDO->query("SELECT servicos,aliquota,estado FROM cartorios_servicos WHERE codigo ='$nossonumero'"); 
+list($servicos,$aliquota,$estado)=$sqlEditar->fetch(); 
  
 ?>
 <table width="98%" align="center">
     <tr>
      <td>
-      <fieldset><legend>Edi&ccedil;&atilde;o de Servi&ccedil;os</legend>
+      <fieldset><legend>EdiÃ§Ã£o de ServiÃ§os</legend>
       <form  method="post" id="frmEditar">   
 		  <input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
 		  <input type="hidden" name="COD" id="COD" value="<?php echo  $_POST['COD'];?>" />
@@ -78,7 +78,7 @@ list($servicos,$aliquota,$estado)=mysql_fetch_array($sqlEditar);
 		  <table width="100%" border="0" align="center">
 		   <tr>
 		   <tr>
-			<td width="94">Descri&ccedil;&atilde;o</td>
+			<td width="94">DescriÃ§Ã£o</td>
 			<td colspan="2" align="left">
 			 <textarea cols="40" rows="5" name="txtEdDescServicos" class="texto"><?php print $servicos; ?></textarea>
 			</td>
@@ -87,8 +87,8 @@ list($servicos,$aliquota,$estado)=mysql_fetch_array($sqlEditar);
 			 <td>Aliquota</td>
 			 <td align="left">
 			  <input type="text" size="5" maxlength="5" name="txtEdAliquota" class="texto" value="<?php print $aliquota; ?>" onkeyup="MaskPercent(this)"/>
-			   &nbsp;%&nbsp;&nbsp;Exemplo(0.00)</td>
-			 <td align="left"><em>Para servi&ccedil;os em geral </em></td>
+			   %Exemplo(0.00)</td>
+			 <td align="left"><em>Para serviÃ§os em geral </em></td>
 		   </tr>
 		   <tr>
 			<td>Estado</td>
@@ -106,9 +106,9 @@ list($servicos,$aliquota,$estado)=mysql_fetch_array($sqlEditar);
 			  */
 			?>
 			</td>
-			<td width="169">&nbsp;		</td>
+			<td width="169">		</td>
 			<td width="223"  style="font-size:10px;" align="right">
-			 <font color="#FF0000">*</font>Campos Obrigat&oacute;rios		</td>
+			 <font color="#FF0000">*</font>Campos ObrigatÃ³rios		</td>
 		   </tr>   
 		  </table>   
       </form>

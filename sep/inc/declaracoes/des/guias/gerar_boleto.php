@@ -33,11 +33,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$datavencimento = UltDiaUtil($data[1],$data[0]);
 	
 	// busca o codigo do banco e o arquivo q gera o boleto
-	$sql=mysql_query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
-	list($codbanco,$boleto)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
+	list($codbanco,$boleto)=$sql->fetch();
 	
 	// inseri a guia de pagamento no db
-	mysql_query("
+	$PDO->query("
 		INSERT INTO 
 			guia_pagamento 
 		SET 
@@ -50,8 +50,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	");
 	
 	// busca o codigo da guia de pagamento recem inserida
-	$sql=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
-	list($codguia)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
+	list($codguia)=$sql->fetch();
 	
 	
 	//Mensagem($cont);
@@ -61,21 +61,21 @@ Fith Floor, Boston, MA 02110-1301, USA
 			//Mensagem($cont);
 			$coddeclaracao=explode("|", $_POST["ckISS".$i]);
 			
-			mysql_query("INSERT INTO guias_declaracoes SET codguia='$codguia', codrelacionamento='$coddeclaracao[1]', relacionamento='des'");
-			mysql_query("UPDATE des SET estado='B' WHERE codigo='$coddeclaracao[1]'");
+			$PDO->query("INSERT INTO guias_declaracoes SET codguia='$codguia', codrelacionamento='$coddeclaracao[1]', relacionamento='des'");
+			$PDO->query("UPDATE des SET estado='B' WHERE codigo='$coddeclaracao[1]'");
 		}
 	}
 	
 	// retorna o codigo do ultimo relacionamento
-	$sql=mysql_query("SELECT MAX(codigo) FROM guias_declaracoes");
-	list($codrelacionamento)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT MAX(codigo) FROM guias_declaracoes");
+	list($codrelacionamento)=$sql->fetch();
 	
 	// gera o nossonumero e chavecontroledoc
 	$nossonumero = gerar_nossonumero($codguia);
 	$chavecontroledoc = gerar_chavecontrole($codrelacionamento,$codguia);
 	
 	// seta o nossonumero e a chavecontroledoc no banco
-	mysql_query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguia'");
+	$PDO->query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguia'");
 	
 	// gera o boleto
 	Mensagem("Boleto gerado com sucesso");

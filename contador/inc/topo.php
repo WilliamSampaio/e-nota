@@ -22,6 +22,6 @@ Fith Floor, Boston, MA 02110-1301, USA
   require_once("funcao_logs.php");
   require_once("../inc/conect.php"); 
   // arquivo com funcoes uteis
-  require_once("../funcoes/util.php");
+  require_once("../include/util.php");
   print("<a href=index.php target=_parent><img src=../img/topos/$CONF_TOPO></a>");
 ?>

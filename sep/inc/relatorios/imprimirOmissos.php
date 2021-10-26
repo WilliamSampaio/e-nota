@@ -1,7 +1,7 @@
 <?php
 //notas sem livros
 $query = ("SELECT * FROM notas WHERE codigo NOT IN(SELECT codnota FROM livro_notas) AND estado <> 'C' ORDER BY datahoraemissao");
-$sql_pesquisa = mysql_query ($query);
+$sql_pesquisa = $PDO->query($query);
 $result = mysql_num_rows($sql_pesquisa);
 if($result){
 ?>
@@ -21,21 +21,21 @@ if($result){
 	<tr style="background-color:#999999; font-weight:bold" align="center">
 		<td>Contribuinte</td>
 		<td>CPF/CNPJ</td>
-		<td>Data emiss&atilde;o</td>
-        <td>C&oacute;d. Nota</td>
+		<td>Data emissão</td>
+        <td>Cód. Nota</td>
         <td>ISS Retido</td>
-        <td>Base de C&aacute;lculo</td>
+        <td>Base de Cálculo</td>
         <td>Valor Total</td>
 	</tr>
 	<?php
-        while ($dados = mysql_fetch_array($sql_pesquisa)){
+        while ($dados = $sql_pesquisa->fetch()){
 			$explode = explode(" ", $dados['datahoraemissao']);
 			$data = $explode[0];
             $codemissor = $dados['codemissor'];
             $pesquisa_emissor = ("SELECT nome, cpf, cnpj FROM cadastro WHERE codigo = '$codemissor'");
-            $resultado_emissor = mysql_query($pesquisa_emissor);
+            $resultado_emissor = $PDO->query($pesquisa_emissor);
             $emissor = mysql_num_rows($resultado_emissor);
-            while($dados_emissor = mysql_fetch_array($resultado_emissor)){
+            while($dados_emissor = $resultado_emissor->fetch()){
 				if($dados_emissor['cpf'] == ''){
 					$cpfcnpj = $dados_emissor['cnpj'];
 				}else{
@@ -53,7 +53,7 @@ if($result){
 	</tr>
 <?php
 		}
-	}// fim while ($dados = mysql_fetch_array($sql_pesquisa))
+	}// fim while ($dados = $sql_pesquisa))
 ?>
 </table>
 <!-- Fim da Tabela -->
@@ -62,7 +62,7 @@ if($result){
 		?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>Não há resultados!</td>
 	</tr>
 </table>
 <?php 

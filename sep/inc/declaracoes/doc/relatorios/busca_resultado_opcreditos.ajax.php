@@ -32,7 +32,7 @@ $ufPOST = $_GET['txtUF'];
 //faz um where de acordo com oque foi preenchido no from
 //cria uma array com os filtros existentes e implode usando AND
 
-$WHERE="";
+// $WHERE="";
 if($nomePOST){
 	$WHERE[]="operadoras_creditos.nome LIKE '%$nome%' OR operadoras_creditos.razaosocial LIKE '%$nome%'";
 }
@@ -49,7 +49,7 @@ if($ufPOST){
 	$WHERE[]="operadoras_creditos.uf LIKE '$ufPOST'";//like porque pode ser tanto maisculo quanto minusculo
 }//fim if estado
 if($WHERE){
-	$WHERE="WHERE ".implode(" AND ",$WHERE);//implode nos filtros usados com AND
+	$WHERE="WHERE ".implode(" AND ", $WHERE);//implode nos filtros usados com AND
 }//fim se existe WHERE
 
 
@@ -75,21 +75,21 @@ $query = ("
 <legend>Resultado</legend>
 <?php
 $sql=Paginacao($query,'frmRelatorio','divBuscar',10);//paginacao substitui o mysql query, pois volta o resultado limitado por pagina e com os botoes de paginacao
-if(mysql_num_rows($sql)>0){
+if($sql->rowCount()>0){
 ?>
 <div align="left"><input type="submit" name="btImprimir" value="Imprimir" class="botao" onclick="cancelaAction('frmRelatorio','inc/operadoras_creditos/relatorios/imprimir_relatorios_operadoras_creditos.php','_blank')" /></div>
 <table width="100%">
 	<tr bgcolor="#999999">
 		<td align="center" width="240">Nome</td>
 		<td align="center" width="130">CNPJ</td>
-		<td align="center" width="130">Município</td>
+		<td align="center" width="130">Municï¿½pio</td>
 		<td align="center" width="30">UF</td>
-		<td align="center">Situação</td>	
+		<td align="center">Situaï¿½ï¿½o</td>	
 	</tr>
 	<?php
-	while(list($codigo,$nome,$razaosocial,$cnpj,$municipio,$uf,$estado) = mysql_fetch_array($sql)){										
+	while(list($codigo,$nome,$razaosocial,$cnpj,$municipio,$uf,$estado) = $sql->fetch()){										
 		switch($estado){
-			case "NL": $estado = "Não Liberado"; break;
+			case "NL": $estado = "NÃ£o Liberado"; break;
 			case "A" : $estado = "Ativo";   break;
 			case "I" : $estado = "Inativo";    break;
 		}//fim switch estado

@@ -30,8 +30,8 @@ if(isset($_GET)){
 	
 //testa qual foi o valor passado pelo usuario e mostra a tabela conforme o valor
 if($relatorio == "O"){ 
-	include("relatorios_opcreditos.php");
+	require_once("relatorios_opcreditos.php");
 }elseif($relatorio == "D"){
-	include("relatorios_declaracoes.php");
-}//fim if declarações
+	require_once("relatorios_declaracoes.php");
+}//fim if declaraï¿½ï¿½es
 ?>

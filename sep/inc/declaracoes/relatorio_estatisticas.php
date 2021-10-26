@@ -32,17 +32,17 @@ if($combo == "issretido"){
 	$ctom = 0; //contador de tomadores;
 	$totaldeclaracoes = 0;
 	$declaracoes[]=0;
-	$sql_nro_tomadores = mysql_query("SELECT codtomador,tomadores.nome 
+	$sql_nro_tomadores = $PDO->query("SELECT codtomador,tomadores.nome 
 									  FROM des_issretido
 									  INNER JOIN tomadores ON des_issretido.codtomador = tomadores.codigo
 									  GROUP BY codtomador");
-	while(list($cod_tomador,$nome_tomador)=mysql_fetch_array($sql_nro_tomadores)) {
+	while(list($cod_tomador,$nome_tomador)=$sql_nro_tomadores->fetch()) {
 		$tomadores[$ctom]=$cod_tomador;
 		$nometomadores[$ctom]=$nome_tomador;
-		$sql_des_tomador = mysql_query("SELECT codigo FROM des_issretido WHERE codtomador='$cod_tomador'");
-		while(list($cod_des_tomador)=mysql_fetch_array($sql_des_tomador)) {
-			$sql_conta_notas = mysql_query("SELECT COUNT(codigo) FROM des_issretido_notas WHERE coddes_issretido='$cod_des_tomador'");
-			list($nro_notas)=mysql_fetch_array($sql_conta_notas);
+		$sql_des_tomador = $PDO->query("SELECT codigo FROM des_issretido WHERE codtomador='$cod_tomador'");
+		while(list($cod_des_tomador)=$sql_des_tomador->fetch()) {
+			$sql_conta_notas = $PDO->query("SELECT COUNT(codigo) FROM des_issretido_notas WHERE coddes_issretido='$cod_des_tomador'");
+			list($nro_notas)=$sql_conta_notas->fetch();
 			$totalnotas = $totalnotas + $nro_notas;
 			$totaldeclaracoes++;
 			$declaracoes[$ctom]++;
@@ -93,23 +93,23 @@ if($combo == "issretido"){
 	}//fim for
 	echo "Total de tomadores: ".count($tomadores)."<br>";
 	echo "Total de notas: $totalnotas<br>";
-	echo "Total de declarações: $totaldeclaracoes<br>";
+	echo "Total de declaraï¿½ï¿½es: $totaldeclaracoes<br>";
 	
-	echo"<br>Media de notas por declaração: ".round($totalnotas/$totaldeclaracoes);
-	echo"<br> Maior número de declarações: $maior_declaracoes por $nome_maior_declaracoes";
-	echo"<br> Menor número de declarações: $menor_declaracoes por $nome_menor_declaracoes";
+	echo"<br>Media de notas por declaraÃ§Ã£o: ".round($totalnotas/$totaldeclaracoes);
+	echo"<br> Maior nÃºmero de declaraï¿½ï¿½es: $maior_declaracoes por $nome_maior_declaracoes";
+	echo"<br> Menor nÃºmero de declaraï¿½ï¿½es: $menor_declaracoes por $nome_menor_declaracoes";
 }
 if($combo == "tomadores"){
 	$ctom = 0; //contador de tomadores;
-	$sql_nro_tomadores = mysql_query("SELECT cod_tomador,tomadores.nome 
+	$sql_nro_tomadores = $PDO->query("SELECT cod_tomador,tomadores.nome 
 									  FROM des_tomadores_notas
 									  INNER JOIN tomadores ON des_tomadores_notas.cod_tomador = tomadores.codigo
 									  GROUP BY cod_tomador");
-	while(list($cod_tomador,$nome_tomador)=mysql_fetch_array($sql_nro_tomadores)) {
+	while(list($cod_tomador,$nome_tomador)=$sql_nro_tomadores->fetch()) {
 		$tomadores[$ctom]=$cod_tomador;
 		$nometomadores[$ctom]=$nome_tomador;
-		$sql_des_tomador = mysql_query("SELECT COUNT(codigo) FROM des_issretido WHERE codtomador='$cod_tomador'");
-		list($nro_notas) = mysql_fetch_array($sql_des_tomador);
+		$sql_des_tomador = $PDO->query("SELECT COUNT(codigo) FROM des_issretido WHERE codtomador='$cod_tomador'");
+		list($nro_notas) = $sql_des_tomador->fetch();
 		$totalnotas   += $nro_notas;
 		$notas[$ctom] += $nro_notas;
 		$ctom++;
@@ -158,30 +158,30 @@ if($combo == "tomadores"){
 	echo "Total de tomadores: ".count($tomadores)."<br>";
 	echo "Total de notas: $totalnotas<br>";
 	
-	echo"<br> Maior número de notas: $maior_notas por $nome_maior_notas";
-	echo"<br> Menor número de notas: $menor_notas por $nome_menor_notas";
+	echo"<br> Maior nÃºmero de notas: $maior_notas por $nome_maior_notas";
+	echo"<br> Menor nÃºmero de notas: $menor_notas por $nome_menor_notas";
 }
 if($combo == "emissores"){
 	$c_emi = 0;//contador dos emissores
-	$sql_nro_emissores = mysql_query("SELECT codemissor,emissores.razaosocial,emissores.cnpjcpf
+	$sql_nro_emissores = $PDO->query("SELECT codemissor,emissores.razaosocial,emissores.cnpjcpf
 									  FROM des
 									  INNER JOIN emissores ON des.codemissor = emissores.codigo
 									  GROUP BY codemissor");
-	while(list($cod_emissor,$razao_emissor,$cnpjcpf_emissor)=mysql_fetch_array($sql_nro_emissores)) {
+	while(list($cod_emissor,$razao_emissor,$cnpjcpf_emissor)=$sql_nro_emissores->fetch()) {
 		$emissores[$c_emi]=$cod_emissor;
 		$nomeemissores[$c_emi]=$razao_emissor;
 		$cnpjemissores[$c_emi]=$cnpjcpf_emissor;
-		$sql_des_emissor = mysql_query("SELECT codigo FROM des WHERE codemissor='$cod_emissor'");
-		while(list($cod_des_emissor)=mysql_fetch_array($sql_des_emissor)) {
-			$sql_conta_notas = mysql_query("SELECT COUNT(codigo) 
+		$sql_des_emissor = $PDO->query("SELECT codigo FROM des WHERE codemissor='$cod_emissor'");
+		while(list($cod_des_emissor)=$sql_des_emissor->fetch()) {
+			$sql_conta_notas = $PDO->query("SELECT COUNT(codigo) 
 											FROM des_servicos WHERE coddes='$cod_des_emissor'");
-			list($nro_notas)=mysql_fetch_array($sql_conta_notas);
+			list($nro_notas)=$sql_conta_notas->fetch();
 			$totalnotas = $totalnotas + $nro_notas;
 			$totaldeclaracoes++;
 			$declaracoes[$c_emi]++;
 			$notas[$c_emi] += $nro_notas;
 		}
-		$sql_declaracoes_temp = mysql_query("
+		$sql_declaracoes_temp = $PDO->query("
 			SELECT 
 				COUNT(des_temp.codigo) 
 			FROM 
@@ -191,7 +191,7 @@ if($combo == "emissores"){
 			WHERE 
 				emissores_temp.cnpj='$cnpjcpf_emissor'
 		");
-		list($declaracoes_temp)=mysql_fetch_array($sql_declaracoes_temp);
+		list($declaracoes_temp)=$sql_declaracoes_temp->fetch();
 		$declaracoes[$c_emi]+=$declaracoes_temp;
 		$notas[$c_emi]+=$declaracoes_temp;		
 		$totalnotas+=$declaracoes_temp;
@@ -239,7 +239,7 @@ if($combo == "emissores"){
 			$nome_menor_notas = $nomeemissores[$x];
 		}//fim if
 	}//fim for
-	$sql_emissores_temp = mysql_query("
+	$sql_emissores_temp = $PDO->query("
 		SELECT 
 			emissores_temp.cnpj
 		FROM 
@@ -254,11 +254,11 @@ if($combo == "emissores"){
 	$emissores_temp = mysql_num_rows($sql_emissores_temp);
 	echo "Total de prestadores: ".(count($emissores)+$emissores_temp)."<br>";
 	echo "Total de notas: $totalnotas<br>";
-	echo "Total de declarações: $totaldeclaracoes<br>";
+	echo "Total de declaraï¿½ï¿½es: $totaldeclaracoes<br>";
 	
-	echo"<br>Media de notas por declaração: ".round($totalnotas/$totaldeclaracoes);
-	echo"<br> Maior número de declarações: $maior_declaracoes por $nome_maior_declaracoes";
-	echo"<br> Menor número de declarações: $menor_declaracoes por $nome_menor_declaracoes";
+	echo"<br>Media de notas por declaraÃ§Ã£o: ".round($totalnotas/$totaldeclaracoes);
+	echo"<br> Maior nÃºmero de declaraï¿½ï¿½es: $maior_declaracoes por $nome_maior_declaracoes";
+	echo"<br> Menor nÃºmero de declaraï¿½ï¿½es: $menor_declaracoes por $nome_menor_declaracoes";
 }
 
 ?>

@@ -19,14 +19,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-$sql = mysql_query("SELECT cidade FROM configuracoes");
-list($solicitante) = mysql_fetch_array($sql);
+$sql = $PDO->query("SELECT cidade FROM configuracoes");
+list($solicitante) = $sql->fetch();
 ?>
 
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Utilit&aacute;rios - Chat</td>  
+    <td background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Utilitários - Chat</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>

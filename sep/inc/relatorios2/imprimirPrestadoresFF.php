@@ -23,7 +23,7 @@
 			codemissor
 	");
 	
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa); //Pega quantos resultados voltaram
 	
 	if($result){ //Se existir algum registro, mostra na tabela
@@ -45,14 +45,14 @@
 	<tr style="background-color:#999999; font-weight:bold" align="center">
 		<td>Prestador</td>
 		<td>CPF/CNPJ</td>
-		<td>N&deg; de Notas</td>
+		<td>Nº de Notas</td>
 		<td>Iss Retido</td>
 		<td>Iss Arrecadado</td>
 	</tr>
 
 
 <?php
-while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+while($dados_pesquisa = $sql_pesquisa->fetch()){
 ?>
 	<tr>
 		<td><?php echo $dados_pesquisa['nome'];?></td>
@@ -62,7 +62,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 		<td width="120" align="center"><?php echo 'R$ '.$dados_pesquisa['issarrecadado'];?></td>
 	</tr>
 <?php
-}//Fim do while($dados_pesquisa = mysql_fetch_array($sql_pesquisa))
+}//Fim do while($dados_pesquisa = $sql_pesquisa))
 ?>
 </table>
 <!-- Fim da Tabela -->
@@ -72,7 +72,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>Não há resultados!</td>
 	</tr>
 </table>
 <?php

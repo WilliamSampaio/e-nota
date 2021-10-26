@@ -22,18 +22,18 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$novasenha  = rand(000000,999999);
 	$senhamd5 = MD5($novasenha);
 	$CODEMISSOR = $_POST['CODEMISSOR'];
-	mysql_query("UPDATE cadastro SET senha = '$senhamd5' WHERE codigo = '$CODEMISSOR'");
-	$sql_nome = mysql_query("SELECT nome, email FROM cadastro WHERE codigo = '$CODEMISSOR'");
-	list($nome_prestador, $email) = mysql_fetch_array($sql_nome);
+	$PDO->query("UPDATE cadastro SET senha = '$senhamd5' WHERE codigo = '$CODEMISSOR'");
+	$sql_nome = $PDO->query("SELECT nome, email FROM cadastro WHERE codigo = '$CODEMISSOR'");
+	list($nome_prestador, $email) = $sql_nome->fetch();
 	//depois de cadastrada a empresa envia-se um passo a passo com  senha para a empresa cadastrada
 	
 	$msg = "
 		$nome_prestador,<br>
 		<br>
 		Foi gerado uma nova senha de acesso ao sistema.<br>
-		Sua senha &eacute; : $novasenha<br>
+		Sua senha é : $novasenha<br>
 		<br>
-		Caso n&atilde;o tenha solicitado uma renova&ccedil;&atilde;o de senha, favor entrar em contato com a prefeitura.
+		Caso não tenha solicitado uma renovação de senha, favor entrar em contato com a prefeitura.
 	";	
 	
 	$assunto = "Nova senha de acesso ao sistema de NF-e.";

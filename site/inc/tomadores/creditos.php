@@ -59,7 +59,7 @@ function atualizacreditos(valormaximo,valortotal){
 	<table width="580" border="0" cellpadding="0" cellspacing="1">
         <tr>
 			<td width="5%" height="10" bgcolor="#FFFFFF"></td>
-	        <td width="25%" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta Cr&eacute;ditos</td>
+	        <td width="25%" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta Créditos</td>
 	        <td width="70%" bgcolor="#FFFFFF"></td>
 	    </tr>
 		<tr>
@@ -81,8 +81,8 @@ function atualizacreditos(valormaximo,valortotal){
                         <td width="70%"  align="left"><input type="text" name="txtTomCpfCnpj" id="txtTomCpfCnpj" size="20" class="texto"  onkeydown="stopMsk( event );" onkeypress="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );"/></td> 
                     </tr>
                     <tr>
-                        <td align="center">&nbsp;</td>
-                        <td align="left"><font color="#FF0000">*</font> Dados obrigat&oacute;rios</td>
+                        <td align="center"></td>
+                        <td align="left"><font color="#FF0000">*</font> Dados obrigatórios</td>
                     </tr>
                     <tr>
                         <td align="left" colspan="2"><input type="button" onclick="acessoAjax('inc/tomadores/creditos.ajax.php','frmCreditos','divUsarCreditos');" name="btConsultarCreditos" id="btConsultarCreditos" value="Consultar" class="botao" /></td>
@@ -105,25 +105,25 @@ if($_POST['btConfirma']){
 	$imovel = $_POST['txtImovel'];
 	if($imovel!=""){
 		$cod = $_POST['hdCod'];
-		$vercredito = mysql_query("SELECT credito FROM cadastro WHERE codigo = '$cod'");
-		list($credito)=mysql_fetch_array($vercredito);
+		$vercredito = $PDO->query("SELECT credito FROM cadastro WHERE codigo = '$cod'");
+		list($credito)=$vercredito->fetch();
 		if($credito>0){
-			$procura = mysql_query("SELECT * FROM creditos_imoveis WHERE codcadastro = '$cod' AND estado = 'A'");
-			if(mysql_num_rows($procura)>0){
-				Mensagem("Esse CNPJ já fez solicita&ccedil;&atilde;o e aguarda libera&ccedil;&atilde;o da prefeitura.");
+			$procura = $PDO->query("SELECT * FROM creditos_imoveis WHERE codcadastro = '$cod' AND estado = 'A'");
+			if($procura->rowCount()>0){
+				Mensagem("Esse CNPJ já fez solicitação e aguarda liberação da prefeitura.");
 			}else{
-				if(mysql_query("INSERT INTO creditos_imoveis (codcadastro, codimovel) VALUES ('$cod','$imovel')")){
-					Mensagem('Solicita&ccedil;&atilde;o enviada &agrave; prefeitura');	
+				if($PDO->query("INSERT INTO creditos_imoveis (codcadastro, codimovel) VALUES ('$cod','$imovel')")){
+					Mensagem('Solicitação enviada à prefeitura');	
 				}else{
-					Mensagem('Erro ao fazer solicita&ccedil;&atilde;o');	
+					Mensagem('Erro ao fazer solicitação');	
 				}
 			}
 		}else{
-			Mensagem("Esse CNPJ n&atilde;o possui cr&eacute;ditos");	
+			Mensagem("Esse CNPJ não possui créditos");	
 		}
 	}else{
-		Mensagem("Nenhum im&oacute;vel selecionado");	
+		Mensagem("Nenhum imóvel selecionado");	
 	}
-	//$sql = mysql_query("SELECT * FROM cadastro");
+	//$sql = $PDO->query("SELECT * FROM cadastro");
 }
 ?>

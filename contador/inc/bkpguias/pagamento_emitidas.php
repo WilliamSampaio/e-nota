@@ -39,7 +39,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<tr>
 		<td height="60" colspan="3" bgcolor="#CCCCCC">
    <!-- Formulario de pesquisa de pagamento  --->   
-   <?php include("pagamento_lista.php"); ?>   
+   <?php require_once("pagamento_lista.php"); ?>   
 		</td>
 	</tr>
 	<tr>

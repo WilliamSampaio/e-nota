@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <script src="scripts/jquery-1.4.2.min.js" type="text/javascript"></script>
 <script src="scripts/jquery-ui-1.8.5.custom.min.js" type="text/javascript"></script>
 <?php 
-  include("inc/conect.php");
-  include("funcoes/util.php");
-  include("funcoes/funcao_logs.php");
+  require_once("inc/conect.php");
+  require_once("funcoes/util.php");
+  require_once("funcoes/funcao_logs.php");
 ?>

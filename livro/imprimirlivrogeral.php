@@ -3,9 +3,9 @@
 <head></head>
 <body>
 <?php 
-	include("../include/conect.php");
+	require_once("../include/conect.php");
 	
-	include("../funcoes/util.php");
+	require_once("../include/util.php");
 
 	$livro = base64_decode($_GET['livro']);
 	

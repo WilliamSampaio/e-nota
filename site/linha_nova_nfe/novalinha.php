@@ -1,7 +1,7 @@
 <?php
 //REQUIRES
 require_once("../../include/conect.php");
-include("../../funcoes/util.php");
+require_once("../../funcoes/util.php");
 
 //PEGANDO POR GET
 $quantidade = $_GET['quantidade'];
@@ -76,22 +76,22 @@ if ($quantidade != 1) {
 <table width="100%" id="tbl<?php echo $quantidade; ?>">
 
 	<tr align="center" bgcolor="#999999" <?php echo $style; ?>>
-		<td width="23%"><b>Seleciona o Servi�o</b></td>
+		<td width="23%"><b>Seleciona o Serviço</b></td>
 		<td width="10%"><b>Base Calc.(R$)</b></td>
 		<td width="10%"><b>Aliquota(%)</b></td>
 		<td width="10%" <?php echo $isento;
 						echo $display;
 						echo $disabled; ?>><b>ISS(R$)</b></td>
 		<td width="10%" <?php echo $isento; ?>><b>ISSRetido(R$)</b></td>
-		<td width="10%"><b>Dedu&ccedil;&otilde;es(R$)</b></td>
-		<td width="10%"><b>Acr&eacute;scimos(R$)</b></td>
-		<td width="10%"><b>Valor L&iacute;q(R$)</b></td>
+		<td width="10%"><b>Deduções(R$)</b></td>
+		<td width="10%"><b>Acréscimos(R$)</b></td>
+		<td width="10%"><b>Valor Líq(R$)</b></td>
 	</tr>
 
 	<tr bgcolor="#FFFFFF" align="center">
 		<td width="23%">
 			<select name="cmbCodServico<?php echo $quantidade; ?>" id="cmbCodServico<?php echo $quantidade; ?>" style="width:180px;" onchange="MostraAliquota('txtAliqServico<?php echo $quantidade; ?>', 'txtISSRetidoManual<?php echo $quantidade; ?>', '<?php echo $quantidade; ?>'); calculaISSNfe('hdInputs', '<?php echo $quantidade; ?>'); notaIssRetido('<?php echo $quantidade; ?>'); aliquotaEditavel('<?php echo $quantidade; ?>','<?php echo $simples; ?>','<?php echo $coddeclaracao; ?>')" onkeypress="if(event.keyCode==13){document.getElementById('txtBaseCalcServico<?php echo $quantidade; ?>').focus(); return false;}">
-				<option value="0">Selecione o Servi�o</option>
+				<option value="0">Selecione o Serviço</option>
 				<?php
 				while (list($codigo_empresas_servicos, $codigo, $codservico, $descricao, $aliquota, $issretido, $basecalculo) = $sql_servicos->fetch()) {
 					print("<option value=\"$aliquota|$codigo|$issretido|$basecalculo\"> $descricao </option>");
@@ -151,7 +151,7 @@ if ($quantidade != 1) {
 
 	<tr>
 		<td align="center" colspan="8">
-			<textarea name="txtDiscriminacaoServico<?php echo $quantidade; ?>" id="txtDiscriminacaoServico<?php echo $quantidade; ?>" rows="0" cols="0" style="width:100%; height:40px">Discrimina��o do servi�o</textarea>
+			<textarea name="txtDiscriminacaoServico<?php echo $quantidade; ?>" id="txtDiscriminacaoServico<?php echo $quantidade; ?>" rows="0" cols="0" style="width:100%; height:40px">Discriminação do serviço</textarea>
 		</td>
 	</tr>
 </table>

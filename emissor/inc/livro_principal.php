@@ -45,14 +45,14 @@ $btInserir   = $_POST['btInserir'];
 $btPesquisar = $_REQUEST['btPesquisar'];
 
 if($_POST['btGerar']){
-	include("../livro/inserir.php");
+	require_once("../livro/inserir.php");
 }
 
 if($btInserir !="")	{
-	include("../livro/iss_gerar.php");
+	require_once("../livro/iss_gerar.php");
 }
 if($btPesquisar !="") {
-	include("../livro/iss_consultar.php");
+	require_once("../livro/iss_consultar.php");
 }
 	
 ?>

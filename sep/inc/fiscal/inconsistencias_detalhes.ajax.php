@@ -5,7 +5,7 @@
 	
 	$codNota = $_GET['hdcod'];
 	
-	$sql_detalhes = mysql_query("
+	$sql_detalhes = $PDO->query("
 		SELECT 
 			notas.codigo, 
 			notas.codemissor, 
@@ -47,7 +47,7 @@
 		$testeISS = true;
 	}
 	
-	$sql_servicos_nota_emitida = mysql_query("
+	$sql_servicos_nota_emitida = $PDO->query("
 		SELECT 
 			codservico,
 			basecalculo,
@@ -83,11 +83,11 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr <?php if($testeCodverificacao == true){ echo "class=\"inconsistente\""; }?>>
-					<td align="left">Cód. Verificação: </td>
+					<td align="left">CÃ³d. VerificaÃ§Ã£o: </td>
 					<td align="left"><?php echo $dadosNotas->codverificacao;?></td>
 				</tr>
 				<?php
-				$sql_servicos_nota_emitida = mysql_query("
+				$sql_servicos_nota_emitida = $PDO->query("
 					SELECT 
 						codservico,
 						basecalculo,
@@ -134,11 +134,11 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr <?php if($testeCodverificacao == true){ echo "class=\"inconsistente\""; }?>>
-					<td align="left">Cód. Verificação: </td>
+					<td align="left">CÃ³d. VerificaÃ§Ã£o: </td>
 					<td align="left"><?php echo $dadosNotas->codverificacaoNT;?></td>
 				</tr>
 				<?php
-				$sql_servicos_nota_tomada = mysql_query("
+				$sql_servicos_nota_tomada = $PDO->query("
 					SELECT 
 						codservico,
 						basecalculo,

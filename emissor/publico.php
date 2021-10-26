@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-// inicia a sess�o verificando se jah esta com o usuario logado, se estiver entra na p�gina admin
+// inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
 session_name("emissor");
 session_start();
 if(!(isset($_SESSION["empresa"])))
@@ -38,7 +38,7 @@ if(!(isset($_SESSION["empresa"])))
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>e-Nota</title><script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
 <script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
-<?php // include("scripts/java.php") ?>
+<?php // require_once("scripts/java.php") ?>
 <link href="../css/padrao_emissor.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -46,7 +46,7 @@ if(!(isset($_SESSION["empresa"])))
 <center>
 <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
-    <td><?php include("../include/topo.php"); ?></td>
+    <td><?php require_once("../include/topo.php"); ?></td>
   </tr>
   <tr>
     <td bgcolor="#FFFFFF" height="400" valign="top" align="center">
@@ -54,7 +54,7 @@ if(!(isset($_SESSION["empresa"])))
 <!-- frame central inicio --> 	
 <table border="0" cellspacing="0" cellpadding="0" height="100%">
   <tr>
-    <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php include("inc/menu.php"); ?></td>
+    <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php require_once("inc/menu.php"); ?></td>
     <td width="530"bgcolor="#FFFFFF" valign="top">
 
 <!-- frame central lateral direita inicio -->	
@@ -65,7 +65,7 @@ if(!(isset($_SESSION["empresa"])))
   <tr>
     <td>
 	
-<?php include("inc/exportar_principal.php"); ?>	
+<?php require_once("inc/exportar_principal.php"); ?>	
 	
 	
 	</td>
@@ -81,7 +81,7 @@ if(!(isset($_SESSION["empresa"])))
 	</td>
   </tr>
   <tr>
-    <td><?php include("inc/rodape.php"); ?></td>
+    <td><?php require_once("inc/rodape.php"); ?></td>
   </tr>
 </table>
 </center>

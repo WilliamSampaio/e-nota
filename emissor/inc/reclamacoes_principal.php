@@ -25,12 +25,12 @@ $campo   = tipoPessoa($cnpjcpf);
 
 $sql = $PDO->query("SELECT $campo FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 list($prestador_cnpjcpf) = $sql->fetch();
-//SQL de filtragem de servi�os
+//SQL de filtragem de serviÚos
 $sql_listaPendentes = $PDO->query("SELECT codigo, especificacao, datareclamacao, responsavel, tomador_cnpj FROM reclamacoes WHERE estado = 'pendente' AND emissor_cnpjcpf = '$prestador_cnpjcpf' ORDER BY datareclamacao DESC LIMIT 0,10");
 
 ?>
  
-<!-- cabe�alho da pesquisa --> 
+<!-- cabeÚalho da pesquisa --> 
 <?php
 if($sql_listaPendentes->rowCount()>0){
 ?>   
@@ -38,7 +38,7 @@ if($sql_listaPendentes->rowCount()>0){
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">10 �ltimas pendentes</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">10 Últimas pendentes</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -58,10 +58,10 @@ if($sql_listaPendentes->rowCount()>0){
         
     <table width="100%" border="0" cellspacing="2" cellpadding="2">
     <tr>
-      <td width="30%">Especifica&ccedil;&atilde;o</td>
+      <td width="30%">Especificação</td>
       <td width="40%">Tomador</td>
       <td width="5%">Dta Recl</td>
-      <td width="20%">Respons&aacute;vel</td>
+      <td width="20%">Responsável</td>
       <td width="5%"></td>
     </tr>
     <tr>
@@ -82,7 +82,7 @@ if($sql_listaPendentes->rowCount()>0){
         if(($btDetalhes=="Detalhes")&&($codigo==$y))
             {
                 echo "<tr><td colspan=\"5\">";
-                include("inc/reclamacoes_detalhes.php");
+                require_once("inc/reclamacoes_detalhes.php");
                 echo "</td></tr>";
             }
     ?>
@@ -104,7 +104,7 @@ if($sql_listaPendentes->rowCount()>0){
 </form>
 <?php
 }else{
-	echo "<center>N�o h� reclama��es pendentes</center>";
+	echo "<center>Não há reclamações pendentes</center>";
 }
 ?>
 </fieldset> 
@@ -121,7 +121,7 @@ LIMIT 0,10");
 
 ?>
  
-<!-- cabe�alho da pesquisa --> 
+<!-- cabeçalho da pesquisa --> 
 <?php
 if($sql_listaAtendidas->rowCount()>0){
 ?>
@@ -129,7 +129,7 @@ if($sql_listaAtendidas->rowCount()>0){
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">10 �ltimas atendidas</td>
+	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">10 Últimas atendidas</td>
       <td width="400" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -147,10 +147,10 @@ if($sql_listaAtendidas->rowCount()>0){
 		<td height="60" colspan="3" bgcolor="#CCCCCC">
   <table width="99%" border="0" cellspacing="2" cellpadding="2">
     <tr>
-      <td width="30%">Especifica&ccedil;&atilde;o</td>
+      <td width="30%">Especificação</td>
       <td width="40%">Tomador</td>
       <td width="5%">Dta Atend</td>
-      <td width="20%">Respons&aacute;vel</td>
+      <td width="20%">Responsável</td>
       <td width="5%"></td>
     </tr>
     <tr>
@@ -171,7 +171,7 @@ if($sql_listaAtendidas->rowCount()>0){
 		if(($btDetalhes=="Detalhes")&&($codigo==$y))
 			{
 				echo "<tr><td colspan=\"5\">";
-				include("inc/reclamacoes_detalhes.php");
+				require_once("inc/reclamacoes_detalhes.php");
 				echo "</td></tr>";
 			}
 	?>
@@ -191,6 +191,6 @@ if($sql_listaAtendidas->rowCount()>0){
 </form>
 <?php
 }else{
-	echo "<center>N&atilde;o h&aacute; reclama&ccedil;&oacute;es atendidas</center>";
+	echo "<center>Não há reclamaçóes atendidas</center>";
 }
 ?>

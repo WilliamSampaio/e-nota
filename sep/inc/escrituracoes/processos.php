@@ -20,9 +20,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	// SELECIONA OS BANCOS DISPONIVEIS DO BANCO DE DADOS
-	$sqlbancos = mysql_query("SELECT banco FROM bancos");
+	$sqlbancos = $PDO->query("SELECT banco FROM bancos");
 	
-	// TESTA SE O BOTÃO CONFIRMAR FOI CLICADO E REALIZA A OPERACAO
+	// TESTA SE O BOTï¿½O CONFIRMAR FOI CLICADO E REALIZA A OPERACAO
 	if($_POST['btConfirmar']=="Confirmar")
 		{
 			if($txtNossoNumero == '')
@@ -37,8 +37,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 				}
 				else
 				{
-					$sql=mysql_query("SELECT pago, valor, codigo FROM guia_pagamento WHERE nossonumero='$txtNossoNumero'");
-					list($pago, $valornossonumero) = mysql_fetch_array($sql);
+					$sql=$PDO->query("SELECT pago, valor, codigo FROM guia_pagamento WHERE nossonumero='$txtNossoNumero'");
+					list($pago, $valornossonumero) = $sql->fetch();
 						if(mysql_num_rows($sql)!=0)
 						{
 							if($pago == "N")
@@ -47,23 +47,23 @@ Fith Floor, Boston, MA 02110-1301, USA
 									if($valornossonumero == $valor)
 									{
 										// ATUALIZA O BANCO DE DADOS ONDE O NOSSO NUMERO E O VALOR CORESPONDE AOS SEUS VALORES NO BANCO
-										mysql_query("UPDATE guia_pagamento SET pago='S' WHERE nossonumero='$txtNossoNumero' AND valor=$valor");
+										$PDO->query("UPDATE guia_pagamento SET pago='S' WHERE nossonumero='$txtNossoNumero' AND valor=$valor");
 										add_logs('Ataulizou uma Guia de Pagamento');
 										echo"<script>alert('Pagamento realizado com sucesso')</script>";
 									}
 									else
 									{
-										echo"<script>alert('Valor não corresponde ao valor da nota')</script>";
+										echo"<script>alert('Valor nÃ£o corresponde ao valor da nota')</script>";
 									} // FIM DO TESTE DA VARIAVEL VALORNOSSONUMERO COM VALOR
 							}
 							else
 							{
-								echo"<script>alert('Pagamento já efetuado')</script>";
+								echo"<script>alert('Pagamento jÃ¡ efetuado')</script>";
 							}
 						} // FIM DO IF DE TESTE DA VARIAVEL PAGO
 						else
 						{
-							echo"<script>alert('Nosso Número digitado não consta em nosso banco de dados ou o valor é diferente, favor verificar!')</script>";
+							echo"<script>alert('Nosso NÃºmero digitado nÃ£o consta em nosso banco de dados ou o valor Ã© diferente, favor verificar!')</script>";
 						} // FIM DO IF NUMROWS
 				} // FIM DO IF TXTVALORBOLETO
 			} // FIM DO IF TXTNOSSOSNUMERO
@@ -73,7 +73,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Escritura&ccedil;&otilde;es - Processos</td>  
+		<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">EscrituraÃ§Ãµes - Processos</td>  
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -91,7 +91,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 											<option>=== Selecione um Banco ===</option>
 											<?php
 											// MONTA UMA CMB COM AS OPCOES PUXADAS DO BANCO
-											while(list($bancos) = mysql_fetch_array($sqlbancos)){
+											while(list($bancos) = $sqlbancos->fetch()){
 										  echo "<option value=\"$bancos\" onclick=\"acessoAjax('inc/escrituracoes/bancos.php','frmEscrituracoes','divSelecao');\">$bancos</option>";
 											}
 											?>
@@ -103,7 +103,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<div id="escrituracao"><fieldset><legend>Pagamento Manual</legend>
 								<table>
 									<tr>
-										<td>Nosso Número*</td>
+										<td>Nosso NÃºmero*</td>
 										<td><input type="text" class="texto" size="20" name="txtNossoNumero" id="txtNossoNumero"></td>
 										<td rowspan="2"><input type="submit" class="botao" value="Confirmar" name="btConfirmar"></td>
 									</tr>
@@ -140,7 +140,7 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
             <table width="100%">
              <tr>
               <td align="center" bgcolor="#999999">Nome</td>
-              <td align="center" bgcolor="#999999">Boleto N°</td>
+              <td align="center" bgcolor="#999999">Boleto Nï¿½</td>
               <td align="center" bgcolor="#999999">Pagamento</td>
              </tr>
         <?php  
@@ -148,19 +148,19 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
     {
      $linha[$x]=fgets($ponteiro, 4096);
      $nossonumero=substr($linha[$x], 13, 21);
-	 $relacionamento = mysql_query("SELECT guias_declaracoes.relacionamento FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia  WHERE nossonumero='$nossonumero'");
-	 $sql=mysql_query("SELECT codigo, pago, nossonumero FROM guia_pagamento WHERE nossonumero='$nossonumero'");
+	 $relacionamento = $PDO->query("SELECT guias_declaracoes.relacionamento FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia  WHERE nossonumero='$nossonumero'");
+	 $sql=$PDO->query("SELECT codigo, pago, nossonumero FROM guia_pagamento WHERE nossonumero='$nossonumero'");
 
-	   while(list($codigo, $pago)=mysql_fetch_array($sql))
+	   while(list($codigo, $pago)=$sql->fetch())
         {
 
-		$update=mysql_query("UPDATE guia_pagamento SET pago='S' WHERE codigo='$codigo'");
+		$update=$PDO->query("UPDATE guia_pagamento SET pago='S' WHERE codigo='$codigo'");
  
 		// SELECIONA O TIPO DE RELACIONAMENTO
-		while(list($tipo) = mysql_fetch_array($relacionamento)){
+		while(list($tipo) = $relacionamento->fetch()){
 						if($tipo=="des")
 						{
-							$sqlnome = mysql_query("
+							$sqlnome = $PDO->query("
 							SELECT emissores.razaosocial, guia_pagamento.pago, guia_pagamento.nossonumero
 							FROM guia_pagamento 
 							INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia 
@@ -170,7 +170,7 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
 						}
 						elseif($tipo=="des_issretido")
 						{
-							$sqlnome = mysql_query("
+							$sqlnome = $PDO->query("
 							SELECT tomadores.nome, guia_pagamento.pago, guia_pagamento.nossonumero
 							FROM guia_pagamento 
 							INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia 
@@ -180,7 +180,7 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
 						}
 						elseif($tipo=="cartorios_des")
 						{
-							$sqlnome = mysql_query("
+							$sqlnome = $PDO->query("
 							SELECT cartorios.nome, guia_pagamento.pago, guia_pagamento.nossonumero
 							FROM guia_pagamento 
 							INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia 
@@ -190,7 +190,7 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
 						}
 						elseif($tipo=="dop_des")
 						{
-							$sqlnome = mysql_query("
+							$sqlnome = $PDO->query("
 							SELECT orgaospublicos.nome, guia_pagamento.pago, guia_pagamento.nossonumero
 							FROM guia_pagamento 
 							INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia 
@@ -200,7 +200,7 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
 						}
 						elseif($tipo=="dif_des")
 						{
-							$sqlnome = mysql_query("
+							$sqlnome = $PDO->query("
 							SELECT inst_financeiras.nome, guia_pagamento.pago, guia_pagamento.nossonumero
 							FROM guia_pagamento 
 							INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia 
@@ -210,7 +210,7 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
 						}
 						elseif($tipo=="decc_des")
 						{
-							$sqlnome = mysql_query("
+							$sqlnome = $PDO->query("
 							SELECT empreiteiras.nome, guia_pagamento.pago, guia_pagamento.nossonumero
 							FROM guia_pagamento 
 							INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia 
@@ -220,7 +220,7 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
 						}
 						elseif($tipo=="doc_des")
 						{
-							$sqlnome = mysql_query("
+							$sqlnome = $PDO->query("
 							SELECT operadoras_creditos.nome, guia_pagamento.pago, guia_pagamento.nossonumero
 							FROM guia_pagamento 
 							INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia 
@@ -230,7 +230,7 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
 						}
 						elseif($tipo=="nfe")
 						{
-							$sqlnome = mysql_query("
+							$sqlnome = $PDO->query("
                             SELECT emissores.razaosocial, guia_pagamento.pago, guia_pagamento.nossonumero
 							FROM guia_pagamento
 							INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia 
@@ -241,12 +241,12 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
 
 				
 
-				list($nome, $pago, $nossonumero)=mysql_fetch_array($sqlnome);
+				list($nome, $pago, $nossonumero)=$sqlnome->fetch();
 					// TRANSFORMA A VARIAVEL PAGO
 					switch($pago)
 					{
 						case 'S': $pago = "Pago"; break;
-						case 'N': $pago = "Não Pago"; break;
+						case 'N': $pago = "NÃ£o Pago"; break;
 					}
 					
 							echo "
@@ -265,7 +265,7 @@ $arquivo_tmp=$_FILES['Arquivo_bb']["tmp_name"];
 	 //echo "<tr><td colspan=\"2\"><input type=\"button\" class=\"botao\" value=\"Voltar\" onClick=\"window.location='importar.php';\" /></td></tr>";
 	 echo "
 		   <script>
-		    alert('Importação de dados concluída com sucesso!');
+		    alert('Importaï¿½ï¿½o de dados concluï¿½da com sucesso!');
 		   </script>
 		  ";
   } //FIM DO IF ARQUIVO

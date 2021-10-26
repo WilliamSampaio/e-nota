@@ -20,17 +20,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 
 <?php 
-include("../../inc/conect.php");
-include("../../funcoes/util.php");
+require_once("../../inc/conect.php");
+require_once("../../funcoes/util.php");
 // variaveis vindas do conect.php
 // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF
 
-$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 //preenche a variavel com os valores vindos do banco
-list($BRASAO) = mysql_fetch_array($sql_brasao);
+list($BRASAO) = $sql_brasao->fetch();
 ?>
 
-<title>Imprimir Relat&oacute;rio</title>
+<title>Imprimir Relatório</title>
 
 <style type="text/css" media="screen">
 <!--
@@ -77,7 +77,7 @@ div.pagina {
         <div id="DivImprimir">
             <input type="button" onClick="print();" value="Imprimir" />
             <br />
-            <i><b>Este relat&oacute;rio &eacute; melhor visualizado em formato de impress&atilde;o em paisagem.</b></i>
+            <i><b>Este relatório é melhor visualizado em formato de impressão em paisagem.</b></i>
             <br /><br />
         </div>
         <center>
@@ -92,7 +92,7 @@ div.pagina {
             	<td width="584" height="33" colspan="2">
 					<span class="style1">
 					<center>
-						 <p>RELAT&Oacute;RIO DE BOLETOS GERADOS </p>
+						 <p>RELATÓRIO DE BOLETOS GERADOS </p>
 						 <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 						 <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 					</center>
@@ -135,7 +135,7 @@ div.pagina {
 					WHERE pago = 'N' AND $codigo <> '' && guia.estado = '$estado' $where
 					");
 		
-		$sql_pesquisa = mysql_query ($query);
+		$sql_pesquisa = $PDO->query($query);
 		$result = mysql_num_rows($sql_pesquisa);
 		if(mysql_num_rows($sql_pesquisa)){
         ?>
@@ -156,7 +156,7 @@ div.pagina {
 						<strong>CPF/CNPJ</strong>
 					</td>
 					<td align="center">
-						<strong>Data Emiss&atilde;o</strong>
+						<strong>Data Emissão</strong>
 					</td>
                     <td align="center">
 						<strong>Data Vencimento</strong>
@@ -181,7 +181,7 @@ div.pagina {
 					</td>
           		</tr>
 				<?php
-					while ($dados = mysql_fetch_array($sql_pesquisa)){
+					while ($dados = $sql_pesquisa->fetch()){
 						if($dados['tomador_nome'] != ''){
 							$nome = $dados['tomador_nome'];
 						}else{
@@ -198,8 +198,8 @@ div.pagina {
 							$total2 = 0;
 						}
 						
-						$sql = mysql_query("SELECT cpf, cnpj FROM cadastro WHERE nome = '$nome'");
-						$result = mysql_fetch_array($sql);
+						$sql = $PDO->query("SELECT cpf, cnpj FROM cadastro WHERE nome = '$nome'");
+						$result = $sql->fetch();
 						if($result['cpf'] == ''){
 							$cpfcnpj = $result['cnpj'];
 						}else{
@@ -244,7 +244,7 @@ div.pagina {
 			?>
             <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
                 <tr style="background-color:#999999;font-weight:bold;" align="center">
-                    <td>N&atilde;o h&aacute; resultados!</td>
+                    <td>Não há resultados!</td>
                 </tr>
             </table>
             <?php

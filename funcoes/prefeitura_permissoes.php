@@ -21,14 +21,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 
 //arquivo com a funcao de gerar logs
-include("../prefeitura/inc/funcao_logs.php");
+require_once("../prefeitura/inc/funcao_logs.php");
 // arquivo com funcoes uteis 
-include("util.php");
+require_once("util.php");
 //Verifica qual o nivel de permissao que a pagina requere e qual o nivel do usuario logado
 function PermissaoMenu($arquivo, $url)
 {
 	//arquivo de conexao com o banco de dados, endereco muda de prefeitura, emissor ou contador
-	include("../$url/inc/conect.php");
+	require_once("../$url/inc/conect.php");
 	$sql = $PDO->query("SELECT nivel FROM menus_prefeitura WHERE link='$arquivo'");
 	list($permissao) = $sql->fetch();
 	if ($_SESSION["nivel_de_acesso"] == "A") {

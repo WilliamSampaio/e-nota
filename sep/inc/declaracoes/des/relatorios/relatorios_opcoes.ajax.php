@@ -31,7 +31,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 //testa qual foi o valor passado pelo usuario e mostra a tabela conforme o valor
 if($relatorio == "E"){ 
 	//query que verifica todos os cadastrados, ativos, inativos e nao liberados
-	$sql_cadastradas = mysql_query("
+	$sql_cadastradas = $PDO->query("
 		SELECT COUNT(codigo) FROM empreiteiras
 		UNION ALL
 		SELECT COUNT(codigo) FROM empreiteiras WHERE estado = 'A'
@@ -42,28 +42,28 @@ if($relatorio == "E"){
 	");
 	$cont = 0;
 	//Recebe o array gerado pelo sql e recebe em uma variavel para imprimir os dados na tela
-	while(list($quantidade) = mysql_fetch_array($sql_cadastradas)){
+	while(list($quantidade) = $sql_cadastradas->fetch()){
 		$result[$cont] = $quantidade;
 		$cont++;
 	}
 ?>
-<fieldset><legend>Informações sobre as Empreiteiras</legend>
+<fieldset><legend>Informaï¿½ï¿½es sobre as Empreiteiras</legend>
 <table width="100%" border="0" cellpadding="0">
     <tr>
         <td width="15%" align="left">Cadastradas:</td>
-        <td align="left"><?php if($result[0] != 0){ echo $result[0];}else{ echo "Não há empreiteiras cadastradas";}?></td>
+        <td align="left"><?php if($result[0] != 0){ echo $result[0];}else{ echo "NÃ£o hÃ¡ empreiteiras cadastradas";}?></td>
     </tr>
     <tr>
         <td align="left">Ativas:</td>
-        <td align="left"><?php if($result[1] != 0){ echo $result[1];}else{ echo "Não há empreiteiras ativas";}?></td>
+        <td align="left"><?php if($result[1] != 0){ echo $result[1];}else{ echo "NÃ£o hÃ¡ empreiteiras ativas";}?></td>
     </tr>
     <tr>
         <td align="left">Inativas:</td>
-        <td align="left"><?php if($result[2] != 0){ echo $result[2];}else{ echo "Não há empreiteiras inativas";}?></td>
+        <td align="left"><?php if($result[2] != 0){ echo $result[2];}else{ echo "NÃ£o hÃ¡ empreiteiras inativas";}?></td>
     </tr>
     <tr>
-        <td align="left">Não Liberadas:</td>
-        <td width="85%" align="left"><?php if($result[3] != 0){ echo $result[3];}else{ echo "Não há empreiteiras não liberadas";}?></td>
+        <td align="left">NÃ£o Liberadas:</td>
+        <td width="85%" align="left"><?php if($result[3] != 0){ echo $result[3];}else{ echo "NÃ£o hÃ¡ empreiteiras nÃ£o liberadas";}?></td>
   </tr>
 </table>
 </fieldset>
@@ -84,7 +84,7 @@ if($relatorio == "E"){
             	<option value=""></option>
                 <option value="A">Ativos</option>
                 <option value="I">Inativos</option>
-                <option value="NL">Não liberados</option>
+                <option value="NL">NÃ£o liberados</option>
             </select>
         </td>
     </tr>
@@ -109,7 +109,7 @@ if($relatorio == "E"){
 <fieldset><legend>Filtro</legend>
 <table width="100%">
     <tr>
-        <td width="17%" align="left">Nome/Raz&atilde;o Social</td>
+        <td width="17%" align="left">Nome/RazÃ£o Social</td>
       <td width="83%" align="left"><input name="txtNome" type="text" class="texto" size="60" maxlength="100" /></td>
   </tr>
     <tr>
@@ -117,17 +117,17 @@ if($relatorio == "E"){
         <td align="left"><input name="txtCNPJ" type="text" class="texto" size="20" maxlength="18" /></td>
     </tr>
     <tr>
-        <td align="left">N° da Decc</td>
+        <td align="left">Nï¿½ da Decc</td>
         <td align="left"><input name="txtNroDecc" type="text" class="texto" size="10" maxlength="10" /></td>
     </tr>
     <tr>
-        <td align="left">Compet&ecirc;cia</td>
+        <td align="left">CompetÃªcia</td>
         <td align="left">
             <select name="cmbMes" class="combo">
                 <option value=""></option>
                 <?php
-                //array dos meses comecando na posição 1 ate 12 e faz um for listando os meses no combo
-                $meses = array(1=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+                //array dos meses comecando na posiÃ§Ã£o 1 ate 12 e faz um for listando os meses no combo
+                $meses = array(1=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
                 for($x=1;$x<=12;$x++){
                     echo "<option value='$x'>$meses[$x]</option>";
                 }//fim for meses
@@ -136,8 +136,8 @@ if($relatorio == "E"){
             <select name="cmbAno" class="combo">
                 <option value=""></option>
                 <?php
-                $sql_ano = mysql_query("SELECT SUBSTRING(competencia,1,4) FROM decc_des GROUP BY SUBSTRING(competencia,1,4) ORDER BY SUBSTRING(competencia,1,4) DESC");
-                while(list($ano) = mysql_fetch_array($sql_ano)){
+                $sql_ano = $PDO->query("SELECT SUBSTRING(competencia,1,4) FROM decc_des GROUP BY SUBSTRING(competencia,1,4) ORDER BY SUBSTRING(competencia,1,4) DESC");
+                while(list($ano) = $sql_ano->fetch()){
                     echo "<option value=\"$ano\">$ano</option>";
                 }
                 ?>
@@ -177,7 +177,7 @@ if($relatorio == "E"){
 <div id="divgraficoDecc"></div>
 <?php
 }elseif($relatorio == "O"){
-	$sql_obras = mysql_query("
+	$sql_obras = $PDO->query("
 		SELECT COUNT(codigo) FROM obras
 			UNION ALL
 		SELECT COUNT(codigo) FROM obras WHERE estado = 'A'
@@ -185,7 +185,7 @@ if($relatorio == "E"){
 		SELECT COUNT(codigo) FROM obras WHERE estado = 'C'");
 	$cont = 0;
 	//Recebe o array gerado pelo sql e recebe em uma variavel para imprimir os dados na tela
-	while(list($quantidade) = mysql_fetch_array($sql_obras)){
+	while(list($quantidade) = $sql_obras->fetch()){
 		$result[$cont] = $quantidade;
 		$cont++;
 	}
@@ -193,19 +193,19 @@ if($relatorio == "E"){
 <fieldset>
 <table width="100%">
 	<tr>
-    	<td align="left" colspan="2"><b>Informações das Obras</b></td>
+    	<td align="left" colspan="2"><b>Informaï¿½ï¿½es das Obras</b></td>
     </tr>
     <tr>
     	<td width="16%" align="left">Cadastradas</td>
-        <td width="84%" align="left"><?php if($result[0] != 0){ echo $result[0];}else{ echo "Não há obras cadastradas";}?></td>
+        <td width="84%" align="left"><?php if($result[0] != 0){ echo $result[0];}else{ echo "NÃ£o hÃ¡ obras cadastradas";}?></td>
     </tr>
     <tr>
     	<td align="left">Abertas</td>
-        <td align="left"><?php if($result[1] != 0){ echo $result[1];}else{ echo "Não há obras cadastradas";}?></td>
+        <td align="left"><?php if($result[1] != 0){ echo $result[1];}else{ echo "NÃ£o hÃ¡ obras cadastradas";}?></td>
     </tr>
     <tr>
     	<td align="left">Concluidas</td>
-        <td align="left"><?php if($result[2] != 0){ echo $result[2];}else{ echo "Não há obras cadastradas";}?></td>
+        <td align="left"><?php if($result[2] != 0){ echo $result[2];}else{ echo "NÃ£o hÃ¡ obras cadastradas";}?></td>
     </tr>
 </table>
 </fieldset>

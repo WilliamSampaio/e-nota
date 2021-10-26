@@ -19,11 +19,11 @@
     <td class="cab03"><?php print strtoupper($CONF_SECRETARIA); ?></td>
   </tr>
   <tr>
-    <td class="cab02">NOTA FISCAL ELETRÔNICA DE SERVIÇOS - e-NOTA</td>
+    <td class="cab02">NOTA FISCAL ELETRï¿½NICA DE SERVIï¿½OS - e-NOTA</td>
   </tr>
   <?php if($rps_numero){ ?>
   <tr>
-    <td>RPS N&ordm; <?php print $rps_numero; ?>, emitido em <?php print (substr($rps_data,8,2)."/".substr($rps_data,5,2)."/".substr($rps_data,0,4)); ?>.</td>
+    <td>RPS NÂº <?php print $rps_numero; ?>, emitido em <?php print (substr($rps_data,8,2)."/".substr($rps_data,5,2)."/".substr($rps_data,0,4)); ?>.</td>
   </tr>
   <?php }// fim if se tem rps ?>
 </table>
@@ -32,7 +32,7 @@
     $query = $_POST['hdQuery'];
 
     if(empty ($query)){
-        echo "<center><b>Nenhum débito a ser impresso</b></center>";
+        echo "<center><b>Nenhum dï¿½bito a ser impresso</b></center>";
     }else{
         ?>
         <table width="800" align="center" border="0" cellspacing="0" style="border:1px solid #000000;">
@@ -43,18 +43,18 @@
                 </td>
                 <td bgcolor="#999999" align="center"
                 style="border-right:1px solid #000000; border-bottom:1px solid #000000;">
-                    Competência
+                    CompetÃªncia
                 </td>
                 <td bgcolor="#999999" align="center"
                 style="border-right:1px solid #000000; border-bottom:1px solid #000000;">
-                    Débito
+                    Dï¿½bito
                 </td>
                 <td bgcolor="#999999" align="center" style=" border-bottom:1px solid #000000;">
                     Estado
                 </td>
             </tr>
         <?php
-        $sql = mysql_query($query);
+        $sql = $PDO->query($query);
         while($debitos = mysql_fetch_object($sql)){
             $debitos->estado = ($debitos->estado == 'E') ? $debitos->estado = "Pago" : $debitos->estado = "Aberto";
             ?>

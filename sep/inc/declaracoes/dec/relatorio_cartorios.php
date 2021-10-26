@@ -19,12 +19,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    $sql_total=mysql_query("SELECT codigo FROM cartorios");
-    $sql_ativos=mysql_query("SELECT codigo FROM cartorios WHERE estado='A'");
-    $sql_inativos=mysql_query("SELECT codigo FROM cartorios WHERE estado='I'");
-    $sql_pendentes=mysql_query("SELECT codigo FROM cartorios WHERE estado='NL'");
+    $sql_total=$PDO->query("SELECT codigo FROM cartorios");
+    $sql_ativos=$PDO->query("SELECT codigo FROM cartorios WHERE estado='A'");
+    $sql_inativos=$PDO->query("SELECT codigo FROM cartorios WHERE estado='I'");
+    $sql_pendentes=$PDO->query("SELECT codigo FROM cartorios WHERE estado='NL'");
 ?>
-<fieldset><legend>Informações dos Cartórios</legend>
+<fieldset><legend>Informaï¿½ï¿½es dos Cartï¿½rios</legend>
     <table align="left">
         <tr align="left">
             <td>Cadastrados:</td>
@@ -39,7 +39,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td><?php echo mysql_num_rows($sql_inativos); ?></td>
         </tr>
         <tr align="left">
-            <td>Não Liberados:</td>
+            <td>NÃ£o Liberados:</td>
             <td><?php echo mysql_num_rows($sql_pendentes); ?></td>
         </tr>
     </table>
@@ -63,7 +63,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     <option></option>
                     <option value="A">Ativo</option>
                     <option value="I">Inativo</option>
-                    <option value="NL">Não Liberado</option>
+                    <option value="NL">NÃ£o Liberado</option>
                 </select>
             </td>
         </tr>

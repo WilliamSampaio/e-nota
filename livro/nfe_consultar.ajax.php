@@ -79,15 +79,15 @@ if ($sql->rowCount() == 0) {
 	?>
 	<table width="100%" border="0" cellspacing="2" cellpadding="2">
 		<tr>
-			<td bgcolor="#999999" align="center">C&oacute;digo</td>
-			<td bgcolor="#999999" align="center">Per&iacute;odo</td>
+			<td bgcolor="#999999" align="center">Código</td>
+			<td bgcolor="#999999" align="center">Período</td>
             <td bgcolor="#999999" align="center">Estado</td>
 			<td bgcolor="#999999" align="center">CNPJ prestador</td>
 			<td bgcolor="#999999" align="center">Base de calculo</td>
 			<td bgcolor="#999999" align="center">Iss</td>
 			<td bgcolor="#999999" align="center">Iss retido</td>
 			<td bgcolor="#999999" align="center">Iss total</td>
-			<td bgcolor="#999999" align="center">A&ccedil;&atilde;o</td>
+			<td bgcolor="#999999" align="center">Ação</td>
 		</tr>
 		<?php
 		while ($dados = $sql->fetch()) {
@@ -113,8 +113,8 @@ if ($sql->rowCount() == 0) {
 			<td bgcolor="#FFFFFF" align="right"><?php echo DecToMoeda($dados['valorisstotal']); ?></td>
 			<td bgcolor="#FFFFFF" align="center">				
             <input type="submit" class="botao" id="btnImprimirr" name="btnImprimir" 
-            onclick="document.getElementById('frmLivro').action='../livro/imprimirlivrogeral.php?livro=<?php echo base64_encode($dados['codigo']); ?>'" value="Imprimir"/>&nbsp;
-                <!-- <input type="button" class="botao" id="btnImprimirr" name="btnImprimir" value="Imprimir" onclick="DivMenuAbas('<?php echo base64_encode($dados['codigo']); ?>');"/>&nbsp;
+            onclick="document.getElementById('frmLivro').action='../livro/imprimirlivrogeral.php?livro=<?php echo base64_encode($dados['codigo']); ?>'" value="Imprimir"/>
+                <!-- <input type="button" class="botao" id="btnImprimirr" name="btnImprimir" value="Imprimir" onclick="DivMenuAbas('<?php echo base64_encode($dados['codigo']); ?>');"/>
 				<input <?php echo $cancel; ?> type="button" class="botao" id="btCancelar" name="btCancelar" value="Cancelar" onclick="if(confirm('Deseja realmente fazer o cancelamento?')){cancelarGuiaLivro('<?php echo $dados['codigo']; ?>')}" /> -->
               
 			</td>

@@ -29,8 +29,8 @@ $num_servicos = $_POST['hdServicos'];
 $total = 0;
 $codverificacao = gera_codverificacao();
 
-$sql_busca_cod = mysql_query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj'");
-list($cod_orgao) = mysql_fetch_array($sql_busca_cod);
+$sql_busca_cod = $PDO->query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj'");
+list($cod_orgao) = $sql_busca_cod->fetch();
 
 for($c=1;$c<=$num_servicos;$c++){
 	$CNPJPrestador[$c] = $_POST['txtCNPJPrestador'.$c];
@@ -45,20 +45,20 @@ for($c=1;$c<=$num_servicos;$c++){
 $multaJuros = MoedaToDec($_POST['txtMultaJuros']);
 $totalPagar = MoedaToDec($_POST['txtTotalPagar']);
 
-mysql_query("INSERT INTO dop_des 
+$PDO->query("INSERT INTO dop_des 
 			 SET codorgaopublico='$cod_orgao', 
 				 competencia='$dataCompetencia', 
 				 data_gerado='$dataGerado', 
 				 total='$total',
 				 iss='$totalPagar',
 				 codverificacao='$codverificacao'"); 
-$sql_des = mysql_query("SELECT MAX(codigo) 
+$sql_des = $PDO->query("SELECT MAX(codigo) 
 				  				 FROM dop_des");
-list($cod_des)=mysql_fetch_array($sql_des);
+list($cod_des)=$sql_des->fetch();
 
 for($c=1;$c<=$num_servicos;$c++){
 	if($baseCalculo[$c]!=""&&$codigoServico[$c]!=""){
-		mysql_query("
+		$PDO->query("
 			 INSERT INTO dop_des_notas
 			 SET coddop_des='$cod_des',
 			 	 codemissor='".$CNPJPrestador[$c]."',
@@ -71,7 +71,7 @@ for($c=1;$c<=$num_servicos;$c++){
 
 /*$data_venc = DataVencimento();
 
-mysql_query("INSERT INTO guia_pagamento
+$PDO->query("INSERT INTO guia_pagamento
 			 SET codrelacionamento = '$cod_des',
 			 	 relacionamento= 'dop_des',
 				 dataemissao = '$dataGerado',
@@ -80,16 +80,16 @@ mysql_query("INSERT INTO guia_pagamento
 				 datavencimento = '$data_venc',
 				 pago = 'N'");
 
-$sql_guia = mysql_query("SELECT MAX(codigo) 
+$sql_guia = $PDO->query("SELECT MAX(codigo) 
 			  			 FROM guia_pagamento;");
 
-list($cod_guia)=mysql_fetch_array($sql_guia);
+list($cod_guia)=$sql_guia);
 
 
 $nossonumero = gerar_nossonumero($cod_guia);
 $chavecontroledoc = gerar_chavecontrole($cod_des,$cod_guia);
 
-mysql_query("UPDATE guia_pagamento SET nossonumero ='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo=$cod_guia");
+$PDO->query("UPDATE guia_pagamento SET nossonumero ='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo=$cod_guia");
 */
 $cod_guia =base64_encode($cod_guia);
 $cod_des = base64_encode($cod_des);

@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;SEPISS - Pesquisar Prestadores</td>
+		<td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">SEPISS - Pesquisar Prestadores</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" onclick="document.getElementById('divBuscaPrestador').style.visibility='hidden'" title="Fechar" /></td>
 	</tr>
 	<tr>
@@ -64,7 +64,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					
 					$nome?$cpfcnpj?$where=" WHERE razaosocial LIKE'%$nome%' AND $campo = '$cpfcnpj' AND estado <> 'NL'":$where=" WHERE razaosocial LIKE'%$nome%' AND estado <> 'NL'":NULL;
 					$cpfcnpj?$where=" WHERE $campo = '$cpfcnpj' AND estado <> 'NL'":NULL;
-					$sql=mysql_query("
+					$sql=$PDO->query("
 					SELECT 
 						codigo,
 						nome, 
@@ -88,7 +88,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					ORDER BY
 						razaosocial
 					");
-					while(list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe) = mysql_fetch_array($sql)){
+					while(list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe) = $sql->fetch()){
 						if(!$razaosocial){
 							$razaosocial = $nome;
 						}

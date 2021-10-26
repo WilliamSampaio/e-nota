@@ -26,15 +26,15 @@ $ano = $_POST['cmbAno'];
 $codigo_nota = $_POST['hdCodigoGuia'];
 $razao_social = $_POST['txtRazaoNome'];
 
-$sql_test = mysql_query("SELECT nome, logradouro FROM cadastro WHERE cnpj='$cnpj' OR cpf='$cnpj'");
-list($nome_test,$endereco_test) = mysql_fetch_array($sql_test);
+$sql_test = $PDO->query("SELECT nome, logradouro FROM cadastro WHERE cnpj='$cnpj' OR cpf='$cnpj'");
+list($nome_test,$endereco_test) = $sql_test->fetch();
 if(!$endereco_test){
-	mysql_query("UPDATE cadastro SET nome='$razao_social' WHERE cnpj='$cnpj' OR cpf='$cnpj'");
+	$PDO->query("UPDATE cadastro SET nome='$razao_social' WHERE cnpj='$cnpj' OR cpf='$cnpj'");
 }
-$sql=mysql_query("SELECT codigo FROM cadastro WHERE cnpj='$cnpj' OR cpf='$cnpj'");
-list($CodTomador)=mysql_fetch_array($sql);
+$sql=$PDO->query("SELECT codigo FROM cadastro WHERE cnpj='$cnpj' OR cpf='$cnpj'");
+list($CodTomador)=$sql->fetch();
 
-$sql_guia_prestador = mysql_query("
+$sql_guia_prestador = $PDO->query("
 	SELECT 
 		numero,
 		valortotal,
@@ -46,7 +46,7 @@ $sql_guia_prestador = mysql_query("
 	WHERE
 		codigo = '$codigo_nota'
 ");
-list($numero,$total,$iss,$issretido,$codprestador) = mysql_fetch_array($sql_guia_prestador);
+list($numero,$total,$iss,$issretido,$codprestador) = $sql_guia_prestador->fetch();
 
 $competencia    = $ano."-".$mes."-01";
 $dataemissao    = date("Y-m-d");
@@ -56,7 +56,7 @@ $datavencimento = date("Y-m-d",$datavencimento);*/
 $datavencimento = UltDiaUtil($data[1],$data[0]);
 
 
-mysql_query("
+$PDO->query("
 	INSERT INTO 
 		des_issretido 
 	SET 
@@ -70,14 +70,14 @@ mysql_query("
 		total = '$total',
 	 	estado='B'
 ");
-$sql=mysql_query("SELECT MAX(codigo) FROM des_issretido");
-list($CodDes)=mysql_fetch_array($sql);
+$sql=$PDO->query("SELECT MAX(codigo) FROM des_issretido");
+list($CodDes)=$sql->fetch();
 
-$sql=mysql_query("SELECT valor, multa FROM des_issretido WHERE codigo='$CodDes'");
-list($ValorGuia,$ValorMulta)=mysql_fetch_array($sql);
+$sql=$PDO->query("SELECT valor, multa FROM des_issretido WHERE codigo='$CodDes'");
+list($ValorGuia,$ValorMulta)=$sql->fetch();
 // 614e67229b0bf097cd5e6a527e197217
 // 202cb962ac59075b964b07152d234b70
-mysql_query("
+$PDO->query("
 	INSERT INTO 
 		des_issretido_notas 
 	SET 
@@ -91,8 +91,8 @@ mysql_query("
 /* --- Separacao da insercao da des com issretido para a emissao de guia --- */
 
 // busca o codigo do banco e o arquivo q gera o boleto
-$sql=mysql_query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
-list($codbanco,$boleto)=mysql_fetch_array($sql);
+$sql=$PDO->query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
+list($codbanco,$boleto)=$sql->fetch();
 
 // inseri a guia de pagamento no db
 
@@ -100,7 +100,7 @@ list($codbanco,$boleto)=mysql_fetch_array($sql);
 //$pg_sql_cod = pg_query("SELECT MAX(numero_conhecimto) FROM smafinan");
 //list($pg_last_id) = pg_fetch_array($pg_sql_cod);
 //$pg_codigo = $pg_last_id + 1;
-mysql_query("
+$PDO->query("
 	INSERT INTO 
 		guia_pagamento 
 	SET  
@@ -113,11 +113,11 @@ mysql_query("
 ");
 
 // busca o codigo da guia de pagamento recem inserida
-$sql=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
-list($codguia)=mysql_fetch_array($sql);
-//include_once('../guia_pg/postgre_sql.php');
+$sql=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
+list($codguia)=$sql->fetch();
+//require_once('../guia_pg/postgre_sql.php');
 
-mysql_query("
+$PDO->query("
 	INSERT INTO 
 		guias_declaracoes 
 	SET 
@@ -125,18 +125,18 @@ mysql_query("
 		codrelacionamento='$CodDes',
 		relacionamento='des_issretido'
 ");
-mysql_query("UPDATE des_issretido SET estado='B' WHERE codigo='$CodDes'");
+$PDO->query("UPDATE des_issretido SET estado='B' WHERE codigo='$CodDes'");
 
 // retorna o codigo do ultimo relacionamento
-$sql=mysql_query("SELECT MAX(codigo) FROM guias_declaracoes");
-list($codrelacionamento)=mysql_fetch_array($sql);
+$sql=$PDO->query("SELECT MAX(codigo) FROM guias_declaracoes");
+list($codrelacionamento)=$sql->fetch();
 
 // gera o nossonumero e chavecontroledoc
 $nossonumero = gerar_nossonumero($codguia);
 $chavecontroledoc = gerar_chavecontrole($codrelacionamento,$codguia);
 
 // seta o nossonumero e a chavecontroledoc no banco
-mysql_query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguia'");
+$PDO->query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguia'");
 
 // gera o boleto
 Mensagem("Boleto gerado com sucesso");

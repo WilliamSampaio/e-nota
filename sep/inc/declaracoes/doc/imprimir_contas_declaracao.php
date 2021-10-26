@@ -25,7 +25,7 @@ require_once("../../nocache.php");
 
 $codigo=$_POST['hdCodDoc'];//recebe o codigo do hidden da declaracao que foi clicada
 
-$sql_info = mysql_query("
+$sql_info = $PDO->query("
 	SELECT 
 		doc_des.data,
 		DATE_FORMAT(doc_des.competencia,'%m/%Y') as competencia,
@@ -51,7 +51,11 @@ $sql_info = mysql_query("
 	GROUP BY
 		doc_des_contas.coddoc_des
 	");
-	$info = mysql_fetch_array($sql_info) or die(mysql_error());
+	try{
+		$info = $sql_info->fetch();
+	}catch(PDOException $e){
+		echo 'Erro: ' . $e->getMessage();
+	}
 	$info['endereco'] = $info['logradouro'].', '.$info['numero'];
 	
 	$aux = explode(" ",$info['data']);
@@ -71,9 +75,9 @@ $sql_info = mysql_query("
 <script type="text/javascript">
 top.resizeTo(800,600);
 </script>
-<title>Declaracao de Operadora de Cr&eacute;dito</title>
+<title>Declaracao de Operadora de Cr√©dito</title>
 <input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
-<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Contas da Declara&ccedil;&atilde;o de Operadora de Cr&eacute;dito</b><br />
+<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Contas da Declara√ß√£o de Operadora de Cr√©dito</b><br />
 </p>
 <input type="hidden" name="hdCodUser" value="<?php echo $codigo;?>">
 <table width="100%" style="text-indent:25px;" border="0">
@@ -94,13 +98,13 @@ top.resizeTo(800,600);
         <td align="left"><?php echo $info['uf'];?></td>
   </tr>
   <tr bgcolor="#FFFFFF">
-    	<td align="left"><b>Data de geraÁ„o</b></td>
+    	<td align="left"><b>Data de gera√ß√£o</b></td>
         <td align="left"><?php echo DataPt($info['data']);?></td>
-        <td align="right"><b>CompetÍncia</b></td>
+        <td align="right"><b>Compet√™ncia</b></td>
         <td align="left"><?php echo $info['competencia'];?></td>
   </tr>
   <tr bgcolor="#FFFFFF">
-    	<td align="left"><b>Cod. VerificaÁ„o</b></td>
+    	<td align="left"><b>Cod. Verifica√ß√£o</b></td>
         <td align="left"><?php echo $info['codverificacao'];?></td>
         <td align="right"><b>ISS</b></td>
         <td align="left"><?php echo DecToMoeda($info['iss']);?></td>
@@ -114,7 +118,7 @@ top.resizeTo(800,600);
 </table>
 
 <?php
-$sql=mysql_query("
+$sql=$PDO->query("
 				SELECT 
 					contaoficial, 
 					contacontabil, 
@@ -143,7 +147,7 @@ $sql=mysql_query("
         <td align="left">Item</td>
         <td align="left">Saldo Anterior</td>
         <td align="left">Debito</td>
-        <td align="left">CrÈdito</td>
+        <td align="left">Cr√©dito</td>
         <td align="left">Saldo Atual</td>
         <td align="left">Receita</td>
         <td align="left">Aliquota</td>
@@ -153,7 +157,7 @@ $sql=mysql_query("
     	<td colspan="11"><hr color="#000000" size="2" /></td>
     </tr>
     <?php
-		while(list($contaoficial,$contacontabil,$titulo,$item,$saldo_mesantarior,$debito,$credito,$saldo_mesatual,$receita,$aliquota,$iss) = mysql_fetch_array($sql)){
+		while(list($contaoficial,$contacontabil,$titulo,$item,$saldo_mesantarior,$debito,$credito,$saldo_mesatual,$receita,$aliquota,$iss) = $sql->fetch()){
 	?>
     <tr bgcolor="#FFFFFF">
         <td align="left"><?php echo $contaoficial;?></td>

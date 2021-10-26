@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php  
-	include("../include/conect.php");
+	require_once("../include/conect.php");
 	$sql=$PDO->query("
 					SELECT 
 					 especificacao, 
@@ -44,11 +44,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <table width="100%">
 	<tr align="left">
-		<td>Especifica��o:</td>
+		<td>Especificação:</td>
 		<td><?php echo $especificacao; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Descri��o:</td>
+		<td>Descrição:</td>
 		<td><?php echo $descricao; ?></td>
 	</tr>
 	<tr align="left">
@@ -60,7 +60,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo $email; ?></td>
 	</tr>
 	<tr align="left">
-		<td>N� do RPS/NFe:</td>
+		<td>Nº do RPS/NFe:</td>
 		<td><?php echo $nro; ?></td>
 	</tr>
 	<tr align="left">
@@ -72,11 +72,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo "R$ ".$valor; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Data da Reclama��o:</td>
+		<td>Data da Reclamação:</td>
 		<td><?php echo $reclamacao; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Respons�vel:</td>
+		<td>Responsável:</td>
 		<td><?php echo $responsavel; ?></td>
 	</tr>
 	<tr align="left">

@@ -25,7 +25,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$nivel = $_POST["cmbNivel"];
 	$senha = md5($_POST["txtSenha"]);
 	if($_POST["btCadastrar"] == "Inserir"){
-		mysql_query("INSERT INTO usuarios SET nome = '$nome', login = '$login', senha = '$senha', tipo = 'prefeitura', nivel = '$nivel'");
+		$PDO->query("INSERT INTO usuarios SET nome = '$nome', login = '$login', senha = '$senha', tipo = 'prefeitura', nivel = '$nivel'");
 		Mensagem("Usuario inserido");
 	}//fim if
 	if($_POST["btEditar"] == "Editar"){
@@ -40,21 +40,21 @@ Fith Floor, Boston, MA 02110-1301, USA
 		}
 		//atualiza os campos do banco
 		
-		mysql_query("UPDATE usuarios SET nome = '$nome', login = '$login', $str nivel = '$nivel' WHERE codigo = '$codedit'");
-		add_logs('Atualizou Configurações de um Usuário');
+		$PDO->query("UPDATE usuarios SET nome = '$nome', login = '$login', $str nivel = '$nivel' WHERE codigo = '$codedit'");
+		add_logs('Atualizou Configuraï¿½ï¿½es de um Usuï¿½rio');
 		Mensagem("Usuario atualizado");
 	}//fim if
 	if($_POST["btDeletar"] == "Excluir"){
 		$coddel = $_POST["hdCodDel"];
-		mysql_query("DELETE FROM usuarios WHERE codigo = '$coddel'");
-		add_logs('Excluiu Configurações de um Usuário');
+		$PDO->query("DELETE FROM usuarios WHERE codigo = '$coddel'");
+		add_logs('Excluiu Configuraï¿½ï¿½es de um Usuï¿½rio');
 		Mensagem("Usuario excluido");
 	}//fim if
 ?>
 <form method="post" id="frmUsuario" name="frmUsuario">
 	<input type="hidden" name="include" id="include" value="<?php echo $_POST["include"];?>" />
 	<input type="hidden" name="btUsuarios" value="<?php echo $_POST["btUsuarios"];?>">
-	<fieldset><legend>Cadastro de Usuários</legend>
+	<fieldset><legend>Cadastro de Usuï¿½rios</legend>
 		<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
 			<tr>
 				<td align="left" width="20%">Nome<font color="#FF0000">*</font></td>
@@ -66,15 +66,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 			</tr>
 			<tr>
 				<td align="left">Senha<font color="#FF0000">*</font></td>
-				<td align="left"><input type="password" size="10" maxlength="10" name="txtSenha" id="txtSenha" class="texto">&nbsp;No máximo 10 caracteres</td>
+				<td align="left"><input type="password" size="10" maxlength="10" name="txtSenha" id="txtSenha" class="texto">No mÃ¡ximo 10 caracteres</td>
 			</tr>
 			<tr>
-				<td align="left">Nível de permissão</td>
+				<td align="left">Nï¿½vel de permissï¿½o</td>
 				<td align="left">
 					<select name="cmbNivel" id="cmbNivel">
 						<option value=""></option>
 						<option value="A">Alto</option>
-						<option value="M">Médio</option>
+						<option value="M">Mï¿½dio</option>
 						<option value="B">Baixo</option>
 					</select>
 				</td>
@@ -82,23 +82,23 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<tr>
 				<td>
 					<input type="submit" value="Inserir" name="btCadastrar" class="botao" onclick="return ValidaFormulario('txtNome|txtLogin|txtSenha|cmbNivel')"></td>
-				<td align="right"><font color="#FF0000">*</font>Campos Obrigat&oacute;rios</td>
+				<td align="right"><font color="#FF0000">*</font>Campos ObrigatÃ³rios</td>
 			</tr>   
 		</table>   
 	</fieldset>
 <?php
-	$sql = mysql_query("SELECT codigo, nome, login, nivel, ultlogin	FROM usuarios WHERE tipo = 'prefeitura'	ORDER BY nome");
-	$result = mysql_num_rows($sql);
+	$sql = $PDO->query("SELECT codigo, nome, login, nivel, ultlogin	FROM usuarios WHERE tipo = 'prefeitura'	ORDER BY nome");
+	$result = $sql->rowCount();
 	if($result>0){
 ?>
-	<!-- cabeçalho da pesquisa --> 
-	<fieldset><legend>Usuários Cadastrados: <?php echo $result; ?></legend>
+	<!-- cabeï¿½alho da pesquisa --> 
+	<fieldset><legend>Usuï¿½rios Cadastrados: <?php echo $result; ?></legend>
 		<table width="100%">  
 			<tr bgcolor="#999999">
 				<td width="136" align="center">Nome</td>
 				<td width="138" align="center">Login</td>
-				<td width="49" align="center">Nível</td>
-				<td width="126" align="center">Últ login</td>
+				<td width="49" align="center">Nï¿½vel</td>
+				<td width="126" align="center">ï¿½lt login</td>
 				<td width="49" align="center"></td>
 				<td align="center"></td>
 			</tr>
@@ -107,14 +107,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<table width="100%" border="0" cellpadding="0" cellspacing="1">
 			<?php 
 				$x = 0;
-				while(list($codigo,$nome,$login,$nivel,$ultlogin)=mysql_fetch_array($sql)) { 
+				while(list($codigo,$nome,$login,$nivel,$ultlogin)=$sql->fetch()) { 
 					switch($nivel){
 						case "A": $nivel = "Alto";  break;
 						case "M": $nivel = "Medio"; break;
 				        case "B": $nivel = "Baixo"; break;
 					}
-					$sql_ultlogin= mysql_query("SELECT data FROM logs WHERE codusuario ='$codigo' ORDER BY codigo DESC LIMIT 1");
-					list($data)=mysql_fetch_array($sql_ultlogin);
+					$sql_ultlogin= $PDO->query("SELECT data FROM logs WHERE codusuario ='$codigo' ORDER BY codigo DESC LIMIT 1");
+					list($data)=$sql_ultlogin->fetch();
 						$datahora = explode(" ",$data);
 						$data = $datahora[0];
 						$hora = $datahora[1];

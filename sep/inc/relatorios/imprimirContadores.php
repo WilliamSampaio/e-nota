@@ -20,13 +20,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 
 <?php //Includes
-	include("../../inc/conect.php");
-	include("../../funcoes/util.php");
+	require_once("../../inc/conect.php");
+	require_once("../../funcoes/util.php");
 ?>
 
 <?php //Pega o brasão
-	$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
-	list($BRASAO) = mysql_fetch_array($sql_brasao);
+	$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
+	list($BRASAO) = $sql_brasao->fetch();
 ?>
 
 <?php
@@ -68,11 +68,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</style>
 <!-- Fim do css da Impressão da página -->
 
-<title>Imprimir Relat&oacute;rio</title>
+<title>Imprimir Relatório</title>
 <div class="pagina"> <!-- Início div página -->
 	<div id="DivImprimir">
 		<input type="button" onClick="print();" value="Imprimir" /><br />
-		<i><b>Este relat&oacute;rio &eacute; melhor visualizado em formato de impress&atilde;o em paisagem.</b></i>
+		<i><b>Este relatório é melhor visualizado em formato de impressão em paisagem.</b></i>
 	</div>
 	
 	<!-- Início do topo com as informações -->
@@ -87,7 +87,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td width="584" height="33" colspan="2">
 					<span class="style1">
 						<center>
-							<p>RELAT&Oacute;RIO - CONTADORES </p>
+							<p>RELATÓRIO - CONTADORES </p>
 							<p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 							<p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 						</center>
@@ -103,7 +103,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 	$query =("SELECT * FROM cadastro WHERE estado = '$estado' AND codtipo = '10'");
 		
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa); //Pega quantos resultados voltaram
 	if(mysql_num_rows($sql_pesquisa)){ //Se existir algum registro, mostra na tabela
 ?>
@@ -124,15 +124,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td>Nome</td>
 		<td>CPF/CNPJ</td>
 		<td>Logradouro</td>
-        <td>N&uacute;mero</td>
+        <td>Número</td>
 		<td>Complemento</td>
         <td>Bairro</td>
-        <td>Munic&iacute;pio</td>
+        <td>Município</td>
         <td>UF</td>
         <td>Estado</td>
      </tr>
 		<?php
-			while ($dados = mysql_fetch_array($sql_pesquisa)){
+			while ($dados = $sql_pesquisa->fetch()){
 				if($dados['cpf'] == ''){
 					$cpfcnpj = $dados['cnpj'];
 				}else{
@@ -161,7 +161,7 @@ Fith Floor, Boston, MA 02110-1301, USA
        	<td bgcolor="white"  align="center"><font size="1"><?php echo $estadocont; ?></font></td>
 	</tr>
 		<?php
-			}// Fim while ($dados = mysql_fetch_array($sql_pesquisa))
+			}// Fim while ($dados = $sql_pesquisa))
 		?>
 </table>
 <?php
@@ -170,7 +170,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>Não há resultados!</td>
 	</tr>
 </table>
 <?php

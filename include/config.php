@@ -20,6 +20,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
+require_once '../config/constants.php';
+
 function getSubdominio()
 {
     $dominio = $_SERVER['SERVER_NAME'];
@@ -33,7 +35,7 @@ function getSubdominio()
     // return 'subdominio1';
 }
 
-$config = parse_ini_file(dirname(__DIR__) . '/.config.ini', TRUE);
+$config = parse_ini_file(ROOTPATH . '/.config.ini', TRUE);
 
 // $str  = $config[getSubdominio()]['DB_HOST'];
 // $str .= $config[getSubdominio()]['DB_DATABASE'];

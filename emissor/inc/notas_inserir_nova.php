@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 $sessioncnpj = $_SESSION['login'];
 if($sessioncnpj==$_POST['txtTomadorCNPJ']){
-	Mensagem('O tomador nao pode ser o pr�prio prestador');
+	Mensagem('O tomador nao pode ser o próprio prestador');
 }else{
 	$servico = explode("|",$_POST['cmbCodServico1']);
 	if($servico[1]!=0){
@@ -77,7 +77,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 		//testa se o numero de notas limites ja foi ultrapassado se ja tiver ultrapassado avisa-o
 		if(($ultimanota>$notalimite)&&($notalimite!=0)) {
 		
-			Mensagem('Voc&ecirc; nao pode emitir NFe por que ultrapassou seu limite estabelecido pelo AIDF. Entre em contato com a prefeitura.');
+			Mensagem('Você nao pode emitir NFe por que ultrapassou seu limite estabelecido pelo AIDF. Entre em contato com a prefeitura.');
 			Redireciona('notas.php');
 			
 		}elseif(($ultimanota<=$notalimite)||($notalimite==0)){  
@@ -101,7 +101,8 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 				if($sql->rowCount()<=0){
 				
 					$codtipo = codtipo('tomador');
-					$codtipodec = coddeclaracao('DES Simplificada');
+					$sql_cargo = $PDO->query("SELECT codigo FROM declaracoes WHERE declaracao LIKE 'DES Simplificada'");
+					$codtipodec = $sql_cargo->fetchColumn();
 					$diaatual = date("Y-m-d");
 					$PDO->query("
 						INSERT INTO 
@@ -162,7 +163,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					$notaTotalValorISSRetido = 0;
 				}
 				
-				//verifica se o prestador � do MEI
+				//verifica se o prestador é do MEI
 				$sqlMei = $PDO->query("SELECT codigo FROM declaracoes WHERE declaracao = 'MEI'");
 				list($codmei) = $sqlMei->fetch();
 				$sqlTipoDeclaracao = $PDO->query("SELECT codtipodeclaracao FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
@@ -228,7 +229,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					$servicoISSRetido = MoedaToDec($_POST['txtISSRetidoManual'.$cont]);
 					$servicoDiscr     = trataString(htmlentities($_POST['txtDiscriminacaoServico'.$cont]));
 					
-					if($servicoDiscr == htmlentities("Discrimina&ccedil;&atilde;o do servi&ccedil;o")){
+					if($servicoDiscr == htmlentities("Discriminação do serviço")){
 						$servicoDiscr = "";
 					}
 	
@@ -293,11 +294,11 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					echo "<script>window.location='notas.php';</script>";
 				}
 			}else{
-				print("<script language=JavaScript>alert('Favor preencher campos obrigat�rios')</script>");
+				print("<script language=JavaScript>alert('Favor preencher campos obrigatórios')</script>");
 			}
 		}
 	}else{
-		print("<script language=JavaScript>alert('� necess�rio selecionar um servi�o para a emiss�o da nota.')</script>");
+		print("<script language=JavaScript>alert('� necess�rio selecionar um serviço para a emissão da nota.')</script>");
 	}
 }
 ?>

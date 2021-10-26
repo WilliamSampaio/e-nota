@@ -2,9 +2,9 @@
 require_once("../conect.php");
 require_once("../../funcoes/util.php");
 
-$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 //preenche a variavel com os valores vindos do banco
-list($BRASAO) = mysql_fetch_array($sql_brasao);
+list($BRASAO) = $sql_brasao->fetch();
 
 
 ?>
@@ -36,14 +36,14 @@ if ($datafinal) {
 	$sql_where[] = "DATE(notas.datahoraemissao) <= '$datafinal'";
 }
 if ($cnpjprestador) {
-	$sqlEmissor = mysql_query("SELECT codigo FROM cadastro WHERE cpf='$cnpjprestador' OR cnpj='$cnpjprestador'");
-    list($codEmissor) = mysql_fetch_array($sqlEmissor);
+	$sqlEmissor = $PDO->query("SELECT codigo FROM cadastro WHERE cpf='$cnpjprestador' OR cnpj='$cnpjprestador'");
+    list($codEmissor) = $sqlEmissor->fetch();
     $sql_where[] = "notas.codemissor = '$codEmissor'";
 }
 
 $sql_where = implode(' AND ', $sql_where);
 
-$sql = mysql_query("
+$sql = $PDO->query("
 	SELECT
 		notas.codigo,
 		notas.numero,
@@ -63,14 +63,14 @@ $sql = mysql_query("
 		codigo DESC
 ");
 
-if (mysql_num_rows($sql) <= 0) {
+if ($sql->rowCount() <= 0) {
 	?><strong><center>Nenhum resultado encontrado.</center></strong><?php
 	exit();
 }
 ?>
 <html>
 <head>
-<title>Relat&oacute;rio de Notas escrituradas</title>
+<title>Relatório de Notas escrituradas</title>
 <style type="text/css">
 @media print {
 	#DivImprimir {
@@ -98,7 +98,7 @@ if (mysql_num_rows($sql) <= 0) {
     </center></td>
     <td width="584" height="33" colspan="2"><span class="style1">
       <center>
-             <p>RELAT&Oacute;RIO DE NOTAS ESCRITURADAS</p>
+             <p>RELATÓRIO DE NOTAS ESCRITURADAS</p>
              <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
              <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
       </center>
@@ -110,7 +110,7 @@ if (mysql_num_rows($sql) <= 0) {
 <table>
 	<?php if($_POST["txtNossonumero"]){?>
 	<tr>
-		<td><strong>Nosso N&uacute;mero:</strong></td>
+		<td><strong>Nosso Número:</strong></td>
 		<td><?php echo $_POST["txtNossonumero"]; ?></td>
 	</tr>
 	<?php } if($_POST["txtDataIni"]){ ?>
@@ -120,7 +120,7 @@ if (mysql_num_rows($sql) <= 0) {
 	</tr>
 	<?php } if($_POST["txtDataFim"]){ ?>
 	<tr>
-		<td><strong>At� a data:</strong></td>
+		<td><strong>At� a data:</strong></td>
 		<td><?php echo $_POST["txtDataFim"]; ?></td>
 	</tr>
 	<?php } if($_POST["txtCnpjPrestador"]) {?>
@@ -130,21 +130,21 @@ if (mysql_num_rows($sql) <= 0) {
 	</tr>
 	<?php }//fim if mostrar os dados usados no filtro ?>
 	<tr>
-		<td colspan="2"><b><?php echo mysql_num_rows($sql); ?> notas escrituradas</b></td>
+		<td colspan="2"><b><?php echo $sql->rowCount(); ?> notas escrituradas</b></td>
 	</tr>
 </table>
 <table width="100%" class="relatorio">
     <tr bgcolor="grey">
         <td align="center"><b>Emissor</b></td>
-		<td align="center"><b>N&ordm;</b></td>
-		<td align="center"><b>Data de emiss&atilde;o</b></td>
+		<td align="center"><b>Nº</b></td>
+		<td align="center"><b>Data de emissão</b></td>
 		<td align="center"><b>CNPJ/CPF Tomador</b></td>
 		<td align="center"><b>Tomador</b></td>
 		<td align="center"><b>Valor</b></td>
 		<td align="center"><b>Iss</b></td>
 	</tr>
 	<?php
-	while($dados = mysql_fetch_array($sql)){
+	while($dados = $sql->fetch()){
 	?>
 	<tr>
         <td align="center"><?php echo $dados['razaosocial']; ?></td>

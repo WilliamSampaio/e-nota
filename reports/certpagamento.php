@@ -20,8 +20,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 session_start();
-include("../include/conect.php");
-include("../funcoes/util.php");
+require_once("../include/conect.php");
+require_once("../include/util.php");
 if (!$_GET['CODV']) {
 	Mensagem(" COD Inv�lido");
 	Redireciona("../site/certidoes.php");
@@ -145,7 +145,7 @@ if ($resultado) {
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-	<title>Certid&atilde;o de Pagamento de ISS</title>
+	<title>Certidão de Pagamento de ISS</title>
 	<link href="../css/imprimir_certidoes.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -166,9 +166,9 @@ if ($resultado) {
 			</td>
 		</tr>
 		<tr>
-			<td width="25%" height="30" align="center" bgcolor="#CCCCCC"><strong>Documento N&ordm;.</strong></td>
-			<td width="25%" align="center" bgcolor="#CCCCCC"><strong>C&oacute;digo de Verifica&ccedil;&atilde;o </strong></td>
-			<td width="25%" align="center" bgcolor="#CCCCCC"><strong>Data de Emiss&atilde;o </strong></td>
+			<td width="25%" height="30" align="center" bgcolor="#CCCCCC"><strong>Documento Nº.</strong></td>
+			<td width="25%" align="center" bgcolor="#CCCCCC"><strong>Código de Verificação </strong></td>
+			<td width="25%" align="center" bgcolor="#CCCCCC"><strong>Data de Emissão </strong></td>
 			<td width="25%" align="center" bgcolor="#CCCCCC"><strong>Data de Validade</strong></td>
 		</tr>
 		<tr>
@@ -186,7 +186,7 @@ if ($resultado) {
 			</td>
 		</tr>
 		<tr>
-			<td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICA&Ccedil;&Atilde;O DO SUJEITO PASSIVO </strong></td>
+			<td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICAÇÃO DO SUJEITO PASSIVO </strong></td>
 		</tr>
 		<tr>
 			<td height="50" colspan="3" valign="top">Nome<br>
@@ -197,7 +197,7 @@ if ($resultado) {
 			</td>
 		</tr>
 		<tr>
-			<td height="75" colspan="4" valign="top">Endere&ccedil;o<br>
+			<td height="75" colspan="4" valign="top">Endereço<br>
 				<font class="prefeitura"><?php echo $endereco; ?></font>
 			</td>
 		</tr>
@@ -224,24 +224,24 @@ if ($resultado) {
 		}
 		?>
 		<tr>
-			<td height="20" colspan="3" align="right" valign="middle"><strong>Valor Total (R$)</strong>&nbsp;&nbsp;</td>
+			<td height="20" colspan="3" align="right" valign="middle"><strong>Valor Total (R$)</strong></td>
 			<td height="20" align="center" valign="middle"><?php echo DecToMoeda($valor_total); ?></td>
 		</tr>
 		<tr>
-			<td height="100" colspan="4" align="center" valign="middle">&nbsp;</td>
+			<td height="100" colspan="4" align="center" valign="middle"></td>
 		</tr>
 		<tr>
-			<td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>OBSERVA&Ccedil;&Otilde;ES</strong></td>
+			<td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>OBSERVAÇÕES</strong></td>
 		</tr>
 		<tr>
 			<td colspan="4">
 				<p>- O presente documento somente tem validade:<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;a. Quando n&atilde;o apresentar rasuras;<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;b. At&eacute; a data de validade exposta acima;</p>
+					a. Quando não apresentar rasuras;<br>
+					b. Até a data de validade exposta acima;</p>
 			</td>
 		</tr>
 		<tr>
-			<td height="50" colspan="4">A aceita&ccedil;&atilde;o deste documento esta condicionada &agrave; verifica&ccedil;&atilde;o de sua validade, de forma exclusiva pelo aceitante junto &agrave; Prefeitura Municipal de <font class="prefeitura"><?php echo $CONF_CIDADE; ?></font>. </td>
+			<td height="50" colspan="4">A aceitação deste documento esta condicionada à verificação de sua validade, de forma exclusiva pelo aceitante junto à Prefeitura Municipal de <font class="prefeitura"><?php echo $CONF_CIDADE; ?></font>. </td>
 		</tr>
 	</table>
 </body>

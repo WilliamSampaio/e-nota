@@ -46,7 +46,7 @@ $simplesnacional    = $_POST['txtSimplesNacional'];
 $CODCAT             = $_POST['txtMAXCODIGOCAT'];
 $nfe                = $_POST['txtNfe'];
 
-// define se � ou nao contador
+// define se é ou nao contador
 $sql = $PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
 list($maxcodigo) = $sql->fetch();
 $sql_categoria = $PDO->query("SELECT codigo FROM servicos_categorias WHERE nome LIKE '%Contabil%'");
@@ -83,13 +83,13 @@ list($codtipodeclaracao) = $sql->fetch();
 if ((strlen($cpfcnpj) != 14) && (strlen($cpfcnpj) != 18)) {
 	echo "
 		<script>
-			alert('O CPF/CNPJ informado n&atilde;o &eacute; v&aacute;lido');
+			alert('O CPF/CNPJ informado não é válido');
 			window.location='../../contadores.php';
 		</script>
 	";
 }
 
-//Verifica se n�o h� nenhuma empresa cadastrada com o mesmo nome e/ou cnpj
+//Verifica se não há nenhuma empresa cadastrada com o mesmo nome e/ou cnpj
 $campo = tipoPessoa($cpfcnpj);
 $teste_nome        = $PDO->query("SELECT codigo FROM cadastro WHERE nome = '$nome'");
 $teste_razaosocial = $PDO->query("SELECT codigo FROM cadastro WHERE razaosocial = '$razaosocial'");
@@ -100,13 +100,13 @@ $erro = 0;
 $codtipo_tomador = codtipo('tomador');
 
 if ($teste_cnpj->rowCount() > 0) {
-	$msg = "J&aacute; existe um contador com este CPF/CNPJ";
+	$msg = "Já existe um contador com este CPF/CNPJ";
 	$erro = 2;
 } elseif ($teste_razaosocial->rowCount() > 0) {
-	$msg = "J&aacute; existe um contador com esta razão social";
+	$msg = "Já existe um contador com esta razão social";
 	$erro = 1;
 } elseif ($teste_nome->rowCount() > 0) {
-	$msg = "J&aacute; existe um contador com este nome";
+	$msg = "Já existe um contador com este nome";
 	$erro = 1;
 }
 //
@@ -296,7 +296,7 @@ while ($contsocios < $nrosocios) {
 
 //gera o comprovante em pdf 
 $CodEmp = base64_encode($CODEMPRESA);
-Mensagem("Contador cadastrado! N&atilde;o esque&ccedil;a de Imprimir o comprovante de cadastro que abrir&aacute; em uma nova janela!");
+Mensagem("Contador cadastrado! Não esqueça de Imprimir o comprovante de cadastro que abrirá em uma nova janela!");
 print "
 		<script language=JavaScript> 
 			window.open('../../../reports/cadastro_comprovante.php?COD=$CodEmp');

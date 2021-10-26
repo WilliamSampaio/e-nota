@@ -59,7 +59,7 @@ if($numero){
 	$str_where .= " AND doc_des.codigo = '$numero'";
 }
 	
-$sql = mysql_query("
+$sql = $PDO->query("
 			SELECT 
 				doc_des.codigo,
 				DATE_FORMAT(doc_des.data,'%d/%m/%Y'),
@@ -88,9 +88,9 @@ switch($estado){
 ?>
 <link href="../../../css/padrao.css" rel="stylesheet" type="text/css">
 <script src="../../scripts/padrao.js" type="text/javascript"></script>
-<title>Relatorios - Operadoras de Cr&eacute;ditos</title>
+<title>Relatorios - Operadoras de CrÃ©ditos</title>
 <input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
-<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relatório de Declara&ccedil;&otilde;es de Operadoras de Cr&eacute;ditos</b></p>
+<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relatï¿½rio de DeclaraÃ§Ãµes de Operadoras de CrÃ©ditos</b></p>
 <table>
 	<?php if($nome){?>
 	<tr>
@@ -106,19 +106,19 @@ switch($estado){
 	if($compmes&&$compano){
 	?>
 	<tr>
-		<td><b>Competência:</b></td>
+		<td><b>CompetÃªncia:</b></td>
 		<td><?php echo "$compmes/$compano"; ?></td>
 	</tr>
 	<?php
 	}else{
 		if($compmes){ ?>
 	<tr>
-		<td><b>Mês de competência:</b></td>
+		<td><b>Mï¿½s de competï¿½ncia:</b></td>
 		<td><?php echo $compmes; ?></td>
 	</tr>
 	<?php } if($compano){ ?>
 	<tr>
-		<td><b>Ano de competência:</b></td>
+		<td><b>Ano de competï¿½ncia:</b></td>
 		<td><?php echo $compano; ?></td>
 	</tr>
 	<?php }
@@ -130,7 +130,7 @@ switch($estado){
 	</tr>
 	<?php } if($datafim){ ?>
 	<tr>
-		<td><b>Até a data:</b></td>
+		<td><b>Atï¿½ a data:</b></td>
 		<td><?php echo DataPt($datafim); ?></td>
 	</tr>
 	<?php } if($estado){ ?>
@@ -140,17 +140,17 @@ switch($estado){
 	</tr>
 	<?php } if($numero){ ?>
 	<tr>
-		<td><b>N° DOC:</b></td>
+		<td><b>Nï¿½ DOC:</b></td>
 		<td><?php echo $numero; ?></td>
 	</tr>
 	<?php }?>
 	<tr>
 		<td colspan="2"><strong>
 		<?php 
-		if(mysql_num_rows($sql)>1){
-		echo mysql_num_rows($sql); ?> Declarações registradas
+		if($sql->rowCount()>1){
+		echo $sql->rowCount(); ?> DeclaraÃ§Ãµes registradas
 		<?php }else{
-			echo "1 Declaração encontrada";
+			echo "1 Declaraï¿½ï¿½o encontrada";
 		} ?>
 		</strong></td>
 	</tr>
@@ -158,8 +158,8 @@ switch($estado){
 <br />
 <table width="750" bordercolor="#000000" border="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
     <tr>
-        <td width="6%" align="center">N&deg; Dec</td>
-        <td width="12%" align="center">Cod verificação</td>
+        <td width="6%" align="center">NÂº Dec</td>
+        <td width="12%" align="center">Cod verificaÃ§Ã£o</td>
         <td width="35%" align="center">Nome</td>
         <td width="8%" align="center">Total</td>
         <td width="11%" align="center">Data</td>
@@ -170,7 +170,7 @@ switch($estado){
     	<td colspan="8"><hr color="#000000" size="2" /></td>
     </tr>
     <?php
-		while(list($codigo,$data,$total,$codverificacao,$estado,$competencia,$nome) = mysql_fetch_array($sql)){
+		while(list($codigo,$data,$total,$codverificacao,$estado,$competencia,$nome) = $sql->fetch()){
 			switch($estado){
 				case "B": $estado = "Boleto";      break;
 				case "N": $estado = "Normal";      break;

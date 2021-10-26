@@ -86,7 +86,7 @@
 	
     $sql = Paginacao($query,"frmInconsistencias","divInconsistenciasDetalhes",10);
 	//cria a lista de campos	
-	if(mysql_num_rows($sql)){
+	if($sql->rowCount()){
 		?>
 		<input type="hidden" name="hdPrestador" id="hdPrestador" />
 		<table width="100%" border="0" align="center" >
@@ -104,7 +104,7 @@
 				if($tipo == "3"){
 				?>
 				<td width="11%" align="center">Data</td>
-				<td width="8%" align="center">N&deg; Nota</td>
+				<td width="8%" align="center">Nº Nota</td>
 				<td width="12%" align="center">Valor (R$)</td>
 				<?php
 				}else{
@@ -119,9 +119,9 @@
 			</tr>
 		<?php
 		$cont=0;
-		while(list($codigo, $codemissor, $data, $numero, $valor) = mysql_fetch_array($sql)){
-			$sql_busca_info_emissor = mysql_query("SELECT nome, razaosocial, cnpj, cpf FROM cadastro WHERE codigo = $codemissor");
-			list($nome, $razao, $cnpj, $cpf) = mysql_fetch_array($sql_busca_info_emissor);
+		while(list($codigo, $codemissor, $data, $numero, $valor) = $sql->fetch()){
+			$sql_busca_info_emissor = $PDO->query("SELECT nome, razaosocial, cnpj, cpf FROM cadastro WHERE codigo = $codemissor");
+			list($nome, $razao, $cnpj, $cpf) = $sql_busca_info_emissor->fetch();
 			if(!$razao){
 				$nome_prestador = $nome;
 			}else{
@@ -134,7 +134,7 @@
 		?>
 			<tr bgcolor="#FFFFFF">
 				<td align="center"><?php echo $cnpjcpf;?></td>
-				<td align="left" title="<?php echo nome_prestador;?>"><?php echo $nome_curto;?></td>
+				<td align="left" title="<?php echo $nome_prestador ?>"><?php echo $nome_curto;?></td>
 				<td align="center"><?php echo DataPt($data);?></td>
 				<?php 
 				if($tipo == "3"){

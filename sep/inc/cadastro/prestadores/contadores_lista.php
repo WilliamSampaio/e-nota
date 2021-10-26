@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	
 	<?php 
 	// Troca caractere do estado da empresa para a palavra completa
-	while(list($codigo, $nome, $cpfcnpj, $estado)=mysql_fetch_array($sql_buscaempresa)) 
+	while(list($codigo, $nome, $cpfcnpj, $estado)=$sql_buscaempresa->fetch()) 
 	{
 	 if($estado == "A")
 	  $estado = "Ativo";
@@ -40,7 +40,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	 ?>
      <tr> 
 	  <td align="left" bgcolor="#FFFFFF">     
-	    &nbsp;<?php echo $nome; ?>      </td>
+	    <?php echo $nome; ?>      </td>
 	  <td align="center" bgcolor="#FFFFFF"> 
 	    <?php echo $cpfcnpj; ?>
       </td>
@@ -50,8 +50,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	  <td align="center" bgcolor="#FFFFFF">  
 	   <a onclick="document.getElementById('COD').value='<?php echo $codigo;?>';document.getElementById('frmClientes').submit();" style="cursor:pointer">
 		<?php       
-            $sql_nroclientes = mysql_query("SELECT Count(emissores.nome) FROM emissores WHERE emissores.codcontador = $codigo"); 
-            list($nroclientes) = mysql_fetch_array($sql_nroclientes);
+            $sql_nroclientes = $PDO->query("SELECT Count(emissores.nome) FROM emissores WHERE emissores.codcontador = $codigo"); 
+            list($nroclientes) = $sql_nroclientes->fetch();
             echo $nroclientes;      
         ?>       
        </a></td>

@@ -21,15 +21,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Utilit&aacute;rios - Cadastro de Cr&eacute;ditos</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Utilitários - Cadastro de Créditos</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
     <td width="18" background="img/form/lateralesq.jpg"></td>
     <td align="center">
 <?php
- include("creditos_inserir.php");
- include("creditos_busca.php") ;
+ require_once("creditos_inserir.php");
+ require_once("creditos_busca.php") ;
 ?>
 	</td>
 	<td width="19" background="img/form/lateraldir.jpg"></td>

@@ -20,14 +20,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
   session_start();	
-  // arquivo de conexão com o banco
-  include("conect.php"); 
+  // arquivo de conexÃ£o com o banco
+  require_once("conect.php"); 
   
   // arquivo com funcoes uteis
-  include("../funcoes/util.php");
+  require_once("../include/util.php");
   
   //arquivo com a funcao de logs
-  include("../funcoes/funcao_logs.php"); 
+  require_once("../funcoes/funcao_logs.php"); 
 
   print("<a href=index.php target=_parent><img src=../img/topos/$CONF_TOPO></a>");
   

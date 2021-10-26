@@ -19,16 +19,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-/* Não gravar em cache */
+/* NÃ£o gravar em cache */
 include 'nocache.php';
 
 require_once("conect.php");
-require_once("../funcoes/util.php");
+require_once("../include/util.php");
 
 $cod = addslashes($_GET['codigo']);
 $motivo = addslashes($_GET['motivo']);
 
-mysql_query("
+$PDO->query("
     UPDATE livro
     SET estado = 'C',
     obs = '$motivo'

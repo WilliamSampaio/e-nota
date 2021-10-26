@@ -1,6 +1,6 @@
 <?php
-	include("conect.php");
-	include("../../funcoes/util.php");
+	require_once("conect.php");
+	require_once("../../funcoes/util.php");
 
 	$codnota = $_POST['txtNotaEmail'];
 	$sql = $PDO->query("

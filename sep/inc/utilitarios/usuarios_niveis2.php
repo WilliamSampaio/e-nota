@@ -29,16 +29,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 					if($baixo != ""){$valor = "B";}
 					elseif(($baixo == "") && ($medio != "")){$valor = "M";}
 					elseif(($baixo == "")&&($medio == "")){$valor = "A";}
-					$sql = mysql_query("UPDATE menus_prefeitura SET nivel='$valor' WHERE codigo='$codigo'");
+					$sql = $PDO->query("UPDATE menus_prefeitura SET nivel='$valor' WHERE codigo='$codigo'");
 				}
-			add_logs('Atualizou o Nível de Usuários');
+			add_logs('Atualizou o Nï¿½vel de Usuï¿½rios');
 			echo "<script>alert('Dados alterados com sucesso');</script>";
 		}
 ?>
-<fieldset><legend>Defina as opções do menu para cada nível de usuário</legend>
-	<p align="center">Os usários com nível de permissão Alto tem acesso a todos os menus </p>
+<fieldset><legend>Defina as opï¿½ï¿½es do menu para cada nï¿½vel de usuÃ¡rio</legend>
+	<p align="center">Os usï¿½rios com nï¿½vel de permissï¿½o Alto tem acesso a todos os menus </p>
 	<?php
-		$sql = mysql_query("SELECT codigo, menu, nivel FROM menus_prefeitura WHERE menu<>'Sair' AND menu<>'Manuais de Ajuda' ORDER BY ordem");
+		$sql = $PDO->query("SELECT codigo, menu, nivel FROM menus_prefeitura WHERE menu<>'Sair' AND menu<>'Manuais de Ajuda' ORDER BY ordem");
 		$x=0;
 		?>
 		<form method="post">
@@ -46,13 +46,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<input type="hidden" name="btNivel" value="<?php echo $_POST["btNivel"];?>">
 			<table width="100%">
 		<?php
-		while(list($codigo,$menu,$nivel)=mysql_fetch_array($sql))
+		while(list($codigo,$menu,$nivel)=$sql->fetch())
 			{
 				echo "
 					<tr>
 						<td align=\"left\">$menu</td>
 						<td align=\"left\">
-							<input type=\"checkbox\" id=\"medio$x\" name=\"medio$x\" value=\"M\" />Médio
+							<input type=\"checkbox\" id=\"medio$x\" name=\"medio$x\" value=\"M\" />Mï¿½dio
 							<input type=\"hidden\" name=\"txtCodigo$x\" value=\"$codigo\" />
 						</td>
 						<td align=\"left\">

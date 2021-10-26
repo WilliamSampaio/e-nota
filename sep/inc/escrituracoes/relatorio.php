@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Escritura&ccedil;&otilde;es - Relat&oacute;rios </td>  
+		<td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">EscrituraÃ§Ãµes - RelatÃ³rios </td>  
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -31,11 +31,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<tr>
 					<td>
 						<form method="post" id="frmRelatorio" name="frmRelatorio" onsubmit="return false">						
-                        <fieldset style="width:800px"  ><legend>Buscar Escrituração por Nosso Número:</legend>
+                        <fieldset style="width:800px"  ><legend>Buscar Escrituraï¿½ï¿½o por Nosso NÃºmero:</legend>
 						<input type="hidden" name="include" id="include" value="<?php echo $_POST['include']; ?>">
 							<table width="100%" border="0" cellpadding="0"align="center">
 								<tr>
-									<td width="100">Nosso Número:</td>
+									<td width="100">Nosso NÃºmero:</td>
 									<td>
 										<input type="text" name="txtNossonumero" onkeydown="return NumbersOnly(event);" class="texto" size="30" maxlength="30">
 										<input type="submit" name="btnNossoNumero" id="btnNossoNumero" value="Consulta" class="botao" onclick="acessoAjax('inc/escrituracoes/relatorios/busca_relatorios.ajax.php','frmRelatorio','divBuscar');" >
@@ -43,7 +43,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								</tr>								
 								<tr>
 									<td colspan="2"><br />					
-										<input type="button" name="btnTodos" id="btnTodos" value="Relatório" class="botao" onclick="acessoAjax('inc/escrituracoes/relatorios/busca_todos.ajax.php','frmRelatorio','divBuscar');"/>					
+										<input type="button" name="btnTodos" id="btnTodos" value="Relatï¿½rio" class="botao" onclick="acessoAjax('inc/escrituracoes/relatorios/busca_todos.ajax.php','frmRelatorio','divBuscar');"/>					
 									</td>
 								</tr>
 							</table>

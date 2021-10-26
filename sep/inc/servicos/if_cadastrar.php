@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php  
 
 if(isset($_POST['btCadastrar'])){   
-	include("if_inserir.php");
+	require_once("if_inserir.php");
 }?>
 <fieldset style="margin-left:10px; margin-right:10px;">
 	<legend>Cadastro de Contas</legend>
@@ -35,7 +35,7 @@ if(isset($_POST['btCadastrar'])){
 		    	</td>
 		    </tr>
 			<tr>
-				<td align="left">Descri&ccedil;&atilde;o<font color="#FF0000"> *</font></td>
+				<td align="left">Descrição<font color="#FF0000"> *</font></td>
 				<td align="left">
 					<textarea cols="40" rows="5" name="txtInsDescricao" id="txtInsDescricao" class="texto"></textarea></td>
 			</tr>
@@ -50,12 +50,12 @@ if(isset($_POST['btCadastrar'])){
 				</td>
 			</tr>
 			<tr>
-			  <td align="left">&nbsp;</td>
-			  <td align="left"><font color="#FF0000">*</font>Campos Obrigat&oacute;rios</td>
+			  <td align="left"></td>
+			  <td align="left"><font color="#FF0000">*</font>Campos Obrigatórios</td>
 		  </tr>
 			<tr>
 			  <td align="left"></td>
-			  <td align="center">&nbsp;</td>
+			  <td align="center"></td>
 		  </tr>
 		</table>
 </form>

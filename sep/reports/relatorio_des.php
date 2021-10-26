@@ -21,9 +21,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 <html>
 <head>
 <?php 
-include("../inc/conect.php");
-include("../funcoes/util.php");
-include("../funcoes/funcao_logs.php");
+require_once("../inc/conect.php");
+require_once("../include/util.php");
+require_once("../funcoes/funcao_logs.php");
 $valor = $_POST['cmbDes'];
 if($valor == 'tomadores') {
 	$Des = "Tomadores";
@@ -34,7 +34,7 @@ if($valor == 'issretido') {
 if($valor == 'emissores') {
 	$Des = "Emissores";
 }
-echo "<title>SEP - Relatório $Des</title>";
+echo "<title>SEP - Relatï¿½rio $Des</title>";
 ?>
 </head>
 <body style="margin-left: 5%;" >
@@ -63,7 +63,7 @@ echo "</div><br>";
 <div id="divResultado" style="width:800px">
 <?php 
 
-echo"<center><h1>Relatório $Des $anoComp</h1></center>";
+echo"<center><h1>Relatï¿½rio $Des $anoComp</h1></center>";
 
 
 if($valor =='tomadores'){
@@ -73,7 +73,7 @@ if($valor =='tomadores'){
 		$string = "cadastro.$campo LIKE '$CnpjCpf%'";
 	}
 	
-	$sql=mysql_query("SELECT tomadores.nome,
+	$sql=$PDO->query("SELECT tomadores.nome,
  						  des_tomadores_notas.nota,
  						  DATE_FORMAT(des_tomadores_notas.dataemissao,'%d/%m/%Y'),
 				   		  emissores.nome,
@@ -85,19 +85,19 @@ if($valor =='tomadores'){
                    WHERE cadastro.nome LIKE '$Nome%' AND
                       	 des_tomadores_notas.dataemissao LIKE '%$DataEmissao%'
                    ORDER BY dataemissao DESC");  
-	if(mysql_num_rows($sql)>=1){
+	if($sql->rowCount()>=1){
 		echo"
 		  <table width=\"100%\"  cellspacing=\"1\" cellpadding=\"1\" align=\"center\" border=\"0\" id=\"tblResultado\">
 		 	<tr>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Tomador</td>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Nro Nota</td>
-				<td bgcolor=\"#AAAAAA\" align=\"center\">Data Emissão</td>
+				<td bgcolor=\"#AAAAAA\" align=\"center\">Data EmissÃ£o</td>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Emissor</td>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Valor(R$)</td>
-				<td bgcolor=\"#AAAAAA\" align=\"center\">Crédito(R$)</td>		
+				<td bgcolor=\"#AAAAAA\" align=\"center\">CrÃ©dito(R$)</td>		
 		    </tr>";
-		while(list($tomador,$nota,$dataemissao,$emissor,$valor,$credito)=mysql_fetch_array($sql)){
-			$sql_busca_tomador = mysql_query("SELECT nome FROM cadastro WHERE codigo = '$codtomador'");
+		while(list($tomador,$nota,$dataemissao,$emissor,$valor,$credito)=$sql->fetch()){
+			$sql_busca_tomador = $PDO->query("SELECT nome FROM cadastro WHERE codigo = '$codtomador'");
 			
 			$bgcor = $contcor%2==0? "#FFFFFF" : "#DDDDDD";
 			echo" <tr>
@@ -118,7 +118,7 @@ if($valor =='tomadores'){
 
 elseif($valor == 'issretido'){	
 
-	$sql=mysql_query("SELECT tomadores.nome,
+	$sql=$PDO->query("SELECT tomadores.nome,
   							 des_issretido.valor,
   						     des_issretido.multa,
   						     DATE_FORMAT(des_issretido.competencia,'%m/%Y'),
@@ -137,23 +137,23 @@ elseif($valor == 'issretido'){
                       		guia_pagamento.relacionamento = 'des_issretido'
                       ORDER BY competencia DESC");
 
-	if (mysql_num_rows($sql)>=1){
+	if ($sql->rowCount()>=1){
 		echo"
 		  <table width=\"100%\"  cellspacing=\"1\" cellpadding=\"1\" align=\"center\" border=\"0\" id=\"tblResultado\">
 		 	<tr>
 				<td width=32% bgcolor=\"#AAAAAA\" align=\"center\">Tomador</td>	
-				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Competência</td>	
-				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Emissão</td>	
+				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">CompetÃªncia</td>	
+				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">EmissÃ£o</td>	
 				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Total (R$)</td>
 				<td width=13% bgcolor=\"#AAAAAA\" align=\"center\">Valor (R$)</td>	
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Pago</td>
 		    </tr>
 		    ";
 			
-		while(list($tomador,$valor,$multa,$competencia,$emissao,$guia_pago,$des_codigo)=mysql_fetch_array($sql)){
-			$sql2 = mysql_query("SELECT SUM(valor_nota) FROM des_issretido_notas WHERE coddes_issretido = '$des_codigo'");
-			list($total) = mysql_fetch_array($sql2);
-			$guia_pago = $guia_pago=="S" ? "sim" : "não";
+		while(list($tomador,$valor,$multa,$competencia,$emissao,$guia_pago,$des_codigo)=$sql->fetch()){
+			$sql2 = $PDO->query("SELECT SUM(valor_nota) FROM des_issretido_notas WHERE coddes_issretido = '$des_codigo'");
+			list($total) = $sql2->fetch();
+			$guia_pago = $guia_pago=="S" ? "sim" : "nÃ£o";
 			$bgcor = $contcor%2==0? "#FFFFFF" : "#DDDDDD";
 			echo"    
 				<tr>
@@ -174,7 +174,7 @@ elseif($valor == 'issretido'){
 
 elseif($valor == 'emissores'){
 	
-	$sql=mysql_query("
+	$sql=$PDO->query("
 		(
 			SELECT 
 				emissores_temp.razaosocial,
@@ -219,21 +219,21 @@ elseif($valor == 'emissores'){
 		ORDER BY competencia DESC"
 	);
 					  
-	if(mysql_num_rows($sql)>=1)	{			  
+	if($sql->rowCount()>=1)	{			  
 	    echo"
 		  <table width=\"100%\"  cellspacing=\"1\" cellpadding=\"1\" align=\"center\" border=\"0\" id=\"tblTituloResultado\">
 		    <tr>
 				<td width=32% bgcolor=\"#AAAAAA\" align=\"center\">Prestador</td>
-				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Competência</td>
-				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Emissão</td>
+				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">CompetÃªncia</td>
+				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">EmissÃ£o</td>
 				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Total R$</td>
 				<td width=13% bgcolor=\"#AAAAAA\" align=\"center\">Valor R$</td>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Pago</td>		
 		    </tr>
 		    ";
 								  
-	    while(list($emissor,$competencia,$dataemissao,$total,$valor,$guia_pago)=mysql_fetch_array($sql)){
-			$guia_pago = $guia_pago=="S" ? "sim" : "não";
+	    while(list($emissor,$competencia,$dataemissao,$total,$valor,$guia_pago)=$sql->fetch()){
+			$guia_pago = $guia_pago=="S" ? "sim" : "nÃ£o";
 			$comp = explode("-",$competencia);
 			$competencia = $comp[1]."/".$comp[0];
 			

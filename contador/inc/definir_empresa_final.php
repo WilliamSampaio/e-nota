@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php		
 	session_start();
-	include("conect.php");
+	require_once("conect.php");
 	if($btDefinirEmpresa!="")
 		{
 			$sql=mysql_query("UPDATE emissores SET codempresa='$cmbEmpresa' WHERE cnpjcpf='".$_SESSION['login']."'");

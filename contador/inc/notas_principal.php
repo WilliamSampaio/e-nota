@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="99%" border="0" cellspacing="0" cellpadding="2">
   <tr>
     <td align="center">
-		<input name="btPropria" type="submit" value="Notas Pr&oacute;prias" class="botao" />
+		<input name="btPropria" type="submit" value="Notas Próprias" class="botao" />
 		<input name="btEmpresa" type="submit" value="Notas Empresas" class="botao" />
 	</td>
   </tr>
@@ -34,7 +34,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     //$btPesquisar = $_POST['btPesquisar'];
 	
     if($_POST['btCancel']){
-        include("inc/notas_cancelar.php");
+        require_once("inc/notas_cancelar.php");
         $btPesquisar='T';
         if($_POST['txtTipoCanc']=='pro'){
             $btPropria='T';
@@ -45,6 +45,6 @@ Fith Floor, Boston, MA 02110-1301, USA
         }
 
     }
-    if($btPropria!=""){include("inc/notas_propria.php");}
-    if($btEmpresa!=""){include("inc/notas_empresa.php");}
+    if($btPropria!=""){require_once("inc/notas_propria.php");}
+    if($btEmpresa!=""){require_once("inc/notas_empresa.php");}
 ?>

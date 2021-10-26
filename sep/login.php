@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-/* Inicia a sess�o */
+/* Inicia a sessão */
 
 session_start();
 $_SESSION['autenticacao'] = rand(10000,99999);
@@ -49,18 +49,18 @@ if(!(isset($_SESSION["logado"])))
         </tr>
 
       <tr>
-        <td colspan="3" height="25" bgcolor="#CCCCCC">&nbsp;</td>
+        <td colspan="3" height="25" bgcolor="#CCCCCC"></td>
         </tr>
       <tr>
         <td colspan="3" align="center" bgcolor="#FFFFFF"><img src="img/logosep.jpg" width="370" height="70"></td>
         </tr>
       <tr>
-        <td width="118" bgcolor="#FFFFFF">&nbsp;</td>
-        <td width="182" bgcolor="#FFFFFF">&nbsp;</td>
-        <td width="100" bgcolor="#FFFFFF">&nbsp;</td>
+        <td width="118" bgcolor="#FFFFFF"></td>
+        <td width="182" bgcolor="#FFFFFF"></td>
+        <td width="100" bgcolor="#FFFFFF"></td>
       </tr>
       <tr>
-        <td height="28" align="right" bgcolor="#FFFFFF"><strong>Usu&aacute;rio</strong></td>
+        <td height="28" align="right" bgcolor="#FFFFFF"><strong>Usuário</strong></td>
         <td align="center" bgcolor="#FFFFFF"><input name="txtLogin" type="text" id="txtLogin" class="texto" tabindex="1"></td>
         <td rowspan="3" bgcolor="#FFFFFF"><input type="image" name="imageField" src="img/chave.jpg" tabindex="4"></td>
       </tr>
@@ -69,17 +69,17 @@ if(!(isset($_SESSION["logado"])))
         <td align="center" bgcolor="#FFFFFF"><input name="txtSenha" type="password" id="txtSenha" class="texto" tabindex="2"></td>
       </tr>
 	  <tr>
-        <td height="29" align="right" bgcolor="#FFFFFF"><strong>C&oacute;d Verifica&ccedil;&atilde;o</strong></td>
+        <td height="29" align="right" bgcolor="#FFFFFF"><strong>Cód Verificação</strong></td>
         <td align="center" valign="middle" bgcolor="#FFFFFF">
         	<input name="codseguranca" type="text" id="codseguranca" class="texto" size="5" maxlength="5" tabindex="3"> 
-        	<img style="cursor: pointer;" onClick="mostrar_teclado();" src="img/botoes/num_key.jpg" title="Teclado Virtual" >&nbsp; 
-        	<?php include("inc/cod_verificacao.php");?>
+        	<img style="cursor: pointer;" onClick="mostrar_teclado();" src="img/botoes/num_key.jpg" title="Teclado Virtual" > 
+        	<?php require_once("inc/cod_verificacao.php");?>
         </td>		
       </tr>	
       <tr>	  
-        <td bgcolor="#FFFFFF">&nbsp;</td>
-        <td bgcolor="#FFFFFF">&nbsp;</td>
-        <td bgcolor="#FFFFFF">&nbsp;</td>
+        <td bgcolor="#FFFFFF"></td>
+        <td bgcolor="#FFFFFF"></td>
+        <td bgcolor="#FFFFFF"></td>
       </tr>	  
       <tr>
         <td colspan="3" height="25" bgcolor="#CCCCCC"></td>
@@ -88,7 +88,7 @@ if(!(isset($_SESSION["logado"])))
         <td colspan="3" height="1" bgcolor="#FFFFFF"></td>
       </tr>
       <tr>
-        <td colspan="3" height="25" align="center"><font size="1" color="#FFFFFF">&copy; Portal P&uacute;blico Inform&aacute;tica - 2009</font></td>
+        <td colspan="3" height="25" align="center"><font size="1" color="#FFFFFF">&copy; Portal Público Informática - 2009</font></td>
       </tr>
       <tr>
         <td colspan="3" height="1" bgcolor="#FFFFFF"></td>

@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-include("../conect.php");
-include("../../funcoes/util.php");
+require_once("../conect.php");
+require_once("../../funcoes/util.php");
 // variaveis globais vindas do conect.php
 // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF	
 
@@ -29,7 +29,7 @@ if(isset($_POST["CODIGO"])){ $CODIGO = base64_decode($_POST["CODIGO"]);}
 else { $CODIGO = base64_decode($_GET["CODIGO"]);}
 
 // sql feito na nota
-$sql = mysql_query("
+$sql = $PDO->query("
 SELECT
   `notas`.`aliq_percentual`, 
   `notas`.`codigo`, 
@@ -90,7 +90,7 @@ INNER JOIN
 WHERE
   `notas`.`codigo` = '$CODIGO'
 ");
-list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $rps_numero, $rps_data, $tomador_nome, $tomador_cnpjcpf, $tomador_inscrmunicipal,$tomador_inscrestadual,$tomador_endereco, $tomador_logradouro, $tomador_numero, $tomador_complemento, $tomador_cep, $tomador_municipio, $tomador_uf, $tomador_email, $discriminacao, $valortotal, $estado, $credito, $valordeducoes, $basecalculo, $valoriss,$valorinss,$aliqinss,$valorirrf,$aliqirrf, $deducao_irrf, $total_retencao, $motivo_cancelamento, $empresa_razaosocial, $empresa_nome, $empresa_cnpj, $empresa_cpf, $empresa_inscrmunicipal,$inscrestadual,$empresa_endereco, $empresa_numero, $empresa_municipio, $empresa_uf, $empresa_logo ,$issretido,$codtipo,$cadastropispasep,$codtipodec,$observacao,$pispasep,$cofins,$csocial) = mysql_fetch_array($sql);
+list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $rps_numero, $rps_data, $tomador_nome, $tomador_cnpjcpf, $tomador_inscrmunicipal,$tomador_inscrestadual,$tomador_endereco, $tomador_logradouro, $tomador_numero, $tomador_complemento, $tomador_cep, $tomador_municipio, $tomador_uf, $tomador_email, $discriminacao, $valortotal, $estado, $credito, $valordeducoes, $basecalculo, $valoriss,$valorinss,$aliqinss,$valorirrf,$aliqirrf, $deducao_irrf, $total_retencao, $motivo_cancelamento, $empresa_razaosocial, $empresa_nome, $empresa_cnpj, $empresa_cpf, $empresa_inscrmunicipal,$inscrestadual,$empresa_endereco, $empresa_numero, $empresa_municipio, $empresa_uf, $empresa_logo ,$issretido,$codtipo,$cadastropispasep,$codtipodec,$observacao,$pispasep,$cofins,$csocial) = $sql->fetch();
 
 		$empresa_cnpjcpf = $empresa_cnpj.$empresa_cpf;
 		
@@ -103,7 +103,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 
 		//nao tem soh endereco agora tem logradouro e numero com complemento
 		//$tomador_endereco="$tomador_logradouro, $tomador_numero";
-		//se tiver complemento, adiciona para a string de endereço
+		//se tiver complemento, adiciona para a string de endereÃ§o
 		//if($tomador_complemento){
 			//$tomador_endereco.=", $tomador_complemento";
 		//}
@@ -111,8 +111,8 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 		$codtipoSN = coddeclaracao('Simples Nacional');
 		
 		//Verifica na tabela configuracoes se os creditos estao ativos
-		$sql_verifica_creditos = mysql_query("SELECT ativar_creditos FROM configuracoes");
-		list($ativar_creditos) = mysql_fetch_array($sql_verifica_creditos);
+		$sql_verifica_creditos = $PDO->query("SELECT ativar_creditos FROM configuracoes");
+		list($ativar_creditos) = $sql_verifica_creditos->fetch();
 		
 		if($ativar_creditos == "n"){
 			$display = "display:none";
@@ -123,8 +123,8 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			$colspan = "";
 		}
 		
-		$sql_leidecreto = mysql_query("SELECT lei, decreto FROM configuracoes");
-		list($lei,$decreto) = mysql_fetch_array($sql_leidecreto);
+		$sql_leidecreto = $PDO->query("SELECT lei, decreto FROM configuracoes");
+		list($lei,$decreto) = $sql_leidecreto->fetch();
 		?>
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml">
@@ -171,23 +171,23 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			<td class="cab03"><?php print strtoupper($CONF_SECRETARIA); ?></td>
 		  </tr>
 		  <tr>
-			<td class="cab02">NOTA FISCAL ELETR&Ocirc;NICA DE SERVI&Ccedil;OS - NF-e</td>
+			<td class="cab02">NOTA FISCAL ELETR&Ocirc;NICA DE SERVIÃ‡OS - NF-e</td>
 		  </tr>
 		  <?php if($rps_numero){ ?>
 		  <tr>
-			<td>RPS N&ordm; <?php print $rps_numero; ?>, emitido em <?php print (substr($rps_data,8,2)."/".substr($rps_data,5,2)."/".substr($rps_data,0,4)); ?>.</td>
+			<td>RPS NÂº <?php print $rps_numero; ?>, emitido em <?php print (substr($rps_data,8,2)."/".substr($rps_data,5,2)."/".substr($rps_data,0,4)); ?>.</td>
 		  </tr>
 		  <?php }// fim if se tem rps ?>
 		</table>
 		
 		<!-- tabela prefeitura fim -->	</td>
-			<td width="25%" colspan="2" align="left" style="border:#000000 1px solid">Número da Nota<br /><div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print $numero; ?></strong></font></div></td>
+			<td width="25%" colspan="2" align="left" style="border:#000000 1px solid">NÃºmero da Nota<br /><div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print $numero; ?></strong></font></div></td>
 		  </tr>
 		  <tr>
-			<td align="left" colspan="2" style="border:#000000 1px solid">Data e Hora de Emissão<br /><div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print (substr($datahoraemissao,8,2)."/".substr($datahoraemissao,5,2)."/".substr($datahoraemissao,0,4)." ".substr($datahoraemissao,11,2).":".substr($datahoraemissao,14,2)); ?></strong></font></div></td>
+			<td align="left" colspan="2" style="border:#000000 1px solid">Data e Hora de EmissÃ£o<br /><div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print (substr($datahoraemissao,8,2)."/".substr($datahoraemissao,5,2)."/".substr($datahoraemissao,0,4)." ".substr($datahoraemissao,11,2).":".substr($datahoraemissao,14,2)); ?></strong></font></div></td>
 		  </tr>
 		  <tr>
-			<td align="left" colspan="2" style="border:#000000 1px solid">Código de Verificação<br /><div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print $codverificacao; ?></strong></font></div></td>
+			<td align="left" colspan="2" style="border:#000000 1px solid">CÃ³digo de VerificaÃ§Ã£o<br /><div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print $codverificacao; ?></strong></font></div></td>
 		  </tr>
 		  <tr>
 			<td colspan="6" align="center" style="border:#000000 1px solid">
@@ -195,7 +195,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 		<!-- tabela prestador -->	
 		<table width="100%" border="0" cellspacing="0" cellpadding="2">
 		  <tr>
-			<td colspan="3" class="cab03" align="center">PRESTADOR DE SERVI&Ccedil;OS</td>
+			<td colspan="3" class="cab03" align="center">PRESTADOR DE SERVIÃ‡OS</td>
 			</tr>
 		  <tr>
 			<td rowspan="6">
@@ -207,21 +207,21 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			?>	
 			</td>
 			<td align="left">CNPJ/CPF: <strong><?php print $empresa_cnpjcpf; ?></strong></td>
-			<td align="left">Inscri&ccedil;&atilde;o Estadual: <strong><?php print verificaCampo($inscrestadual); ?></strong></td>
+			<td align="left">InscriÃ§Ã£o Estadual: <strong><?php print verificaCampo($inscrestadual); ?></strong></td>
 		  </tr>
 		  <tr>
 			<td align="left">Nome: <strong><?php print $empresa_nome; ?></strong></td>
-			<td align="left">Inscri&ccedil;&atilde;o Municipal: <strong><?php print verificaCampo($empresa_inscrmunicipal); ?></strong></td>
+			<td align="left">InscriÃ§Ã£o Municipal: <strong><?php print verificaCampo($empresa_inscrmunicipal); ?></strong></td>
 		  </tr>
 		  <tr>
-			<td align="left">Raz&atilde;o Social: <strong><?php print $empresa_razaosocial; ?></strong></td>
+			<td align="left">RazÃ£o Social: <strong><?php print $empresa_razaosocial; ?></strong></td>
             <td align="left">PIS/PASEP: <?php echo verificaCampo($cadastropispasep); ?></td>
 		  </tr>
 		  <tr>
-			<td colspan="2" align="left">Endere&ccedil;o: <strong><?php print $empresa_endereco; ?></strong></td>
+			<td colspan="2" align="left">EndereÃ§o: <strong><?php print $empresa_endereco; ?></strong></td>
 		  </tr>
 		  <tr>
-			<td align="left">Munic&iacute;pio: <strong><?php print $empresa_municipio; ?></strong></td>
+			<td align="left">MunicÃ­pio: <strong><?php print $empresa_municipio; ?></strong></td>
 			<td align="left">UF: <strong><?php print $empresa_uf; ?></strong></td>
 		  </tr>
 		</table>
@@ -235,25 +235,25 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 		
 		<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center">
 		  <tr>
-			<td colspan="3" class="cab03" align="center">TOMADOR DE SERVI&Ccedil;OS</td>
+			<td colspan="3" class="cab03" align="center">TOMADOR DE SERVIÃ‡OS</td>
 			</tr>
 		  <tr>
-			<td colspan="3" align="left">&nbsp;&nbsp;Nome/Raz&atilde;o Social: <strong><?php print verificaCampo($tomador_nome); ?></strong></td>
+			<td colspan="3" align="left">Nome/RazÃ£o Social: <strong><?php print verificaCampo($tomador_nome); ?></strong></td>
 			</tr>
 		  <tr>
-			<td align="left" width="450">&nbsp;&nbsp;CPF/CNPJ: <strong><?php print verificaCampo($tomador_cnpjcpf); ?></strong></td>
-			<td colspan="2" align="left">&nbsp;&nbsp;Inscri&ccedil;&atilde;o Estadual: <strong><?php print verificaCampo($tomador_inscrestadual); ?></strong></td>
+			<td align="left" width="450">CPF/CNPJ: <strong><?php print verificaCampo($tomador_cnpjcpf); ?></strong></td>
+			<td colspan="2" align="left">InscriÃ§Ã£o Estadual: <strong><?php print verificaCampo($tomador_inscrestadual); ?></strong></td>
 			</tr>
 		  <tr>
-			<td align="left">&nbsp;&nbsp;Endere&ccedil;o: <strong><?php print verificaCampo($tomador_endereco);?></strong></td>
-			<td colspan="2" align="left">&nbsp;&nbsp;Inscri&ccedil;&atilde;o Municipal: <strong><?php print verificaCampo($tomador_inscrmunicipal); ?></strong></td>
+			<td align="left">EndereÃ§o: <strong><?php print verificaCampo($tomador_endereco);?></strong></td>
+			<td colspan="2" align="left">InscriÃ§Ã£o Municipal: <strong><?php print verificaCampo($tomador_inscrmunicipal); ?></strong></td>
 		  </tr>
 		  <tr>
-			<td align="left">&nbsp;&nbsp;Munic&iacute;pio: <strong><?php print verificaCampo($tomador_municipio); ?></strong></td>
-			<td align="left">&nbsp;&nbsp;CEP: <strong><?php print verificaCampo($tomador_cep)?></strong></td>
+			<td align="left">MunicÃ­pio: <strong><?php print verificaCampo($tomador_municipio); ?></strong></td>
+			<td align="left">CEP: <strong><?php print verificaCampo($tomador_cep)?></strong></td>
 		  </tr>
 		  <tr>
-			<td align="left">&nbsp;&nbsp;E-mail: <strong><?php print verificaCampo($tomador_email); ?></strong></td>
+			<td align="left">E-mail: <strong><?php print verificaCampo($tomador_email); ?></strong></td>
             <td align="left">UF: <strong><?php print verificaCampo($tomador_uf); ?></strong></td>
 		  </tr>
 		</table>
@@ -267,14 +267,14 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			
 		<table width="100%" border="0" cellspacing="0" cellpadding="2">
 		  <tr>
-			<td class="cab03" align="center">DISCRIMINA&Ccedil;&Atilde;O DE SERVI&Ccedil;OS E DEDU&Ccedil;&Otilde;ES</td>
+			<td class="cab03" align="center">DISCRIMINAÃ‡ÃƒO DE SERVIÃ‡OS E DEDUÃ‡Ã•ES</td>
 		  </tr>
 		  <tr>
 			<td height="400" align="left" valign="top">
 				<br />
 				<?php
 				//sql para listar os servicos da nota atual
-				$servicos_sql = mysql_query("
+				$servicos_sql = $PDO->query("
 					SELECT 
 						s.codservico,
 						s.descricao,
@@ -294,9 +294,9 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 				?>
 				<table class="gridview" align="center">
 					<tr>
-						<th align="center">C&oacute;digo</th>
-						<th align="center">Servi&ccedil;o</th>
-						<th align="center">Al&iacute;quota (%) </th>
+						<th align="center">CÃ³digo</th>
+						<th align="center">ServiÃ§o</th>
+						<th align="center">AlÃ­quota (%) </th>
 						<th align="center">Base de Calculo (R$)</th>
 						<th align="center">Iss retido (R$)</th>
 						<th align="center">Iss (R$)</th>
@@ -306,7 +306,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 					while ($servicos_dados = mysql_fetch_assoc($servicos_sql)) {
 					?>
 					<tr>
-						<td align="center" <?php if(!$servicos_dados['codservico']){ echo "title='Não possui codigo de serviço'"; }?>>
+						<td align="center" <?php if(!$servicos_dados['codservico']){ echo "title='NÃ£o possui codigo de serviÃ§o'"; }?>>
 							<?php if($servicos_dados['codservico']){ echo $servicos_dados['codservico']; }else{ echo "N/P"; }?>
 						</td>
 						<td align="left"><?php echo $servicos_dados['descricao']; ?></td>
@@ -318,7 +318,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 					<?php
 					?>
 					<tr>
-						<th colspan="6" align="left"><strong>Discrimina&ccedil;&atilde;o</strong></th>
+						<th colspan="6" align="left"><strong>DiscriminaÃ§Ã£o</strong></th>
 					</tr>
 					<tr>
 						<td height="30" colspan="6">
@@ -326,7 +326,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 								if($servicos_dados['discriminacao']){
 									echo $servicos_dados['discriminacao'];
 								}else{
-									echo "Não foi informado";
+									echo "NÃ£o foi informado";
 								}
 							?>
 						</td>
@@ -341,7 +341,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 				// verifica o estado da nfe
 				if($estado == "C") {
 					echo "<div align=center><font size=7 color=#FF0000><b>
-						ATEN&Ccedil;&Atilde;O!!<br />NFE CANCELADA</font> <br /><font size=5 color=#FF0000>
+						ATENÃ‡ÃƒO!!<br />NFE CANCELADA</font> <br /><font size=5 color=#FF0000>
 						Motivo do cancelamento:<br /> $motivo_cancelamento</B></font></div>";
 				} // fim if
 				
@@ -360,7 +360,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 				<td colspan="6" align="center" style="border:#000000 1px solid">
 					<table width="100%">
 						<tr>
-							<td class="cab03" align="center">DISCRIMINA&Ccedil;&Atilde;O DA NOTA</td>
+							<td class="cab03" align="center">DISCRIMINAÃ‡ÃƒO DA NOTA</td>
 						</tr>	
 						<tr>
 							<td align="left">
@@ -383,7 +383,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 				<td colspan="6" align="center" style="border:#000000 1px solid">
 					<table width="100%">
 						<tr>
-							<td class="cab03" align="center">OBSERVA&Ccedil;&Otilde;ES DA NOTA</td>
+							<td class="cab03" align="center">OBSERVAÃ‡Ã•ES DA NOTA</td>
 						</tr>	
 						<tr>
 							<td align="left">
@@ -405,28 +405,28 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			<td colspan="6" class="cab03" align="center" style="border:#000000 1px solid">VALOR TOTAL DA NOTA = R$ <?php print DecToMoeda($valortotal); ?></td>
 			</tr>
 		  <!--<tr>
-			<td colspan="6" align="left" style="border:#000000 1px solid">Código do Serviço<br /><strong><?php print $servico_codservico." - ". $servico_descricao; ?></strong></td>
+			<td colspan="6" align="left" style="border:#000000 1px solid">CÃ³digo do ServiÃ§o<br /><strong><?php print $servico_codservico." - ". $servico_descricao; ?></strong></td>
 			</tr>-->
 		  <tr>
 			<?php
 				if($valoracrescimos > 0){
 					
 			?>
-			<td style="border:#000000 1px solid">Dedu&ccedil;&otilde;es (R$)<br /><div align="right"><strong><?php print DecToMoeda($valordeducoes); ?></strong></div></td>
-			<td style="border:#000000 1px solid">Acr&eacute;scimos (R$)<br /><div align="right"><strong><?php print DecToMoeda($valoracrescimos); ?></strong></div></td>
+			<td style="border:#000000 1px solid">DeduÃ§Ãµes (R$)<br /><div align="right"><strong><?php print DecToMoeda($valordeducoes); ?></strong></div></td>
+			<td style="border:#000000 1px solid">AcrÃ©scimos (R$)<br /><div align="right"><strong><?php print DecToMoeda($valoracrescimos); ?></strong></div></td>
 			<?php
 				}else{
 					if($ativar_creditos == "n"){
 						$colspan = "colspan=\"3\"";
 					}
 			?>
-			<td style="border:#000000 1px solid">Valor Total das Dedu&ccedil;&otilde;es (R$)<br /><div align="right"><strong><?php print DecToMoeda($valordeducoes); ?></strong></div></td>
+			<td style="border:#000000 1px solid">Valor Total das DeduÃ§Ãµes (R$)<br /><div align="right"><strong><?php print DecToMoeda($valordeducoes); ?></strong></div></td>
 			<?php
 				}
 			?>
-			<td style="border:#000000 1px solid" colspan="2">Base de C&aacute;lculo (R$)<br /><div align="right"><strong><?php print DecToMoeda($basecalculo); ?></strong></div></td>
+			<td style="border:#000000 1px solid" colspan="2">Base de CÃ¡lculo (R$)<br /><div align="right"><strong><?php print DecToMoeda($basecalculo); ?></strong></div></td>
 			<td style="border:#000000 1px solid; display:none">
-			 Al&iacute;quota (%)
+			 AlÃ­quota (%)
 			 <br />
 			 <div align="right">
 			  <strong>
@@ -461,7 +461,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			</td>  
 		
 			<td style="border:#000000 1px solid; <?php echo $display;?>">
-			 Cr&eacute;dito 
+			 CrÃ©dito 
 			 <br />
 			 <div align="right">
 			 <strong>
@@ -478,25 +478,25 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			</td>
 		  </tr>
 		  <tr>
-			<td colspan="6" style="border:#000000 1px solid" class="cab03">OUTRAS INFORMA&Ccedil;&Otilde;ES</td>
+			<td colspan="6" style="border:#000000 1px solid" class="cab03">OUTRAS INFORMAÃ‡Ã•ES</td>
 		  </tr>
 		  
 		  <tr>
 			<td colspan="6" style="border:#000000 1px solid" align="left">
-			- Esta NF-e foi emitida com respaldo na Lei n&ordm; <?php print $lei; ?> e no Decreto n&ordm; <?php print $decreto; ?><br />
+			- Esta NF-e foi emitida com respaldo na Lei nÂº <?php print $lei; ?> e no Decreto nÂº <?php print $decreto; ?><br />
 			<?php /*
 			if ($codtipodec == $codtipoSN)
 			{
-			  echo "- Esta NF-e não gera créditos, pois a empresa prestadora de serviços é optante pelo Simples Nacional<br> ";
+			  echo "- Esta NF-e nÃ£o gera crÃ©ditos, pois a empresa prestadora de serviÃ§os Ã© optante pelo Simples Nacional<br> ";
 			} */
 			if($issretido != 0)
 			{
-			  echo "- Esta NF-e possui retenção de ISS no valor de R$ ".DecToMoeda($issretido)."<br> ";
+			  echo "- Esta NF-e possui retenï¿½ï¿½o de ISS no valor de R$ ".DecToMoeda($issretido)."<br> ";
 			
 			}
 			
 			if($pispasep > 0){
-				echo "- Está NF-e possui PIS/PASEP no valor de R$ ".DecToMoeda($pispasep)."<br />";
+				echo "- Estï¿½ NF-e possui PIS/PASEP no valor de R$ ".DecToMoeda($pispasep)."<br />";
 			}
 			
 			
@@ -504,12 +504,12 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			/*
 			if(($CONF_CIDADE != $tomador_municipio) && ($codtipodec != $codtipoSN)) {
 				if($ativar_creditos == "s"){
-					echo "- Esta NF-e não gera crédito, pois o Tomador de Serviços está localizado fora do município de $CONF_CIDADE<br>";
+					echo "- Esta NF-e nÃ£o gera crÃ©dito, pois o Tomador de ServiÃ§os  estÃ¡ localizado fora do municÃ­pio de $CONF_CIDADE<br>";
 				}
 			} // fim if	*/
 			if($rps_numero){
 			?>
-			- Esta NF-e substitui o RPS N&ordm; <?php print $rps_numero; ?>, emitido em <?php print (substr($rps_data,8,2)."/".substr($rps_data,5,2)."/".substr($rps_data,0,4)); ?><br />
+			- Esta NF-e substitui o RPS NÂº <?php print $rps_numero; ?>, emitido em <?php print (substr($rps_data,8,2)."/".substr($rps_data,5,2)."/".substr($rps_data,0,4)); ?><br />
 			<?php
 			}//fim if rps
 			//$valorinss,$aliqinss,$valorirrf,$aliqinss
@@ -517,30 +517,30 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			if($valorinss > 0){ //soh mostra se tiver valor
 
 				if($aliqinss > 0){
-					echo "- Retenção de INSS ".DecToMoeda($aliqinss)."% com valor de R$ ".DecToMoeda($valorinss)." <br>";
+					echo "- Retenï¿½ï¿½o de INSS ".DecToMoeda($aliqinss)."% com valor de R$ ".DecToMoeda($valorinss)." <br>";
 				}else{
-					echo "- Retenção de INSS com valor de R$ ".DecToMoeda($valorinss)." <br>";
+					echo "- Retenï¿½ï¿½o de INSS com valor de R$ ".DecToMoeda($valorinss)." <br>";
 				}
 			}
 			if($valorirrf > 0){ //soh mostra se tiver valor
 				if($aliqirrf > 0){
-					echo "- Retenção de IRRF ".DecToMoeda($aliqirrf)."% com valor de R$ ".DecToMoeda($valorirrf).""; if($deducao_irrf > 0){ echo ". Dedução de R$ ".DecToMoeda($deducao_irrf); }
+					echo "- Retenï¿½ï¿½o de IRRF ".DecToMoeda($aliqirrf)."% com valor de R$ ".DecToMoeda($valorirrf).""; if($deducao_irrf > 0){ echo ". Deduï¿½ï¿½o de R$ ".DecToMoeda($deducao_irrf); }
 					echo "<br>";
 				}else{
-					echo "- Retenção de IRRF com valor de R$ ".DecToMoeda($valorirrf).""; if($deducao_irrf > 0){ echo ". Dedução de R$ ".DecToMoeda($deducao_irrf); }
+					echo "- Retenï¿½ï¿½o de IRRF com valor de R$ ".DecToMoeda($valorirrf).""; if($deducao_irrf > 0){ echo ". Deduï¿½ï¿½o de R$ ".DecToMoeda($deducao_irrf); }
 					echo "<br>";
 				}
 			} 
 			if($cofins > 0){
-				echo "- Retenção de Confins com valor de R$ ".DecToMoeda($cofins)." <br>";
+				echo "- Retenï¿½ï¿½o de Confins com valor de R$ ".DecToMoeda($cofins)." <br>";
 			}
 			
 			if($csocial > 0){
-				echo "- Contribuição Social com valor de R$ ".DecToMoeda($csocial)." <br>";
+				echo "- Contribuiï¿½ï¿½o Social com valor de R$ ".DecToMoeda($csocial)." <br>";
 			}
 			
 			if($total_retencao > 0){
-				echo "- Total de retenções da nota R$ ".DecToMoeda($total_retencao)." <br>";
+				echo "- Total de retenï¿½ï¿½es da nota R$ ".DecToMoeda($total_retencao)." <br>";
 			}			
 			?>
 			</td>

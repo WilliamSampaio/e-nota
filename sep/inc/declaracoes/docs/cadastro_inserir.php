@@ -19,16 +19,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	// verifica se já há algum cartorio cadastrado com o cnpj indicado. caso ñ haja, faz o cadastro 
-	$sql_verifica=mysql_query("SELECT cnpj FROM cadastro WHERE cnpj='$cnpj'");
-	if(mysql_num_rows($sql_verifica)>0)
+	// verifica se jÃ¡ hÃ¡ algum cartorio cadastrado com o cnpj indicado. caso Ã© haja, faz o cadastro 
+	$sql_verifica=$PDO->query("SELECT cnpj FROM cadastro WHERE cnpj='$cnpj'");
+	if($sql_verifica->rowCount()>0)
 		{
-			Mensagem("Já existe um Cartório cadastrado com este CNPJ");
+			Mensagem("JÃ¡ existe um Cartï¿½rio cadastrado com este CNPJ");
 		}
 	else
 		{
 			$tipocartorio=codtipo('cartorio');
-			mysql_query("INSERT INTO cadastro 
+			$PDO->query("INSERT INTO cadastro 
 							SET 
 							codtipo='$tipocartorio',
 							nome='$nome',
@@ -50,29 +50,29 @@ Fith Floor, Boston, MA 02110-1301, USA
 			"); 
 			
 			// seleciona o cartorio adicionado
-			$sql_busca=mysql_query("SELECT codigo FROM cadastro WHERE cnpj='$cnpj'");
-			list($codigo)=mysql_fetch_array($sql_busca);
+			$sql_busca=$PDO->query("SELECT codigo FROM cadastro WHERE cnpj='$cnpj'");
+			list($codigo)=$sql_busca->fetch();
 			// insere nas outras tabelas s dados restantes do cadastro
 			$resp=codcargo('responsavel');
 			$diret=codcargo('diretor');
-			mysql_query("INSERT INTO cartorios SET codcadastro='$codigo', admpublica='$admpublica', nivel='$nivel'");
-			mysql_query("INSERT INTO cadastro_resp SET codemissor='$codigo', codcargo='$diret', nome='$diretor', cpf='$diretor_cpf'");
-			mysql_query("INSERT INTO cadastro_resp SET codemissor='$codigo', codcargo='$resp', nome='$responsavel', cpf='$responsavel_cpf'");
+			$PDO->query("INSERT INTO cartorios SET codcadastro='$codigo', admpublica='$admpublica', nivel='$nivel'");
+			$PDO->query("INSERT INTO cadastro_resp SET codemissor='$codigo', codcargo='$diret', nome='$diretor', cpf='$diretor_cpf'");
+			$PDO->query("INSERT INTO cadastro_resp SET codemissor='$codigo', codcargo='$resp', nome='$responsavel', cpf='$responsavel_cpf'");
 			
 			//monta o corpo do email
 			$assunto="ISSDigital";
 			$corpo="
-				A Prefeitura Municipal de $CIDADE informa que este cartório foi cadastrad no sitema de ISSDigital do municipio.<br>
-				Para acessar o o sistema do ISSDigital acesse o site $Link, o login é próprio CNPJ do cartório. A senha, gerada pelo sistema, é: $senha<br>
-				Para sua maior segurança, altere sua senha.
+				A Prefeitura Municipal de $CIDADE informa que este cartÃ³rio foi cadastrad no sitema de ISSDigital do municipio.<br>
+				Para acessar o o sistema do ISSDigital acesse o site {$config['host']}, o login Ã© prÃ³prio CNPJ do cartÃ³rio. A senha, gerada pelo sistema, ï¿½: $senha<br>
+				Para sua maior seguranÃ§a, altere sua senha.
 			";
 			
 			//envia a senha por email
 			mail("$email","$assunto","$corpo");
 			
 			Mensagem("Cadastro efetuado com sucesso!");
-/*			$sql_cadastrado= mysql_query("SELECT codigo FROM cadastro WHERE cnpj='cnpj'");
-			list($codigo)=mysql_fetch_array($sql_cadastrado);
+/*			$sql_cadastrado= $PDO->query("SELECT codigo FROM cadastro WHERE cnpj='cnpj'");
+			list($codigo)=$sql_cadastrado);
 */		
 		}	
 ?>

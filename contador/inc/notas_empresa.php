@@ -28,6 +28,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 </table>
 </form>
 <?php
-	if($btInserir !=""){include("inc/notas_inserir_empresa.php");}
-	if($btPesquisar !=""){include("inc/notas_pesquisar_empresa.php");}
+	if($btInserir !=""){require_once("inc/notas_inserir_empresa.php");}
+	if($btPesquisar !=""){require_once("inc/notas_pesquisar_empresa.php");}
 ?>

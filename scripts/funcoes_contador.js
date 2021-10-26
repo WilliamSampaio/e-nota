@@ -35,7 +35,7 @@ function convertDate(data)
         d=new date();
     return d
 }
-/* Validações */
+/* Validaï¿½ï¿½es */
 function FmtValorMonetario(Dado)
 {
       var Result, i;
@@ -238,7 +238,7 @@ function isCpf(elem, msgbox)
 		return true;
 	if (pCpf.length < 14) {
 	    if (msgbox)
-		    alert (utf8_decode('CPF inválido (' + pCpf + ').'));
+		    alert (utf8_decode('CPF invï¿½lido (' + pCpf + ').'));
 		//elem.value = "";
 		return false;
 	}
@@ -250,16 +250,16 @@ function isCpf(elem, msgbox)
 	var digitos = dvCpfCnpj(base, false);
 	var algUnico, i;
 
-	// Valida dígitos verificadores
+	// Valida dï¿½gitos verificadores
 	
 	if (numero != base + digitos) {
 	    if (msgbox)
-		    alert (utf8_decode('CPF inválido (' + pCpf + ').'));
+		    alert (utf8_decode('CPF invï¿½lido (' + pCpf + ').'));
 		//elem.value = "";
 		return false;
 	}
 
-	/* Não serão considerados válidos os seguintes CPF:
+	/* NÃ£o serÃ¡o considerados vï¿½lidos os seguintes CPF:
 	 * 000.000.000-00, 111.111.111-11, 222.222.222-22, 333.333.333-33, 444.444.444-44,
 	 * 555.555.555-55, 666.666.666-66, 777.777.777-77, 888.888.888-88, 999.999.999-99.
 	 */
@@ -271,7 +271,7 @@ function isCpf(elem, msgbox)
 	if (algUnico)
 	{
 	    if (msgbox)
-	        alert (utf8_decode('CPF inválido (' + pCpf + ').'));
+	        alert (utf8_decode('CPF invï¿½lido (' + pCpf + ').'));
 		//elem.value = "";
 		return false;
 	}
@@ -289,7 +289,7 @@ function isCnpj(elem, msgbox)
 	if (pCnpj.length < 18)
 	{
 	    if (msgbox)
-		    alert (utf8_decode('CNPJ inválido (' + pCnpj + ').'));
+		    alert (utf8_decode('CNPJ invï¿½lido (' + pCnpj + ').'));
 		//elem.value = "";
 		return false;
 	}
@@ -302,17 +302,17 @@ function isCnpj(elem, msgbox)
 	var digitos = dvCpfCnpj(base + ordem, true);
 	var algUnico;
 
-	// Valida dígitos verificadores
+	// Valida dï¿½gitos verificadores
 	if (numero != base + ordem + digitos)
 	{
 	    if (msgbox)
-		    alert (utf8_decode('CNPJ inv&aacute;lido (' + pCnpj + ').'));
+		    alert (utf8_decode('CNPJ invÃ¡lido (' + pCnpj + ').'));
 		//elem.value = "";
 		return false;
 	}
 
 
-	/* Não serão considerados válidos os CNPJ com os seguintes números BÁSICOS:
+	/* NÃ£o serÃ¡o considerados vï¿½lidos os CNPJ com os seguintes nÃºmeros Bï¿½SICOS:
 	 * 11.111.111, 22.222.222, 33.333.333, 44.444.444, 55.555.555,
 	 * 66.666.666, 77.777.777, 88.888.888, 99.999.999.
 	 */
@@ -325,26 +325,26 @@ function isCnpj(elem, msgbox)
 	if (algUnico) 
 	{
 	    if (msgbox)
-		    alert (utf8_decode('CNPJ inv&aacute;lido (' + pCnpj + ').'));
+		    alert (utf8_decode('CNPJ invÃ¡lido (' + pCnpj + ').'));
 		//elem.value = "";
 		return false;
 	}
 
 
-	/* Não será considerado válido CNPJ com número de ORDEM igual a 0000.
-	 * Esta crítica não será feita quando o BÁSICO do CNPJ for igual a 00.000.000.
+	/* NÃ£o serÃ¡ considerado vï¿½lido CNPJ com nÃºmero de ORDEM igual a 0000.
+	 * Esta crï¿½tica nÃ£o serÃ¡ feita quando o Bï¿½SICO do CNPJ for igual a 00.000.000.
 	*/ 
 	if (ordem == "0000")
 	{
 	    if (msgbox)
-		    alert (utf8_decode('CNPJ inv&aacute;lido (' + pCnpj + ').'));
+		    alert (utf8_decode('CNPJ invÃ¡lido (' + pCnpj + ').'));
 		//elem.value = "";
 		return false;
 	}
 	
 /*	if (!(base == "00000000" || base.substring(0, 3) != "000"))
 	{
-		alert (utf8_decode('CNPJ (' + pCnpj + ') inválido.'));
+		alert (utf8_decode('CNPJ (' + pCnpj + ') invï¿½lido.'));
 		alert('base : ' + base);
 		elem.value = "";
 		return false;
@@ -449,7 +449,7 @@ function validaCnpj(source, args)
 }
 
 
-/* Máscaras */
+/* Mï¿½scaras */
 function strip( str, c ) {
 	var tmp = str.split( c );
 	return tmp.join("");

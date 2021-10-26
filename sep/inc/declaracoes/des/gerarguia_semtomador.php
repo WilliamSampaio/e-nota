@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-//Utiliza a função para obter o codigo de verificação
+//Utiliza a funÃ§Ã£o para obter o codigo de verificaÃ§Ã£o
 $codverificacao = gera_codverificacao();
 
 $cod_emissor = $_POST['hdCodEmissor'];
@@ -44,8 +44,8 @@ for($c=1;$c<=$num_servicos;$c++){
 
 $multaJuros = MoedaToDec($_POST['txtMultaJuros']);
 $totalPagar = MoedaToDec($_POST['txtImpostoTotal']);
-
-mysql_query("
+try{
+	$PDO->query("
 	INSERT INTO des SET 
 		codcadastro		='$cod_emissor', 
 		competencia		='$dataCompetencia', 
@@ -55,27 +55,34 @@ mysql_query("
 		iss				='$totalPagar', 
 		tomador			='n',
 		codverificacao	='$codverificacao'
-") or die(mysql_error());
-$sql_des = mysql_query("SELECT MAX(codigo) FROM des");
-list($cod_des)=mysql_fetch_array($sql_des);
+	");
+}catch(PDOException $e){
+	echo 'Echo: ' . $e->getMessage();
+}
+$sql_des = $PDO->query("SELECT MAX(codigo) FROM des");
+list($cod_des)=$sql_des->fetch();
 
 for($c=1;$c<=$num_servicos;$c++){
 	if($baseCalculo[$c]!=""&&$codigoServico[$c]!=""){
-		mysql_query("
+		try{
+			$PDO->query("
 			INSERT INTO des_servicos SET 
 				coddes			='{$cod_des}',
 				codservico		='{$codigoServico[$c]}',
 				basedecalculo	='{$baseCalculo[$c]}',
 				iss_retido		='{$valor_iss_retido[$c]}',
 				iss				='{$impostoServico[$c]}'
-		") or die(mysql_error());
+			");
+		}catch(PDOException $e){
+			echo 'Erro: ' . $e->getMessage();
+		}
 	}
 }
 
 /*$dias_prazo = 5;
 $data_venc = date("Y-m-d", time() + ($dias_prazo * 86400));
 
-mysql_query("INSERT INTO guia_pagamento
+$PDO->query("INSERT INTO guia_pagamento
 			 SET codrelacionamento = '$cod_des',
 				 relacionamento= 'des',
 				 dataemissao = '$dataGerado',
@@ -84,21 +91,21 @@ mysql_query("INSERT INTO guia_pagamento
 				 datavencimento = '$data_venc',
 				 pago = 'N'");
 
-$sql_guia = mysql_query("SELECT MAX(codigo) 
+$sql_guia = $PDO->query("SELECT MAX(codigo) 
 						 FROM guia_pagamento;");
 
-list($cod_guia)=mysql_fetch_array($sql_guia);
+list($cod_guia)=$sql_guia);
 
 
 $nossonumero = gerar_nossonumero($cod_guia);
 $chavecontroledoc = gerar_chavecontrole($cod_des,$cod_guia);
 
-mysql_query("UPDATE guia_pagamento SET nossonumero ='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo=$cod_guia");
+$PDO->query("UPDATE guia_pagamento SET nossonumero ='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo=$cod_guia");
 */
 $cod_guia =base64_encode($cod_guia);
 $cod_des = base64_encode($cod_des);
 
-Mensagem("Declaração efetuada com sucesso!");
+Mensagem("Declaraï¿½ï¿½o efetuada com sucesso!");
 echo"<script>window.open('reports/des_prestadores_comprovante.php?COD=$cod_des');</script>"; 
 /*		echo"<script>window.open('../../boleto/boleto_bb.php?COD=$cod_guia');</script>"; */
 //Redireciona("../../boleto/boleto_bb.php?COD=$cod_guia");

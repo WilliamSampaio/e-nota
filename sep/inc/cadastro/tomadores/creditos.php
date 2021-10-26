@@ -31,13 +31,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Tomadores - Cr&eacute;ditos</td>  
+    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Tomadores - Créditos</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
     <td width="18" background="img/form/lateralesq.jpg"></td>
     <td align="center">
-			<fieldset><legend>Consulta de Cr&eacute;ditos</legend>
+			<fieldset><legend>Consulta de Créditos</legend>
 				<form method="post">	
 					<input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
 					<table align="left" width="100%">
@@ -47,7 +47,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						</tr>
 						<tr align="left">
 							<td width="25%"><input type="submit" class="botao" name="btConsultaCreditos" value="Consultar" /></td>
-							<td>&nbsp;</td>
+							<td></td>
 						</tr>
 					</table>
 				<?php
@@ -68,27 +68,27 @@ Fith Floor, Boston, MA 02110-1301, USA
 							Mensagem("Informe o CNPJ/CPF do tomador");
 						}else{	
 							//Soma os creditos do tomador sobre as nfe correspondente ao cnpjcpf informado
-							$sql_credito_nfe = mysql_query("SELECT credito, nome FROM cadastro WHERE $campo='$cnpjcpf'");
+							$sql_credito_nfe = $PDO->query("SELECT credito, nome FROM cadastro WHERE $campo='$cnpjcpf'");
 							//verifica o nome deste mesmo tomador
-							list($credito_nfe, $tomador) = mysql_fetch_array($sql_credito_nfe);
-							if(mysql_num_rows($sql_credito_nfe)>0){?>
+							list($credito_nfe, $tomador) = $sql_credito_nfe->fetch();
+							if($sql_credito_nfe->rowCount()>0){?>
                                 <table align="center" width="100%">
 									<tr align="center" bgcolor="#999999">
 										<td>CNPJ/CPF</td>
 										<td>Nome do tomador</td>
-										<td>Cr&eacute;dito</td>
+										<td>Crédito</td>
 									</tr>
 									<tr align="center" bgcolor="#FFFFFF">
 										<td width="180"><?php echo $cnpjcpf;?></td>
 										<td><?php echo $tomador;?></td>
-										<td width="125"><?php if($credito_nfe <= 0){ echo "N�o possui cr&eacute;ditos"; }else{ echo "R$".DecToMoeda($credito_nfe); }?></td>
+										<td width="125"><?php if($credito_nfe <= 0){ echo "Não possui créditos"; }else{ echo "R$".DecToMoeda($credito_nfe); }?></td>
 									</tr>
                                 </table><?php 
 							}else{
 								//mensagem de erro ao tentar verificar um CNPJCPF que nao esteja cadastrado
 								echo "<table width=\"100%\">
 											<tr>
-												<td align=\"center\">Este CNPJ/CPF n&atilde;o existe.</td>
+												<td align=\"center\">Este CNPJ/CPF não existe.</td>
 											</tr>
 										</table>
 									";

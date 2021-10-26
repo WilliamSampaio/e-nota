@@ -20,40 +20,40 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 session_start(); 
-include("../funcoes/util.php");
-// recebe a variavel que contem o número de verificação e a variavel que contém o número que o usuário digitou.
+require_once("../include/util.php");
+// recebe a variavel que contem o nÃºmero de verificaÃ§Ã£o e a variavel que contÃ©m o nÃºmero que o usuÃ¡rio digitou.
 $autenticacao = $_SESSION['autenticacao'];
 $cod_seguranca= $_POST['codseguranca'];
 
 if($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca)
 {
 
-include("conect.php");
-$sql = mysql_query("SELECT * FROM usuarios WHERE login = '".$_POST['txtLogin']."' and tipo = 'prefeitura' ");	
+require_once("conect.php");
+$sql = $PDO->query("SELECT * FROM usuarios WHERE login = '".$_POST['txtLogin']."' and tipo = 'prefeitura' ");	
  if(mysql_num_rows($sql) > 0) 
  { 
- 	$dados = mysql_fetch_array($sql);
-	 //verifica se a senha digitada confere com a que está armazenada no banco	
+ 	$dados = $sql->fetch();
+	 //verifica se a senha digitada confere com a que estÃ¡ armazenada no banco	
 	if(md5($txtSenha) == $dados['senha']) {
-		// inicia a sessão e direciona para index.		
+		// inicia a sessÃ£o e direciona para index.		
 		$_SESSION['logado'] = $dados['codigo'];
 		$_SESSION['login'] = $dados['login'];
 		$_SESSION['nivel_de_acesso'] = $dados['nivel'];
 		add_logs('Efetuou o Login');
 		$nome = $dados['nome'];
 		//Salva no banco o ultimo login do usuario
-		$sql=mysql_query("UPDATE usuarios SET ultlogin= NOW()  WHERE nome = '$nome'"); 
+		$sql=$PDO->query("UPDATE usuarios SET ultlogin= NOW()  WHERE nome = '$nome'"); 
 		print("<script language=JavaScript>parent.location='../login.php';</script>");
     }
 	else{
-	  print("<script language=JavaScript>alert('Senha não confere com a cadastrada no sistema! Favor verificar a senha.');parent.location='../login.php';</script>");	
+	  print("<script language=JavaScript>alert('Senha nÃ£o confere com a cadastrada no sistema! Favor verificar a senha.');parent.location='../login.php';</script>");	
 	}
 } 
 else {
-  print("<script language=JavaScript>alert('Usuário inexistente! Favor verificar usuário.');parent.location='../login.php';</script>");
+  print("<script language=JavaScript>alert('Usuï¿½rio inexistente! Favor verificar usuÃ¡rio.');parent.location='../login.php';</script>");
  } 
 
 }else{
-  print("<script language=JavaScript>alert('Favor verificar código de segurança!');parent.location='../login.php';</script>");
+  print("<script language=JavaScript>alert('Favor verificar cÃ³digo de seguranÃ§a!');parent.location='../login.php';</script>");
 } 
 ?> 

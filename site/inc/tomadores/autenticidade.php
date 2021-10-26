@@ -43,25 +43,25 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="99%" border="0" align="center" cellpadding="5" cellspacing="0">
  <tr>
   <td width="30%" align="left">
-   N&uacute;mero da NFe<font color="#FF0000">*</font>  </td>
+   Número da NFe<font color="#FF0000">*</font>  </td>
   <td width="70%"  align="left">
    <input type="text" name="txtNFe" id="txtNFe" size="20" class="texto"  onkeydown="stopMsk( event ); return NumbersOnly( event );"> 
-   <em>Somente n&uacute;meros  </em></td> 
+   <em>Somente números  </em></td> 
  </tr>
   <tr> 
   <td align="left">Prestador CNPJ/CPF<font color="#FF0000">*</font></td> 
-  <td align="left"><input type="text" name="txtCPFCNPJ" id="txtCPFCNPJ" size="20" class="texto"  onkeydown="stopMsk( event ); return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );"/>     <em>Somente n&uacute;meros</em></td>
+  <td align="left"><input type="text" name="txtCPFCNPJ" id="txtCPFCNPJ" size="20" class="texto"  onkeydown="stopMsk( event ); return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );"/>     <em>Somente números</em></td>
   </tr>
   <tr>
-    <td align="left">C&oacute;digo de Verifica&ccedil;&atilde;o<font color="#FF0000">*</font></td>
+    <td align="left">Código de Verificação<font color="#FF0000">*</font></td>
     <td align="left"><input type="text" name="txtCodigo" id="txtCodigo" size="20" class="texto" style="text-transform:uppercase"/>       </td>
   </tr>
   <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left"><font color="#FF0000">*</font> Dados obrigat&oacute;rios</td>
+    <td align="left"></td>
+    <td align="left"><font color="#FF0000">*</font> Dados obrigatórios</td>
   </tr>
   <tr>
-    <td align="left">&nbsp;</td>
+    <td align="left"></td>
     <td align="left"><input type="submit" name="btAutenticidade" value="Consultar" class="botao" /></td>
   </tr>
 </table>
@@ -75,23 +75,26 @@ Fith Floor, Boston, MA 02110-1301, USA
 </form>
 <?php
 	if($_POST['btAutenticidade']){
-		if(($txtNFe !="")&&($txtCPFCNPJ !="")&&($txtCodigo !="")){
-			$campo = tipoPessoa($txtCPFCNPJ);
+		if(($_POST['txtNFe'] !="")&&($_POST['txtCPFCNPJ'] !="")&&($_POST['txtCodigo'] !="")){
+			$campo = tipoPessoa($_POST['txtCPFCNPJ']);
 			if($campo){
-				$sql=mysql_query("SELECT notas.codigo FROM notas INNER JOIN cadastro ON notas.codemissor = cadastro.codigo WHERE notas.codverificacao='$txtCodigo' AND notas.numero='$txtNFe' AND cadastro.$campo ='$txtCPFCNPJ'");
-				$registros=mysql_num_rows($sql);
+				$sql=$PDO->query("
+					SELECT notas.codigo 
+					FROM notas INNER JOIN cadastro ON notas.codemissor = cadastro.codigo 
+					WHERE notas.codverificacao='" . $_POST['txtCodigo'] . "' AND notas.numero='" . $_POST['txtNFe'] . "' AND cadastro.$campo ='" . $_POST['txtCPFCNPJ'] . "'");
+				$registros=$sql->rowCount();
 				if($registros >0){
-					list($cod_nota)=mysql_fetch_array($sql);
+					list($cod_nota)=$sql->fetch();
 					$codigo = base64_encode($cod_nota);
 					print("<script language=\"javascript\">window.open('../reports/nfe_imprimir.php?CODIGO=$codigo&TIPO=T');</script>");
 				}
 				else{
-					Mensagem('Nota n�o aut�ntica');
+					print("<script language=JavaScript>alert('Nota não autêntica');parent.location='tomadores.php';</script>");
 				}
 			}
 			else{
-				print("<script language=JavaScript>alert('N�o existe nota cadastrada com estes dados!');parent.location='tomadores.php';</script>");
-			}
+				print("<script language=JavaScript>alert('Não existe nota cadastrada com estes dados!');parent.location='tomadores.php';</script>");
+			}	
 		}
 		else{
 			print("<script language=JavaScript>alert('Todos os campos devem ser preenchidos para realizar a consulta.');</script>");

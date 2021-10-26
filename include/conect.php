@@ -19,26 +19,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-//arquivo com as configuracoes de HOST, USUARIO, SENHA e BANCO
-require_once dirname(__FILE__) . '/config.php';
-
-// Conectar ao banco de dados das prefeituras
-// $conectar_pref = mysql_connect($HOST,$USUARIO, $SENHA); 
-// if (!$conectar_pref) { die('N&atilde;o foi poss&iacute;vel  conectar: ' . mysql_error()); } 
-
-// Seleciona o banco de dados
-// $db_selected_pref = mysql_select_db($BANCO, $conectar_pref);
-// if (!$db_selected_pref) {die ('N&atilde;o foi poss&iacute;vel  acessar a base: ' . mysql_error());}
-//mysql_close($conectar);
 
 try {
-	$PDO = new PDO('mysql:host=' . $DB_HOST . ';dbname=' . $DB_DATABASE, $DB_USERNAME, $DB_PASSWORD);
+	$PDO = getConnection();
 } catch (PDOException $e) {
 	echo 'Erro ao conectar com o MySQL: ' . $e->getMessage();
 }
 
 //SELEIONA O CODIGO DA EMPRESA
-
 if ($_SESSION['login'] != "") {
 	$NOME = $_SESSION['nome'];
 	$CODIGO = $_SESSION['codempresa'];

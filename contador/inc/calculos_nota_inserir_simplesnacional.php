@@ -24,7 +24,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <table width="100%" id="tblServicos" cellpadding="3">
 	<tr>
-		<td align="left"><b>Observações da nota: </b></td>
+		<td align="left"><b>Observaï¿½ï¿½es da nota: </b></td>
 	</tr>
 	<tr>
 		<td align="center"><textarea name="txtObsNota" rows="0" cols="0" style="width:90%; height:60px;"></textarea></td>
@@ -33,8 +33,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="100%">
 	<tr>
 		<td align="left">
-			<label><strong>Clique para informar os serviços<br /><br /></strong>
-			<input name="btServico" type="button" value="Serviços" class="botao" 
+			<label><strong>Clique para informar os serviÃ§os<br /><br /></strong>
+			<input name="btServico" type="button" value="Serviï¿½os" class="botao" 
 			onclick="mostraDivServicos()" /></label>
 			<div id="divServicosNota" class="divServicosNota">
 				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC" height="100%">
@@ -57,7 +57,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<td>
 							<!--<table width="100%">
 								<tr align="center" bgcolor="#999999">
-									<td width="33%" align="center"><b>Seleciona o Serviço</b></td>
+									<td width="33%" align="center"><b>Seleciona o Serviï¿½o</b></td>
 									<td width="20%" align="center"><b>Base Calc.(R$)</b></td>
 									<td width="15%" align="center"><b>Aliquota(%)</b></td>
 									<td width="12%" align="center"><b>ISS(R$)</b></td>
@@ -74,10 +74,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td width="93%" align="right">
 								<input name="btAdicionar" id="btAdicionar" type="button" class="botao" value="Adicionar" 
 								onclick="addLinhaNota()" style="display:none" />
-								&nbsp;
+								
 								<input name="btRemover" id="btRemover" type="button" class="botao" value="Remover" onclick="removeLinha('retornoDivLinha','btAdicionar')" 
 								disabled="disabled" style="display:none" /> 
-                                &nbsp;
+                                
                                 <input name="btConfirmar" id="btConfirmar" type="button" class="botao"
                                 value="Confirmar" onclick="escondeMostraDiv('divServicosNota');" />
 							</td>
@@ -107,7 +107,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="100%">
 	<!-- busca a relacao dos servicos por empresa -->
 	<tr>
-		<td align="left">Base de Cálculo</td>
+		<td align="left">Base de Cï¿½lculo</td>
 		<td align="left">
 			R$ <input name="txtBaseCalculo" type="text" size="10" class="texto" id="txtBaseCalculo" style="text-align:right;" 
 			onkeyup="MaskMoeda(this);" onkeydown="return NumbersOnly(event);" onblur="ValorIss('<?php echo $regras_credito;?>')" readonly="readonly" value="0,00">
@@ -118,12 +118,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 		</td>
 	</tr>
 	<tr>
-		<td width="21%" align="left">Deduções</td>
+		<td width="21%" align="left">Deduï¿½ï¿½es</td>
 		<td width="26%" align="left">R$
 			<input name="txtValorDeducoes" type="text" size="12" class="texto" id="txtValorDeducoes"  style="text-align:right;" value="0,00"
 			onkeydown="MaskMoeda(this); return NumbersOnly(event);" onblur="ValorIss('<?php echo $regras_credito;?>')" />
 		</td>
-		<td width="13%" align="left">Acréscimos</td>
+		<td width="13%" align="left">Acrï¿½scimos</td>
 		<td width="40%" align="left">
 			R$ 
 			<input name="txtValorAcrescimos" type="text" size="12" class="texto" id="txtValorAcrescimos" style="text-align:right" value="0,00" 
@@ -171,7 +171,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <input name="txtCofins" id="txtCofins" type="text" class="texto" size="10" value="0,00" onkeyup="MaskMoeda(this);"
 			onkeydown="return NumbersOnly(event);" style="text-align:right" onblur="ValorIss('<?php echo $regras_credito;?>')" />
 		</td>
-        <td width="21%" align="left">Contribuição Social</td>
+        <td width="21%" align="left">Contribuiï¿½ï¿½o Social</td>
 		<td width="26%" align="left">R$
             <input name="txtContribuicaoSocial" id="txtContribuicaoSocial" type="text" class="texto" size="10" value="0,00" onkeyup="MaskMoeda(this);"
 			onkeydown="return NumbersOnly(event);" style="text-align:right" onblur="ValorIss('<?php echo $regras_credito;?>')" />
@@ -194,17 +194,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<tr>
 		<td width="21%" align="left"><b>Valor liquido</b></td>
 		<td width="26%" align="left">
-			R$ <input name="txtValTotal" id="txtValTotal" type="text" size="10" class="texto" readonly="yes" style="text-align:right;" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" >&nbsp;
+			R$ <input name="txtValTotal" id="txtValTotal" type="text" size="10" class="texto" readonly="yes" style="text-align:right;" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" >
 		</td>
 		<td width="13%" align="left">
-			Retenç&otilde;es		</td>
+			Retenï¿½Ãµes		</td>
 		<td width="40%" align="left">
 			R$ 
 				<input name="txtValTotalRetencao" id="txtValTotalRetencao" type="text" class="texto" size="10" readonly="readonly" style="text-align:right" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" />
 		</td>
 	</tr>
 	<tr <?php echo $display;?>>
-		<td align="left">Crédito</td>
+		<td align="left">Crï¿½dito</td>
 		<td align="left">R$
 			<input name="txtCredito" id="txtCredito" type="text" onblur="document.getElementById('txtBaseCalculo').onblur()" size="10" class="texto" readonly="yes" style="text-align:right" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" >
 		</td>
@@ -214,7 +214,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td  align="left">
 			<input name="btInserirNota" type="submit" value="Emitir" class="botao" onclick="return ValidaFormulario('txtTomadorUF|txtTomadorNome')&&VerificaCPF();"  >
 		</td>
-		<td align="right" colspan="8"><font color="#FF0000">*</font>Campos obrigatórios<br />
+		<td align="right" colspan="8"><font color="#FF0000">*</font>Campos obrigatÃ³rios<br />
 		</td>
 	</tr>
 </table>

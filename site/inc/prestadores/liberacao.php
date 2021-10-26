@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<table border="0" cellspacing="1" cellpadding="0">
 		<tr>
 			<td width="10" height="10" bgcolor="#FFFFFF"></td>
-			<td width="165" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta de Libera&ccedil;&atilde;o</td>
+			<td width="165" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta de Liberação</td>
 			<td width="405" bgcolor="#FFFFFF"></td>
 		</tr>
 		<tr>
@@ -44,7 +44,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<td width="19%" align="left">CNPJ/CPF</td>
 						<td width="81%" align="left" valign="middle"><em>
 								<input class="texto" type="text" title="CNPJ" name="txtCNPJ" id="txtCNPJ" tabindex="1" />
-								Somente n&uacute;meros</em></td>
+								Somente números</em></td>
 					</tr>
 					<tr>
 						<td align="left">Senha</td>
@@ -54,17 +54,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 						</td>
 					</tr>
 					<tr>
-						<td align="left">Cod Verifica&ccedil;&atilde;o</td>
+						<td align="left">Cod Verificação</td>
 						<td align="left">
 							<input class="texto" type="text" title="IM" name="codseguranca" id="codseguranca" size="5" maxlength="5" tabindex="3" />
-							<img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/botoes/num_key.jpg" title="Teclado Virtual">&nbsp;
-							<?php include("inc/cod_verificacao.php"); ?>
+							<img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/botoes/num_key.jpg" title="Teclado Virtual">
+							<?php require_once("inc/cod_verificacao.php"); ?>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">&nbsp;</td>
+						<td align="center"></td>
 						<td align="left" valign="middle">
-							<input type="submit" value="Avan�ar" class="botao" onclick="return verificaCnpjCpfIm();" tabindex="5" />
+							<input type="submit" value="Avançar" class="botao" onclick="return verificaCnpjCpfIm();" tabindex="5" />
 						</td>
 					</tr>
 				</table>

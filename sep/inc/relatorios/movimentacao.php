@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - MovimentaÁ„o </td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relat√≥rios - Movimenta√ß√£o </td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -35,12 +35,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 <tbody>
 <tr>
         <td>
-            Escolha o PerÌodo
+            Escolha o Per√≠odo
         </td>
         <td>    
 			<?php
   		  	//array de meses comencando em 1 ate 12
-    		$meses=array("1"=>"Janeiro","Fevereiro","MarÁo","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+    		$meses=array("1"=>"Janeiro","Fevereiro","MarÔøΩo","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
     		$mes = date("n");
     		$ano = date("Y");						
     		?>
@@ -77,10 +77,10 @@ Fith Floor, Boston, MA 02110-1301, USA
             </td>
 			<td align="left" colspan="5">
             <select style="width: 150px" name="cmbCategoria<?php echo $contservico; ?>" id="cmbCategoria<?php echo $contservico; ?>" onchange="acessoAjax('inc/relatorios/movimentacao.ajax.php','frmMovimentacao','tdServico')">
-			  <option value="">Selecione a categoria do serviÁo</option>
+			  <option value="">Selecione a categoria do servi√ßo</option>
 	  <?php	    
-	  		$sql_categoria=mysql_query("SELECT codigo,nome FROM servicos_categorias"); 
-		    while(list($codcat,$nomecat)=mysql_fetch_array($sql_categoria))
+	  		$sql_categoria=$PDO->query("SELECT codigo,nome FROM servicos_categorias"); 
+		    while(list($codcat,$nomecat)=$sql_categoria->fetch())
 	  {	  
 	    	print("<option value=\"$codcat|$contservico|$maxcodcat\">$nomecat</option>");
 	  }
@@ -91,7 +91,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             
             <tr>
             <td>
-            Escolha o ServiÁo
+            Escolha o Servi√ßo
             </td>
             
             <td id="tdServico">

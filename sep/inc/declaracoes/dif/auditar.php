@@ -19,12 +19,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    include("../conect.php");
-    include("../../funcoes/util.php");
+    require_once("../conect.php");
+    require_once("../../funcoes/util.php");
     $codinst_financeira=$_GET['cmbInstFinanceira'];
     $coddif_des=$_GET['hdCodSolicitacao'];
 
-    $sql_auditoria=mysql_query("SELECT DATE_FORMAT(dif_des.competencia, '%Y/%m') AS competencia,
+    $sql_auditoria=$PDO->query("SELECT DATE_FORMAT(dif_des.competencia, '%Y/%m') AS competencia,
                                 dif_des.codverificacao,
                                 dif_des.estado,
                                 DATE_FORMAT(des_issretido.competencia, '%Y/%m') AS competenciaissretido,
@@ -44,8 +44,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                                 AND dif_des.codigo='$coddif_des'
                                 AND dif_des.codinst_financeira='$codinst_financeira'
                                 AND dif_des.data=des_issretido.data_gerado");
-    if(mysql_num_rows($sql_auditoria)){
-        $dados_auditoria=mysql_fetch_array($sql_auditoria);
+    if($sql_auditoria->rowCount()){
+        $dados_auditoria=$sql_auditoria->fetch();
 
         // trata o estado da declaracao da empreiteira
         if($dados_auditoria['estado']=="N"){
@@ -80,27 +80,27 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <td><?php echo $dados_auditoria['cnpjcpf']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Cód. Verificação Declaração do Tomador:</td>
+                        <td>CÃ³d. VerificaÃ§Ã£o Declaraï¿½ï¿½o do Tomador:</td>
                         <td><?php echo $dados_auditoria['codigoverificaissretido']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Cód. Verificação Declaração da Empreiteira:</td>
+                        <td>CÃ³d. VerificaÃ§Ã£o Declaraï¿½ï¿½o da Empreiteira:</td>
                         <td><?php echo $dados_auditoria['codverificacao']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Competência Declaração do Tomador:</td>
+                        <td>CompetÃªncia Declaraï¿½ï¿½o do Tomador:</td>
                         <td><?php echo $dados_auditoria['competenciaissretido']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Competência Declaração da Empreiteira:</td>
+                        <td>CompetÃªncia Declaraï¿½ï¿½o da Empreiteira:</td>
                         <td><?php echo $dados_auditoria['competencia']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Estado Declaração do Tomador:</td>
+                        <td>Estado Declaraï¿½ï¿½o do Tomador:</td>
                         <td><?php echo $dados_auditoria['estadoissretido']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Estado Declaração da Empreiteira:</td>
+                        <td>Estado Declaraï¿½ï¿½o da Empreiteira:</td>
                         <td><?php echo $dados_auditoria['estado']; ?></td>
                     </tr>
                 </table>
@@ -109,17 +109,17 @@ Fith Floor, Boston, MA 02110-1301, USA
     }
 
     // busca as notas relacionadas com a declaracao do tomador
-    $sql_notas_tomador=mysql_query("SELECT nota_nro AS numero, valor_nota AS valor FROM des_issretido_notas WHERE coddes_issretido='".$dados_auditoria['codissretido']."'");
-    $sql_notas_prestador=mysql_query("SELECT nronota AS numero, valornota AS valor FROM decc_des_notas WHERE coddecc_des='$coddecc_des'");
+    $sql_notas_tomador=$PDO->query("SELECT nota_nro AS numero, valor_nota AS valor FROM des_issretido_notas WHERE coddes_issretido='".$dados_auditoria['codissretido']."'");
+    $sql_notas_prestador=$PDO->query("SELECT nronota AS numero, valornota AS valor FROM decc_des_notas WHERE coddecc_des='$coddecc_des'");
     ?>
-        <fieldset><legend>Notas relacionadas na Declaração do Tomador</legend>
+        <fieldset><legend>Notas relacionadas na Declaraï¿½ï¿½o do Tomador</legend>
             <table width="50%" align="center">
                 <tr align="center" bgcolor="999999">
-                    <td>Número</td>
+                    <td>NÃºmero</td>
                     <td>Valor R$</td>
                 </tr>
                 <?php
-                    while($dados=mysql_fetch_array($sql_notas_tomador)){
+                    while($dados=$sql_notas_tomador->fetch()){
                         echo "
                             <tr align=\"center\" bgcolor=\"FFFFFF\">
                                 <td>".$dados['numero']."</td>
@@ -130,14 +130,14 @@ Fith Floor, Boston, MA 02110-1301, USA
                 ?>
             </table>
         </fieldset>
-        <fieldset><legend>Notas Relacionadas na Declaração da Empreiteira</legend>
+        <fieldset><legend>Notas Relacionadas na Declaraï¿½ï¿½o da Empreiteira</legend>
             <table width="50%" align="center">
                 <tr align="center" bgcolor="999999">
-                    <td>Número</td>
+                    <td>NÃºmero</td>
                     <td>Valor R$</td>
                 </tr>
                 <?php
-                    while($dados=mysql_fetch_array($sql_notas_prestador)){
+                    while($dados=$sql_notas_prestador->fetch()){
                         echo "
                             <tr align=\"center\" bgcolor=\"FFFFFF\">
                                 <td>".$dados['numero']."</td>

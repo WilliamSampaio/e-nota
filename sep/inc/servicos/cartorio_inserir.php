@@ -28,18 +28,18 @@ if(($servicos !="") &&($aliquota !=""))
 {
   if(is_numeric($aliquota))
   {
-   $sql= mysql_query("INSERT INTO cartorios_servicos SET servicos='$servicos', aliquota= '$aliquota', estado='$estado', codtipo='$codcategoria'");
-   print "<script language=JavaScript> alert('Servi&ccedil;o inserido com sucesso');</script>";   
-   add_logs('Inseriu novo servi�o de Cart�rio');	
+   $sql= $PDO->query("INSERT INTO cartorios_servicos SET servicos='$servicos', aliquota= '$aliquota', estado='$estado', codtipo='$codcategoria'");
+   print "<script language=JavaScript> alert('Serviço inserido com sucesso');</script>";   
+   add_logs('Inseriu novo serviço de Cart�rio');	
   }
   else
   {
-   print "<script language=JavaScript> alert('Ambas aliquotas devem ser preenchidas com n&uacute;meros e ponto, verifique exemplo');</script>";
+   print "<script language=JavaScript> alert('Ambas aliquotas devem ser preenchidas com números e ponto, verifique exemplo');</script>";
   }
 }
 else
 {
-  print "<script language=JavaScript> alert('Favor preencher campos obrigat&oacute;rios');</script>";
+  print "<script language=JavaScript> alert('Favor preencher campos obrigatórios');</script>";
 }
 
 

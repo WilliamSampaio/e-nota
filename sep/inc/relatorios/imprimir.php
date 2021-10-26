@@ -20,22 +20,22 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php 
 
-include("../../inc/conect.php");
-include("../../funcoes/util.php");
+require_once("../../inc/conect.php");
+require_once("../../funcoes/util.php");
 // variaveis vindas do conect.php
 // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF	
 
 
 
-$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 //preenche a variavel com os valores vindos do banco
-list($BRASAO) = mysql_fetch_array($sql_brasao);
+list($BRASAO) = $sql_brasao->fetch();
 
 
 
 ?>
 
-<title>Imprimir Relat&oacute;rio</title>
+<title>Imprimir Relatório</title>
 
 
 <style type="text/css" media="screen">
@@ -83,7 +83,7 @@ div.pagina {
         <div id="DivImprimir">
             <input type="button" onClick="print();" value="Imprimir" />
             <br />
-            <i><b>Este relat&oacute;rio &eacute; melhor visualizado em formato de impress&atilde;o em paisagem.</b></i>
+            <i><b>Este relatório é melhor visualizado em formato de impressão em paisagem.</b></i>
             <br /><br />
         </div>
         <center>
@@ -94,7 +94,7 @@ div.pagina {
             </center></td>
             <td width="584" height="33" colspan="2"><span class="style1">
               <center>
-                     <p>RELAT&Oacute;RIO DE <b>PRESTADORES</b> </p>
+                     <p>RELATÓRIO DE <b>PRESTADORES</b> </p>
                      <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
                      <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
               </center>
@@ -111,7 +111,7 @@ div.pagina {
                         <?php
                         //Comando sql que selecionara do banco os tipos de prestadores e a quantidade de cada e o total geral
 
-                        $sql_tipo = mysql_query("
+                        $sql_tipo = $PDO->query("
                             SELECT
                                 tipo.nome,
                                 COUNT(cadastro.codigo)
@@ -125,7 +125,7 @@ div.pagina {
                         echo "<b><center><font class=\"fonte\">Tipos de Prestadores</center></b> <br>";
 
                         $qtdtotal=0;
-                        while(list($nome,$qtd)=mysql_fetch_array($sql_tipo)){
+                        while(list($nome,$qtd)=$sql_tipo->fetch()){
                             echo"<tr><td align=\"center\"><font class=\"fonte\">$nome:</font></td><td align=\"center\"><font class=\"fonte\">$qtd</font></td></tr>";
                             $qtdtotal=$qtdtotal+$qtd;
                             }
@@ -140,7 +140,7 @@ div.pagina {
         <?php
 
         //Comando sql que selecionar� do banco a quantidade de prestadores por estado
-        $sql = mysql_query ("
+        $sql = $PDO->query("
             SELECT
                 uf ,
                 COUNT(*)
@@ -156,7 +156,7 @@ div.pagina {
 
         $qtdtotal=0;
         $cont = 0;
-        while(list($uf,$qtd)=mysql_fetch_array($sql)){
+        while(list($uf,$qtd)=$sql->fetch()){
 			if($uf == '')$uf='outros';
         if($cont == '5'){
         echo "</tr><tr>";		
@@ -171,7 +171,7 @@ div.pagina {
         ?>
 
         <?php
-        $ano=mysql_query("SELECT year (datahoraemissao) from notas");
+        $ano=$PDO->query("SELECT year (datahoraemissao) from notas");
         ?>
         </tr>
             <tr>
@@ -227,7 +227,7 @@ div.pagina {
                       `cadastro`.`nome`
 
                     ");
-            $sql_pesquisa = mysql_query ($query);
+            $sql_pesquisa = $PDO->query($query);
             $result = mysql_num_rows($sql_pesquisa);
         if(mysql_num_rows($sql_pesquisa)){
         ?>
@@ -245,12 +245,12 @@ div.pagina {
                 echo "<b>Foram encontrados $result  Resultados</b>";
             }
             ?>
-              <td width="50%" align="center"><strong>Raz&atilde;o Social</strong></td>
+              <td width="50%" align="center"><strong>Razão Social</strong></td>
               <td width="16%" align="center"><strong>CPF/CNPJ</strong></td>
               <td width="10%" align="center"><strong>Simples Nacional</strong></td>
               <td width="5%" align="center"><strong>Estado</strong></td>
               <td width="5%" align="center"><strong>Isento</strong></td>
-              <td width="23%" align="center"><strong>Munic&iacute;pio</strong></td>
+              <td width="23%" align="center"><strong>Município</strong></td>
 
           </tr>
           <?php
@@ -258,17 +258,17 @@ div.pagina {
                 $tipos_extenso = array(
                     "prestador"              => "Prestador",
                     "empreiteira"            => "Empreiteira",
-                    "instituicao_financeira" => "Institui&ccedil;&atilde;o Financeira",
-                    "cartorio"               => "Cart&oacute;rio",
-                    "operadora_credito"      => "Operadora de Cr&eacute;dito",
-                    "grafica"                => "Gr&aacute;fica",
+                    "instituicao_financeira" => "Instituição Financeira",
+                    "cartorio"               => "Cartório",
+                    "operadora_credito"      => "Operadora de Crédito",
+                    "grafica"                => "Gráfica",
                     "contador"               => "Contador",
                     "tomador"                => "Tomador",
-                    "orgao_publico"          => "Org&atilde;o P&uacute;blico",
+                    "orgao_publico"          => "Orgão Público",
                     "simples"                => "Simples"
                 );
 
-                while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+                while($dados_pesquisa = $sql_pesquisa->fetch()){
                     $declaracoes = $dados_pesquisa['declaracao'];
                 if ($declaracoes!="Simples Nacional"){
                        $declaracoes="";
@@ -279,13 +279,13 @@ div.pagina {
                 switch($dados_pesquisa['estado']){
                     case "A": $dados_pesquisa['estado'] = "Ativo"; break;
                     case "I": $dados_pesquisa['estado'] = "Inativo"; break;
-                    case "NL": $dados_pesquisa['estado'] = "N&atilde;o Liberado"; break;
+                    case "NL": $dados_pesquisa['estado'] = "Não Liberado"; break;
                 }
 
                 if($dados_pesquisa['isentoiss'] == "S"){
                     $dados_pesquisa['isentoiss'] = "Sim";
                 }else{
-                    $dados_pesquisa['isentoiss'] = "N&atilde;o";
+                    $dados_pesquisa['isentoiss'] = "Não";
                 }
 
                 //print_array($dados_pesquisa);
@@ -320,12 +320,12 @@ div.pagina {
                         <table width="95%" class="tabela" border="1" cellspacing="0" style="margin-top:10px;
                         page-break-after: always">
                             <tr style="background-color:#999999">
-                                <td width="50%" align="center"><strong>Raz&atilde;o Social</strong></td>
+                                <td width="50%" align="center"><strong>Razão Social</strong></td>
                               <td width="16%" align="center"><strong>CPF/CNPJ</strong></td>
                               <td width="10%" align="center"><strong>Simples Nacional</strong></td>
                               <td width="5%" align="center"><strong>Estado</strong></td>
                               <td width="5%" align="center"><strong>Isento</strong></td>
-                              <td width="23%" align="center"><strong>Munic&iacute;pio</strong></td>
+                              <td width="23%" align="center"><strong>Município</strong></td>
                           </tr>
                         <?php
                     }
@@ -336,7 +336,7 @@ div.pagina {
         <?php
         }else{
          //caso não encontre resultados, a mensagem 'Não há resultados!' será mostrada na tela
-            echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">N&atilde;o h&aacute; resultados!</font></center></td></b></tr>";
+            echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">Não há resultados!</font></center></td></b></tr>";
         }
         ?>
         </table>

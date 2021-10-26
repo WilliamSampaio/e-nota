@@ -1,6 +1,6 @@
 <?php
-    include('../../funcoes/util.php');
-    include('../../include/conect.php');
+    require_once('../../funcoes/util.php');
+    require_once('../../include/conect.php');
 
     $sql = $PDO->query("SELECT cidade,email,secretaria FROM configuracoes");
     list($cidade,$to,$secretaria) = $sql->fetch();
@@ -10,15 +10,15 @@
     }
     //echo "<pre>"; print_r($_POST); echo "</pre>";
 
-    $message = "O prestador de servi&ccedil;os ".$_POST['txtInsNomeEmpresa']." solicita acesso ao sistema e-Nota da Prefeitura Municipal de ".$cidade.".";
+    $message = "O prestador de serviços ".$_POST['txtInsNomeEmpresa']." solicita acesso ao sistema e-Nota da Prefeitura Municipal de ".$cidade.".";
     $message .= "<br />";
-    $message .= "Os dados do prestador de servi&ccedil;os ".$_POST['txtInsNomeEmpresa']." seguem abaixo para avalia&ccedil;&atilde;o:";
+    $message .= "Os dados do prestador de serviços ".$_POST['txtInsNomeEmpresa']." seguem abaixo para avaliação:";
     $message .= "<br /><br />";
     $message .= "Prestador: ".$_POST['txtInsNomeEmpresa']."<br />";
-    $message .= "Raz&atilde;o Social: ".$_POST['txtInsRazaoSocial']."<br />";
+    $message .= "Razão Social: ".$_POST['txtInsRazaoSocial']."<br />";
     $message .= "CNPJ/CPF: ".$_POST['txtCNPJ']."<br />";
     $message .= "Logradouro: ".$_POST['txtLogradouro']."<br />";
-    $message .= "N&uacute;mero: ".$_POST['txtNumero']."<br />";
+    $message .= "Número: ".$_POST['txtNumero']."<br />";
     if(!empty($_POST['txtComplemento'])){
         $message .= "Complemento: ".$_POST['txtComplemento']."<br />";
     }
@@ -29,9 +29,9 @@
         $message .= "Telefone Celular: ".$_POST['txtFoneCelular']."<br />";
     }
     $message .= "Estado: ".$_POST['txtInsUfEmpresa']."<br />";
-    $message .= "Munic&iacute;pio: ".$_POST['txtInsMunicipioEmpresa']."<br />";
+    $message .= "Município: ".$_POST['txtInsMunicipioEmpresa']."<br />";
     if(empty($_POST['txtPispasep'])){
-        $_POST['txtPispasep'] = "N&atilde;o Informado";
+        $_POST['txtPispasep'] = "Não Informado";
     }
     $message .= "PIS/PASEP: ".$_POST['txtPispasep']."<br />";
     $message .= "Email: ".$_POST['txtInsEmailEmpresa']."<br />";
@@ -39,14 +39,14 @@
     if($_POST['txtSimplesNacional'] == 'S'){
         $message .= "Empresa optante pelo Simples Nacional<br /><br />";
     }
-    $message .= "S&oacute;cios/Respons&aacute;veis:<br />";
+    $message .= "Sócios/Responsáveis:<br />";
     for($key = 1; $key <= 10; $key++){
         if(!empty($_POST['txtNomeSocio'.$key]) && !empty($_POST['txtCpfSocio'.$key])){
             $message .= "Nome: ".$_POST['txtNomeSocio'.$key]." CPF: ".$_POST['txtCpfSocio'.$key]."<br />";
         }
     }
     $message .= "<br />";
-    $message .= "Servi&ccedil;os:<br>";
+    $message .= "Serviços:<br>";
     for($key = 1; $key <= 5; $key++){
         if(!empty($_POST['cmbCategoria'.$key])){
             $cod = explode('|',$_POST['cmbCategoria'.$key]);
@@ -57,7 +57,7 @@
             $sqlServ = $PDO->query("SELECT descricao FROM servicos WHERE codservico = '{$cod[0]}'");
             list($servico) =$sqlServ->fetch();
 
-            $message .= "Servi&ccedil;o: ".$servico." - Categoria: ".$categoria."<br />";
+            $message .= "Serviço: ".$servico." - Categoria: ".$categoria."<br />";
         }
     }
 
@@ -68,7 +68,7 @@
     switch($mes){
         case "01": $mes = "Janeiro"; break;
         case "02": $mes = "Fevereiro"; break;
-        case "03": $mes = "Mar&ccedil;o"; break;
+        case "03": $mes = "Março"; break;
         case "04": $mes = "Abril"; break;
         case "05": $mes = "Maio"; break;
         case "06": $mes = "Junho"; break;
@@ -80,7 +80,7 @@
         case "12": $mes = "Dezembro"; break;
     }
 
-    $message .= "Solicita&ccedil;&atilde;o de cadastro efetuada as ".$hora." horas do dia ".date('d')." de ".$mes." de".date("Y");
+    $message .= "Solicitação de cadastro efetuada as ".$hora." horas do dia ".date('d')." de ".$mes." de".date("Y");
 
     $subject = "Cadastro ao sistema e-Nota";
     $headers = "MIME-Version: 1.0 \r\n";

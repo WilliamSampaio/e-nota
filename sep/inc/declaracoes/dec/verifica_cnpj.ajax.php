@@ -19,11 +19,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	include("../../conect.php");
-	include("../../../funcoes/util.php");
+	require_once("../../conect.php");
+	require_once("../../../funcoes/util.php");
 	/*$cnpj = $_SESSION['login'];
-	$sqlcnpj = mysql_query("SELECT codigo, nome, razaosocial, cnpj, logradouro, municipio, uf, email FROM cadastro WHERE cnpj = '$cnpj' AND estado = 'A'");
-	list($codigo,$nome,$razaosocial,$cnpj_cartorio,$endereco,$municipio,$uf,$email)=mysql_fetch_array($sqlcnpj);*/
+	$sqlcnpj = $PDO->query("SELECT codigo, nome, razaosocial, cnpj, logradouro, municipio, uf, email FROM cadastro WHERE cnpj = '$cnpj' AND estado = 'A'");
+	list($codigo,$nome,$razaosocial,$cnpj_cartorio,$endereco,$municipio,$uf,$email)=$sqlcnpj);*/
 	
 	
 ?>
@@ -34,8 +34,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<input type="hidden" name="hdCodCartorio" value="<?php echo $codigo; ?>" />
 	<table width="100%" height="100%" bgcolor="#CCCCCC" border="0" align="center" cellpadding="5" cellspacing="0">
 		<tr>
-			<td colspan="3" align="center"><strong>C&aacute;lculo de Receita Bruta com Discrimina&ccedil;&atilde;o de Tomadores<br>
-				Guia destinada SOMENTE para tributa&ccedil;&atilde;o de receitas PR&Oacute;PRIAS. </strong>
+			<td colspan="3" align="center"><strong>Cálculo de Receita Bruta com Discriminação de Tomadores<br>
+				Guia destinada SOMENTE para tributação de receitas PRÓPRIAS. </strong>
 			</td>
 		</tr>
 		<tr>

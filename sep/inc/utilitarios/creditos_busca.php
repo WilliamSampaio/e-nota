@@ -68,7 +68,7 @@ if($_POST['btSalvarRegra'])
 	{
 	  if(($_POST['txtCredito'.$cont])&&($_POST['rdTipoPessoa'.$cont])&&($_POST['rdIssRetido'.$cont])&&($_POST['txtValor'.$cont])&&($_POST['hdCodRegra']))
 	  {
-		$sql =mysql_query("UPDATE nfe_creditos SET credito='".$_POST['txtCredito'.$cont]."',tipopessoa='".$_POST['rdTipoPessoa'.$cont]."',issretido='".$_POST['rdIssRetido'.$cont]."',valor='".$_POST['txtValor'.$cont]."',estado='A' WHERE codigo='".$_POST['hdCodRegra']."'");	
+		$sql =$PDO->query("UPDATE nfe_creditos SET credito='".$_POST['txtCredito'.$cont]."',tipopessoa='".$_POST['rdTipoPessoa'.$cont]."',issretido='".$_POST['rdIssRetido'.$cont]."',valor='".$_POST['txtValor'.$cont]."',estado='A' WHERE codigo='".$_POST['hdCodRegra']."'");	
 		Mensagem("Regra atualizada com sucesso!!");
 	  }
 	
@@ -76,7 +76,7 @@ if($_POST['btSalvarRegra'])
 }
 elseif($_POST['btExcluirRegra'])
 {
- mysql_query("DELETE FROM nfe_creditos WHERE codigo='".$_POST['hdCodRegra']."'");
+ $PDO->query("DELETE FROM nfe_creditos WHERE codigo='".$_POST['hdCodRegra']."'");
  Mensagem("Regra excluida com sucesso !!");
 }?>
 <fieldset style="margin-left:10px; margin-right:10px;">
@@ -85,7 +85,7 @@ elseif($_POST['btExcluirRegra'])
 <form method="post"> 
 <table width="100%" border="0">	
 	<tr>
-		<td align="center" width="13%">		  Crédito (%) </td>
+		<td align="center" width="13%">		  CrÃ©dito (%) </td>
     <td align="center" width="20%">	    Tipo Pessoa		</td>
     <td align="center" width="15%">	    ISS Retido		</td>
     <td align="center" width="20%">	    Valor	(R$)	</td>
@@ -112,12 +112,12 @@ elseif($_POST['btExcluirRegra'])
 	
  <?php 
  
-   $sql=mysql_query("SELECT codigo,credito,tipopessoa,issretido,valor FROM nfe_creditos");
+   $sql=$PDO->query("SELECT codigo,credito,tipopessoa,issretido,valor FROM nfe_creditos");
    $cont=0;
-   while(list($codigo,$credito,$tipopessoa,$issretido,$valor)=mysql_fetch_array($sql))      
+   while(list($codigo,$credito,$tipopessoa,$issretido,$valor)=$sql->fetch())      
    {
-     $issretidodisplay = $issretido=="S"?"Sim":"Não";     
-	 $tipopessoadisplay = $tipopessoa == 'PF' ? 'Pessoa Física' : 'Pessoa Jurídica';   
+     $issretidodisplay = $issretido=="S"?"Sim":"NÃ£o";     
+	 $tipopessoadisplay = $tipopessoa == 'PF' ? 'Pessoa Fï¿½sica' : 'Pessoa Jurï¿½dica';   
 	  echo"
 	   
 	   <div style=\"display:block\" id=\"DivBusca$cont\">	       
@@ -133,7 +133,7 @@ elseif($_POST['btExcluirRegra'])
 					  $issretidodisplay 
 					</td>
 					<td bgcolor=\"#ffffff\" align=\"right\" width=\"20%\">
-					  ";echo DecToMoeda($valor); echo "&nbsp;
+					  ";echo DecToMoeda($valor); echo "
 					</td>
 					<td bgcolor=\"#ffffff\" align=\"center\" width=\"16%\">		  
 					  <input type=\"button\" class=\"botao\" value=\"Atualizar\" name=\"btAtualizar\" id=\"btAtualizar\"					   onclick=\"MostraDiv('Div$cont','DivBusca$cont','hddiv|hdcredito|hdtipopessoapf|hdtipopessoapj|hdissretidos|hdissretidon|hdvalor','txtCredito$cont|rdTipoPessoaPF$cont|rdTipoPessoaPJ$cont|rdIssRetidoS$cont|rdIssRetidoN$cont|txtValor$cont','block','$codigo|hdCodRegra')\">
