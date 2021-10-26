@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <img src="
                             <?php
                             if ($CONF_BRASAO) {
-                                echo "../img/brasoes/" . isTenancyAppBySubdomain() . '/' . rawurlencode($CONF_BRASAO);
+                                echo "../img/brasoes/" . isTenancyAppBySubdomain() . rawurlencode($CONF_BRASAO);
                             }
                             ?>" alt="" width="64" height="64" class="d-inline-block align-text-top">
                     </a>
