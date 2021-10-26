@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-
+// teste
 require_once 'autoload.php';
 
 header("Location: " . BASE_URL . 'site/');
