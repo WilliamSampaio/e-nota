@@ -21,8 +21,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 
 <?php
-	include("conect.php");
-	include("../funcoes/util.php");
+	require_once("conect.php");
+	require_once("../include/util.php");
 	
 	$cnpj    = $_GET['txtCNPJ'];
 	$tipo    = $_GET['tipo'];
@@ -34,7 +34,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$string = " AND codtipodeclaracao = '$tipodec'";
 	}
 	
-	$sql_infos = mysql_query("
+	$sql_infos = $PDO->query("
 		SELECT 
 			codigo, 
 			razaosocial, 
@@ -47,17 +47,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 			(cnpj = '$cnpj' OR cpf = '$cnpj') AND 
 			codtipo = '$codtipo' $string
 	");
-	list($codigo,$razaosocial,$endereco,$municipio,$uf) = mysql_fetch_array($sql_infos);
+	list($codigo,$razaosocial,$endereco,$municipio,$uf) = $sql_infos->fetch();
 	
-	if(mysql_num_rows($sql_infos) > 0){
+	if($sql_infos->rowCount() > 0){
 ?>
 <table width="100%">
 	<tr>
-		<td width="17%" align="left" valign="middle">Raz&atilde;o Social:</td>
+		<td width="17%" align="left" valign="middle">Razão Social:</td>
 		<td width="83%" align="left" valign="middle"><b><?php echo $razaosocial;?></b></td>
 	</tr>
 	<tr>
-		<td align="left" valign="middle">Endere&ccedil;o:</td>
+		<td align="left" valign="middle">Endereço:</td>
 		<td align="left" valign="middle"><b><?php echo "$endereco - $municipio - $uf";?></b></td>
 	</tr>
 </table>
@@ -83,27 +83,27 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 	
 	//Da include do arquivo para a insercao de nota
-	include("declaracoes/$pasta/declarar_inserir.ajax.php");
+	require_once("declaracoes/$pasta/declarar_inserir.ajax.php");
 	}else{
 		
 		switch($tipo){
-			case "cartorio":      $nometipo = "ou n&atilde;o &eacute; um cart&oacute;rio";      break;
-			case "empreiteira":   $nometipo = "ou n&atilde;o &eacute; uma empreiteira";  break;
-			case "orgao_publico": $nometipo = "ou n&atilde;o &eacute; um org&atilde;o publico"; break;
+			case "cartorio":      $nometipo = "ou não é um cartório";      break;
+			case "empreiteira":   $nometipo = "ou não é uma empreiteira";  break;
+			case "orgao_publico": $nometipo = "ou não é um orgão publico"; break;
 			case "prestador":
 				if($tipodec == ""){
-					$nometipo = "ou n&atilde;o &eacute; um prestador";
+					$nometipo = "ou não é um prestador";
 				}else if($tipodeclaracao == "mei"){
-					$nometipo = "ou n&atilde;o &eacute; um prestador MEI";
+					$nometipo = "ou não é um prestador MEI";
 				}else{
-					$nometipo = "ou n�o � um prestador simples nacional";
+					$nometipo = "ou não é um prestador simples nacional";
 				}          
 			  break;
 		}
 	?>
 		<table width="100%">
 			<tr>
-				<td align="center"><b>Este cnpj/cpf n&atilde;o esta cadastrado <?php echo $nometipo;?>!</b></td>
+				<td align="center"><b>Este cnpj/cpf não esta cadastrado <?php echo $nometipo;?>!</b></td>
 			</tr>
 			<tr>
 				<td align="left"><input type="submit" name="btVoltar" class="botao" value="Voltar" /></td>

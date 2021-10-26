@@ -20,19 +20,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
     <?php
 
-    include("../../inc/conect.php");
-    include("../../funcoes/util.php");
+    require_once("../../inc/conect.php");
+    require_once("../../funcoes/util.php");
     // variaveis vindas do conect.php
     // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF
 
-    $sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+    $sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
     //preenche a variavel com os valores vindos do banco
-    list($BRASAO) = mysql_fetch_array($sql_brasao);
+    list($BRASAO) = $sql_brasao->fetch();
 
     $meses = array(
         1  => "Janeiro",
         2  => "Fevereiro",
-        3  => "Mar&ccedil;o",
+        3  => "Março",
         4  => "Abril",
         5  => "Maio",
         6  => "Junho",
@@ -45,7 +45,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     );
     ?>
 
-        <title>Imprimir Al&iacute;quota Simples</title>
+        <title>Imprimir Alíquota Simples</title>
 
 
         <style type="text/css"  media="screen">
@@ -98,7 +98,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td width="584" height="33" colspan="2">
               <span class="style1">
                   <center>
-                     <p>RELAT&Oacute;RIO DE <b>AL&Iacute;QUOTAS DO SIMPLES UTILIZADAS PELO CONTRIBUINTE</b> </p>
+                     <p>RELATÓRIO DE <b>AL&Iacute;QUOTAS DO SIMPLES UTILIZADAS PELO CONTRIBUINTE</b> </p>
                      <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
                      <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
                   </center>
@@ -123,22 +123,22 @@ Fith Floor, Boston, MA 02110-1301, USA
             $where = "";
             if(empty($ano) && empty($mes)){
                 $where = "";
-                $sqlPeriodo = mysql_query("
+                $sqlPeriodo = $PDO->query("
                     SELECT DATE_FORMAT(MAX(datahoraemissao),'%m/%Y') AS final,
                     DATE_FORMAT(MIN(datahoraemissao),'%m/%Y') AS inicio
                     FROM notas
                 ");
-                $historico = mysql_fetch_object($sqlPeriodo);
-                $periodo = "<b>Per&iacute;odo:</b> {$historico->inicio} at&eacute; {$historico->final}";
+                $historico = $sqlPeriodo->fetchObject();
+                $periodo = "<b>Período:</b> {$historico->inicio} até {$historico->final}";
             }elseif(!empty($ano) && empty($mes)){
                 $where = "WHERE DATE_FORMAT(notas.datahoraemissao,'%Y') = '$ano'";
-                $periodo = "<b>Per&iacute;odo:</b> 01/$ano at&eacute; 12/$ano";
+                $periodo = "<b>Período:</b> 01/$ano até 12/$ano";
             }elseif(empty($ano) && !empty($mes)){
                 $where = "WHERE DATE_FORMAT(notas.datahoraemissao,'%m') = '$mes'";
-                $periodo = "<b>Per&iacute;odo:</b> Hist&oacute;rico do m&ecirc;s de $nomeMes";
+                $periodo = "<b>Período:</b> Histórico do mês de $nomeMes";
             }elseif(!empty($ano) && !empty($mes)){
                 $where = "WHERE DATE_FORMAT(notas.datahoraemissao,'%Y-%m') = '$ano-$mes'";
-                $periodo = "<b>Per&iacute;odo:</b> $mes/$ano";
+                $periodo = "<b>Período:</b> $mes/$ano";
             }
 
             if(empty($where) && !empty($codPrestador)){
@@ -154,7 +154,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             }
 
             $where .= " AND cadastro.nfe = 'S' AND cadastro.codtipodeclaracao = 3";
-            $sqlValores = mysql_query("
+            $sqlValores = $PDO->query("
                SELECT
                    AVG(notas.aliq_percentual) AS aliqpercentual,
                    AVG(notas.aliqinss) AS aliqinss,
@@ -163,7 +163,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			   	   notas INNER JOIN cadastro ON notas.codemissor = cadastro.codigo
                $where
            ");
-           $valores = mysql_fetch_object($sqlValores);
+           $valores = $sqlValores->fetchObject();
         ?>
         <table width="95%" border="1" cellspacing="0" class="tabelameio"  >
             <tr>
@@ -172,23 +172,23 @@ Fith Floor, Boston, MA 02110-1301, USA
                 </td>
                 <td valign="top">
                    <?php
-                       echo "<b>M�dia al&iacute;quota percentual:</b> ".DecToMoeda($valores->aliqpercentual);
+                       echo "<b>M�dia alíquota percentual:</b> ".DecToMoeda($valores->aliqpercentual);
                    ?>
                 </td>
                 <td>
                     <?php
-                       echo "<b>M�dia al&iacute;quota INSS:</b> ".DecToMoeda($valores->aliqinss);
+                       echo "<b>M�dia alíquota INSS:</b> ".DecToMoeda($valores->aliqinss);
                     ?>
                 </td>
                 <td>
                     <?php
-                       echo "<b>M�dia al&iacute;quota IRRF:</b> ".DecToMoeda($valores->aliqirrf);
+                       echo "<b>M�dia alíquota IRRF:</b> ".DecToMoeda($valores->aliqirrf);
                     ?>
                 </td>
             </tr>
         </table>
         <?php
-            //Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela fun��o
+            //Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
             $varcont= $_POST['hdContador'];
 
             $query = ("
@@ -206,8 +206,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                 $where
 				ORDER BY cadastro.nome
             ");
-            $sql = mysql_query($query);
-            $result = mysql_num_rows($sql);
+            $sql = $PDO->query($query);
+            $result = $sql->rowCount();
             $x = 0;
             if($result == 1){
                 echo "<b>Foi encontrado $result  Resultado</b>";
@@ -224,16 +224,16 @@ Fith Floor, Boston, MA 02110-1301, USA
                       <td align="center"><strong>CNPJ / CPF</strong></td>
                       <td align="center"><strong>Tomador</strong></td>
                       <td align="center"><strong>CNPJ / CPF</strong></td>
-                      <td align="center"><strong>N&ordm; Nota</strong></td>
-                      <td align="center"><strong>Al&iacute;quota percentual</strong></td>
-                      <td align="center"><strong>Al&iacute;quota INSS</strong></td>
-                      <td align="center"><strong>Al&iacute;quota IRRF</strong></td>
+                      <td align="center"><strong>Nº Nota</strong></td>
+                      <td align="center"><strong>Alíquota percentual</strong></td>
+                      <td align="center"><strong>Alíquota INSS</strong></td>
+                      <td align="center"><strong>Alíquota IRRF</strong></td>
 
                   </tr>
                 <?php
             }
             $cont = 0;
-            while($dados_pesquisa = mysql_fetch_array($sql)){
+            while($dados_pesquisa = $sql->fetch()){
                 if(strlen($dados_pesquisa['nome']) > 40){
                     $descricao = ResumeString($dados_pesquisa['nome'],40);
                 }else{

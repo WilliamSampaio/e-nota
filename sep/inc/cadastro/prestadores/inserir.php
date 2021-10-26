@@ -73,11 +73,11 @@ $include=$_POST['include'];
 
 
 
-	// define se � ou nao contador
-    $sql=mysql_query("SELECT MAX(codigo) FROM servicos_categorias");
-	list($maxcodigo)=mysql_fetch_array($sql);
-	$sql_categoria=mysql_query("SELECT codigo FROM servicos_categorias WHERE nome = 'Cont�bil'");	
-	list($codigocategoria)=mysql_fetch_array($sql_categoria);
+	// define se é ou nao contador
+    $sql=$PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
+	list($maxcodigo)=$sql->fetch();
+	$sql_categoria=$PDO->query("SELECT codigo FROM servicos_categorias WHERE nome = 'Cont�bil'");	
+	list($codigocategoria)=$sql_categoria->fetch();
 	$categoria=1;
 	$servico=1;
 	$tipo="empresa";
@@ -94,37 +94,37 @@ $include=$_POST['include'];
 		$servico++;	
 	}
     if($tipo=="contador"){
-        $sql=mysql_query("SELECT codigo FROM tipo WHERE tipo='contador'");
-		list($codtipo)=mysql_fetch_array($sql);
+        $sql=$PDO->query("SELECT codigo FROM tipo WHERE tipo='contador'");
+		list($codtipo)=$sql->fetch();
     }
 
     // verifca se o valor da variavel cpfcnpj e valido como cpf ou cmpj
     if((strlen($cpfcnpj)!=14)&&(strlen($cpfcnpj)!=18)){
-		Mensagem("O CPF/CNPJ informado n&atilde;o &eacute; v&aacute;lido");
+		Mensagem("O CPF/CNPJ informado não é válido");
 		RedirecionaPost("?include={$include}");
 		die();//die() para nao executar o restante do arquivo
     }
 
-    //Verifica se n�o h� nenhuma empresa cadastrada com o mesmo nome e/ou cnpj
+    //Verifica se não há nenhuma empresa cadastrada com o mesmo nome e/ou cnpj
     $campo=tipoPessoa($cpfcnpj);
-	$teste_nome        = mysql_query("SELECT codigo FROM cadastro WHERE nome = '$nome'");
-	$teste_razaosocial = mysql_query("SELECT codigo FROM cadastro WHERE razaosocial = '$razaosocial'");
-	$teste_cnpj        = mysql_query("SELECT codigo FROM cadastro WHERE $campo = '$cpfcnpj'");
-	if(mysql_num_rows($teste_nome)>0){
-		Mensagem("J&aacute; existe um prestador de servi&ccedil;os com este nome");
+	$teste_nome        = $PDO->query("SELECT codigo FROM cadastro WHERE nome = '$nome'");
+	$teste_razaosocial = $PDO->query("SELECT codigo FROM cadastro WHERE razaosocial = '$razaosocial'");
+	$teste_cnpj        = $PDO->query("SELECT codigo FROM cadastro WHERE $campo = '$cpfcnpj'");
+	if($teste_nome->rowCount()>0){
+		Mensagem("Já existe um prestador de serviços com este nome");
 		RedirecionaPost("?include={$include}");
-	}elseif(mysql_num_rows($teste_razaosocial)>0){
-		Mensagem("J&aacute; existe um prestador de servi&ccedil;os com esta raz&atilde;o social");
+	}elseif($teste_razaosocial->rowCount()>0){
+		Mensagem("Já existe um prestador de serviços com esta razão social");
 		RedirecionaPost("?include={$include}");
-	}elseif(mysql_num_rows($teste_cnpj)>0){
-		Mensagem("J&aacute; existe um prestador de servi&ccedil;os com este CPF/CNPJ");
+	}elseif($teste_cnpj->rowCount()>0){
+		Mensagem("Já existe um prestador de serviços com este CPF/CNPJ");
 		RedirecionaPost("?include={$include}");
 	}else{		
 	   
 		// insere a empresa no banco
         
 		
-		$sql = mysql_query("
+		$sql = $PDO->query("
 			INSERT INTO 
 				cadastro
             SET 
@@ -156,8 +156,8 @@ $include=$_POST['include'];
 		");
 			
 		
-		$sql_busca_cod = mysql_query("SELECT codigo FROM cadastro WHERE $campo = '$cpfcnpj'");
-		list($codigoempresa) = mysql_fetch_array($sql_busca_cod);
+		$sql_busca_cod = $PDO->query("SELECT codigo FROM cadastro WHERE $campo = '$cpfcnpj'");
+		list($codigoempresa) = $sql_busca_cod->fetch();
 							
 							
 	   //Pega os codtipo dos prestadores que tem informa��es extras
@@ -165,22 +165,22 @@ $include=$_POST['include'];
 	   $codtipo_opr  = codtipo('operadora_credito');
 	   $codtipo_cart = codtipo('cartorio');
 	   
-	   //testa se o prestador que est� sendo editado tem alguma informa��o extra
+	   //testa se o prestador que está sendo editado tem alguma informação extra
 	   if($codtipo == $codtipo_inst){
-			mysql_query("INSERT inst_financeiras SET agencia = '$agencia', codbanco = '$codbanco', codcadastro = '$codigoempresa'");
+			$PDO->query("INSERT inst_financeiras SET agencia = '$agencia', codbanco = '$codbanco', codcadastro = '$codigoempresa'");
 			$codcargo = codcargo("Gerente");
-			add_logs('Inseriu uma Institui��o Financeira');
-			mysql_query("INSERT cadastro_resp SET nome = '$gerente', cpf = '$gerente_cpf', codcargo = '$codcargo', codemissor = '$codigoempresa'");
+			add_logs('Inseriu uma Instituição Financeira');
+			$PDO->query("INSERT cadastro_resp SET nome = '$gerente', cpf = '$gerente_cpf', codcargo = '$codcargo', codemissor = '$codigoempresa'");
 	   }elseif($codtipo == $codtipo_opr){
-			mysql_query("INSERT operadoras_creditos SET agencia = '$agencia', codbanco = '$codbanco', codcadastro = '$codigoempresa'");
+			$PDO->query("INSERT operadoras_creditos SET agencia = '$agencia', codbanco = '$codbanco', codcadastro = '$codigoempresa'");
 			$codcargo = codcargo("Gerente");
-			add_logs('Inseriu uma Operadora de Cr�dito');
-			mysql_query("INSERT cadastro_resp SET nome = '$gerente', cpf = '$gerente_cpf', codcargo = '$codcargo', codemissor = '$codigoempresa'");
+			add_logs('Inseriu uma Operadora de Crédito');
+			$PDO->query("INSERT cadastro_resp SET nome = '$gerente', cpf = '$gerente_cpf', codcargo = '$codcargo', codemissor = '$codigoempresa'");
 	   	}elseif($codtipo == $codtipo_cart){
-			mysql_query("INSERT cartorios SET admpublica = '$adm_publica', nivel = '$nivel', codcadastro = '$codigoempresa'");
+			$PDO->query("INSERT cartorios SET admpublica = '$adm_publica', nivel = '$nivel', codcadastro = '$codigoempresa'");
 			$codcargo = codcargo("Diretor");
-			add_logs('Inseriu um Cart&oacute;rio');
-			mysql_query("INSERT cadastro_resp SET nome = '$diretor', cpf = '$diretor_cpf', codcargo = '$codcargo', codemissor = '$codigoempresa'");		
+			add_logs('Inseriu um Cartório');
+			$PDO->query("INSERT cadastro_resp SET nome = '$diretor', cpf = '$diretor_cpf', codcargo = '$codcargo', codemissor = '$codigoempresa'");		
 	   }
 	   
 	   
@@ -188,8 +188,8 @@ $include=$_POST['include'];
 		
 		
 		//depois de cadastrada a empresa envia-se um passo a passo com  senha para a empresa cadastrada
-		$sql_url_site = mysql_query("SELECT site FROM configuracoes");
-		list($LINK_ACESSO) = mysql_fetch_array($sql_url_site);
+		$sql_url_site = $PDO->query("SELECT site FROM configuracoes");
+		list($LINK_ACESSO) = $sql_url_site->fetch();
 		
 		
 		$msg = "O cadastro da empresa $nome foi efetuado com sucesso.<br>
@@ -226,8 +226,8 @@ $include=$_POST['include'];
 			
 		
 		// busca empresa no banco --------------------------------------------------------------------------------------------------		
-		$sql_empresa = mysql_query("SELECT codigo FROM cadastro WHERE $campo = '$cpfcnpj'");
-		list($CODEMPRESA) = mysql_fetch_array($sql_empresa);
+		$sql_empresa = $PDO->query("SELECT codigo FROM cadastro WHERE $campo = '$cpfcnpj'");
+		list($CODEMPRESA) = $sql_empresa->fetch();
 	
 		
 	
@@ -237,15 +237,15 @@ $include=$_POST['include'];
 		//Insere os servicos no banco...		
 			
 			//vetores para adicionar servicos
-			 $sql_categoria=mysql_query("SELECT codigo,nome FROM servicos_categorias");
+			 $sql_categoria=$PDO->query("SELECT codigo,nome FROM servicos_categorias");
 			 
 			 $contpos=0;
-			 while(list($codcategoria)=mysql_fetch_array($sql_categoria)) {   
+			 while(list($codcategoria)=$sql_categoria->fetch()) {   
 			   $conts=1;
 			   for($conts=1;$conts<=5;$conts++) {    
 					$vetor_insere_servico[$contpos]=$_POST['cmbCodigo'.$codcategoria.$conts];
 					if($_POST['cmbCodigo'.$codcategoria.$conts]){
-						$sql = mysql_query("INSERT INTO cadastro_servicos
+						$sql = $PDO->query("INSERT INTO cadastro_servicos
                                             SET codservico = '".$_POST['cmbCodigo'.$codcategoria.$conts]."',
                                             codemissor='$CODEMPRESA'");
 					} 
@@ -266,13 +266,13 @@ $include=$_POST['include'];
 		while($contsocios < $nrosocios) {   
 			if($vetor_sociosnomes[$contsocios] != "") {
                 if($contsocios==0){
-                    $sql_cargo=mysql_query("SELECT codigo FROM cargos WHERE cargo='Respons�vel'");
+                    $sql_cargo=$PDO->query("SELECT codigo FROM cargos WHERE cargo='Responsável'");
                 }else{
-                    $sql_cargo=mysql_query("SELECT codigo FROM cargos WHERE cargo='S�cio'");
+                    $sql_cargo=$PDO->query("SELECT codigo FROM cargos WHERE cargo='Sócio'");
                 }
-                list($codcargo)=mysql_fetch_array($sql_cargo);
+                list($codcargo)=$sql_cargo->fetch();
 				$vetor_sociosnomes[$contsocios] = strtoupper($vetor_sociosnomes[$contsocios]);
-				$sql = mysql_query("INSERT INTO cadastro_resp
+				$sql = $PDO->query("INSERT INTO cadastro_resp
                                     SET codemissor='$CODEMPRESA',
                                     nome = '$vetor_sociosnomes[$contsocios]',
                                     cpf = '$vetor_socioscpf[$contsocios]',

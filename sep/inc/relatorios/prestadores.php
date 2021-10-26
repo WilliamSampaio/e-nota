@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - Prestadores </td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Prestadores </td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -37,14 +37,14 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <td colspan="6" align="left">
                     <!--ESTE SELECT ESTA COM A NOMENCLATTURA DE UM TEXT PARA MANTER A COMPATIBILIDADE DO ARQUIVO INSERIR.PHP COM TODOS OS ARQUIVOS DE CADASTRO DE EMPRESAS-->
                     <?php
-                        $sql_uf = mysql_query("SELECT estado, cidade FROM configuracoes");
-                        list($UF,$MUNICIPIO) = mysql_fetch_array($sql_uf);
+                        $sql_uf = $PDO->query("SELECT estado, cidade FROM configuracoes");
+                        list($UF,$MUNICIPIO) = $sql_uf->fetch();
                     ?>
                     <select name="cmbEstado" id="txtInsUfEmpresa" onchange="buscaCidades(this,'txtInsMunicipioEmpresa')">
                         <option></option>
                         <?php
-                            $sql=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-                            while(list($uf_busca)=mysql_fetch_array($sql)){
+                            $sql=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+                            while(list($uf_busca)=$sql->fetch()){
                                 echo "<option value=\"$uf_busca\"";if($uf_busca == $UF){ echo "selected=selected"; }echo ">$uf_busca</option>";
                             }
                         ?>
@@ -52,14 +52,14 @@ Fith Floor, Boston, MA 02110-1301, USA
                 </td>
             </tr>
             <tr>
-                <td align="left" style="text-indent:5px">Munic&iacute;pio</td>
+                <td align="left" style="text-indent:5px">Município</td>
                 <td colspan="6" align="left">
                     <div  id="txtInsMunicipioEmpresa">
                         <select name="txtInsMunicipioEmpresa" id="txtInsMunicipioEmpresa" class="combo" style="width:150px">
                             <option></option>
                             <?php
-                                $sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$UF'");
-                                while(list($nome) = mysql_fetch_array($sql_municipio)){
+                                $sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$UF'");
+                                while(list($nome) = $sql_municipio->fetch()){
                                     echo "<option value=\"$nome\"";if(strtolower($nome) == strtolower($MUNICIPIO)){ echo "selected=selected";} echo ">$nome</option>";
                                 }//fim while
                             ?>
@@ -73,7 +73,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     <select name="cmbCategoria" id="cmbCategoria" style="width:500px">
                         <option></option>
                         <?php
-                            $sqlCategoria = mysql_query("SELECT codigo, nome FROM servicos_categorias");
+                            $sqlCategoria = $PDO->query("SELECT codigo, nome FROM servicos_categorias");
                             while($categoria = mysql_fetch_object($sqlCategoria)){
                                 echo "<option value='".$categoria->codigo."'>".$categoria->nome."</option>";
                             }
@@ -85,10 +85,10 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <td align="left" style="text-indent:5px">Estado</td>
                 <td colspan="6" align="left">
                     <input type="radio" name="rgpEstado" value="A" />Ativo
-                    &nbsp;
+                    
                     <input type="radio" name="rgpEstado" value="I" />Inativo
-                    &nbsp;
-                    <input type="radio" name="rgpEstado" value="NL" />N&atilde;o Liberado
+                    
+                    <input type="radio" name="rgpEstado" value="NL" />Não Liberado
                 </td>
             </tr>
         </table>

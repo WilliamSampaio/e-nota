@@ -21,10 +21,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php  
  if(isset($_POST['btCadastrar']))
  {   
-   include("inserir.php");
+   require_once("inserir.php");
  }?>
 <fieldset style="margin-left:10px; margin-right:10px;">
-	<legend>Cadastro de Servi&ccedil;os</legend>
+	<legend>Cadastro de Serviços</legend>
 	<form method="post" id="frmCadastro">
 	<input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
 		<table width="100%" align="left">
@@ -34,8 +34,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<select name="cmbCategoria" id="cmbCategoria">
                     	<option />
 						<?php
-							$sql=mysql_query("SELECT codigo,nome FROM servicos_categorias");
-							while(list($codigo,$nome)=mysql_fetch_array($sql))
+							$sql=$PDO->query("SELECT codigo,nome FROM servicos_categorias");
+							while(list($codigo,$nome)=$sql->fetch())
 								{
 									echo "<option value=\"$codigo\">".ResumeString($nome,50)."</option>";
 								}
@@ -43,11 +43,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</select>				</td>
 			</tr>
 			<tr>
-				<td align="left">C&oacute;d. Servi&ccedil;o</td>
+				<td align="left">Cód. Serviço</td>
 				<td align="left"><input type="text" size="20" maxlength="20" name="txtInsCodServico" id="txtInsCodServico" class="texto"></tr>
 			<td align="left"></tr>
 			<tr>
-				<td align="left">Descri&ccedil;&atilde;o<font color="#FF0000"> *</font></td>
+				<td align="left">Descrição<font color="#FF0000"> *</font></td>
 				<td align="left">
 					<textarea cols="40" rows="5" name="txtInsDescServicos" id="txtInsDescServicos" class="texto" style="text-transform: uppercase; "></textarea>				</td>
 			</tr>
@@ -55,29 +55,29 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td align="left">Tipo de Pessoa <font color="#FF0000">*</font></td>
 				<td align="left"><select name="cmbInsTipoPessoa" id="cmbInsTipoPessoa" class="combo">
                 	<option />
-                  <option value="PJ">Pessoa Jur&iacute;dica</option>
-                  <option value="PF">Pessoa F&iacute;sica</option>
+                  <option value="PJ">Pessoa Jurídica</option>
+                  <option value="PF">Pessoa Física</option>
                   <option value="PJPF">Ambas</option>
                 </select></td>
 			</tr>
 			<tr>
 			  <td align="left">Aliquota<font color="#FF0000">*</font></td>
 		      <td align="left"><input type="text" size="6" maxlength="5" name="txtInsAliquota" id="txtInsAliquota" class="texto" onkeyup="MaskPercent(this)" />
-	          &nbsp;%&nbsp;&nbsp;Exemplo(0.00)&nbsp;&nbsp;<em>Para servi&ccedil;os em geral </em></td>
+	          %Exemplo(0.00)<em>Para serviços em geral </em></td>
 		  </tr>
 			<tr>
-				<td align="left">Reten&ccedil;&atilde;o ISS <font color="#FF0000">*</font></td>
+				<td align="left">Retenção ISS <font color="#FF0000">*</font></td>
 				<td align="left">
 					<input name="txtInsAliquotaIR" type="text" class="texto" id="txtInsAliquotaIR" onkeyup="MaskPercent(this)" value="" size="5" maxlength="4">
-					&nbsp;%&nbsp;&nbsp;Exemplo(0.00)&nbsp;&nbsp;<em>Para servi&ccedil;os com ISS Retido</em>				</td>
+					%Exemplo(0.00)<em>Para serviços com ISS Retido</em>				</td>
 			</tr>
 			<tr>
-				<td align="left">Base de C&aacute;lculo</td>
+				<td align="left">Base de Cálculo</td>
 				<td align="left"><input name="txtInsBaseCalculo" type="text" class="texto" id="txtInsBaseCalculo" onkeyup="MaskMoeda(this)" onkeydown="return NumbersOnly(event)" value="" size="10" maxlength="9" />
 				</td>
 			</tr>
 			<tr>
-			  <td align="left">Incid&ecirc;ncia <font color="#FF0000">*</font></td>
+			  <td align="left">Incidência <font color="#FF0000">*</font></td>
 			  <td align="left"><select name="cmbInsIncidencia" id="cmbInsIncidencia" class="combo">
               <option />
 			    <option value="mensal">Mensal</option>
@@ -97,12 +97,12 @@ Fith Floor, Boston, MA 02110-1301, USA
                             </select></td>
 		  </tr>
 			<tr>
-			  <td align="left">&nbsp;</td>
-			  <td align="left"><font color="#FF0000">*</font>Campos Obrigat&oacute;rios</td>
+			  <td align="left"></td>
+			  <td align="left"><font color="#FF0000">*</font>Campos Obrigatórios</td>
 		  </tr>
 			<tr>
 			  <td align="left"></td>
-			  <td align="center">&nbsp;</td>
+			  <td align="center"></td>
 		  </tr>
 		</table>
 </form>

@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-  include("../../include/conect.php");
-  include("../../funcoes/util.php");
+  require_once("../../include/conect.php");
+  require_once("../../funcoes/util.php");
   $cnpjcpf =$_GET['txtTomadorCNPJ'];
   if($cnpjcpf!=""){
 	  $query=mysql_query("SELECT nome,razaosocial,inscrmunicipal,logradouro,numero,complemento,bairro,cep,municipio,email,uf,codtipo FROM cadastro WHERE cnpj='$cnpjcpf' or cpf='$cnpjcpf'");
@@ -39,7 +39,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <table width="100%" border="0" cellspacing="2" cellpadding="2"> 
 <tr>
-    <td width="25%" align="left">Nome/Razão Social<font color="#FF0000">*</font></td>
+    <td width="25%" align="left">Nome/RazÃ£o Social<font color="#FF0000">*</font></td>
     <td width="75%" align="left"><input name="txtTomadorNome" id="txtTomadorNome" type="text" size="55" class="texto" value="<?php echo $dados->nome ;?>" <?php echo $disable; ?>>
 </td>
   <tr>
@@ -50,13 +50,13 @@ Fith Floor, Boston, MA 02110-1301, USA
   </tr>
   </tr>  
   <tr>
-    <td align="left">Inscrição Municipal</td>
+    <td align="left">Inscriï¿½ï¿½o Municipal</td>
     <td align="left"><input name="txtTomadorIM" id="txtTomadorIM" onkeydown="return NumbersOnly( event );"  type="text" size="30" class="texto" value="<?php echo $dados->inscrmunicipal ;?>"<?php echo $disable; ?>></td>
   </tr>
   <tr>
     <td align="left">Logradouro</td>
     <td align="left"><input name="txtTomadorLogradouro" id="txtTomadorLogradouro" type="text" size="30" class="texto" value="<?php echo $dados->logradouro ;?>" <?php echo $disable; ?>>
-     &nbsp;&nbsp;Número <input name="txtTomadorNumero" onkeydown="return NumbersOnly( event );"  type="text" size="5" class="texto" maxlength="5" value="<?php echo $dados->numero ;?>" <?php echo $disable; ?>/>
+     NÃºmero <input name="txtTomadorNumero" onkeydown="return NumbersOnly( event );"  type="text" size="5" class="texto" maxlength="5" value="<?php echo $dados->numero ;?>" <?php echo $disable; ?>/>
 	</td>
   </tr>  
   <tr>
@@ -87,7 +87,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
   <tr>
     <td align="left">
-		Município<font color="#FF0000">*</font></td>
+		Municï¿½pio<font color="#FF0000">*</font></td>
     <td align="left">
         <div  id="divTomadorMunicipio">
         	<input type="hidden" name="txtTomadorMunicipio" id="txtTomadorMunicipio" value="<?php echo $dados->municipio ;?>" />

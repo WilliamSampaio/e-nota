@@ -21,17 +21,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <?php 
 	//Includes
-	include("../../inc/conect.php");
-	include("../../funcoes/util.php");
+	require_once("../../inc/conect.php");
+	require_once("../../funcoes/util.php");
 	
-	//Pega o bras„o
-	$sql_brasao = mysql_query("SELECT brasao_nfe, rpsdataconversao FROM configuracoes");
-	list($BRASAO,$dataconversao) = mysql_fetch_array($sql_brasao);
+	//Pega o brasÔøΩo
+	$sql_brasao = $PDO->query("SELECT brasao_nfe, rpsdataconversao FROM configuracoes");
+	list($BRASAO,$dataconversao) = $sql_brasao->fetch();
 	
 	//Recebe o mes
 	$mes = $_POST["cmbMes"];
 	
-	//Define o tÌtulo do relatÛrio de acordo com o que vem do rdbServicos
+	//Define o t√≠tulo do relatÔøΩrio de acordo com o que vem do rdbServicos
 	if ($_POST['rdbRPS'] == 'dentro'){
 		$titulo = 'RPS CONVERTIDOS EM NFE DENTRO DO PRAZO LEGAL';
 		$where = "AND DAY(rps_data) < '$dataconversao'";
@@ -41,7 +41,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	}
 ?>
 
-<!-- InÌcio do css da visualizaÁ„o da p·gina -->
+<!-- InÔøΩcio do css da visualizaÔøΩÔøΩo da p√°gina -->
 	<style type="text/css" media="screen">
 	<!--
 	.style1 {font-family: Georgia, "Times New Roman", Times, serif}
@@ -72,26 +72,26 @@ Fith Floor, Boston, MA 02110-1301, USA
 	}
 	-->
 	</style>
-<!-- Fim do css da visualizaÁ„o da p·gina -->
+<!-- Fim do css da visualizaÔøΩÔøΩo da p√°gina -->
 
 
-<!-- InÌcio do css da Impress„o da p·gina -->
+<!-- InÔøΩcio do css da Impress√£o da p√°gina -->
 	<style type="text/css" media="print">
     #DivImprimir{
-		display: none; /*Tira a div imprimir na hora da impress„o*/
+		display: none; /*Tira a div imprimir na hora da impressÔøΩo*/
 	}
 	</style>
-<!-- Fim do css da Impress„o da p·gina -->
+<!-- Fim do css da Impress√£o da p√°gina -->
 
-<title>Imprimir Relat&oacute;rio - RPS</title>
+<title>Imprimir Relat√≥rio - RPS</title>
 
-<div class="pagina"> <!-- InÌcio div p·gina -->
+<div class="pagina"> <!-- InÔøΩcio div p√°gina -->
 	<div id="DivImprimir">
 		<input type="button" onClick="print();" value="Imprimir" /><br />
-		<i><b>Este relat&oacute;rio &eacute; melhor visualizado em formato de impress&atilde;o em paisagem.</b></i>
+		<i><b>Este relat√≥rio √© melhor visualizado em formato de impress√£o em paisagem.</b></i>
 	</div>
 	
-	<!-- InÌcio do topo com as informaÁıes -->
+	<!-- InÔøΩcio do topo com as informaÔøΩÔøΩes -->
 	<div id="DivTopo">
 		<table width="95%" height="120" border="2" cellspacing="0" class="tabela" align="center">
 			<tr>
@@ -103,7 +103,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td width="584" height="33" colspan="2">
 					<span class="style1">
 						<center>
-							<p>RELAT&Oacute;RIO - <?php print strtoupper($titulo); ?> </p>
+							<p>RELAT√ìRIO - <?php print strtoupper($titulo); ?> </p>
 							<p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 							<p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 						</center>
@@ -112,7 +112,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			</tr>
 		</table>
 	</div>
-	<!-- Fim do topo com as informaÁıes -->
+	<!-- Fim do topo com as informaÔøΩÔøΩes -->
 	
 	<br>
 
@@ -135,12 +135,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 		ORDER BY
 			numero, rps_numero
 	");
-	$sql_pesquisa = mysql_query ($query);
-	$result = mysql_num_rows($sql_pesquisa); //Pega o n˙mero de registros que voltaram
+	$sql_pesquisa = $PDO->query($query);
+	$result = mysql_num_rows($sql_pesquisa); //Pega o n√∫mero de registros que voltaram
 	if($result){ //Se existir algum registro, mostra na tabela
 ?>
 
-<!-- InÌcio da Tabela -->
+<!-- InÔøΩcio da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999">
 		<?php
@@ -152,20 +152,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 		?>
 	</tr>
 	<tr style="background-color:#999999; font-weight:bold" align="center">
-		<td>N&uacute;mero da NFe </td>
-		<td>C&oacute;d Verifica&ccedil;&atilde;o </td>
-		<td>Data Emis&atilde;o </td>
-		<td>RPS - N&uacute;mero </td>
+		<td>N√∫mero da NFe </td>
+		<td>C√≥d Verifica√ß√£o </td>
+		<td>Data Emis√£o </td>
+		<td>RPS - N√∫mero </td>
 		<td>RPS - Data </td>
 		<td>Tomador - Nome </td>
 		<td>Tomador - CNPJ/CPF </td>
-		<td>Tomador - Munic&iacute;pio </td>
+		<td>Tomador - Munic√≠pio </td>
 		<td>Tomador - UF </td>
 		<td>Valor Total </td>
 	</tr>
 	
 <?php
-	while ($dados = mysql_fetch_array($sql_pesquisa)){
+	while ($dados = $sql_pesquisa->fetch()){
 	$datahoraemissao = $dados['datahoraemissao'];
 	$rps_data = $dados['rps_data'];
 ?>
@@ -182,7 +182,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td>R$ <?php echo $dados['valortotal']; ?></td>
 	</tr>
 <?php
-	}// Fim while ($dados = mysql_fetch_array($sql_pesquisa))
+	}// Fim while ($dados = $sql_pesquisa))
 ?>
 </table>
 <?php
@@ -191,7 +191,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>N√£o h√° resultados!</td>
 	</tr>
 </table>
 <?php

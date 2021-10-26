@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<table width="580" border="0" cellpadding="0" cellspacing="1">
         <tr>
 			<td width="5%" height="10" bgcolor="#FFFFFF"></td>
-	        <td width="50%" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta Recibo Provis&oacute;rio de Servi&ccedil;os (RPS)</td>
+	        <td width="50%" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta Recibo Provisório de Serviços (RPS)</td>
 	        <td width="45%" bgcolor="#FFFFFF"></td>
 	    </tr>
 		<tr>
@@ -43,7 +43,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="99%" border="0" align="center" cellpadding="5" cellspacing="0">
  <tr>
   <td width="30%" align="left">
-   N�mero do RPS<font color="#FF0000">*</font>  </td>
+   Número do RPS<font color="#FF0000">*</font>  </td>
   <td width="70%" align="left">
    <input type="text" name="txtNumeroRps" size="20" class="texto" />  </td>
  </tr>
@@ -67,11 +67,11 @@ Fith Floor, Boston, MA 02110-1301, USA
    <input type="text" name="txtTomCpfCnpj" id="txtTomCpfCnpj" size="20" class="texto"  onkeydown="stopMsk( event ); return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );"/>  </td> 
  </tr>
   <tr> 
-  <td align="center">&nbsp;</td> 
-  <td align="left"><font color="#FF0000">*</font> Dados obrigat&oacute;rios</td>
+  <td align="center"></td> 
+  <td align="left"><font color="#FF0000">*</font> Dados obrigatórios</td>
   </tr>
   <tr>
-    <td align="center">&nbsp;</td>
+    <td align="center"></td>
     <td align="left"><input type="submit" name="btConsulta" id="btConsulta" value="Consultar" class="botao" /></td>
   </tr>
 </table>
@@ -86,6 +86,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php 
 	if($_POST['btConsulta'])
 	{
-		include('rps_consulta.php');		
+		require_once('rps_consulta.php');		
 	}
 ?>

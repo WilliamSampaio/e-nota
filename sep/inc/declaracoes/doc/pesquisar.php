@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;SEPISS - Pesquisar</td>  
+    <td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">SEPISS - Pesquisar</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" onclick="document.getElementById('divBuscaOpr').style.visibility='hidden'" /></td>
   </tr>
   <tr>
@@ -41,7 +41,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				if(isset($_POST['txtBuscaNomeOpr']))
 					{
 						$nome = $_POST["txtBuscaNomeOpr"];
-						$sql_busca = mysql_query("
+						$sql_busca = $PDO->query("
 							SELECT 
 								codigo, 
 								nome, 
@@ -65,7 +65,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 							WHERE 
 								nome LIKE '%$nome%' AND estado <> 'NL'
 						");
-						while(list($codigo,$nome,$razaosocial,$agencia,$cnpj,$gerente,$gerente_cpf,$responsavel,$responsavel_cpf,$inscrmunicipal,$endereco,$fone1,$fone2,$codbanco,$senha,$email,$estado) = mysql_fetch_array($sql_busca))
+						while(list(
+							$codigo,$nome,$razaosocial,$agencia,$cnpj,$gerente,$gerente_cpf,$responsavel,$responsavel_cpf,$inscrmunicipal,
+							$endereco,$fone1,$fone2,$codbanco,$senha,$email,$estado) = $sql_busca->fetch())
 							{		
 								switch($estado){
 									case "A": $estado = "Ativo";  break;

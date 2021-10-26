@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" align="center" cellpadding="0" cellspacing="1">
 		<tr>
 			<td width="10" height="10" bgcolor="#FFFFFF"></td>
-			<td width="120" align="center" bgcolor="#FFFFFF" rowspan="3">Relat&oacute;rio Notas</td>
+			<td width="120" align="center" bgcolor="#FFFFFF" rowspan="3">Relatório Notas</td>
 			<td width="450" bgcolor="#FFFFFF"></td>
 		</tr>
 		<tr>

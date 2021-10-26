@@ -19,16 +19,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-// Valor do campo que fez requisição
+// Valor do campo que fez requisiÃ§Ã£o
 $cnpj   = $_GET['valor'];
-$valido ='Emissor n&atilde;o cadastrado';
+$valido ='Emissor nÃ£o cadastrado';
 //acentuacao e nao armazena no cache
-include('nocache.php');
-include("conect.php");
+require_once('nocache.php');
+require_once("conect.php");
 
-$sql_cnpj = mysql_query("SELECT codigo, razaosocial FROM cadastro WHERE cnpj='$cnpj' OR cpf='$cnpj'");
-if (mysql_num_rows($sql_cnpj)){
-	list($codigo,$valido)=mysql_fetch_array($sql_cnpj);
+$sql_cnpj = $PDO->query("SELECT codigo, razaosocial FROM cadastro WHERE cnpj='$cnpj' OR cpf='$cnpj'");
+if ($sql_cnpj->rowCount()){
+	list($codigo,$valido)=$sql_cnpj->fetch();
 }
   
 echo $valido; 

@@ -59,5 +59,5 @@
 		  break;
 	}
 	
-	$sql_notas = mysql_query($query);
+	$sql_notas = $PDO->query($query);
 ?>

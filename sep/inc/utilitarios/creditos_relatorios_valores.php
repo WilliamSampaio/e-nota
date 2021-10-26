@@ -19,16 +19,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-include("../conect.php"); 
-include("../../funcoes/util.php");
+require_once("../conect.php"); 
+require_once("../../funcoes/util.php");
 $tipo = $_GET["cmbTipo"];
 $issretido = $_GET["cmbISSretido"];
 ?>
 <select style="width: 60px" name="cmbValor" id="cmbValor" class="combo">
 	<option value=""></option>
 <?php
-$sql = mysql_query("SELECT codigo, valor FROM nfe_creditos WHERE tipopessoa='$tipo' AND issretido='$issretido' ORDER BY valor ASC");
-while(list($codigo,$valor) = mysql_fetch_array($sql)){
+$sql = $PDO->query("SELECT codigo, valor FROM nfe_creditos WHERE tipopessoa='$tipo' AND issretido='$issretido' ORDER BY valor ASC");
+while(list($codigo,$valor) = $sql->fetch()){
 	echo "<option value=\"$valor\">$valor</option>";
 }
 ?>

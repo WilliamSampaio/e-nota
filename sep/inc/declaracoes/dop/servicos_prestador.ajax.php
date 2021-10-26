@@ -19,15 +19,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-/* Não gravar em cache */
+/* NÃ£o gravar em cache */
 include '../../nocache.php';
 
-include("../../conect.php");
-include("../../../funcoes/util.php");
+require_once("../../conect.php");
+require_once("../../../funcoes/util.php");
 
 $prestador_cnpj = $_GET['cnpj'];
 $c = $_GET['contador'];
-$sql_servicos2 = mysql_query("
+$sql_servicos2 = $PDO->query("
 	SELECT servicos.codigo, 
 		   servicos.descricao, 
 		   servicos.aliquota 
@@ -37,14 +37,14 @@ $sql_servicos2 = mysql_query("
 	WHERE (cadastro.cpf='$prestador_cnpj' OR cadastro.cnpj='$prestador_cnpj') AND 
 		  cadastro.estado = 'A';
 ") or die(mysql_error());
-if(mysql_num_rows($sql_servicos2)){
+if($sql_servicos2->rowCount()){
 	echo "
 	<select style=\"width:150px;\" id=\"cmbCodServico$c\" name=\"cmbCodServico$c\" 
 	 onchange=\"var temp = this.value.split('|'); getElementById('txtAliquota$c').value = temp[0]; 
 	 dop.CalculaImposto(txtBaseCalculo$c,txtAliquota$c,txtImposto$c);\">
     <option/>";
 	
-	while(list($cod_serv, $desc_serv, $aliq_serv) = mysql_fetch_array($sql_servicos2)) {
+	while(list($cod_serv, $desc_serv, $aliq_serv) = $sql_servicos2->fetch()) {
 		if(strlen($desc_serv)>100)
 			$desc_serv = substr($desc_serv,0,100)."...";
 		echo "<option value=\"$aliq_serv|$cod_serv\" id=\"$aliq_serv\">$desc_serv</option>";

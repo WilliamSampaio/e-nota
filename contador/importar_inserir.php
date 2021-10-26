@@ -33,16 +33,16 @@ if(!(isset($_SESSION["codempresa"]))){
 	$botao = $_POST['btImportarXML'];  
 	$arquivo_xml = $_POST['txtArquivoNome'];
 	if($botao == "Importar Arquivo"){
-		include("../include/conect.php");
-		include("../funcoes/util.php");
-		include("inc/funcao_logs.php");
+		require_once("../include/conect.php");
+		require_once("../include/util.php");
+		require_once("inc/funcao_logs.php");
 		$sql=mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'");
 		list($UltimaNota)=mysql_fetch_array($sql);  
 		
 		$sql=mysql_query("SELECT codigo FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'"); 
 		list($codigoEmpresa)=mysql_fetch_array($sql);  
 		
-		$xml = simplexml_load_file("importar/$arquivo_xml"); // lê o arquivo XML 
+		$xml = simplexml_load_file("importar/$arquivo_xml"); // lï¿½ o arquivo XML 
 		$cont = 0; 
 		$inserir_tomador = "N";
 		foreach($xml->children() as $elemento => $valor){   
@@ -148,7 +148,7 @@ if(!(isset($_SESSION["codempresa"]))){
 			
 			$sql_verifica_rps = mysql_query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '".$_POST['hdCodEmpresa']."'");
 			if(mysql_num_rows($sql_verifica_rps)){
-				Mensagem("A nota com o número de RPS $rps_numero, já foi emitida!");
+				Mensagem("A nota com o nÃºmero de RPS $rps_numero, jÃ¡ foi emitida!");
 				exit;
 			}
 			
@@ -167,7 +167,7 @@ if(!(isset($_SESSION["codempresa"]))){
 				  break;
 			}
 			
-			//GERA O CÓDIGO DE VERIFICAÇÃO
+			//GERA O Cï¿½DIGO DE VERIFICAï¿½ï¿½O
 			$CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';	
 			$max = strlen($CaracteresAceitos)-1;
 			$password = null;
@@ -366,7 +366,7 @@ if(!(isset($_SESSION["codempresa"]))){
 		}// foreach
 		unlink("importar/$arquivo_xml");
 		add_logs('Importou Arquivo');
-		print("<script language=JavaScript>alert('Importação efetuada com sucesso !');window.close();</script>");
+		print("<script language=JavaScript>alert('Importaï¿½ï¿½o efetuada com sucesso !');window.close();</script>");
 	}else{
 		print("Acesso Negado!!");
 	}	

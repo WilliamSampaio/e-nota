@@ -75,14 +75,14 @@ $sql = Paginacao($query,'frmRelEscrituracoes','divResultado');
 		<tr bgcolor="#999999">
 			<td width="78" align="center"><strong>Cod. Arquivo</strong></td>
 			<td width="486" align="center"><strong>Nome do Arquivo</strong></td>
-			<td width="134" align="center"><strong>Compet&ecirc;ncia</strong></td>
-			<td width="76" align="center">&nbsp;</td>
+			<td width="134" align="center"><strong>Competência</strong></td>
+			<td width="76" align="center"></td>
 	</tr>
 		<tr>
 			<td colspan="7" height="1" bgcolor="#999999"></td>
 		</tr>
 	<?php
-	while(list($codigo, $arquivo, $competencia) = mysql_fetch_array($sql)) {
+	while(list($codigo, $arquivo, $competencia) = $sql->fetch()) {
 	?>    
 		<tr bgcolor="#FFFFFF">
 			<td align="center"><?php echo $codigo; ?></td>

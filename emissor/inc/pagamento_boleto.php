@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	include("conect.php");
+	require_once("conect.php");
 	$_SESSION['login'] = $txtLogin; 
 	$_SESSION['nome'] = $txtNome;
 	//Recebe a variavel enviada por post do arquivo pagamento_resultado

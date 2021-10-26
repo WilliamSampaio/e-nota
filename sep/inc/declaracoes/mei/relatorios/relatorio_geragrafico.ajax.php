@@ -62,7 +62,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	}
 	
 	//Gera a pesquisa conforme os dados enviados pelo usuario utilizando as variaveis string
-	$sql_pesquisa = mysql_query("
+	$sql_pesquisa = $PDO->query("
 						SELECT 
 							DATE_FORMAT(decc_des.competencia,'%m/%Y'),
 							SUM(decc_des.total)
@@ -79,7 +79,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						DESC
 						");
 	$cont = 0;
-	while(list($data,$total) = mysql_fetch_array($sql_pesquisa)){
+	while(list($data,$total) = $sql_pesquisa->fetch()){
 		$arraytotal[$cont] = $total; 
 		$arraydata[$cont]  = $data;
 		$cont++;
@@ -90,7 +90,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$titulos = serialize($arraydata);
 ?>
 <link href="css/padrao.css" rel="stylesheet" type="text/css">
-<fieldset><legend>Gráfico</legend>
+<fieldset><legend>Grï¿½fico</legend>
 <table width="100%">
 	<tr>
     	<td><input name="btImprimir" type="button" class="botao" value="Imprimir"></td>

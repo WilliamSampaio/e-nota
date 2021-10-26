@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC" width="750">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Cartórios - Auditoria </td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Cartï¿½rios - Auditoria </td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -38,8 +38,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                                 <option></option>
                                 <?php
 									$cartorio = codtipo('cartorio');
-                                    $sql=mysql_query("SELECT razaosocial, codigo FROM cadastro WHERE codtipo='$cartorio'");
-                                    while($dados=mysql_fetch_array($sql)){
+                                    $sql=$PDO->query("SELECT razaosocial, codigo FROM cadastro WHERE codtipo='$cartorio'");
+                                    while($dados=$sql->fetch()){
                                         echo "<option value='".$dados['codigo']."'>".$dados['razaosocial']."</option>";
                                     }
                                 ?>

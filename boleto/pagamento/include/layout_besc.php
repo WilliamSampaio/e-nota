@@ -54,8 +54,8 @@ de Impressão</DIV></TD></TR><TR><TD valign=top class=cp><DIV ALIGN="left">
 <li>Caso não apareça o código de barras no final, clique em F5 para atualizar esta tela.
 <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico ou no internet banking:<br><br>
 <span class="ld2">
-&nbsp;&nbsp;&nbsp;&nbsp;Linha Digitável: &nbsp;<?php echo $dadosboleto["linha_digitavel"]?><br>
-&nbsp;&nbsp;&nbsp;&nbsp;Valor: &nbsp;&nbsp;R$ <?php echo $dadosboleto["valor_boleto"]?><br>
+Linha Digitável: <?php echo $dadosboleto["linha_digitavel"]?><br>
+Valor: R$ <?php echo $dadosboleto["valor_boleto"]?><br>
 </span>
 </DIV></td></tr></table><br><table cellspacing=0 cellpadding=0 width=666 border=0><TBODY><TR><TD class=ct width=666><img height=1 src=imagens/6.png width=665 border=0></TD></TR><TR><TD class=ct width=666><div align=right><b class=cp>Recibo 
 do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cellpadding=0 border=0><tr><td width=41></TD></tr></table>
@@ -66,7 +66,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 	<?php echo $dadosboleto["endereco"]; ?><br>
 	<?php echo $dadosboleto["cidade_uf"]; ?><br>
     </td>
-    <td align=RIGHT width=150 class=ti>&nbsp;</td>
+    <td align=RIGHT width=150 class=ti></td>
   </tr>
 </table>
 <BR><table cellspacing=0 cellpadding=0 width=666 border=0><tr><td class=cp width=150> 

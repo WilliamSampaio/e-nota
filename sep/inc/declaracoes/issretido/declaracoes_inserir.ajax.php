@@ -25,16 +25,16 @@ require_once("../../../funcoes/util.php");
 
 if ($_GET['txtInscMunicipal']){
 	$tomador_IM = $_GET['txtInscMunicipal'];
-	$sql_IM_tomador=mysql_query("
+	$sql_IM_tomador=$PDO->query("
 		SELECT cnpj,cpf
 		FROM cadastro
 		WHERE inscrmunicipal='$tomador_IM'
 	");
-	if(!mysql_num_rows($sql_IM_tomador))	{
-		echo "Inscrição Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF";
+	if(!$sql_IM_tomador->rowCount())	{
+		echo "Inscriï¿½ï¿½o Municipal nÃ£o encontrada, verifique os dados ou tente pelo CNPJ/CPF";
 		exit();
 	}else{	
-		list($tomador_CNPJ)=mysql_fetch_array($sql_IM_tomador);
+		list($tomador_CNPJ)=$sql_IM_tomador->fetch();
 	}
 
 }
@@ -43,17 +43,17 @@ if($_GET['txtCNPJ']){
 	$tomador_CNPJ = $_GET['txtCNPJ'];
 }
 
-$sql_emissor = mysql_query("SELECT codigo, cnpj,cpf, razaosocial, email, inscrmunicipal, logradouro,numero,complemento,bairro,cep FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
-if (!mysql_num_rows($sql_emissor)){
-	echo "CPF/CNPJ não encontrado, verifique os dados";
+$sql_emissor = $PDO->query("SELECT codigo, cnpj,cpf, razaosocial, email, inscrmunicipal, logradouro,numero,complemento,bairro,cep FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
+if (!$sql_emissor->rowCount()){
+	echo "CPF/CNPJ nÃ£o encontrado, verifique os dados";
 	//Redireciona("des.php");
 }else{
 
 	list($cod_emissor,$cnpj_emissor,$cpf_emissor,$nome_emissor,$email_emissor,$inscrmunicipal_emissor,$logradouro_emissor,
-	$numero_emissor,$complemento_emissor,$bairro_emissor,$cep_emissor)=mysql_fetch_array($sql_emissor);
+	$numero_emissor,$complemento_emissor,$bairro_emissor,$cep_emissor)=$sql_emissor->fetch();
 	
-	$sql_tomador=mysql_query("SELECT codigo, cnpj,cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
-	list($cod_tomador,$cnpj,$cpf,$TomadorNome,$TomadorEmail)=mysql_fetch_array($sql_tomador);
+	$sql_tomador=$PDO->query("SELECT codigo, cnpj,cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
+	list($cod_tomador,$cnpj,$cpf,$TomadorNome,$TomadorEmail)=$sql_tomador->fetch();
 	
 	listaRegrasMultaDes();
 	
@@ -64,25 +64,25 @@ if (!mysql_num_rows($sql_emissor)){
 	<table border="0" cellpadding="3" cellspacing="2" width="100%">
 		<tr>
 			<td width="30%" align="left" valign="middle">CNPJ/CPF:</td>
-			<td width="70%" align="left" bgcolor="#FFFFFF">&nbsp;&nbsp;<b><?php echo $tomador_CNPJ;?></b>
+			<td width="70%" align="left" bgcolor="#FFFFFF"><b><?php echo $tomador_CNPJ;?></b>
 			 <input type="hidden" value="<?php echo $tomador_CNPJ;?>" name="txtCNPJ" /></td>
 		</tr>		
 		<tr>
-			<td align="left" valign="middle">Razão Social/Nome:</td>
-			<td align="left" bgcolor="#FFFFFF"> &nbsp;&nbsp;<b><?php echo $TomadorNome;?></b>
+			<td align="left" valign="middle">RazÃ£o Social/Nome:</td>
+			<td align="left" bgcolor="#FFFFFF"> <b><?php echo $TomadorNome;?></b>
 				<input type="hidden" name="txtRazaoNome" value="<?php echo $TomadorNome;?>" id="txtRazaoNome" class="texto"  size="62"/>
 			</td>
 		</tr>			
 		
 		<tr>
 			<td align="left" valign="middle">
-				Compet&ecirc;ncia/Período:
+				CompetÃªncia/PerÃ­odo:
 			</td>
-			<td align="left">&nbsp;&nbsp;  
+			<td align="left">  
 				<select name="cmbMes" id="cmbMes" onchange="CalculaMultaDes();">					
 					<option value="1">Janeiro</option>
 					<option value="2">Fevereiro</option>
-					<option value="3">Março</option>
+					<option value="3">Marï¿½o</option>
 					<option value="4">Abril</option>
 					<option value="5">Maio</option>
 					<option value="6">Junho</option>
@@ -120,7 +120,7 @@ if (!mysql_num_rows($sql_emissor)){
 				    Cnpj/Cpf				  
 				  </td>		
 				  <td width="22%" align="center" bgcolor="#999999">		
-   				    Número Nota				  
+   				    NÃºmero Nota				  
 				  </td>									
 				  <td width="29%" align="center" bgcolor="#999999">		
 	

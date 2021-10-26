@@ -21,20 +21,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 
 <?php
-$sql_municipio=mysql_query("SELECT cidade, estado FROM configuracoes");
-$dados_municipio=mysql_fetch_array($sql_municipio);
+$sql_municipio=$PDO->query("SELECT cidade, estado FROM configuracoes");
+$dados_municipio=$sql_municipio->fetch();
 
-//Verifica se foi inserido alguma empresa nova, se for vai para o arquivo de inserção
+//Verifica se foi inserido alguma empresa nova, se for vai para o arquivo de inserÃ§Ã£o
  if(($_POST['btCadastrar'] =="Salvar")&&($_POST['hdAtualizar'] ==''))
  {   
-   include("inserir.php");
+   require_once("inserir.php");
  }
  if(($_POST['btCadastrar'] =="Salvar")&&($_POST['hdAtualizar']=='sim'))
  { 
- 	include("editar.php"); 
+ 	require_once("editar.php"); 
  }
 ?>
-	 <!-- Formulário de inserção de empresa  -----------------------------------------------------------------------------> 
+	 <!-- FormulÃ¡rio de inserÃ§Ã£o de empresa  -----------------------------------------------------------------------------> 
 	<style type="text/css">
 	<!--
 	#divBusca {
@@ -48,12 +48,12 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 	}
 	-->
 	</style>
-	<div id="divBusca"  ><?php include("inc/prestadores/busca.php"); ?></div> 
+	<div id="divBusca"  ><?php require_once("inc/prestadores/busca.php"); ?></div> 
 	 
 	<?php	
 	if(($_POST['CODEMISSOR'])){		   
 		$codigo=$_POST['CODEMISSOR'];	
-		$sql=mysql_query("
+		$sql=$PDO->query("
 						SELECT 
 							codigo,
 							nome, 
@@ -76,12 +76,12 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 						WHERE
 							codigo='$codigo'
 						");
-		list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$endereco,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe)= mysql_fetch_array($sql);	
+		list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$endereco,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe)= $sql->fetch();	
 	}?>
 <table border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Empreiteiras - Cadastro</td>
+    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Empreiteiras - Cadastro</td>
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -102,7 +102,7 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
        </tr>
        <tr>
         <td align="left">
-		 Razão Social<font color="#FF0000">*</font>		</td>
+		 RazÃ£o Social<font color="#FF0000">*</font>		</td>
         <td align="left">
 	     <input type="text" size="70" maxlength="100" name="txtRazao" class="texto" value="<?php if(isset($razaosocial)){echo $razaosocial;} ?>">		</td>
        </tr>	   	
@@ -113,18 +113,18 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 		 CNPJ/CPF<font color="#FF0000">*</font>		</td> 
         <td align="left">			
 		 <input  id="txtInsCpfCnpjEmpresa" type="text" size="20"  name="txtCNPJ" class="texto" onkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" value="<?php if(isset($cnpjcpf)){echo $cnpjcpf;} ?>" />
-		 <em>Somente n&uacute;meros</em> </td>
+		 <em>Somente nÃºmeros</em> </td>
        </tr>
 	   <!-- alterna input cpf/cnpj FIM-->   
        <tr>
         <td align="left">
-		 Endere&ccedil;o<font color="#FF0000">*</font>		</td>
+		 EndereÃ§o<font color="#FF0000">*</font>		</td>
         <td align="left">
 		 <input type="text" size="70" maxlength="100" name="txtEndereco" class="texto" value="<?php if(isset($endereco)){echo $endereco;} ?>" />		</td>
        </tr>
        <tr>
 	     <td align="left">
-		  Município<font color="#FF0000">*</font>		 </td>
+		  Municï¿½pio<font color="#FF0000">*</font>		 </td>
 	     <td align="left">
           <input type="text" size="30" maxlength="100" name="txtMunicipio" class="texto" value="<?php if(isset($municipio)){echo $municipio;} else{echo $dados_municipio['cidade'];} ?>" />		 </td>
 	     </tr>
@@ -148,18 +148,18 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 	   <tr>
 	     <td align="left">NFe</td>
 	     <td align="left"><input type="checkbox" value="s"  name="txtNfe" id="txtNfe" <?php if($nfe =='s'){echo "checked=\"checked\"";} ?>/>
-           <em>Esta empresa emite Nota Fiscal eletr&ocirc;nica</em></td>
+           <em>Esta empresa emite Nota Fiscal eletrÃ´nica</em></td>
 	   </tr>
 	   <?php if($_POST['CODEMISSOR']){?>
 	   <tr>
 	     <td align="left">Estado</td>
-	     <td align="left"><input type="radio" name="rgEstado" value="A" id="rgEstado_0"  <?php if($estado =='A'){echo "checked=\"checked\"";} ?> />&nbsp;Ativo
-	     <input type="radio" name="rgEstado" value="I" id="rgEstado_1" <?php if($estado =='I'){echo "checked=\"checked\"";} ?>/>&nbsp;Inativo
+	     <td align="left"><input type="radio" name="rgEstado" value="A" id="rgEstado_0"  <?php if($estado =='A'){echo "checked=\"checked\"";} ?> />Ativo
+	     <input type="radio" name="rgEstado" value="I" id="rgEstado_1" <?php if($estado =='I'){echo "checked=\"checked\"";} ?>/>Inativo
          </td>
 	   </tr>       
 	   <?php }?>
 	   <tr>
-	     <td colspan="2" align="left">&nbsp;</td>
+	     <td colspan="2" align="left"></td>
 	     </tr>
 		 <tr>
 		 	<td colspan="2" align="left">
@@ -168,23 +168,23 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 				<?php 
 				if(($_POST['CODEMISSOR'])){
 					$COD = $_POST['CODEMISSOR'];	   	
-					$sql=mysql_query("SELECT codigo, nome, cpf FROM emissores_socios WHERE codemissor = '$COD'");	
-					$contsocios = mysql_num_rows($sql);
+					$sql=$PDO->query("SELECT codigo, nome, cpf FROM emissores_socios WHERE codemissor = '$COD'");	
+					$contsocios = $sql->rowCount();
 					$cont_aux_socios = $contsocios;	  
 					print("<tr>
 							  <td colspan=4 align=left>
-							   <b>Resposável/Socio</b>
+							   <b>Resposï¿½vel/Socio</b>
 							  </td>
 							 </tr>
 							");
-					while(list($CodigoSocio,$nomesocio,$cpfsocio)=mysql_fetch_array($sql))
+					while(list($CodigoSocio,$nomesocio,$cpfsocio)=$sql->fetch())
 					{
 						print("	    
 						<tr>
 						   <td align=left colspan=4>
 							<input type=hidden name=txtCodigoSocio$contsocios value=$CodigoSocio>
-							Nome&nbsp; <input type=text name=txtnomesocio$contsocios value=\"$nomesocio\" size=40 maxlength=100 class=texto>&nbsp;
-							CPF&nbsp;<input type=text name=txtcpfsocio$contsocios value=$cpfsocio size=14 maxlength=14 class=texto onkeypress=\"formatar(this,'000.000.000-000')\">");
+							Nome <input type=text name=txtnomesocio$contsocios value=\"$nomesocio\" size=40 maxlength=100 class=texto>
+							CPF<input type=text name=txtcpfsocio$contsocios value='$cpfsocio' size=14 maxlength=14 class=texto onkeypress=\"formatar(this,'000.000.000-000')\">");
 							if($contsocios != $cont_aux_socios)
 							{
 							print("<input type=checkbox name=checkExcluiSocio$contsocios value=$CodigoSocio>Excluir"); 
@@ -201,18 +201,18 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 		 </tr>
 	   <tr>
          <td colspan="2" align="left">
-		   <!-- botão que chama a função JS e mostra + um sócio-->
-		  <input type="button" value="Adicionar Responsável/Sócio" name="btAddSocio" class="botao" onclick="incluirSocio()" /> 
+		   <!-- botï¿½o que chama a funÃ§Ã£o JS e mostra + um sï¿½cio-->
+		  <input type="button" value="Adicionar ResponsÃ¡vel/SÃ³cio" name="btAddSocio" class="botao" onclick="incluirSocio()" /> 
 		  <font color="#FF0000">*</font></td>
        </tr>
 	   <tr>
 	     <td colspan="2" align="center">		  
 		  
-			<!--CAMPO SÓCIOS --------------------------------------------------------------------------->	   
+			<!--CAMPO Sï¿½CIOS --------------------------------------------------------------------------->	   
 			<table width="100%" border="0" cellspacing="1" cellpadding="2">       
-				 <?php include("cadastro_socios.php")?>
+				 <?php require_once("cadastro_socios.php")?>
 			</table>
-			<!-- CAMPO SÒCIOS FIM -->   	     
+			<!-- CAMPO Sï¿½CIOS FIM -->   	     
 		</td>
 	   </tr>
 	   <tr>
@@ -222,26 +222,26 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 				<table width="100%" border="0" cellspacing="1" cellpadding="2">  
 					<tr>	
 						   <td align="left" colspan="4" align="left">
-							<b>Serviços</b>	<br />	    
+							<b>ServiÃ§os</b>	<br />	    
 						   </td>     
 						   <td></td>		  
 						 </tr>								
 					 <!---------------- LISTAGEM DOS SERVICOS A SEREM EDITADOS ------------------------------------------------------->	  
 					 <?php
 					  $COD = $_POST['CODEMISSOR'];
-					  $sql_servicos=mysql_query("
+					  $sql_servicos=$PDO->query("
 					  SELECT emissores_servicos.codigo,servicos.codigo,servicos.codservico,servicos.descricao,servicos.aliquota 
 					  FROM servicos
 					  INNER JOIN emissores_servicos ON servicos.codigo = emissores_servicos.codservico
 					  WHERE emissores_servicos.codemissor = '$COD'");
 					  
-					 $contservicos = mysql_num_rows($sql_servicos);
+					 $contservicos = $sql_servicos->rowCount();
 					 $cont_aux_servicos = $contservicos;				 
 					 $numservicos = $contservicos;	 				 
-					 $sql_all_servicos=mysql_query("SELECT codigo,codservico,descricao,aliquota FROM servicos WHERE estado= 'A'");?>
+					 $sql_all_servicos=$PDO->query("SELECT codigo,codservico,descricao,aliquota FROM servicos WHERE estado= 'A'");?>
 					 
 							
-				 <?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota)=mysql_fetch_array($sql_servicos))
+				 <?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota)=$sql_servicos->fetch())
 					  {
 						print("	 
 						 <tr>	
@@ -250,14 +250,14 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 							 <select name=cmbEditaServico$contservicos style=width:400px;>
 							   <option value=$codigo>$codservico | $descricao | $aliquota</option>");	
 									 
-							  while(list($CODigo,$CODservico,$Descricao,$Aliquota)=mysql_fetch_array($sql_all_servicos))			    
+							  while(list($CODigo,$CODservico,$Descricao,$Aliquota)=$sql_all_servicos->fetch())			    
 							  {
 							   if ($codigo != $CODigo)
 							   {
 								print("<option value=$CODigo>$CODservico |$Descricao | $Aliquota</option>");
 							   }
 							  }	
-						print("</select>&nbsp;");
+						print("</select>");
 							  if($contservicos != $cont_aux_servicos )
 							  {
 							   print("<input type=checkbox name=checkExcluiServico$contservicos value=$codigo>Excluir");
@@ -272,8 +272,8 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 	   </tr>	   
 	   <tr>
          <td colspan="2" align="left">
-		  <!-- botão que chama a função JS e mostra + um serviço-->
-		  <input type="button" value="Adicionar Serviços" name="btAddServicos" class="botao" onclick="incluirServico()" /> 
+		  <!-- botï¿½o que chama a funÃ§Ã£o JS e mostra + um serviÃ§o-->
+		  <input type="button" value="Adicionar ServiÃ§os " name="btAddServicos" class="botao" onclick="incluirServico()" /> 
 		  <font color="#FF0000">*</font></td>
        </tr>	   
 	   <tr>
@@ -282,7 +282,7 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 		<!--CAMPO SERVICOS -->	   
 		<table width="100%" border="0" cellspacing="1" cellpadding="2">
 			   
-			 <?php include("cadastro_servicos.php")?>
+			 <?php require_once("cadastro_servicos.php")?>
 		</table>
 		
 		<!-- CAMPO SERVICOS FIM -->  
@@ -290,7 +290,7 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
 	   </tr>	         
 	  
        <tr>
-         <td colspan="2" align="right"><font color="#FF0000">*</font> Campos Obrigat&oacute;rios<br /> </td>
+         <td colspan="2" align="right"><font color="#FF0000">*</font> Campos ObrigatÃ³rios<br /> </td>
          </tr>
       </table>       
       </fieldset>
@@ -310,7 +310,7 @@ $dados_municipio=mysql_fetch_array($sql_municipio);
     <td align="right" background="img/form/rodape_fundo.jpg"><img src="img/form/rodape_cantodir.jpg" /></td>
   </tr>
 </table>
-<!-- Formulário de inserção de serviços Fim-->       
+<!-- FormulÃ¡rio de inserÃ§Ã£o de serviÃ§os Fim-->       
 		 		
   
 

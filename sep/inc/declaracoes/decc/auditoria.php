@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="500" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Empreiteiras - Auditoria </td>
+    <td width="500" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Empreiteiras - Auditoria </td>
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -37,8 +37,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <td>
                             <select name="cmbEmpreiteira">
                                 <?php
-                                    $sql=mysql_query("SELECT codigo, razaosocial FROM empreiteiras");
-                                    while($dados=mysql_fetch_array($sql)){
+                                    $sql=$PDO->query("SELECT codigo, razaosocial FROM empreiteiras");
+                                    while($dados=$sql->fetch()){
                                         echo "<option value='".$dados['codigo']."'>".$dados['razaosocial']."</option>";
                                     }
                                 ?>

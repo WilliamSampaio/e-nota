@@ -33,14 +33,14 @@ if($btSalvar == "Salvar")
 	$txtDataAtndimento = $_POST['txtDataAtendimento'];
 	$txtDataAtndimento = implode('-', array_reverse(explode('/', $txtDataAtndimento)));	
 	// executa o btSalvar
-	$sql = mysql_query("UPDATE `reclamacoes` SET `estado`='$txtEstado', `responsavel`='$txtResponsavel', `dataatendimento`= '$txtDataAtndimento' WHERE `codigo`=$CODIGO");
-	echo "<script language=JavaScript>alert('Reclamação atualizada.');document.getElementById('frmRedireciona').submit();</script>";
-	add_logs('Atualizou uma Reclamação');
+	$sql = $PDO->query("UPDATE `reclamacoes` SET `estado`='$txtEstado', `responsavel`='$txtResponsavel', `dataatendimento`= '$txtDataAtndimento' WHERE `codigo`=$CODIGO");
+	echo "<script language=JavaScript>alert('ReclamaÃ§Ã£o atualizada.');document.getElementById('frmRedireciona').submit();</script>";
+	add_logs('Atualizou uma ReclamaÃ§Ã£o');
  }?>	
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Ouvidoria - Reclama&ccedil;&otilde;es</td>  
+    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Ouvidoria - ReclamaÃ§Ãµes</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -51,26 +51,26 @@ if($btSalvar == "Salvar")
 				<td>
 			<?php		 
 			if(isset($_POST['btEditar']) == "R") {
-				include("reclamacoes_editar.php");
+				require_once("reclamacoes_editar.php");
 			}else{
 			?>
-			   <!-- Formulário de pesquisa de usuarios  --->
+			   <!-- FormulÃ¡rio de pesquisa de usuarios  --->
 			   <table width="100%" align="center" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
 				<tr>
 				 <td>
-				  <fieldset style="width:730px"><legend>Pesquisa de Reclamações</legend>
+				  <fieldset style="width:730px"><legend>Pesquisa de ReclamaÃ§Ãµes</legend>
 				  <form method="post" name="frmReclamacoesPesquisa">   
 					<input type="hidden" name="include" id="include" value="<?php echo $_POST['include'];?>">
 				  <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
 				   <tr>
-					<td align="left" width="30%">Especificação</td>
+					<td align="left" width="30%">EspecificaÃ§Ã£o</td>
 					<td width="2"align="right"></td>
 					<td align=left width=70% colspan="2"><select name="cmbEspecificacao" >
 					<option value="">===== Selecione aqui =====</option>
 					<?php
 					// cria combo com os assuntos ja postados no banco de forma agrupada
-					$sql = mysql_query("SELECT especificacao FROM reclamacoes GROUP BY especificacao ORDER BY especificacao ASC");
-					while(list($especificacao) = mysql_fetch_array($sql)) {
+					$sql = $PDO->query("SELECT especificacao FROM reclamacoes GROUP BY especificacao ORDER BY especificacao ASC");
+					while(list($especificacao) = $sql->fetch()) {
 						print("<option value=\"$especificacao\">$especificacao</option>");
 					} // fim while
 					?>
@@ -93,7 +93,7 @@ if($btSalvar == "Salvar")
 					</td>
 				   </tr>
 				   <tr>
-					<td align="left">RPS - Número</td>
+					<td align="left">RPS - NÃºmero</td>
 					<td width="2"align="right"></td>
 					<td align="left"><input type="text" size="20" maxlength="20" name="txtRPSNumero" class="texto"></td>
 				   </tr>
@@ -129,21 +129,21 @@ if($btSalvar == "Salvar")
 				</tr>  
 			   </table> 
 			<? } ?> 
-			<!-- Formulário de pesquisa de reclamacoes Fim--->
+			<!-- FormulÃ¡rio de pesquisa de reclamacoes Fim--->
 			</td>
 		  </tr>
 		  <tr>
 			<td> 
-			<!-- Formulário de resultado de pesquisa inicio --->
+			<!-- FormulÃ¡rio de resultado de pesquisa inicio --->
 			<?php 
 			if(isset($_POST['btPesquisar'])){
-				include("reclamacoes_resultadopesquisa.php");
+				require_once("reclamacoes_resultadopesquisa.php");
 			}
 			else{
-				include("reclamacoes_busca.php"); 	
+				require_once("reclamacoes_busca.php"); 	
 			}
 			?>
-			<!-- Formulário de resultado de pesquisa Fim --->
+			<!-- FormulÃ¡rio de resultado de pesquisa Fim --->
 		</td>
 	  </tr>  
 	</table>    	

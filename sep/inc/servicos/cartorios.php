@@ -24,15 +24,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 			$categoria = $_POST["txtCategoria"];
 			if($categoria != "")
 				{
-					$sql_verifica = mysql_query("SELECT codigo FROM cartorios_tipo WHERE tipocartorio='$categoria'");
+					$sql_verifica = $PDO->query("SELECT codigo FROM cartorios_tipo WHERE tipocartorio='$categoria'");
 					if(mysql_num_rows($sql_verifica)>0)
 						{
-							Mensagem("J� existe uma categoria com esse nome!");
+							Mensagem("Já existe uma categoria com esse nome!");
 						}
 					else
 						{	
-							$sql = mysql_query("INSERT INTO cartorios_tipo SET tipocartorio='$categoria'");
-							add_logs('Inseriu uma categoria de Cart�rio');
+							$sql = $PDO->query("INSERT INTO cartorios_tipo SET tipocartorio='$categoria'");
+							add_logs('Inseriu uma categoria de Cart�rio');
 							Mensagem("Categoria inserida com sucesso!");
 						}	
 				}
@@ -44,14 +44,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($_POST["btSalvar"] == "Salvar"){
 		$desc = $_POST["txtServicoEdit"];
 		$codserv = $_POST["hdCodServ"];
-		mysql_query("UPDATE cartorios_tipo SET tipocartorio = '$desc' WHERE codigo = '$codserv'");
-		Mensagem("Servi�o atualizado");
+		$PDO->query("UPDATE cartorios_tipo SET tipocartorio = '$desc' WHERE codigo = '$codserv'");
+		Mensagem("Serviço atualizado");
 	}//fim if
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Servi&ccedil;os - Cart&oacute;rios</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Serviços - Cartórios</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -60,7 +60,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<form method="post" name="frmInsereCat" id="frmInsereCat">
 			<input type="hidden" name="include" id="include" value="<?php echo $_POST["include"];?>" />
 			<fieldset style="margin-left:10px; margin-right:10px;">
-			<legend>Cadastro de Servi&ccedil;os de Cart&oacute;rios</legend>
+			<legend>Cadastro de Serviços de Cartórios</legend>
 				<input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
 					<table>
 						<tr>
@@ -75,9 +75,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<br />
 				<table width="100%" border="0" cellspacing="0" cellpadding="1">
 						<?php
-							$sql = mysql_query("SELECT codigo, tipocartorio FROM cartorios_tipo");
+							$sql = $PDO->query("SELECT codigo, tipocartorio FROM cartorios_tipo");
 							$x = 0;
-							while(list($codigo,$nome) = mysql_fetch_array($sql))
+							while(list($codigo,$nome) = $sql->fetch())
 								{
 						?>			<tr>	
 										<td width="86%" bgcolor="#FFFFFF"><?php echo $nome;?></td>

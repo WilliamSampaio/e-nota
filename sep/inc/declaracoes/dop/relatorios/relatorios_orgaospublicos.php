@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	//query que verifica todos os cadastrados, ativos, inativos e nao liberados
-	$sql = mysql_query("
+	$sql = $PDO->query("
 		SELECT COUNT(codigo) FROM orgaospublicos
 		UNION ALL
 		SELECT COUNT(codigo) FROM orgaospublicos WHERE estado = 'A'
@@ -31,34 +31,34 @@ Fith Floor, Boston, MA 02110-1301, USA
 	");
 	
 	//mysql_result pega um unico resultado da linha solicitada
-	$cadastradas=mysql_result($sql,0);
-	$ativas=mysql_result($sql,1);
-	$inativas=mysql_result($sql,2);
-	$nl=mysql_result($sql,3);
+	$cadastradas=$sql->fetchColumn(0);
+	$ativas=$sql->fetchColumn(1);
+	$inativas=$sql->fetchColumn(2);
+	$nl=$sql->fetchColumn(3);
 	
 ?>
-<fieldset><legend>Informações sobre Órgãos Públicos</legend>
+<fieldset><legend>Informaï¿½ï¿½es sobre ï¿½rgï¿½os Pï¿½blicos</legend>
 <table width="100%" border="0" cellpadding="0">
     <tr>
         <td width="15%" align="left">Cadastradas:</td>
-      <td align="left"><?php if($cadastradas != 0){ echo $cadastradas;}else{ echo "Não há órgãos públicos cadastrados";}?></td>
+      <td align="left"><?php if($cadastradas != 0){ echo $cadastradas;}else{ echo "NÃ£o hÃ¡ ï¿½rgï¿½os pï¿½blicos cadastrados";}?></td>
     </tr>
     <tr>
         <td align="left">Ativas:</td>
-        <td align="left"><?php if($ativas != 0){ echo $ativas;}else{ echo "Não há órgãos públicos ativos";}?></td>
+        <td align="left"><?php if($ativas != 0){ echo $ativas;}else{ echo "NÃ£o hÃ¡ ï¿½rgï¿½os pï¿½blicos ativos";}?></td>
     </tr>
     <tr>
         <td align="left">Inativas:</td>
-        <td align="left"><?php if($inativas != 0){ echo $inativas;}else{ echo "Não há órgãos públicos inativos";}?></td>
+        <td align="left"><?php if($inativas != 0){ echo $inativas;}else{ echo "NÃ£o hÃ¡ ï¿½rgï¿½os pï¿½blicos inativos";}?></td>
     </tr>
     <tr>
-        <td align="left">Não Liberadas:</td>
-        <td width="85%" align="left"><?php if($nl != 0){ echo $nl;}else{ echo "Não há órgãos públicos não liberados";}?></td>
+        <td align="left">NÃ£o Liberadas:</td>
+        <td width="85%" align="left"><?php if($nl != 0){ echo $nl;}else{ echo "NÃ£o hÃ¡ ï¿½rgï¿½os pï¿½blicos nÃ£o liberados";}?></td>
   </tr>
 </table>
 </fieldset>
 <fieldset>
-<legend>Relat&oacute;rios de &Oacute;rg&atilde;os P&uacute;blicos</legend>
+<legend>RelatÃ³rios de Ã“rgÃ£os PÃºblicos</legend>
 	<table align="left" border="0" cellpadding="0">
 		<tr>
 			<td>Nome:</td>
@@ -73,18 +73,18 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<option value=""></option>
 					<option value="A">Ativos</option>
 					<option value="I">Inativos</option>
-					<option value="NL">Não Liberados</option>
+					<option value="NL">NÃ£o Liberados</option>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td>Município:</td>
+			<td>Municï¿½pio:</td>
 			<td><input type="text" name="txtCidade" class="texto" /></td>
 			<td>UF:</td>
 			<td><input type="text" name="txtUF" class="texto" maxlength="2" size="2" /></td>
 		</tr>
 		<tr>
-			<td>Administração:</td>
+			<td>Administraï¿½ï¿½o:</td>
 			<td>
 				<select name="cmbAdmin" class="combo">
 					<option value=""></option>

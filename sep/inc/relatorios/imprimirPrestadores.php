@@ -20,16 +20,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 
 <?php //Includes
-	include("../../inc/conect.php");
-	include("../../funcoes/util.php");
+	require_once("../../inc/conect.php");
+	require_once("../../funcoes/util.php");
 ?>
 
 <?php //Pega o brasão e o estado
-	$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
-	list($BRASAO) = mysql_fetch_array($sql_brasao);
+	$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
+	list($BRASAO) = $sql_brasao->fetch();
 	
-	$sql_estado = mysql_query("SELECT estado FROM configuracoes");
-	list($ESTADO) = mysql_fetch_array($sql_estado);
+	$sql_estado = $PDO->query("SELECT estado FROM configuracoes");
+	list($ESTADO) = $sql_estado->fetch();
 ?>
 
 <?php //Define o título do relatório de acordo com o que vem do rdbServicos
@@ -83,7 +83,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</style>
 <!-- Fim do css da Impressão da página -->
 
-<title>Relat&oacute;rio de Prestadores</title>
+<title>Relatório de Prestadores</title>
 
 <div class="pagina"> <!-- Início div página -->
 	<div id="DivImprimir">
@@ -102,7 +102,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td width="584" height="33" colspan="2">
 					<span class="style1">
 						<center>
-							<p>RELAT&Oacute;RIO - <b><?php print strtoupper($titulo); ?></b> </p>
+							<p>RELATÓRIO - <b><?php print strtoupper($titulo); ?></b> </p>
 							<p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 							<p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 						</center>
@@ -117,12 +117,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 	
 <?php //Verifica a opção marcada e chama o arquivo que vai gerar o relarório
 	if ($_POST['rdbPrestadores'] == 'NE')
-		include("imprimirPrestadoresNE.php");
+		require_once("imprimirPrestadoresNE.php");
 		
 	else if ($_POST['rdbPrestadores'] == 'VA')
-		include("imprimirPrestadoresVA.php");
+		require_once("imprimirPrestadoresVA.php");
 	
 	else
-		include("imprimirPrestadoresFF.php");
+		require_once("imprimirPrestadoresFF.php");
 ?>
 </div> <!-- Fim div página -->

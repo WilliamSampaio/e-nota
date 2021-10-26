@@ -21,15 +21,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?
 //session_name('nfe');
 session_start();
-include("../funcoes/funcao_logs.php");
-// recebe a variavel que contem o n�mero de verifica��o e a variavel que cont�m o n�mero que o usu�rio digitou.
+require_once("../funcoes/funcao_logs.php");
+// recebe a variavel que contem o número de verificação e a variavel que contém o número que o usuário digitou.
 
 $autenticacao  = $_SESSION['autenticacao'];
 $cod_seguranca = $_POST['codseguranca'];
 
 if ($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca) {
-	include("conect.php");
-	include("../funcoes/util.php");
+	require_once("conect.php");
+	require_once("../include/util.php");
 	$campologin = $_POST['txtLogin'];
 	$campo = tipoPessoa($campologin);
 	$sql = $PDO->query("SELECT * FROM cadastro WHERE $campo = '$campologin'");
@@ -43,10 +43,10 @@ if ($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca) {
 
 
 		if ($estado == "A") {
-			//verifica se a senha digitada confere com a que est� armazenada no banco	
+			//verifica se a senha digitada confere com a que está armazenada no banco	
 			if (md5($txtSenha) == $dados['senha']) {
 				if ($dados['codtipo'] == 1) {
-					// inicia a sess�o e direciona para index.		
+					// inicia a sessão e direciona para index.		
 					$_SESSION['empresa'] = $dados['senha'];
 					$_SESSION['login'] = $login;
 					$_SESSION['nome'] = $dados['nome'];
@@ -57,16 +57,16 @@ if ($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca) {
 					parent.location='../login.php';</script>");
 				}
 			} else {
-				print("<script language=JavaScript>alert('Senha n�o confere com a cadastrada no sistema! Favor verificar a senha.');
+				print("<script language=JavaScript>alert('Senha não confere com a cadastrada no sistema! Favor verificar a senha.');
 				parent.location='../login.php';</script>");
 			}
 		} else {
 			print("<script language=JavaScript>alert('Empresa desativada! Contate a Prefeitura.');parent.location='../login.php';</script>");
 		}
 	} else {
-		print("<script language=JavaScript>alert('CPF/CNPJ n�o cadastrado no sistema! Favor verificar usuario.');parent.location='../login.php';</script>");
+		print("<script language=JavaScript>alert('CPF/CNPJ não cadastrado no sistema! Favor verificar usuario.');parent.location='../login.php';</script>");
 	}
 } else {
-	print("<script language=JavaScript>alert('Favor verificar c�digo de seguran�a!');parent.location='../login.php';</script>");
+	print("<script language=JavaScript>alert('Favor verificar código de segurança!');parent.location='../login.php';</script>");
 }
 ?>

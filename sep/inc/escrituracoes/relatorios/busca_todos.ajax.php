@@ -19,37 +19,37 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include('../../conect.php');
-include("../../../funcoes/util.php");
+require_once('../../conect.php');
+require_once("../../../funcoes/util.php");
 
 //SELECIONA TODOS OS GUIAS E GRAVA EM UMA VARIAVEL
-$sqltodos = mysql_query("SELECT guia_pagamento.datavencimento FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia GROUP BY guia_pagamento.codigo");
+$sqltodos = $PDO->query("SELECT guia_pagamento.datavencimento FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia GROUP BY guia_pagamento.codigo");
 $todos = mysql_num_rows($sqltodos);
 
 //SELECIONA OS CAMPOS QUE FORAM PAGOS E GRAVA EM UMA VARIAVEL O RESULTADO
-$sqlpago = mysql_query("SELECT guia_pagamento.datavencimento FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guia_pagamento.pago = 'S' GROUP BY guia_pagamento.codigo");
+$sqlpago = $PDO->query("SELECT guia_pagamento.datavencimento FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guia_pagamento.pago = 'S' GROUP BY guia_pagamento.codigo");
 $pagos = mysql_num_rows($sqlpago);
 
 //SELECIONA OS CAMPOS QUE NAO FORAM PAGOS E GRAVA EM UMA VARIAVEL O RESULTADO
-$sqlnaopago = mysql_query("SELECT guia_pagamento.datavencimento FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guia_pagamento.pago = 'N' GROUP BY guia_pagamento.codigo");
+$sqlnaopago = $PDO->query("SELECT guia_pagamento.datavencimento FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guia_pagamento.pago = 'N' GROUP BY guia_pagamento.codigo");
 $naopagos = mysql_num_rows($sqlnaopago);
 
 $dataatual = date('Y-m-d');
 //SELECIONA OS CAMPOS QUE NAO FORAM PAGOS E ESTAO ATRASADOS E GRAVA EM UMA VARIAVEL O RESULTADO
-$sqlatrasado = mysql_query("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guia_pagamento.pago = 'N'AND datavencimento<'$dataatual' GROUP BY guia_pagamento.codigo");
+$sqlatrasado = $PDO->query("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guia_pagamento.pago = 'N'AND datavencimento<'$dataatual' GROUP BY guia_pagamento.codigo");
 $atrasados = mysql_num_rows($sqlatrasado);
 
-$sqlcartorios=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='cartorios_des'");
-$sqldestemp=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='des_temp'");
-$sqlorgaos=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='dop_des'");
-$sqlfinanceiras=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='dif_des'");
-$sqlempreiteiras=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='decc_des'");
-$sqlopcreditos=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='doc_des'");
-$sqldesnotas=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='nfe'");
-$sqldes=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='des'");
-$sqldesissretido=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='des_issretido'");
+$sqlcartorios=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='cartorios_des'");
+$sqldestemp=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='des_temp'");
+$sqlorgaos=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='dop_des'");
+$sqlfinanceiras=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='dif_des'");
+$sqlempreiteiras=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='decc_des'");
+$sqlopcreditos=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='doc_des'");
+$sqldesnotas=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='nfe'");
+$sqldes=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='des'");
+$sqldesissretido=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='des_issretido'");
 ?>
-	<fieldset style="width:800px"><legend>Relatório de Escriturações</legend>
+	<fieldset style="width:800px"><legend>Relatï¿½rio de Escrituraï¿½ï¿½es</legend>
         <table width="100%">
             <tr>
                 <td width="195">Total de Guias:</td>
@@ -60,7 +60,7 @@ $sqldesissretido=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento I
               <td><?php echo "$pagos"; ?></td>
             </tr>
             <tr>
-                <td>Total de Guias Não Pagas:</td>
+                <td>Total de Guias NÃ£o Pagas:</td>
                 <td><?php echo "$naopagos"; ?></td>
             </tr>
             <tr>
@@ -73,7 +73,7 @@ $sqldesissretido=mysql_query("SELECT guia_pagamento.codigo FROM guia_pagamento I
             <td>
 <input type="radio" name="RGListar" value="T" checked="checked" id="RBTipoT" onchange="acessoAjax('inc/escrituracoes/relatorios/tipos_relatorios.ajax.php','frmListando','divListar')" /><label for="RBTipoT">Todas</label>
 <input type="radio" name="RGListar" value="P" id="RBTipoP" onchange="acessoAjax('inc/escrituracoes/relatorios/tipos_relatorios.ajax.php','frmRelatorio','divListar')"/><label for="RBTipoP">Pagas</label>
-<input type="radio" name="RGListar" value="NP" id="RBTipoNP" onchange="acessoAjax('inc/escrituracoes/relatorios/tipos_relatorios.ajax.php','frmRelatorio','divListar')"/><label for="RBTipoNP">Não Pagas</label>
+<input type="radio" name="RGListar" value="NP" id="RBTipoNP" onchange="acessoAjax('inc/escrituracoes/relatorios/tipos_relatorios.ajax.php','frmRelatorio','divListar')"/><label for="RBTipoNP">NÃ£o Pagas</label>
 <input type="radio" name="RGListar" value="A" id="RBTipoA" onchange="acessoAjax('inc/escrituracoes/relatorios/tipos_relatorios.ajax.php','frmRelatorio','divListar')"/><label for="RBTipoA">Atrasadas</label>
 			</td>
             </tr>

@@ -27,17 +27,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 	header("Pragma: no-cache");
 	header("Content-Type: text/html; charset=iso-8859-1");
 	
-	include("../../conect.php");
+	require_once("../../conect.php");
 	$c = $_GET['contador'];
 	?> 
 	<select style="width:275px;" id="cmbCodCart<?php echo $c;?>" name="cmbCodCart<?php echo $c;?>" onchange="var temp = this.value.split('|'); getElementById('txtAliquota<?php echo $c;?>').value = temp[0];CalculaImpostoDes(txtBaseCalculo<?php echo $c;?>,txtAliquota<?php echo $c;?>,txtImposto<?php echo $c;?>);">
-		<option value="">Tipo de servi&ccedil;o</option> 
+		<option value="">Tipo de serviço</option> 
 	<?php
 	
 	
-	$sql_servicos = mysql_query("SELECT cartorios_servicos.codigo, cartorios_servicos.servicos, cartorios_servicos.aliquota FROM cartorios_servicos WHERE cartorios_servicos.codtipo ='".$_GET["codigo"]."'");
-	if(mysql_num_rows($sql_servicos)){
-		while(list($codigoserv, $servicos, $aliq_serv) = mysql_fetch_array($sql_servicos))
+	$sql_servicos = $PDO->query("SELECT cartorios_servicos.codigo, cartorios_servicos.servicos, cartorios_servicos.aliquota FROM cartorios_servicos WHERE cartorios_servicos.codtipo ='".$_GET["codigo"]."'");
+	if($sql_servicos->rowCount()){
+		while(list($codigoserv, $servicos, $aliq_serv) = $sql_servicos->fetch())
 		{
 			echo "<option value=\"$aliq_serv|$codigoserv\" id=\"$aliq_serv\" >$servicos</option>\n";
 		}

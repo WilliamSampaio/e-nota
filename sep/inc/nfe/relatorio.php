@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;NFe - Relat&oacute;rios </td>  
+    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">NFe - RelatÃ³rios </td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -34,23 +34,23 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<table width="760" align="left">
 		<tr>
 			<td>
-				<fieldset><legend>Relatório geral</legend>
+				<fieldset><legend>Relatï¿½rio geral</legend>
 				<?php  
 				//pega o numero total de notas emitidas
-				$sql_relatorios = mysql_query("SELECT * FROM notas");
-				$notas = mysql_num_rows($sql_relatorios);
+				$sql_relatorios = $PDO->query("SELECT * FROM notas");
+				$notas = $sql_relatorios->rowCount();
 				
 				//pega o numero de notas canceladas
-				$sql_relatorios = mysql_query("SELECT * FROM notas WHERE estado = 'C'");
-				$notas_C = mysql_num_rows($sql_relatorios);
+				$sql_relatorios = $PDO->query("SELECT * FROM notas WHERE estado = 'C'");
+				$notas_C = $sql_relatorios->rowCount();
 				
 				//pega o nome do emissor que emitiu mais notas e o numero de notas emitidas por ele
-				$sql_relatorio = mysql_query("SELECT nome, ultimanota FROM emissores WHERE nfe='S' ORDER BY ultimanota DESC LIMIT 1");
-				list($maior_emissor, $maior_emissor_notas) = mysql_fetch_array($sql_relatorio);
+				$sql_relatorio = $PDO->query("SELECT nome, ultimanota FROM emissores WHERE nfe='S' ORDER BY ultimanota DESC LIMIT 1");
+				list($maior_emissor, $maior_emissor_notas) = $sql_relatorio->fetch();
 				
 				//procura no banco quem foi o tomador que recebeu mais notas e quantas notas recebeu.  count(*) serve para contar quantos tem no grupo do GROUP BY.
-				$sql_relatorio = mysql_query("SELECT tomador_nome, count(*) FROM notas GROUP BY tomador_nome ORDER BY count(*) DESC LIMIT 1");
-				list($maior_tomador, $maior_tomador_notas) = mysql_fetch_array($sql_relatorio);
+				$sql_relatorio = $PDO->query("SELECT tomador_nome, count(*) FROM notas GROUP BY tomador_nome ORDER BY count(*) DESC LIMIT 1");
+				list($maior_tomador, $maior_tomador_notas) = $sql_relatorio->fetch();
 				?>
 					<table>
 					<tr>
@@ -84,7 +84,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</tr>
 					</table>
 				</fieldset>
-				<fieldset><legend>Relatório de notas</legend>
+				<fieldset><legend>Relatï¿½rio de notas</legend>
 					<form method="post" name="frmNotas">
 					<input type="hidden" name="include" id="include" value="<?php echo $_POST["include"]; ?>" />
 					<input type="hidden" name="btNotas" id="btNotas" value="<?php echo $_POST["btNotas"]; ?>" />
@@ -95,9 +95,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 								<td align="left">
 									<select name="cmbEstado" class="combo">
 										<option value="">Todos</option>
-										<?php //Pega o estado do banco e muda a descricao para a vizualização do usuario no combobox
-											$sql = mysql_query("SELECT estado FROM notas GROUP BY estado");
-											while(list($estado) = mysql_fetch_array($sql))
+										<?php //Pega o estado do banco e muda a descricao para a vizualizaï¿½ï¿½o do usuario no combobox
+											$sql = $PDO->query("SELECT estado FROM notas GROUP BY estado");
+											while(list($estado) = $sql->fetch())
 												{
 													switch($estado)
 														{
@@ -136,11 +136,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</form>
 				</fieldset>
 				<?php if($_POST["btProcurar"]) {?>
-				<fieldset><legend>Relatório</legend>
+				<fieldset><legend>Relatï¿½rio</legend>
 					<table align="center">
 						<tr>
 							<td>
-								<?php include("relatorios_notas_emitidas.php"); ?>
+								<?php require_once("relatorios_notas_emitidas.php"); ?>
 							</td>
 						</tr>
 					</table>

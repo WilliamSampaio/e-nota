@@ -557,11 +557,11 @@ do Sacado</b></div></TD></tr></tbody></table>
 		</tr>
 
 		<tr class="campos">
-			<td class="cedente"><?php echo $dadosboleto["cedente"]; ?>&nbsp;</td>
-			<td class="ag_cod_cedente"><?php echo $dadosboleto["agencia_codigo"]?> &nbsp;</td>
-			<td class="especie"><?php echo $dadosboleto["especie"]?>&nbsp;</td>
-			<TD class="qtd"><?php echo $dadosboleto["quantidade"]?>&nbsp;</td>
-			<TD class="nosso_numero"><?php echo $dadosboleto["nosso_numero"]?>&nbsp;</td>
+			<td class="cedente"><?php echo $dadosboleto["cedente"]; ?></td>
+			<td class="ag_cod_cedente"><?php echo $dadosboleto["agencia_codigo"]?> </td>
+			<td class="especie"><?php echo $dadosboleto["especie"]?></td>
+			<TD class="qtd"><?php echo $dadosboleto["quantidade"]?></td>
+			<TD class="nosso_numero"><?php echo $dadosboleto["nosso_numero"]?></td>
 		</tr>
 		</tbody>
 		</table>
@@ -595,11 +595,11 @@ do Sacado</b></div></TD></tr></tbody></table>
 			<td class="valor_cobrado">(=) Valor cobrado</td>
 		</tr>
 		<tr class="campos">
-			<td class="desconto">&nbsp;</td>
-			<td class="outras_deducoes">&nbsp;</td>
-			<td class="mora_multa" align="left">&nbsp;</td>
-			<td class="outros_acrescimos">&nbsp;</td>
-			<td class="valor_cobrado">&nbsp;</td>
+			<td class="desconto"></td>
+			<td class="outras_deducoes"></td>
+			<td class="mora_multa" align="left"></td>
+			<td class="outros_acrescimos"></td>
+			<td class="valor_cobrado"></td>
 		</tr>
 		</tbody>
 		</table>
@@ -646,7 +646,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 			<td class="vencimento2">Vencimento</td>
 		</tr>
 		<tr class="campos">
-			<td class="local_pagto">QUALQUER BANCO AT&Eacute; O VENCIMENTO</td>
+			<td class="local_pagto">QUALQUER BANCO ATÉ O VENCIMENTO</td>
 			<td class="vencimento2"><?php echo $dadosboleto["data_vencimento"]?></td>
 		</tr>
 		</tbody>
@@ -697,8 +697,8 @@ do Sacado</b></div></TD></tr></tbody></table>
 			<td class="valor_doc2">(=) Valor documento</td>
 		</tr>
 		<tr class="campos">
-			<td class="reservado">&nbsp;</td>
-			<td class="carteira"><?php echo $dadosboleto["carteira"]?> <?php echo isset($dadosboleto["variacao_carteira"]) ? $dadosboleto["variacao_carteira"] : '&nbsp;' ?></td>
+			<td class="reservado"></td>
+			<td class="carteira"><?php echo $dadosboleto["carteira"]?> <?php echo isset($dadosboleto["variacao_carteira"]) ? $dadosboleto["variacao_carteira"] : '' ?></td>
 			<td class="especie2"><?php echo $dadosboleto["especie"]?></td>
 			<td class="qtd2"><?php echo $dadosboleto["quantidade"]?></td>
 			<td class="xvalor"><?php echo $dadosboleto["valor_unitario"]?></td>
@@ -740,7 +740,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 				<td class="desconto2">(-) Desconto / Abatimento</td>
 			</tr>
 			<tr class="campos">
-				<td class="desconto2">&nbsp;</td>
+				<td class="desconto2"></td>
 			</tr>
 			</tbody>
 			</table>
@@ -753,7 +753,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 				<td class="outras_deducoes2">(-) Outras deduções</td>
 			</tr>
 			<tr class="campos">
-				<td class="outras_deducoes2">&nbsp;</td>
+				<td class="outras_deducoes2"></td>
 			</tr>
 			</tbody>
 			</table>
@@ -766,7 +766,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 				<td class="mora_multa2">(+) Mora / Multa</td>
 			</tr>
 			<tr class="campos">
-				<td class="mora_multa2" align="right">&nbsp;</td>
+				<td class="mora_multa2" align="right"></td>
 			</tr>
 			</tbody>
 			</table>
@@ -779,7 +779,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 				<td class="outros_acrescimos2">(+) Outros Acréscimos</td>
 			</tr>
 			<tr class="campos">
-				<td class="outros_acrescimos2">&nbsp;</td>
+				<td class="outros_acrescimos2"></td>
 			</tr>
 			</tbody>
 			</table>
@@ -792,7 +792,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 				<td class="valor_cobrado2">(=) Valor cobrado</td>
 			</tr>
 			<tr class="campos">
-				<td class="valor_cobrado2">&nbsp;</td>
+				<td class="valor_cobrado2"></td>
 			</tr>
 			</tbody>
 			</table>
@@ -822,7 +822,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 			<td class="sacador_avalista" colspan="2">Sacador/Avalista</td>
 		</tr>
 		<tr class="campos">
-			<td class="sacador_avalista">&nbsp;</td>
+			<td class="sacador_avalista"></td>
 			<td class="cod_baixa">Cód. baixa</td>
 		</tr>
 		</tbody>

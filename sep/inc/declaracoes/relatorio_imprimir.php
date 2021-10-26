@@ -26,9 +26,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 <script src="../../scripts/padrao.js" type="text/javascript" language="javascript"></script>
 
 <?php 
-  include("../conect.php");
-  include("../../funcoes/util.php");
-  include("../../funcoes/funcao_logs.php");
+  require_once("../conect.php");
+  require_once("../../funcoes/util.php");
+  require_once("../../funcoes/funcao_logs.php");
 ?>
 </head>
 <body style="margin-left: 5%;" >
@@ -57,20 +57,20 @@ echo "</div><br>";
 <div id="divResultado" style="width:800px">
 <?php 
 if($valor == 'tomadores') {
-	echo"<center><h1>Relatório Tomadores $anoComp</h1></center>";
+	echo"<center><h1>Relatï¿½rio Tomadores $anoComp</h1></center>";
 }
 if($valor == 'issretido') {
-	echo"<center><h1>Relatório ISS Retido $anoComp</h1></center>";
+	echo"<center><h1>Relatï¿½rio ISS Retido $anoComp</h1></center>";
 }
 if($valor == 'emissores') {
-	echo"<center><h1>Relatório Emissores $anoComp</h1></center>";
+	echo"<center><h1>Relatï¿½rio Emissores $anoComp</h1></center>";
 }
 
 
 
 if($valor =='tomadores'){
 	
-	$sql=mysql_query("SELECT tomadores.nome,
+	$sql=$PDO->query("SELECT tomadores.nome,
  						  des_tomadores_notas.nota,
  						  DATE_FORMAT(des_tomadores_notas.dataemissao,'%d/%m/%Y'),
 				   		  emissores.nome,
@@ -89,12 +89,12 @@ if($valor =='tomadores'){
 		 	<tr>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Tomador</td>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Nro Nota</td>
-				<td bgcolor=\"#AAAAAA\" align=\"center\">Data Emissão</td>
+				<td bgcolor=\"#AAAAAA\" align=\"center\">Data EmissÃ£o</td>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Emissor</td>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Valor(R$)</td>
-				<td bgcolor=\"#AAAAAA\" align=\"center\">Crédito(R$)</td>		
+				<td bgcolor=\"#AAAAAA\" align=\"center\">CrÃ©dito(R$)</td>		
 		    </tr>";
-		while(list($tomador,$nota,$dataemissao,$emissor,$valor,$credito)=mysql_fetch_array($sql)){
+		while(list($tomador,$nota,$dataemissao,$emissor,$valor,$credito)=$sql->fetch()){
 			
 			$bgcor = $contcor%2==0? "#FFFFFF" : "#DDDDDD";
 			echo" <tr>
@@ -115,7 +115,7 @@ if($valor =='tomadores'){
 
 elseif($valor == 'issretido'){	
 
-	$sql=mysql_query("SELECT tomadores.nome,
+	$sql=$PDO->query("SELECT tomadores.nome,
   							 des_issretido.valor,
   						     des_issretido.multa,
   						     DATE_FORMAT(des_issretido.competencia,'%m/%Y'),
@@ -139,18 +139,18 @@ elseif($valor == 'issretido'){
 		  <table width=\"100%\"  cellspacing=\"1\" cellpadding=\"1\" align=\"center\" border=\"0\" id=\"tblResultado\">
 		 	<tr>
 				<td width=32% bgcolor=\"#AAAAAA\" align=\"center\">Tomador</td>	
-				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Competência</td>	
-				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Emissão</td>	
+				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">CompetÃªncia</td>	
+				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">EmissÃ£o</td>	
 				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Total (R$)</td>
 				<td width=13% bgcolor=\"#AAAAAA\" align=\"center\">Valor (R$)</td>	
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Pago</td>
 		    </tr>
 		    ";
 			
-		while(list($tomador,$valor,$multa,$competencia,$emissao,$guia_pago,$des_codigo)=mysql_fetch_array($sql)){
-			$sql2 = mysql_query("SELECT SUM(valor_nota) FROM des_issretido_notas WHERE coddes_issretido = '$des_codigo'");
-			list($total) = mysql_fetch_array($sql2);
-			$guia_pago = $guia_pago=="S" ? "sim" : "não";
+		while(list($tomador,$valor,$multa,$competencia,$emissao,$guia_pago,$des_codigo)=$sql->fetch()){
+			$sql2 = $PDO->query("SELECT SUM(valor_nota) FROM des_issretido_notas WHERE coddes_issretido = '$des_codigo'");
+			list($total) = $sql2->fetch();
+			$guia_pago = $guia_pago=="S" ? "sim" : "nÃ£o";
 			$bgcor = $contcor%2==0? "#FFFFFF" : "#DDDDDD";
 			echo"    
 				<tr>
@@ -171,7 +171,7 @@ elseif($valor == 'issretido'){
 
 elseif($valor == 'emissores'){
 	
-	$sql=mysql_query("(SELECT des_temp.razaosocial,
+	$sql=$PDO->query("(SELECT des_temp.razaosocial,
 							  des_temp.competencia,
 							  DATE_FORMAT(guia_pagamento.dataemissao,'%d/%m/%Y'),
 							  des_temp.base,
@@ -206,16 +206,16 @@ elseif($valor == 'emissores'){
 		  <table width=\"100%\"  cellspacing=\"1\" cellpadding=\"1\" align=\"center\" border=\"0\" id=\"tblTituloResultado\">
 		    <tr>
 				<td width=32% bgcolor=\"#AAAAAA\" align=\"center\">Prestador</td>
-				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Competência</td>
-				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Emissão</td>
+				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">CompetÃªncia</td>
+				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">EmissÃ£o</td>
 				<td width=15% bgcolor=\"#AAAAAA\" align=\"center\">Total R$</td>
 				<td width=13% bgcolor=\"#AAAAAA\" align=\"center\">Valor R$</td>
 				<td bgcolor=\"#AAAAAA\" align=\"center\">Pago</td>		
 		    </tr>
 		    ";
 								  
-	    while(list($emissor,$competencia,$dataemissao,$total,$valor,$guia_pago)=mysql_fetch_array($sql)){
-			$guia_pago = $guia_pago=="S" ? "sim" : "não";
+	    while(list($emissor,$competencia,$dataemissao,$total,$valor,$guia_pago)=$sql->fetch()){
+			$guia_pago = $guia_pago=="S" ? "sim" : "nÃ£o";
 			$comp = explode("-",$competencia);
 			$competencia = $comp[1]."/".$comp[0];
 			

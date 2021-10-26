@@ -40,8 +40,8 @@ if($datafinal) {
 	$sql_where[] = "DATE(notas.datahoraemissao) <= '$datafinal'";
 }
 if($cnpjprestador) {
-    $sqlEmissor = mysql_query("SELECT codigo FROM cadastro WHERE cpf='$cnpjprestador' OR cnpj='$cnpjprestador'");
-    list($codEmissor) = mysql_fetch_array($sqlEmissor);
+    $sqlEmissor = $PDO->query("SELECT codigo FROM cadastro WHERE cpf='$cnpjprestador' OR cnpj='$cnpjprestador'");
+    list($codEmissor) = $sqlEmissor->fetch();
 	$sql_where[] = "notas.codemissor = '$codEmissor'";
 }
 
@@ -68,22 +68,22 @@ $query = ("
 ");
 $sql = Paginacao($query,'frmRelatorio','dvResultdoRelatorio');
 
-if (mysql_num_rows($sql) < 1) {
+if ($sql->rowCount() < 1) {
 	?><strong><center>Nenhum resultado encontrado.</center></strong><?php
 } else {
 	?>
 		<table width="100%" border="0" cellspacing="2" cellpadding="2">
 			<tr>
                 <td bgcolor="#999999" align="center">Emissor</td>
-				<td bgcolor="#999999" align="center">N&ordm;</td>
-				<td bgcolor="#999999" align="center">Data de emiss&atilde;o</td>
+				<td bgcolor="#999999" align="center">Nº</td>
+				<td bgcolor="#999999" align="center">Data de emissão</td>
 				<td bgcolor="#999999" align="center">CNPJ/CPF Tomador</td>
 				<td bgcolor="#999999" align="center">Tomador</td>
 				<td bgcolor="#999999" align="center">Valor</td>
 				<td bgcolor="#999999" align="center">Iss</td>
 			</tr>
 			<?php
-			while ($dados = mysql_fetch_array($sql)){
+			while ($dados = $sql->fetch()){
 			?>
 			<tr>
                 <td bgcolor="#FFFFFF" align="center"><?php echo $dados['razaosocial']; ?></td>

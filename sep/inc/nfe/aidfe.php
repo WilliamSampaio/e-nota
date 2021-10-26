@@ -19,14 +19,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	$sql=mysql_query("SELECT cadastro.codigo, cadastro.nome, cadastro.ultimanota, cadastro.notalimite FROM cadastro 
+	$sql=$PDO->query("SELECT cadastro.codigo, cadastro.nome, cadastro.ultimanota, cadastro.notalimite FROM cadastro 
 INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitante");
 ?>
 
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Prestadores - AIDF eletrônica</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Prestadores - AIDF eletrÃ´nica</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -35,9 +35,9 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 
 
 <fieldset style="margin-left:10px; margin-right:10px;">
-	<legend>Solicitações</legend>
+	<legend>SolicitaÃ§Ãµes</legend>
 	<?php
-	if(mysql_num_rows($sql)){
+	if($sql->rowCount()){
 	?>
 	<table width="100%">
 		<tr bgcolor="#999999">
@@ -48,7 +48,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 		</tr>
 	<?php
 		$x=0;
-		while(list($codigo,$nome,$ultimanota,$notalimite)=mysql_fetch_array($sql)){
+		while(list($codigo,$nome,$ultimanota,$notalimite)=$sql->fetch()){
 			?>
 			<tr bgcolor="FFFFFF">
 				<td><?php echo $nome; ?></td>
@@ -65,7 +65,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 	</table>
 	<?php
 	}else{?>
-		<center><b>Não há solicitações</b></center>
+		<center><b>NÃ£o hÃ¡ solicitaï¿½ï¿½es</b></center>
 	<?php
 	}
 	?>
@@ -73,8 +73,8 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 <?php
 	if($btLiberar!="")
 	{   
-		$sql=mysql_query("SELECT razaosocial, notalimite FROM cadastro WHERE codigo='$cod'");
-		list($razaosocial,$notalimite)=mysql_fetch_array($sql);
+		$sql=$PDO->query("SELECT razaosocial, notalimite FROM cadastro WHERE codigo='$cod'");
+		list($razaosocial,$notalimite)=$sql->fetch();
 		?>
 		<fieldset style="margin-left:10px; margin-right:10px;">	
 			<legend>Controle do AIDFe</legend>
@@ -113,14 +113,14 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 		</form>	
 			
 	<?php	
-		$sql00=mysql_query("SELECT razaosocial, notalimite,email FROM cadastro WHERE codigo='$txtCodigo'");
-		list($razaosocial,$notalimite,$email)=mysql_fetch_array($sql00);
+		$sql00=$PDO->query("SELECT razaosocial, notalimite,email FROM cadastro WHERE codigo='$txtCodigo'");
+		list($razaosocial,$notalimite,$email)=$sql00->fetch();
 		
 		$headers = "MIME-Version: 1.1\r\n";
 		$headers .= "Content-type: text/plain; charset=iso-8859-1\r\n";
-		mail($email, "Liberação de AIDOF", "Olá $razaosocial a prefeitura municipal de $CONF_CIDADE aprovou sua solicitação de AIDOF, seu limite de notas é $notalimite", $headers);
-		$sql=mysql_query("UPDATE cadastro SET notalimite='$txtAIDF' WHERE codigo='$txtCodigo'");		
-		$sql=mysql_query("DELETE FROM aidfe_solicitacoes WHERE solicitante='$txtCodigo'");
+		mail($email, "Liberaï¿½ï¿½o de AIDOF", "Olï¿½ $razaosocial a prefeitura municipal de $CONF_CIDADE aprovou sua solicitaÃ§Ã£o de AIDOF, seu limite de notas Ã© $notalimite", $headers);
+		$sql=$PDO->query("UPDATE cadastro SET notalimite='$txtAIDF' WHERE codigo='$txtCodigo'");		
+		$sql=$PDO->query("DELETE FROM aidfe_solicitacoes WHERE solicitante='$txtCodigo'");
 		add_logs('Liberou nota limite de AIDF');
 		echo "
 			<script>
@@ -146,7 +146,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 			<td>CNPJ / CPF</td>
 			<td>
 				<input name="txtCNPJ" type="text" class="texto" onkeypress="return NumbersOnly( event );" onkeydown="stopMsk( event );" onkeyup="CNPJCPFMsk( this );" size="20" /> 
-				<em>Somente n&uacute;meros</em> </td>
+				<em>Somente nÃºmeros</em> </td>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="submit" name="btBusca" value="Buscar" class="botao" /></td>
@@ -156,7 +156,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 </form>	
 <?php
 	if($btBusca!=""){// Verifica se a busca foi feita
-	if($btAtualizar!="")// Se a atualização foi feita, registra as informações no banco
+	if($btAtualizar!="")// Se a atualizaï¿½ï¿½o foi feita, registra as informaï¿½ï¿½es no banco
 		{?>
 			<form name="frmAIDF" method="post" id="frmAIDF">
 			<input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
@@ -168,7 +168,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 			$x=0;
 			while($x<=$txtLoop)
 				{
-					$sql=mysql_query("UPDATE cadastro SET notalimite='".$_POST['txtAIDF'.$x]."' WHERE codigo='".$_POST['txtCodigo'.$x]."'");
+					$sql=$PDO->query("UPDATE cadastro SET notalimite='".$_POST['txtAIDF'.$x]."' WHERE codigo='".$_POST['txtCodigo'.$x]."'");
 					$x++;
 				}
 			add_logs('Alterou dados AIDF');
@@ -184,7 +184,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 <fieldset style="margin-left:10px; margin-right:10px;">
 	<legend>AIDF Digital</legend>
 <?php
-	$sql=mysql_query("
+	$sql=$PDO->query("
 			SELECT
 				codigo, 
 				razaosocial, 
@@ -205,8 +205,8 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 	<input name="txtEmissor" type="hidden" value="<?php echo $_POST['txtEmissor'];?>" />
 	<input name="txtCNPJ" type="hidden" value="<?php echo $_POST['txtCNPJ'];?>"/> 
 	<?php
-	if(mysql_num_rows($sql)==0){
-		echo "<center><b>Não há solicitações</b></center>";
+	if($sql->rowCount()==0){
+		echo "<center><b>NÃ£o hÃ¡ solicitaï¿½ï¿½es</b></center>";
 	}else{
 		?>
 		<table align="left" width="100%">
@@ -217,7 +217,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 			</tr>
 			<?php
 			$x=0;
-			while(list($codigo,$razaosocial,$notalimite)=mysql_fetch_array($sql)){
+			while(list($codigo,$razaosocial,$notalimite)=$sql->fetch()){
 				?>
 					<tr align="left" bgcolor="#FFFFFF">
 						<td><?php echo $razaosocial ?></td>

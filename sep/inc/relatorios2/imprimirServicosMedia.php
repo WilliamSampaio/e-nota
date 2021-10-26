@@ -4,7 +4,7 @@
 	}else{
 		$where = "";
 	}
-	//Seleciona os servi�os � a soma do iss arrecadado
+	//Seleciona os serviços é a soma do iss arrecadado
 	$query = ("
 		SELECT 
 			servicos.descricao,
@@ -25,13 +25,13 @@
 			servicos.descricao
 		");
 
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa); //Pega quantos resultados voltaram
 
 	if($result){ //Se existir algum registro, mostra na tabela
 	?>
 	
-<!-- In�cio da Tabela -->
+<!-- In�cio da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999">
 		<?php
@@ -43,12 +43,12 @@
 	</tr>
 	
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>Descri&ccedil;&atilde;o</td>
+		<td>Descrição</td>
 		<td>ISS Arrecadado</td>
 	</tr>
 	
 <?php
-while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+while($dados_pesquisa = $sql_pesquisa->fetch()){
 	if(strlen($dados_pesquisa['descricao']) > 80)
 		$desc = ResumeString($dados_pesquisa['descricao'],80);
 	else
@@ -58,7 +58,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 		<td><?php echo $desc; ?></td>
 		<td><?php echo DecToMoeda($dados_pesquisa['valoriss']); ?></td>
 <?php
-}//Fim do while($dados_pesquisa = mysql_fetch_array($sql_pesquisa))
+}//Fim do while($dados_pesquisa = $sql_pesquisa))
 ?>
 </table>
 <!-- Fim da Tabela -->
@@ -69,7 +69,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>Não há resultados!</td>
 	</tr>
 </table>
 <?php

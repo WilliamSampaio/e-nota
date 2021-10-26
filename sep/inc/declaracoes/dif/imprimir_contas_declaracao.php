@@ -24,8 +24,8 @@ require_once("../../../funcoes/util.php");
 require_once("../../nocache.php");
 
 $codigo=$_POST['hdCodDif'];//recebe o codigo do hidden da declaracao que foi clicada
-
-$sql_info = mysql_query("
+try{
+	$sql_info = $PDO->query("
 	SELECT 
 		dif_des.data,
 		DATE_FORMAT(dif_des.competencia,'%m/%Y') as competencia,
@@ -50,8 +50,15 @@ $sql_info = mysql_query("
 		dif_des.codigo = '$codigo'
 	GROUP BY
 		dif_des_contas.coddif_des
-	") or die(mysql_error());
-	$info = mysql_fetch_array($sql_info) or die(mysql_error());
+	");
+}catch(PDOException $e){
+	echo 'Erro: ' . $e->getMessage();
+}
+try{
+	$info = $sql_info->fetch();
+}catch(PDOException $e){
+	echo 'Erro: ' . $e->getMessage();
+}
 	$info['endereco'] = $info['logradouro'].', '.$info['numero'];
 	
 	$aux = explode(" ",$info['data']);
@@ -71,9 +78,9 @@ $sql_info = mysql_query("
 <script type="text/javascript">
 top.resizeTo(800,600);
 </script>
-<title>Declaracao de Instituição financeira</title>
+<title>Declaracao de InstituiÃ§Ã£o financeira</title>
 <input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
-<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Contas da Declara&ccedil;&atilde;o de Instituição financeira</b><br />
+<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Contas da DeclaraÃ§Ã£o de InstituiÃ§Ã£o financeira</b><br />
 </p>
 <input type="hidden" name="hdCodUser" value="<?php echo $codigo;?>">
 <table width="100%" style="text-indent:25px;" border="0">
@@ -94,13 +101,13 @@ top.resizeTo(800,600);
         <td align="left"><?php echo $info['uf'];?></td>
   </tr>
   <tr bgcolor="#FFFFFF">
-    	<td align="left"><b>Data de geração</b></td>
+    	<td align="left"><b>Data de geraÃ§Ã£o</b></td>
         <td align="left"><?php echo DataPt($info['data']);?></td>
-        <td align="right"><b>Competência</b></td>
+        <td align="right"><b>CompetÃªncia</b></td>
         <td align="left"><?php echo $info['competencia'];?></td>
   </tr>
   <tr bgcolor="#FFFFFF">
-    	<td align="left"><b>Cod. Verificação</b></td>
+    	<td align="left"><b>Cod. VerificaÃ§Ã£o</b></td>
         <td align="left"><?php echo $info['codverificacao'];?></td>
         <td align="right"><b>ISS</b></td>
         <td align="left"><?php echo DecToMoeda($info['iss']);?></td>
@@ -114,7 +121,7 @@ top.resizeTo(800,600);
 </table>
 
 <?php
-$sql=mysql_query("
+$sql=$PDO->query("
 				SELECT 
 					contaoficial, 
 					contacontabil, 
@@ -143,7 +150,7 @@ $sql=mysql_query("
         <td align="left">Item</td>
         <td align="left">Saldo Anterior</td>
         <td align="left">Debito</td>
-        <td align="left">Crédito</td>
+        <td align="left">CrÃ©dito</td>
         <td align="left">Saldo Atual</td>
         <td align="left">Receita</td>
         <td align="left">Aliquota</td>
@@ -153,7 +160,7 @@ $sql=mysql_query("
     	<td colspan="11"><hr color="#000000" size="2" /></td>
     </tr>
     <?php
-		while(list($contaoficial,$contacontabil,$titulo,$item,$saldo_mesantarior,$debito,$credito,$saldo_mesatual,$receita,$aliquota,$iss) = mysql_fetch_array($sql)){
+		while(list($contaoficial,$contacontabil,$titulo,$item,$saldo_mesantarior,$debito,$credito,$saldo_mesatual,$receita,$aliquota,$iss) = $sql->fetch()){
 	?>
     <tr bgcolor="#FFFFFF">
         <td align="left"><?php echo $contaoficial;?></td>

@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Fiscal Inteligente - Dados divergentes</td>  
+    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Fiscal Inteligente - Dados divergentes</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg">
 		<a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a>
 	</td>
@@ -39,9 +39,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 				$dataInicial = $_POST['txtDataInicial'];
 				$dataFinal   = $_POST['txtDataFinal'];
 				
-				include("inconsistencias_dados.php");
+				require_once("inconsistencias_dados.php");
 			}else{
-				include("inconsistencias_dados.php");
+				require_once("inconsistencias_dados.php");
 			}
 		?>
 		<script>
@@ -72,22 +72,22 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</td>
 				</tr>
 				<tr>
-					<td align="left" colspan="5"><strong>Resumo do periodo de: <?php echo DataPt($dataInicial)." at� ".DataPt($dataFinal);?></strong></td>
+					<td align="left" colspan="5"><strong>Resumo do periodo de: <?php echo DataPt($dataInicial)." até ".DataPt($dataFinal);?></strong></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="left">N&uacute;mero de NFe emitidas </td>
+					<td colspan="2" align="left">Número de NFe emitidas </td>
 					<td align="left">
 						<input name="txtNfEmitidas" type="text" id="txtNfEmitidas" size="10" class="texto" value="<?php echo $nf_emitidas;?>" />
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="left">N&uacute;mero de NFe tomadas (declaradas) </td>
+					<td colspan="2" align="left">Número de NFe tomadas (declaradas) </td>
 					<td align="left">
 						<input name="txtNfTomadas" type="text" id="txtNfTomadas" size="10" class="texto" value="<?php echo $nf_emitidas_tomador;?>"/>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="left">N&uacute;mero de Prestadores com Nfe sem par:</td>
+					<td colspan="2" align="left">Número de Prestadores com Nfe sem par:</td>
 					<td align="left">
 						<input name="txtNfDivergentesPrestador" type="text" id="txtNfDivergentesPrestador" size="10" class="texto" value="<?php echo $nf_divirgentes;?>" />
 					</td>
@@ -108,7 +108,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="left">Nro. de notas com inconsist�ncias: </td>
+					<td colspan="2" align="left">Nro. de notas com inconsist�ncias: </td>
 					<td align="left">
 						<input name="txtNfInconsistencias" type="text" id="txtNfInconsistencias" size="10" class="texto" 
 						value="<?php echo $nf_inconsistentes;?>" />

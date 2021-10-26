@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 <tr>
 	<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-	<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - Contribuintes</td>
+	<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Contribuintes</td>
 	<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg">
 		<a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a>
 	</td>
@@ -41,8 +41,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 					Por:
 				</td>
 				<td>
-					<label><input type="radio" name="rdbContribuinte" value="vinculados" checked >Vinculados por contador </label>&nbsp;
-                    <label><input type="radio" name="rdbContribuinte" value="omissos" >Omissos de Escritura&ccedil;&atilde;o </label>
+					<label><input type="radio" name="rdbContribuinte" value="vinculados" checked >Vinculados por contador </label>
+                    <label><input type="radio" name="rdbContribuinte" value="omissos" >Omissos de Escrituração </label>
 			  </td>
 			</tr>
        	</table>

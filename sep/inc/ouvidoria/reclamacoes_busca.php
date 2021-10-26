@@ -21,8 +21,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 
 
-//SQL de filtragem de serviços
-$sql_listaPendentes = mysql_query("
+//SQL de filtragem de serviÃ§os
+$sql_listaPendentes = $PDO->query("
 SELECT codigo, especificacao, datareclamacao, responsavel, tomador_cnpj
 FROM reclamacoes
 WHERE estado = 'pendente'
@@ -35,23 +35,23 @@ LIMIT 0,10");
 		<td>
 		
 		
-<!-- cabeçalho da pesquisa-----> 
-<fieldset style="width:730px;"><legend>Dez Últimas Reclamações Pendentes</legend>      
+<!-- cabeï¿½alho da pesquisa-----> 
+<fieldset style="width:730px;"><legend>Dez Ãºltimas ReclamaÃ§Ãµes Pendentes</legend>      
 <form name="frmListaReclamacoesPendentes" method="post" id="frmListaReclamacoesPendentes" >
 	<input type="hidden" name="include" id="include" value="<?php echo $_POST['include'];?>">
 	<input type="hidden" name="btEditar" id="btEditar">
 	<input type="hidden" name="CODIGO" id="CODIGOlista">	
   <table width="730" border="0">
     <tr bgcolor="#999999">
-      <td width="230" align="center">Especificação</td>
+      <td width="230" align="center">EspecificaÃ§Ã£o</td>
       <td width="150" align="center">Tomador</td>
-      <td width="150" align="center">Data Reclamação</td>
-      <td width="100" align="center">Responsável</td>
-	  <td width="100" align="center">Ações</td>
+      <td width="150" align="center">Data ReclamaÃ§Ã£o</td>
+      <td width="100" align="center">ResponsÃ¡vel</td>
+	  <td width="100" align="center">AÃ§Ãµes</td>
     </tr>
   <?php
   // lista o resultado do sql
-  while(list($codigo, $especificacao, $datareclamacao, $responsavel, $tomador_cnpj) = mysql_fetch_array($sql_listaPendentes)) {
+  while(list($codigo, $especificacao, $datareclamacao, $responsavel, $tomador_cnpj) = $sql_listaPendentes->fetch()) {
   ?>
     <tr bgcolor="#FFFFFF" height="35">
       <td align="center"><?php echo $especificacao; ?></td>
@@ -70,7 +70,7 @@ LIMIT 0,10");
 
 
 //SQL de filtragem de reclamacoes atendidas
-$sql_listaAtendidas = mysql_query("
+$sql_listaAtendidas = $PDO->query("
 SELECT codigo, especificacao, dataatendimento, responsavel, tomador_cnpj
 FROM reclamacoes
 WHERE estado = 'atendida'
@@ -79,23 +79,23 @@ LIMIT 0,10");
 
 ?>
  
-<!-- cabeçalho da pesquisa-----> 
-<fieldset style="width:730px;"><legend>Dez Últimas Reclamações Atendidas</legend>      
+<!-- cabeï¿½alho da pesquisa-----> 
+<fieldset style="width:730px;"><legend>Dez Ãºltimas ReclamaÃ§Ãµes Atendidas</legend>      
 <form name="frmListaReclamacoesAtendidas" method="post" id="frmListaReclamacoesAtendidas">
 	<input type="hidden" name="include" id="include" value="<?php echo $_POST['include'];?>">
 	<input type="hidden" name="btEditar" id="btEditar">
 	<input type="hidden" name="CODIGO" id="CODIGObusca">	
   <table width="730" border="0">
     <tr bgcolor="#999999">
-      <td width="230" align="center">Especificação</td>
+      <td width="230" align="center">EspecificaÃ§Ã£o</td>
       <td width="150" align="center">Tomador</td>
       <td width="150" align="center">Data Atendimento</td>
-      <td width="100" align="center">Responsável</td>
-	  <td width="100" align="center">Ações</td>
+      <td width="100" align="center">ResponsÃ¡vel</td>
+	  <td width="100" align="center">AÃ§Ãµes</td>
     </tr>
   <?php
   // lista o resultado do sql
-  while(list($codigo, $especificacao, $dataatendimento, $responsavel, $tomador_cnpj) = mysql_fetch_array($sql_listaAtendidas)) {
+  while(list($codigo, $especificacao, $dataatendimento, $responsavel, $tomador_cnpj) = $sql_listaAtendidas->fetch()) {
   ?>
     <tr bgcolor="#FFFFFF" height="35">
       <td align="center"><?php echo $especificacao; ?></td>

@@ -20,17 +20,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	if($_POST['btEditar'] == "Salvar"){
-		include("inc/utilitarios/abatimento_editar.php");
+		require_once("inc/utilitarios/abatimento_editar.php");
 	}
 ?>
 <?php
-$abat = mysql_query("SELECT abatimento_iptu FROM configuracoes");
-list($porc_iptu)=mysql_fetch_array($abat);
+$abat = $PDO->query("SELECT abatimento_iptu FROM configuracoes");
+list($porc_iptu)=$abat->fetch();
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="500" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Abatimento Iptu</td>
+		<td width="500" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Abatimento Iptu</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -44,12 +44,12 @@ list($porc_iptu)=mysql_fetch_array($abat);
 				<table width="100%">
 					<tr>
 						<td align="left" width="30"><input type="text" value="<?php echo $porc_iptu; ?>" name="txtPorc" id="txtPorc" class="texto" onkeyup="MaskPercent(this)" size="8" onblur="limitePct('txtPorc')" ></td>
-                        <td align="left">%  <font color="#FF0000">* Digite o valor m&aacute;ximo para abatimento.</font></td>
+                        <td align="left">%  <font color="#FF0000">* Digite o valor máximo para abatimento.</font></td>
 					</tr>
 					<tr>
 						<td align="left" colspan="2">							
 							<input name="btEditar" type="submit" class="botao" value="Salvar" 
-                            onclick="return (ValidaFormulario('txtPorc','Preencha os dados obrigat�rios'))">
+                            onclick="return (ValidaFormulario('txtPorc','Preencha os dados obrigatórios'))">
 						</td>
 					</tr>
 				</table>

@@ -8,7 +8,7 @@ They can be accessed from three different locations:
 
 - the directory defined by the FPDF_FONTPATH constant (if this constant is defined)
 - the font directory located in the directory containing fpdf.php (as it is the case in this archive)
-- the directories accessible through include()
+- the directories accessible through require_once()
 
 Here is an example defining FPDF_FONTPATH (note the mandatory final slash):
 

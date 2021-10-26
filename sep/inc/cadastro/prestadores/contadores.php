@@ -18,11 +18,11 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<!-- Formul�rio com o filtro de empresas------------------------->
+<!-- Formulário com o filtro de empresas------------------------->
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Prestadores - Contadores</td>  
+    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Prestadores - Contadores</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -44,7 +44,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	  Cnpj/Cpf     </td>
      <td align="left">
       <input name="txtBuscaCnpj" type="text" maxlength="18" size="20" id="txtBuscaCnpj" class="texto"  onkeydown="stopMsk( event );" onkeypress="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" /> 
-      <em>Somente n&uacute;meros</em> </td>
+      <em>Somente números</em> </td>
 	</tr>
 	<tr>       
      <td align="left" colspan="2">
@@ -59,7 +59,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 //Verifica se o botao de busca empresa foi acionado, se for mostra o resultado da pesquisa
 if($_POST['btPesquisarEmpresa'] == "Procurar")
 {  
- $sql_buscaempresa=mysql_query("SELECT emissores.codigo, emissores.nome, emissores.cnpjcpf, emissores.estado FROM emissores 
+ $sql_buscaempresa=$PDO->query("SELECT emissores.codigo, emissores.nome, emissores.cnpjcpf, emissores.estado FROM emissores 
  INNER JOIN usuarios ON emissores.cnpjcpf=usuarios.login WHERE emissores.nome LIKE '$txtBuscaNome%' AND emissores.cnpjcpf LIKE '$txtBuscaCnpj%' AND usuarios.tipo='contador' ORDER BY emissores.nome ASC ");
 ?>
    <form id="frmClientes" method="post"> 
@@ -67,10 +67,10 @@ if($_POST['btPesquisarEmpresa'] == "Procurar")
 	<input type="hidden" name="COD" id="COD">
    </form> 
 <?php 
-	include("inc/prestadores/contadores_lista.php");
+	require_once("inc/prestadores/contadores_lista.php");
 }
 if($_POST['COD']){	
-	include('inc/prestadores/contadores_listacliente.php');
+	require_once('inc/prestadores/contadores_listacliente.php');
 }	
 ?>
 

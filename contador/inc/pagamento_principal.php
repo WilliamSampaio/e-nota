@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    $login = $_SESSION['codempresa']; //$publicarBtn = array("s" => "N�o Publicar", "n" => "Publicar");
+    $login = $_SESSION['codempresa']; //$publicarBtn = array("s" => "Não Publicar", "n" => "Publicar");
 
     $sql = mysql_query("
         SELECT codigo FROM cadastro
@@ -48,10 +48,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<table width="100%">
 			<tr>
 				<td align="center">
-                    Empresa&nbsp;
+                    Empresa
                       <select name="cmbEmpresaCliente" id="cmbEmpresaCliente">
                           <?php if($simples < 1){ ?>
-                          <option value="<?php echo $codcontador; ?>"><?php echo "Pr&oacute;pria - ".$_SESSION['codempresa']; ?></option>
+                          <option value="<?php echo $codcontador; ?>"><?php echo "Própria - ".$_SESSION['codempresa']; ?></option>
                           <?php } ?>
                           <?php
                             while($empresaCliente = mysql_fetch_object($sqlEmpresaCliente)){
@@ -70,7 +70,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                       </select>
                     <br /><br />
                     <input type="submit" class="botao" name="btOp" value="Gerar Guia">
-                    &nbsp;
+                    
                     <input type="submit" name="btOp" class="botao" value="Guias Emitidas">
                 </td>
 			</tr>
@@ -81,12 +81,12 @@ Fith Floor, Boston, MA 02110-1301, USA
  	<?php
 	if($_POST['btOp'] == "Gerar Guia")
 	{
-	  include("guia_pagamento.php");
+	  require_once("guia_pagamento.php");
 	}
 	
 	elseif($_POST['btOp'] == "Guias Emitidas")
 	{
-	  include("pagamento_emitidas.php");
+	  require_once("pagamento_emitidas.php");
 	
 	}
 	
@@ -94,7 +94,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	//codigo para impressao do boleto
     if($btEnviaBoleto =="Boleto")
     {
-      include("pagamento_boleto.php");
+      require_once("pagamento_boleto.php");
     } 
 
 	?>

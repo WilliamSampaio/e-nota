@@ -43,12 +43,12 @@ function GeraGuia($codguia){
     <input type="hidden" name="txtEmissor" value="<?php echo $codcadastro;?>" />
 			<table border="0" width="100%">
 				<tr bgcolor="#999999">
-					<td align="center">Data Declara&ccedil;&atilde;o</td>
-					<td align="center">Compet&ecirc;cia</td>
+					<td align="center">Data Declaração</td>
+					<td align="center">Competêcia</td>
                     <td align="center">Vencimento</td>
                     <td align="center">Multa</td>
 					<td align="center">Valor</td>															
-					<td align="center" width="100">A&ccedil;&otilde;es</td>
+					<td align="center" width="100">Ações</td>
 			    </tr>
 			    <?php
 				while(list($codigo,$total,$data,$competencia,$vencimento)=$sql->fetch()){

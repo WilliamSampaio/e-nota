@@ -19,12 +19,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-$file = $_GET['file']; // pega o endere�o do arquivo
+$file = $_GET['file']; // pega o endereço do arquivo
 // ou o nome dele se o arquivo 
 // estiver na mesma pagina!! 
 foreach ($_GET as $link => $nada);
 $file = ".." . str_replace("_", ".", $link);
-if (strpos($file, ".csv") === false) { //teste se o arquivo � a exten��o esperada, para nao baixar arquivos php por exemplo
+if (strpos($file, ".csv") === false) { //teste se o arquivo é a exten��o esperada, para nao baixar arquivos php por exemplo
 	echo "erro na importação do arquivo!";
 } else {
 	$nome_arquivo = array_reverse(explode("/", $file));

@@ -19,26 +19,26 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-	include('../conect.php');
-	include("../../funcoes/util.php");
-	$sql=mysql_query("SELECT assunto, especificacao, tomador_cnpj, tomador_email, datareclamacao, estado, responsavel FROM reclamacoes WHERE estado='atendida'");
+	require_once('../conect.php');
+	require_once("../../funcoes/util.php");
+	$sql=$PDO->query("SELECT assunto, especificacao, tomador_cnpj, tomador_email, datareclamacao, estado, responsavel FROM reclamacoes WHERE estado='atendida'");
 ?>
 
 <table width="800" bgcolor="#CCCCCC" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>			
-			<fieldset style="width:800px"><legend>Busca de Escriturações Pagas</legend>
+			<fieldset style="width:800px"><legend>Busca de Escrituraï¿½ï¿½es Pagas</legend>
 				<table width="100%">
 					<tr bgcolor="#999999">
 						<td align="center" width="200">Assunto</td>
-						<td align="center" width="160">Especificação</td>
+						<td align="center" width="160">EspecificaÃ§Ã£o</td>
 						<td align="center" width="100">Tomador</td>
 						<td align="center" width="140">E-mail</td>
-						<td align="center" width="110">Data Reclamação</td>
-						<td align="center" width="100">Responsável</td>
+						<td align="center" width="110">Data ReclamaÃ§Ã£o</td>
+						<td align="center" width="100">ResponsÃ¡vel</td>
 					</tr>
 			<?php
-			while(list($assunto, $especificacao, $tomador, $email, $data, $estado, $responsavel)=mysql_fetch_array($sql)){
+			while(list($assunto, $especificacao, $tomador, $email, $data, $estado, $responsavel)=$sql->fetch()){
 				echo "
 					<tr bgcolor=\"#FFFFFF\" height=\"30\">
 						<td align=\"center\">$assunto</td>

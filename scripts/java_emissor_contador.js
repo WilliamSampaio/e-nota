@@ -114,12 +114,12 @@ function buscaInfoPrestador(obj){
 			});
 			
 		}else{
-			spanErro.innerHTML = "<strong>Formato de CNPJ/CPF inv&aacute;lido!</strong>";
+			spanErro.innerHTML = "<strong>Formato de CNPJ/CPF inválido!</strong>";
 			divPrestador.innerHTML = '';
 			hdCNPJ.value = '';
 		}
 	}else{
-		spanErro.innerHTML = "<strong>Voc&ecirc; deve digitar um CNPJ/CPF v&aacute;lido!</strong>";
+		spanErro.innerHTML = "<strong>Você deve digitar um CNPJ/CPF válido!</strong>";
 		divPrestador.innerHTML = '';
 		hdCNPJ.value = '';
 	}
@@ -615,7 +615,7 @@ function servicoNota(tipo, div){
 
 
 
-// FUN��ES da GUIA DE PAGAMENTO
+// FUNÇÕES da GUIA DE PAGAMENTO
 
 function GuiaPagamento_TotalISS()
 {
@@ -751,7 +751,7 @@ function GuiaPagamento_SomaISS(iss)
 	}
 		
 }
-// FUN��ES da GUIA DE PAGAMENTO fim
+// FUNÇÕES da GUIA DE PAGAMENTO fim
 
 
 
@@ -988,7 +988,7 @@ function ValorIss(regras_de_credito)
 
 			
 			
-			//calcula o cr�dito final que o tomador receber� ao emitir a nota
+			//calcula o crédito final que o tomador receber� ao emitir a nota
 			var somaiss= iss+issretido;
 			credito_final = (somaiss * parseFloat(credito))/100;
 			
@@ -1216,7 +1216,7 @@ function ValorIssRPA(cred_pf_n,val_pf_n,cred_pf_s,val_pf_s,cred_pj_n,val_pj_n,cr
 		 
 		 if(aliquota != "")
 		 { 
-			  //separa os valores do combo e pega o valor do cr�dito
+			  //separa os valores do combo e pega o valor do crédito
 			  var aux = document.getElementById('cmbCodServico').value;  
 			  var issretido = aux.split("|"); 
 		  
@@ -1233,13 +1233,13 @@ function ValorIssRPA(cred_pf_n,val_pf_n,cred_pf_s,val_pf_s,cred_pj_n,val_pj_n,cr
 			  {
 			   //calcula o iss
 			   
-			   var iss = parseFloat(aliquota);  //rpa o calculo � direto e nao por porcetagem 
+			   var iss = parseFloat(aliquota);  //rpa o calculo é direto e nao por porcetagem 
 
 			   /*a = Math.sqrt(iss);*/
 			   iss = iss.toFixed(2);
 			   document.getElementById('txtISS').value=DecToMoeda(iss);	  
 			  
-				  //verifica a quantidade de cr�ditos que o tomador receber�, baseando-se no tipo de pessoa e se tem iss retido ou n�o.
+				  //verifica a quantidade de créditos que o tomador receber�, baseando-se no tipo de pessoa e se tem iss retido ou não.
 				  if( tipopessoa == 14)
 				   {	   
 					 if (issretido[2] != 0)
@@ -1311,7 +1311,7 @@ function ValorIssRPA(cred_pf_n,val_pf_n,cred_pf_s,val_pf_s,cred_pj_n,val_pj_n,cr
 				   
 		
 
-			//calcula o valor do ISS que ser� retido
+			//calcula o valor do ISS que será retido
 			var valor_issretido = parseFloat(basecalc) * parseFloat(issretido[2])/100;
 			
 			//valor_issretido = valor_issretido.toFixed(2);
@@ -1320,13 +1320,13 @@ function ValorIssRPA(cred_pf_n,val_pf_n,cred_pf_s,val_pf_s,cred_pj_n,val_pj_n,cr
 			//calcula o valor total da nota
 			var total = parseFloat(basecalc) + parseFloat(valdeduc);
 			
-			total = (total) + parseFloat(iss); // var iss � do valor do rpa que deve ser somado com o valor total da nota
+			total = (total) + parseFloat(iss); // var iss é do valor do rpa que deve ser somado com o valor total da nota
 
 			//   a = Math.sqrt(total);
 			//   total = a.toFixed(2);
 			document.getElementById('txtValTotal').value=DecToMoeda(total);
 		   
-			//calcula o cr�dito final que o tomador receber� ao emitir a nota
+			//calcula o crédito final que o tomador receber� ao emitir a nota
 			credito_final = (parseFloat(iss) * parseFloat(credito))/100;
 			//credito_final = credito_final.toFixed(2);
 			document.getElementById('txtCredito').value=DecToMoeda(credito_final);
@@ -1368,7 +1368,7 @@ function ValidarInserirNota()
 			}
 	}
 	
-//fun��o gen�rica que requisita confirma��o de envio
+//função gen�rica que requisita confirmação de envio
 
 function ConfirmaForm()
 	{
@@ -1546,7 +1546,7 @@ function creditosNfe($regras_de_credito){
 				}
 			}
 		}				
-	//calcula o cr�dito final que o tomador receber� ao emitir a nota
+	//calcula o crédito final que o tomador receber� ao emitir a nota
 	credito_final = (iss * parseFloat(credito))/100;
 	//credito_final = credito_final.toFixed(2);
 	document.getElementById('txtCredito').value=DecToMoeda(credito_final);	

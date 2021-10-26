@@ -4,7 +4,7 @@
 	}else{
 		$where = "";
 	}
-	//Seleciona os serviÁos e a discriminaÁ„o
+	//Seleciona os servi√ßos e a discrimina√ß√£o
 	$query = ("
 		SELECT 
 			servicos.descricao,
@@ -25,13 +25,13 @@
 			servicos.descricao
 		");
 
-	$sql_pesquisa = mysql_query ($query);
-	$result = mysql_num_rows($sql_pesquisa); //Pega quantos resultados voltaram
+	$sql_pesquisa = $PDO->query($query);
+	$result = $sql_pesquisa->rowCount(); //Pega quantos resultados voltaram
 
 	if($result){ //Se existir algum registro, mostra na tabela
 	?>
 	
-<!-- InÌcio da Tabela -->
+<!-- InÔøΩcio da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999">
 		<?php
@@ -43,12 +43,12 @@
 	</tr>
 	
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td width="430">Descri&ccedil;&atilde;o</td>
-		<td>DiscriminaÁ„o</td>
+		<td width="430">Descri√ß√£o</td>
+		<td>Discrimina√ß√£o</td>
 	</tr>
 	
 <?php
-while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+while($dados_pesquisa = $sql_pesquisa->fetch()){
 	if(strlen($dados_pesquisa['descricao']) > 60)
 		$desc = ResumeString($dados_pesquisa['descricao'],60);
 	else
@@ -58,7 +58,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 		<td><?php echo $desc; ?></td>
 		<td><?php echo $dados_pesquisa['discriminacao']; ?></td>
 <?php
-}//Fim do while($dados_pesquisa = mysql_fetch_array($sql_pesquisa))
+}//Fim do while($dados_pesquisa = $sql_pesquisa))
 ?>
 </table>
 <!-- Fim da Tabela -->
@@ -69,7 +69,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>N√£o h√° resultados!</td>
 	</tr>
 </table>
 <?php

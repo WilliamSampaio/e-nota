@@ -37,10 +37,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</tr>
 	<tr>
 		<td height="60" colspan="3" bgcolor="#CCCCCC" style="padding:5px;">
-Este software lhe permite gerar documentos em PDF a partir de qualquer programa que lhe disponibilize a funÁ„o de impress„o.
+Este software lhe permite gerar documentos em PDF a partir de qualquer programa que lhe disponibilize a fun√ß√ß√£o de impress√£o.
 Efetue o download clicando <a href="http://www.cutepdf.com/" target="_blank">aqui</a>.<br>
 <Br>
-<em>Este È um software livre, portanto n„o necessita de uma licenÁa de uso.</em><br />
+<em>Este √© um software livre, portanto n√£o necessita de uma licen√ßa de uso.</em><br />
   <br>
   <a href="http://www.cutepdf.com/" target="_blank"><img src="../img/cutepdf.jpg" border="0" /></a>	  </td>
 	</tr>
@@ -70,7 +70,7 @@ Efetue o download clicando <a href="http://www.cutepdf.com/" target="_blank">aqu
 Este software lhe permite visualizar documentos em PDF.
 Efetue o download clicando <a href="http://get.adobe.com/br/reader/" target="_blank">aqui</a>.<br>
 <Br>
-<em>Este È um software livre, portanto n„o necessita de uma licenÁa de uso.</em><br />
+<em>Este √© um software livre, portanto n√£o necessita de uma licen√ßa de uso.</em><br />
   <br>
   <a href="http://get.adobe.com/br/reader/" target="_blank"><img src="../img/adobereader.jpg" border="0" /></a>	  </td>
 	</tr>
@@ -101,7 +101,7 @@ Efetue o download clicando <a href="http://get.adobe.com/br/reader/" target="_bl
 Este software lhe permite acessar todos os recursos deste sistema.
 Efetue o download clicando <a href="http://www.mozilla.com/pt-BR/" target="_blank">aqui</a>.<br>
 <Br>
-<em>Este È um software livre, portanto n„o necessita de uma licenÁa de uso.</em><br />
+<em>Este √© um software livre, portanto n√£o necessita de uma licen√ßa de uso.</em><br />
   <br>
   <a href="http://www.mozilla.com/pt-BR/" target="_blank"><img src="../img/firefox.jpg" border="0" /></a>	  </td>
 	</tr>

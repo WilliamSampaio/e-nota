@@ -43,7 +43,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 $btPesquisar = $_REQUEST['btPesquisar'];
 
 if($btPesquisar !="") {
-	include("notas_pesquisa_relatorio.php");
+	require_once("notas_pesquisa_relatorio.php");
 }
 	
 ?>

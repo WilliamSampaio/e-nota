@@ -20,8 +20,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 //Conecta ao banco
-include("../conect.php");
-include("../../funcoes/util.php");
+require_once("../conect.php");
+require_once("../../funcoes/util.php");
 
 //Recebe as variaveis enviadas por post
 $tipo      = $_POST["cmbTipo"];
@@ -37,11 +37,11 @@ $valor     = $_POST["cmbValor"];
 		<td>
 			<table>
 				<?php
-					$sql = mysql_query("SELECT credito, tipopessoa, issretido, valor FROM nfe_creditos WHERE tipopessoa LIKE '$cmbTipo%' AND issretido LIKE '$issretido%' AND valor LIKE '$cmbValor%'");
+					$sql = $PDO->query("SELECT credito, tipopessoa, issretido, valor FROM nfe_creditos WHERE tipopessoa LIKE '$cmbTipo%' AND issretido LIKE '$issretido%' AND valor LIKE '$cmbValor%'");
 					if(mysql_num_rows($sql)){
 				?>
 				<tr>
-					<td align="center" width="20%">Crédito( % )</td>
+					<td align="center" width="20%">CrÃ©dito( % )</td>
 					<td align="center" width="20%">Tipo</td>
 					<td align="center" width="27%">ISS retido</td>
 					<td align="center" width="33%">Valor</td>
@@ -50,10 +50,10 @@ $valor     = $_POST["cmbValor"];
 					<td colspan="4"><hr size="1" color="#000000"></td>
 				</tr>
 				<?php
-						while(list($credito,$tipopessoa,$issretido,$valor) = mysql_fetch_array($sql)){
+						while(list($credito,$tipopessoa,$issretido,$valor) = $sql->fetch()){
 							switch($issretido){
 								case "S": $issretido = "Sim"; break;
-								case "N": $issretido = "Não"; break;
+								case "N": $issretido = "NÃ£o"; break;
 							}
 							switch($tipopessoa){
 								case "PF": $tipopessoa = "Pessoa fisica";   break;

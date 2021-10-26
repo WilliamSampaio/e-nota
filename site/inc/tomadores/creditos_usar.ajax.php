@@ -20,7 +20,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 require_once("../../../include/conect.php");
-require_once("../../../funcoes/util.php");
 $cod=$_GET['cod'];
 ?>
 <table>
@@ -28,7 +27,7 @@ $cod=$_GET['cod'];
     	<td colspan="2" height="15"></td>
     </tr>
 	<tr>
-    	<td>Digite o C&oacute;digo do Im&oacute;vel: &nbsp;&nbsp;<input type="text" class="texto" name="txtImovel" id="txtImovel" onkeyup="RetornaImovel(this.value, <?php echo $cod; ?>)" />
+    	<td>Digite o Código do Imóvel: <input type="text" class="texto" name="txtImovel" id="txtImovel" onkeyup="RetornaImovel(this.value, <?php echo $cod; ?>)" />
         	<p></br><span id="spanRetorno"></span></p>
         </td>
     </tr>

@@ -18,12 +18,12 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<?php 
- include("inc/conect.php");
- // unset($_SESSION["empresa"],$_SESSION['login']);
- session_name("emissor");
- session_start();  
- session_destroy();
- print("<script language=JavaScript>parent.location.href='login.php'</script>"); ?>
+<?php
 
+require_once("../autoload.php");
+
+session_name("emissor");
+session_start();
+session_destroy();
+
+header('Location: ' . BASE_URL . 'emissor/login.php');

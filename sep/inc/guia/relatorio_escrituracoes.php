@@ -1,7 +1,7 @@
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Nfe - Relat&oacute;rio de Escritura&ccedil;&otilde;es</td>
+		<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Nfe - Relatório de Escriturações</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -34,7 +34,7 @@
 						<select name="cmbMes">
 							<option value="">Selecione</option>
 							<?php
-								$meses = array("1"=>"Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+								$meses = array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 								$cont = 1;
 								while($cont <= 12){
 								?>

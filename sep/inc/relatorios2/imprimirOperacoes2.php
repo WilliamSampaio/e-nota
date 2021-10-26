@@ -20,17 +20,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 
 <?php 
-include("../../inc/conect.php");
-include("../../funcoes/util.php");
+require_once("../../inc/conect.php");
+require_once("../../funcoes/util.php");
 // variaveis vindas do conect.php
 // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF
 
-$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 //preenche a variavel com os valores vindos do banco
-list($BRASAO) = mysql_fetch_array($sql_brasao);
+list($BRASAO) = $sql_brasao->fetch();
 ?>
 
-<title>Imprimir Relat&oacute;rio</title>
+<title>Imprimir Relatório</title>
 
 <style type="text/css" media="screen">
 <!--
@@ -76,7 +76,7 @@ div.pagina {
         <div id="DivImprimir">
             <input type="button" onClick="print();" value="Imprimir" />
             <br />
-            <i><b>Este relat&oacute;rio &eacute; melhor visualizado em formato de impress&atilde;o em paisagem.</b></i>
+            <i><b>Este relatório é melhor visualizado em formato de impressão em paisagem.</b></i>
             <br /><br />
         </div>
         <center>
@@ -91,7 +91,7 @@ div.pagina {
             	<td width="584" height="33" colspan="2">
 					<span class="style1">
 					<center>
-						 <p>RELAT&Oacute;RIO DE OPRERA&Ccedil;&Otilde;ES EFETUADAS POR CONTADOR </p>
+						 <p>RELATÓRIO DE OPRERAÇÕES EFETUADAS POR CONTADOR </p>
 						 <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 						 <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 					</center>
@@ -107,7 +107,7 @@ div.pagina {
                 <br />
 					<?php
 					$query =("SELECT * FROM cadastro WHERE codtipo = '$codigo'");
-					$sql_pesquisa = mysql_query ($query);
+					$sql_pesquisa = $PDO->query($query);
 					$result = mysql_num_rows($sql_pesquisa);
 					if($result <= 1){
 						echo "<b>Foi encontrado $result Resultado</b>";
@@ -142,14 +142,14 @@ div.pagina {
           		</tr>
                 <?php
 			if(mysql_num_rows($sql_pesquisa)){
-				while ($dados = mysql_fetch_array($sql_pesquisa)){
+				while ($dados = $sql_pesquisa->fetch()){
 					$codcontador = $dados['codigo'];
 					$query2 = ("SELECT * FROM cadastro WHERE codcontador = '$codcontador'");
 				
-			$sql_pesquisa2 = mysql_query ($query2);
+			$sql_pesquisa2 = $PDO->query($query2);
 			$result2 = mysql_num_rows($sql_pesquisa2);
 			if(mysql_num_rows($sql_pesquisa2)){
-					while ($dados2 = mysql_fetch_array($sql_pesquisa2)){
+					while ($dados2 = $sql_pesquisa2->fetch()){
 					
 						if($dados['cpf'] == ''){
 							$cpfcnpj = $dados['cnpj'];
@@ -168,19 +168,19 @@ div.pagina {
 						<font size="1"><?php echo $dados2['nome']; ?></font>
 					</td>
 					<td bgcolor="white"  align="center">
-						<font size="1"><?php if($dados2['contadoreaidf'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadoreaidf'] == 'S'){echo "SIM";}else{echo "NÃO";} ?></font>
 					</td>
 					<td bgcolor="white" align="center">
-						<font size="1"><?php if($dados2['contadornfe'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadornfe'] == 'S'){echo "SIM";}else{echo "NÃO";} ?></font>
 					</td>
                     <td bgcolor="white" align="center">
-						<font size="1"><?php if($dados2['contadorlivro'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadorlivro'] == 'S'){echo "SIM";}else{echo "NÃO";} ?></font>
 					</td>
 					<td bgcolor="white"  align="center">
-						<font size="1"><?php if($dados2['contadorguia'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadorguia'] == 'S'){echo "SIM";}else{echo "NÃO";} ?></font>
 					</td>
 					<td bgcolor="white" align="center">
-						<font size="1"><?php if($dados2['contadorrps'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadorrps'] == 'S'){echo "SIM";}else{echo "NÃO";} ?></font>
 					</td>
 				</tr>
         	<?php
@@ -189,7 +189,7 @@ div.pagina {
 					}//fim while
 			}else{
 			//caso não encontre resultados, a mensagem 'Não há resultados!' será mostrada na tela
-            	echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">N&atilde;o h&aacute; resultados!</font></center></td></b></tr>";
+            	echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">Não há resultados!</font></center></td></b></tr>";
         	}
         	?>
         	</table>

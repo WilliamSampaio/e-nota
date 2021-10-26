@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<table border="0" cellspacing="0" cellpadding="0" class="form">
 		<tr>
 			<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-			<td id="titulo_teclado" width="" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Teclado</td>  
+			<td id="titulo_teclado" width="" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Teclado</td>  
 			<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><img style="cursor: pointer;" onclick="mostrar_teclado();" src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></td>
 		</tr>
 		<tr>
@@ -63,7 +63,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								    <td align="center"><button class="tecla">j</button></td>
 								    <td align="center"><button class="tecla">k</button></td>
 								    <td align="center"><button class="tecla">l</button></td>
-								    <td align="center"><button class="tecla">ç</button></td>
+								    <td align="center"><button class="tecla">ï¿½</button></td>
 							    </tr>
 							    <tr>
 								    <td align="center"><button class="tecla">z</button></td>
@@ -79,7 +79,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							    </tr>
 							    <tr>
 							     	<td colspan="10" align="center">
-							     		<input style="width: 200px;" type="button" class="tecla" value="Espaço" onclick="if((focused.value.length < focused.maxLength||focused.maxLength == -1)&&!focused.readOnly)focused.value+=' ';focused.focus();" >
+							     		<input style="width: 200px;" type="button" class="tecla" value="Espaï¿½o" onclick="if((focused.value.length < focused.maxLength||focused.maxLength == -1)&&!focused.readOnly)focused.value+=' ';focused.focus();" >
 							     		
 							     	</td>
 							    </tr>

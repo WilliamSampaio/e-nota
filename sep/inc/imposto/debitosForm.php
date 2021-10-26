@@ -1,5 +1,5 @@
 <fieldset>
-    <legend>Débitos</legend>
+    <legend>Dï¿½bitos</legend>
     <form method="post" id="formDebitos" name="formDebitos" action="./inc/imposto/debitosImprimir.php" target="_blank">
         <table align="left" width="100%">
             <tr>
@@ -8,11 +8,11 @@
                     <select name="cmbAnoDebito" id="cmbAnoDebito">
                         <option></option>
                         <?php
-                            $sql = mysql_query("
+                            $sql = $PDO->query("
                                 SELECT DATE_FORMAT(datahoraemissao,'%Y') AS ano
                                 FROM notas GROUP BY ano
                             ");
-                            while(list($ano) = mysql_fetch_array($sql)){
+                            while(list($ano) = $sql->fetch()){
                                 echo "<option value='$ano'>$ano</option>";
                             }
                         ?>
@@ -20,13 +20,13 @@
                 </td>
             </tr>
             <tr>
-                <td>Mês</td>
+                <td>Mï¿½s</td>
                 <td>
                     <select name="cmbMesDebito" id="cmbMesDebiro">
                         <option></option>
                         <option value="01">Janeiro</option>
                         <option value="02">Fevereiro</option>
-                        <option value="03">Março</option>
+                        <option value="03">Marï¿½o</option>
                         <option value="04">Abril</option>
                         <option value="05">Maio</option>
                         <option value="06">Junho</option>
@@ -45,7 +45,7 @@
                     <select id="cmbEmissorDebito" name="cmbEmissorDebito" style="width: 150px">
                         <option></option>
                         <?php
-                            $sql = mysql_query("SELECT razaosocial, codigo FROM cadastro WHERE nfe='S' AND estado='A'");
+                            $sql = $PDO->query("SELECT razaosocial, codigo FROM cadastro WHERE nfe='S' AND estado='A'");
                             while($emissor = mysql_fetch_object($sql)){
                                 echo "<option value='".$emissor->codigo."'>".$emissor->razaosocial."</option>";
                             }

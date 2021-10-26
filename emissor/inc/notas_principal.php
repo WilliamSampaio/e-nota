@@ -33,16 +33,16 @@ $btInserir   = $_POST['btInserir'];
 $btPesquisar = $_REQUEST['btPesquisar'];
 
 if($_POST['btCancel']){
-	include("inc/notas_cancelar.php");
+	require_once("inc/notas_cancelar.php");
 	$btPesquisar='T';
 }
 
 
 if($btInserir !="")	{
-	include("inc/notas_inserir.php");
+	require_once("inc/notas_inserir.php");
 }
 if($btPesquisar !="") {
-	include("inc/notas_pesquisar.php");
+	require_once("inc/notas_pesquisar.php");
 }
 	
 ?>

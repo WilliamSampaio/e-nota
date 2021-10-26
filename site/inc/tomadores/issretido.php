@@ -60,7 +60,7 @@ if(!$_POST['txtCNPJ']&&!$_POST['txtInscMunicipal']){
 				<td width="19%" align="left">CNPJ/CPF</td>
 			    <td width="81%" align="left" valign="middle"><em>
 			      <input class="texto" type="text" title="CNPJ" name="txtCNPJ"  id="txtCNPJ"  tabindex="1"/>
-			    Somente n&uacute;meros</em></td>
+			    Somente nÃºmeros</em></td>
 			</tr>
 		<?php if($login_seguro) {
 		?>
@@ -72,18 +72,18 @@ if(!$_POST['txtCNPJ']&&!$_POST['txtInscMunicipal']){
 				</td>
 			</tr>
 			<tr>
-				<td align="left">Cod Verificação</td>
+				<td align="left">Cod VerificaÃ§Ã£o</td>
 				<td align="left">
 					<input class="texto" type="text" title="IM" name="codseguranca" id="codseguranca" size="5" maxlength="5" tabindex="3" />
-					<img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/botoes/num_key.jpg" title="Teclado Virtual" >&nbsp;
-					<?php include("inc/cod_verificacao.php");?>
+					<img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/botoes/num_key.jpg" title="Teclado Virtual" >
+					<?php require_once("inc/cod_verificacao.php");?>
 				</td>
 			</tr>
 			
 		<?php } else {?>
 			<tr>
 			  <td align="left">ou</td>
-			  <td align="left" valign="middle">&nbsp;</td>
+			  <td align="left" valign="middle"></td>
 		  	</tr>
 			<tr>
 			  <td align="left">Insc. Municipal</td>
@@ -93,9 +93,9 @@ if(!$_POST['txtCNPJ']&&!$_POST['txtInscMunicipal']){
 		  	</tr>
 		<?php } ?>
 			<tr>
-			  <td align="center">&nbsp;</td>
+			  <td align="center"></td>
 			  <td align="left" valign="middle">
-				  <input type="submit" value="Avançar" class="botao" onclick="return verificaCnpjCpfIm();" tabindex="5" />
+				  <input type="submit" value="AvanÃ§ar" class="botao" onclick="return verificaCnpjCpfIm();" tabindex="5" />
 				  <input class="botao" value="Voltar" type="button" onclick="parent.location = 'tomadores.php';" tabindex="6" />
 			  </td>
 		  </tr>
@@ -113,34 +113,34 @@ if(!$_POST['txtCNPJ']&&!$_POST['txtInscMunicipal']){
 
 if ($_POST['txtInscMunicipal']){
 	$tomador_IM = $_POST['txtInscMunicipal'];
-	$sql_IM_tomador=mysql_query("
+	$sql_IM_tomador=$PDO->query("
 		SELECT cnpj,cpf
 		FROM cadastro
 		WHERE inscrmunicipal='$tomador_IM'
 	");
-	if(!mysql_num_rows($sql_IM_tomador))	{
-		Mensagem("Inscrição Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF");
+	if(!$sql_IM_tomador->rowCount())	{
+		Mensagem("Inscriï¿½ï¿½o Municipal nÃ£o encontrada, verifique os dados ou tente pelo CNPJ/CPF");
 		Redireciona("tomadores.php");
 	}else{
-		list($tomador_CNPJ,$tomador_CPF)=mysql_fetch_array($sql_IM_tomador);
+		list($tomador_CNPJ,$tomador_CPF)=$sql_IM_tomador->fetch();
 		$tomador_CNPJ = $tomador_CNPJ.$tomador_CPF;
 	}
 }
 if ($_POST['txtCNPJ']){
 	$tomador_CNPJ = $_POST['txtCNPJ'];
 }
-$sql_emissor = mysql_query("SELECT codigo, cnpj,cpf, razaosocial, email, inscrmunicipal, logradouro,numero,complemento,bairro,cep FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
-if (mysql_num_rows($sql_emissor)){
+$sql_emissor = $PDO->query("SELECT codigo, cnpj,cpf, razaosocial, email, inscrmunicipal, logradouro,numero,complemento,bairro,cep FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
+if ($sql_emissor->rowCount()){
 	list($cod_emissor,$cnpj_emissor,$cpf_emissor,$nome_emissor,$email_emissor,$inscrmunicipal_emissor,$logradouro_emissor,
-		$numero_emissor,$complemento_emissor,$bairro_emissor,$cep_emissor)=mysql_fetch_array($sql_emissor);
+		$numero_emissor,$complemento_emissor,$bairro_emissor,$cep_emissor)=$sql_emissor->fetch();
 }
-$sql_tomador=mysql_query("SELECT codigo, codtipo, cnpj,cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
+$sql_tomador=$PDO->query("SELECT codigo, codtipo, cnpj,cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
 
-if(!mysql_num_rows($sql_tomador)){
+if(!$sql_tomador->rowCount()){
 	$tipopessoa = strlen($tomador_CNPJ)==18? 'cnpj':'cpf';
 	$codtipo = codtipo('tomador');
 	$codtipodec = coddeclaracao('DES Simplificada');
-	mysql_query("
+	$PDO->query("
 		INSERT INTO 
 			cadastro 
 		SET 
@@ -149,11 +149,11 @@ if(!mysql_num_rows($sql_tomador)){
 			codtipodeclaracao = '$codtipodec'
 	");
 	
-	$sql_tomador=mysql_query("SELECT codigo, codtipo, cnpj, cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
-	//Mensagem("Tomador não cadastrado no sistema, preencha os campos obrigatórios");
+	$sql_tomador=$PDO->query("SELECT codigo, codtipo, cnpj, cpf, nome, email FROM cadastro WHERE cnpj='$tomador_CNPJ' OR cpf='$tomador_CNPJ'");
+	//Mensagem("Tomador nÃ£o cadastrado no sistema, preencha os campos obrigatÃ³rios");
 }			  
 	
-list($cod_tomador,$codtipo_tomador,$cnpj,$cpf,$TomadorNome,$TomadorEmail)=mysql_fetch_array($sql_tomador);
+list($cod_tomador,$codtipo_tomador,$cnpj,$cpf,$TomadorNome,$TomadorEmail)=$sql_tomador->fetch();
 $cnpj = $cnpj.$cpf;
 listaRegrasMultaDes();
 
@@ -168,7 +168,7 @@ if($codtipo != $codtipo_tomador){
 <table border="0" cellspacing="1" cellpadding="0">
 <tr>
 		<td width="10" height="10" bgcolor="#FFFFFF"></td>
-	    <td width="250" align="center" bgcolor="#FFFFFF" rowspan="3" class="fieldsetCab">Gerar guia - Serviços Tomados</td>
+	    <td width="250" align="center" bgcolor="#FFFFFF" rowspan="3" class="fieldsetCab">Gerar guia - ServiÃ§os  Tomados</td>
       <td width="405" bgcolor="#FFFFFF"></td>
   </tr>
 	<tr>
@@ -190,27 +190,27 @@ if($codtipo != $codtipo_tomador){
 	<table border="0" cellpadding="3" cellspacing="2" width="100%">
 		<tr>
 			<td width="22%" align="left" valign="middle">CNPJ/CPF:</td>
-			<td align="left" bgcolor="#FFFFFF" colspan="3">&nbsp;&nbsp;<b><?php echo $_POST['txtCNPJ'];?></b>
+			<td align="left" bgcolor="#FFFFFF" colspan="3"><b><?php echo $_POST['txtCNPJ'];?></b>
 			 <input type="hidden" value="<?php echo $_POST['txtCNPJ'];?>" name="txtCNPJ" /></td>
 		</tr>		
 		<tr>
-			<td align="left" valign="middle">Razão Social/Nome:</td>
+			<td align="left" valign="middle">RazÃ£o Social/Nome:</td>
 			<td align="left" colspan="3"><font color="#FF0000">*</font> <input type="text" name="txtRazaoNome" value="<?php echo $TomadorNome;?>" id="txtRazaoNome" class="texto"  size="62"/></td>
 		</tr>			
 		
 		<tr>
 			<td align="left" valign="middle">
-				Compet&ecirc;ncia/Período:
+				CompetÃªncia/PerÃ­odo:
 			</td>
-			<td align="left">&nbsp;&nbsp;  
+			<td align="left">  
         <?php
-				$meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+				$meses=array("1"=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 				$mes=date("n");
 				$ano=date("Y");						
 				if($DEC_ATRAZADAS == 'n'){//var que vem do conect.php
 					echo "<b>{$meses[$mes]}/{$ano}</b>";
 				?><br />
-				Declarações atrasadas entre em contato com a prefeitura
+				DeclaraÃ§Ãµes atrasadas entre em contato com a prefeitura
 				<input type="hidden" name="cmbMes" id="cmbMes" value="<?php echo $mes; ?>" />
 				<input type="hidden" name="cmbAno" id="cmbAno" value="<?php echo $ano; ?>" />
 				<?php 
@@ -233,9 +233,9 @@ if($codtipo != $codtipo_tomador){
 						?>
 				  </select>
 				<?php
-				}//else se é permitudo declaracões atrazadas
+				}//else se Ã© permitudo declaracï¿½es atrazadas
 				?>
-				&nbsp;&nbsp;
+				
 				<input name="btBuscar" type="button" class="botao" value="Buscar" 
                 onclick="buscaGuiasIssRetido('<?php echo $_POST['txtCNPJ'];?>','cmbMes','cmbAno','tdConteudo')" />
 			</td>

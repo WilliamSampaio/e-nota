@@ -28,7 +28,7 @@ if(isset($_GET['coddecc'])){
 	$coddecc = $_GET['coddecc'];
 	
 	//atualiza os dados da declaracao
-	/*mysql_query("
+	/*$PDO->query("
 		UPDATE decc_des
 		SET estado = 'C'
 		WHERE codigo = '$coddecc'

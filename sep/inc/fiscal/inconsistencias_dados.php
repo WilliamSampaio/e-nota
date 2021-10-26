@@ -2,7 +2,7 @@
 	$dataInicialMysql = DataMysql($dataInicial);
 	$dataFinalMysql   = DataMysql($dataFinal);
 	
-	$sql_nf_emitidas = mysql_query("
+	$sql_nf_emitidas = $PDO->query("
 		SELECT 
 			notas.codigo 
 		FROM 
@@ -16,7 +16,7 @@
 	
 	
 		
-	$sql_nf_divirgentes = mysql_query("
+	$sql_nf_divirgentes = $PDO->query("
 		SELECT 
 			notas.codigo 
 		FROM
@@ -34,7 +34,7 @@
 
 
 	
-	$sql_nf_emitidas_tomador = mysql_query("
+	$sql_nf_emitidas_tomador = $PDO->query("
 		SELECT 
 			* 
 		FROM 
@@ -46,7 +46,7 @@
 	");
 	$nf_emitidas_tomador = mysql_num_rows($sql_nf_emitidas_tomador);
 		
-	$sql_nf_emitidas_tomador_divirgentes = mysql_query("
+	$sql_nf_emitidas_tomador_divirgentes = $PDO->query("
 		SELECT 
 			notas_tomadas.codigo 
 		FROM 
@@ -62,7 +62,7 @@
 	");
 	$nf_emitidas_tomador_divirgentes = mysql_num_rows($sql_nf_emitidas_tomador_divirgentes);
 	
-	$sql_nf_inconsistentes = mysql_query("
+	$sql_nf_inconsistentes = $PDO->query("
 		SELECT 
 			notas.codigo 
 		FROM

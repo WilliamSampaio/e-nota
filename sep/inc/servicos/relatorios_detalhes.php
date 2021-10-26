@@ -24,16 +24,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$wherecodservicodes = "des_servicos.codservico='$codservico' AND";
 	}
 	// busca os dados na tabela notas
-	$sql_notas=mysql_query("SELECT notas.datahoraemissao, notas.tomador_nome, notas.valoriss, emissores.nome FROM notas INNER JOIN emissores ON notas.codemissor=emissores.codigo WHERE $wherecodservico notas.datahoraemissao>='$dataini' AND notas.datahoraemissao<='$datafim'");
+	$sql_notas=$PDO->query("SELECT notas.datahoraemissao, notas.tomador_nome, notas.valoriss, emissores.nome FROM notas INNER JOIN emissores ON notas.codemissor=emissores.codigo WHERE $wherecodservico notas.datahoraemissao>='$dataini' AND notas.datahoraemissao<='$datafim'");
 	
 	// busca os dados na tabela des
-	$sql_des=mysql_query("SELECT des.data_gerado, des.total, emissores.razaosocial, tomadores.nome FROM des INNER JOIN emissores ON des.codemissor=emissores.codigo INNER JOIN des_servicos ON des.codigo=des_servicos.coddes INNER JOIN tomadores ON des_servicos.tomador_cnpjcpf=tomadores.cnpjcpf WHERE $wherecodservicodes des.data_gerado>='2009-07-01' AND des.data_gerado<='2009-09-28'"); 
+	$sql_des=$PDO->query("SELECT des.data_gerado, des.total, emissores.razaosocial, tomadores.nome FROM des INNER JOIN emissores ON des.codemissor=emissores.codigo INNER JOIN des_servicos ON des.codigo=des_servicos.coddes INNER JOIN tomadores ON des_servicos.tomador_cnpjcpf=tomadores.cnpjcpf WHERE $wherecodservicodes des.data_gerado>='2009-07-01' AND des.data_gerado<='2009-09-28'"); 
 	
-	if((mysql_num_rows($sql_notas)>0)||(mysql_num_rows($sql_des)>0))
+	if(($sql_notas->rowCount()>0)||($sql_des->rowCount()>0))
 		{
-			$qtd=mysql_num_rows($sql_notas)+mysql_num_rows($sql_des);
+			$qtd=$sql_notas->rowCount()+$sql_des->rowCount();
 			?>
-				<fieldset><legend><?php echo $qtd; ?> Presta&ccedil;&otilde;es do servi&ccedil;o durante o per&iacute;odo</legend>	
+				<fieldset><legend><?php echo $qtd; ?> Prestações do serviço durante o período</legend>	
 					<table width="100%">
 						<tr bgcolor="#999999">
 							<td width="25%">Data</td>
@@ -45,7 +45,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<div id="detalhes" style="height:250px; overflow:auto">
 						<table width="100%">
 							<?php
-								while(list($emissao,$tomador,$iss,$emissor)=mysql_fetch_array($sql_notas))
+								while(list($emissao,$tomador,$iss,$emissor)=$sql_notas->fetch())
 									{
 										$data=explode(" ",$emissao);
 										$data[0]=DataPt($data[0]);
@@ -58,7 +58,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 											</tr>
 										";
 									}
-								while(list($data,$iss,$emissor,$tomador)=mysql_fetch_array($sql_des))
+								while(list($data,$iss,$emissor,$tomador)=$sql_des->fetch())
 									{
 										$data=DataPt($data);
 										echo "
@@ -78,5 +78,5 @@ Fith Floor, Boston, MA 02110-1301, USA
 		}
 	else
 		{
-			echo "Nenhuma presta&ccedil;&atilde;o deste servi&ccedil;o foi realizada durante o per&iacute;odo!";
+			echo "Nenhuma prestação deste serviço foi realizada durante o período!";
 		}		?>

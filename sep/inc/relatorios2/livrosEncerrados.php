@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 <tr>
 	<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-	<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - Livros Encerrados </td>
+	<td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Livros Encerrados </td>
 	<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg">
 		<a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a>
 	</td>
@@ -58,14 +58,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 			
 			<tr>
 				<td>
-					M&ecirc;s:
+					Mês:
 				</td>
 				<td colspan="3">
 					<select name="cmbMes">
 						<option>Selecione!</option>
 						<option value="01">Janeiro</option>
 						<option value="02">Fevereiro</option>
-						<option value="03">Mar&ccedil;o</option>
+						<option value="03">Março</option>
 						<option value="04">Abril</option>
 						<option value="05">Maio</option>
 						<option value="06">Junho</option>

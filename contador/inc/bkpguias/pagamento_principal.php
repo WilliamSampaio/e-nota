@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	require_once("../funcoes/util.php");
-    $login=$_SESSION['login']; //$publicarBtn = array("s" => "Não Publicar", "n" => "Publicar");
+	require_once("../include/util.php");
+    $login=$_SESSION['login']; //$publicarBtn = array("s" => "NÃ£o Publicar", "n" => "Publicar");
 	
 	?>    
 	<form method="post">
@@ -36,12 +36,12 @@ Fith Floor, Boston, MA 02110-1301, USA
  	<?php
 	if($_POST['btOp'] == "Gerar Guia")
 	{
-	  include("pagamento_nota.php");
+	  require_once("pagamento_nota.php");
 	}
 	
 	elseif($_POST['btOp'] == "Guias Emitidas")
 	{
-	  include("pagamento_emitidas.php");
+	  require_once("pagamento_emitidas.php");
 	
 	}
 	
@@ -49,7 +49,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	//codigo para impressao do boleto
     if($btEnviaBoleto =="Boleto")
     {
-      include("pagamento_boleto.php");
+      require_once("pagamento_boleto.php");
     } 
 
 	?>

@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="850" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;&Oacute;rg&atilde;os P&uacute;blicos - Relat&oacute;rios</td>
+    <td width="850" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Ã“rgÃ£os PÃºblicos - RelatÃ³rios</td>
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td align="center">
     	<form method="post" name="frmRelatorio" id="frmRelatorio" onsubmit="return false">
         	<fieldset>
-        	<legend>Relat&oacute;rios</legend>
+        	<legend>RelatÃ³rios</legend>
                 <table width="100%">
                     <tr>
                         <td width="17%" align="left">Assunto</td>
@@ -37,8 +37,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <select name="cmbRelatorios" class="combo" 
                         onchange="acessoAjax('inc/orgaospublicos/relatorios/relatorios_opcoes.ajax.php','frmRelatorio','divRelatorios')">
                         <option value=""></option>
-                        <option value="O">Órgãos Públicos</option>
-                        <option value="D">Declarações</option>
+                        <option value="O">ï¿½rgï¿½os Pï¿½blicos</option>
+                        <option value="D">Declaraï¿½ï¿½es</option>
                         </select>
                         </td>
                   </tr>

@@ -30,7 +30,7 @@ WHERE SUBSTRING(datahoraemissao,1,4) = '$cmbAno' AND SUBSTRING(datahoraemissao,6
  
  if($BANCOMONETARIO =="")
  {
-  print("<center>a Prefeitura n&atilde;o definiu qual o banco monet&aacute;rio, favor entre em contato com a prefeitura</center>");
+  print("<center>a Prefeitura não definiu qual o banco monetário, favor entre em contato com a prefeitura</center>");
  } 
  elseif($sql->rowCount() =="")
  {

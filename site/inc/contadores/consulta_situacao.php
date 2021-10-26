@@ -27,7 +27,7 @@ $diretor = codcargo('diretor');
 $campo = tipoPessoa($cnpj);
 
 if (!$campo) { //se digitou o campo em um formato incorreto
-	Mensagem("Este CNPJ n&atilde;o est&aacute; cadastrado no sistema");
+	Mensagem("Este CNPJ não está cadastrado no sistema");
 	RedirecionaPost($_SERVER['PHP_SELF'] . "?txtMenu=" . $_POST['txtMenu']);
 	//volta para a pagina de consulta com o post txtMenu necessario
 } else {
@@ -54,19 +54,19 @@ if (!$campo) { //se digitou o campo em um formato incorreto
 				WHERE 
 					cadastro.$campo = '$cnpj'
 				AND
-					cadastro.codtipo = '$codtipo'	
-		");
-
+					cadastro.codtipo = '$codtipo'");
 
 	//se verifica se tem o cnpj no banco
 	if ($sql->rowCount() == 0) {
-		Mensagem("Este CNPJ/CPF n&atilde;o est&aacute; cadastrado no sistema");
+		Mensagem("Este CNPJ/CPF não está cadastrado no sistema");
 		RedirecionaPost($_SERVER['PHP_SELF'] . "?txtMenu=" . $_POST['txtMenu']);
 	} else { //fim if se existe o cnpj no banco
-		list($codigo, $nome, $razaosocial, $logradouro, $bairro, $numero, $municipio, $uf, $cep, $telefone, $telefone2, $email, $estado) = $sql->fetch();
+		list(
+			$codigo, $nome, $razaosocial, $logradouro, $bairro, $numero, $municipio, $uf, $cep, 
+			$telefone, $telefone2, $email, $estado) = $sql->fetch();
 		switch ($estado) {
 			case "NL":
-				$estado = '<b>Aguarde a libera&ccedil;&atilde;o da prefeitura</b>';
+				$estado = '<b>Aguarde a liberação da prefeitura</b>';
 				break;
 			case "A":
 				$estado = '<font color="#006600"><b>Cadastro liberado</b></font>';
@@ -112,7 +112,7 @@ if (!$campo) { //se digitou o campo em um formato incorreto
 							<td colspan="3" bgcolor="#FFFFFF" align="left" valign="middle"><?php echo $nome; ?></td>
 						</tr>
 						<tr>
-							<td align="left">Raz&atilde;o Social:</td>
+							<td align="left">Razão Social:</td>
 							<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo $razaosocial; ?></td>
 						</tr>
 						<tr>
@@ -128,12 +128,12 @@ if (!$campo) { //se digitou o campo em um formato incorreto
 							<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo $email; ?></td>
 						</tr>
 						<tr>
-							<td align="left">Situac&atilde;o:</td>
+							<td align="left">Situacão:</td>
 							<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo $estado; ?></td>
 						</tr>
 						<tr>
-							<td align="left">Endere&ccedil;o:</td>
-							<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo "$logradouro, n� $numero"; ?></td>
+							<td align="left">Endereço:</td>
+							<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo "$logradouro, nº $numero"; ?></td>
 						</tr>
 						<tr>
 							<td align="left">Bairro:</td>
@@ -145,13 +145,13 @@ if (!$campo) { //se digitou o campo em um formato incorreto
 							<td align="left">Municipio:</td>
 							<td align="left" bgcolor="#FFFFFF" valign="middle"><?php echo $municipio; ?></td>
 							<td width="16%" align="left">Estado (UF):</td>
-							<td align="left" bgcolor="#FFFFFF" width="15%" valign="middle">&nbsp;<?php echo $uf; ?></td>
+							<td align="left" bgcolor="#FFFFFF" width="15%" valign="middle"><?php echo $uf; ?></td>
 						</tr>
 						<tr>
 							<td align="left">Telefone:</td>
 							<td align="left" bgcolor="#FFFFFF" valign="middle"><?php echo $telefone; ?></td>
 							<td align="left">Telefone Adicional:</td>
-							<td align="left" bgcolor="#FFFFFF" valign="middle">&nbsp;<?php echo verificaCampo($telefone2); ?></td>
+							<td align="left" bgcolor="#FFFFFF" valign="middle"><?php echo verificaCampo($telefone2); ?></td>
 						</tr>
 						<tr>
 							<td width="100%" colspan="4" height="3">
@@ -162,9 +162,9 @@ if (!$campo) { //se digitou o campo em um formato incorreto
 						while (list($nome_resp, $cpf_resp) = $sql_resp->fetch()) {
 						?>
 							<tr>
-								<td align="left">Respons&aacute;vel:</td>
+								<td align="left">Responsável:</td>
 								<td align="left" bgcolor="#FFFFFF" valign="middle"><?php echo verificaCampo($nome_resp); ?></td>
-								<td align="left" width="20%">CPF Respons&aacute;vel:</td>
+								<td align="left" width="20%">CPF Responsável:</td>
 								<td align="left" width="20%" bgcolor="#FFFFFF" valign="middle"><?php echo verificaCampo($cpf_resp); ?></td>
 							</tr>
 						<?php
@@ -173,9 +173,9 @@ if (!$campo) { //se digitou o campo em um formato incorreto
 						while (list($nome_socio, $cpf_socio) = $sql_socio->fetch()) {
 						?>
 							<tr>
-								<td align="left">S&oacute;cio:</td>
+								<td align="left">Sócio:</td>
 								<td align="left" bgcolor="#FFFFFF" valign="middle"><?php echo verificaCampo($nome_socio); ?></td>
-								<td align="left" width="20%">CPF S&oacute;cio:</td>
+								<td align="left" width="20%">CPF Sócio:</td>
 								<td align="left" width="20%" bgcolor="#FFFFFF" valign="middle"><?php echo verificaCampo($cpf_socio); ?></td>
 							</tr>
 						<?php

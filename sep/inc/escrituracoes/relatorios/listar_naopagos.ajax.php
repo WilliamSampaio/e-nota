@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-include('../../conect.php');
-include("../../../funcoes/util.php");
+require_once('../../conect.php');
+require_once("../../../funcoes/util.php");
 
 
 // SELECIONA NO BANCO AS GUIAS PAGAS A SEREM MOSTRADAS
@@ -29,30 +29,30 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 	<table width="800" bgcolor="#CCCCCC" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-				<fieldset style="width:800px"><legend>Busca de Escriturações Não Pagas</legend>
+				<fieldset style="width:800px"><legend>Busca de Escrituraï¿½ï¿½es NÃ£o Pagas</legend>
 				<?php
                 $sql=Paginacao($sqlpago,'frmListando','divListar');
-                $resultados=mysql_num_rows($sql);
-                if(mysql_num_rows($sql)>0){
+                $resultados=$sql->rowCount();
+                if($sql->rowCount()>0){
                 ?>
 					<table width="800">
 							<tr bgcolor="#999999">
 								<td width="210" align="center">Nome</td>
-								<td width="200" align="center">Nosso Número</td>
+								<td width="200" align="center">Nosso NÃºmero</td>
 								<td width="80" align="center">Valor</td>
 								<td width="80" align="center">Pagamento</td>
-								<td width="95" align="center">Data Emissão</td>
+								<td width="95" align="center">Data EmissÃ£o</td>
 								<td width="110"align="center">Data Vencimento</td>
 							</tr>
 				<?php
 
 				// FAZ A SELECAO BUSCANDO PELA COLUNA RELACIONAMENTO
-				while(list($relacionamento, $codigo) = mysql_fetch_array($sql))
+				while(list($relacionamento, $codigo) = $sql->fetch())
 				{
 					
 					if($relacionamento=="des")
 						{
-							$sqllistar = mysql_query("
+							$sqllistar = $PDO->query("
 							SELECT cadastro.razaosocial, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -63,7 +63,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						}
 					elseif($relacionamento=="des_issretido")
 						{
-							$sqllistar = mysql_query("
+							$sqllistar = $PDO->query("
 							SELECT tomadores.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -74,7 +74,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						}
 					elseif($relacionamento=="cartorios_des")
 						{
-							$sqllistar = mysql_query("
+							$sqllistar = $PDO->query("
 							SELECT cartorios.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -85,7 +85,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						}
 					elseif($relacionamento=="dop_des")
 						{
-							$sqllistar = mysql_query("
+							$sqllistar = $PDO->query("
 							SELECT orgaospublicos.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -97,7 +97,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						}
 					elseif($relacionamento=="dif_des")
 						{
-							$sqllistar = mysql_query("
+							$sqllistar = $PDO->query("
 							SELECT inst_financeiras.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -109,7 +109,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						}
 					elseif($relacionamento=="decc_des")
 						{
-							$sqllistar = mysql_query("
+							$sqllistar = $PDO->query("
 							SELECT empreiteiras.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -121,7 +121,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						}
 					elseif($relacionamento=="doc_des")
 						{
-							$sqllistar = mysql_query("
+							$sqllistar = $PDO->query("
 							SELECT operadoras_creditos.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -133,7 +133,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						}
 						elseif($relacionamento=="nfe")
 						{
-							$sqllistar = mysql_query("
+							$sqllistar = $PDO->query("
                             SELECT cadastro.razaosocial, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia, guias_declaracoes.relacionamento
 							FROM guia_pagamento
@@ -144,7 +144,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						}
 						elseif($relacionamento=="des_temp")
 						{
-							$sqllistar = mysql_query("
+							$sqllistar = $PDO->query("
 							SELECT emissores_temp.razaosocial, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -154,7 +154,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 							WHERE guia_pagamento.codigo = '$codigo' GROUP BY guia_pagamento.codigo");
 						}
 						
-						while(list($razao, $valor, $pago, $dtemissao, $dtvenc, $nossonumero) = mysql_fetch_array($sqllistar)){
+						while(list($razao, $valor, $pago, $dtemissao, $dtvenc, $nossonumero) = $sqllistar->fetch()){
 
 						$dtemissao = DataPt($dtemissao);
 						$dtvenc = DataPt($dtvenc);
@@ -163,7 +163,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						switch($pago)
 						{
 						case "S": $pago="Efetuado"; break;
-						case "N": $pago="Não Efetuado"; break;
+						case "N": $pago="NÃ£o Efetuado"; break;
 						}
 					
 						echo "
@@ -182,7 +182,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 						}
 						else
 						{
-							echo "&nbsp;Nenhuma declaração encontrada!";
+							echo "Nenhuma declaraÃ§Ã£o encontrada!";
 						}
 						
 						?>	

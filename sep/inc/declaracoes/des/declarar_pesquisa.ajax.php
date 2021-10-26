@@ -33,9 +33,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$numero      = $_GET['txtNroDes'];
 	$cancelaDes = $_GET['hdCancelaDes'];
 	
-	//se foi cancelada alguma declaração da o updade no banco e da um alert se der algum erro
+	//se foi cancelada alguma declaraÃ§Ã£o da o updade no banco e da um alert se der algum erro
 	if($cancelaDes){
-		mysql_query("UPDATE des SET estado = 'C' WHERE codigo = '$cancelaDes'");
+		$PDO->query("UPDATE des SET estado = 'C' WHERE codigo = '$cancelaDes'");
 	}//fim if cacela
 	
 	//verifica quais campos foram preenchidos e concatena na variavel str_where
@@ -59,7 +59,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$str_where .= " AND des.codigo = '$numero'";
 	}
 	
-	//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
+	//Sql buscando as informaï¿½ï¿½es que o usuario pediu e com o limit estipulado pela funÃ§Ã£o
 	$query = ("
 			SELECT 
 				des.codigo,
@@ -79,11 +79,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 				des.codigo
 			DESC");
 	$sql_pesquisa = Paginacao($query,'frmDes','divDeclaracoesSimples',10);
-if(mysql_num_rows($sql_pesquisa)){
+if($sql_pesquisa->rowCount()){
 ?>
 <table width="100%">
 	<tr bgcolor="#999999">
-    	<td width="7%" align="center">N&deg; Des</td>
+    	<td width="7%" align="center">NÂº Des</td>
         <td width="38%" align="center">Nome</td>
         <td width="15%" align="center">Data</td>
         <td width="13%" align="center">Competencia</td>
@@ -92,7 +92,7 @@ if(mysql_num_rows($sql_pesquisa)){
   </tr>
     <?php
 		$x = 0;
-		while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+		while($dados_pesquisa = $sql_pesquisa->fetch()){
 			//alterna o valor da variavel pelo seu valor por extenso
 			switch($dados_pesquisa['estado']){
 				case "B": $str_estado = "Boleto";      break;
@@ -113,14 +113,14 @@ if(mysql_num_rows($sql_pesquisa)){
      	<td bgcolor="<?php echo $bgcolor;?>" align="center"><?php echo DataPt($dados_pesquisa['data_gerado']);?></td>
         <td bgcolor="<?php echo $bgcolor;?>" align="center"><?php echo DataPt($dados_pesquisa['competencia']);?></td>
         <td bgcolor="<?php echo $bgcolor;?>" align="center"><?php echo $str_estado;?></td>
-<td bgcolor="#FFFFFF" align="left" colspan="2">&nbsp;
+<td bgcolor="#FFFFFF" align="left" colspan="2">
         	<label title="Ver Detalhes">
         		<input name="btDetalhesDes" id="btLupa" type="button" class="botao" value="" 
             	onClick="VisualizarNovaLinha('<?php echo $dados_pesquisa['codigo'];?>','<?php echo"tddes".$x;?>',this,'inc/declaracoes/des/declarar_vizualizar.ajax.php')">
             </label>
-            &nbsp;
+            
             <?php if($dados_pesquisa['estado'] != "C"){?>
-            <label title="Cancelar Declaração" id="lbCancelar<?php echo $x;?>">
+            <label title="Cancelar Declaraï¿½ï¿½o" id="lbCancelar<?php echo $x;?>">
             	<input name="btCancelarDes" id="btX" type="button" class="botao" value=""
                 onClick="document.getElementById('hdPrimeiro').value=1; return cancelarDeclaracao('<?php echo $dados_pesquisa['codigo'];?>','<?php echo $dados_pesquisa['nome'];?>','inc/declaracoes/des/declarar_pesquisa.ajax.php','frmDes','divDeclaracoesSimples','hdCancelaDes');">
             </label>
@@ -138,7 +138,7 @@ if(mysql_num_rows($sql_pesquisa)){
 </table>
 <?php
 }else{
-	echo "<center><b>Não há resultados!</b></center>";
+	echo "<center><b>NÃ£o hÃ¡ resultados!</b></center>";
 }
 ?>
 

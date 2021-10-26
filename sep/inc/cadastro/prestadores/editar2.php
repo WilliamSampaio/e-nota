@@ -68,11 +68,11 @@ $isentoIss = (empty($isentoIss)) ? $isentoIss = "" : $isentoIss = ",isentoiss='$
 $codtipo_prestador = $array_codtipo[0];
 	
 
-	// define se � ou nao contador
-    $sql=mysql_query("SELECT MAX(codigo) FROM servicos_categorias");
-	list($maxcodigo)=mysql_fetch_array($sql);
-	$sql_categoria=mysql_query("SELECT codigo FROM servicos_categorias WHERE nome = 'Cont�bil'");	
-	list($codigocategoria)=mysql_fetch_array($sql_categoria);
+	// define se é ou nao contador
+    $sql=$PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
+	list($maxcodigo)=$sql->fetch();
+	$sql_categoria=$PDO->query("SELECT codigo FROM servicos_categorias WHERE nome = 'Cont�bil'");	
+	list($codigocategoria)=$sql_categoria->fetch();
 	$categoria=1;
 	$servico=1;
 	$tipo="empresa";
@@ -89,8 +89,8 @@ $codtipo_prestador = $array_codtipo[0];
 		$servico++;	
 	}
     if($tipo=="contador"){
-        $sql=mysql_query("SELECT codigo FROM tipo WHERE tipo='contador'");
-		list($codtipo)=mysql_fetch_array($sql);
+        $sql=$PDO->query("SELECT codigo FROM tipo WHERE tipo='contador'");
+		list($codtipo)=$sql->fetch();
     }
 
 	
@@ -113,10 +113,10 @@ $vetor_exluir_servicos = array($checkExcluiServico1,$checkExcluiServico2,$checkE
 
 
 //vetores para adicionar servicos
- $sql_categoria=mysql_query("SELECT codigo,nome FROM servicos_categorias");
+ $sql_categoria=$PDO->query("SELECT codigo,nome FROM servicos_categorias");
  
  $contpos=0;
- while(list($codcategoria)=mysql_fetch_array($sql_categoria))
+ while(list($codcategoria)=$sql_categoria->fetch())
  {   
    $conts=1;
    for($conts=1;$conts<=5;$conts++)
@@ -154,22 +154,24 @@ $txtCpfSocio8,$txtCpfSocio9,$txtCpfSocio10);
 
 //lista os dados da empresa-------------------------------------------------------------------------------------------------------
 $campo = tipoPessoa($cnpjcpfempresa);
-$sql_dados_empresa=mysql_query("SELECT nome,codtipo,codtipodeclaracao,razaosocial,$campo,inscrmunicipal,email,logradouro,numero,estado,nfe,pispasep, datainicio, datafim, cep, fonecomercial, fonecelular, municipio, complemento, bairro FROM cadastro
+$sql_dados_empresa=$PDO->query("SELECT nome,codtipo,codtipodeclaracao,razaosocial,$campo,inscrmunicipal,email,logradouro,numero,estado,nfe,pispasep, datainicio, datafim, cep, fonecomercial, fonecelular, municipio, complemento, bairro FROM cadastro
  WHERE codigo = '$codigoempresa'");
-list($Nempresa,$CodTipo,$CodTipoDec,$Rempresa,$CNCPempresa,$Iempresa,$ESempresa,$EMempresa,$ENempresa,$NMempresa,$OPestado,$Nfe,$Pispasep,$EMdatainicio,$EMdatafim, $EMcep, $EMfone, $FCcelular, $Mmunicipio, $Ccomplemento, $Bbairro)=mysql_fetch_array($sql_dados_empresa); 
+list(
+	$Nempresa,$CodTipo,$CodTipoDec,$Rempresa,$CNCPempresa,$Iempresa,$ESempresa,$EMempresa,$ENempresa,$NMempresa,$OPestado,$Nfe,$Pispasep,
+	$EMdatainicio,$EMdatafim, $EMcep, $EMfone, $FCcelular, $Mmunicipio, $Ccomplemento, $Bbairro)=$sql_dados_empresa->fetch(); 
 
     $campo=tipoPessoa($cnpjcpfempresa);
-	$teste_nome        = mysql_query("SELECT codigo FROM cadastro WHERE nome = '$nomeempresa' AND nome != '$Nempresa'");
-	$teste_razaosocial = mysql_query("SELECT codigo FROM cadastro WHERE razaosocial = '$razaosocial' AND razaosocial != '$Rempresa'");
-	$teste_cnpj        = mysql_query("SELECT codigo FROM cadastro WHERE $campo = '$cnpjcpfempresa' AND $campo != '$CNCPempresa'");
-	if(mysql_num_rows($teste_nome)>0){
-		Mensagem("J&aacute; existe um prestador de servi&ccedil;os com este nome");
+	$teste_nome        = $PDO->query("SELECT codigo FROM cadastro WHERE nome = '$nomeempresa' AND nome != '$Nempresa'");
+	$teste_razaosocial = $PDO->query("SELECT codigo FROM cadastro WHERE razaosocial = '$razaosocial' AND razaosocial != '$Rempresa'");
+	$teste_cnpj        = $PDO->query("SELECT codigo FROM cadastro WHERE $campo = '$cnpjcpfempresa' AND $campo != '$CNCPempresa'");
+	if($teste_nome->rowCount()>0){
+		Mensagem("Já existe um prestador de serviços com este nome");
 		RedirecionaPost("?include={$include}");
-	}elseif(mysql_num_rows($teste_razaosocial)>0){
-		Mensagem("J&aacute; existe um prestador de servi&ccedil;os com esta raz&atilde;o social");
+	}elseif($teste_razaosocial->rowCount()>0){
+		Mensagem("Já existe um prestador de serviços com esta razão social");
 		RedirecionaPost("?include={$include}");
-	}elseif(mysql_num_rows($teste_cnpj)>0){
-		Mensagem("J&aacute; existe um prestador de servi&ccedil;os com este CPF/CNPJ");
+	}elseif($teste_cnpj->rowCount()>0){
+		Mensagem("Já existe um prestador de serviços com este CPF/CNPJ");
 		RedirecionaPost("?include={$include}");
 	}else{
 
@@ -177,32 +179,32 @@ list($Nempresa,$CodTipo,$CodTipoDec,$Rempresa,$CNCPempresa,$Iempresa,$ESempresa,
 //Busca os dados adcionais da tabela
 $codcargo_gerente = codcargo('Gerente');
 $codcargo_diretor = codcargo('Diretor');					
-$sql_resp = mysql_query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = '$codigoempresa' AND 
+$sql_resp = $PDO->query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = '$codigoempresa' AND 
 (codcargo = '$codcargo_gerente' OR codcargo = '$codcargo_diretor')");
-list($Nome_Responsavel,$Cpf_Responsavel) = mysql_fetch_array($sql_resp);
+list($Nome_Responsavel,$Cpf_Responsavel) = $sql_resp->fetch();
 
 
-//Busca as informa��es que s�o extra para cada tipo de prestador
-$sql_info_instituicoes = mysql_query("SELECT agencia, codbanco FROM inst_financeiras WHERE codcadastro = '$codigoempresa'");
-list($Agencia_Inst,$Codbanco_Inst) = mysql_fetch_array($sql_info_instituicoes);
+//Busca as informa��es que são extra para cada tipo de prestador
+$sql_info_instituicoes = $PDO->query("SELECT agencia, codbanco FROM inst_financeiras WHERE codcadastro = '$codigoempresa'");
+list($Agencia_Inst,$Codbanco_Inst) = $sql_info_instituicoes->fetch();
 
-$sql_info_operadoras = mysql_query("SELECT agencia, codbanco FROM operadoras_creditos WHERE codcadastro = '$codigoempresa'");
-list($Agencia_Opr,$Codbanco_Opr) = mysql_fetch_array($sql_info_operadoras);
+$sql_info_operadoras = $PDO->query("SELECT agencia, codbanco FROM operadoras_creditos WHERE codcadastro = '$codigoempresa'");
+list($Agencia_Opr,$Codbanco_Opr) = $sql_info_operadoras->fetch();
 
-$sql_info_cartorios = mysql_query("SELECT admpublica, nivel FROM cartorios WHERE codigo = '$codigoempresa'");
-list($Admpublica_Cart,$Nivel_Cart) = mysql_fetch_array($sql_info_cartorios);
+$sql_info_cartorios = $PDO->query("SELECT admpublica, nivel FROM cartorios WHERE codigo = '$codigoempresa'");
+list($Admpublica_Cart,$Nivel_Cart) = $sql_info_cartorios->fetch();
 
 
 //Atualiza dados da Empresa---------------------------------------------------------------------------------------------------------
 if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa != $CNCPempresa) || ($enderecoempresa != $ENempresa) ||($inscrmunicipal != $Iempresa) || ($emailempresa != $EMempresa) || ($estado != $OPestado) || ($codtipodeclaracao != $CodTipoDec) || ($codtipo_prestador != $CodTipo) || ($codbanco != $Codbanco_Inst) || ($codbanco != $Codbanco_Opr) || ($agencia != $Agencia_Inst) || ($agencia != $Agencia_Opr) || ($adm_publica != $Admpublica_Cart) || ($nivel != $Nivel_Cart) || ($nfe != $Nfe) || ($pispasep != $Pispasep) || ($datainicio != $EMdatainicio) || ($datafim != $EMdatafim) || ($cep != $EMcep) || ($fone != $EMfone) || ($numero != $NMempresa) || ($celular != $FCcelular) || ($municipio != $Mmunicipio) || ($complemento != $Ccomplemento) || ($bairro != $Bbairro))
  {   
   
-   /*$sql=mysql_query("
+   /*$sql=$PDO->query("
    UPDATE usuarios SET nome = '$nomeempresa',login = '$cnpjcpfempresa'
    WHERE nome = '$Nempresa'");*/
    
    
-   $sql=mysql_query("
+   $sql=$PDO->query("
        UPDATE cadastro
            SET nome = '$nomeempresa',
            razaosocial = '$razaosocial',
@@ -238,11 +240,11 @@ if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa 
 			$msg = "
 				$nomeempresa,<br>
 				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;Por meio deste e-mail, estamos informando-lhe que o estado de sua empresa<br>
-				foi alterado para inativo no Sistema Eletr&ocirc;nico da Prefeitura (SEP).<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;Assim sua empresa n&atilde;o podera efetuar login no sistema de NF-e.<br>
+				Por meio deste e-mail, estamos informando-lhe que o estado de sua empresa<br>
+				foi alterado para inativo no Sistema Eletrônico da Prefeitura (SEP).<br>
+				Assim sua empresa não podera efetuar login no sistema de NF-e.<br>
 				<br>
-				Para mais informa&ccedil;&otilde;es, entrar em contato com a prefeitura.
+				Para mais informações, entrar em contato com a prefeitura.
 			";
 			
 		}else{
@@ -250,11 +252,11 @@ if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa 
 			$msg = "
 				$nomeempresa,<br>
 				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;Por meio deste e-mail, estamos informando-lhe que o estado de sua empresa<br>
-				foi alterado para Ativo no Sistema Eletr&ocirc;nico da Prefeitura (SEP).<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;Assim sua empresa podera efetuar login no sistema de NF-e.<br>
+				Por meio deste e-mail, estamos informando-lhe que o estado de sua empresa<br>
+				foi alterado para Ativo no Sistema Eletrônico da Prefeitura (SEP).<br>
+				Assim sua empresa podera efetuar login no sistema de NF-e.<br>
 				<br>
-				Para mais informa&ccedil;&otilde;es, entrar em contato com a prefeitura.
+				Para mais informações, entrar em contato com a prefeitura.
 			";
 					
 		}
@@ -282,21 +284,21 @@ if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa 
    $codtipo_opr  = codtipo('operadora_credito');
    $codtipo_cart = codtipo('cartorio');
    
-   //testa se o prestador que est� sendo editado tem alguma informa��o extra
+   //testa se o prestador que está sendo editado tem alguma informação extra
    if($codtipo_prestador == $codtipo_inst){
-   		mysql_query("UPDATE inst_financeiras SET agencia = '$agencia', codbanco = '$codbanco' WHERE codcadastro = '$codigoempresa'");
+   		$PDO->query("UPDATE inst_financeiras SET agencia = '$agencia', codbanco = '$codbanco' WHERE codcadastro = '$codigoempresa'");
 		$codcargo = codcargo("Gerente");
-		mysql_query("UPDATE cadastro_resp SET nome = '$gerente', cpf = '$gerente_cpf' WHERE codemissor = '$codigoempresa' AND codcargo = '$codcargo'");
+		$PDO->query("UPDATE cadastro_resp SET nome = '$gerente', cpf = '$gerente_cpf' WHERE codemissor = '$codigoempresa' AND codcargo = '$codcargo'");
    }
    if($codtipo_prestador == $codtipo_opr){
-   		mysql_query("UPDATE operadoras_creditos SET agencia = '$agencia', codbanco = '$codbanco' WHERE codcadastro = '$codigoempresa'");
+   		$PDO->query("UPDATE operadoras_creditos SET agencia = '$agencia', codbanco = '$codbanco' WHERE codcadastro = '$codigoempresa'");
 		$codcargo = codcargo("Gerente");
-		mysql_query("UPDATE cadastro_resp SET nome = '$gerente', cpf = '$gerente_cpf' WHERE codemissor = '$codigoempresa' AND codcargo = '$codcargo'");
+		$PDO->query("UPDATE cadastro_resp SET nome = '$gerente', cpf = '$gerente_cpf' WHERE codemissor = '$codigoempresa' AND codcargo = '$codcargo'");
    }
    if($codtipo_prestador == $codtipo_cart){
-   		mysql_query("UPDATE cartorios SET admpublica = '$adm_publica', nivel = '$nivel' WHERE codcadastro = '$codigoempresa'");
+   		$PDO->query("UPDATE cartorios SET admpublica = '$adm_publica', nivel = '$nivel' WHERE codcadastro = '$codigoempresa'");
 		$codcargo = codcargo("Diretor");
-		mysql_query("UPDATE cadastro_resp SET nome = '$diretor', cpf = '$diretor_cpf', codcargo = '$codcargo' WHERE codemissor = '$codigoempresa' AND codcargo = '$codcargo'");
+		$PDO->query("UPDATE cadastro_resp SET nome = '$diretor', cpf = '$diretor_cpf', codcargo = '$codcargo' WHERE codemissor = '$codigoempresa' AND codcargo = '$codcargo'");
    }
         
    add_logs('Atualizou dados da empresa'); 
@@ -313,18 +315,18 @@ if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa 
 
 
 //edita servicos--------------------------------------------------------------------------------------------------------------------
-  $sql_seleciona_servicos=mysql_query("SELECT codservico FROM cadastro_servicos WHERE codigo = '$vetor_cod_servico[$contservicos]'");  
+  $sql_seleciona_servicos=$PDO->query("SELECT codservico FROM cadastro_servicos WHERE codigo = '$vetor_cod_servico[$contservicos]'");  
 
   while($contservicos < $contpos) 
         {  		
 		      
-		      $sql_seleciona_servicos=mysql_query("SELECT codservico FROM cadastro_servicos WHERE codigo = '$vetor_cod_servico[$contservicos]'"); 
+		      $sql_seleciona_servicos=$PDO->query("SELECT codservico FROM cadastro_servicos WHERE codigo = '$vetor_cod_servico[$contservicos]'"); 
 			  
-			  list($codigo_servico)=mysql_fetch_array($sql_seleciona_servicos);
+			  list($codigo_servico)=$sql_seleciona_servicos->fetch();
 			  
 			  if($vetor_editar_servicos[$contservicos] != $codigo_servico)
 			   { 				  			
-				$sql=mysql_query("UPDATE cadastro_servicos SET codservico = '$vetor_editar_servicos[$contservicos]'
+				$sql=$PDO->query("UPDATE cadastro_servicos SET codservico = '$vetor_editar_servicos[$contservicos]'
 				WHERE codigo = '$vetor_cod_servico[$contservicos]'"); 
 				$a="teste"; 
 				add_logs('Atualizou servico da empresa');
@@ -333,14 +335,14 @@ if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa 
 		     
 			   if($vetor_exluir_servicos[$contservicos] != "")
 			   {
-			     $sql_deleta_servico=mysql_query("DELETE FROM cadastro_servicos WHERE codigo = '$vetor_cod_servico[$contservicos]'");	
+			     $sql_deleta_servico=$PDO->query("DELETE FROM cadastro_servicos WHERE codigo = '$vetor_cod_servico[$contservicos]'");	
 				  add_logs('Excluiu servico da empresa');	
 				  $editado = 1; //recebe valor se algo foi editado
 	           }
 			   
 			  if($vetor_insere_servico[$contservicos] != "")
 			   { 				  			
-				$sql=mysql_query("INSERT INTO cadastro_servicos SET codservico= '$vetor_insere_servico[$contservicos]',
+				$sql=$PDO->query("INSERT INTO cadastro_servicos SET codservico= '$vetor_insere_servico[$contservicos]',
 				codemissor= '$codigoempresa'");	
 				add_logs('Inseriu servico na empresa');		
 				$editado = 1; //recebe valor se algo foi editado	
@@ -355,19 +357,19 @@ if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa 
   while($contsocios < $numsocios) 
         {  	  
 		
-		      $sql_seleciona_servicos=mysql_query("SELECT nome, cpf FROM cadastro_resp 
+		      $sql_seleciona_servicos=$PDO->query("SELECT nome, cpf FROM cadastro_resp 
 			  WHERE codigo = '$vetor_codigo_socios[$contsocios]'");
 			  
-			  list($nome_socios, $CPF_socios)=mysql_fetch_array($sql_seleciona_servicos);
+			  list($nome_socios, $CPF_socios)=$sql_seleciona_servicos->fetch();
 			  
-			  $sql_cargo_socio = mysql_query("SELECT codigo FROM cargos WHERE cargo = 'S�cio'");
-			  list($cod_cargo_socio) = mysql_fetch_array($sql_cargo_socio);
+			  $sql_cargo_socio = $PDO->query("SELECT codigo FROM cargos WHERE cargo = 'Sócio'");
+			  list($cod_cargo_socio) = $sql_cargo_socio->fetch();
 			  
 			  
 			  		 
 			  if(($vetor_sociosnomes[$contsocios] != $nome_socios)&&($vetor_sociosnomes[$contsocios] != ""))
 			   { 	 			   		  			
-				$sql=mysql_query("UPDATE cadastro_resp SET nome = '$vetor_sociosnomes[$contsocios]',
+				$sql=$PDO->query("UPDATE cadastro_resp SET nome = '$vetor_sociosnomes[$contsocios]',
 				cpf = '$vetor_socioscpf[$contsocios]'
 				WHERE codigo = '$vetor_codigo_socios[$contsocios]'");	
 				add_logs('Inseriu socio na empresa');		
@@ -376,7 +378,7 @@ if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa 
 			   
 			    if(($vetor_socioscpf[$contsocios] != $CPF_socios)&&($vetor_socioscpf[$contsocios] != ""))
 			   { 	 			   		  			
-				$sql=mysql_query("UPDATE cadastro_resp SET nome = '$vetor_sociosnomes[$contsocios]',
+				$sql=$PDO->query("UPDATE cadastro_resp SET nome = '$vetor_sociosnomes[$contsocios]',
 				cpf = '$vetor_socioscpf[$contsocios]'
 				WHERE codigo = '$vetor_codigo_socios[$contsocios]'");	
 				add_logs('Inseriu socio na empresa');		
@@ -385,14 +387,14 @@ if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa 
 			   
 			   if($vetor_excluir_socios[$contsocios] != "")
 			   {			    
-			    $sql_deleta_socios=mysql_query("DELETE FROM cadastro_resp WHERE codigo ='$vetor_excluir_socios[$contsocios]'");
+			    $sql_deleta_socios=$PDO->query("DELETE FROM cadastro_resp WHERE codigo ='$vetor_excluir_socios[$contsocios]'");
 				add_logs('Inseriu socio na empresa');		
 				$editado = 1; //recebe valor se algo foi editado				
 			   } 
 	 
 			  if($vetor_nome_socios[$contsocios] != "")
 			   { 				  			
-				$sql=mysql_query("INSERT INTO cadastro_resp SET nome='$vetor_nome_socios[$contsocios]',
+				$sql=$PDO->query("INSERT INTO cadastro_resp SET nome='$vetor_nome_socios[$contsocios]',
 				cpf = '$vetor_cpf_socios[$contsocios]', codcargo = '$cod_cargo_socio',codemissor= '$codigoempresa'");
 				add_logs('Inseriu socio na empresa');	
 				$editado = 1; //recebe valor se algo foi editado				

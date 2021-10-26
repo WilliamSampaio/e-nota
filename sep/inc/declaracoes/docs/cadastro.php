@@ -20,8 +20,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	// busca a cidade e o estado do banco
-	$sql_cidadeuf = mysql_query("SELECT estado, cidade FROM configuracoes");
-	list($UF,$CIDADE) = mysql_fetch_array($sql_cidadeuf);
+	$sql_cidadeuf = $PDO->query("SELECT estado, cidade FROM configuracoes");
+	list($UF,$CIDADE) = $sql_cidadeuf->fetch();
 
 	// recebe os dados do formulario
 	$cod=				$_POST["txtCodCart"];
@@ -51,28 +51,28 @@ Fith Floor, Boston, MA 02110-1301, USA
 	
 	//inclui a pagina quando o botao cadastrar for clicado
 	if($_POST['btCadastrar']){
-		include("inc/cartorios/cadastro_inserir.php");
+		require_once("inc/cartorios/cadastro_inserir.php");
 		?><script>LimpaCampos('frmCadastroCart');</script><?php
 	}
 	if($_POST['btDesativar']){
 		$codigo=$_POST['hdDesativar'];
-		mysql_query("UPDATE cadastro SET estado = 'I' WHERE codigo='$codigo'");
+		$PDO->query("UPDATE cadastro SET estado = 'I' WHERE codigo='$codigo'");
 		$codigo="";
-		Mensagem("Cartório desativado!");
+		Mensagem("Cartï¿½rio desativado!");
 	}
 	
 	if($_POST['btAtivar']){
 		$codigo=$_POST["hdDesativar"];
-		mysql_query("UPDATE cadastro SET estado = 'A' WHERE codigo='$codigo'");
+		$PDO->query("UPDATE cadastro SET estado = 'A' WHERE codigo='$codigo'");
 		$codigo="";
-		Mensagem("Cartório ativado!");
+		Mensagem("Cartï¿½rio ativado!");
 	}
 					
 	if($_POST['btExcluir']){
 		$codigo=$_POST["hdDesativar"];
-		mysql_query("DELETE FROM cadastro WHERE codigo=$codigo");
+		$PDO->query("DELETE FROM cadastro WHERE codigo=$codigo");
 		$codigo="";
-		Mensagem("Cartório excluído com sucesso!");
+		Mensagem("Cartï¿½rio excluï¿½do com sucesso!");
 	}
 ?>
 <!--cria a div de consulta de cartorios-->
@@ -89,10 +89,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 }
 -->
 </style>
-<div id="divBuscaCart"  ><?php include("inc/cartorios/pesquisar.php"); ?></div>
+<div id="divBuscaCart"  ><?php require_once("inc/cartorios/pesquisar.php"); ?></div>
 
 <?php
-	//transforma as variaveis com apenas um caractere em informação completa para o usuario
+	//transforma as variaveis com apenas um caractere em informaÃ§Ã£o completa para o usuario
 	switch($nivel){
 	case "M": $nivel ="Municipal"; break;
 	case "E": $nivel ="Estadual"; break;
@@ -107,24 +107,24 @@ Fith Floor, Boston, MA 02110-1301, USA
 	switch($estado){
 	case "A": $estado ="Ativo"; break;
 	case "I": $estado ="Inativo"; break;
-	case "NL": $estado ="Não Liberado"; break;
+	case "NL": $estado ="NÃ£o Liberado"; break;
 	}
 	//testa se tem o codigo e coloca numa variavel
 	if($_POST["CODCART"]){
 		$codigo=$_POST["CODCART"];
 		
 		//seleciona no banco o cartorio com o codigo do cartorio e monta as variaveis
-		$sql=mysql_query("SELECT cadastro.codigo, cadastro.nome, cadastro.razaosocial, cadastro.cnpj, cadastro.municipio, cadastro.uf, cadastro.logradouro, cadastro.numero, cadastro.bairro, cadastro.complemento, cadastro.email, cadastro.fonecomercial, cadastro.fonecelular, cadastro.estado, cartorios.admpublica, cartorios.nivel, cadastro.cep, cadastro.inscrmunicipal, cadastro.senha FROM cadastro INNER JOIN cadastro_resp ON cadastro_resp.codemissor=cadastro.codigo INNER JOIN cartorios ON cartorios.codcadastro=cadastro.codigo WHERE cadastro.codigo='$codigo'");
-		list($codcart, $nome, $razaosocial, $cnpj, $municipio, $uf, $logradouro, $numero, $numero, $complemento, $email, $fonecomercial, $fonecelular, $estado, $admpublica, $nivel, $cep, $inscrmunicipal, $senha)=mysql_fetch_array($sql);
+		$sql=$PDO->query("SELECT cadastro.codigo, cadastro.nome, cadastro.razaosocial, cadastro.cnpj, cadastro.municipio, cadastro.uf, cadastro.logradouro, cadastro.numero, cadastro.bairro, cadastro.complemento, cadastro.email, cadastro.fonecomercial, cadastro.fonecelular, cadastro.estado, cartorios.admpublica, cartorios.nivel, cadastro.cep, cadastro.inscrmunicipal, cadastro.senha FROM cadastro INNER JOIN cadastro_resp ON cadastro_resp.codemissor=cadastro.codigo INNER JOIN cartorios ON cartorios.codcadastro=cadastro.codigo WHERE cadastro.codigo='$codigo'");
+		list($codcart, $nome, $razaosocial, $cnpj, $municipio, $uf, $logradouro, $numero, $numero, $complemento, $email, $fonecomercial, $fonecelular, $estado, $admpublica, $nivel, $cep, $inscrmunicipal, $senha)=$sql->fetch();
 
 		$resp=codcargo('responsavel');
 		$diret=codcargo('diretor');
-		$sql_resp= mysql_query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor='$codigo' AND codcargo='$resp' LIMIT 1");
-		$sql_diretor= mysql_query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor='$codigo' AND codcargo='$diret' LIMIT 1");
-		list($responsavel, $responsavel_cpf)=mysql_fetch_array($sql_resp);
-		list($diretor, $diretor_cpf)=mysql_fetch_array($sql_diretor);
+		$sql_resp= $PDO->query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor='$codigo' AND codcargo='$resp' LIMIT 1");
+		$sql_diretor= $PDO->query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor='$codigo' AND codcargo='$diret' LIMIT 1");
+		list($responsavel, $responsavel_cpf)=$sql_resp->fetch();
+		list($diretor, $diretor_cpf)=$sql_diretor->fetch();
 
-		//transforma as variaveis com apenas um caractere em informação completa para o usuario
+		//transforma as variaveis com apenas um caractere em informaÃ§Ã£o completa para o usuario
 		switch($nivel){
 		case "M": $nivel ="Municipal"; break;
 		case "E": $nivel ="Estadual"; break;
@@ -139,14 +139,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 		switch($estado){
 		case "A": $estado ="Ativo"; break;
 		case "I": $estado ="Inativo"; break;
-		case "NL": $estado ="Não Liberado"; break;
+		case "NL": $estado ="NÃ£o Liberado"; break;
 		}
 	}//fim do if post
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC" width="700">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="671" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Cartórios - Cadastro</td>  
+		<td width="671" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Cartï¿½rios - Cadastro</td>  
 		<td width="30" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -158,14 +158,14 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <form method="post" id="frmCadastroCart">
                         <input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
                         <input type="hidden" name="txtCodCart" value="<?php echo $codcart; ?>" />
-                        <fieldset><legend>Cadastro de Cartórios</legend>
+                        <fieldset><legend>Cadastro de Cartï¿½rios</legend>
                             <table align="left">
                                 <tr align="left">
                                     <td width="150"><font color="#FF0000">*</font> Nome:</td>
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtNome" size="60" id="txtNome" value="<?php echo $nome; ?>" /></td>
                                 </tr>
                                 <tr align="left">
-                                    <td><font color="#FF0000">*</font> Razão Social:</td>
+                                    <td><font color="#FF0000">*</font> RazÃ£o Social:</td>
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtRazao" size="60" id="txtRazao" value="<?php echo $razaosocial; ?>" /></td>
                                 </tr>
                                 <tr align="left">
@@ -173,7 +173,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtCnpj" size="25" nkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" maxlength="18" id="txtCnpj" value="<?php echo $cnpj; ?>" /></td>
                                 </tr>
                                 <tr align="left">
-                                    <td>&nbsp;&nbsp;&nbsp;Inscrição Municipal:</td>
+                                    <td>Inscriï¿½ï¿½o Municipal:</td>
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtInscMunicipal" size="60" id="txtInscMunicipal" value="<?php echo $inscmunicipal; ?>" /></td>
                                 </tr>
                                 <tr align="left">
@@ -189,11 +189,11 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     <td><input type="text" class="texto" name="txtBairro" <?php if($codigo) echo "disabled=\"disabled\""; ?> id="txtBairro" size="40" value="<?php echo $bairro; ?>" /></td>
                                 </tr>
                                 <tr align="left">
-                                    <td><font color="#FF0000">*</font> Número:</td>
+                                    <td><font color="#FF0000">*</font> NÃºmero:</td>
                                     <td><input type="text" class="texto" size="9" maxlength="9" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtLogradouroNro" id="txtLogradouroNro" value="<?php echo $numero; ?>"/></td>
                                 </tr>
                                 <tr align="left">
-                                    <td>&nbsp;&nbsp;&nbsp;Complemento:</td>
+                                    <td>Complemento:</td>
                                     <td><input type="text" class="texto" size="20" maxlength="20" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtComplemento" id="txtComplemento" value="<?php echo $complemento; ?>"/></td>
                                 </tr>
                                 <tr align="left">
@@ -201,8 +201,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     <td align="left" colspan="2" <?php if($codigo) echo "style=\"display:none\"" ?>>
                                         <select name="txtUfEmpresa" id="txtUfEmpresa" onchange="buscaCidades(this,'txtMunicipioEmpresa')" class="combo">
                                             <?php
-                                                $sql=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-                                                while(list($uf_busca)=mysql_fetch_array($sql)){
+                                                $sql=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+                                                while(list($uf_busca)=$sql->fetch()){
                                                 echo "<option value=\"$uf_busca\"";if($uf_busca == $UF){ echo "selected=selected"; }echo ">$uf_busca</option>";
                                                 }
                                             ?>
@@ -215,13 +215,13 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="left"><font color="#FF0000">*</font> Município</td>
+                                    <td align="left"><font color="#FF0000">*</font> Municï¿½pio</td>
                                     <td align="left" colspan="2" <?php if($codigo) echo "style=\"display:none\"" ?>>
                                         <div  id="txtMunicipioEmpresa" >
                                             <select name="txtMunicipioEmpresa" id="txtMunicipioEmpresa" class="combo">
 												<?php
-                                                $sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$UF'");
-                                                while(list($nome) = mysql_fetch_array($sql_municipio)){
+                                                $sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$UF'");
+                                                while(list($nome) = $sql_municipio->fetch()){
                                                 echo "<option value=\"$nome\"";if(strtolower($nome) == strtolower($CIDADE)){ echo "selected=selected";} echo ">$nome</option>";
                                                 }//fim while 
                                                 ?>
@@ -243,7 +243,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtFoneComercial" id="txtFoneComercial" value="<?php echo $fonecomercial; ?>" /></td>
                                 </tr>
                                 <tr align="left">
-                                    <td>&nbsp;&nbsp;&nbsp;Telefone Adicional:</td>
+                                    <td>Telefone Adicional:</td>
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtFoneAdicional" value="<?php echo $fonecelular; ?>" /></td>
                                 </tr>
                                 <tr><td colspan="3"><hr /></td></tr>
@@ -256,16 +256,16 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtCpfDiretor" size="40" onkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" maxlength="14" id="txtCpfDiretor" value="<?php echo $diretor_cpf; ?>" /></td> 
                                 </tr>
                                 <tr align="left">
-                                    <td><font color="#FF0000">*</font> Responsável:</td>
+                                    <td><font color="#FF0000">*</font> ResponsÃ¡vel:</td>
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtResponsavel" size="40" id="txtResponsavel" value="<?php echo $responsavel; ?>" /></td>
                                 </tr>
                                 <tr align="left">
-                                    <td><font color="#FF0000">*</font> CPF Responsável:</td>
+                                    <td><font color="#FF0000">*</font> CPF ResponsÃ¡vel:</td>
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtCpfResponsavel" size="30" onkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" maxlength="14" id="txtCpfResponsavel" value="<?php echo $responsavel_cpf; ?>" /></td>
                                 </tr>
                                 <tr><td colspan="3"><hr /></td></tr>
                                 <tr align="left">
-                                    <td><font color="#FF0000">*</font> Adm. Pública</td>
+                                    <td><font color="#FF0000">*</font> Adm. Pï¿½blica</td>
                                     <td colspan="2">
                                         <select name="cmbAdmPublica" id="cmbAdmPublica" <?php if($codigo) echo "style=\"display:none\"" ?>>
                                             <?php
@@ -283,7 +283,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     </td>
                                 </tr>
                                 <tr align="left">
-                                    <td><font color="#FF0000">*</font> Nível</td>
+                                    <td><font color="#FF0000">*</font> Nï¿½vel</td>
                                     <td colspan="2">
                                         <select name="cmbNivel" id="cmbNivel" <?php if($codigo) echo "style=\"display:none\"" ?>>
                                             <?php
@@ -324,23 +324,23 @@ Fith Floor, Boston, MA 02110-1301, USA
                                             </tr>";
                                         }
                                     ?>
-                                <tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigatórios</font></td></tr>
+                                <tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigatï¿½rios</font></td></tr>
                                 <tr align="left">
                                     <td colspan="2">
                                         <input type="submit" name="btBuscarCliente" value="Buscar" class="botao" />
                                             <?php 
                                                 if ($codigo){
-                                                    echo "<input type=\"submit\" class=\"botao\" value=\"Voltar\" onclick=\"LimpaCampos('frmCadastroCart');Redireciona('cadastro.php');\" />&nbsp;<input type=\"hidden\" name=\"hdDesativar\" id=\"hdDesativar\" value=\"$codigo\"/><input type=\"submit\" name=\"btComprovante\" value=\"Comprovante\" class=\"botao\" onclick=\"return ValidaFormulario('txtCodCart', 'Busque por uma Instituição Financeira antes de gerar o comprovante')\" />&nbsp;";
+                                                    echo "<input type=\"submit\" class=\"botao\" value=\"Voltar\" onclick=\"LimpaCampos('frmCadastroCart');Redireciona('cadastro.php');\" /><input type=\"hidden\" name=\"hdDesativar\" id=\"hdDesativar\" value=\"$codigo\"/><input type=\"submit\" name=\"btComprovante\" value=\"Comprovante\" class=\"botao\" onclick=\"return ValidaFormulario('txtCodCart', 'Busque por uma InstituiÃ§Ã£o Financeira antes de gerar o comprovante')\" />";
                                                 }
-												/*<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir Cartório\" onclick=\"return Confirma('Deseja Excluir Cartório?');\" />&nbsp;*/
+												/*<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir Cartï¿½rio\" onclick=\"return Confirma('Deseja Excluir Cartï¿½rio?');\" />*/
                                                 if($estado == "Ativo"){
-                                                    echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar Cartório\"/>&nbsp;";
+                                                    echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar Cartï¿½rio\"/>";
                                                 }
                                                 elseif($estado == "Inativo"){
-                                                    echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar Cartório\"/>&nbsp;";
+                                                    echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar Cartï¿½rio\"/>";
                                                 }
                                             ?>
-                                        <input type="submit" class="botao" name="btCadastrar" <?php if($codigo){echo "style=\"display:none\"";} ?> value="Cadastrar" onclick="return ValidaFormulario('txtCpfDiretor|txtCpfResponsavel|txtMunicipioEmpresa|txtUfEmpresa|rdbEstado|cmbAdmPublica|cmbNivel|txtNome|txtComplemento|txtRazao|txtCnpj|txtDiretor|txtResponsavel|txtInscMunicipal|txtLogradouro|txtBairro|txtCEP|txtLogradouroNro|txtEmail|txtFoneComercial|txtFoneAdicional|txtSenha|txtSenhaConf', 'Preencha todos os campos obrigatórios.')" />&nbsp;
+                                        <input type="submit" class="botao" name="btCadastrar" <?php if($codigo){echo "style=\"display:none\"";} ?> value="Cadastrar" onclick="return ValidaFormulario('txtCpfDiretor|txtCpfResponsavel|txtMunicipioEmpresa|txtUfEmpresa|rdbEstado|cmbAdmPublica|cmbNivel|txtNome|txtComplemento|txtRazao|txtCnpj|txtDiretor|txtResponsavel|txtInscMunicipal|txtLogradouro|txtBairro|txtCEP|txtLogradouroNro|txtEmail|txtFoneComercial|txtFoneAdicional|txtSenha|txtSenhaConf', 'Preencha todos os campos obrigatÃ³rios.')" />
                                     </td>
                                 </tr>
                             </table>

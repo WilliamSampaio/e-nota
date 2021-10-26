@@ -37,7 +37,7 @@ while ($contservico <= $nroservicos) {
 			?>
 
 			<select name="cmbCategoria<?php echo $contservico; ?>" id="cmbCategoria<?php echo $contservico; ?>" onchange="ServicosCategorias(this);" style="width:440px;">
-				<option value="">Selecione a categoria do servi&ccedil;o</option>
+				<option value="">Selecione a categoria do serviço</option>
 				<?php
 
 
@@ -60,7 +60,7 @@ while ($contservico <= $nroservicos) {
 					$sql_servicos = $PDO->query("SELECT codigo, codservico, descricao, aliquota, estado FROM servicos WHERE estado = 'A' AND codcategoria='$codcategoria' ORDER BY codservico");
 					?>
 					<select name="cmbCodigo<?php echo $codcategoria . $contservico; ?>" id="cmbCodigo<?php echo $codcategoria . $contservico; ?>" style="width:440px">
-						<option value="">C&oacute;digo | Descri&ccedil;&atilde;o | Aliquota %</option>
+						<option value="">Código | Descrição | Aliquota %</option>
 						<?php
 						// laco para display das opcoes no combo
 						while (list($codigo, $codservico, $descricao, $aliquota, $estado) = $sql_servicos->fetch()) {

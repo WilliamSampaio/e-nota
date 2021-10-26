@@ -35,14 +35,14 @@
 		//array dos menus com seus respectivos links
 		$menus=array(
 			"Cadastro" 			=> "empresas.php",
-			"AIDF Eletr&ocirc;nico" 	=> "aidf.php",
-			"Notas Eletr&ocirc; nicas" => "notas.php",
+			"AIDF Eletrônico" 	=> "aidf.php",
+			"Notas Eletrô nicas" => "notas.php",
 			/*"NF-e Tomadas"      => "notas_tomadas.php",*/
 			"Livro Digital"     => "livro.php",
 			"RPS" 				=> "importar.php",
 			"Exportar Notas" 	=> "exportar.php",
 			"Ouvidoria" 		=> "reclamacoes.php",
-			"Utilit&aacute;rios"	 	=> "utilitarios.php",
+			"Utilitários"	 	=> "utilitarios.php",
 			"Contador Simples"  => "contador_simples.php",
 			"Sair" 				=> "logout.php"
 		);
@@ -50,15 +50,15 @@
 	}elseif($codtipodeclaracao == $codtipodec && !is_null($codCliente)){
 		$menus=array(
 			"Cadastro" 			=> "empresas.php",
-			"AIDF Eletr&ocirc;nico" 	=> "aidf.php",
-			"Notas Eletr&ocirc;nicas" => "notas.php",
+			"AIDF Eletrônico" 	=> "aidf.php",
+			"Notas Eletrônicas" => "notas.php",
 			/*"NF-e Tomadas"      => "notas_tomadas.php",*/
 			"Livro Digital"     => "livro.php",
 			"Guia de Pagamento" => "pagamento.php",
 			"RPS" 				=> "importar.php",
 			"Exportar Notas" 	=> "exportar.php",
 			"Ouvidoria" 		=> "reclamacoes.php",
-			"Utilit&aacute;rios"	 	=> "utilitarios.php",
+			"Utilitários"	 	=> "utilitarios.php",
 			"Contador Simples"  => "contador_simples.php",
 			"Sair" 				=> "logout.php"
 		);
@@ -66,15 +66,15 @@
 		//array dos menus com seus respectivos links
 		$menus=array(
 			"Cadastro" 			=> "empresas.php",
-			"AIDF Eletr&ocirc;nico" 	=> "aidf.php",
-			"Notas Eletr&ocirc;nicas" => "notas.php",
+			"AIDF Eletrônico" 	=> "aidf.php",
+			"Notas Eletrônicas" => "notas.php",
 			/*"NF-e Tomadas"      => "notas_tomadas.php",*/
 			"Livro Digital"     => "livro.php",
 			"Guia de Pagamento" => "pagamento.php",
 			"RPS"		 		=> "importar.php",
 			"Exportar Notas" 	=> "exportar.php",
 			"Ouvidoria" 		=> "reclamacoes.php",
-			"Utilit&aacute;rios"	 	=> "utilitarios.php",
+			"Utilitários"	 	=> "utilitarios.php",
 			"Sair" 				=> "logout.php"
 		);
 	}
@@ -86,7 +86,7 @@
 	foreach($menus as $menu => $link){
 	?>
 		<tr>
-			<td height="20" class="menu"><?php print(" <a class=\"menu\" href='$link' target='_parent'>&nbsp;$menu</a>"); ?></td>
+			<td height="20" class="menu"><?php print(" <a class=\"menu\" href='$link' target='_parent'>$menu</a>"); ?></td>
 		</tr>
 		<tr>
 			<td height="1" bgcolor="#CCCCCC"></td>

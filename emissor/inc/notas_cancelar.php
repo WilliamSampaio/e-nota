@@ -35,13 +35,13 @@ $sql = $PDO->query("UPDATE notas SET estado = 'C', motivo_cancelamento = '$txtMo
  
 
 
-    $msg = "Comunicamos que a NFE com os seguintes dados foi cancelada pela empresa prestadora de servi&ccedil;o: <br><br>
-	- N&uacute;mero da nota: $num_nota;<br>
-	- Com data e hora de emiss&atilde;o de: $dataehora ;<br>
-	- C&oacute;digo de verifica&ccedil;&atilde;o: $codverificacao ;<br>
-	- RPS N&uacute;mero: $num_rps <br>	
-	- Prestador de servi&ccedil;o: $nome_empresa ;<br>
-	- CPF/CNPJ do prestador de servi&ccedil;o: $cpfcnpf_empresa ;<br>  ";
+    $msg = "Comunicamos que a NFE com os seguintes dados foi cancelada pela empresa prestadora de serviço: <br><br>
+	- Número da nota: $num_nota;<br>
+	- Com data e hora de emissão de: $dataehora ;<br>
+	- Código de verificação: $codverificacao ;<br>
+	- RPS Número: $num_rps <br>	
+	- Prestador de serviço: $nome_empresa ;<br>
+	- CPF/CNPJ do prestador de serviço: $cpfcnpf_empresa ;<br>  ";
 	
 	
 	

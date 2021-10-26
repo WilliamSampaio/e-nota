@@ -21,10 +21,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php  
  if(isset($_POST['btCadastrar']))
  {   
-   include("cartorio_inserir.php");
+   require_once("cartorio_inserir.php");
  }?>
 <fieldset style="margin-left:10px; margin-right:10px;">
-	<legend>Cadastro de Servi&ccedil;os</legend>
+	<legend>Cadastro de Serviços</legend>
 	<form method="post" id="frmCadastro">
 	<input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
 		<table width="100%" align="left">
@@ -34,8 +34,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<select name="cmbCategoria" id="cmbCategoria">
                     	<option />
 						<?php
-							$sql=mysql_query("SELECT codigo ,tipocartorio FROM cartorios_tipo");
-							while(list($codigo,$tipocartorio)=mysql_fetch_array($sql))
+							$sql=$PDO->query("SELECT codigo ,tipocartorio FROM cartorios_tipo");
+							while(list($codigo,$tipocartorio)=$sql->fetch())
 								{
 									echo "<option value=\"$codigo\">$tipocartorio</option>";
 								}
@@ -43,14 +43,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</select>				</td>
 			</tr>
 			<tr>
-				<td align="left">Descri&ccedil;&atilde;o<font color="#FF0000"> *</font></td>
+				<td align="left">Descrição<font color="#FF0000"> *</font></td>
 				<td align="left">
 					<textarea cols="40" rows="5" name="txtInsDescServicos" id="txtInsDescServicos" class="texto"></textarea></td>
 			</tr>
 			<tr>
 			  <td align="left">Aliquota<font color="#FF0000">*</font></td>
 		      <td align="left"><input type="text" size="6" maxlength="5" name="txtInsAliquota" id="txtInsAliquota" class="texto" onkeyup="MaskPercent(this)" />
-	          &nbsp;%&nbsp;&nbsp;Exemplo(0.00)&nbsp;&nbsp;<em>Para servi&ccedil;os em geral </em></td>
+	          %Exemplo(0.00)<em>Para serviços em geral </em></td>
 		  </tr>
 		  <td>Estado</td>
 				  <td colspan="">
@@ -62,12 +62,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 				  </td>
 			  </tr>
 		  <tr>
-			  <td align="left">&nbsp;</td>
-			  <td align="left"><font color="#FF0000">*</font>Campos Obrigat&oacute;rios</td>
+			  <td align="left"></td>
+			  <td align="left"><font color="#FF0000">*</font>Campos Obrigatórios</td>
 		  </tr>
 			<tr>
 			  <td align="left"></td>
-			  <td align="center">&nbsp;</td>
+			  <td align="center"></td>
 		  </tr>
 		</table>
 </form>

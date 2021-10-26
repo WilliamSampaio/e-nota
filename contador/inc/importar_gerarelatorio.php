@@ -39,7 +39,7 @@ if(!(isset($_SESSION["empresa"]))){
 }else{
 
 	// conecta ao banco
-	include("../../include/conect.php");
+	require_once("../../include/conect.php");
 	$codLogado = $_POST['codLogado'];
 	
 	$mes = $_POST["cmbMes"];
@@ -79,20 +79,20 @@ if(!(isset($_SESSION["empresa"]))){
 		if(mysql_num_rows($sql)>0){
 	?>
 	  <tr>
-		<td colspan="10" align="left" class="cab01">RPS CONVERTIDOS EM NFE <?php if($string){ echo "- Per�odo: $mes/$ano"; }?></td>
+		<td colspan="10" align="left" class="cab01">RPS CONVERTIDOS EM NFE <?php if($string){ echo "- Período: $mes/$ano"; }?></td>
 	  </tr>
 	  <tr>
 		<td>Total de RPS convertidos: <?php echo mysql_num_rows($sql);?></td>
 	  </tr>
 	  <tr>
-		<td class="cab02" align="center">N&uacute;mero da NFe </td>
-		<td class="cab02" align="center">C&oacute;d Verifica&ccedil;&atilde;o </td>
-		<td class="cab02" align="center">Data/Hora Emis&atilde;o </td>
-		<td class="cab02" align="center">RPS - N&uacute;mero </td>
+		<td class="cab02" align="center">Número da NFe </td>
+		<td class="cab02" align="center">Cód Verificação </td>
+		<td class="cab02" align="center">Data/Hora Emisão </td>
+		<td class="cab02" align="center">RPS - Número </td>
 		<td class="cab02" align="center">RPS - Data </td>
 		<td class="cab02" align="center">Tomador - Nome </td>
 		<td class="cab02" align="center">Tomador - CNPJ/CPF </td>
-		<td class="cab02" align="center">Tomador - Munic&iacute;pio </td>
+		<td class="cab02" align="center">Tomador - Município </td>
 		<td class="cab02" align="center">Tomador - UF </td>
 		<td class="cab02" align="center">Valor Total </td>
 	  </tr>
@@ -129,7 +129,7 @@ if(!(isset($_SESSION["empresa"]))){
 	}else{
 		?>
 			<tr>
-				<td align="center"><b>N&atilde;o h&aacute; rps convertidos nesse per&iacute;odo!</b></td>
+				<td align="center"><b>Não há rps convertidos nesse período!</b></td>
 			</tr>
 	<?php
 	}

@@ -62,7 +62,7 @@ if($numero){
 <fieldset>
 <legend>Resultado</legend>
 <?php	
-	//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
+	//Sql buscando as informaï¿½ï¿½es que o usuario pediu e com o limit estipulado pela funÃ§Ã£o
 	$query=("
 			SELECT 
 				doc_des.codigo,
@@ -84,7 +84,7 @@ if($numero){
 			");
 		
 $sql = Paginacao($query,'frmRelatorio','divBuscar',10);
-if(mysql_num_rows($sql)>0){
+if($sql->rowCount()>0){
 ?>
 	<table width="100%">
     	<tr>
@@ -96,8 +96,8 @@ if(mysql_num_rows($sql)>0){
     </table>
 <table width="100%">
     <tr bgcolor="#999999">
-        <td width="6%" align="center">N&deg; Dec</td>
-        <td width="12%" align="center">Cod verificação</td>
+        <td width="6%" align="center">NÂº Dec</td>
+        <td width="12%" align="center">Cod verificaÃ§Ã£o</td>
         <td width="35%" align="center">Nome</td>
         <td width="8%" align="center">Total</td>
         <td width="11%" align="center">Data</td>
@@ -105,7 +105,7 @@ if(mysql_num_rows($sql)>0){
         <td width="10%" align="center">Estado</td>
     </tr>
     <?php
-		while(list($codigo,$data,$total,$codverificacao,$estado,$competencia,$nome) = mysql_fetch_array($sql)){
+		while(list($codigo,$data,$total,$codverificacao,$estado,$competencia,$nome) = $sql->fetch()){
 			switch($estado){
 				case "B": $estado = "Boleto";      break;
 				case "N": $estado = "Normal";      break;

@@ -42,17 +42,18 @@ Fith Floor, Boston, MA 02110-1301, USA
 </script>
 <?php 
 	if($_POST["btSalvar"] == "Salvar"){
-		include("inc/utilitarios/boleto_editar.php");
+		require_once("inc/utilitarios/boleto_editar.php");
 		 
 	}//fim if
-	$sql_boleto = mysql_query("SELECT codigo, tipo,  codbanco, agencia, contacorrente, convenio, contrato, carteira, codfebraban, instrucoes FROM boleto");
-	list($codigo, $tipo, $codbanco, $agencia, $contacorrente, $convenio, $contrato, $carteira, $codfebraban, $instrucoes)= mysql_fetch_array($sql_boleto);
+	$sql_boleto = $PDO->query("SELECT codigo, tipo,  codbanco, agencia, contacorrente, convenio, contrato, carteira, codfebraban, instrucoes FROM boleto");
+	list($codigo, $tipo, $codbanco, $agencia, $contacorrente, $convenio, 
+	$contrato, $carteira, $codfebraban, $instrucoes)= $sql_boleto->fetch();
 	//echo "$codigo, $tipo, $codbanco, $agencia, $contacorrente, $convenio, $contrato, $carteira, $cofebraban";
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Utilit&aacute;rios - Configurações</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">UtilitÃ¡rios - Configuraï¿½ï¿½es</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -68,13 +69,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<tr align="left">
 				<td colspan="4">
 				<?php 
-                    $sql_banco = mysql_query("SELECT codigo, banco FROM bancos");
+                    $sql_banco = $PDO->query("SELECT codigo, banco FROM bancos");
 				?>
                     <input type="hidden" name="cmbTipo" id="cmbTipo" value="R" />
 				</td>
 					
 					<tr>
-						<td colspan="4"><label>Instruções para Recebimento</label><br />
+						<td colspan="4"><label>InstruÃ§Ãµes para Recebimento</label><br />
 						<textarea name="txtInstrucoes" cols="60" rows="3" id="txtInstrucoes"><?php echo $instrucoes; ?></textarea>
 						</td>
 					</tr>
@@ -85,7 +86,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<div id = "febraban">
                 <table align="left">
                     <tr>
-                        <td>Código Febraban:</td>
+                        <td>CÃ³digo Febraban:</td>
                         <td>
                             <input name="txtCodfebraban"  type="text" class="texto" value="<?php echo $codfebraban;?>"  >
                         </td>

@@ -29,7 +29,7 @@ $sql_login=$PDO->query("SELECT * FROM cadastro WHERE cnpj='$cnpj' OR cpf='$cnpj'
 $dados=$sql_login->fetch();
 
 if($sql_login->rowCount()<1){
-	Mensagem("CNPJ/CPF ou senha inv&aacute;lidos");
+	Mensagem("CNPJ/CPF ou senha inválidos");
 	Redireciona("site/des.php");
 }
 
@@ -50,7 +50,7 @@ function AbrirGuias(ano, mes){
 <table width="580" border="0" cellpadding="0" cellspacing="1">
     <tr>
 		<td width="5%" height="10" bgcolor="#FFFFFF"></td>
-        <td width="40%" align="center" bgcolor="#FFFFFF" rowspan="3" class="fieldsetCab">Emiss&atilde;o da Guia de Pagamento</td>
+        <td width="40%" align="center" bgcolor="#FFFFFF" rowspan="3" class="fieldsetCab">Emissão da Guia de Pagamento</td>
         <td width="55%" bgcolor="#FFFFFF"></td>
     </tr>
     <tr>
@@ -78,7 +78,7 @@ function AbrirGuias(ano, mes){
     ?>
 	<tr>
 		<td height="60" colspan="3" bgcolor="#CCCCCC" align="center">
-			<p align="center">Escolha o per&iacute;odo da compet&ecirc;ncia e o tipo</p>				
+			<p align="center">Escolha o período da competência e o tipo</p>				
 			<form method="post" id="frmPeriodo">
 				<input type="hidden" name="txtMenu" value="guia_pagamento" />
 				<table>
@@ -122,7 +122,7 @@ function AbrirGuias(ano, mes){
 	}else{
 		?>
 		<tr>
-			<td height="60" colspan="3" bgcolor="#CCCCCC" align="center">Nenhum livro fechado ou guias j&aacute; emitidas.</td>
+			<td height="60" colspan="3" bgcolor="#CCCCCC" align="center">Nenhum livro fechado ou guias já emitidas.</td>
         </tr>
 		<?php
 	} ?>

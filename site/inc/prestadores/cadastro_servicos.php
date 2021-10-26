@@ -18,7 +18,8 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php
+<?php 
+
 $nroservicos = 5;
 $contservico = 1;
 
@@ -39,8 +40,6 @@ while ($contservico <= $nroservicos) {
 			<select name="cmbCategoria<?php echo $contservico; ?>" id="cmbCategoria<?php echo $contservico; ?>" onchange="ServicosCategorias(this);" style="width:440px;">
 				<option value=""></option>
 				<?php
-
-
 				$sql_categoria = $PDO->query("SELECT codigo, nome FROM servicos_categorias");
 				while (list($codcat, $nomecat) = $sql_categoria->fetch()) {
 					print("<option value=\"$codcat|$contservico|$maxcodcat\">$nomecat</option>");
@@ -73,7 +72,7 @@ while ($contservico <= $nroservicos) {
 						");
 					?>
 					<select name="cmbCodigo<?php echo $codcategoria . $contservico; ?>" id="cmbCodigo<?php echo $codcategoria . $contservico; ?>" style="width:440px">
-						<option value="">C�digo | Descri��o | Aliquota %</option>
+						<option value="">Código | Descrição | Aliquota %</option>
 						<?php
 						// laco para display das opcoes no combo
 						while (list($codigo, $codservico, $descricao, $aliquota, $estado) = $sql_servicos->fetch()) {
@@ -96,5 +95,6 @@ while ($contservico <= $nroservicos) {
 <?php
 	$contservico++;
 }
+die('kkkkkkkkkkkkkkkkkk');
 
 ?>

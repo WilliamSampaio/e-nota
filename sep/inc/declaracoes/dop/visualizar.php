@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;SEPISS - Pesquisar</td>  
+    <td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">SEPISS - Pesquisar</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" onclick="document.getElementById('divBuscaOrgaos').style.visibility='hidden'" /></td>
   </tr>
   <tr>
@@ -40,9 +40,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<?php if(isset($_POST['txtBuscaNomeOrgao']))
 				{
 					$nome=$_POST['txtBuscaNomeOrgao'];
-					$sqlorgao = mysql_query("SELECT codigo, nome, razaosocial, cnpj, endereco, municipio, uf, email, telefone, telefone_adicional, responsavel_nome, responsavel_cpf, diretor_nome, diretor_cpf, admpublica, nivel FROM orgaospublicos WHERE nome LIKE'%$nome%' AND estado !='NL'");
+					$sqlorgao = $PDO->query("SELECT codigo, nome, razaosocial, cnpj, endereco, municipio, uf, email, telefone, telefone_adicional, responsavel_nome, responsavel_cpf, diretor_nome, diretor_cpf, admpublica, nivel FROM orgaospublicos WHERE nome LIKE'%$nome%' AND estado !='NL'");
 					
-					while(list($codigo, $nome, $razaosocial, $cnpj, $endereco, $municipio, $uf,  $email, $telefone, $telefone_adicional, $responsavel_nome,  $responsavel_cpf, $diretor_nome, $diretor_cpf, $admpublica, $nivel) = mysql_fetch_array($sqlorgao)) { 
+					while(list($codigo, $nome, $razaosocial, $cnpj, $endereco, $municipio, $uf,  $email, $telefone, $telefone_adicional, 
+					$responsavel_nome,  $responsavel_cpf, $diretor_nome, $diretor_cpf, $admpublica, $nivel) = $sqlorgao->fetch()) { 
 					
 					if($nome !=""){ 
 							echo "<option value=\"$codigo\">".$nome."</option>";

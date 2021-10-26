@@ -39,15 +39,15 @@ Fith Floor, Boston, MA 02110-1301, USA
   <tr id="camposservico<?php echo $contservico; ?>" style="display:<?php echo $display; ?>">
     <td align="left" bgcolor="#999999">
 	 <?php
-	  $sql_maxcodcat=mysql_query("SELECT MAX(codigo) FROM servicos_categorias");
-	  list($maxcodcat)=mysql_fetch_array($sql_maxcodcat);
+	  $sql_maxcodcat=$PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
+	  list($maxcodcat)=$sql_maxcodcat->fetch();
 	  ?>
 
 	 <select name="cmbCategoria<?php echo $contservico; ?>" id="cmbCategoria<?php echo $contservico; ?>" onchange="ServicosCategorias(this);" style="width:460px">
      <option value="">Categoria</option>
 	  <?php
-	  $sql_categoria=mysql_query("SELECT codigo,nome FROM servicos_categorias ");
-	  while(list($codcat,$nomecat)=mysql_fetch_array($sql_categoria))
+	  $sql_categoria=$PDO->query("SELECT codigo,nome FROM servicos_categorias ");
+	  while(list($codcat,$nomecat)=$sql_categoria->fetch())
 	  {
 	    print("<option value=\"$codcat|$contservico|$maxcodcat\">$nomecat</option>");
 	  }
@@ -62,12 +62,12 @@ Fith Floor, Boston, MA 02110-1301, USA
      ?>
 
 	 <?php
-	 $sql_categoria=mysql_query("SELECT codigo,nome FROM servicos_categorias");
-	 while(list($codcategoria)=mysql_fetch_array($sql_categoria))
+	 $sql_categoria=$PDO->query("SELECT codigo,nome FROM servicos_categorias");
+	 while(list($codcategoria)=$sql_categoria->fetch())
 	 {?>
 		 <div id="div<?php echo $codcategoria.$contservico;?>" style="display:none">
 		 <?php
-			$sql_servicos = mysql_query("SELECT codigo,
+			$sql_servicos = $PDO->query("SELECT codigo,
                                          codservico,
                                          descricao,
                                          aliquota,
@@ -78,10 +78,10 @@ Fith Floor, Boston, MA 02110-1301, USA
                                          ORDER BY codservico");
 		 ?>
 		 <select name="cmbCodigo<?php echo $codcategoria.$contservico; ?>" id="cmbCodigo<?php echo $codcategoria.$contservico; ?>" style="width:440px">
-		   <option value="">Código | Descrição | Aliquota %</option>
+		   <option value="">CÃ³digo | DescriÃ§Ã£o | Aliquota %</option>
 		   <?php
 		   // laco para display das opcoes no combo
-		   while(list($codigo, $codservico, $descricao, $aliquota, $estado) = mysql_fetch_array($sql_servicos)) {
+		   while(list($codigo, $codservico, $descricao, $aliquota, $estado) = $sql_servicos->fetch()) {
 				print("<option value=$codigo>$codservico | ".substr($descricao,0,70)."... | $aliquota</option>");
 		   } // fecha while
 		   ?>

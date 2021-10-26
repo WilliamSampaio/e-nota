@@ -19,15 +19,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	// verifica se já há alguma inst. financeira cadastrada com o cnpj indicado. caso ñ haja, faz o cadastro 
-	$sql_verifica=mysql_query("SELECT cnpj FROM inst_financeiras WHERE cnpj='$cnpj'");
-	if(mysql_num_rows($sql_verifica)>0)
+	// verifica se jÃ¡ hÃ¡ alguma inst. financeira cadastrada com o cnpj indicado. caso Ã© haja, faz o cadastro 
+	$sql_verifica=$PDO->query("SELECT cnpj FROM inst_financeiras WHERE cnpj='$cnpj'");
+	if($sql_verifica->rowCount()>0)
 		{
-			Mensagem("Já existe uma Instituição Financeira cadastrada com este CNPJ");
+			Mensagem("JÃ¡ existe uma InstituiÃ§Ã£o Financeira cadastrada com este CNPJ");
 		}
 	else
 		{
-			mysql_query("INSERT INTO inst_financeiras 
+			$PDO->query("INSERT INTO inst_financeiras 
 							SET codbanco='$codbanco',
 							nome='$nome',
 							razaosocial='$razaosocial',
@@ -51,9 +51,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 			//monta o corpo do email
 			$assunto="ISSDigital";
 			$corpo="
-				A Prefeitura Municipal de $CIDADE informa que esta instituição financeira foi cadastrada no sitema de ISSDigital do municipio.<br>
-				Para acessar o o sistema do ISSDigital acesse o site $Link, o login é próprio CNPJ da instituição. A senha, gerada pelo sistema, é: $senha<br>
-				Para sua maior segurança, altere sua senha.
+				A Prefeitura Municipal de $CIDADE informa que esta instituiï¿½ï¿½o financeira foi cadastrada no sitema de ISSDigital do municipio.<br>
+				Para acessar o o sistema do ISSDigital acesse o site {$config['host']}, o login Ã© prÃ³prio CNPJ da instituiï¿½ï¿½o. A senha, gerada pelo sistema, ï¿½: $senha<br>
+				Para sua maior seguranÃ§a, altere sua senha.
 			";
 			
 			//envia a senha por email

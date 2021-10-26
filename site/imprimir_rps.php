@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../include/conect.php");
-include("../funcoes/util.php");
+require_once("../include/conect.php");
+require_once("../include/util.php");
 
 $codEmissor = base64_decode($_GET['codUser']);
 
@@ -112,7 +112,7 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 
 					<tr>
 						<td class="cab2" align="center">
-							Recibo Provis&oacute;rio de Servi&ccedil;os - N&deg; do RPS - <?php echo $cont; ?>
+							Recibo Provisório de Serviços - Nº do RPS - <?php echo $cont; ?>
 						</td>
 					</tr>
 				</table>
@@ -120,7 +120,7 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 			<div id="prestador" class="divBorder">
 				<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center">
 					<tr>
-						<td colspan="2" class="cab03" align="center">PRESTADOR DE SERVI&Ccedil;OS</td>
+						<td colspan="2" class="cab03" align="center">PRESTADOR DE SERVIÇOS</td>
 					</tr>
 					<tr>
 						<td align="left">
@@ -134,12 +134,12 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 						<td align="left">CNPJ: <strong><?php print $cnpjcpf; ?></strong></td>
 					</tr>
 					<tr>
-						<td align="left" width="60%">Endere&ccedil;o: <strong><?php echo $endereco; ?></strong></td>
+						<td align="left" width="60%">Endereço: <strong><?php echo $endereco; ?></strong></td>
 
 						<td align="left">Cep: <strong><?php echo $dadosEmissor->cep; ?></strong></td>
 					</tr>
 					<tr>
-						<td align="left">Munic&iacute;pio: <strong><?php print $dadosEmissor->municipio; ?></strong></td>
+						<td align="left">Município: <strong><?php print $dadosEmissor->municipio; ?></strong></td>
 						<td align="left">UF:<strong><?php echo $dadosEmissor->uf; ?></strong></td>
 					</tr>
 					<tr>
@@ -147,14 +147,14 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 						<td align="left">Fax: <strong><?php print $dadosEmissor->fax; ?></strong></td>
 					</tr>
 					</tr>
-					<td align="left" colspan="5">&nbsp;</td>
+					<td align="left" colspan="5"></td>
 					</tr>
 				</table>
 			</div>
 			<div id="tomador" class="divBorder">
 				<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center">
 					<tr>
-						<td colspan="8" class="cab03" align="center">TOMADOR DE SERVI&Ccedil;OS</td>
+						<td colspan="8" class="cab03" align="center">TOMADOR DE SERVIÇOS</td>
 					</tr>
 					<tr>
 						<td align="left">Nome:</td>
@@ -175,7 +175,7 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 																	} ?> /></td>
 					</tr>
 					<tr>
-						<td align="left" width="65">Endere&ccedil;o:</td>
+						<td align="left" width="65">Endereço:</td>
 						<td><input type="text" class="inputTomador" <?php {
 																		echo "disabled=\"disabled\"";
 																	} ?> /></td>
@@ -185,7 +185,7 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 																			} ?> /></td>
 					</tr>
 					<tr>
-						<td align="left">Munic&iacute;pio:</td>
+						<td align="left">Município:</td>
 						<td><input type="text" class="inputTomador" <?php {
 																		echo "disabled=\"disabled\"";
 																	} ?> /></td>
@@ -193,7 +193,7 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 						<td><input type="text" class="inputP" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
-						<td width="33" align="left">Pa&iacute;s:</td>
+						<td width="33" align="left">País:</td>
 						<td width="218"><input type="text" class="input" <?php {
 																				echo "disabled=\"disabled\"";
 																			} ?> /></td>
@@ -205,43 +205,43 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 																	} ?> /></td>
 					</tr>
 					</tr>
-					<td align="left" colspan="8">&nbsp;</td>
+					<td align="left" colspan="8"></td>
 					</tr>
 				</table>
 			</div>
 			<div id="identRps" class="divBorder">
 				<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center">
 					<tr>
-						<td colspan="4" class="cab03" align="center">IDENTIFICA&Ccedil;&Atilde;O DO RPS</td>
+						<td colspan="4" class="cab03" align="center">IDENTIFICAÇÃO DO RPS</td>
 					</tr>
 					<tr>
-						<td align="left">S&eacute;rie do RPS:</td>
+						<td align="left">Série do RPS:</td>
 						<td colspan="2"><input type="text" class="inputTomador" <?php {
 																					echo "disabled=\"disabled\"";
 																				} ?> /></td>
 					</tr>
 					<tr>
-						<td align="left">Data da Emiss&atilde;o do RPS:</td>
+						<td align="left">Data da Emissão do RPS:</td>
 						<td colspan="2"><input type="text" class="inputTomador" <?php {
 																					echo "disabled=\"disabled\"";
 																				} ?> /></td>
 					</tr>
 					</tr>
-					<td align="left" colspan="5">&nbsp;</td>
+					<td align="left" colspan="5"></td>
 					</tr>
 				</table>
 			</div>
 			<div id="discServ">
 				<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center">
 					<tr>
-						<td colspan="8" class="cab03" align="center">IDENTIFICA&Ccedil;&Atilde;O DA PRESTA&Ccedil;&Atilde;O DO SERVI&Ccedil;OS</td>
+						<td colspan="8" class="cab03" align="center">IDENTIFICAÇÃO DA PRESTAÇÃO DO SERVIÇOS</td>
 					</tr>
 					<tr>
-						<td align="left">Valor do Servi&ccedil;o:</td>
+						<td align="left">Valor do Serviço:</td>
 						<td> <input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
-						<td align="left" nowrap="nowrap">Valor Dedu&ccedil;&otilde;es:</td>
+						<td align="left" nowrap="nowrap">Valor Deduções:</td>
 						<td> <input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
@@ -269,25 +269,25 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
-						<td align="left" nowrap="nowrap">Item lista Servi&ccedil;os:</td>
+						<td align="left" nowrap="nowrap">Item lista Serviços:</td>
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
-						<td align="left">C&oacute;d. CNAE:</td>
+						<td align="left">Cód. CNAE:</td>
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
 					</tr>
 					<tr>
-						<td align="left" nowrap="nowrap">C&oacute;d. Trib. Municipio:</td>
+						<td align="left" nowrap="nowrap">Cód. Trib. Municipio:</td>
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
-						<td align="left">Base C&aacute;lculo:</td>
+						<td align="left">Base Cálculo:</td>
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
-						<td align="left" nowrap="nowrap">Al&iacute;q. Servi&ccedil;os:</td>
+						<td align="left" nowrap="nowrap">Alíq. Serviços:</td>
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
@@ -297,11 +297,11 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
-						<td align="left">Valor L&iacute;q. NFSE:</td>
+						<td align="left">Valor Líq. NFSE:</td>
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
-						<td align="left" nowrap="nowrap">Outras Reten&ccedil;&otilde;es:</td>
+						<td align="left" nowrap="nowrap">Outras Retenções:</td>
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
@@ -315,20 +315,20 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
-						<td align="left">Discrimina&ccedil;&atilde;o:</td>
+						<td align="left">Discriminação:</td>
 						<td><input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> /></td>
 					</tr>
 
 					<tr>
-						<td align="left" colspan="5">Municipio da Presta&ccedil;&atilde;o de Servi&ccedil;o:
+						<td align="left" colspan="5">Municipio da Prestação de Serviço:
 							<input type="text" class="input" <?php {
 																	echo "disabled=\"disabled\"";
 																} ?> />
 						</td>
 					</tr>
-					<td align="left" colspan="5">&nbsp;</td>
+					<td align="left" colspan="5"></td>
 					</tr>
 				</table>
 			</div>
@@ -338,9 +338,9 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 					<tr>
 						<td align="left" colspan="3">
 							<p class="pRps">
-								* Este documento n&atilde;o tem valor fiscal;<br /><br />
-								* Este RPS dever&aacute; ser convertido em nota fiscal eletr&ocirc;nica em at&eacute; 5 dias &uacute;teis. Caso contr&aacute;rio, contate o &nbsp;&nbsp; prestador de servi&ccedil;o e/ou a Secretaria Municipal da Fazenda;<br /><br />
-								* A n&atilde;o convers&atilde;o deste RPS em nota fiscal eletr&ocirc;nica n&atilde;o ir&aacute; gerar cr&eacute;dito ao tomador do servi&ccedil;o, e &nbsp;&nbsp;&nbsp;sujeita o emissor a multa.<br />
+								* Este documento não tem valor fiscal;<br /><br />
+								* Este RPS deverá ser convertido em nota fiscal eletrônica em até 5 dias úteis. Caso contrário, contate o  prestador de serviço e/ou a Secretaria Municipal da Fazenda;<br /><br />
+								* A não conversão deste RPS em nota fiscal eletrônica não irá gerar crédito ao tomador do serviço, e sujeita o emissor a multa.<br />
 							</p>
 						</td>
 					</tr>
@@ -350,7 +350,7 @@ $dadoslimiterps = $sql_ultimanota->fetchObject();
 				<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center">
 					<tr>
 						<td align="left" colspan="3">
-							<p class="p"> CONCORDO QUE A MINHA RESPONSABILIDADE POR ESTE R.P.S CONTINUA EM VIGOR TORNANDO-ME RESPONS&Aacute;VEL NO CASO EM QUE A PESSOA, COMPANHIA OU ASSOCIA&Ccedil;&Atilde;O INDICADA DEIXE DE PAGAR PARCIAL OU TOTALMENTE A SOMA DAS DESPESASAQUI ESPECIFICADAS.
+							<p class="p"> CONCORDO QUE A MINHA RESPONSABILIDADE POR ESTE R.P.S CONTINUA EM VIGOR TORNANDO-ME RESPONS&Aacute;VEL NO CASO EM QUE A PESSOA, COMPANHIA OU ASSOCIAÇÃO INDICADA DEIXE DE PAGAR PARCIAL OU TOTALMENTE A SOMA DAS DESPESASAQUI ESPECIFICADAS.
 							</p>
 						</td>
 					</tr>

@@ -103,7 +103,7 @@ jQuery.fn.calendario = function(options){
 			
 			// Preenchendo dias vazios no calendário
 			for(i=0;i<inicioSemana;i++){ 
-				$('#'+idCalendario+' ul.lista_dia').append("<li class='dia_vazio'>&nbsp;<\/li>"); 
+				$('#'+idCalendario+' ul.lista_dia').append("<li class='dia_vazio'><\/li>"); 
 			}
 			
 			// preenchendo dias do mes

@@ -27,16 +27,17 @@ if($_POST["btBoleto"] == "Boleto"){
 	include 'inc/utilitarios/boleto.php';
 }else{
 	if($_POST["btAtualizar"] == "Atualizar"){
-		include("inc/utilitarios/configuracoes_editar.php");
+		require_once("inc/utilitarios/configuracoes_editar.php");
 	}//fim if
 	//pega as configuracoes da tabela
-	$sql_configuracoes = mysql_query("SELECT codigo, endereco, cidade, estado, cnpj, email, secretaria, secretario, chefetributos, lei, decreto, topo_nfe, logo_nfe, brasao_nfe, codlayout, taxacorrecao, taxamulta, taxajuros, data_tributacao, declaracoes_atrazadas, gerar_guia_site FROM configuracoes");
-	list($codigo,$endereco,$cidade,$estado,$cnpj,$email,$secretaria,$secretario,$chefetributos,$lei,$decreto,$topo,$logo,$brasao,$layout,$taxacorrecao,$taxamulta,$taxajuros,$data_tributacao,$declaracoes_atrazadas,$gerar_guia_site) = mysql_fetch_array($sql_configuracoes);
+	$sql_configuracoes = $PDO->query("SELECT codigo, endereco, cidade, estado, cnpj, email, secretaria, secretario, chefetributos, lei, decreto, topo_nfe, logo_nfe, brasao_nfe, codlayout, taxacorrecao, taxamulta, taxajuros, data_tributacao, declaracoes_atrazadas, gerar_guia_site FROM configuracoes");
+	list($codigo,$endereco,$cidade,$estado,$cnpj,$email,$secretaria,$secretario,$chefetributos,$lei,$decreto,$topo,$logo,$brasao,$layout,
+	$taxacorrecao,$taxamulta,$taxajuros,$data_tributacao,$declaracoes_atrazadas,$gerar_guia_site) = $sql_configuracoes->fetch();
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Utilit&aacute;rios - Configurações</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">UtilitÃ¡rios - Configuraï¿½ï¿½es</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -44,18 +45,18 @@ if($_POST["btBoleto"] == "Boleto"){
     <td align="center">
 		<form method="post" id="frmConfiguracoes" enctype="multipart/form-data">
 			<input name="include" id="include" type="hidden" value="<?php echo $_POST["include"];?>" />
-			<fieldset><legend>Configurações</legend>
+			<fieldset><legend>Configuraï¿½ï¿½es</legend>
 				<table width="100%">
 					<tr align="left">
-						<td align="left"><label for="txtEndereco">Endereço:</label></td>
+						<td align="left"><label for="txtEndereco">EndereÃ§o:</label></td>
 						<td><input name="txtEndereco" id="txtEndereco" type="text" class="texto" value="<?php echo $endereco;?>" ></td>
 						<td><label for="txtCidade">Cidade: </label></td>
 						<td colspan="2">
 							<div  id="divInsMunicipioEmpresa">
 								<select name="txtInsMunicipioEmpresa" id="txtInsMunicipioEmpresa" class="combo">
 									<?php
-										$sql_municipio = mysql_query("SELECT codigo, nome FROM municipios WHERE uf = '$estado' ORDER BY nome");
-										while(list($codMunicipio_bd,$nome_municipio) = mysql_fetch_array($sql_municipio)){
+										$sql_municipio = $PDO->query("SELECT codigo, nome FROM municipios WHERE uf = '$estado' ORDER BY nome");
+										while(list($codMunicipio_bd,$nome_municipio) = $sql_municipio->fetch()){
 											echo "<option value=\"$nome_municipio\"";if( (strtolower($nome_municipio) == strtolower($cidade)) ){ echo "selected=selected";} echo ">$nome_municipio</option>";
 										}//fim while
 									?>
@@ -68,8 +69,8 @@ if($_POST["btBoleto"] == "Boleto"){
 						<td>
 							<select name="txtInsUfEmpresa" id="txtInsUfEmpresa" onchange="buscaCidadesConfiguracao(this,'divInsMunicipioEmpresa')">
 								<?php
-									$sql=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-									while(list($uf_busca)=mysql_fetch_array($sql)){
+									$sql=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+									while(list($uf_busca)=$sql->fetch()){
 										echo "<option value=\"$uf_busca\"";if($uf_busca == $estado){ echo "selected=selected"; }echo ">$uf_busca</option>";
 									}
 								?>
@@ -93,23 +94,23 @@ if($_POST["btBoleto"] == "Boleto"){
 					<tr align="left">
 						<td><label for="txtSecretaria">Secretaria:</label></td>
 						<td><input name="txtSecretaria" id="txtSecretaria" type="text" class="texto" value="<?php echo $secretaria;?>" ></td>
-						<td><label for="txtSecretario">Secretário:</label></td>
+						<td><label for="txtSecretario">Secretï¿½rio:</label></td>
 						<td colspan="2"><input name="txtSecretario" id="txtSecretario" type="text" class="texto" value="<?php echo $secretario;?>" ></td>
 					</tr>
 					
 					<tr align="left">
 						
-						<td><label for="txtData">Dia tributação:</label></td>
+						<td><label for="txtData">Dia tributaï¿½ï¿½o:</label></td>
 						<td colspan="4">
 							<input name="txtData" id="txtData" maxlength="2" size="3" type="text"  class="texto" value="<?php echo $data_tributacao;?>" />
-							<label><input name="ckbData" type="checkbox" id="ckbData" onclick="DesabilitarDataTributo()" />Último dia do mês</label>
+							<label><input name="ckbData" type="checkbox" id="ckbData" onclick="DesabilitarDataTributo()" />ï¿½ltimo dia do mï¿½s</label>
 						</td>
 					</tr>
 					<tr align="left">
-						<td><label for="flBrasao">Brasão</label></td>
+						<td><label for="flBrasao">Brasï¿½o</label></td>
 						<td><input name="flBrasao" id="flBrasao" type="file" class="texto" ></td>
 						<td>
-							<label>Gerar guia para declarações pelo site</label>
+							<label>Gerar guia para declaraï¿½ï¿½es pelo site</label>
 						</td>
 						<td>
 							<label><input type="radio" name="rbGuias" id="rbGuiasS" value="t" <?php if($gerar_guia_site=='t'){echo 'checked="checked"';}?> /> Todas</label>
@@ -119,15 +120,15 @@ if($_POST["btBoleto"] == "Boleto"){
 					<tr align="left">
 						<td></td>
 						<td></td>
-						<td><label>Permitir Declarações atrasadas pelo site:</label></td>
+						<td><label>Permitir DeclaraÃ§Ãµes atrasadas pelo site:</label></td>
 						<td width="151">
 							<label><input type="radio" name="rbDec" id="rbDecS" value="s" <?php if($declaracoes_atrazadas=='s'){echo 'checked="checked"';}?> /> Sim</label>
-							<label><input type="radio" name="rbDec" id="rbDecN" value="n" <?php if($declaracoes_atrazadas=='n'){echo 'checked="checked"';}?> /> N&atilde;o</label>
+							<label><input type="radio" name="rbDec" id="rbDecN" value="n" <?php if($declaracoes_atrazadas=='n'){echo 'checked="checked"';}?> /> NÃ£o</label>
 						</td>
 					</tr>
 					<!--
 					<tr>
-						<td style="visibility:hidden">Tipo de serviço: </td>
+						<td style="visibility:hidden">Tipo de serviÃ§o: </td>
 						<td style="visibility:hidden"><label><input name="rbTipoServico" value="CNAE" type="radio" /> CNAE</label></td>
 						<td width="139" style="visibility:hidden">
 							<label><input name="rbTipoServico" value="LC 116" type="radio" /> LC 116</label>
@@ -135,7 +136,7 @@ if($_POST["btBoleto"] == "Boleto"){
 					</tr>
 					-->
 					<tr>
-						<td colspan="4" align="left"><strong>Brasão atual: </strong>
+						<td colspan="4" align="left"><strong>Brasï¿½o atual: </strong>
 					</td>
 					<tr>
 						<td align="left" colspan="4">
@@ -145,7 +146,7 @@ if($_POST["btBoleto"] == "Boleto"){
 								<img src="img/brasoes/<?php echo $brasao;?>" width="100" height="100" />
 							<?php
 							}else{
-								echo "<font color=\"#FF0000\"><strong>A prefeitura não possui brasão</strong></font>";
+								echo "<font color=\"#FF0000\"><strong>A prefeitura nÃ£o possui brasï¿½o</strong></font>";
 							}
 							?>
 						</td>

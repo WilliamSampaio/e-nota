@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 $sessioncnpj = $_SESSION['login'];
 if($sessioncnpj==$_POST['txtTomadorCNPJ']){
-	Mensagem('O tomador nao pode ser o pr&oacute;prio prestador');
+	Mensagem('O tomador nao pode ser o próprio prestador');
 }else{
 	if($_POST['cmbCodServico1']!=0){
 		//Variaveis com os valores preenchidos da nota
@@ -74,7 +74,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 		//testa se o numero de notas limites ja foi ultrapassado se ja tiver ultrapassado avisa-o
 		if(($ultimanota>$notalimite)&&($notalimite!=0)) {
 		
-			Mensagem('Voc&ecirc; nao pode emitir NFe por que ultrapassou seu limite estabelecido pelo AIDF. Entre em contato com a prefeitura.');
+			Mensagem('Você nao pode emitir NFe por que ultrapassou seu limite estabelecido pelo AIDF. Entre em contato com a prefeitura.');
 			Redireciona('notas.php');
 			
 		}elseif(($ultimanota<=$notalimite)||($notalimite==0)){  
@@ -94,7 +94,8 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 				if($sql->rowCount()<=0){
 				
 					$codtipo = codtipo('tomador');
-					$codtipodec = coddeclaracao('DES Simplificada');
+					$sql_cargo = $PDO->query("SELECT codigo FROM declaracoes WHERE declaracao LIKE 'DES Simplificada'");
+					$codtipodec = $sql_cargo->fetchColumn();
 					$diaatual = date("Y-m-d");
 					$PDO->query("
 						INSERT INTO 
@@ -206,7 +207,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					$servicoISSRetido = MoedaToDec($_POST['txtISSRetidoManual'.$cont]);
 					$servicoDiscr     = htmlentities($_POST['txtDiscriminacaoServico'.$cont]);
 					
-					if($servicoDiscr == htmlentities("Discrimina&ccedil;&atilde;o do servi&ccedil;o")){
+					if($servicoDiscr == htmlentities("Discriminação do serviço")){
 						$servicoDiscr = "";
 					}
 	
@@ -264,11 +265,11 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					print("<script language=JavaScript>alert('Nota Emitida com sucesso!!')</script>");
 				}
 			}else{
-				print("<script language=JavaScript>alert('Favor preencher campos obrigat&oacute;rios')</script>");
+				print("<script language=JavaScript>alert('Favor preencher campos obrigatórios')</script>");
 			}
 		}
 	}else{
-		print("<script language=JavaScript>alert('� necess�rio selecionar um servi�o para a emiss�o da nota.')</script>");
+		print("<script language=JavaScript>alert('� necess�rio selecionar um serviço para a emissão da nota.')</script>");
 	}
 }
 ?>

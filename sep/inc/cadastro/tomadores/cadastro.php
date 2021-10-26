@@ -20,15 +20,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 //seleciona o estado das configura��es
-$sql_info = mysql_query("SELECT estado, cidade FROM configuracoes");
-list($UF,$CIDADE) = mysql_fetch_array($sql_info);
+$sql_info = $PDO->query("SELECT estado, cidade FROM configuracoes");
+list($UF,$CIDADE) = $sql_info->fetch();
 	
 if($_POST["btSalvar"] == "Salvar"){
-	include("atualizar.php");
+	require_once("atualizar.php");
 }
 ?>
 
-<!-- Formul�rio de insercao de tomadores  --> 
+<!-- Formulário de insercao de tomadores  --> 
 <style type="text/css">
 <!--
 #divBuscaTomadores {
@@ -42,20 +42,22 @@ if($_POST["btSalvar"] == "Salvar"){
 }
 -->
 </style>
-<div id="divBuscaTomadores" ><?php include("inc/cadastro/tomadores/busca.php"); ?></div>
+<div id="divBuscaTomadores" ><?php require_once("inc/cadastro/tomadores/busca.php"); ?></div>
 
 <?php	
 	//verifica se CODTOMADOR tem valor
 	if(($_POST['CODTOMADOR'])){		   
 		$codigo = $_POST['CODTOMADOR'];	
-		$sql_tomador = mysql_query("SELECT codigo,codtipo, nome, IF(cnpj <> '',cnpj,cpf) AS cnpjcpf, inscrmunicipal, inscrestadual, logradouro, complemento, bairro, numero, cep, municipio, uf, email FROM cadastro WHERE codigo = '$codigo'");
-		list($codigo,$codtipo,$nome,$cnpjcpf,$inscrmunicipal,$inscrestadual,$logradouro,$complemento,$bairro,$numero,$cep,$municipio,$uf,$email) = mysql_fetch_array($sql_tomador);
+		$sql_tomador = $PDO->query("SELECT codigo,codtipo, nome, IF(cnpj <> '',cnpj,cpf) AS cnpjcpf, inscrmunicipal, inscrestadual, logradouro, complemento, bairro, numero, cep, municipio, uf, email FROM cadastro WHERE codigo = '$codigo'");
+		list(
+			$codigo,$codtipo,$nome,$cnpjcpf,$inscrmunicipal,$inscrestadual,$logradouro,$complemento,$bairro,$numero,$cep,$municipio,$uf,
+			$email) = $sql_tomador->fetch();
 	}//fim if
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Tomadores - Cadastro</td>  
+    <td background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Tomadores - Cadastro</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -117,7 +119,7 @@ if($_POST["btSalvar"] == "Salvar"){
 						</tr>
                         
 						<tr>
-                                                    <td align="left">N&uacute;mero</td>
+                                                    <td align="left">Número</td>
 							<td align="left"><input name="txtNumero" id="txtNumero" type="text" class="texto" size="15" maxlength="15" value="<?php if(isset($numero)){echo $numero;} ?>"></td>
 						</tr>
 						<tr>
@@ -140,8 +142,8 @@ if($_POST["btSalvar"] == "Salvar"){
 								<select name="txtInsUfEmpresa" id="txtInsUfEmpresa" onchange="buscaCidades(this,'txtInsMunicipioEmpresa')">
 									<option value=""></option>
 									<?php
-										$sql=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-										while(list($uf_busca)=mysql_fetch_array($sql)){
+										$sql=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+										while(list($uf_busca)=$sql->fetch()){
 											echo "<option value=\"$uf_busca\"";if($uf_busca == $uf_teste){ 
 												echo "selected=selected"; 
 											}echo ">$uf_busca</option>";
@@ -151,13 +153,13 @@ if($_POST["btSalvar"] == "Salvar"){
 							</td>
 						</tr>
 						<tr>
-                                                    <td align="left">Munic&iacute;pio<font color="#FF0000">*</font></td>
+                                                    <td align="left">Município<font color="#FF0000">*</font></td>
 							<td align="left">
 								<div  id="txtInsMunicipioEmpresa">
 									<select name="txtInsMunicipioEmpresa" id="txtInsMunicipioEmpresa" class="combo">
 										<?php
-											$sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$uf_teste' ORDER BY nome");
-											while(list($nome_municipio) = mysql_fetch_array($sql_municipio)){
+											$sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$uf_teste' ORDER BY nome");
+											while(list($nome_municipio) = $sql_municipio->fetch()){
 												echo "<option value=\"$nome_municipio\"";if(strtolower($nome_municipio) == strtolower($municipio)){ echo "selected=\"selected\"";} echo ">$nome_municipio</option>";
 											}//fim while 
 										?>
@@ -187,7 +189,7 @@ if($_POST["btSalvar"] == "Salvar"){
 						if($_POST['CODTOMADOR']){
 					?>
 							<input type="submit" value="Salvar"  name="btSalvar" class="botao">
-                            <!--<input name="btConsultaCreditos" type="submit" class="botao" value="Consultar Cr&eacute;ditos"/>-->
+                            <!--<input name="btConsultaCreditos" type="submit" class="botao" value="Consultar Créditos"/>-->
 					<?php 
 						}
 					?>

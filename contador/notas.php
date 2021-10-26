@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-// inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
+// inicia a sessÃ£o verificando se jah esta com o usuario logado, se estiver entra na pÃ¡gina admin
 session_name("contador");
 session_start();
 if($_POST['cmbEmpresa']){
@@ -36,7 +36,7 @@ if(!(isset($_SESSION["empresa"])))
 }else{
 	
 	
-	include("nocache.php");
+	require_once("nocache.php");
     //unset($_SESSION['empresaCliente']);
     ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -55,7 +55,7 @@ if(!(isset($_SESSION["empresa"])))
 	<table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
 		<tr>
 			<td>
-				<?php include("../include/topo.php"); ?>
+				<?php require_once("../include/topo.php"); ?>
 			</td>
 		</tr>
 		<tr>
@@ -64,12 +64,12 @@ if(!(isset($_SESSION["empresa"])))
 				<table border="0" cellspacing="0" cellpadding="0" height="100%">
 					<tr>
 						<td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top">
-							<?php include("inc/menu.php"); ?>
+							<?php require_once("inc/menu.php"); ?>
 						</td>
 						<td width="590"bgcolor="#FFFFFF" valign="top">
                         <img src="../img/cabecalhos/notas.jpg" />
 							<!-- frame central lateral direita inicio -->
-										<?php include("inc/notas_principal.php"); ?>
+										<?php require_once("inc/notas_principal.php"); ?>
 							<!-- frame central lateral direita fim -->
 						</td>
 					</tr>
@@ -79,7 +79,7 @@ if(!(isset($_SESSION["empresa"])))
 		</tr>
 		<tr>
 			<td>
-				<?php include("inc/rodape.php"); ?>
+				<?php require_once("inc/rodape.php"); ?>
 			</td>
 		</tr>
 	</table>

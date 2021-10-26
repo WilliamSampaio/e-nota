@@ -71,14 +71,14 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td width="15%" align="center">Nome</td>
             <td width="6%"  align="center">Alvara</td>
             <td width="19%" align="center">Endereco</td>
-            <td width="19%" align="center">Propietário</td>
+            <td width="19%" align="center">Propietï¿½rio</td>
             <td width="15%" align="center">CNPJCPF</td>
             <td width="9%"  align="center">Data inicio</td>	
             <td width="10%" align="center">Data termino</td>
             <td width="7%"  align="center">Estado</td>
       </tr>
         <?php
-		while($dados_obra = mysql_fetch_array($sql_obras)){
+		while($dados_obra = $sql_obras)){
             switch($dados_obra['estado']){
                 case "A" : $estado = "Aberto";    break;
                 case "C" : $estado = "Concluido"; break;
@@ -103,7 +103,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 
 	}else{
-		echo "<center><b>Não há empreiteiras cadastradas</b></center>";
+		echo "<center><b>NÃ£o hÃ¡ empreiteiras cadastradas</b></center>";
 	}
 
 ?>

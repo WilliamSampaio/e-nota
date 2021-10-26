@@ -22,19 +22,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 
 <?php 
-// Inclusão da biblioteca
+// Inclusï¿½o da biblioteca
 require_once ("../../../../jpgraph/src/jpgraph.php");    
 require_once ("../../../../jpgraph/src/jpgraph_bar.php"); 
-// Conexão ao banco MySQL e consulta
+// Conexï¿½o ao banco MySQL e consulta
 $valores = unserialize($_GET['valor']);
 $titulos = unserialize($_GET['titulo']);
 
 /*$query1="SELECT tomador_nome, SUM(valortotal), SUM(basecalculo) FROM notas GROUP BY tomador_nome ORDER BY SUM(valortotal) DESC LIMIT 5";
 $query2="SELECT SUBSTRING(datahoraemissao,1,7), COUNT(*) FROM notas GROUP BY SUBSTRING(datahoraemissao,1,7) ORDER BY SUBSTRING(datahoraemissao,1,10) ASC LIMIT 10";
 
-$sql = mysql_query($query2);
+$sql = $PDO->query($query2);
 $cont=0;
-while(list($mes, $valor)=mysql_fetch_array($sql)){
+while(list($mes, $valor)=$sql->fetch()){
 	switch(substr($mes,5,2)){
 		case "01": $mes="Janeiro ".substr($mes,0,4); break;
 		case "02": $mes="Fevereiro ".substr($mes,0,4); break;
@@ -55,20 +55,20 @@ while(list($mes, $valor)=mysql_fetch_array($sql)){
 }*/
        
 
-// margem das partes principais do gráfico (dados), o que está
-// fora da margem fica separado para as labels, títulos, etc
+// margem das partes principais do grï¿½fico (dados), o que estÃ¡
+// fora da margem fica separado para as labels, tÃ­tulos, etc
 $grafico = new graph(800,250,"png");
 $grafico->img->SetMargin(60,30,30,30);
 
 
 $grafico->SetScale("textlin");
 
-$grafico->title->Set('Relatórios de Empreiteiras');
+$grafico->title->Set('Relatï¿½rios de Empreiteiras');
 // definir sub-titulo
 $grafico->subtitle->Set('');
 
-// pedir para mostrar os grides no fundo do gráfico,
-// o ygrid é marcado como true por padrão
+// pedir para mostrar os grides no fundo do grï¿½fico,
+// o ygrid Ã© marcado como true por padrï¿½o
 $grafico->ygrid->Show(true);
 $grafico->xgrid->Show(true);
 
@@ -77,10 +77,10 @@ $gBarras->SetFillColor("blue");
 $gBarras->SetShadow("darkblue"); 
 
 
-// título dos vértices
+// tÃ­tulo dos vï¿½rtices
 $grafico->yaxis->title->Set("");
 $grafico->xaxis->title->Set("");
-// título das barras
+// tÃ­tulo das barras
 $grafico->xaxis->SetTickLabels($titulos);
 $gBarras->value->Show(); 
 $gBarras->value->SetFormat('R$ %0.2f');		

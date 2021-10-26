@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../include/conect.php");
-include("../funcoes/util.php");
+require_once("../include/conect.php");
+require_once("../include/util.php");
 
 // variaveis globais vindas do conect.php
 // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF	
@@ -104,7 +104,7 @@ $empresa_cnpjcpf = $empresa_cnpj . $empresa_cpf;
 
 //nao tem soh endereco agora tem logradouro e numero com complemento
 $tomador_endereco = "$tomador_logradouro, $tomador_numero";
-//se tiver complemento, adiciona para a string de endere�o
+//se tiver complemento, adiciona para a string de endereço
 if ($tomador_complemento) {
   $tomador_endereco .= ", $tomador_complemento";
 }
@@ -178,7 +178,7 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
             </tr>
             <?php if ($rps_numero) { ?>
               <tr>
-                <td>RPS N&ordm; <?php print $rps_numero; ?>, emitido em <?php print(substr($rps_data, 8, 2) . "/" . substr($rps_data, 5, 2) . "/" . substr($rps_data, 0, 4)); ?>.</td>
+                <td>RPS Nº <?php print $rps_numero; ?>, emitido em <?php print(substr($rps_data, 8, 2) . "/" . substr($rps_data, 5, 2) . "/" . substr($rps_data, 0, 4)); ?>.</td>
               </tr>
             <?php } // fim if se tem rps 
             ?>
@@ -186,21 +186,21 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
 
           <!-- tabela prefeitura fim -->
         </td>
-        <td width="25%" align="left" style="border:#000000 solid">N&uacute;mero da Nota<br />
+        <td width="25%" align="left" style="border:#000000 solid">Número da Nota<br />
           <div align="center">
             <font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print $numero; ?></strong></font>
           </div>
         </td>
       </tr>
       <tr>
-        <td align="left" style="border:#000000 solid">Data e Hora de Emiss&atilde;o<br />
+        <td align="left" style="border:#000000 solid">Data e Hora de Emissão<br />
           <div align="center">
             <font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print(substr($datahoraemissao, 8, 2) . "/" . substr($datahoraemissao, 5, 2) . "/" . substr($datahoraemissao, 0, 4) . " " . substr($datahoraemissao, 11, 2) . ":" . substr($datahoraemissao, 14, 2)); ?></strong></font>
           </div>
         </td>
       </tr>
       <tr>
-        <td align="left" style="border:#000000 solid">C&oacute;digo de Verifica&ccedil;&atilde;o<br />
+        <td align="left" style="border:#000000 solid">Código de Verificação<br />
           <div align="center">
             <font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print $codverificacao; ?></strong></font>
           </div>
@@ -212,7 +212,7 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
           <!-- tabela prestador -->
           <table width="100%" border="0" cellspacing="0" cellpadding="2">
             <tr>
-              <td colspan="3" class="cab03" align="center">PRESTADOR DE SERVI&Ccedil;OS</td>
+              <td colspan="3" class="cab03" align="center">PRESTADOR DE SERVIÇOS</td>
             </tr>
             <tr>
               <td rowspan="6">
@@ -224,20 +224,20 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
                 ?>
               </td>
               <td align="left">CNPJ/CPF: <strong><?php print $empresa_cnpjcpf; ?></strong></td>
-              <td align="left">Inscri&ccedil;&atilde;o Municipal: <strong><?php print verificaCampo($empresa_inscrmunicipal); ?></strong></td>
+              <td align="left">Inscrição Municipal: <strong><?php print verificaCampo($empresa_inscrmunicipal); ?></strong></td>
             </tr>
             <tr>
               <td align="left">Nome: <strong><?php echo $empresa_nome; ?></strong></td>
               <td align="left">PIS/PASEP: <?php echo verificaCampo($pispasep); ?></td>
             </tr>
             <tr>
-              <td align="left">Raz&atilde;o Social: <strong><?php print $empresa_razaosocial; ?></strong></td>
+              <td align="left">Razão Social: <strong><?php print $empresa_razaosocial; ?></strong></td>
             </tr>
             <tr>
-              <td colspan="2" align="left">Endere&ccedil;o: <strong><?php print $empresa_endereco . ", " . $numero; ?></strong></td>
+              <td colspan="2" align="left">Endereço: <strong><?php print $empresa_endereco . ", " . $numero; ?></strong></td>
             </tr>
             <tr>
-              <td align="left">Munic&iacute;pio: <strong><?php print $empresa_municipio; ?></strong></td>
+              <td align="left">Município: <strong><?php print $empresa_municipio; ?></strong></td>
               <td align="left">UF: <strong><?php print $empresa_uf; ?></strong></td>
             </tr>
           </table>
@@ -252,25 +252,25 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
 
           <table width="100%" border="0" cellspacing="0" cellpadding="2" align="center">
             <tr>
-              <td colspan="3" class="cab03" align="center">TOMADOR DE SERVI&Ccedil;OS</td>
+              <td colspan="3" class="cab03" align="center">TOMADOR DE SERVIÇOS</td>
             </tr>
             <tr>
-              <td colspan="3" align="left">&nbsp;&nbsp;Nome/Raz&atilde;o Social: <strong><?php print verificaCampo($tomador_nome); ?></strong></td>
+              <td colspan="3" align="left">Nome/Razão Social: <strong><?php print verificaCampo($tomador_nome); ?></strong></td>
             </tr>
             <tr>
-              <td align="left" width="450">&nbsp;&nbsp;CPF/CNPJ: <strong><?php print verificaCampo($tomador_cnpjcpf); ?></strong></td>
-              <td colspan="2" align="left">&nbsp;&nbsp;Inscri&ccedil;&atilde;o Municipal: <strong><?php print verificaCampo($tomador_inscrmunicipal); ?></strong></td>
+              <td align="left" width="450">CPF/CNPJ: <strong><?php print verificaCampo($tomador_cnpjcpf); ?></strong></td>
+              <td colspan="2" align="left">Inscrição Municipal: <strong><?php print verificaCampo($tomador_inscrmunicipal); ?></strong></td>
             </tr>
             <tr>
-              <td align="left">&nbsp;&nbsp;Endere�o: <strong><?php print verificaCampo($tomador_logradouro); ?></strong></td>
-              <td colspan="2" align="left">&nbsp;&nbsp;CEP: <strong><?php print verificaCampo($tomador_cep) ?></strong></td>
+              <td align="left">Endereço: <strong><?php print verificaCampo($tomador_logradouro); ?></strong></td>
+              <td colspan="2" align="left">CEP: <strong><?php print verificaCampo($tomador_cep) ?></strong></td>
             </tr>
             <tr>
-              <td align="left">&nbsp;&nbsp;Munic&iacute;pio: <strong><?php print verificaCampo($tomador_municipio); ?></strong></td>
-              <td align="left">&nbsp;&nbsp;Uf: <strong><?php print verificaCampo($tomador_uf); ?></strong></td>
+              <td align="left">Município: <strong><?php print verificaCampo($tomador_municipio); ?></strong></td>
+              <td align="left">Uf: <strong><?php print verificaCampo($tomador_uf); ?></strong></td>
             </tr>
             <tr>
-              <td align="left">&nbsp;&nbsp;E-mail: <strong><?php print verificaCampo($tomador_email); ?></strong></td>
+              <td align="left">E-mail: <strong><?php print verificaCampo($tomador_email); ?></strong></td>
             </tr>
           </table>
 
@@ -284,7 +284,7 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
 
           <table width="100%" border="0" cellspacing="0" cellpadding="2">
             <tr>
-              <td class="cab03" align="center">DISCRIMINA&Ccedil;&Atilde;O DE SERVI&Ccedil;OS E DEDU&Ccedil;&Otilde;ES</td>
+              <td class="cab03" align="center">DISCRIMINAÇÃO DE SERVIÇOS E DEDUÇÕES</td>
             </tr>
             <tr>
               <td height="400" align="left" valign="top">
@@ -296,7 +296,7 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
                 <?php
                 // verifica o estado da nfe
                 if ($estado == "C") {
-                  echo "<div align=center><font size=7 color=#FF0000><b>ATEN&Ccedil;&Atilde;O!!<BR>NFE CANCELADA</B></font></div>";
+                  echo "<div align=center><font size=7 color=#FF0000><b>ATENÇÃO!!<BR>NFE CANCELADA</B></font></div>";
                 } // fim if
 
                 ?>
@@ -312,19 +312,19 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
         <td colspan="5" class="cab03" align="center" style="border:#000000 solid">VALOR TOTAL DA NOTA = R$ <?php print DecToMoeda($valortotal); ?></td>
       </tr>
       <tr>
-        <td colspan="5" align="left" style="border:#000000 solid">C&oacute;digo do Servi&ccedil;o<br />
+        <td colspan="5" align="left" style="border:#000000 solid">Código do Serviço<br />
           <strong><?php print $servico_codservico . " - " . $servico_descricao; ?></strong>
         </td>
       </tr>
       <tr>
-        <td style="border:#000000 solid">Valor Total das Dedu&ccedil;&otilde;es (R$)<br />
+        <td style="border:#000000 solid">Valor Total das Deduções (R$)<br />
           <div align="right"><strong><?php print DecToMoeda($valordeducoes); ?></strong></div>
         </td>
-        <td style="border:#000000 solid">Base de C&aacute;lculo (R$)<br />
+        <td style="border:#000000 solid">Base de Cálculo (R$)<br />
           <div align="right"><strong><?php print DecToMoeda($basecalculo); ?></strong></div>
         </td>
         <td style="border:#000000 solid">
-          Al&iacute;quota (%)
+          Alíquota (%)
           <br />
           <div align="right">
             <strong>
@@ -353,7 +353,7 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
         </td>
 
         <td style="border:#000000 solid; <?php echo $display; ?>">
-          Cr&eacute;dito p/ Abatimento do IPTU
+          Crédito p/ Abatimento do IPTU
           <br />
           <div align="right">
             <strong>
@@ -368,42 +368,42 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
         </td>
       </tr>
       <tr>
-        <td colspan="5" style="border:#000000 solid" class="cab03">OUTRAS INFORMA&Ccedil;&Otilde;ES</td>
+        <td colspan="5" style="border:#000000 solid" class="cab03">OUTRAS INFORMAÇÕES</td>
       </tr>
       <tr>
         <td colspan="5" style="border:#000000 solid" align="left">
-          - Esta NF-e foi emitida com respaldo na Lei n&ordm; <?php print $lei; ?> e no Decreto n&ordm; <?php print $decreto; ?><br />
+          - Esta NF-e foi emitida com respaldo na Lei nº <?php print $lei; ?> e no Decreto nº <?php print $decreto; ?><br />
           <?php
           if ($codtipo == $codtipoSN) {
-            echo "- Esta NF-e n&atilde;o gera cr&eacute;ditos, pois a empresa prestadora de servi&ccedil;os &eacute; optante pelo Simples Nacional<br> ";
+            echo "- Esta NF-e não gera créditos, pois a empresa prestadora de serviços é optante pelo Simples Nacional<br> ";
           }
           if ($issretido != 0) {
-            echo "- Esta NF-e possui reten&ccedil;&aacute;o de ISS no valor de R$ $issretido<br> ";
+            echo "- Esta NF-e possui retençáo de ISS no valor de R$ $issretido<br> ";
           }
           // verifica o estado do tomador
           if (($MUNICIPIO !== $tomador_municipio) && ($codtipo != $codtipoSN)) {
             if ($ativar_creditos == "s") {
-              echo "- Esta NF-e n&atilde;o gera cr&eacute;dito, pois o Tomador de Servi&ccedil;os est&aacute; localizado fora do munic&iacute;pio de $MUNICIPIO<br>";
+              echo "- Esta NF-e não gera crédito, pois o Tomador de Serviços está localizado fora do município de $MUNICIPIO<br>";
             }
           } // fim if	
           if ($rps_numero) {
           ?>
-            - Esta NF-e substitui o RPS N&ordm; <?php print $rps_numero; ?>, emitido em <?php print(substr($rps_data, 8, 2) . "/" . substr($rps_data, 5, 2) . "/" . substr($rps_data, 0, 4)); ?><br />
+            - Esta NF-e substitui o RPS Nº <?php print $rps_numero; ?>, emitido em <?php print(substr($rps_data, 8, 2) . "/" . substr($rps_data, 5, 2) . "/" . substr($rps_data, 0, 4)); ?><br />
           <?php
           } //fim if rps
           //$valorinss,$aliqinss,$valorirrf,$aliqinss
           if ($valorinss > 0) { //soh mostra se tiver valor
-            echo "- Reten&ccedil;&atilde;o de INSS " . DecToMoeda($aliqinss) . "% com valor de R$ " . DecToMoeda($valorinss) . " <br>";
+            echo "- Retenção de INSS " . DecToMoeda($aliqinss) . "% com valor de R$ " . DecToMoeda($valorinss) . " <br>";
           }
           if ($valorirrf > 0) { //soh mostra se tiver valor
-            echo "- Reten&ccedil;&atilde;o de IRRF " . DecToMoeda($aliqirrf) . "% com valor de R$ " . DecToMoeda($valorirrf) . "";
+            echo "- Retenção de IRRF " . DecToMoeda($aliqirrf) . "% com valor de R$ " . DecToMoeda($valorirrf) . "";
             if ($deducao_irrf > 0) {
               echo ". Dedu��o de R$ " . DecToMoeda($deducao_irrf);
             }
             echo "<br>";
           }
           if ($total_retencao > 0) {
-            echo "- Total de renten&ccedil;&otilde;es da nota R$ " . DecToMoeda($total_retencao) . " <br>";
+            echo "- Total de rentenções da nota R$ " . DecToMoeda($total_retencao) . " <br>";
           }
           ?>
         </td>

@@ -32,7 +32,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<tr>
 				  <td align="left">
                       <a href="manual/prestador.pdf" target="_blank">
-                          01. Manual do Prestador de Servi&ccedil;os
+                          01. Manual do Prestador de Serviços
                       </a>
                       <br /><br />
                       <a href="manual/site.pdf" target="_blank">

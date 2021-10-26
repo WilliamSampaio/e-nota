@@ -19,18 +19,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
+
 session_start();
-// arquivo de conex�o com o banco
-include("conect.php");
 
-// arquivo com funcoes uteis
-include("../funcoes/util.php");
-
-//arquivo com a funcao de logs
-include("../funcoes/funcao_logs.php");
-
-// arquivo com funcoes uteis
-include("../include/teclado.php");
+require_once '../autoload.php';
+require_once '../funcoes/funcao_logs.php';
+require_once 'teclado.php';
 
 ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="130">
@@ -43,7 +37,7 @@ include("../include/teclado.php");
       </a>
     </td>
     <td width="85%" align="left" valign="middle">
-      <font class="prefeituraTitulo" color="#FFFFFF" size="-1"><b><?php echo "Prefeitura Municipal de " . $CONF_CIDADE; ?></b></font><br />
+      <font class="prefeituraTitulo" color="#FFFFFF" size="-1"><b><?php echo strtoupper('Prefeitura Municipal de ' . $CONF_CIDADE); ?></b></font><br />
       <font class="secretariaTitulo" color="#FFFFFF" size="+1"><b><?php echo $CONF_SECRETARIA; ?></b></font>
     </td>
   </tr>

@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	/* Não gravar em cache */
+	/* NÃ£o gravar em cache */
 	$gmtDate = gmdate("D, d M Y H:i:s");
 	header("Expires: {$gmtDate} GMT");
 	header("Last-Modified: {$gmtDate} GMT");
@@ -27,10 +27,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 	header("Pragma: no-cache");
 	header("Content-Type: text/html; charset=iso-8859-1");
 
-	include("conect.php");
+	require_once("conect.php");
 	echo "<select name=\"txtInsMunicipioEmpresa\" class=\"combo\">";
-	$sql = mysql_query("SELECT nome FROM municipios WHERE uf='".$_GET["UF"]."' ORDER BY nome");
-	while(list($municipio) = mysql_fetch_array($sql)) {
+	$sql = $PDO->query("SELECT nome FROM municipios WHERE uf='".$_GET["UF"]."' ORDER BY nome");
+	while(list($municipio) = $sql->fetch()) {
 		echo "<option value=\"$municipio\">$municipio</option>";
 	}
 	echo "</select>";

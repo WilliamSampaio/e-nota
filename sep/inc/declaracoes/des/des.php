@@ -21,10 +21,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 <form name="frmDes" id="frmDes" method="post" onsubmit="return false">
     <input type="hidden" name="abertdes" id="abertdes">
     <input type="hidden" name="hdCancelaDes" id="hdCancelaDes" />
-    <fieldset><legend>Pesquisa de declarações</legend>
+    <fieldset><legend>Pesquisa de declaraï¿½ï¿½es</legend>
         <table width="100%">
             <tr>
-                <td align="left">Nome/Raz&atilde;o Social</td>
+                <td align="left">Nome/RazÃ£o Social</td>
                 <td align="left"><input name="txtNome" type="text" class="texto" size="60" maxlength="100" /></td>
             </tr>
             <tr>
@@ -32,17 +32,17 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <td align="left"><input name="txtCNPJ" type="text" class="texto" size="20" maxlength="18" /></td>
             </tr>
             <tr>
-                <td align="left">N° da Des</td>
+                <td align="left">Nï¿½ da Des</td>
                 <td align="left"><input name="txtNroDes" type="text" class="texto" size="10" maxlength="10" /></td>
             </tr>
             <tr>
-                <td align="left">Compet&ecirc;cia</td>
+                <td align="left">CompetÃªcia</td>
                 <td align="left">
                     <select name="cmbMes" class="combo">
                         <option value=""></option>
                         <?php
-                        //array dos meses comecando na posição 1 ate 12 e faz um for listando os meses no combo
-                        $meses = array(1=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+                        //array dos meses comecando na posiÃ§Ã£o 1 ate 12 e faz um for listando os meses no combo
+                        $meses = array(1=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
                         for($x=1;$x<=12;$x++){
                             echo "<option value='$x'>$meses[$x]</option>";
                         }//fim for meses
@@ -71,14 +71,14 @@ Fith Floor, Boston, MA 02110-1301, USA
                 </td>
             </tr>
             <tr>
-                <td align="left">Data Emissão</td>
+                <td align="left">Data Emissï¿½o</td>
                 <td align="left"><input name="txtData" type="text" class="texto" size="12" maxlength="10" /></td>
             </tr>
             <tr>
                 <td align="left" colspan="2">
                     <input name="btPesquisar" type="submit" class="botao" value="Pesquisar" 
                     onclick="acessoAjax('inc/declaracoes/simples/declarar_pesquisa.ajax.php','frmDes','divDeclaracoesSimples')" />
-                    &nbsp;
+                    
                     <input name="btLimpar" type="reset" class="botao" value="Limpar" />
                 </td>
             </tr>

@@ -47,12 +47,12 @@ if (!$_POST['txtCNPJ']) {
 							<td width="19%" align="left">CNPJ/CPF</td>
 							<td width="81%" align="left" valign="middle"><em>
 									<input class="texto" type="text" title="CNPJ" name="txtCNPJ" id="txtCNPJ" />
-									Somente n&uacute;meros</em></td>
+									Somente números</em></td>
 						</tr>
 						<tr>
-							<td align="center">&nbsp;</td>
-							<td align="left" valign="middle"><input name="btAvancar" type="submit" value="Avan�ar" class="botao" />
-								&nbsp;
+							<td align="center"></td>
+							<td align="left" valign="middle"><input name="btAvancar" type="submit" value="Avançar" class="botao" />
+								
 								<input type="button" name="btVoltar" value="Voltar" class="botao" onClick="window.location='contadores.php'">
 							</td>
 						</tr>
@@ -66,6 +66,6 @@ if (!$_POST['txtCNPJ']) {
 	</form>
 <?php
 } else {
-	include("consulta_situacao.php");
+	require_once("consulta_situacao.php");
 }
 ?>

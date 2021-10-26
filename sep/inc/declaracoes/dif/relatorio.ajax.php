@@ -23,9 +23,9 @@ Fith Floor, Boston, MA 02110-1301, USA
     require_once("../../funcoes/util.php");
 
     if($_GET['cmbOpcao']=="instfinanceiras"){
-        include("relatorio_instfinanceira.php");
+        require_once("relatorio_instfinanceira.php");
     }
     elseif($_GET['cmbOpcao']=="dif"){
-        include("relatorio_dif.php");
+        require_once("relatorio_dif.php");
     }
 ?>

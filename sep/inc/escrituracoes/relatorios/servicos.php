@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - Servi&ccedil;os</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relat√≥rios - Servi√ßos</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td align="center">
 
 <fieldset>
-<legend><strong>Pesquisa de Servi&ccedil;os</strong></legend>
+<legend><strong>Pesquisa de Servi√ßos</strong></legend>
 <p>
   <label></label>
   <span style="vertical-align:middle; text-align:left"></span>
@@ -41,12 +41,12 @@ Fith Floor, Boston, MA 02110-1301, USA
   <tr>
     <td width="164" >
     <form id="frmServ" method="post" target="_blank" action="inc/relatorios/area.php">
-    	<input name="btPesquisar" type="submit" id="button1" class="botao" value="Lista por Categoria e ServiÁo"   />
+    	<input name="btPesquisar" type="submit" id="button1" class="botao" value="Lista por Categoria e ServiÔøΩo"   />
 	</form>
     </td>
      <td width="179">
      <form id="frmServ" method="post" target="_blank" action="inc/relatorios/categ.php">
-		 <input type="submit" name="btLimpar" id="button2" value="Lista EstatÌstica" class="botao" />
+		 <input type="submit" name="btLimpar" id="button2" value="Lista EstatÔøΩstica" class="botao" />
      </form>
      </td> 
   </tr>

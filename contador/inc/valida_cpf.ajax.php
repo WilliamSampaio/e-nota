@@ -1,5 +1,5 @@
 <?php 
-	include("../../funcoes/util.php");
+	require_once("../../funcoes/util.php");
 	
 
 	if(is_cpf($_GET['txtTomadorCNPJ'])||(strlen($_GET['txtTomadorCNPJ'])!=14)){

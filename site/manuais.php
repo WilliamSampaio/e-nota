@@ -20,11 +20,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
-// arquivo de conex�o com o banco
-include("../include/conect.php");
+// arquivo de conexão com o banco
+require_once("../include/conect.php");
 
 // arquivo com funcoes uteis
-include("../funcoes/util.php");
+require_once("../include/util.php");
 //print("<a href=index.php target=_parent><img src=../img/topos/$TOPO></a>");
 
 ?>
@@ -77,9 +77,9 @@ include("../funcoes/util.php");
     <br />
     <br />
     <br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    
+    
     <?php
     $sql = $PDO->query("SELECT COUNT(codigo) FROM cadastro WHERE estado = 'A'");
     list($empresas_ativas) = $sql->fetch();
@@ -90,9 +90,9 @@ include("../funcoes/util.php");
     <br />
     <br />
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    
+    
     <?php
     $sql = $PDO->query("SELECT COUNT(codigo) FROM notas");
     list($notas_emitidas) = $sql->fetch();
@@ -102,14 +102,14 @@ include("../funcoes/util.php");
   </div>
   <table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
     <tr>
-      <td><?php include("inc/topo.php"); ?></td>
+      <td><?php require_once 'inc/navbar.php'; ?></td>
     </tr>
     <tr>
       <td bgcolor="#FFFFFF" valign="top" align="center">
 
         <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="170" rowspan="2" align="left" valign="top" background="../img/menus/menu_fundo.jpg"><?php include("inc/menu.php"); ?></td>
+            <td width="170" rowspan="2" align="left" valign="top" background="../img/menus/menu_fundo.jpg"><?php require_once("inc/menu.php"); ?></td>
             <td align="right" valign="top" width="590"><img src="../img/cabecalhos/manuais.jpg" width="590" height="100" /></td>
           </tr>
           <tr>
@@ -125,7 +125,7 @@ include("../funcoes/util.php");
                   <td align="center" bgcolor="#CCCCCC" valign="top">
                     <table width="98%" border="0" cellspacing="2" cellpadding="0">
                       <tr>
-                        <td>&nbsp;</td>
+                        <td></td>
                       </tr>
                     </table>
                   </td>
@@ -156,7 +156,7 @@ include("../funcoes/util.php");
   </td>
   </tr>
   </table>
-  <?php include("inc/rodape.php"); ?>
+  <?php require_once("inc/rodape.php"); ?>
 
 </body>
 

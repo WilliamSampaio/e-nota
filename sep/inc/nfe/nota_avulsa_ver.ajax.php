@@ -50,15 +50,15 @@ $query = ("
 	LIMIT 1
 ");
 
-$sql = mysql_query($query);
+$sql = $PDO->query($query);
 
 if (mysql_num_rows($sql) == 0) {
 	?><strong><center>Nenhum resultado encontrado.</center></strong><?php
 } else {
-	$dados = mysql_fetch_array($sql);
+	$dados = $sql->fetch();
 	$dados['cnpj'] .= $dados['cpf'];
 	if($dados['nfe']=="S"){
-		?><strong><center>Este contribuinte n&atilde;o gera Nota Avulsa.</center></strong><?php
+		?><strong><center>Este contribuinte não gera Nota Avulsa.</center></strong><?php
 	}else{
 	$notas = ("SELECT * FROM notas WHERE codemissor = '$dados[codigo]' ORDER BY codigo DESC");
 	$sql = Paginacao($notas,'frmNota','dvResultadoNota');
@@ -70,17 +70,17 @@ if (mysql_num_rows($sql) == 0) {
 		<table width="100%" cellpadding="0" cellspacing="0">
 			<tr bgcolor="#999999">
 				<td width="10%" align="center">Nro. nota</td>
-				<td width="25%" align="center">Cod. Verifica&ccedil;&atilde;o</td>
+				<td width="25%" align="center">Cod. Verificação</td>
 				<td width="25%" align="center">Valor</td>
 				<td width="25%" align="center">Estado</td>
-				<td width="15%" align="center">A&ccedil;&otilde;es</td>
+				<td width="15%" align="center">Ações</td>
 			</tr>
 			<?php
-			while($dadosnota=mysql_fetch_array($sql)){
-				$guia = mysql_query("SELECT codigo FROM guia_pagamento WHERE codnota = '{$dadosnota[codigo]}'");
-				$notaslivro = mysql_query("SELECT * FROM livro_notas WHERE codnota = '{$dadosnota[codigo]}'");
+			while($dadosnota=$sql->fetch()){
+				$guia = $PDO->query("SELECT codigo FROM guia_pagamento WHERE codnota = '{$dadosnota[codigo]}'");
+				$notaslivro = $PDO->query("SELECT * FROM livro_notas WHERE codnota = '{$dadosnota[codigo]}'");
 				if(mysql_num_rows($guia)>0){ 
-					list($codguia)=mysql_fetch_array($guia); 
+					list($codguia)=$guia->fetch(); 
 				}
 				$estado = $dadosnota['estado'];
 				$cor = "#FFFFFF";

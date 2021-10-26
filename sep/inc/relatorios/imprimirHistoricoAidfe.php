@@ -7,7 +7,7 @@
 		WHERE 
 			notalimite <> '0'
 	");
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa); //Pega quantos resultados voltaram
 	if($result){ //Se existir algum registro, mostra na tabela
 ?>
@@ -29,11 +29,11 @@
 		<td>CPF/CNPJ</td>
 		<td>Notas emitidas</td>
 		<td>Nota Limite</td>
-		<td>Solicita&ccedil;&atilde;o</td>
+		<td>Solicitação</td>
 	</tr>
 	
 <?php
-while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+while($dados_pesquisa = $sql_pesquisa->fetch()){
 	if($dados_pesquisa['cpf'] == ''){
 		$cpfcnpj = $dados_pesquisa['cnpj'];
 	}else{
@@ -42,9 +42,9 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 
 	$codsolicitante = $dados_pesquisa['codigo'];
 	$pesquisa = ("SELECT * FROM aidfe_solicitacoes WHERE solicitante = '$codsolicitante'");
-	$resultado = mysql_query($pesquisa);
+	$resultado = $PDO->query($pesquisa);
 	$solicitante = mysql_num_rows($resultado);
-	//while($dados_solicitante = mysql_fetch_array($resultado)){
+	//while($dados_solicitante = $resultado)){
 ?>
 	<tr align="center">
 		<td align="left"><?php echo $dados_pesquisa['nome'];?></td>
@@ -53,16 +53,16 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 		<td><?php echo $dados_pesquisa['notalimite'];?></td>
         <?php
         	if($solicitante){
-				$solic = "Solicita&ccedil;&atilde;o Pendente";
+				$solic = "Solicitação Pendente";
 			}else{
-				$solic = "Nenhuma solicita&ccedil;&atilde;o pendente";
+				$solic = "Nenhuma solicitação pendente";
 			}
 		?>
 		<td><?php echo $solic; ?></td>
 	</tr>
 <?php
 	//}
-}//Fim do while($dados_pesquisa = mysql_fetch_array($sql_pesquisa))
+}//Fim do while($dados_pesquisa = $sql_pesquisa))
 ?>
 </table>
 <!-- Fim da Tabela -->
@@ -73,7 +73,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>Não há resultados!</td>
 	</tr>
 </table>
 <?php

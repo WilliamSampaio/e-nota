@@ -20,187 +20,54 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
-// arquivo de conex�o com o banco
-include("../include/conect.php");
-
-// arquivo com funcoes uteis
-include("../funcoes/util.php");
-//print("<a href=index.php target=_parent><img src=../img/topos/$TOPO></a>");
+require_once '../autoload.php';
+require_once 'inc/header.php';
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <title>e-Nota</title>
-
-  <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
-
-  <script type="text/javascript" src="../scripts/lightbox/prototype.js"></script>
-  <script type="text/javascript" src="../scripts/lightbox/scriptaculous.js?load=effects,builder"></script>
-  <script type="text/javascript" src="../scripts/lightbox/lightbox.js"></script>
-  <link rel="stylesheet" href="../css/lightbox.css" type="text/css" media="screen" />
-
-  <link href="../css/padrao_site.css" rel="stylesheet" type="text/css" />
-  <style type="text/css">
-    <!--
-    #apDiv1 {
-      position: absolute;
-      left: 40%;
-      top: 45%;
-      width: 400px;
-      height: 160px;
-      z-index: 1;
-      background-image: url(../img/index/indicativos.jpg);
-    }
-
-    .style1 {
-      font-size: 12pt;
-      color: #FF0000;
-      font-weight: bold;
-    }
-    -->
-  </style>
-</head>
-
 <body>
-  <div id="apDiv1" style="visibility:hidden" onclick="javascript:changeProp('apDiv1','','visibility','hidden','DIV')"><br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <?php
+    <?php require_once 'inc/navbar.php'; ?>
 
-    $sql = $PDO->query("SELECT COUNT(codigo) FROM aidf_solicitacoes WHERE estado = 'A'");
-    var_dump($sql->fetch());
-    list($empresas_ativas) = $sql->fetch();
+    <div class="container">
+        <div class="row align-items-start">
+            <!-- MENU -->
+            <div class="col-3 col-xl-3">
+                <?php require_once 'inc/menu.php' ?>
+            </div>
 
-    var_dump($sql->fetch());
+            <!-- CONTEÚDO -->
+            <div class="col-sm-12 col-xl-9">
 
-    echo "<font color=#FF0000 size=4><strong>$empresas_ativas</strong></font>";
+                <!-- NFE LOGO -->
+                <!-- <div class="row text-center">
+                    <div class="col-12">
+                        <img style="width: 80%;" src="../img/cabecalhos/noticias.jpg" class="img-fluid" alt="...">
+                    </div>
+                </div> -->
 
-    ?>
-    <br />
-    <br />
-    <br />
+                <br>
+                <h1>Recibo Provisório de serviço (RPS)</h1>
+                <h5 class="card-title">RPS é o documento que deverá ser usado por emitentes da NF-e no eventual impedimento da emissão "online da NFe"</h5>
+                <hr><br>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <?php
-    $sql = $PDO->query("SELECT COUNT(codigo) FROM notas");
-    list($notas_emitidas) = $sql->fetch();
-    echo "<font color=#FF0000 size=4><strong>$notas_emitidas</strong></font>";
+                <h3>Como funciona?</h3>
+                <hr>
 
-    ?>
-  </div>
-  <table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
-    <tr>
-      <td><?php include("inc/topo.php"); ?></td>
-    </tr>
-    <tr>
-      <td bgcolor="#FFFFFF" valign="top" align="center">
+                <p>Também poderá ser utilizado pelos prestadores sujeitos à emissão de grande quantidade de NF-e (exemplo: estacionamentos). Nesse caso, o prestador emitirá o RPS para cada transação e providenciará sua conversão em NF-e mediante o envio de arquivos (processamento em lote).</p>
+                <p>Para maior esclarecimento ou solucionar possíveis dúvidas acesse o link Perguntas e Respostas, <a href="faq.php">clique aqui</a>.
+                </p>
 
-        <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="170" rowspan="2" align="left" valign="top" background="../img/menus/menu_fundo.jpg"><?php include("inc/menu.php"); ?></td>
-            <td align="right" valign="top" width="590"><img src="../img/cabecalhos/rps.jpg" width="590" height="100" /></td>
-          </tr>
-          <tr>
-            <td align="center" valign="top">
+                <h3>Modelo de RPS</h3>
+                <hr>
 
+                <p>Se você, ou sua empresa, não possui sistema que emita documento que possa ser utilizado como RPS, é possível baixar o modelo e utilizar como RPS da sua prestação de serviços.</p>
+                <p>
+                    <!-- <a href="rps/modelo.pdf" target="_blank"><img src="../img/pdf.jpg" title="Download do pdf" /></a> -->Basta aces sar o perfil do prestador de serviço e o menu "RPS".
+                </p>
 
-              <table border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td align="center" valign="top">
-                    <!-- quadro da esquerda acima -->
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td height="3" bgcolor="#CCCCCC"></td>
-                      </tr>
-                      <tr>
-                        <td height="10" bgcolor="#999999"></td>
-                      </tr>
-                      <tr>
-                        <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-                          <font class="boxTitulo">Como funciona?</font><br />
-                          <br />
-                          Tamb&eacute;m poder&aacute; ser utilizado pelos prestadores sujeitos &agrave; emiss&atilde;o de grande quantidade de NF-e (exemplo: estacionamentos). Nesse caso, o prestador emitir&aacute; o RPS para cada transa&ccedil;&atilde;o e providenciar&aacute; sua convers&atilde;o em NF-e mediante o envio de arquivos (processamento em lote).<br />
-                          <br />
-                          Para maior esclarecimento ou solucionar poss&iacute;veis d&uacute;vidas acesse o link Perguntas e Respostas, <a href="faq.php">clique aqui</a>.<br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="1"></td>
-                      </tr>
-                      <tr>
-                        <td height="5" align="left" bgcolor="#859CAD"></td>
-                      </tr>
-                    </table>
+            </div>
+        </div>
+    </div>
 
-                    <!-- Quadro do meio acima -->
-                  </td>
-                  <td width="190" align="center" valign="top">
-
-                    <!-- quadro direita acima -->
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td height="3" bgcolor="#CCCCCC"></td>
-                      </tr>
-                      <tr>
-                        <td height="10" bgcolor="#999999"></td>
-                      </tr>
-                      <tr>
-                        <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-                          <font class="boxTitulo"> Modelo de RPS</font>
-                          <br />
-                          <br />
-                          Se voc&ecirc;, ou sua empresa, n&atilde;o possui sistema que emita documento que possa ser utilizado como RPS, &eacute; poss&iacute;vel baixar o modelo e utilizar como RPS da sua presta&ccedil;&atilde;o de servi&ccedil;os.<br />
-                          <br />
-                          <a href="rps/modelo.pdf" target="_blank"></a>Basta acessar o perfil do prestador de servi&ccedil;o e o menu &quot;RPS&quot; <br />
-                          <br />
-                          <div align="center"></div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="1"></td>
-                      </tr>
-                      <tr>
-                        <td height="5" align="left" bgcolor="#859CAD"></td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-
-
-
-
-
-
-
-            </td>
-          </tr>
-        </table>
-
-
-
-      </td>
-    </tr>
-  </table>
-  <?php include("inc/rodape.php"); ?>
-
-</body>
-
-</html>
+    <?php require_once 'inc/footer.php'; ?>

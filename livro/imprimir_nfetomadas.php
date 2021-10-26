@@ -69,33 +69,33 @@ $sql_notas = $PDO->query("
 <table border="0" cellpadding="5" cellspacing="0" style="margin:0 auto;">
   <tr>
     <td width="150" rowspan="4" align="center"><?php echo $livro->codcadastro; ?><?php if(!$topo->topo){echo 'sem imagem';} else{echo "<img src=../img/logos/$topo->logo width=\"120\" height=\"120\"/>";}; ?></td>
-    <td width="800" colspan="4" align="center" class="titulo1">REGISTRO E APURA&Ccedil;&Atilde;O DO ISS </td>
-    <td width="150" rowspan="4" align="center"><?php if($CONF_BRASAO ==NULL) {echo 'sem imagem';} else {echo "<img src=../img/brasoes/$CONF_BRASAO width=\"120\" height=\"120\"/>";} ?>&nbsp;</td>
+    <td width="800" colspan="4" align="center" class="titulo1">REGISTRO E APURAÇÃO DO ISS </td>
+    <td width="150" rowspan="4" align="center"><?php if($CONF_BRASAO ==NULL) {echo 'sem imagem';} else {echo "<img src=../img/brasoes/$CONF_BRASAO width=\"120\" height=\"120\"/>";} ?></td>
   </tr>
   <tr>
     <td width="150" class="field1">Contribuinte:</td>
-    <td colspan="3" class="field1"><?php echo $topo->razaosocial; ?>&nbsp;</td>
+    <td colspan="3" class="field1"><?php echo $topo->razaosocial; ?></td>
     </tr>
   <tr>
     <td class="field1">CNPJ/CPF:</td>
-    <td width="250"><?php echo $topo->cnpj.$topo->cpf; ?>&nbsp;</td>
-    <td width="150" class="field1">Per&iacute;odo:</td>
+    <td width="250"><?php echo $topo->cnpj.$topo->cpf; ?></td>
+    <td width="150" class="field1">Período:</td>
     <td width="250"><?php
 			$periodof = substr($topo->periodo,5,2); 
 			$periodof = $periodof."/".substr($topo->periodo,0,4);
-			echo $periodof; ?>&nbsp;</td>
+			echo $periodof; ?></td>
     </tr>
   <tr>
     <td class="field1">Inscr. Municipal: </td>
-    <td colspan="3" class="field1"><?php echo $topo->inscrmunicipal; ?>&nbsp;</td>
+    <td colspan="3" class="field1"><?php echo $topo->inscrmunicipal; ?></td>
     </tr>
   <tr>
-    <td class="field1">Observa&ccedil;&otilde;es:</td>
-    <td colspan="5"><?php echo $topo->obs; ?>&nbsp;</td>
+    <td class="field1">Observações:</td>
+    <td colspan="5"><?php echo $topo->obs; ?></td>
     </tr>
   <tr>
-    <td class="field1">Data da Gera&ccedil;&atilde;o: </td>
-    <td colspan="5"><?php echo $topo->geracao; ?>&nbsp;</td>
+    <td class="field1">Data da Geração: </td>
+    <td colspan="5"><?php echo $topo->geracao; ?></td>
     </tr>
 </table>
 	
@@ -111,20 +111,20 @@ $sql_notas = $PDO->query("
     <td colspan="11" align="center" class="titulo1">NOTAS FISCAIS ELETR&Ocirc;NICAS TOMADAS </td>
     </tr>
   <tr>
-    <td colspan="3"  width="30%" align="center" class="field2">NFEletr&ocirc;nica</td>
+    <td colspan="3"  width="30%" align="center" class="field2">NFEletrônica</td>
     <td colspan="3" width="20%" align="center" class="field2">Prestador Emissor </td>
-    <td colspan="5" align="center" class="field2">Servi&ccedil;os</td>
+    <td colspan="5" align="center" class="field2">Serviços</td>
     </tr>
   <tr align="center">
     <td width="4%">Data</td>
-    <td width="6%">N&uacute;mero</td>
+    <td width="6%">Número</td>
     <td width="8%">Canc.</td>
     <td width="7%">CNPJ/CPF</td>
     <td width="15%">Inscr. Municipal </td>
     <td width="15%">Nome</td>
     <td width="20%" colspan="2">Atividade Operacional </td>
-    <td>Valor Servi&ccedil;os </td>
-    <td width="15%">ISS Pr&oacute;prio </td>
+    <td>Valor Serviços </td>
+    <td width="15%">ISS Próprio </td>
     <td width="10%">ISS Retido </td>
   </tr>
 <?php while($notas = $sql_notas->fetchObject()) { ?>
@@ -137,7 +137,7 @@ $sql_notas = $PDO->query("
 										elseif($notas->estado=='C'){echo 'Cancelada';} 
 										else{echo 'Erro';} ;?> </td>
     <td align="center" class="field3"><?php echo $notas->cnpj; ?></td>
-    <td align="center" class="field3"><?php echo $notas->inscrmunicipal; ?> &nbsp;</td>
+    <td align="center" class="field3"><?php echo $notas->inscrmunicipal; ?> </td>
     <td align="center" class="field3"><?php echo $notas->razaosocial; ?> </td>
     <td colspan="2" align="center" class="field3"><?php echo $notas->descricao; ?> </td>
     <td align="center" class="field3"><?php echo $notas->total; ?></td>
@@ -170,9 +170,9 @@ $totais= $sql_totais->fetchObject();
   
   <tr>
     <td colspan="8" align="right" class="field4"><strong>Total Geral</strong></td>
-	<td width="20%" align="center" class="field4"><?php echo $totais->basecalculo; ?>&nbsp;</td>
-	<td class="field4" align="center"><?php echo $totais->valoriss;?>&nbsp;</td>
-	<td class="field4" align="center"><?php echo $totais->issretido; ?>&nbsp;</td>
+	<td width="20%" align="center" class="field4"><?php echo $totais->basecalculo; ?></td>
+	<td class="field4" align="center"><?php echo $totais->valoriss;?></td>
+	<td class="field4" align="center"><?php echo $totais->issretido; ?></td>
   </tr>
 </table>
 	

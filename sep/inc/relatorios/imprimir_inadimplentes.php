@@ -22,19 +22,19 @@ Fith Floor, Boston, MA 02110-1301, USA
     <head>
         <?php
 
-        include("../../inc/conect.php");
-        include("../../funcoes/util.php");
+        require_once("../../inc/conect.php");
+        require_once("../../funcoes/util.php");
         // variaveis vindas do conect.php
         // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF
 
-        $sql_brasao = mysql_query("SELECT brasao FROM configuracoes");
+        $sql_brasao = $PDO->query("SELECT brasao FROM configuracoes");
         //preenche a variavel com os valores vindos do banco
-        list($BRASAO) = mysql_fetch_array($sql_brasao);
+        list($BRASAO) = $sql_brasao->fetch();
 
         $meses = array(
             1  => "Janeiro",
             2  => "Fevereiro",
-            3  => "Mar&ccedil;o",
+            3  => "Março",
             4  => "Abril",
             5  => "Maio",
             6  => "Junho",
@@ -68,7 +68,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             $where = "WHERE notas.codemissor = $codprestador";
         }
         ?>
-        <title>Imprimir Relat&oacute;rio</title>
+        <title>Imprimir Relatório</title>
         <style type="text/css"  media="screen">
         .style1 {font-family: Georgia, "Times New Roman", Times, serif}
 
@@ -112,7 +112,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <td width="584" height="33" colspan="2">
                     <span class="style1">
                         <center>
-                            <p>RELAT&Oacute;RIO DE PRESTADORES INADIMPLENTES</p>
+                            <p>RELATÓRIO DE PRESTADORES INADIMPLENTES</p>
                             <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
                             <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
                         </center>
@@ -122,10 +122,10 @@ Fith Floor, Boston, MA 02110-1301, USA
             </table>
             <br /><br />
             <?php
-                $sql = mysql_query("SELECT COUNT(notas.codigo) FROM notas $where ");
-                list($emitidas) = mysql_fetch_array($sql);
+                $sql = $PDO->query("SELECT COUNT(notas.codigo) FROM notas $where ");
+                list($emitidas) = $sql->fetch();
 
-                $sql = mysql_query("
+                $sql = $PDO->query("
                     SELECT COUNT(notas.codigo)
                     FROM notas
                     INNER JOIN livro_notas
@@ -135,9 +135,9 @@ Fith Floor, Boston, MA 02110-1301, USA
                     $where AND notas.estado = 'C'
                     AND livro.vencimento < NOW()
                 ");
-                list($canceladas) = mysql_fetch_array($sql);
+                list($canceladas) = $sql->fetch();
 
-                $sql = mysql_query("
+                $sql = $PDO->query("
                     SELECT COUNT(notas.codigo) FROM notas
                     INNER JOIN cadastro ON notas.codemissor = cadastro.codigo
                     INNER JOIN livro_notas
@@ -150,17 +150,17 @@ Fith Floor, Boston, MA 02110-1301, USA
                     AND livro.vencimento < NOW()
                     
                 ");
-                list($vencidas) = mysql_fetch_array($sql);
+                list($vencidas) = $sql->fetch();
             ?>
             <table width="95%" border="2" cellspacing="0" class="tabela">
                 <tr>
-                    <td><b>Notas emitidas no per&iacute;odo:</b> <?php echo $emitidas; ?></td>
-                    <td><b>Notas canceladas no per&iacute;odo:</b> <?php echo $canceladas; ?></td>
-                    <td><b>Notas vencidas no per&iacute;odo:</b> <?php echo $vencidas; ?></td>
+                    <td><b>Notas emitidas no período:</b> <?php echo $emitidas; ?></td>
+                    <td><b>Notas canceladas no período:</b> <?php echo $canceladas; ?></td>
+                    <td><b>Notas vencidas no período:</b> <?php echo $vencidas; ?></td>
                 </tr>
             </table>
              <?php
-                    $sql = mysql_query("
+                    $sql = $PDO->query("
                         SELECT
                             notas.tomador_nome AS tomador,
                             notas.valortotal AS valor,
@@ -181,7 +181,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                             AND livro.vencimento < NOW()
                             
                     ");
-                    if(mysql_num_rows($sql) > 0){
+                    if($sql->rowCount() > 0){
                         ?>
                             <table width="95%" border="2" cellspacing="0" class="tabela">
                                 <tr bgcolor="#CCCCCC">
@@ -211,7 +211,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                             </table>
                         <?php
                     }else{
-                        echo "<br />Nenhum prestador com indaimpl&ecirc;ncia no per&iacute;odo";
+                        echo "<br />Nenhum prestador com indaimplência no período";
                     }
                 ?>
         </center>

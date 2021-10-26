@@ -42,9 +42,9 @@ if(!$_GET['m']){
 	</script>
 <?php    
 	$cont_menu = 1;
-	$sql_menus = mysql_query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
-	while(list($codmenu,$menu,$link) = mysql_fetch_array($sql_menus)) {
-		$sql_submenus = mysql_query("
+	$sql_menus = $PDO->query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
+	while(list($codmenu,$menu,$link) = $sql_menus->fetch()) {
+		$sql_submenus = $PDO->query("
 				SELECT
 				  menus_prefeitura.link, submenus_prefeitura.menu, submenus_prefeitura.link
 				FROM
@@ -58,7 +58,7 @@ if(!$_GET['m']){
 				ORDER BY
 				  menus_prefeitura_submenus.ordem
 		");
-		if(mysql_num_rows($sql_submenus)){
+		if($sql_submenus->rowCount()){
 			//Verifica o nivel de permissao do usuario
 			$string = "";
 			if($_SESSION['nivel_de_acesso'] == "M"){
@@ -73,7 +73,7 @@ if(!$_GET['m']){
 					var menu_content$cont_menu = {divclass:'anylinkmenu', linktarget:'_parent'};
 					menu_content$cont_menu.items = [
 			";
-			while(list($menulink, $submenu, $submenulink) = mysql_fetch_array($sql_submenus)) {
+			while(list($menulink, $submenu, $submenulink) = $sql_submenus->fetch()) {
 			
 				$menu_content[$cont_menu][] = "['$submenu',\"javascript:chamaForm('$menulink','$submenulink');\"]";
             
@@ -99,9 +99,9 @@ if(!$_GET['m']){
 ?>
 <ul id="nav">
 <?php    
-	$sql_menus = mysql_query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
-	while(list($codmenu,$menu,$link) = mysql_fetch_array($sql_menus)) {
-		$sql_submenus = mysql_query("
+	$sql_menus = $PDO->query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
+	while(list($codmenu,$menu,$link) = $sql_menus->fetch()) {
+		$sql_submenus = $PDO->query("
 				SELECT
 				  menus_prefeitura.link, submenus_prefeitura.menu, submenus_prefeitura.link
 				FROM
@@ -115,7 +115,7 @@ if(!$_GET['m']){
 				ORDER BY
 				  menus_prefeitura_submenus.ordem
 		");
-		if(mysql_num_rows($sql_submenus)){
+		if($sql_submenus->rowCount()){
 ?>	
 		<li><a class="menua" href="principal.php" target="_parent"><?php echo $menu; ?></a>
         	<ul>
@@ -130,7 +130,7 @@ if(!$_GET['m']){
 			
 			// submenu
 
-			while(list($menulink, $submenu, $submenulink) = mysql_fetch_array($sql_submenus)) {
+			while(list($menulink, $submenu, $submenulink) = $sql_submenus->fetch()) {
             ?>
 				<li><a  class="submenua" id="submenua" onClick="chamaForm('<?php echo $menulink; ?>','<?php echo $submenulink; ?>')"><?php echo $submenu; ?></a></li>
 			<?php

@@ -23,6 +23,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$tolerancia = $_POST['txtDias'];
 	$multa      = $_POST['txtMulta'];
 	$estado     = $_POST['cmbEstado'];
-	mysql_query("INSERT INTO multas SET dias = '$tolerancia', multa = '$multa', estado = '$estado'");
+	$PDO->query("INSERT INTO multas SET dias = '$tolerancia', multa = '$multa', estado = '$estado'");
 	Mensagem_onload("Regra de multa inserida!");
 ?>

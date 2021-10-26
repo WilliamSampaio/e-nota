@@ -23,5 +23,5 @@ Fith Floor, Boston, MA 02110-1301, USA
 { 
  $usuario = $_SESSION["login"];
  $ip = getenv("REMOTE_ADDR");  
- $sql = mysql_query("INSERT INTO logs SET usuario='$usuario', ip='$ip', datas=NOW(), acao = '$acao'");
+ $sql = $PDO->query("INSERT INTO logs SET usuario='$usuario', ip='$ip', datas=NOW(), acao = '$acao'");
 } */?>

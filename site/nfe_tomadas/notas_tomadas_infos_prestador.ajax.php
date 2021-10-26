@@ -64,7 +64,7 @@ if ($sql_infos_prestador->rowCount()) {
 			<legend><strong>Dados do Prestador</strong></legend>
 			<table width="100%">
 				<tr>
-					<td width="24%" align="left">Nome/Raz�o Social: </td>
+					<td width="24%" align="left">Nome/Razão Social: </td>
 					<td align="left" colspan="3" bgcolor="#FFFFFF"><?php echo $nome; ?> </td>
 				</tr>
 				<tr>
@@ -80,7 +80,7 @@ if ($sql_infos_prestador->rowCount()) {
 			</table>
 		</fieldset>
 		<fieldset>
-			<legend><strong>Servi�os da nota</strong></legend>
+			<legend><strong>Serviços da nota</strong></legend>
 			<?php
 			$sql_num_servicos = $PDO->query("
 		SELECT 
@@ -106,12 +106,12 @@ if ($sql_infos_prestador->rowCount()) {
 				?>
 					<table width="100%" style="border:1px solid #000000">
 						<tr>
-							<td align="left" bgcolor="#999999" style="border-bottom:1px solid #000; border-right:1px solid #000">Servi�o <?php echo $cont + 1; ?></td>
+							<td align="left" bgcolor="#999999" style="border-bottom:1px solid #000; border-right:1px solid #000">Serviço <?php echo $cont + 1; ?></td>
 							<td align="left" colspan="4"></td>
 						</tr>
 						<tr bgcolor="#999999">
 							<td align="center"><strong>Atividade</strong></td>
-							<td align="center"><strong>B. c�lculo</strong></td>
+							<td align="center"><strong>B. cálculo</strong></td>
 							<td align="center"><strong>Aliq.</strong></td>
 							<td align="center"><strong>ISS</strong></td>
 							<td align="center"><strong>ISS Retido</strong></td>
@@ -120,7 +120,7 @@ if ($sql_infos_prestador->rowCount()) {
 							<td align="center"><?php if ($cont == 0) {
 													echo "<font color=\"#FF0000\">*</font>";
 												} else {
-													echo "&nbsp;";
+													echo "";
 												} ?>
 								<select name="cmbCodServico<?php echo $cont; ?>" id="cmbCodServico<?php echo $cont; ?>" class="combo" style="width:250px;" onchange="MostraAliquotaNFTomada(this,'txtAliqServico<?php echo $cont; ?>', <?php echo $cont; ?>);notaIssRetido('<?php echo $cont; ?>');
 				 calculaISSNfeTomadas('hdInputs','<?php echo $cont; ?>');">
@@ -154,7 +154,7 @@ if ($sql_infos_prestador->rowCount()) {
 								<?php if ($cont == 0) {
 									echo "<font color=\"#FF0000\">*</font>";
 								} else {
-									echo "&nbsp;";
+									echo "";
 								} ?>
 								<input type="text" name="txtBaseCalcServico<?php echo $cont; ?>" id="txtBaseCalcServico<?php echo $cont; ?>" size="8" class="texto" onkeyup="MaskMoeda(this);" onkeydown="return NumbersOnly(event);" onblur="calculaISSNfeTomadas('hdInputs','<?php echo $cont; ?>');" value="0,00" />
 								<input type="hidden" name="hdBaseServico<?php echo $cont; ?>" id="hdBaseServico<?php echo $cont; ?>" />
@@ -168,7 +168,7 @@ if ($sql_infos_prestador->rowCount()) {
 							</td>
 						</tr>
 						<tr>
-							<td colspan="5" align="left">Discrimina��o: </td>
+							<td colspan="5" align="left">Discriminação: </td>
 						</tr>
 						<tr>
 							<td colspan="5" align="center">
@@ -181,7 +181,7 @@ if ($sql_infos_prestador->rowCount()) {
 					$cont++;
 				}
 			} else {
-				$mensagem = "<center><strong>O prestador n�o possui Servi�os cadastrados</strong></center>";
+				$mensagem = "<center><strong>O prestador não possui Serviços  cadastrados</strong></center>";
 				$erro = 1;
 				$retorno = $mensagem . "==>" . $erro;
 				echo $retorno;
@@ -205,13 +205,13 @@ if ($sql_infos_prestador->rowCount()) {
 		</fieldset>
 <?php
 	} else {
-		$mensagem = "<center><strong>N�o � possivel declarar notas tomadas da empresa logada no sistema!</strong></center>";
+		$mensagem = "<center><strong>Não é possivel declarar notas tomadas da empresa logada no sistema!</strong></center>";
 		$erro = 1;
 		$retorno = $mensagem . "==>" . $erro;
 		echo $retorno;
 	}
 } else {
-	$mensagem = "<center><strong>Este cnpj n�o pertence a nenhum prestador cadastrado!</strong></center>";
+	$mensagem = "<center><strong>Este cnpj não pertence a nenhum prestador cadastrado!</strong></center>";
 	$erro = 1;
 	$retorno = $mensagem . "==>" . $erro;
 	echo $retorno;

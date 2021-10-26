@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("conect.php");
-include("../../funcoes/util.php");	
+require_once("conect.php");
+require_once("../../funcoes/util.php");	
 	$numero = $_GET['txtNumeroNota'];
 	$codverificacao = $_GET['txtCodigoVerificacao'];
 	$tomador_cnpjcpf = $_GET['txtTomadorCPF'];	
@@ -83,13 +83,13 @@ include("../../funcoes/util.php");
 if(mysql_num_rows($sql)>0){
 ?>
   <tr>
-    <td width="5%" align="center">N&ordm;</td>
-    <td width="14%" align="center">C&oacute;d Verif</td>
-    <td width="15%" align="center">D/H Emiss&atilde;o</td>
+    <td width="5%" align="center">Nº</td>
+    <td width="14%" align="center">Cód Verif</td>
+    <td width="15%" align="center">D/H Emissão</td>
     <td width="40%" align="center">Tomador Nome </td>
 	<td width="14%" align="center">Estado</td>
     <td width="10%" align="center">
-        <input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir sele��o" onclick="document.getElementById('frmCancelarNota').action='../site/imprimirnotas.php';document.getElementById('frmCancelarNota').target='_blank';submit();" />
+        <input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir sele��o" onclick="document.getElementById('frmCancelarNota').action='../site/imprimirnotas.php';document.getElementById('frmCancelarNota').target='_blank';submit();" />
     </td>
   </tr>
   <tr>
@@ -163,7 +163,7 @@ if(mysql_num_rows($sql)>0){
 }else{
 ?> 
 	<tr>
-		<td align="center" colspan="9">N&atilde;o houve nenhum resultado!</td>
+		<td align="center" colspan="9">Não houve nenhum resultado!</td>
 	</tr>
 <?php
 }?>

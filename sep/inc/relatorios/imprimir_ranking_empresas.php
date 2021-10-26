@@ -19,14 +19,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
     <?php
-		include("../../inc/conect.php");
-		include("../../funcoes/util.php");
+		require_once("../../inc/conect.php");
+		require_once("../../funcoes/util.php");
 		// variaveis vindas do conect.php
 		// $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF
 	
-		$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+		$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 		//preenche a variavel com os valores vindos do banco
-		list($BRASAO) = mysql_fetch_array($sql_brasao);
+		list($BRASAO) = $sql_brasao->fetch();
     ?>
 
         <title>Imprimir Ranking de empresas</title>
@@ -82,7 +82,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td width="584" height="33" colspan="2">
               <span class="style1">
                   <center>
-                     <p>RELAT&Oacute;RIO DE <b>RANKING DE EMPRESAS</b></p>
+                     <p>RELATÓRIO DE <b>RANKING DE EMPRESAS</b></p>
                      <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
                      <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
                   </center>
@@ -94,7 +94,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			$meses = array(
 				1  => "Janeiro",
 				2  => "Fevereiro",
-				3  => "Mar&ccedil;o",
+				3  => "Março",
 				4  => "Abril",
 				5  => "Maio",
 				6  => "Junho",
@@ -127,22 +127,22 @@ Fith Floor, Boston, MA 02110-1301, USA
             $where = "";
             if(empty($ano) && empty($mes)){
                 $where = "";
-                $sqlPeriodo = mysql_query("
+                $sqlPeriodo = $PDO->query("
                     SELECT DATE_FORMAT(MAX(datahoraemissao),'%m/%Y') AS final,
                     DATE_FORMAT(MIN(datahoraemissao),'%m/%Y') AS inicio
                     FROM notas
                 ");
                 $historico = mysql_fetch_object($sqlPeriodo);
-                $periodo = "<b>Per&iacute;odo:</b> {$historico->inicio} at&eacute; {$historico->final}";
+                $periodo = "<b>Período:</b> {$historico->inicio} até {$historico->final}";
             }elseif(!empty($ano) && empty($mes)){
                 $where = "WHERE DATE_FORMAT(notas.datahoraemissao,'%Y') = '$ano'";
-                $periodo = "<b>Per&iacute;odo:</b> 01/$ano at&eacute; 12/$ano";
+                $periodo = "<b>Período:</b> 01/$ano até 12/$ano";
             }elseif(empty($ano) && !empty($mes)){
                 $where = "WHERE DATE_FORMAT(notas.datahoraemissao,'%m') = '$mes'";
-                $periodo = "<b>Per&iacute;odo:</b> Hist&oacute;rico do m&ecirc;s de $nomeMes";
+                $periodo = "<b>Período:</b> Histórico do mês de $nomeMes";
             }elseif(!empty($ano) && !empty($mes)){
                 $where = "WHERE DATE_FORMAT(notas.datahoraemissao,'%Y-%m') = '$ano-$mes'";
-                $periodo = "<b>Per&iacute;odo:</b> $mes/$ano";
+                $periodo = "<b>Período:</b> $mes/$ano";
             }
 			
 			
@@ -158,17 +158,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 				   		switch($ordem){
 							case 'arrecadacao DESC': echo 'Maior faturamento';break;
 							case 'arrecadacao ASC': echo 'Menor faturamento';break;
-							case 'iss DESC': echo 'Maior Gera&ccedil;&atilde;o de ISSQN';break;
-							case 'iss ASC': echo 'Menor Gera&ccedil;&atilde;o de ISSQN';break;
-							case 'qtdnotas DESC': echo 'Maior n&uacute;mero de notas emitidas';break;
-							case 'qtdnotas ASC': echo 'Menor n&uacute;mero de notas emitidas';break;
+							case 'iss DESC': echo 'Maior Geração de ISSQN';break;
+							case 'iss ASC': echo 'Menor Geração de ISSQN';break;
+							case 'qtdnotas DESC': echo 'Maior número de notas emitidas';break;
+							case 'qtdnotas ASC': echo 'Menor número de notas emitidas';break;
 						}
                    ?>
                 </td>
             </tr>
         </table>
         <?php
-            //Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela fun��o
+            //Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
             $varcont= $_POST['hdContador'];
 			
 			//$sqlnotas = "SELECT COUNT(codigo) AS qtdnotas FROM notas GROUP BY codemissor ORDER BY qtdnotas ASC";
@@ -189,8 +189,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                 GROUP BY nome
                 ORDER BY $ordem
             ");
-            $sql = mysql_query($query);
-            $result = mysql_num_rows($sql);
+            $sql = $PDO->query($query);
+            $result = $sql->rowCount();
             $x = 0;
             if($result == 1){
                 echo "<b>Foi encontrado $result  Resultado</b>";
@@ -203,7 +203,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             ?>
                 <table width="95%" class="tabela" border="1" cellspacing="0">
                     <tr style="background-color:#999999">
-                      <td align="center"><strong>Posi&ccedil;&atilde;o</strong></td>
+                      <td align="center"><strong>Posição</strong></td>
                       <td align="center"><strong>Prestador</strong></td>
                       <td align="center"><strong>CNPJ / CPF</strong></td>
                       <td align="center">
@@ -220,7 +220,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <?php
             }
             $cont = 0;
-            while($dados_pesquisa = mysql_fetch_array($sql)){
+            while($dados_pesquisa = $sql->fetch()){
                 if(strlen($dados_pesquisa['nome']) > 40){
                     $descricao = ResumeString($dados_pesquisa['nome'],40);
                 }else{
@@ -228,7 +228,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 }
          ?>
             <tr id="trDecc<?php echo $x;?>">
-            	<td bgcolor="white" align="center"><?php echo ($x+1)."&ordm;"; ?></td>
+            	<td bgcolor="white" align="center"><?php echo ($x+1)."º"; ?></td>
                 <td bgcolor="white" align="center"><?php echo $descricao;?></td>
                 <td bgcolor="white" align="center"><?php echo $dados_pesquisa['doc'];?></td>
                 <td bgcolor="white" align="center">R$ <?php echo DecToMoeda($dados_pesquisa['arrecadacao']);?></td>

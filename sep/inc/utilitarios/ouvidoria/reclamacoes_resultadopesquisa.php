@@ -27,11 +27,11 @@ $rps_data = $_POST['txtRPSData'];
 $rps_data = implode("-",array_reverse(explode("/", $rps_data)));
 $rps_valor = $_POST['txtRPSValor'];
 $estado = $_POST['rgEstado'];
-$rps_valor = str_replace(",",".",$rps_valor); //Troca a virgula posta pela função javascript por um ponto para que se possa fazer a pesquisa no banco
+$rps_valor = str_replace(",",".",$rps_valor); //Troca a virgula posta pela funÃ§Ã£o javascript por um ponto para que se possa fazer a pesquisa no banco
 
 
 //SQL de filtragem de reclamacoes
-$sql = mysql_query("
+$sql = $PDO->query("
 SELECT codigo, especificacao, tomador_cnpj, datareclamacao, responsavel
 FROM reclamacoes
 WHERE
@@ -57,15 +57,15 @@ WHERE
 	<input type="hidden" name="CODIGO" id="CODIGOresult">	
   <table width="100%" border="0" cellspacing="2" cellpadding="2">
     <tr bgcolor="#999999">
-      <td width="230" align="center">Especificação</td>
+      <td width="230" align="center">EspecificaÃ§Ã£o</td>
       <td width="150" align="center">Tomador</td>
-      <td width="150" align="center">Data Reclamação</td>
-      <td width="100" align="center">Responsável</td>
-	  <td width="100" align="center">Ações</td>
+      <td width="150" align="center">Data ReclamaÃ§Ã£o</td>
+      <td width="100" align="center">ResponsÃ¡vel</td>
+	  <td width="100" align="center">AÃ§Ãµes</td>
     </tr>
   <?php
   // lista o resultado do sql
-  while(list($codigo, $especificacao, $tomador_cnpj, $datareclamacao, $responsavel) = mysql_fetch_array($sql)) {
+  while(list($codigo, $especificacao, $tomador_cnpj, $datareclamacao, $responsavel) = $sql->fetch()) {
   ?>
     <tr bgcolor="#FFFFFF">
       <td align="center"><?php echo $especificacao; ?></td>

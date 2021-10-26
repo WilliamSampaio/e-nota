@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../conect.php");
-include("../../funcoes/util.php");
+require_once("../conect.php");
+require_once("../../funcoes/util.php");
 //recebimento de variaveis por get
 $hidden = $_GET["hdCombo"];
 $nome   = $_GET["txtNome"];
@@ -56,13 +56,13 @@ if($result>0){
 ?>
 	<table width="100%">
 		<tr bgcolor="#999999"> 
-			<td width="180" align="center">Usuário</td>
+			<td width="180" align="center">Usuï¿½rio</td>
 			<td width="80" align="center">IP</td>
 			<td width="140" align="center">Data e hora</td>
-			<td align="center">Ação</td>   
+			<td align="center">Aï¿½ï¿½o</td>   
 		</tr>
 		<?php
-		while(list($user, $ip, $data, $acao) = mysql_fetch_array($sql_logs)){
+		while(list($user, $ip, $data, $acao) = $sql_logs)){
 			$datahora = explode(" ",$data);
 			$data     = DataPt($datahora[0]);
 			$hora     = $datahora[1];
@@ -82,7 +82,7 @@ if($result>0){
 	?>
 	<table width="100%">
 		<tr>
-			<td><b>Não há nenhum log</b></td>
+			<td><b>NÃ£o hÃ¡ nenhum log</b></td>
 		</tr>
 	</table>
 	<?php

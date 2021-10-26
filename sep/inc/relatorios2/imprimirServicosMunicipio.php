@@ -3,7 +3,7 @@
 		$where = "AND datahoraemissao LIKE '___%-$mes-%__'";
 	else
 		$where = "";
-	//Seleciona os municipios nas notas, que forem diferentes do municipio cadastrado nas configuraÁıes.
+	//Seleciona os municipios nas notas, que forem diferentes do municipio cadastrado nas configuraÔøΩÔøΩes.
 	$query =("
 		SELECT 
 			tomador_uf
@@ -17,15 +17,15 @@
 			tomador_uf
 	");
 	
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa);
 	
 	if($result){ //Se existir algum registro, mostra na tabela
 ?>
 
-<!-- InÌcio da Tabela -->
+<!-- InÔøΩcio da Tabela -->
 	<?php
-	while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+	while($dados_pesquisa = $sql_pesquisa->fetch()){
 		$uf = ($dados_pesquisa['tomador_uf']);
 		//Seleciona os tomadores
 		$query_tomador = ("
@@ -48,7 +48,7 @@
 			GROUP BY 
 				notas_servicos.codservico
 		");
-		$sql_tomador = mysql_query ($query_tomador);
+		$sql_tomador = $PDO->query($query_tomador);
 		$result_tomador = mysql_num_rows($sql_tomador);		
 	?>
 <table width="95%" class="tabela" border="1" cellspacing="0" align="center">
@@ -65,11 +65,11 @@
 		<td colspan="3"><?php echo $uf; ?></td>
 	</tr>
 	<tr style="background-color:#999999;font-weight:bold;">
-		<td width="650">Descri&ccedil;&atilde;o</td>
-		<td>Incid&ecirc;ncia</td>
+		<td width="650">Descri√ß√£o</td>
+		<td>Incid√™ncia</td>
 	</tr>
 	<?php
-		while($dados_servicos = mysql_fetch_array($sql_tomador)){ //enquanto receber tomadores, exibe seu nome e a descriÁ„o do  serviÁo que tomou
+		while($dados_servicos = $sql_tomador->fetch()){ //enquanto receber tomadores, exibe seu nome e a descriÔøΩÔøΩo do  servi√ßo que tomou
 			if(strlen($dados_servicos['descricao']) > 100)
 				$desc = ResumeString($dados_servicos['descricao'],100);
 			else
@@ -80,12 +80,12 @@
 		<td><?php echo $dados_servicos['incidencia']; ?></td>
 	</tr>
 	<?php
-		}//Fim do while($dados_servicos = mysql_fetch_array($sql_tomador))
+		}//Fim do while($dados_servicos = $sql_tomador))
 	?>
 </table>
 <br />
 	<?php
-	}//Fim do while($dados_pesquisa = mysql_fetch_array($sql_pesquisa))
+	}//Fim do while($dados_pesquisa = $sql_pesquisa))
 ?>
 <!-- Fim da Tabela -->
 
@@ -95,7 +95,7 @@
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>N√£o h√° resultados!</td>
 	</tr>
 </table>
 <?php

@@ -20,19 +20,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	if($_POST['btSalvar'] == "Salvar"){
-		include("inc/utilitarios/regras/regras_salvar.php");
+		require_once("inc/utilitarios/regras/regras_salvar.php");
 	}
 	if($_POST['btEditar'] == "Salvar"){
-		include("inc/utilitarios/regras/regras_editar.php");
+		require_once("inc/utilitarios/regras/regras_editar.php");
 	}
 	if($_POST['btExcluir'] == " "){
-		include("inc/utilitarios/regras/regras_excluir.php");
+		require_once("inc/utilitarios/regras/regras_excluir.php");
 	}
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="500" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Regras de multa</td>
+		<td width="500" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Regras de multa</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -42,10 +42,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<form method="post" name="formMultas" id="formMultas">
 				<input name="include" id="include" value="<?php echo $_POST['include'];?>" type="hidden" />
 				<fieldset>
-				<legend>Regras de multa para emissão de guia</legend>
+				<legend>Regras de multa para emissÃ£o de guia</legend>
 				<table width="100%" border="0">
 					<tr>
-						<td width="27%" align="left">Dias de tolerância<font color="#FF0000">*</font></td>
+						<td width="27%" align="left">Dias de tolerï¿½ncia<font color="#FF0000">*</font></td>
 						<td align="left" colspan="2"><input name="txtDias" id="txtDias" type="text" maxlength="3" size="3" class="texto"></td>
 					</tr>
 					<tr>
@@ -68,7 +68,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<input name="btPesquisar" type="button" class="botao" value="Pesquisar" 
 							onclick="acessoAjax('inc/utilitarios/regras/regra_lista.ajax.php','formMultas','divMultasLista')">
 							<input name="btSalvar" type="submit" class="botao" value="Salvar" 
-                            onclick="return (ValidaFormulario('txtDias|txtMulta|cmbEstado','Preencha os dados obrigatórios'))">
+                            onclick="return (ValidaFormulario('txtDias|txtMulta|cmbEstado','Preencha os dados obrigatÃ³rios'))">
 						</td>
 					</tr>
 				</table>

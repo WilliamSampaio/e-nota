@@ -51,20 +51,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$multaJuros = MoedaToDec($_POST['txtMultaJuros']);
 		$totalPagar = MoedaToDec($_POST['txtTotalPagar']);
 		
-		mysql_query("INSERT INTO simples_des 
+		$PDO->query("INSERT INTO simples_des 
 					 SET codemissor='$cod_emissor', 
 						 competencia='$dataCompetencia', 
 						 data_gerado='$dataGerado', 
 						 total='$total', 
 						 tomador='s',
 						 codverificacao='$codverificacao'");
-		$sql_des = mysql_query("SELECT MAX(codigo) 
+		$sql_des = $PDO->query("SELECT MAX(codigo) 
 						  				 FROM simples_des");
-		list($codsimples_des)=mysql_fetch_array($sql_des);
+		list($codsimples_des)=$sql_des->fetch();
 		
 		for($c=1;$c<=$num_servicos;$c++){
 			if($baseCalculo[$c]!=""&&$codigoServico[$c]!=""){
-				mysql_query("INSERT INTO simples_des_servicos
+				$PDO->query("INSERT INTO simples_des_servicos
 							 SET codsimples_des='$codsimples_des',
 								 codservico='".$codigoServico[$c]."',
 								 basedecalculo='".$baseCalculo[$c]."',
@@ -78,7 +78,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		
 		
 		$codsimples_des = base64_encode($codsimples_des);
-		Mensagem("Declaração efetuada com sucesso!");
+		Mensagem("Declaraï¿½ï¿½o efetuada com sucesso!");
 		NovaJanela("reports/simples_des_comprovante.php?COD=$codsimples_des");
 		//Redireciona('../../principal.php');
 		

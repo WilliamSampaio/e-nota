@@ -25,12 +25,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 <link href="../css/imprimir_descomprovantes.css" rel="stylesheet" type="text/css"></head>
 <?php 
     session_start();    
-	include("../inc/conect.php");
-	include("../funcoes/util.php");
+	require_once("../inc/conect.php");
+	require_once("../include/util.php");
 	if($_GET['COD']){
 		$CODDIF =  base64_decode($_GET['COD']);
 		
-		$sql_comprovante = mysql_query("
+		$sql_comprovante = $PDO->query("
 			SELECT 
 				dif_des.codigo,
 				DATE_FORMAT(dif_des.competencia,'%m/%Y'),
@@ -47,7 +47,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			WHERE 
 				dif_des.codigo = '$CODDIF'
 			");
-		list($Codigo,$competencia,$codverificacao,$razaosocial,$cnpj,$logradouro,$numero,$dataemissao) = mysql_fetch_array($sql_comprovante);
+		list($Codigo,$competencia,$codverificacao,$razaosocial,$cnpj,$logradouro,$numero,$dataemissao) = $sql_comprovante->fetch();
 	}
 
 	
@@ -64,15 +64,15 @@ Fith Floor, Boston, MA 02110-1301, USA
         <td width="520" style="border:0px;" align="left" valign="middle">
 		<font class="prefeitura">Prefeitura Municipal de <?php echo $CONF_CIDADE; ?></font><br>
 		<font class="secretaria"><?php echo $CONF_SECRETARIA; ?><br>
-		Comprovante de Declara&ccedil;&atilde;o Institui&ccedil;&atilde;o Financeira </font></td>
+		Comprovante de Declaração Instituição Financeira </font></td>
       </tr>
     </table></td>
   </tr>
   <tr>
-    <td width="25%" height="30" align="center" bgcolor="#CCCCCC"><strong>Documento N&ordm;.</strong></td>
-    <td width="25%" align="center" bgcolor="#CCCCCC"><strong>C&oacute;digo de Verifica&ccedil;&atilde;o</strong></td>
-    <td align="center" bgcolor="#CCCCCC"><strong>Data de Emiss&atilde;o </strong></td>
-    <td align="center" bgcolor="#CCCCCC"><strong>Per&iacute;odo</strong></td>
+    <td width="25%" height="30" align="center" bgcolor="#CCCCCC"><strong>Documento Nº.</strong></td>
+    <td width="25%" align="center" bgcolor="#CCCCCC"><strong>Código de Verificação</strong></td>
+    <td align="center" bgcolor="#CCCCCC"><strong>Data de Emissão </strong></td>
+    <td align="center" bgcolor="#CCCCCC"><strong>Período</strong></td>
   </tr>
   <tr>
     <td height="30" align="center"><font class="prefeitura"><?php echo $Codigo; ?></font></td>
@@ -81,7 +81,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td align="center"><font class="prefeitura"><?php echo $competencia; ?></font></td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICA&Ccedil;&Atilde;O DO SUJEITO PASSIVO </strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICAÇÃO DO SUJEITO PASSIVO </strong></td>
   </tr>
   <tr>
     <td height="50" colspan="3" valign="top">Nome<br>
@@ -90,26 +90,26 @@ Fith Floor, Boston, MA 02110-1301, USA
     <font class="prefeitura"><?php echo $cnpj; ?></font></td>
   </tr>
   <tr>
-    <td height="75" colspan="4" valign="top">Endere&ccedil;o<br>
+    <td height="75" colspan="4" valign="top">Endereço<br>
     <font class="prefeitura"><?php echo $logradouro. ", " .$numero; ?></font></td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>CERTIFICA&Ccedil;&Atilde;O</strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>CERTIFICAÇÃO</strong></td>
   </tr>
   <tr>
-    <td height="200" colspan="4" align="center" valign="middle"><span class="style1">A Prefeitura Municipal de <font class="prefeitura"><?php echo $CONF_CIDADE; ?></font> certifica que a Institui&ccedil;&atilde;o Financeira citada acima concluiu o processo de Declara&ccedil;&atilde;o  Institui&ccedil;&atilde;o Financeira, referente ao per&iacute;odo <font class="prefeitura"><?php echo DataPt($competencia); ?></font>.</span>   </td>
+    <td height="200" colspan="4" align="center" valign="middle"><span class="style1">A Prefeitura Municipal de <font class="prefeitura"><?php echo $CONF_CIDADE; ?></font> certifica que a Instituição Financeira citada acima concluiu o processo de Declaração  Instituição Financeira, referente ao período <font class="prefeitura"><?php echo DataPt($competencia); ?></font>.</span>   </td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>OBSERVA&Ccedil;&Otilde;ES</strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>OBSERVAÇÕES</strong></td>
   </tr>
   <tr>
-    <td colspan="4"><p>- Fica assegurado ao Munic&iacute;pio a cobran&ccedil;a de qualquer d&eacute;bito que possa ser verificado posteriormente; </p>
+    <td colspan="4"><p>- Fica assegurado ao Município a cobrança de qualquer débito que possa ser verificado posteriormente; </p>
     <p>- O presente documento somente tem validade:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;a. Quando nao apresentar rasuras;<br>
+	a. Quando nao apresentar rasuras;<br>
     </p></td>
   </tr>
   <tr>
-    <td height="50" colspan="4">A aceita&ccedil;&atilde;o deste documento esta condicionada &agrave; verifica&ccedil;&atilde;o de sua validade, de forma exclusiva pela  Prefeitura Municipal de <font class="prefeitura"><?php echo $CONF_CIDADE; ?></font>.  </td>
+    <td height="50" colspan="4">A aceitação deste documento esta condicionada à verificação de sua validade, de forma exclusiva pela  Prefeitura Municipal de <font class="prefeitura"><?php echo $CONF_CIDADE; ?></font>.  </td>
   </tr>
 </table>
 </body>

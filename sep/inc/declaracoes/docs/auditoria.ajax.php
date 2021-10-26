@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    include('../conect.php');
-    include('../../funcoes/util.php');
+    require_once('../conect.php');
+    require_once('../../funcoes/util.php');
 
     $codcartorio=$_GET['cmbCartorios'];
 	$cartorio= codtipo('cartorio');
@@ -39,11 +39,11 @@ Fith Floor, Boston, MA 02110-1301, USA
              ORDER BY cartorios_des.competencia DESC");
 
     $sql_cartorio=Paginacao($query,'frmAuditoria','detalhes_dec');
-    if(mysql_num_rows($sql_cartorio)>0){
+    if($sql_cartorio->rowCount()>0){
         ?>
             <table align="center" width="100%">
                 <tr align="center" bgcolor="999999">
-                    <td>Cód. Verificacao</td>
+                    <td>CÃ³d. Verificacao</td>
                     <td>Competencia</td>
                     <td>Data</td>
                     <td>Total</td>
@@ -53,7 +53,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     <td></td>
                 </tr>
                 <?php
-                    while($dados=mysql_fetch_array($sql_cartorio)){
+                    while($dados=$sql_cartorio->fetch()){
                         if($dados['estado']=="N"){
                             $dados['estado']="Normal";
                             $motivo="";

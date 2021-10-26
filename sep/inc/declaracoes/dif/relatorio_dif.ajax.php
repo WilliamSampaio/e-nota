@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    include("../conect.php");
-    include("../../funcoes/util.php");
+    require_once("../conect.php");
+    require_once("../../funcoes/util.php");
 
     //recebe os dados
     $razaosocial=strip_tags(addslashes($_GET['txtRazao']));
@@ -63,21 +63,21 @@ Fith Floor, Boston, MA 02110-1301, USA
              ORDER BY dif_des.data DESC"); 
     $sql=Paginacao($query,'frmRelatorio','detalhes_dif_des',10);
     
-    if(mysql_num_rows($sql)>0){
+    if($sql->rowCount()>0){
         ?>
             <table width="100%" align="center">
                 <tr align="center" bgcolor="999999">
-                    <td>Cód. de Verificação</td>
-                    <td>Instituição Financeira</td>
-                    <td>Data de Emissão</td>
-                    <td>Competência</td>
+                    <td>CÃ³d. de VerificaÃ§Ã£o</td>
+                    <td>InstituiÃ§Ã£o Financeira</td>
+                    <td>Data de EmissÃ£o</td>
+                    <td>CompetÃªncia</td>
                     <td>Valor Total</td>
                     <td>ISS</td>
                 </tr>
                 <?php
-                    while($dados=mysql_fetch_array($sql)){
-                        $sql_iss=mysql_query("SELECT SUM(iss) FROM dif_des_contas WHERE coddif_des='".$dados['codigo']."'");
-                        list($iss)=mysql_fetch_array($sql_iss);
+                    while($dados=$sql->fetch()){
+                        $sql_iss=$PDO->query("SELECT SUM(iss) FROM dif_des_contas WHERE coddif_des='".$dados['codigo']."'");
+                        list($iss)=$sql_iss->fetch();
 
                         echo "
                             <tr align=\"center\" bgcolor=\"FFFFFF\">

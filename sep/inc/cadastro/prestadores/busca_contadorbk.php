@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
  <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;SEPISS - Pesquisar Contadores</td>
+		<td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">SEPISS - Pesquisar Contadores</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" onclick="document.getElementById('divBuscaContador').style.visibility='hidden'" title="Fechar" /></td>
 	</tr>
 	<tr>
@@ -33,7 +33,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<table width="100%">
 					<tr>
                         <td>
-                            C&oacute;digo do Cadastr</td>
+                            Código do Cadastr</td>
                         <td rowspan="4" valign="middle"><input name="btBuscarContador" type="submit" value="" id="btBuscarCliente" title="Buscar"></td>
                     </tr>
                     <tr>
@@ -43,7 +43,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Raz&atilde;o Social
+                            Razão Social
                         </td>
                     </tr>
                     <tr>
@@ -63,7 +63,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                         $codCadastro = $_POST['txtBuscaCodCadastro'];
                                         $where = "razaosocial LIKE'%$nome%' AND codtipo = '$codtipo_cont' AND estado <> 'NL'";
                                         if(!empty($codCadastro)){$where .= " AND codigo = $codCadastro";}
-										$sql=mysql_query("
+										$sql=$PDO->query("
 										SELECT 
 											codigo,
 											nome, 
@@ -88,7 +88,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 										ORDER BY
 											razaosocial
 										");
-										while(list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe) = mysql_fetch_array($sql)){
+										while(list($codigo,$nome,$razaosocial,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$municipio,$uf,$logo,$email,$ultima,$notalimite,$estado,$simplesnaconal,$codcontador,$nfe) = $sql->fetch()){
 											switch($notalimite){
 												case 0:	 $aidf = "Liberado";  break;
 												default: $aidf = $notalimite; break;

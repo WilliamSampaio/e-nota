@@ -23,17 +23,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$titulo = $_POST["txtTitulo"];
 	$texto  = $_POST["txtText"];
 	if($_POST["btInserir"] == "Inserir Nova"){
-		mysql_query("INSERT INTO noticias SET titulo = '$titulo', texto = '$texto', data = NOW(), sistema='nfe'");
-		add_logs('Inseriu uma Notícia');
-		Mensagem(htmlentities("Notícia inserida"));
+		$PDO->query("INSERT INTO noticias SET titulo = '$titulo', texto = '$texto', data = NOW(), sistema='nfe'");
+		add_logs('Inseriu uma Notï¿½cia');
+		Mensagem(htmlentities("Notï¿½cia inserida"));
 	}//fim if
 	 if($_POST["btExcluir"] == " "){
 		$cod_nt= $_POST['hdCodNt'];
-		$sql_busca_nt = mysql_query("SELECT texto FROM noticias WHERE codigo = '$cod_nt'");
-		list($exc_nt) = mysql_fetch_array($sql_busca_nt);
-		mysql_query("DELETE FROM noticias WHERE codigo ='$cod_nt'"); 
-		add_logs('Excluiu uma Notícia');
-		Mensagem(htmlentities("Notícia excluida!"));
+		$sql_busca_nt = $PDO->query("SELECT texto FROM noticias WHERE codigo = '$cod_nt'");
+		list($exc_nt) = $sql_busca_nt->fetch();
+		$PDO->query("DELETE FROM noticias WHERE codigo ='$cod_nt'"); 
+		add_logs('Excluiu uma Notï¿½cia');
+		Mensagem(htmlentities("Notï¿½cia excluida!"));
 		}
 			
 ?>
@@ -41,7 +41,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="730" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Utilit&aacute;rios - Not&iacute;cias</td>  
+    <td width="730" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">UtilitÃ¡rios - NotÃ­cias</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -49,17 +49,17 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td align="center">
 		<form method="post" id="frmNoticias">
 			<input name="include" id="include" type="hidden" value="<?php echo $_POST["include"];?>" />
-				<fieldset><legend>Notícias</legend>
+				<fieldset><legend>Notï¿½cias</legend>
 					<table width="100%">
 						<tr>
-							<td width="12%" align="left">Título</td>
+							<td width="12%" align="left">TÃ­tulo</td>
 							<td width="88%" align="left"><input type="text" name="txtTitulo" id="txtTitulo" size="50" class="texto" /></td>
 						</tr>
 						<tr>
-							<td colspan="2" align="left">Conteúdo</td>
+							<td colspan="2" align="left">ConteÃºdo</td>
 						</tr>
 						<tr>
-							<td>&nbsp;</td>
+							<td></td>
 							<td align="left"><textarea name="txtText" id="txtText" cols="50" rows="6" class="texto"></textarea></td>
 						</tr>
 						<tr>

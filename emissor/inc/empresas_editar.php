@@ -36,7 +36,7 @@ if($arquivo !=""){
 		$sql = $PDO->query("UPDATE cadastro SET logo = '$arquivo' WHERE nome = '$NOME'");
 		$imagem = "Atualizada";
 	}else{
-		Mensagem("O logo deve ter, no m&aacute;ximo 100 pixels de altura por 100 pixels de largura");
+		Mensagem("O logo deve ter, no máximo 100 pixels de altura por 100 pixels de largura");
 		Redireciona("empresas.php");
 	}
 } 

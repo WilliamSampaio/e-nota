@@ -116,7 +116,7 @@ if($btSelecionarEmpresa!=""){
 		//testa se o numero de notas limites ja foi ultrapassado se ja tiver ultrapassado avisa-o
 		if(($ultimanota>$notalimite)&&($notalimite!=0)) {
 		
-			Mensagem('Voc&ecirc; n&atilde;o pode emitir NFe por que ultrapassou seu limite estabelecido pelo AIDF. Entre em contato com a prefeitura.');
+			Mensagem('VocÃª nÃ£o pode emitir NFe por que ultrapassou seu limite estabelecido pelo AIDF. Entre em contato com a prefeitura.');
 			Redireciona('notas.php');
 			
 		}elseif(($ultimanota<=$notalimite)||($notalimite==0)){  
@@ -193,7 +193,7 @@ if($btSelecionarEmpresa!=""){
 					}	
 				}
 	
-				//verifica a isenção do prestador
+				//verifica a isenï¿½ï¿½o do prestador
 				$sqlIsento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
 				list($issIsento) = mysql_fetch_array($sqlIsento);
 				if($issIsento == 'S'){
@@ -201,7 +201,7 @@ if($btSelecionarEmpresa!=""){
 					$notaTotalValorISSRetido = 0;
 				}
 				
-				//verifica se o prestador é do MEI
+				//verifica se o prestador Ã© do MEI
 				$sqlMei = mysql_query("SELECT codigo FROM declaracoes WHERE declaracao = 'MEI'");
 				list($codmei) = mysql_fetch_array($sqlMei);
 				$sqlTipoDeclaracao = mysql_query("SELECT codtipodeclaracao FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
@@ -326,11 +326,11 @@ if($btSelecionarEmpresa!=""){
 					echo "<script>window.location='notas.php';</script>";
 				}
 			}else{
-				print("<script language=JavaScript>alert('Favor preencher campos obrigat&oacute;rios')</script>");
+				print("<script language=JavaScript>alert('Favor preencher campos obrigatÃ³rios')</script>");
 			}
 	 }
 	}else{
-		print("<script language=JavaScript>alert('É necessário selecionar um serviço para a emissão da nota.')</script>");
+		print("<script language=JavaScript>alert('ï¿½ necessï¿½rio selecionar um serviÃ§o para a emissÃ£o da nota.')</script>");
 	}
 }
 
@@ -342,7 +342,7 @@ $ultimanota += 1;
 
 $emp_cnpj.=$emp_cpf;
 
-//GERA O CÓDIGO DE VERIFICAÇÃO
+//GERA O Cï¿½DIGO DE VERIFICAï¿½ï¿½O
 $CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
 $max = strlen($CaracteresAceitos)-1;
 $password = null;
@@ -417,11 +417,11 @@ if($limiteRPS < 1){
 
 <table width="100%" border="0" cellspacing="2" cellpadding="2" align="center">
   <tr>    
-	<td  align="left" colspan="3"><font color="#FF0000" size="-2">OBS: N&atilde;o utilizar a tecla Enter para alternar entre os campos.</font>  </td>
+	<td  align="left" colspan="3"><font color="#FF0000" size="-2">OBS: NÃ£o utilizar a tecla Enter para alternar entre os campos.</font>  </td>
   </tr>
   <tr>
     <td colspan="3"><strong><br />
-      Informa&ccedil;&ccedil;es da Nota</strong>
+      InformaÃ§Ã§es da Nota</strong>
 	</td>
   </tr>
   <tr>
@@ -430,9 +430,9 @@ if($limiteRPS < 1){
    </td>
   </tr>  
   <tr>
-    <td align="center">N&uacute;mero</td>
-    <td align="center">Data e Hora de Emiss&atilde;o</td>
-    <td align="center">C&oacute;digo de Verifica&ccedil;&atilde;o</td>
+    <td align="center">NÃºmero</td>
+    <td align="center">Data e Hora de EmissÃ£o</td>
+    <td align="center">CÃ³digo de VerificaÃ§Ã£o</td>
   </tr>
   <tr>
     <td align="center"><input name="txtNotaNumero" style="text-align:center;" type="text" size="10" class="texto" readonly="yes" value="<?php print $ultimanota;?> "></td>
@@ -451,7 +451,7 @@ if($limiteRPS < 1){
 		</td>
 	</tr>
 	<tr>
-		<td width="25%" align="left">N&uacute;mero do RPS</td>
+		<td width="25%" align="left">NÃºmero do RPS</td>
 		<td width="75%" align="left">
 			<input name="txtRpsNum" id="txtRpsNum" onkeydown="return NumbersOnly( event );" style="text-align:center;" disabled="disabled" 
 			type="text" size="6" class="texto" readonly="readonly">
@@ -463,14 +463,14 @@ if($limiteRPS < 1){
 		<td align="left">Data do RPS</td>
 		<td align="left">
 			<input name="txtDataRps" id="txtDataRps" onkeydown="return NumbersOnly( event );"  style="text-align:center;" disabled="disabled" type="text" size="10" 
-			maxlength="10" class="texto"> (dd/mm/aaaa) <em>Somente n&uacute;meros</em>
+			maxlength="10" class="texto"> (dd/mm/aaaa) <em>Somente nÃºmeros</em>
 		</td>
 	</tr>
 	<tr>
 		<td align="left" colspan="2">
 			<span id="spanRPS" style="display:none">
 				<font color="#FF0000">
-					<strong>&Eacute; necess&aacute;rio libera&ccedil;&atilde;o de limite de RPS, clique <a href="importar.php">aqui</a> para solicitar.</strong>
+					<strong>Ã‰ necessÃ¡rio liberaÃ§Ã£o de limite de RPS, clique <a href="importar.php">aqui</a> para solicitar.</strong>
 				</font>
 			</span>
 		</td>
@@ -480,7 +480,7 @@ if($limiteRPS < 1){
 
 <table width="100%" border="0" cellspacing="2" cellpadding="2"> 
   <tr>
-    <td colspan="2"><strong>Tomador de Servi&ccedil;os</strong></td>
+    <td colspan="2"><strong>Tomador de ServiÃ§os</strong></td>
   </tr>
   <tr>
     <td align="left" width="25%">CPF/CNPJ</td>
@@ -490,7 +490,7 @@ if($limiteRPS < 1){
 <div id="divContainer">
 <table width="100%" border="0" cellspacing="2" cellpadding="2"> 
 <tr>
-    <td width="25%" align="left">Nome/Raz&atilde;o Social<font color="#FF0000">*</font></td>
+    <td width="25%" align="left">Nome/RazÃ£o Social<font color="#FF0000">*</font></td>
     <td width="75%" align="left"><input name="txtTomadorNome" id="txtTomadorNome" type="text" size="55" class="texto">
 </td>
   </tr>  
@@ -501,17 +501,17 @@ if($limiteRPS < 1){
 	</td>
   </tr>
   <tr>
-    <td align="left">Inscri&ccedil;&atilde;o Municipal</td>
+    <td align="left">InscriÃ§Ã£o Municipal</td>
     <td align="left"><input name="txtTomadorIM" id="txtTomadorIM" type="text" onkeydown="return NumbersOnly( event );" size="30" class="texto" ></td>
   </tr>
   <tr>
-    <td align="left">Inscri&ccedil;&atilde;o Estadual</td>
+    <td align="left">InscriÃ§Ã£o Estadual</td>
     <td align="left"><input name="txtTomadorIE" id="txtTomadorIE" type="text" onkeydown="return NumbersOnly( event );" size="30" class="texto" ></td>
   </tr>
   <tr>
     <td align="left">Logradouro</td>
     <td align="left"><input name="txtTomadorLogradouro" id="txtTomadorLogradouro" type="text" size="30" class="texto">
-     &nbsp;&nbsp;N&uacute;mero <input name="txtTomadorNumero" type="text" onkeydown="return NumbersOnly( event );" size="5" class="texto" maxlength="5"  />
+     NÃºmero <input name="txtTomadorNumero" type="text" onkeydown="return NumbersOnly( event );" size="5" class="texto" maxlength="5"  />
 	</td>
   </tr>  
   <tr>
@@ -540,7 +540,7 @@ if($limiteRPS < 1){
   </tr>
   <tr>
     <td>
-		Município<font color="#FF0000">*</font></td>
+		Municï¿½pio<font color="#FF0000">*</font></td>
     <td>
         <div  id="divTomadorMunicipio">
             <select name="txtTomadorMunicipio" id="txtTomadorMunicipio" class="combo">
@@ -566,7 +566,7 @@ if($limiteRPS < 1){
 
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
   <tr>
-    <td><strong>Discriminação dos Serviços e/ou Deduções</strong></td>
+    <td><strong>DiscriminaÃ§Ã£o dos ServiÃ§os  e/ou Deduï¿½ï¿½es</strong></td>
   </tr>
   <tr>
    <td align="center">
@@ -584,11 +584,11 @@ if($limiteRPS < 1){
 	//echo $codtipodec."<br>";
 	//echo $codtipodec_teste;
 	//if($tipopessoa == 'cpf'){
-		// include("calculos_nota_inserir_rpa.php");
+		// require_once("calculos_nota_inserir_rpa.php");
 	if($codtipodeclaracao == $codtipodec_teste){
-		include("calculos_nota_inserir_simplesnacional.php");	
+		require_once("calculos_nota_inserir_simplesnacional.php");	
 	}else{
-		include("calculos_nota_inserir.php");
+		require_once("calculos_nota_inserir.php");
 	}
 	
 	?>

@@ -63,14 +63,14 @@ if($str_where){
 		<table width="100%">
 			<tr bgcolor="#999999">
 				<td width="50px" align="right">cod</td>
-				<td width="320px" align="center">Razão</td>
+				<td width="320px" align="center">RazÃ£o</td>
 				<td width="80px" align="center">Data Gerado</td>
 				<td width="80px" align="center">Competencia</td>
-				<td width="" align="center">Ações</td>
+				<td width="" align="center">AÃ§Ãµes</td>
 			</tr>
 			<?php
 				$cont = 1;
-				while(list($codigo,$razao,$data_gerado, $competencia) = mysql_fetch_array($sql)){
+				while(list($codigo,$razao,$data_gerado, $competencia) = $sql->fetch()){
 	
 				?>
 				<tr bgcolor="#FFFFFF">
@@ -97,7 +97,7 @@ if($str_where){
 		echo "
 			<table width='100%'>
 				<tr>
-					<td align=\"center\"><b>Não há declarações para auditar em Orgãos Públicos</b></td>
+					<td align=\"center\"><b>NÃ£o hÃ¡ declaraï¿½ï¿½es para auditar em Orgï¿½os Pï¿½blicos</b></td>
 				</tr>
 			</table>
 		";

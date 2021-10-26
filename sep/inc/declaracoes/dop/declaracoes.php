@@ -39,7 +39,7 @@ function mudarpagina(valor){
 <table border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="760" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Declara&ccedil;&atilde;o de Orgãos Públicos (DOP)<br /></td>  
+    <td width="760" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">DeclaraÃ§Ã£o de Orgï¿½os Pï¿½blicos (DOP)<br /></td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -54,7 +54,7 @@ function mudarpagina(valor){
 							<legend>Dados</legend>
 								<table width="100%">
 									<tr>
-										<td align="left" width="150">Nome/Raz&atilde;o Social</td>
+										<td align="left" width="150">Nome/RazÃ£o Social</td>
 										<td align="left"><input name="txtNome" id="txtNome" type="text" class="texto" size="60" maxlength="100" /></td>
 									</tr>
 									<tr>
@@ -62,17 +62,17 @@ function mudarpagina(valor){
 										<td align="left"><input name="txtCNPJ" id="txtCNPJ" type="text" class="texto" size="20" maxlength="18" /></td>
 									</tr>
 									<tr>
-										<td align="left">N&deg; DOP</td>
+										<td align="left">NÂº DOP</td>
 										<td align="left"><input name="txtNro" id="txtNro" type="text" class="texto" size="10" /></td>
 									</tr>
 									<tr>
-										<td align="left">Compet&ecirc;cia</td>
+										<td align="left">CompetÃªcia</td>
 										<td align="left">
 											<select name="cmbMes" id="cmbMes" class="combo">
 												<option value=""></option>
 												<?php
-												//array dos meses comecando na posição 1 ate 12 e faz um for listando os meses no combo
-												$meses= array(1=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+												//array dos meses comecando na posiÃ§Ã£o 1 ate 12 e faz um for listando os meses no combo
+												$meses= array(1=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 												for($i=1;$i<=12;$i++){
 													echo "<option value='$i'>$meses[$i]</option>";
 												}//fim for meses
@@ -82,10 +82,10 @@ function mudarpagina(valor){
 												<option value=""></option>
 												<?php
 												//verifica quais anos que tem declarcoes de orgaos publicos
-												$sql_ano = mysql_query("SELECT YEAR(competencia) FROM dop_des GROUP BY YEAR(competencia) ORDER BY YEAR(competencia) DESC");
-												while(list($ano) = mysql_fetch_array($sql_ano)){
+												$sql_ano = $PDO->query("SELECT YEAR(competencia) FROM dop_des GROUP BY YEAR(competencia) ORDER BY YEAR(competencia) DESC");
+												while(list($ano) = $sql_ano->fetch()){
 													echo "<option value='$ano'>$ano</option>";
-												}//while para listar os anos que existem declarações
+												}//while para listar os anos que existem declaraï¿½ï¿½es
 												?>
 											</select>
 										</td>
@@ -103,7 +103,7 @@ function mudarpagina(valor){
 										</td>
 									</tr>
 									<tr>
-										<td align="left">Data Emissão</td>
+										<td align="left">Data EmissÃ£o</td>
 										<td align="left"><input name="txtData" id="txtData" type="text" class="texto" size="12" maxlength="10" /></td>
 									</tr>
 									<tr>

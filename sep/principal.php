@@ -27,18 +27,18 @@ if(isset($_SESSION["logado"]))
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>SEP - Sistema Eletr&ocirc;nico de Prefeitura v1.0</title>
+<title>SEP - Sistema Eletrônico de Prefeitura v1.0</title>
 <link href="css/padrao.css" rel="stylesheet" type="text/css">
 <link href="css/menu.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/jquery.tabs.css" type="text/css" media="print, projection, screen">
 <link type="text/css" href="css/dark-hive/jquery-ui-1.8.2.custom.css" rel="stylesheet" />	
-<?php include("scripts.php");?>
+<?php require_once("scripts.php");?>
 </head>
 <body class="principal">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td align="left" valign="middle" bgcolor="#3c5c72" background="img/form/bg.png">
-	<?php include("inc/menu.php"); ?>
+	<?php require_once("inc/menu.php"); ?>
 	</td>
   </tr>
   <tr>
@@ -65,7 +65,7 @@ if(isset($_SESSION["logado"]))
 			$_POST['CODEMISSOR']  = $_POST['CODTOMADOR'];
 		}	
 	
- 		include($_POST['include']);
+ 		require_once($_POST['include']);
 	}
 	?>	
 	</td>
@@ -82,8 +82,8 @@ if(isset($_SESSION["logado"]))
 }
 else
 {
-  include("funcoes/util.php");
-  Mensagem('Sem permiss&atilde;o de acesso!!!');
+  require_once("funcoes/util.php");
+  Mensagem('Sem permissão de acesso!!!');
  print("<script language=JavaScript>parent.location='login.php';</script>"); 
 }
 

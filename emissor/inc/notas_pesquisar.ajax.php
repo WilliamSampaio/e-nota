@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("conect.php");
-include("../../funcoes/util.php");	
+require_once("conect.php");
+require_once("../../funcoes/util.php");	
 	$CODIGO_DA_EMPRESA=$_GET['hdcodempresa'];	
 	$numero = $_GET['txtNumeroNota'];
 	$codverificacao = $_GET['txtCodigoVerificacao'];
@@ -78,9 +78,9 @@ WHERE
 					if($sql->rowCount()>0){
 				?>
 				<tr>
-					<td width="5%" align="center">N&ordm;</td>
-					<td width="13%" align="center">C&oacute;d Verif</td>
-					<td width="19%" align="center">D/H Emiss&atilde;o</td>
+					<td width="5%" align="center">Nº</td>
+					<td width="13%" align="center">Cód Verif</td>
+					<td width="19%" align="center">D/H Emissão</td>
 					<td width="36%" align="center">Tomador Nome </td>
 					<td width="10%" align="center">Estado</td>
 					<td width="10%" align="center">
@@ -162,7 +162,7 @@ WHERE
 			}else{
 				echo "
 						<tr>
-							<td>N&atilde;o h&aacute; nenhuma nota!</td>
+							<td>Não há nenhuma nota!</td>
 						</tr>
 					";
 			}

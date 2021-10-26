@@ -33,8 +33,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <input type="hidden" name="btObras" value="Listar Obras" />
                 <table align=\"center\">
                     <?php
-                        $sql_busca=mysql_query("SELECT codigo, obra FROM obras WHERE codempreiteira=$codempreiteira");
-                        while($dados=mysql_fetch_array($sql_busca)){
+                        $sql_busca=$PDO->query("SELECT codigo, obra FROM obras WHERE codempreiteira=$codempreiteira");
+                        while($dados=$sql_busca->fetch()){
                             ?>
                                 <tr align="left">
                                     <td><?php echo $dados['obra']; ?></td>
@@ -51,6 +51,6 @@ Fith Floor, Boston, MA 02110-1301, USA
     }
 
     if($_POST["btDetalhes"]=="Detalhes"){
-        include("inc/empreiteiras/obras_detalhes.php");
+        require_once("inc/empreiteiras/obras_detalhes.php");
     }
 ?>

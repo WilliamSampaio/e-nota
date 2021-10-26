@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 if($_POST['btAtualizar'] == "Atualizar"){
-	include("empresas_editar.php");
+	require_once("empresas_editar.php");
 }
 
 
@@ -29,7 +29,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
 ?>
 
 			
-<form method="post" name="frmCadUsuarios" enctype="multipart/form-data" onsubmit="return (comprimentoSenha(5,'txtSenha|txtConfirmacao')&&(ValidaFormulario('txtEmail','Preencha os campos obrigatÛrios'))&&(validaExtencao('arquivo')));">
+<form method="post" name="frmCadUsuarios" enctype="multipart/form-data" onsubmit="return (comprimentoSenha(5,'txtSenha|txtConfirmacao')&&(ValidaFormulario('txtEmail','Preencha os campos obrigat√≥rios'))&&(validaExtencao('arquivo')));">
 <input name="hdCod" type="hidden" value="<?php echo $codigo;?>" />
     <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">
     	<tr>
@@ -70,7 +70,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
                 <?php }
                    else		
                      {	   
-                       print("<font color=red>N„o possui logomarca</font>");
+                       print("<font color=red>N√£o possui logomarca</font>");
                      }
                   ?>
                   <input name="bt" type="button" value="Alterar imagem" class="botao" onclick="document.getElementById('trempresa').style.visibility='visible'" />
@@ -81,7 +81,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
             <td align="left">
                 <input type="file" size="50" maxlength="50" name="arquivo" id="arquivo" class="botao">
                 <br />
-                <font size="-2" color="#FF0000">A imagem do logo dever· estar no formato JPG.</font></td>
+                <font size="-2" color="#FF0000">A imagem do logo dever√° estar no formato JPG.</font></td>
         </tr>
         <tr>
             <td>

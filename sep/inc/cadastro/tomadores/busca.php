@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;SEPISS - Pesquisar</td>  
+    <td width="150" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">SEPISS - Pesquisar</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" onclick="document.getElementById('divBuscaTomadores').style.visibility='hidden'" /></td>
   </tr>
   <tr>
@@ -41,7 +41,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				if(isset($_POST['txtBuscaNomeTomador']))
 				{
 					$nome=$_POST['txtBuscaNomeTomador'];
-					$sql=mysql_query("
+					$sql=$PDO->query("
 					SELECT 
 						codigo,
 						nome, 
@@ -63,7 +63,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					ORDER BY 
 						nome
 					");
-					while(list($codigo,$nome,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$cep,$municipio,$uf,$email) = mysql_fetch_array($sql)){
+					while(list($codigo,$nome,$cnpjcpf,$inscrmunicipal,$logradouro,$numero,$cep,$municipio,$uf,$email) = $sql->fetch()){
 						if($nome !=""){ 
 							$tp= tipoPessoa($cnpjcpf);
 							$tp=='cpf'?$tp='PF':$tp='PJ';

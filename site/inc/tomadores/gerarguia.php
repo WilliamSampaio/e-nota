@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php 
 require_once("../../../include/conect.php");
-require_once("../../../funcoes/util.php"); 
+// require_once('../../../include/util.php');
 /*
 if($_POST){
 	
@@ -41,7 +41,7 @@ if($_POST){
 		include 'gerarguia_issretido.php';
 	}
 	
-	//Mensagem("Serviço(s) declarado(s)!");
+	//Mensagem("ServiÃ§o(s) declarado(s)!");
 	//Redireciona("../../tomadores.php");
 	Redireciona("../../../boleto/pagamento/boleto_bb.php?COD=$cod_guia");
 }*/
@@ -50,8 +50,8 @@ $codemissor		= $_POST["txtEmissor"];
 $hoje           = date("Y-m-d");
 $dataem         = explode("-",$hoje);
 
-$sql = mysql_query("SELECT codemissor, issretido, DATE(datahoraemissao) AS data FROM notas WHERE codigo = '$codnota'");
-$dados_notas = mysql_fetch_array($sql);
+$sql = $PDO->query("SELECT codemissor, issretido, DATE(datahoraemissao) AS data FROM notas WHERE codigo = '$codnota'");
+$dados_notas = $sql->fetch();
 
 /*$dataem = explode("-", $dados_notas['data']);
 
@@ -76,8 +76,8 @@ if($dias < 0){
 }
 $multa = calculaMultaDes($dias, $dados_notas['issretido']);
 
-$sql_banco = mysql_query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo = boleto.codbanco");
-list($codbanco,$boleto)=mysql_fetch_array($sql_banco);
+$sql_banco = $PDO->query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo = boleto.codbanco");
+list($codbanco,$boleto)=$sql_banco->fetch();
 
 $insere_guia = ("
 	INSERT INTO 
@@ -93,19 +93,19 @@ $insere_guia = ("
 ");
 
 
-if(mysql_query($insere_guia)){
-	$sqlguia=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
-	list($codguiapag)=mysql_fetch_array($sqlguia);
+if($PDO->query($insere_guia)){
+	$sqlguia=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
+	list($codguiapag)=$sqlguia->fetch();
 	$nossonumero = gerar_nossonumero($dados_notas['codemissor'],$vencimento);
 	$chavecontroledoc = gerar_chavecontrole($dados_notas["codemissor"],$codguiapag);
-	mysql_query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguiapag'");
+	$PDO->query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguiapag'");
 	
-	$sql_boleto=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
-	list($codigoboleto)=mysql_fetch_array($sql_boleto);	
+	$sql_boleto=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
+	list($codigoboleto)=$sql_boleto->fetch();	
 	$crypto = base64_encode($codigoboleto);
 	Mensagem("Boleto gerado com sucesso");
 	//imprimirGuia($codigoboleto);
-	print("<script>window.location = '../../../boleto/recebimento/index.php?COD=$crypto';</script>");
+	print("<script>window.location = '../../../boleto/recebimento/index.php?COD=$crypto';</script>"); 
 	//Redireciona("pagamento.php");	
 			
 }else{

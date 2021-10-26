@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	require_once("../../funcoes/util.php");
 	$codigo = $_GET['hdcod'];
 	
-	$sql_busca = mysql_query("
+	$sql_busca = $PDO->query("
 		SELECT 
 			menus_prefeitura_submenus.codigo, 
 			submenus_prefeitura.menu, 
@@ -43,14 +43,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="100%">
 <?php
 	$x = 0;
-	while(list($cod_sub,$menu_sub,$nivel_sub) = mysql_fetch_array($sql_busca)){
+	while(list($cod_sub,$menu_sub,$nivel_sub) = $sql_busca->fetch()){
 ?>
 			<tr>
 				<td align="left"><?php echo $menu_sub;?></td>
 				<td align="left">
 					<label>
 						<input type="checkbox" id="medio<?php echo $x;?>" name="medio<?php echo $x;?>" 
-						value="M" <?php if($nivel_sub == "M"){ echo "checked";}elseif($nivel_sub == "B"){ echo "checked disabled";}?> />Médio
+						value="M" <?php if($nivel_sub == "M"){ echo "checked";}elseif($nivel_sub == "B"){ echo "checked disabled";}?> />Mï¿½dio
 					</label>
 					<input type="hidden" name="txtCodigo<?php echo $x;?>" value="<?php echo $cod_sub;?>" />
 				</td>

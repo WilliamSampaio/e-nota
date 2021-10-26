@@ -66,7 +66,7 @@ $codTipoContador = codtipo('contador');
 						<tr>
 							<td align="left" colspan="4">Selecione o emissor:
 								<select name="cmbEmpresa" class="combo" style="width:270px;">
-									<option value="<?php echo $codLogado; ?>"><?php echo "(pr�prio)" . $logado->razaosocial . " - " . $cnpjcpf; ?></option>
+									<option value="<?php echo $codLogado; ?>"><?php echo "(próprio)" . $logado->razaosocial . " - " . $cnpjcpf; ?></option>
 									<?php
 									$sql_lista_empresas = $PDO->query("SELECT codigo, razaosocial, cnpj, cpf FROM cadastro WHERE codcontador = '$codLogado'");
 									while ($listaEmpresa = $sql_lista_empresas->fetchObject()) {
@@ -85,9 +85,9 @@ $codTipoContador = codtipo('contador');
 						<td align="left" colspan="3"><input name="txtCNPJ" type="text" class="texto" size="20" /></td>
 					</tr>
 					<tr>
-						<td align="left">N� da Nota: </td>
+						<td align="left">Nº da Nota: </td>
 						<td width="24%" align="left"><input name="txtNumeroNota" type="text" class="texto" size="10" /></td>
-						<td width="19%" align="left">C�d. Verifica��o: </td>
+						<td width="19%" align="left">Cód. Verificação: </td>
 						<td width="43%" align="left"><input name="txtCodVerificacao" type="text" class="texto" size="10" /></td>
 					</tr>
 					<tr>
@@ -99,7 +99,7 @@ $codTipoContador = codtipo('contador');
 					<tr>
 						<td align="left" colspan="4">
 							<input name="btBuscar" type="button" class="botao" value="Buscar" onClick="acessoAjax('../site/nfe_tomadas/notas_tomadas_lista.ajax.php','frmPesquisaNotaTomada','divPesquisaNotaTomada')" />
-							&nbsp;
+							
 							<input type="reset" value="Limpar" class="botao" />
 						</td>
 					</tr>

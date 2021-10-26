@@ -19,11 +19,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	include("../../conect.php");
-	include("../../../funcoes/util.php");
+	require_once("../../conect.php");
+	require_once("../../../funcoes/util.php");
 	/*$cnpj = $_SESSION['login'];
-	$sqlcnpj = mysql_query("SELECT codigo, nome, razaosocial, cnpj, logradouro, municipio, uf, email FROM cadastro WHERE cnpj = '$cnpj' AND estado = 'A'");
-	list($codigo,$nome,$razaosocial,$cnpj_cartorio,$endereco,$municipio,$uf,$email)=mysql_fetch_array($sqlcnpj);*/
+	$sqlcnpj = $PDO->query("SELECT codigo, nome, razaosocial, cnpj, logradouro, municipio, uf, email FROM cadastro WHERE cnpj = '$cnpj' AND estado = 'A'");
+	list($codigo,$nome,$razaosocial,$cnpj_cartorio,$endereco,$municipio,$uf,$email)=$sqlcnpj);*/
 	
 	
 ?>

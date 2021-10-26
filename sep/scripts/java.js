@@ -37,7 +37,7 @@ function cancelarGuiaLivro($codguia){
 				sucesso: function(){
 					var resposta = respostaAjax;
 					if (resposta){
-						alert('Cancelamento concluído!');
+						alert('Cancelamento concluï¿½do!');
                         document.getElementById('btnBuscar').click();
                         //document.getElementById("tdTeste").innerHTML = resposta;
 					}
@@ -91,7 +91,7 @@ function liberaRPS(url,idCampoLimite,hdLimite,retorno){
 }
 
 function recusaRPS(url){
-	if(confirm('Deseja recusar esta solicitação?')){
+	if(confirm('Deseja recusar esta solicitaï¿½ï¿½o?')){
 		ajax({
 			url:url,
 			sucesso: function(){
@@ -106,7 +106,7 @@ function recusaRPS(url){
 
 function comunicarPartesRPS(url,comunicado){
 	if(comunicado == "S"){
-		if(confirm('Você já comunicou esta solicitação, deseja comunicar novamente?')){
+		if(confirm('Vocï¿½ jï¿½ comunicou esta solicitaï¿½ï¿½o, deseja comunicar novamente?')){
 			ajax({
 				url:url,
 				espera: function(){
@@ -118,7 +118,7 @@ function comunicarPartesRPS(url,comunicado){
 					if(respostaAjax == 1){
 						alert("Solicitante comunicado");
 					}else{
-						alert("Não foi possivel comunicar o solicitante, verifique se o mesmo possui e-mail cadastrado!");
+						alert("Nï¿½o foi possivel comunicar o solicitante, verifique se o mesmo possui e-mail cadastrado!");
 					}
 				}
 			});
@@ -131,7 +131,7 @@ function comunicarPartesRPS(url,comunicado){
 					alert("Solicitante comunicado");
 					document.getElementById('btBuscar').click();
 				}else{
-					alert("Não foi possivel comunicar o solicitante, verifique se o mesmo possui e-mail cadastrado!");
+					alert("Nï¿½o foi possivel comunicar o solicitante, verifique se o mesmo possui e-mail cadastrado!");
 				}
 			}
 		});
@@ -186,12 +186,12 @@ function ValidarDesIssRetido() {
 
 	if ((!(document.getElementById('cmbAno').value))
 			|| (!(document.getElementById('cmbMes').value))) {
-		alert('Informe a competência da declaração !');
+		alert('Informe a competï¿½ncia da declaraï¿½ï¿½o !');
 		return false;
 	}
 
 	if (!(document.getElementById('txtRazaoNome').value)) {
-		alert('Informe sua RazãoSocial/Nome!');
+		alert('Informe sua Razï¿½oSocial/Nome!');
 		return false;
 	}
 	for (c = 1; total >= c; total--) {
@@ -199,11 +199,11 @@ function ValidarDesIssRetido() {
 		if ((!(document.getElementById('txtcnpjcpf' + total).value))
 				|| (!(document.getElementById('txtNroNota' + total).value))
 				|| (!(document.getElementById('txtValIssRetido' + total).value))) {
-			alert('Preencha os campos Obrigatórios para realizar a declaração!');
+			alert('Preencha os campos Obrigatï¿½rios para realizar a declaraï¿½ï¿½o!');
 			return false;
 		}
 		if (document.getElementById('hdvalidar' + total).value == 'n') {
-			alert('Emissor Digitado não consta em nosso sistema, Favor verifique os dados !');
+			alert('Emissor Digitado nï¿½o consta em nosso sistema, Favor verifique os dados !');
 			document.getElementById('txtcnpjcpf' + total).focus();
 			return false;
 		}
@@ -334,13 +334,13 @@ function ConsultaCnpj(campo, cont) {
 		},
 		sucesso: function() {
 			var resposta = respostaAjax;
-			if (resposta == 'Emissor não cadastrado') {
+			if (resposta == 'Emissor nï¿½o cadastrado') {
 				document.getElementById('hdvalidar' + cont).value = 'n';
 				resposta = '<font color=#ff0000>' + resposta + '</font>';
 			} else {
 				document.getElementById('hdvalidar' + cont).value = 's';
 			}
-			// Abaixo colocamos a resposta na div do campo que fez a requisição
+			// Abaixo colocamos a resposta na div do campo que fez a requisiï¿½ï¿½o
 			document.getElementById('divtxtcnpjcpf' + cont).innerHTML = resposta;
 		}
 	});/*
@@ -358,7 +358,7 @@ function ConsultaCnpj(campo, cont) {
 
 	req.open("Get", url, true);
 
-	// Quando o objeto recebe o retorno, chamamos a seguinte função;
+	// Quando o objeto recebe o retorno, chamamos a seguinte funï¿½ï¿½o;
 	req.onreadystatechange = function() {
 
 		// Exibe a mensagem "Verificando" enquanto carrega
@@ -366,18 +366,18 @@ function ConsultaCnpj(campo, cont) {
 			document.getElementById('divtxtcnpjcpf' + cont).innerHTML = '<font color="gray">Verificando...</font>';
 		}
 
-		// Verifica se o Ajax realizou todas as operações corretamente
+		// Verifica se o Ajax realizou todas as operaï¿½ï¿½es corretamente
 		// (essencial)
 		if (req.readyState == 4 && req.status == 200) {
 			// Resposta retornada pelo validacao.php
 			var resposta = req.responseText;
-			if (resposta == 'Emissor não cadastrado') {
+			if (resposta == 'Emissor nï¿½o cadastrado') {
 				document.getElementById('hdvalidar' + cont).value = 'n';
 				resposta = '<font color=#ff0000>' + resposta + '</font>';
 			} else {
 				document.getElementById('hdvalidar' + cont).value = 's';
 			}
-			// Abaixo colocamos a resposta na div do campo que fez a requisição
+			// Abaixo colocamos a resposta na div do campo que fez a requisiï¿½ï¿½o
 			document.getElementById('divtxtcnpjcpf' + cont).innerHTML = resposta;
 		}
 
@@ -398,7 +398,7 @@ function verificaTomador(campo, cont){
 			}
 		});
 	}else{
-		document.getElementById('tdServ'+cont).innerHTML = '&nbsp;';
+		document.getElementById('tdServ'+cont).innerHTML = '';
 	}
 }
 
@@ -459,7 +459,7 @@ function ValidaCkbDec(campo){
 	if(total>0){
 		return true;
 	}else{
-		alert('É necessário que escolha ao menos uma declaração');
+		alert('ï¿½ necessï¿½rio que escolha ao menos uma declaraï¿½ï¿½o');
 		return false;
 	}
 }//teste se tem pelo penos uma declaracao selecionada para gerar a guia
@@ -479,11 +479,11 @@ function ValidarDesTomador() {
 				|| (!(document.getElementById('txtValor' + total).value))
 				|| (document.getElementById('txtValor' + total).value == '0,00')
 				|| (!document.getElementById('txtDataEmissao' + total).value)) {
-			alert('Preencha os todos os campos para realizar a declaração!');
+			alert('Preencha os todos os campos para realizar a declaraï¿½ï¿½o!');
 			return false;
 		}
-		if (document.getElementById('tdNota' + total).innerHTML == '<font color="#ff0000">Emissor não cadastrado</font>') {
-			alert('Emissor Digitado não consta em nosso sistema, Favor verifique os dados!');
+		if (document.getElementById('tdNota' + total).innerHTML == '<font color="#ff0000">Emissor nï¿½o cadastrado</font>') {
+			alert('Emissor Digitado nï¿½o consta em nosso sistema, Favor verifique os dados!');
 			document.getElementById('txtPrestador' + total).focus();
 			return false;
 		}
@@ -682,10 +682,10 @@ var dop = {
 		this.CalculaMulta();
 	},
 	cancelarDeclaracao : function (codigo,nome){
-		if(confirm('Deseja cancelar a declaracao N°'+codigo+' de '+nome+'?')){
+		if(confirm('Deseja cancelar a declaracao Nï¿½'+codigo+' de '+nome+'?')){
 			document.getElementById('hdCancelaDop').value=codigo;
 			acessoAjax('inc/declaracoes/dop/declarar_pesquisa.ajax.php','frmDop','spanDop');
-			alert('Declaração de Órgão Público cancelada!');
+			alert('Declaraï¿½ï¿½o de ï¿½rgï¿½o Pï¿½blico cancelada!');
 		}
 	},
 	buscaServicos : function (campo ,cont ){
@@ -706,7 +706,7 @@ var dop = {
 					document.getElementById('tdServ'+cont).innerHTML = 'Verificando...';
 				},
 				sucesso: function(){
-					// Abaixo colocamos a resposta na div do campo que fez a requisição
+					// Abaixo colocamos a resposta na div do campo que fez a requisiï¿½ï¿½o
 					document.getElementById('tdServ'+cont).innerHTML = respostaAjax;
 				}
 			});
@@ -849,7 +849,7 @@ var decc = {
 					document.getElementById('tdServ'+cont).innerHTML = 'Verificando...';
 				},
 				sucesso: function(){
-					// Abaixo colocamos a resposta na div do campo que fez a requisição
+					// Abaixo colocamos a resposta na div do campo que fez a requisiï¿½ï¿½o
 					document.getElementById('tdServ'+cont).innerHTML = respostaAjax;
 				}
 			});
@@ -955,7 +955,7 @@ function buscaServicosCartorioTipo(campo, resultado, contador) {
 		
 		req.open("Get", url, true);
 			 
-		// Quando o objeto recebe o retorno, chamamos a seguinte função;
+		// Quando o objeto recebe o retorno, chamamos a seguinte funï¿½ï¿½o;
 		req.onreadystatechange = function() {
 		 
 			// Exibe a mensagem "Verificando" enquanto carrega
@@ -963,12 +963,12 @@ function buscaServicosCartorioTipo(campo, resultado, contador) {
 				document.getElementById(resultado).innerHTML = '<select style="width:280px;"><option/></select>';
 			}
 		 
-			// Verifica se o Ajax realizou todas as operações corretamente (essencial)
+			// Verifica se o Ajax realizou todas as operaï¿½ï¿½es corretamente (essencial)
 			if(req.readyState == 4 && req.status == 200) {
 				// Resposta retornada pelo validacao.php
 				var resposta = req.responseText;
 				//alert(resposta);
-				// Abaixo colocamos a resposta na div do campo que fez a requisição
+				// Abaixo colocamos a resposta na div do campo que fez a requisiï¿½ï¿½o
 				document.getElementById(resultado).innerHTML = resposta;
 			}
 		 
@@ -1062,7 +1062,7 @@ function chamaForm(menu,submenu){
 }
 */
 
-//Função que envia os dados do form para uma pagina em branco do formulario dos prestadores
+//Funï¿½ï¿½o que envia os dados do form para uma pagina em branco do formulario dos prestadores
 function enviaFormPrestadores(btn)
 {
 	if(btn.name == "rdCompleta")	
@@ -1078,7 +1078,7 @@ function enviaFormPrestadores(btn)
 	document.frmPrestadoresBtn.submit();
 }
 
-//Função que envia os dados do form para uma pagina em branco do formulario dos serviços
+//Funï¿½ï¿½o que envia os dados do form para uma pagina em branco do formulario dos serviï¿½os
 function enviaFormServicos(btn)
 {
 	if(btn.name == "rdAtivos")	
@@ -1094,7 +1094,7 @@ function enviaFormServicos(btn)
 	document.frmServicos.submit();
 }
 
-//Função para escoinder a div apos o clique
+//Funï¿½ï¿½o para escoinder a div apos o clique
 function EscondeDiv(div)
 {
  document.getElementById(div).style.display='none';
@@ -1327,7 +1327,7 @@ function incluirServico()
 
 
 
-// FUNÇÃO PARA MARCAR TODOS OS CHECKBOX DE EMISSORES QUE TENEHAM O AIDF LIBERADO
+// FUNï¿½ï¿½O PARA MARCAR TODOS OS CHECKBOX DE EMISSORES QUE TENEHAM O AIDF LIBERADO
 function MarcaCheckboxAIDF(cb,txt,x)
 	{
 		var cb=cb+x;
@@ -1336,7 +1336,7 @@ function MarcaCheckboxAIDF(cb,txt,x)
 		document.getElementById(txt).disabled=true;
 	}
 	
-// FUNÇÃO PARA TRATAR O FORMULÁRIO DO AIDF	
+// FUNï¿½ï¿½O PARA TRATAR O FORMULï¿½RIO DO AIDF	
 function AIDF(txt,cb,x)	
 	{
 		var txt=txt+x;
@@ -1354,14 +1354,14 @@ function AIDF(txt,cb,x)
 			}
 	}
 
-// FUNÇÃO PARA CONFIRMAÇÃO DA ESCRITURAÇÃO DE NOTAS 
+// FUNï¿½ï¿½O PARA CONFIRMAï¿½ï¿½O DA ESCRITURAï¿½ï¿½O DE NOTAS 
 function ConfirmaEscriturar(boleto)
 	{
 		if(confirm("Deseja escrituras as notas contidas no boleto "+boleto+"?"))
 			{window.location="inc/escrituracao_inserir.php?boleto="+boleto;}
 	}
 
-// FUNÇÃO DE TRATAMENTO DO FORMULÁRIO DE PESQUISA DE BOLETOS
+// FUNï¿½ï¿½O DE TRATAMENTO DO FORMULï¿½RIO DE PESQUISA DE BOLETOS
 function ValidarBuscaBoleto()
 	{
 		if(document.frmBuscaBoleto.txtNroBoleto.value=="")
@@ -1371,7 +1371,7 @@ function ValidarBuscaBoleto()
 			}
 	}
 	
-//FUNÇÃO PARA TRATAMENDO DO FORMULÁRIO DE DELEGAÇÃO DE NIVEL DE USUARIO	
+//FUNï¿½ï¿½O PARA TRATAMENDO DO FORMULï¿½RIO DE DELEGAï¿½ï¿½O DE NIVEL DE USUARIO	
 function MarcaNivel(x)
 	{
 		var baixo="baixo"+x;
@@ -1387,7 +1387,7 @@ function MarcaNivel(x)
 			}
 	}
 	
-// FUNÇÃO PARA MARCAR PERMISSÕES DOS USUARIOS DE NIVEL BAIXO
+// FUNï¿½ï¿½O PARA MARCAR PERMISSï¿½ES DOS USUARIOS DE NIVEL BAIXO
 function MarcaCheckboxBaixo(x)
 	{
 		var baixo = "baixo"+x;
@@ -1397,7 +1397,7 @@ function MarcaCheckboxBaixo(x)
 		document.getElementById(medio).disabled = true;
 	}
 
-// FUNÇÃO PARA MARCAR PERMISSÕES DOS USUÁRIOS DE NIVEL MÉDIO
+// FUNï¿½ï¿½O PARA MARCAR PERMISSï¿½ES DOS USUï¿½RIOS DE NIVEL Mï¿½DIO
 function MarcaCheckboxMedio(x)
 	{
 		var medio = "medio"+x;
@@ -1628,7 +1628,7 @@ function CalculaIssRetido(campovaltotal,campoissretido)
 		}
 	else
 		{
-			alert('Não pode reter mais do que 100% de iss');		
+			alert('Nï¿½o pode reter mais do que 100% de iss');		
 		}
 }
 	
@@ -1646,21 +1646,21 @@ function SomaDeduc(campodeduc,campovaltotal)
 //----- Teste
 
 /***
-* Descrição.: formata um campo do formulário de
-* acordo com a máscara informada...
-* Parâmetros: - objForm (o Objeto Form)
+* Descriï¿½ï¿½o.: formata um campo do formulï¿½rio de
+* acordo com a mï¿½scara informada...
+* Parï¿½metros: - objForm (o Objeto Form)
 * - strField (string contendo o nome
 * do textbox)
 * - sMask (mascara que define o
-* formato que o dado será apresentado,
+* formato que o dado serï¿½ apresentado,
 * usando o algarismo "9" para
-* definir números e o símbolo "!" para
+* definir nï¿½meros e o sï¿½mbolo "!" para
 * qualquer caracter...
 * - evtKeyPress (evento)
 * Uso.......: <input type="textbox"
 * name="xxx".....
 * onkeypress="return txtBoxFormat(document.rcfDownload, 'str_cep', '99999-999', event);">
-* Observação: As máscaras podem ser representadas como os exemplos abaixo:
+* Observaï¿½ï¿½o: As mï¿½scaras podem ser representadas como os exemplos abaixo:
 * CEP -> 99.999-999
 * CPF -> 999.999.999-99
 * CNPJ -> 99.999.999/9999-99
@@ -1669,7 +1669,7 @@ function SomaDeduc(campodeduc,campovaltotal)
 * Tel Cel -> (99) 9999-9999
 * Processo -> 99.999999999/999-99
 * C/C -> 999999-!
-* E por aí vai...
+* E por aï¿½ vai...
 ***/
 
 function txtBoxFormat(objForm, strField, sMask, evtKeyPress) {
@@ -1683,8 +1683,8 @@ if(document.all) { // Internet Explorer
 
 sValue = objForm[strField].value;
 
-// Limpa todos os caracteres de formatação que
-// já estiverem no campo.
+// Limpa todos os caracteres de formataï¿½ï¿½o que
+// jï¿½ estiverem no campo.
 sValue = sValue.toString().replace( "-", "" );
 sValue = sValue.toString().replace( "-", "" );
 sValue = sValue.toString().replace( ".", "" );
@@ -1723,9 +1723,9 @@ while (i <= mskLen) {
 objForm[strField].value = sCod;
 
 if (nTecla != 8) { // backspace
-		if (sMask.charAt(i-1) == "9") { // apenas números...
+		if (sMask.charAt(i-1) == "9") { // apenas nï¿½meros...
 			return ((nTecla > 47) && (nTecla < 58)); 
-		} // números de 0 a 9
+		} // nï¿½meros de 0 a 9
 		else { // qualquer caracter...
 			return true;
 		} 
@@ -1733,7 +1733,7 @@ if (nTecla != 8) { // backspace
 		return true;
 	}
 }
-//Fim da Função Máscaras Gerais
+//Fim da Funï¿½ï¿½o Mï¿½scaras Gerais
 
 function verificaDia(){
 	var ano = parseInt(document.getElementById('cmbAno').value);

@@ -28,8 +28,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$datahoje=date("Y-m-d");
 	if($cod_ativar){
 		//Ativa os cadastros mudando no banco de NL para A
-		mysql_query("UPDATE cadastro SET estado = 'A', datainicio='$datahoje' WHERE codigo = '$cod_ativar' ");
+		$PDO->query("UPDATE cadastro SET estado = 'A', datainicio='$datahoje' WHERE codigo = '$cod_ativar' ");
 	}
 	
-	include("liberar_lista.ajax.php");
+	require_once("liberar_lista.ajax.php");
 ?>

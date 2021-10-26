@@ -34,43 +34,43 @@ if($emissor_CNPJ){
 			if((strlen($emissor_CNPJ) == 18) || (strlen($emissor_CNPJ) == 14)){
 				//Verifica qual o codigo para prestadores
 				$codtipo = codtipo("prestador");
-				//Verifica qual o tipo de declaração este prestador possui
-				$sql_verifica_coddectipo = mysql_query("
+				//Verifica qual o tipo de declaraÃ§Ã£o este prestador possui
+				$sql_verifica_coddectipo = $PDO->query("
 					SELECT 
 						codtipodeclaracao 
 					FROM 
 						cadastro 
 					WHERE 
 						(cnpj = '$emissor_CNPJ' OR cpf = '$emissor_CNPJ') AND codtipo = '$codtipo' AND estado = 'A'");
-				list($codtipodec_sql) = mysql_fetch_array($sql_verifica_coddectipo);
+				list($codtipodec_sql) = $sql_verifica_coddectipo->fetch();
 				
-				if(mysql_num_rows($sql_verifica_coddectipo)){
-					//Pega o codigo dos tipos de verificação possiveis
+				if($sql_verifica_coddectipo->rowCount()){
+					//Pega o codigo dos tipos de verificaÃ§Ã£o possiveis
 					$codtipodec_consolidada  = codtipodeclaracao("DES Consolidada");
 					$codtipodec_simplificada = codtipodeclaracao("DES Simplificada");
 					
-					//Testa o tipo de declaração do prestador dependendo do tipo da include em paginas diferentes
+					//Testa o tipo de declaraÃ§Ã£o do prestador dependendo do tipo da include em paginas diferentes
 					if($codtipodec_sql == $codtipodec_consolidada){
-						include("comtomador.php");
+						require_once("comtomador.php");
 					}elseif($codtipodec_sql == $codtipodec_simplificada){
-						include("semtomador.php");
+						require_once("semtomador.php");
 					}else{
-						echo "<b>O tipo de declaração deste prestador é simples nacional!</b>";
+						echo "<b>O tipo de declaraÃ§Ã£o deste prestador Ã© simples nacional!</b>";
 					}
 				}else{
-					echo "<b>Este cnpj/cpf não está cadastrado ou não foi liberado!</b>";
+					echo "<b>Este cnpj/cpf nÃ£o estÃ¡ cadastrado ou nÃ£o foi liberado!</b>";
 				}
 			}else{
-				echo "<b>O CNPJ/CPF está em um formato inválido</b>";
+				echo "<b>O CNPJ/CPF estÃ¡ em um formato invï¿½lido</b>";
 			}
 		}elseif($tipo == "T"){
-			include("tomadores.php");
+			require_once("tomadores.php");
 		}
 	}else{
-		echo "<b>Você deve selecionar um tipo!</b>";
+		echo "<b>VocÃª deve selecionar um tipo!</b>";
 	}
 }else{
-	echo "<b>Você deve digitar um cnpj/cpf!</b>";
+	echo "<b>VocÃª deve digitar um cnpj/cpf!</b>";
 }
 
 
@@ -93,6 +93,6 @@ if($_POST){
 		include 'gerarguia_issretido.php';
 	}
 	
-	Mensagem("Serviço(s) declarado(s)!");
+	Mensagem("ServiÃ§o(s) declarado(s)!");
 }*/
 ?>

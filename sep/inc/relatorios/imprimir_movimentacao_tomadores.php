@@ -20,19 +20,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
     <?php
 
-    include("../../inc/conect.php");
-    include("../../funcoes/util.php");
+    require_once("../../inc/conect.php");
+    require_once("../../funcoes/util.php");
     // variaveis vindas do conect.php
     // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF
 
-    $sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+    $sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
     //preenche a variavel com os valores vindos do banco
-    list($BRASAO) = mysql_fetch_array($sql_brasao);
+    list($BRASAO) = $sql_brasao->fetch();
 
     $meses = array(
         1  => "Janeiro",
         2  => "Fevereiro",
-        3  => "Mar&ccedil;o",
+        3  => "Março",
         4  => "Abril",
         5  => "Maio",
         6  => "Junho",
@@ -45,7 +45,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     );
     ?>
 
-        <title>Imprimir Movimenta&ccedil;&atilde;o</title>
+        <title>Imprimir Movimentação</title>
 
 
         <style type="text/css"  media="screen">
@@ -98,7 +98,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td width="584" height="33" colspan="2">
               <span class="style1">
                   <center>
-                     <p>RELAT&Oacute;RIO DE <b>MOVIMENTA&Ccedil;&Atilde;O POR TOMADORES</b> </p>
+                     <p>RELATÓRIO DE <b>MOVIMENTAÇÃO POR TOMADORES</b> </p>
                      <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
                      <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
                   </center>
@@ -123,22 +123,22 @@ Fith Floor, Boston, MA 02110-1301, USA
             $where = "";
             if(empty($ano) && empty($mes)){
                 $where = "";
-                $sqlPeriodo = mysql_query("
+                $sqlPeriodo = $PDO->query("
                     SELECT DATE_FORMAT(MAX(datahoraemissao),'%m/%Y') AS final,
                     DATE_FORMAT(MIN(datahoraemissao),'%m/%Y') AS inicio
                     FROM notas
                 ");
                 $historico = mysql_fetch_object($sqlPeriodo);
-                $periodo = "<b>Per&iacute;odo:</b> {$historico->inicio} at&eacute; {$historico->final}";
+                $periodo = "<b>Período:</b> {$historico->inicio} até {$historico->final}";
             }elseif(!empty($ano) && empty($mes)){
                 $where = "WHERE DATE_FORMAT(notas.datahoraemissao,'%Y') = '$ano'";
-                $periodo = "<b>Per&iacute;odo:</b> 01/$ano at&eacute; 12/$ano";
+                $periodo = "<b>Período:</b> 01/$ano até 12/$ano";
             }elseif(empty($ano) && !empty($mes)){
                 $where = "WHERE DATE_FORMAT(notas.datahoraemissao,'%m') = '$mes'";
-                $periodo = "<b>Per&iacute;odo:</b> Hist&oacute;rico do m&ecirc;s de $nomeMes";
+                $periodo = "<b>Período:</b> Histórico do mês de $nomeMes";
             }elseif(!empty($ano) && !empty($mes)){
                 $where = "WHERE DATE_FORMAT(notas.datahoraemissao,'%Y-%m') = '$ano-$mes'";
-                $periodo = "<b>Per&iacute;odo:</b> $mes/$ano";
+                $periodo = "<b>Período:</b> $mes/$ano";
             }
 
             if(empty($where) && !empty($docTomador)){
@@ -146,7 +146,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             }elseif(!empty($where) && !empty($codPrestador)){
                 $where .= " AND notas.tomador_cnpjcpf = '$docTomador'";
             }
-            $sqlValores = mysql_query("
+            $sqlValores = $PDO->query("
                SELECT
                    SUM(notas_servicos.basecalculo) AS arrecadacao,
                    SUM(notas_servicos.issretido) AS issretido,
@@ -184,7 +184,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             </tr>
         </table>
         <?php
-            //Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela fun��o
+            //Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
             $varcont= $_POST['hdContador'];
 
             $query = ("
@@ -203,7 +203,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 GROUP BY nome
                 ORDER BY nome
             ");
-            $sql = mysql_query($query);
+            $sql = $PDO->query($query);
             $result = mysql_num_rows($sql);
             $x = 0;
             if($result == 1){
@@ -226,7 +226,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <?php
             }
             $cont = 0;
-            while($dados_pesquisa = mysql_fetch_array($sql)){
+            while($dados_pesquisa = $sql->fetch()){
                 if(strlen($dados_pesquisa['nome']) > 40){
                     $descricao = ResumeString($dados_pesquisa['nome'],40);
                 }else{
@@ -246,7 +246,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                         </table>
                         <table width="95%" class="tabela" border="1" cellspacing="0">
                             <tr style="background-color:#999999">
-                              <td width="50%" align="center"><strong>Servi�o</strong></td>
+                              <td width="50%" align="center"><strong>Serviço</strong></td>
                               <td width="25%" align="center"><strong>Valor Arrecadado</strong></td>
                               <td width="15%" align="center"><strong>ISS</strong></td>
                               <td width="10%" align="center"><strong>ISS Retido</strong></td>

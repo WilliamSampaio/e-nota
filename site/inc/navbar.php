@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 //rawurlencode($CONF_BRASAO);
 ?>
 
-<nav class="navbar navbar-dark" style="background-color: #26467b;">
+<nav class="navbar navbar-light" style="background-color: #26467b;">
     <div class="container" style='height: 96px;'>
         <table width="100%" cellspacing="0" cellpadding="0">
             <tr>
@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <img src="
                             <?php
                             if ($CONF_BRASAO) {
-                                echo "../img/brasoes/" . rawurlencode($CONF_BRASAO);
+                                echo "../img/brasoes/" . isTenancyAppBySubdomain() . '/' . rawurlencode($CONF_BRASAO);
                             }
                             ?>" alt="" width="64" height="64" class="d-inline-block align-text-top">
                     </a>

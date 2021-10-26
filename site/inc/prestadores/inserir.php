@@ -19,8 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?> 
 <?php
-require_once("../../../include/conect.php");
-require_once("../../../funcoes/util.php");
+require_once '../../../include/conect.php';
 
 // Pega as variaveis que vieram por POST
 $data = date("Y-m-d");
@@ -47,7 +46,7 @@ $CODCAT             = $_POST['txtMAXCODIGOCAT'];
 $nfe                = $_POST['txtNfe'];
 $uf                 = $_POST['txtInsUfEmpresa'];
 
-// define se � ou nao contador
+// define se é ou nao contador
 $sql = $PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
 list($maxcodigo) = $sql->fetch();
 $sql_categoria = $PDO->query("SELECT codigo FROM servicos_categorias WHERE nome LIKE '%Contabil%'");
@@ -86,7 +85,7 @@ list($codtipodeclaracao) = $sql->fetch();
 
 // verifca se o valor da variavel cpfcnpj e valido como cpf ou cmpj
 if ((strlen($cpfcnpj) != 14) && (strlen($cpfcnpj) != 18)) {
-	Mensagem('O CPF/CNPJ informado n&atilde;o &eacute; v&aacute;lido');
+	Mensagem('O CPF/CNPJ informado não é válido');
 	echo "
 			<script>
 				window.location='../../prestadores.php';
@@ -94,7 +93,7 @@ if ((strlen($cpfcnpj) != 14) && (strlen($cpfcnpj) != 18)) {
 		";
 }
 
-//Verifica se n�o h� nenhuma empresa cadastrada com o mesmo nome e/ou cnpj
+//Verifica se não há nenhuma empresa cadastrada com o mesmo nome e/ou cnpj
 $campo = tipoPessoa($cpfcnpj);
 $teste_nome        = $PDO->query("SELECT codigo FROM cadastro WHERE nome = '$nome'");
 $teste_razaosocial = $PDO->query("SELECT codigo FROM cadastro WHERE razaosocial = '$razaosocial'");
@@ -105,13 +104,13 @@ $erro = 0;
 $codtipo_tomador = codtipo('tomador');
 
 if ($teste_cnpj->rowCount() > 0) {
-	$msg = "J&aacute; existe um prestador de servi&ccedil;os com este CPF/CNPJ";
+	$msg = "Já existe um prestador de serviços com este CPF/CNPJ";
 	$erro = 2;
 } elseif ($teste_razaosocial->rowCount() > 0) {
-	$msg = "J&aacute; existe um prestador de servi&ccedil;os com esta razão social";
+	$msg = "Já existe um prestador de serviços com esta razão social";
 	$erro = 1;
 } elseif ($teste_nome->rowCount() > 0) {
-	$msg = "J&aacute; existe um prestador de servi&ccedil;os  com este nome";
+	$msg = "Já existe um prestador de serviços  com este nome";
 	$erro = 1;
 }
 //
@@ -211,7 +210,7 @@ list($LINK_ACESSO) = $sql_url_site->fetch();
 
 $imagemTratada = $_SERVER['HTTP_HOST'] . "/img/brasoes/" . rawurlencode($CONF_BRASAO);
 $msg = "
-		<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Bras&atilde;o Prefeitura\" title=\"Bras&atilde;o\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
+		<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Brasão Prefeitura\" title=\"Brasão\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
 		O cadastro da empresa $nome foi efetuado com sucesso.<br>
 		Dados da empresa:<br><br>
 		Razão Social: $razaosocial<br>
@@ -225,8 +224,8 @@ $msg = "
 		3- Clique no link Prestador<br>
 		4- Entre em acessar o sistema<br>
 		5- Em login insira o cpf/cnpf da empresa<br>
-		6- Sua senha &eacute; <b><font color=\"RED\">$senha</font></b><br>
-		7- Insira o c&oacute;digo de verifica&ccedil;&atilde;o que aparece ao lado<br>";
+		6- Sua senha é <b><font color=\"RED\">$senha</font></b><br>
+		7- Insira o código de verificação que aparece ao lado<br>";
 
 $assunto = "Acesso ao Sistema NF-e ($CONF_CIDADE).";
 
@@ -285,7 +284,7 @@ $vetor_socioscpf = array($txtCpfSocio1, $txtCpfSocio2, $txtCpfSocio3, $txtCpfSoc
 //insere os socios no banco
 while ($contsocios < $nrosocios) {
 	if ($vetor_sociosnomes[$contsocios] != "") {
-		//Especifica que na primeira posi��o ser� inserido um responsavel
+		//Especifica que na primeira posição será inserido um responsavel
 		if ($contsocios == 0) {
 			$sql_cargo = $PDO->query("SELECT codigo FROM cargos WHERE cargo = 'diretor'");
 		} else {
@@ -305,7 +304,7 @@ while ($contsocios < $nrosocios) {
 
 //gera o comprovante em pdf 
 $CodEmp = base64_encode($CODEMPRESA);
-Mensagem('Empresa cadastrada! N&atilde;o esque&ccedil;a de Imprimir o comprovante de cadastro que abrir&aacute; em uma nova janela!');
+Mensagem('Empresa cadastrada! Não esqueça de Imprimir o comprovante de cadastro que abrirá em uma nova janela!');
 print "
 			<script language='javascript' type='text/javascript' charset=\"utf-8\">
 				window.open('../../../reports/cadastro_comprovante.php?COD=$CodEmp');

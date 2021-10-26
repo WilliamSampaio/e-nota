@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 
 <?php			
-	$query=mysql_query("
+	$query=$PDO->query("
 	SELECT  cad.codigo,cad.nome, ds.tomador_cnpjcpf ,COUNT(ds.nota_nro) as nronotas,ds.nota_nro  
 	FROM cadastro as cad
 	INNER JOIN simples_des ON simples_des.codemissor=cad.codigo 			
@@ -32,9 +32,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 	HAVING nronotas >1 AND COUNT(distinct ds.tomador_cnpjcpf)<>1");	
 	
 	while($dados = mysql_fetch_object($query)){		
-	  $sql=mysql_query("SELECT nota_nro FROM  inconsistencias WHERE codemissor ='{$dados->codigo}' AND nota_nro='{$dados->nota_nro}'");	  
+	  $sql=$PDO->query("SELECT nota_nro FROM  inconsistencias WHERE codemissor ='{$dados->codigo}' AND nota_nro='{$dados->nota_nro}'");	  
 	  if(mysql_num_rows($sql)==0){	  
-		mysql_query("INSERT INTO inconsistencias 
+		$PDO->query("INSERT INTO inconsistencias 
 					 SET codemissor='{$dados->codigo}',nota_nro='{$dados->nota_nro}',estado='A',tipo='duplicadas',datahorainconsistencia=NOW()");
 	  }
 	}	

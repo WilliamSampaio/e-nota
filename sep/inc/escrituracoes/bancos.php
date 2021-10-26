@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include('../conect.php');
-include("../../funcoes/util.php");
+require_once('../conect.php');
+require_once("../../funcoes/util.php");
 
 $nomebanco = $_GET['slBancos'];
 ?>

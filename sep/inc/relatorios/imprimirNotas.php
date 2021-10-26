@@ -20,29 +20,29 @@
 ?>
 
 <?php //Includes
-	include("../../inc/conect.php");
-	include("../../funcoes/util.php");
+	require_once("../../inc/conect.php");
+	require_once("../../funcoes/util.php");
 ?>
 
-<?php //Pega o bras„o
-	$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
-	list($BRASAO) = mysql_fetch_array($sql_brasao);
+<?php //Pega o brasÔøΩo
+	$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
+	list($BRASAO) = $sql_brasao->fetch();
 ?>
 
-<?php //Define o tÌtulo do relatÛrio de acordo com o que vem do rdbServicos
+<?php //Define o t√≠tulo do relatÔøΩrio de acordo com o que vem do rdbServicos
 	if ($_POST['rdbNotas'] == 'canceladas')
 		$titulo = 'CANCELADAS';
 	
 	else
-		$titulo = 'RETEN«√O DO ISSQN';
+		$titulo = 'RETENÔøΩÔøΩO DO ISSQN';
 
 ?>
 
-<?php //Pega o mÍs que veio por post
+<?php //Pega o mÔøΩs que veio por post
 	$mes = $_POST['cmbMes'];
 ?>
 
-<!-- InÌcio do css da visualizaÁ„o da p·gina -->
+<!-- InÔøΩcio do css da visualizaÔøΩÔøΩo da p√°gina -->
 	<style type="text/css" media="screen">
 	.style1 {
 		font-family: Georgia, "Times New Roman", Times, serif;
@@ -66,27 +66,27 @@
 		height: 100%;
 	}
 	</style>
-<!-- Fim do css da visualizaÁ„o da p·gina -->
+<!-- Fim do css da visualizaÔøΩÔøΩo da p√°gina -->
 
 
-<!-- InÌcio do css da Impress„o da p·gina -->
+<!-- InÔøΩcio do css da Impress√£o da p√°gina -->
 	<style type="text/css" media="print">
 	#DivImprimir{
-		display: none; /*Tira a div imprimir na hora da impress„o*/
+		display: none; /*Tira a div imprimir na hora da impressÔøΩo*/
 	}
 	</style>
-<!-- Fim do css da Impress„o da p·gina -->
+<!-- Fim do css da Impress√£o da p√°gina -->
 
 
-<title>Relat&oacute;rio de Servi&ccedil;os</title>
+<title>Relat√≥rio de Servi√ßos</title>
 
-<div class="pagina"> <!-- InÌcio div p·gina -->
+<div class="pagina"> <!-- InÔøΩcio div p√°gina -->
 	<div id="DivImprimir">
 		<input type="button" onClick="print();" value="Imprimir" /><br />
-		<i><b>Este relat&oacute;rio &eacute; melhor visualizado em formato de impress&atilde;o em paisagem.</b></i>
+		<i><b>Este relat√≥rio √© melhor visualizado em formato de impress√£o em paisagem.</b></i>
 	</div>
 	<br />
-	<!-- InÌcio do topo com as informaÁıes -->
+	<!-- InÔøΩcio do topo com as informaÔøΩÔøΩes -->
 	<div id="DivTopo">
 		<table width="95%" height="120" border="2" cellspacing="0" class="tabela" align="center">
 			<tr>
@@ -98,7 +98,7 @@
 				<td width="584" height="33" colspan="2">
 					<span class="style1">
 						<center>
-							<p>RELAT&Oacute;RIO - <?php print strtoupper($titulo); ?> </p>
+							<p>RELAT√ìRIO - <?php print strtoupper($titulo); ?> </p>
 							<p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 							<p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 						</center>
@@ -107,15 +107,15 @@
 			</tr>
 		</table>
 	</div>
-	<!-- Fim do topo com as informaÁıes -->
+	<!-- Fim do topo com as informaÔøΩÔøΩes -->
 	
 	<br>
 
-<?php //Verifica a opÁ„o marcada e chama o arquivo que vai gerar o relarÛrio
+<?php //Verifica a op√ß√£o marcada e chama o arquivo que vai gerar o relarÔøΩrio
 	if ($_POST['rdbNotas'] == 'canceladas')
-		include("imprimirNotasCanceladas.php");
+		require_once("imprimirNotasCanceladas.php");
 			
 	else
-		include("imprimirNotasRetencao.php");
+		require_once("imprimirNotasRetencao.php");
 ?>
-</div> <!-- Fim div p·gina -->
+</div> <!-- Fim div p√°gina -->

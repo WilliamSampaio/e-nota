@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Tomadores - Relat&oacute;rios</td>  
+    <td width="800" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Tomadores - Relatórios</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -33,7 +33,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<table width="100%">
                           	<tr>
 								<?php
-                                $sql=mysql_query("SELECT codigo FROM tomadores GROUP BY codigo");
+                                $sql=$PDO->query("SELECT codigo FROM tomadores GROUP BY codigo");
                                 $qtd=mysql_num_rows($sql);
                                 ?>                          		
                                 <td colspan="2">
@@ -55,7 +55,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 									onclick="acessoAjax('inc/tomadores/relatorios/resultados.ajax.php','frmRelatoriosTomadores','divresultados')" />
 								</td>
 								<td width="92%" align="left">
-								  <input type="button" class="botao" name="btCreditos" value="Cr�ditos"
+								  <input type="button" class="botao" name="btCreditos" value="Créditos"
 									onclick="acessoAjax('inc/tomadores/relatorios/tomadores.ajax.php','frmRelatoriosTomadores','divresultados')" />
 								</td>
 						  	</tr>

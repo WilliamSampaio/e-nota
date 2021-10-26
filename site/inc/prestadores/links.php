@@ -20,91 +20,54 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <!-- box de conteúdos -->
 <form name="frmPrestadoresBox" method="post" id="frmPrestadoresBox">
-  <input type="hidden" name="txtMenu" id="txtMenu" />
-  <input type="hidden" name="txtCNPJ" id="txtCNPJ" />
+    <input type="hidden" name="txtMenu" id="txtMenu" />
+    <input type="hidden" name="txtCNPJ" id="txtCNPJ" />
 
-  <table border="0" cellspacing="5" cellpadding="0" align="left">
-    <tr>
-      <td width="190" align="center" valign="top">
-        <!-- quadro da esquerda acima -->
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="3" bgcolor="#CCCCCC"></td>
-          </tr>
-          <tr>
-            <td height="10" bgcolor="#999999"></td>
-          </tr>
-          <tr>
-            <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-              <font class="boxTitulo">Acessar Sistema</font><br />
-              <br />
-              Emitente de NF-e, acesse todas as funcionalidades do sistema.<br />
-              <br />
-              <div align="center"></div>
-            </td>
-          </tr>
-          <tr>
-            <td height="1"></td>
-          </tr>
-          <tr>
-            <td height="20" align="left" bgcolor="#859CAD">&nbsp;<img src="../img/box/web.png" width="14" height="14" /> <a href="../emissor/index.php" target="_blank">Servi&ccedil;o on-line</a></td>
-          </tr>
-        </table>
-      </td>
-      <td width="190" align="center" valign="top">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="3" bgcolor="#CCCCCC"></td>
-          </tr>
-          <tr>
-            <td height="10" bgcolor="#999999"></td>
-          </tr>
-          <tr>
-            <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-              <font class="boxTitulo">Cadastro</font><br />
-              <br />
-              Se voc&ecirc; n&atilde;o possui acesso ao sistema, &eacute; necess&aacute;rio realizar o seu cadastramento.<br />
-              <br />
-              <div align="center"></div>
-            </td>
-          </tr>
-          <tr>
-            <td height="1"></td>
-          </tr>
-          <tr>
-            <td height="20" align="left" bgcolor="#859CAD">&nbsp;<img src="../img/box/web.png" alt="" width="14" height="14" /><a onclick="document.getElementById('txtMenu').value='cadastro';frmPrestadoresBox.submit();" href="#" class="box">Servi&ccedil;o on-line</a></td>
-          </tr>
-        </table>
+    <!-- ITENS -->
+    <div class="row">
 
-        <!-- Quadro do meio acima -->
-      </td>
-      <td width="190" align="center" valign="top">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="3" bgcolor="#CCCCCC"></td>
-          </tr>
-          <tr>
-            <td height="10" bgcolor="#999999"></td>
-          </tr>
-          <tr>
-            <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;">
-              <font class="boxTitulo">Consulta</font><br />
-              <br />
-              Consulte se o seu cadastro j&aacute; foi liberado pela Prefeitura Municipal.<br />
-              <br />
-              <div align="center"></div>
-            </td>
-          </tr>
-          <tr>
-            <td height="1"></td>
-          </tr>
-          <tr>
-            <td height="20" align="left" bgcolor="#859CAD">&nbsp;<img src="../img/box/web.png" alt="" width="14" height="14" /><a onclick="document.getElementById('txtMenu').value='consulta';frmPrestadoresBox.submit();" href="#" class="box">Servi&ccedil;o on-line</a></td>
-          </tr>
-        </table>
+        <div class="col-4">
+            <div class="card">
+                <!-- <img src="../img/index/iconeemitirnf.jpg" class="img-fluid" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Acessar Sistema</h5>
+                    <p class="card-text">Emitente de NF-e, acesse todas as funcionalidades do sistema.</p>
+                </div>
+                <div class="card-footer">
+                    <img src="../img/box/web.png" width="14" height="14">
+                    <a href="../emissor/index.php" target="_blank">Serviço online</a>
+                </div>
+            </div>
+        </div>
 
-        <!-- quadro direita acima -->
-      </td>
-    </tr>
-  </table>
+        <div class="col-4">
+            <div class="card">
+                <!-- <img src="../img/index/iconeemitirnf.jpg" class="img-fluid" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Cadastro</h5>
+                    <p class="card-text">Se você não possui acesso ao sistema, cadastre-se aqui.</p>
+                </div>
+                <div class="card-footer">
+                    <img src="../img/box/web.png" width="14" height="14">
+                    <a onclick="document.getElementById('txtMenu').value='cadastro';frmPrestadoresBox.submit();" href="#" class="box">Serviço online</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card">
+                <!-- <img src="../img/index/iconeemitirnf.jpg" class="img-fluid" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Consulta</h5>
+                    <p class="card-text">Consulte se o seu cadastro já foi liberado pela Prefeitura Municipal.</p>
+                </div>
+                <div class="card-footer">
+                    <img src="../img/box/web.png" width="14" height="14">
+                    <a onclick="document.getElementById('txtMenu').value='consulta';frmPrestadoresBox.submit();" href="#" class="box">Serviço online</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </form>

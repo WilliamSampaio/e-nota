@@ -24,21 +24,21 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 	<table width="100%" height="100%" border="0" align="center" cellpadding="5" cellspacing="0" >
 		<tr>
-			<td width="15%" align="left" valign="middle">&nbsp;</td>
-			<td width="85%" align="left" valign="middle">&nbsp;</td>
+			<td width="15%" align="left" valign="middle"></td>
+			<td width="85%" align="left" valign="middle"></td>
 		</tr>
 		<tr>
-			<td align="left" valign="middle">Per&iacute;odo</td>
+			<td align="left" valign="middle">PerÃ­odo</td>
 			<td align="left" valign="middle">
 				<!--
-				 Função para verificar obras pela competencia
+				 FunÃ§Ã£o para verificar obras pela competencia
 				 acessoAjax('inc/declaracoes/decc/declarar.ajax.php','frmDesSemTomador','tdObra'); 
 				-->
 				<select name="cmbMes" id="cmbMes" onChange="decc.SomaImpostos();decc.CalculaMulta();">
 					<option value=""> </option>
 					<option value="1">Janeiro</option>
 					<option value="2">Fevereiro</option>
-					<option value="3">Março</option>
+					<option value="3">Marï¿½o</option>
 					<option value="4">Abril</option>
 					<option value="5">Maio</option>
 					<option value="6">Junho</option>
@@ -65,13 +65,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<td>Obra</td>
 			<td id="tdObra">
 				<?php 
-				$sql_obras=mysql_query("SELECT codigo, obra FROM obras WHERE codcadastro='{$dados['codigo']}'");
-				if(mysql_num_rows($sql_obras)>0){
+				$sql_obras=$PDO->query("SELECT codigo, obra FROM obras WHERE codcadastro='{$dados['codigo']}'");
+				if($sql_obras->rowCount()>0){
 					?>
 					<select name="cmbObra" id="cmbObra" style="width:145px;">
 						<option></option>
 						<?php
-						while($dados_obra=mysql_fetch_array($sql_obras)){
+						while($dados_obra=$sql_obras->fetch()){
 							echo "<option value=\"".$dados_obra['codigo']."\">".$dados_obra['obra']."</option>";
 						}
 					?>
@@ -87,21 +87,21 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<td colspan="2" align="center" valign="top">
 				<table border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#CCCCCC" bgcolor="#FFFFFF">
 					<tr>
-						<td align="center" bgcolor="#CCCCCC">Servi&ccedil;o / Atividade</td>
-						<td align="center" bgcolor="#CCCCCC">Al&iacute;q (%)</td>
-						<td align="center" bgcolor="#CCCCCC">Base de C&aacute;lculo (R$)</td>
+						<td align="center" bgcolor="#CCCCCC">ServiÃ§o / Atividade</td>
+						<td align="center" bgcolor="#CCCCCC">AlÃ­q (%)</td>
+						<td align="center" bgcolor="#CCCCCC">Base de CÃ¡lculo (R$)</td>
 						<td align="center" bgcolor="#CCCCCC">ISS (R$)</td>
-						<td align="center" bgcolor="#CCCCCC">N&ordm;. Documento</td>
+						<td align="center" bgcolor="#CCCCCC">NÂº. Documento</td>
 					</tr>
 					<?php
 
 					listaRegrasMultaDes();//cria os campos hidden com as regras pra multa da declaracao
 					
 					//pega o numero de servicos do emissor
-					$sql_servicos = mysql_query("SELECT codservico 
+					$sql_servicos = $PDO->query("SELECT codservico 
 												 FROM cadastro_servicos
 												 WHERE codemissor='".$dados['codigo']."'");
-					$num_servicos = 1;//quantos linhas vão aparecer pra preencher
+					$num_servicos = 1;//quantos linhas vï¿½o aparecer pra preencher
 					$num_serv_max = 20;// numero maximo de linhas que podem ser adicionadas
 					
 					campoHidden("hdServicos",$num_servicos);
@@ -119,7 +119,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								<option></option>
 								<?php
 									
-									$sql_servicos2 = mysql_query("SELECT servicos.codigo, 
+									$sql_servicos2 = $PDO->query("SELECT servicos.codigo, 
                                                                   servicos.descricao,
                                                                   servicos.aliquota
                                                                   FROM servicos
@@ -128,7 +128,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                                                   INNER JOIN cadastro
                                                                   ON cadastro_servicos.codemissor=cadastro.codigo
                                                                   WHERE cadastro.codigo='".$dados['codigo']."'");
-									while(list($cod_serv, $desc_serv, $aliq_serv) = mysql_fetch_array($sql_servicos2))
+									while(list($cod_serv, $desc_serv, $aliq_serv) = $sql_servicos2->fetch())
 									{
 										if(strlen($desc_serv)>100)
 											$desc_serv = substr($desc_serv,0,100)."...";
@@ -151,7 +151,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						</td>
 					</tr>
 					<tr id="trServb<?php echo $c;?>" style="<?php echo $trServStyle;?>">
-						<td id="tdServ<?php echo $c;?>" colspan="6" align="center" valign="top">&nbsp;</td>
+						<td id="tdServ<?php echo $c;?>" colspan="6" align="center" valign="top"></td>
 					</tr>
 					<?php
 						if ($c>=$num_servicos){
@@ -166,8 +166,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 		</tr>
 		<tr>
 			<td colspan="2" align="right" valign="middle">
-				<input name="btServRemover" id="btServRemover" type="button" value="Remover Serviço" class="botao" disabled="disabled" onClick="decc.RemoverServ();">
-				<input name="btServInserir" id="btServInserir" type="button" value="Inserir Serviço" class="botao" onClick="decc.InserirServ();montaCombo();">
+				<input name="btServRemover" id="btServRemover" type="button" value="Remover ServiÃ§o" class="botao" disabled="disabled" onClick="decc.RemoverServ();">
+				<input name="btServInserir" id="btServInserir" type="button" value="Inserir ServiÃ§o" class="botao" onClick="decc.InserirServ();montaCombo();">
 			</td>
 		</tr>
 		<tr>
@@ -189,14 +189,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 			</td>
 		</tr>
 		<tr>
-			<td align="left" valign="middle">&nbsp;</td>
+			<td align="left" valign="middle"></td>
 			<td align="right" valign="middle"><em>* Confira seus dados antes de continuar<br>
 				** Desabilite seu bloqueador de pop-up</em></td>
 		</tr>
 		<tr>
-			<td align="left" valign="middle">&nbsp;</td>
+			<td align="left" valign="middle"></td>
 			<td align="left" valign="middle">
-				<input type="submit" value="Declarar" name="btDeclarar" class="botao" onClick="return (ValidaFormulario('cmbMes|cmbAno|cmbCodServico1|txtBaseCalculo1|txtNroDoc1|cmbObra','O Período, uma obra e pelo menos um serviço devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
+				<input type="submit" value="Declarar" name="btDeclarar" class="botao" onClick="return (ValidaFormulario('cmbMes|cmbAno|cmbCodServico1|txtBaseCalculo1|txtNroDoc1|cmbObra','O PerÃ­odo, uma obra e pelo menos um serviÃ§o devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
 				<input type="submit" name="btVoltar" class="botao" value="Voltar" />
 			</td>
 		</tr>

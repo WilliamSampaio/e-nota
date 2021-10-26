@@ -20,13 +20,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	if($_POST['COD']){
-		include("editar.php");
+		require_once("editar.php");
 	}else{
 		if($_POST['excluir']){
 			$codigo = $_POST['excluir'];
-			//Mensagem('Servi�o excluido!');
-			mysql_query("DELETE FROM servicos WHERE codigo='$codigo'");
-			add_logs('Excluiu um Servi�o');
+			//Mensagem('Serviço excluido!');
+			$PDO->query("DELETE FROM servicos WHERE codigo='$codigo'");
+			add_logs('Excluiu um Serviço');
 			unset($codigo);
 		}
 	?>
@@ -41,8 +41,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<select name="cmbCategorias" id="cmbCategorias" class="combo">
 						<option value=""></option>
 						<?php                
-						$sql_categorias = mysql_query("SELECT codigo, nome FROM servicos_categorias ORDER BY nome");
-						while(list($categoriacodigo,$categorianome) = mysql_fetch_array($sql_categorias)){               
+						$sql_categorias = $PDO->query("SELECT codigo, nome FROM servicos_categorias ORDER BY nome");
+						while(list($categoriacodigo,$categorianome) = $sql_categorias->fetch()){               
 						?>
 					  		<option value="<?php echo $categoriacodigo; ?>"><?php echo ResumeString($categorianome,50); ?></option>				
 						<?php
@@ -51,18 +51,18 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</select>                </td>
 				</tr>
 				<tr>
-					<td>Descri&ccedil;&atilde;o</td>
+					<td>Descrição</td>
 					<td colspan="3"><input type="text" size="50" maxlength="50" name="txtBuscaDescServicos" class="texto" /></td>
 				</tr>
 				<tr>
-				  <td>C&oacute;digo Servi&ccedil;o</td>
+				  <td>Código Serviço</td>
 				  <td><input type="text" size="20" maxlength="20" name="txtBuscaCodServicos" class="texto" /></td>
 				<td>Tipo Pessoa</td>
 				<td>
 					<select name="cmbTipoPessoa" id="cmbTipoPessoa" class="combo">
 						<option value=""></option>
-						<option value="PJ">Pessoa Jur&iacute;dica</option>
-						<option value="PF">Pessoa F&iacute;sica</option>
+						<option value="PJ">Pessoa Jurídica</option>
+						<option value="PF">Pessoa Física</option>
 						<option value="PJPF">Ambas</option>
 					</select>
 				</td>
@@ -70,18 +70,18 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<tr>
 				  <td align="left">Aliquota</td>
 				  <td align="left"><input type="text" size="5" maxlength="4" name="txtBuscaAliquota" class="texto" />
-					&nbsp;%&nbsp;&nbsp;<em>Exemplo(0.00)</em></td>
-			  <td align="left">Reten&ccedil;&atilde;o ISS</td>
+					%<em>Exemplo(0.00)</em></td>
+			  <td align="left">Retenção ISS</td>
 			  <td align="left">
 				<input name="txtBuscaAliquotaIR" type="text" class="texto" id="txtBuscaAliquotaIR" size="5" maxlength="4" />
-	&nbsp;%&nbsp;&nbsp;<em>Exemplo(0.00)&nbsp;</em></td>
+	%<em>Exemplo(0.00)</em></td>
 				</tr>
 				<tr>
-				  <td align="left">Base de C&aacute;lculo</td>
+				  <td align="left">Base de Cálculo</td>
 				  <td align="left">
 					<input name="txtBuscaBaseCalculo" type="text" class="texto" id="txtBuscaBaseCalculo" onkeyup="MaskMoeda(this)" onkeydown="return NumbersOnly(event)" size="10" maxlength="9" />
 				  </td>
-			  <td align="left">Incid&ecirc;ncia</td>
+			  <td align="left">Incidência</td>
 			  <td align="left">
 				<select name="cmbBuscaIncidencia" id="cmbBuscaIncidencia" class="combo">
 					<option value=""></option>
@@ -117,13 +117,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 				  <td>
 				  	<input type="button" name="btFiltro" value="Buscar" class="botao" onclick="acessoAjax('inc/servicos/busca.ajax.php','frmBusca','dvResult');"/>
 				  </td>
-				  <td colspan="3">&nbsp;</td>
+				  <td colspan="3"></td>
 			  </tr>
 			</table>
 	</fieldset>
 	<?php
 		if($_POST["btFiltro"] == "Pesquisar"){
-			include("busca.php");
+			require_once("busca.php");
 		}
 	}
 	?>

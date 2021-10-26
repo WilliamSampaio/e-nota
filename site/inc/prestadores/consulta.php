@@ -19,14 +19,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
+
 if (!$_POST['txtCNPJ']) {
 
 ?>
 	<table width="100%" border="0" cellspacing="1" cellpadding="0">
 		<tr>
-			<td width="10" height="10" bgcolor="#FFFFFF"></td>
-			<td width="400" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta ao Cadastro do Prestador</td>
-			<td width="405" bgcolor="#FFFFFF"></td>
+			<td width="100" height="10" bgcolor="#FFFFFF"></td>
+			<td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta ao Cadastro do Prestador</td>
+			<td width="100" bgcolor="#FFFFFF"></td>
 		</tr>
 		<tr>
 			<td height="1" bgcolor="#CCCCCC"></td>
@@ -41,23 +42,25 @@ if (!$_POST['txtCNPJ']) {
 		</tr>
 		<tr>
 			<td height="60" colspan="3" bgcolor="#CCCCCC">
-				<form method="post" name="frmCNPJ">
-					<input type="hidden" value="<?php echo $_POST['txtMenu']; ?>" name="txtMenu">
+
+				<form method="post" name="frmCNPJ" action="prestadores.php"> 
+					<input type="hidden" value="<?php echo $_POST['txtMenu'] ?>" name="txtMenu">
 					<table width="98%" height="100%" border="0" align="center" cellpadding="5" cellspacing="0">
 						<tr>
 							<td width="19%" align="left">CNPJ/CPF</td>
 							<td width="81%" align="left" valign="middle"><em>
 									<input class="texto" type="text" title="CNPJ" name="txtCNPJ" id="txtCNPJ" />
-									Somente n&uacute;meros</em></td>
+									Somente números</em></td>
 						</tr>
 						<tr>
-							<td align="center">&nbsp;</td>
+							<td align="center"></td>
 							<td align="left" valign="middle">
-								<input name="btAvancar" type="submit" value="Avan�ar" class="botao" onclick="return verificaCnpjCpfIm();" />&nbsp;<input type="button" name="btVoltar" value="Voltar" class="botao" onClick="window.location='prestadores.php'">
+								<input name="btAvancar" type="submit" value="Avançar" class="botao" onclick="return verificaCnpjCpfIm();" /><input type="button" name="btVoltar" value="Voltar" class="botao" onClick="window.location='prestadores.php'">
 							</td>
 						</tr>
 					</table>
 				</form>
+
 			</td>
 		</tr>
 		<tr>
@@ -94,15 +97,14 @@ if (!$_POST['txtCNPJ']) {
 			FROM 
 				cadastro 
 			WHERE 
-				(cadastro.cnpj = '$cnpj' OR cadastro.cpf = '$cnpj') AND cadastro.codtipo = '$codtipo'
-");
+				(cadastro.cnpj = '$cnpj' OR cadastro.cpf = '$cnpj') AND cadastro.codtipo = '$codtipo'");
 	list(
 		$codigo, $nome, $razaosocial, $senha, $cnpj, $inscrmunicipal, $logradouro, $numero, $municipio, $bairro, $cep,
 		$complemento, $uf, $email, $fonecomercial, $fonecelular, $estado
 	) = $sql_prestadorlogado->fetch();
 	switch ($estado) {
 		case "NL":
-			$estado = '<b>Aguarde a libera&ccedil;&atilde;o da prefeitura</b>';
+			$estado = '<b>Aguarde a liberação da prefeitura</b>';
 			break;
 		case "A":
 			$estado = '<font color="#006600"><b>Cadastro liberado</b></font>';
@@ -119,13 +121,13 @@ if (!$_POST['txtCNPJ']) {
 	$socio = codcargo('socio');
 	$sql_socio = $PDO->query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = '$codigo' AND codcargo = '$socio'");
 
-	if ($sql_prestadorlogado->fetch()) {
+	if ($sql_prestadorlogado->rowCount()) {
 	?>
 		<table width="100%" border="0" cellpadding="0" cellspacing="1">
 			<tr>
-				<td width="5%" height="5" bgcolor="#FFFFFF"></td>
-				<td width="30%" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta ao Cadastro do Prestador</td>
-				<td width="30%" bgcolor="#FFFFFF"></td>
+				<td width="100" height="5" bgcolor="#FFFFFF"></td>
+				<td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">Consulta ao Cadastro do Prestador</td>
+				<td width="100" bgcolor="#FFFFFF"></td>
 			</tr>
 			<tr>
 				<td height="1" bgcolor="#CCCCCC"></td>
@@ -135,6 +137,17 @@ if (!$_POST['txtCNPJ']) {
 				<td height="10" bgcolor="#FFFFFF"></td>
 				<td bgcolor="#FFFFFF"></td>
 			</tr>
+
+			<!-- retorno dos possiveis erros vão aqui! -->
+			<tr>
+				<td colspan="3">
+					<p style="text-align: center; font-size: small; font-weight: bold; color: red;">
+						<?php echo $_SESSION['error'];
+						unset($_SESSION['error']) ?>
+					</p>
+				</td>
+			</tr>
+
 			<tr>
 				<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
 			</tr>
@@ -151,7 +164,7 @@ if (!$_POST['txtCNPJ']) {
 								<td colspan="3" bgcolor="#FFFFFF" align="left" valign="middle"><?php echo $nome; ?></td>
 							</tr>
 							<tr>
-								<td align="left">Raz�o Social:</td>
+								<td align="left">Razão Social:</td>
 								<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo $razaosocial; ?></td>
 							</tr>
 							<tr>
@@ -163,11 +176,11 @@ if (!$_POST['txtCNPJ']) {
 								<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo verificaCampo($inscrmunicipal); ?></td>
 							</tr>
 							<tr>
-								<td align="left">Endere�o:</td>
-								<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo "$logradouro, n� $numero"; ?></td>
+								<td align="left">Endereço:</td>
+								<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo "$logradouro, nº $numero"; ?></td>
 							</tr>
 							<tr>
-								<td align="left">Situac�o:</td>
+								<td align="left">Situacão:</td>
 								<td align="left" bgcolor="#FFFFFF" colspan="3" valign="middle"><?php echo $estado; ?></td>
 							</tr>
 							<tr>
@@ -201,9 +214,9 @@ if (!$_POST['txtCNPJ']) {
 							while (list($nome_resp, $cpf_resp) = $sql_resp->fetch()) {
 							?>
 								<tr>
-									<td align="left">Respons�vel:</td>
+									<td align="left">Responsável:</td>
 									<td align="left" bgcolor="#FFFFFF" valign="middle"><?php echo verificaCampo($nome_resp); ?></td>
-									<td align="left" width="20%">CPF Respons�vel:</td>
+									<td align="left" width="20%">CPF Responsável:</td>
 									<td align="left" width="20%" bgcolor="#FFFFFF" valign="middle"><?php echo verificaCampo($cpf_resp); ?></td>
 								</tr>
 							<?php
@@ -212,9 +225,9 @@ if (!$_POST['txtCNPJ']) {
 							while (list($nome_socio, $cpf_socio) = $sql_socio->fetch()) {
 							?>
 								<tr>
-									<td align="left">S�cio:</td>
+									<td align="left">Sócio:</td>
 									<td align="left" bgcolor="#FFFFFF" valign="middle"><?php echo verificaCampo($nome_socio); ?></td>
-									<td align="left" width="20%">CPF S�cio:</td>
+									<td align="left" width="20%">CPF Sócio:</td>
 									<td align="left" width="20%" bgcolor="#FFFFFF" valign="middle"><?php echo verificaCampo($cpf_socio); ?></td>
 								</tr>
 							<?php
@@ -234,8 +247,10 @@ if (!$_POST['txtCNPJ']) {
 
 <?php
 	} else {
-		Mensagem("Este CNPJ/CPF n&atilde;o est&aacute; cadastrado no sistema");
-		Redireciona("prestadores.php");
+		$_SESSION['error'] = 'Este CNPJ/CPF não está cadastrado no sistema.';
+		// Mensagem("Este CNPJ/CPF não está cadastrado no sistema");
+		header('Location: ' . BASE_URL . 'site/prestadores.php');
+		// Redireciona("prestadores.php");
 	}
 }
 ?>

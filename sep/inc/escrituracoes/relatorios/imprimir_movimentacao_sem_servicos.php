@@ -8,14 +8,14 @@ if ($datahoraemissao =="-")
 /*$query = ("SELECT codigo FROM notas_servicos");
 
 			
-$sql_pesquisa = mysql_query($query);
+$sql_pesquisa = $PDO->query($query);
 $result = mysql_num_rows($sql_pesquisa);*/
 ?>
 <table width="700px" class="tabela">
 	<tr style="background-color:#999999">
     <?php echo "<b>Foram encontrados $result  Resultados</b>"; ?>
-      <td width="40%" align="center"><strong>ServiÁo</strong></td>
-      <td width="25%" align="center"><strong>MovimentaÁ„o Financeira</strong></td>
+      <td width="40%" align="center"><strong>Servi√ßo</strong></td>
+      <td width="25%" align="center"><strong>Movimenta√ß√£o Financeira</strong></td>
       <td width="15%" align="center"><strong>ISS</strong></td>
       <td width="20%" align="center"><strong>ISS Retido</strong></td>
 
@@ -24,8 +24,8 @@ $result = mysql_num_rows($sql_pesquisa);*/
 	
 	
 if(mysql_num_rows($sql_pesquisa)){
-while(list($codServ)=mysql_fetch_array($sql_pesquisa)){
-	$query_serv=mysql_query("
+while(list($codServ)=$sql_pesquisa->fetch()){
+	$query_serv=$PDO->query("
         SELECT
             SUM(notas_servicos.basecalculo) as movimentacao,
             SUM(notas_servicos.issretido) as issretido,
@@ -49,16 +49,16 @@ while(list($codServ)=mysql_fetch_array($sql_pesquisa)){
 		$tipos_extenso = array(
 			"prestador"              => "Prestador",
 			"empreiteira"            => "Empreiteira",
-			"instituicao_financeira" => "InstituiÁ„o Financeira",
-			"cartorio"               => "CartÛrio",
-			"operadora_credito"      => "Operadora de CrÈdito",
-			"grafica"                => "Gr·fica",
+			"instituicao_financeira" => "Institui√ß√£o Financeira",
+			"cartorio"               => "CartÔøΩrio",
+			"operadora_credito"      => "Operadora de Cr√©dito",
+			"grafica"                => "GrÔøΩfica",
 			"contador"               => "Contador",
 			"tomador"                => "Tomador",
-			"orgao_publico"          => "Org„o P˙blico",
+			"orgao_publico"          => "OrgÔøΩo PÔøΩblico",
 			"simples"                => "Simples"
 		);
-		while(list($movimentacao, $issretido, $iss, $codigo) = mysql_fetch_array($query_serv)){
+		while(list($movimentacao, $issretido, $iss, $codigo) = $query_serv->fetch()){
 		//print_array($dados_pesquisa);
 
 			$nomeServico="
@@ -68,12 +68,12 @@ while(list($codServ)=mysql_fetch_array($sql_pesquisa)){
 						servicos
 					WHERE codigo = '$codServ'
 					";
-			$varnome=mysql_query($nomeServico);
+			$varnome=$PDO->query($nomeServico);
 					
 		if (mysql_num_rows($varnome)>0)
 		{
 			
-			$resposta=mysql_fetch_array($varnome);
+			$resposta=$varnome->fetch();
 			$resposta['resumo']=substr($resposta['descricao'], 0, 40);
 
 	if ($movimentacao=="")
@@ -115,8 +115,8 @@ while(list($codServ)=mysql_fetch_array($sql_pesquisa)){
 <table width="700px" class="tabela">
 <?php
 }else{
- //caso n„o encontre resultados, a mensagem 'N„o h· resultados!' ser· mostrada na tela
-	echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">N„o h· resultados!</font></center></td></b></tr>";
+ //caso n√£o encontre resultados, a mensagem 'N√£o h√° resultados!' ser√° mostrada na tela
+	echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">N√£o h√° resultados!</font></center></td></b></tr>";
 }
 ?>
 </table>

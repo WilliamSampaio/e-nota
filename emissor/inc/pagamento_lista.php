@@ -95,7 +95,7 @@ if($sql->rowCount()>0){
    <td width="85" align="center">
       <b>Valor</b>   </td>
    <td width="109" align="center">
-      <b>Nosso n&uacute;mero</b>   </td>
+      <b>Nosso número</b>   </td>
    <td width="84">   </td>  
  </tr>
  <?php
@@ -123,7 +123,7 @@ if($sql->rowCount()>0){
 }else{
 ?>
 	<tr>
-		<td align="center" colspan="4">N�o h&aacute; guias emitidas</td>
+		<td align="center" colspan="4">Não há guias emitidas</td>
 	</tr>
 <?php
 }

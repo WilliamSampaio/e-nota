@@ -34,13 +34,13 @@ Fith Floor, Boston, MA 02110-1301, USA
   $pagina=$_GET["hdPagina"];
   
   
-  //se foi cancelada alguma declaração da o updade no banco e da um alert se der algum erro
+  //se foi cancelada alguma declaraÃ§Ã£o da o updade no banco e da um alert se der algum erro
   if($canceladop){
-  	mysql_query("UPDATE dop_des SET estado='C' WHERE codigo='$canceladop'");
+  	$PDO->query("UPDATE dop_des SET estado='C' WHERE codigo='$canceladop'");
   }//fim if cacela
   
   //faz um where de acordo com oque foi preenchido no from
-  $sql_where=" ";//comeca a var do where como um espaço
+  $sql_where=" ";//comeca a var do where como um espaï¿½o
   if($cnpj){
 	$sql_where.=" AND orgaospublicos.cnpj='$cnpj'";
   }//fim if cnpj
@@ -67,7 +67,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<div>
 				<?php
 				/*$sql_where dinamico de acordo com o que foi preenchido no form*/
-					//query com limitação de paginas
+					//query com limitaï¿½ï¿½o de paginas
 					$query = ("
 						SELECT 
 							dop_des.codigo, 
@@ -86,21 +86,21 @@ Fith Floor, Boston, MA 02110-1301, USA
 							dop_des.codigo DESC
 					");
 					$sql=Paginacao($query,'frmDop','spanDop',10,true);//true para usar os botoes separados
-					if(mysql_num_rows($sql['sql'])>0){//se tem resultado, mostra a tabela
+					if($sql['sql']->rowCount()>0){//se tem resultado, mostra a tabela
 					echo $sql['botoes'];
 						?>
 						<table width="725px">
 							<tr bgcolor="#999999">
 								<td width="45px" align="center">cod</td>
-								<td width="360px" align="center">Razão</td>
+								<td width="360px" align="center">RazÃ£o</td>
 								<td width="60px" align="center">Estado</td>
 								<td width="80px" align="center">Data Gerado</td>
 								<td width="80px" align="center">Competencia</td>
-								<td width="" align="center">Ações</td>
+								<td width="" align="center">AÃ§Ãµes</td>
 							</tr>
 							<?php
 								$cont = 0;
-								while(list($codigo,$razao,$data_gerado, $competencia, $estado) = mysql_fetch_array($sql['sql'])){
+								while(list($codigo,$razao,$data_gerado, $competencia, $estado) = $sql['sql']->fetch()){
 								switch($estado){
 									case "N": $estado_dop="Normal";break;
 									case "C": $estado_dop="Cancelada";break;
@@ -120,13 +120,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td width="80px" <?php echo $cor; ?> align="center"><?php echo $data_gerado;?></td>
 									<td width="80px" <?php echo $cor; ?> align="center"><?php echo $competencia;?></td>
 									<td>
-									<input name="btVizualizar" id="btLupa" title="Vizualizar Declaração" type="button" value="" class="botao" 
+									<input name="btVizualizar" id="btLupa" title="Vizualizar Declaraï¿½ï¿½o" type="button" value="" class="botao" 
 									onClick="VisualizarNovaLinha(
 									'<?php echo $codigo;?>',
 									'<?php echo"tdDop".$cont;?>',
 									this,'inc/declaracoes/dop/declarar_vizualizar.ajax.php')" />
-									<?php if($estado!="C"){//if mostra o botao cancelar se a declaração nao esta cancelada ?>
-									<input name="btCancelar" id="btX" title="Cancelar Declaração" type="button" value="" class="botao" 
+									<?php if($estado!="C"){//if mostra o botao cancelar se a declaraÃ§Ã£o nao esta cancelada ?>
+									<input name="btCancelar" id="btX" title="Cancelar Declaraï¿½ï¿½o" type="button" value="" class="botao" 
 									onClick="document.getElementById('hdPrimeiro').value=1; dop.cancelarDeclaracao('<?php echo $codigo; ?>','<?php echo $razao; ?>');" />
 									<?php }//fim if mostra o botao cancelar se ainda nao estiver cancelada ?>
 									</td>
@@ -141,7 +141,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						</table>
 						<?php
 					}else{
-						echo "<b>Não há declarações de Orgãos Públicos com a pesquisa solicitada</b>";
+						echo "<b>NÃ£o hÃ¡ declaraï¿½ï¿½es de Orgï¿½os Pï¿½blicos com a pesquisa solicitada</b>";
 					}//fim if
 					?>
 				</div>

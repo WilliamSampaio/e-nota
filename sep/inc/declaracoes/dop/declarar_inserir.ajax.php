@@ -23,17 +23,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <table width="100%" height="100%" border="0" align="center" cellpadding="5" cellspacing="0">
 	<tr>
-		<td align="left" valign="middle">&nbsp;</td>
-		<td align="left" valign="middle">&nbsp;</td>
+		<td align="left" valign="middle"></td>
+		<td align="left" valign="middle"></td>
 	</tr>
 	<tr>
-		<td align="left" valign="middle">Per&iacute;odo</td>
+		<td align="left" valign="middle">PerÃ­odo</td>
 		<td align="left" valign="middle">
 			<select name="cmbMes" id="cmbMes" onchange="dop.SomaImpostos();dop.CalculaMulta();">
 				<option value=""> </option>
 				<option value="1">Janeiro</option>
 				<option value="2">Fevereiro</option>
-				<option value="3">Março</option>
+				<option value="3">Marï¿½o</option>
 				<option value="4">Abril</option>
 				<option value="5">Maio</option>
 				<option value="6">Junho</option>
@@ -61,21 +61,21 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<table border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#CCCCCC" bgcolor="#FFFFFF">
 				<tr>
 					<td align="center" bgcolor="#CCCCCC">Prestador(CPF/CNPJ)</td>
-					<td align="center" bgcolor="#CCCCCC">Servi&ccedil;o / Atividade</td>
-					<td align="center" bgcolor="#CCCCCC">Al&iacute;q (%)</td>
-					<td align="center" bgcolor="#CCCCCC">Base de C&aacute;lculo (R$)</td>
+					<td align="center" bgcolor="#CCCCCC">ServiÃ§o / Atividade</td>
+					<td align="center" bgcolor="#CCCCCC">AlÃ­q (%)</td>
+					<td align="center" bgcolor="#CCCCCC">Base de CÃ¡lculo (R$)</td>
 					<td align="center" bgcolor="#CCCCCC">ISS (R$)</td>
-					<td align="center" bgcolor="#CCCCCC">N&ordm;. Documento</td>
+					<td align="center" bgcolor="#CCCCCC">NÂº. Documento</td>
 				</tr>
 				<?php
 					
 				listaRegrasMultaDes();//cria os campos hidden com as regras pra multa da declaracao
 				
 				//pega o numero de servicos do emissor
-				$sql_servicos = mysql_query("SELECT codservico 
+				$sql_servicos = $PDO->query("SELECT codservico 
 											 FROM emissores_servicos
 											 WHERE codemissor='$cod_emissor'");
-				$num_servicos = 1;//quantos linhas vão aparecer pra preencher
+				$num_servicos = 1;//quantos linhas vï¿½o aparecer pra preencher
 				$num_serv_max = 20;// numero maximo de linhas que podem ser adicionadas
 				
 				campoHidden("hdServicos",$num_servicos);
@@ -95,10 +95,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<option></option>
 							<?php
 									
-								$sql_servicos2 = mysql_query("
+								$sql_servicos2 = $PDO->query("
 									SELECT servicos.codigo, servicos.descricao, servicos.aliquota FROM servicos ORDER BY descricao
 								");
-								while(list($cod_serv, $desc_serv, $aliq_serv) = mysql_fetch_array($sql_servicos2))
+								while(list($cod_serv, $desc_serv, $aliq_serv) = $sql_servicos2->fetch())
 								{
 									if(strlen($desc_serv)>100)
 										$desc_serv = substr($desc_serv,0,100)."...";
@@ -135,8 +135,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</tr>
 	<tr>
 		<td colspan="2" align="right" valign="middle">
-			<input name="btServRemover" id="btServRemover" type="button" value="Remover Serviço" class="botao" disabled="disabled" onclick="dop.RemoverServ();">
-			<input name="btServInserir" id="btServInserir" type="button" value="Inserir Serviço" class="botao" onclick="dop.InserirServ();">
+			<input name="btServRemover" id="btServRemover" type="button" value="Remover ServiÃ§o" class="botao" disabled="disabled" onclick="dop.RemoverServ();">
+			<input name="btServInserir" id="btServInserir" type="button" value="Inserir ServiÃ§o" class="botao" onclick="dop.InserirServ();">
 		</td>
 	</tr>
 	<tr>
@@ -158,14 +158,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 		</td>
 	</tr>
 	<tr>
-		<td align="left" valign="middle">&nbsp;</td>
+		<td align="left" valign="middle"></td>
 		<td align="right" valign="middle"><em>* Confira seus dados antes de continuar<br>** Desabilite seu bloqueador de pop-up</em></td>
 	</tr>
 	<tr>
-		<td align="left" valign="middle">&nbsp;</td>
+		<td align="left" valign="middle"></td>
 		<td align="left" valign="middle">
 			<input type="submit" value="Declarar" name="btDeclarar" class="botao" 
-			onclick="return (ValidaFormulario('cmbMes|cmbAno|txtCNPJPrestador1|cmbCodServico1|txtBaseCalculo1|txtNroDoc1','O Período e pelo menos um serviço devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
+			onclick="return (ValidaFormulario('cmbMes|cmbAno|txtCNPJPrestador1|cmbCodServico1|txtBaseCalculo1|txtNroDoc1','O PerÃ­odo e pelo menos um serviÃ§o devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
 			<input type="submit" name="btVoltar" class="botao" value="Voltar" />
 		</td>
 	</tr>

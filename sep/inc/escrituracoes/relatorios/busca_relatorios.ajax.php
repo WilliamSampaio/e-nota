@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include('../../conect.php');
-include("../../../funcoes/util.php");
+require_once('../../conect.php');
+require_once("../../../funcoes/util.php");
 
 
 $sqltipo = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo, guia_pagamento.nossonumero FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia GROUP BY guia_pagamento.codigo ORDER BY guia_pagamento.dataemissao");
@@ -35,17 +35,17 @@ if(mysql_num_rows($sql)>0){
 				<table width="100%">
 							<tr bgcolor="#999999">
 								<td width="210" align="center">Nome</td>
-								<td width="200" align="center">Nosso Número</td>
+								<td width="200" align="center">Nosso NÃºmero</td>
 								<td width="80" align="center">Valor</td>
 								<td width="80" align="center">Pagamento</td>
-								<td width="95" align="center">Data Emissão</td>
+								<td width="95" align="center">Data EmissÃ£o</td>
 								<td width="110"align="center">Data Vencimento</td>
 							</tr>
 						<?php
-                        while(list($tipo, $codigo) = mysql_fetch_array($sql)){
+                        while(list($tipo, $codigo) = $sql->fetch()){
 						if($tipo=="des")
 						{
-							$relacionamento = mysql_query("
+							$relacionamento = $PDO->query("
 							SELECT cadastro.razaosocial, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -56,7 +56,7 @@ if(mysql_num_rows($sql)>0){
 						}
 						elseif($tipo=="des_issretido")
 						{
-							$relacionamento = mysql_query("
+							$relacionamento = $PDO->query("
 							SELECT tomadores.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -67,7 +67,7 @@ if(mysql_num_rows($sql)>0){
 						}
 						elseif($tipo=="cartorios_des")
 						{
-							$relacionamento = mysql_query("
+							$relacionamento = $PDO->query("
 							SELECT cartorios.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -78,7 +78,7 @@ if(mysql_num_rows($sql)>0){
 						}
 						elseif($tipo=="dop_des")
 						{
-							$relacionamento = mysql_query("
+							$relacionamento = $PDO->query("
 							SELECT orgaospublicos.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -89,7 +89,7 @@ if(mysql_num_rows($sql)>0){
 						}
 						elseif($tipo=="dif_des")
 						{
-							$relacionamento = mysql_query("
+							$relacionamento = $PDO->query("
 							SELECT inst_financeiras.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -100,7 +100,7 @@ if(mysql_num_rows($sql)>0){
 						}
 						elseif($tipo=="decc_des")
 						{
-							$relacionamento = mysql_query("
+							$relacionamento = $PDO->query("
 							SELECT empreiteiras.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -111,7 +111,7 @@ if(mysql_num_rows($sql)>0){
 						}
 						elseif($tipo=="doc_des")
 						{
-							$relacionamento = mysql_query("
+							$relacionamento = $PDO->query("
 							SELECT operadoras_creditos.nome, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 							FROM guia_pagamento 
@@ -122,7 +122,7 @@ if(mysql_num_rows($sql)>0){
 						}
 						elseif($tipo=="nfe")
 						{
-							$relacionamento = mysql_query("
+							$relacionamento = $PDO->query("
                             SELECT cadastro.razaosocial, guia_pagamento.valor, guia_pagamento.pago, 
 							guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia, guias_declaracoes.relacionamento
 							FROM guia_pagamento
@@ -133,7 +133,7 @@ if(mysql_num_rows($sql)>0){
 						}
 						elseif($tipo =='des_temp')
 						{
-						 $relacionamento = mysql_query("SELECT emissores_temp.razaosocial, guia_pagamento.valor, guia_pagamento.pago, 
+						 $relacionamento = $PDO->query("SELECT emissores_temp.razaosocial, guia_pagamento.valor, guia_pagamento.pago, 
 						 guia_pagamento.dataemissao, guia_pagamento.datavencimento, guia_pagamento.nossonumero, guias_declaracoes.codguia
 						 FROM guia_pagamento 
 						 INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia 
@@ -142,14 +142,14 @@ if(mysql_num_rows($sql)>0){
                          WHERE guia_pagamento.codigo = '$codigo' GROUP BY guia_pagamento.codigo");
 						}
 		
-					while(list($razao, $valor, $pago, $dtemissao, $dtvenc, $nn, $codguia) = mysql_fetch_array($relacionamento)){
+					while(list($razao, $valor, $pago, $dtemissao, $dtvenc, $nn, $codguia) = $relacionamento->fetch()){
 					$emissao = implode('/', array_reverse(explode('-', $dtemissao)));
 					$vencimento = implode('/', array_reverse(explode('-', $dtvenc)));
 					$nomerazao = ResumeString($razao,27);
 					switch($pago)
 					{
 					case "S": $pago="Efetuado"; break;
-					case "N": $pago="Não Efetuado"; break;
+					case "N": $pago="NÃ£o Efetuado"; break;
 					}
 					
 					echo "

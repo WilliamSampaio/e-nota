@@ -1,14 +1,14 @@
   
 <?php
 $query =("SELECT * FROM cadastro WHERE codtipo = '$codigo'");
-$sql_pesquisa = mysql_query ($query);
+$sql_pesquisa = $PDO->query($query);
 $result = mysql_num_rows($sql_pesquisa);
 $verifica='n'; //Se não entrar em if($result2), continua valendo n
 if($result){
-	while ($dados = mysql_fetch_array($sql_pesquisa)){
+	while ($dados = $sql_pesquisa->fetch()){
 		$codcontador = $dados['codigo'];
 		$query2 =("SELECT * FROM cadastro WHERE codcontador = '$codcontador'");
-		$sql_pesquisa2 = mysql_query ($query2);
+		$sql_pesquisa2 = $PDO->query($query2);
 		$result2 = mysql_num_rows($sql_pesquisa2); //Pega quantos resultados voltaram
 		
 		if($result2){ //Se existir algum registro, mostra na tabela
@@ -33,7 +33,7 @@ if($result){
 		<td width="33%">CPF/CNPJ</td>
 	</tr>
 		<?php
-			while ($dadoscont = mysql_fetch_array($sql_pesquisa2)){
+			while ($dadoscont = $sql_pesquisa2->fetch()){
 				if($dadoscont['cpf'] == ''){
 					$cpfcnpj = $dadoscont['cnpj'];
 				}else{
@@ -46,19 +46,19 @@ if($result){
 		<td bgcolor="white" align="center"><font size="1"><?php echo $cpfcnpj; ?></font></td>
 	</tr>
 		<?php
-			}// Fim while ($dadoscont = mysql_fetch_array($sql_pesquisa2))
+			}// Fim while ($dadoscont = $sql_pesquisa2))
 		?>
 </table>
 <!-- Fim da Tabela -->
 		<?php
 		}// Fim if(mysql_num_rows($sql_pesquisa2))
-	}// fim while ($dados = mysql_fetch_array($sql_pesquisa))
+	}// fim while ($dados = $sql_pesquisa))
 }// Fim if($result)
 if($verifica=='n'){ //Se ainda vale n é pq n entrou resultado nenhum
 		?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>Não há resultados!</td>
 	</tr>
 </table>
 <?php 

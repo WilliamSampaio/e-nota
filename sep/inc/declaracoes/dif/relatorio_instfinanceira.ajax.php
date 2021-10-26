@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    include("../conect.php");
-    include("../../funcoes/util.php");
+    require_once("../conect.php");
+    require_once("../../funcoes/util.php");
 
     //recebe os dados
     $razaosocial=strip_tags(addslashes($_GET['txtInstFinanceiras']));
@@ -44,7 +44,7 @@ Fith Floor, Boston, MA 02110-1301, USA
              AND cnpj LIKE '$cnpj%'");
 
     $sql_instfinanceiras=Paginacao($query,'frmRelatorio','detalhes_instfinanceiras',10);
-    if(mysql_num_rows($sql_instfinanceiras)>0){
+    if($sql_instfinanceiras->rowCount()>0){
         ?>
             <table  width="100%" align="center">
                 <tr align="center" bgcolor="999999">
@@ -55,13 +55,13 @@ Fith Floor, Boston, MA 02110-1301, USA
                     <?php if(!$estado){?><td>Estado</td><?php } ?>
                 </tr>
         <?php
-            while($dados=mysql_fetch_array($sql_instfinanceiras)){
+            while($dados=$sql_instfinanceiras->fetch()){
                 if($dados['estado']=="I"){
                     $dados['estado']="Inativo";
                 }elseif($dados['estado']=="A"){
                     $dados['estado']="Ativo";
                 }else{
-                    $dados['estado']="Não Liberado";
+                    $dados['estado']="NÃ£o Liberado";
                 }
                 echo "
                     <tr align=\"left\" bgcolor=\"FFFFFF\">

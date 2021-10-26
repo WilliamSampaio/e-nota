@@ -24,17 +24,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<input type="hidden" name="hdCodEmissor" value="<?php echo $codemissor; ?>" />
 		<table width="100%" height="100%" border="0" align="center" cellpadding="3" cellspacing="2">
 		<tr>
-			<td align="left" valign="middle">&nbsp;</td>
-			<td align="left" valign="middle">&nbsp;</td>
+			<td align="left" valign="middle"></td>
+			<td align="left" valign="middle"></td>
 		</tr>
 			<tr>
-			  <td align="left" valign="middle">Per&iacute;odo</td>
+			  <td align="left" valign="middle">PerÃ­odo</td>
 			  <td width="60%" align="left" valign="middle">
 				  <select name="cmbMes" id="cmbMes" onchange="SomaImpostosDes();CalculaMultaDes();">
 					  <option value=""> </option>
 					  <option value="1">Janeiro</option>
 					  <option value="2">Fevereiro</option>
-					  <option value="3">Março</option>
+					  <option value="3">Marï¿½o</option>
 					  <option value="4">Abril</option>
 					  <option value="5">Maio</option>
 					  <option value="6">Junho</option>
@@ -63,11 +63,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#CCCCCC" bgcolor="#FFFFFF">
 				<tr>
 				  <td align="center" bgcolor="#CCCCCC"> Tomador (CPF/CNPJ)</td>
-				  <td align="center" bgcolor="#CCCCCC">Servi&ccedil;o / Atividade</td>
-				  <td style="display: none;" align="center" bgcolor="#CCCCCC">Al&iacute;q (%)</td>
-				  <td align="center" bgcolor="#CCCCCC">Base de C&aacute;lculo (R$)</td>
+				  <td align="center" bgcolor="#CCCCCC">ServiÃ§o / Atividade</td>
+				  <td style="display: none;" align="center" bgcolor="#CCCCCC">AlÃ­q (%)</td>
+				  <td align="center" bgcolor="#CCCCCC">Base de CÃ¡lculo (R$)</td>
 				  <td style="display: none" align="center" bgcolor="#CCCCCC">ISS (R$)</td>
-				  <td align="center" bgcolor="#CCCCCC">N&ordm;. Documento</td>
+				  <td align="center" bgcolor="#CCCCCC">NÂº. Documento</td>
 				</tr>
 				
 <?php
@@ -76,12 +76,12 @@ listaRegrasMultaDes();//cria os campos hidden com as regras pra multa da declara
 
 //pega o numero de servicos do emissor
 
-$sql_servicos = mysql_query("
+$sql_servicos = $PDO->query("
 	SELECT codservico 
 	FROM cadastro_servicos
 	WHERE codemissor='$codemissor'
 ");
-$num_servicos = 1;//quantos linhas vão aparecer pra preencher
+$num_servicos = 1;//quantos linhas vï¿½o aparecer pra preencher
 $num_serv_max = 20;// numero maximo de linhas que podem ser adicionadas
 
 campoHidden("hdServicos",$num_servicos);
@@ -100,18 +100,18 @@ for($c=1;$c<$num_serv_max;$c++){
 						<option></option>
 						<?php
 							
-							$sql_servicos2 = mysql_query("
+							$sql_servicos2 = $PDO->query("
 								SELECT servicos.codigo, servicos.descricao, servicos.aliquota FROM servicos 
 								INNER JOIN cadastro_servicos ON servicos.codigo=cadastro_servicos.codservico
 								INNER JOIN cadastro ON cadastro_servicos.codemissor=cadastro.codigo 
 								WHERE cadastro.codigo='$codemissor'
 							");
-							if(mysql_num_rows($sql_servicos2==0)) {
-								$sql_servicos2 = mysql_query("
+							if($sql_servicos2->rowCount()==0) {
+								$sql_servicos2 = $PDO->query("
 									SELECT servicos.codigo, servicos.descricao, servicos.aliquota FROM servicos ORDER BY descricao
 								");
 							}
-							while(list($cod_serv, $desc_serv, $aliq_serv) = mysql_fetch_array($sql_servicos2))
+							while(list($cod_serv, $desc_serv, $aliq_serv) = $sql_servicos2->fetch())
 							{
 								if(strlen($desc_serv)>100)
 									$desc_serv = substr($desc_serv,0,100)."...";
@@ -157,13 +157,13 @@ for($c=1;$c<$num_serv_max;$c++){
 			  <td align="left" valign="middle"><input type="text" name="txtTotalPagar" id="txtTotalPagar" value="0,00" style="text-align:right;" readonly="readonly" size="16" class="texto" /></td>
 		  </tr>
 		  <tr>
-			  <td align="left" valign="middle">&nbsp;</td>
+			  <td align="left" valign="middle"></td>
 			  <td align="right" valign="middle"><em>* Confira seus dados antes de continuar<br>
 			  ** Desabilite seu bloqueador de pop-up</em></td>
 		  </tr>
 		  <tr>
 			  <td align="right" valign="middle">
-			  	<input type="submit" name="btDeclarar" value="Declarar" class="botao" onclick="return (ValidaFormMsg('cmbMes|cmbAno|txtTomadorCnpjCpf1|cmbCodServico1|txtBaseCalculo1|txtNroDoc1','O Período e pelo menos um serviço devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
+			  	<input type="submit" name="btDeclarar" value="Declarar" class="botao" onclick="return (ValidaFormMsg('cmbMes|cmbAno|txtTomadorCnpjCpf1|cmbCodServico1|txtBaseCalculo1|txtNroDoc1','O PerÃ­odo e pelo menos um serviÃ§o devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
 			  	<input type="submit" name="btVoltar" class="botao" value="Voltar" />
 			  </td>
 		  </tr>

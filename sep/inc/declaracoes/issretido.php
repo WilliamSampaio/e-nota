@@ -20,13 +20,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	if($_POST['btDeclarar'] == "Declarar"){
-		include("inc/declaracoes/issretido/gerarguia_issretido.php");
+		require_once("inc/declaracoes/issretido/gerarguia_issretido.php");
 	}
 ?>
 <table border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Declara&ccedil;&otilde;es - ISS Retidos</td>  
+    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">DeclaraÃ§Ãµes - ISS Retidos</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -93,7 +93,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	    </td>
 	  </tr>
       <tr>
-        <td width="22%" align="left"> Nome/RazãoSocial </td>
+        <td width="22%" align="left"> Nome/RazÃ£oSocial </td>
         <td align="left" colspan="2"><input type="text" class="texto" name="txtNomeEmissor" id="txtNomeEmissor" />
         </td>
       </tr>
@@ -103,13 +103,13 @@ Fith Floor, Boston, MA 02110-1301, USA
         </td>
       </tr>
       <tr id="trComp">
-        <td align="left"> Competência </td>
+        <td align="left"> CompetÃªncia </td>
         <td align="left" colspan="2">
 		  <select name="cmbMesComp" id="cmbMesComp">
               <option value=""> </option>
               <option value="01">Janeiro</option>
               <option value="02">Fevereiro</option>
-              <option value="03">Março</option>
+              <option value="03">Marï¿½o</option>
               <option value="04">Abril</option>
               <option value="05">Maio</option>
               <option value="06">Junho</option>
@@ -124,7 +124,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			  <option value=""> </option>
 			  <?php 
 			  //busca todos os anos das declaracoes pra jogar no comp
-			  $sql_ano = mysql_query ("
+			  $sql_ano = $PDO->query("
 								SELECT SUBSTRING(competencia,1,4) as c FROM des 
 								UNION
 								SELECT SUBSTRING(competencia,1,4) as c FROM des_temp
@@ -132,7 +132,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								SELECT SUBSTRING(competencia,1,4) as c FROM des_issretido
 								GROUP BY c
 								ORDER BY c DESC");
-			  while (list($ano)=mysql_fetch_array($sql_ano)){
+			  while (list($ano)=$sql_ano->fetch()){
 			  	echo "<option value=\"$ano\">$ano</option>";
 			  }
 			  ?>
@@ -140,7 +140,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         </td>
       </tr>
       <tr>
-        <td align="left"> Data da Emissão </td>
+        <td align="left"> Data da EmissÃ£o </td>
         <td width="78%" align="left" colspan="2" >
         	<input type="text" class="texto" name="txtDataEmissao" id="txtDataEmissao" maxlength="10" size="10" />
         </td>
@@ -148,7 +148,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<tr>
         <td align="left" colspan="3" >
         	<input type="button" class="botao" name="btPesquisar" value="Pesquisar" onclick="PesquisarDes();" />
-			<input name="btNova" type="submit" class="botao" value="Nova declaração" 
+			<input name="btNova" type="submit" class="botao" value="Nova declaraÃ§Ã£o" 
 			onclick="acessoAjax('inc/declaracoes/issretido/verifica_cnpj.ajax.php','formDes','divPesquisar')" />
         </td>
       </tr>

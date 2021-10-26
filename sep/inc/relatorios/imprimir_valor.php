@@ -20,22 +20,22 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php 
 
-include("../../inc/conect.php");
-include("../../funcoes/util.php");
+require_once("../../inc/conect.php");
+require_once("../../funcoes/util.php");
 // variaveis vindas do conect.php
 // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF	
 
 
 
-$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 //preenche a variavel com os valores vindos do banco
-list($BRASAO) = mysql_fetch_array($sql_brasao);
+list($BRASAO) = $sql_brasao->fetch();
 
 
 
 ?>
 
-<title>Imprimir Relat&oacute;rio</title>
+<title>Imprimir RelatÃ³rio</title>
 
 
 <style type="text/css">
@@ -77,7 +77,7 @@ list($BRASAO) = mysql_fetch_array($sql_brasao);
     </center></td>
     <td width="584" height="33" colspan="2"><span class="style1">
       <center>
-             <p>RELAT&Oacute;RIO DE PRESTADORES </p>
+             <p>RELATÃ“RIO DE PRESTADORES </p>
              <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
              <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
       </center>
@@ -99,7 +99,7 @@ list($BRASAO) = mysql_fetch_array($sql_brasao);
 							<?php
 							//Comando sql que selecionara do banco os tipos de prestadores e a quantidade de cada e o total geral
 
-							$sql_tipo = mysql_query("
+							$sql_tipo = $PDO->query("
 								SELECT 
 									tipo.nome, 
 									COUNT(cadastro.codigo) 
@@ -115,7 +115,7 @@ list($BRASAO) = mysql_fetch_array($sql_brasao);
 							echo "<b><center><font class=\"fonte\">Tipos de Prestadores</center></b> <br>";
 							
 							$qtdtotal=0;
-							while(list($nome,$qtd)=mysql_fetch_array($sql_tipo)){
+							while(list($nome,$qtd)=$sql_tipo->fetch()){
 								echo"<tr><td align=\"center\"><font class=\"fonte\">$nome:</font></td><td align=\"center\"><font class=\"fonte\">$qtd</font></td></tr>";
 								$qtdtotal=$qtdtotal+$qtd;
 								}
@@ -131,8 +131,8 @@ list($BRASAO) = mysql_fetch_array($sql_brasao);
        <tr >
 <?php
 
-//Comando sql que selecionará do banco a quantidade de prestadores por estado
-$sql = mysql_query ("
+//Comando sql que selecionarï¿½ do banco a quantidade de prestadores por estado
+$sql = $PDO->query("
 	SELECT 
 		uf , 
 		COUNT(*) 
@@ -150,7 +150,7 @@ echo "<b><center>Qnt. de Prestadores por Estado (UF)</center></b> <br>";
 
 $qtdtotal=0;
 $cont = 0;
-while(list($uf,$qtd)=mysql_fetch_array($sql)){
+while(list($uf,$qtd)=$sql->fetch()){
 if($cont == '5'){
 echo "</tr><tr>";
 
@@ -165,7 +165,7 @@ $cont++;
 ?>
 
 <?php
-$ano=mysql_query("SELECT year (datahoraemissao from notas");
+$ano=$PDO->query("SELECT year (datahoraemissao from notas");
 ?>
 </tr>
     <tr>
@@ -176,8 +176,8 @@ $ano=mysql_query("SELECT year (datahoraemissao from notas");
 		<td width="34%" valign="top">
 			<table>
             <?php 
-			//Comando sql que selecionará do banco os tipos de declaracoes e quantidade de cada
-			$sql_tipodec = mysql_query("SELECT declaracoes.declaracao, COUNT(*)
+			//Comando sql que selecionarï¿½ do banco os tipos de declaracoes e quantidade de cada
+			$sql_tipodec = $PDO->query("SELECT declaracoes.declaracao, COUNT(*)
 										FROM
 										  declaracoes 
 										INNER JOIN
@@ -189,7 +189,7 @@ $ano=mysql_query("SELECT year (datahoraemissao from notas");
 										GROUP BY
 										  declaracoes.declaracao");
 			
-			echo "<b><center>Tipos de Declarações</center></b> <br>";  
+			echo "<b><center>Tipos de DeclaraÃ§Ãµes</center></b> <br>";  
 										  
 			$qtdtotal=0;							  
 			while(list($declaracoes,$qtd)=mysql_fetch_array ($sql_tipodec)){
@@ -238,7 +238,7 @@ $ano=mysql_query("SELECT year (datahoraemissao from notas");
 		$str_where .= " AND cadastro.nfe = '$nfe'";
 	}
 	
-//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
+//Sql buscando as informaï¿½ï¿½es que o usuario pediu e com o limit estipulado pela funÃ§Ã£o
 	if ($nome=="" && $ano=="" && $mes=="")
 	{
 		$query = ("
@@ -267,7 +267,7 @@ $ano=mysql_query("SELECT year (datahoraemissao from notas");
 				cadastro.nome
 				");
 	}
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa);
 	
 	
@@ -290,9 +290,9 @@ if(mysql_num_rows($sql_pesquisa)){
 	?>
       <td width="30%" align="center"><strong>Nome</strong></td>
       <td width="20%" align="center"><strong>Valor arrecadado</strong></td>
-      <td width="15%" align="center"><strong>Deduções</strong></td>
+      <td width="15%" align="center"><strong>Deduï¿½ï¿½es</strong></td>
       <td width="12%" align="center"><strong>ISS</strong></td>
-      <td width="20%" align="center"><strong>Total retenção</strong></td>
+      <td width="20%" align="center"><strong>Total retenï¿½ï¿½o</strong></td>
 
   </tr>
   <?php
@@ -301,18 +301,18 @@ if(mysql_num_rows($sql_pesquisa)){
 		$tipos_extenso = array(
 			"prestador"              => "Prestador",
 			"empreiteira"            => "Empreiteira",
-			"instituicao_financeira" => "Instituição Financeira",
-			"cartorio"               => "Cartório",
-			"operadora_credito"      => "Operadora de Crédito",
-			"grafica"                => "Gráfica",
+			"instituicao_financeira" => "InstituiÃ§Ã£o Financeira",
+			"cartorio"               => "Cartï¿½rio",
+			"operadora_credito"      => "Operadora de CrÃ©dito",
+			"grafica"                => "Grï¿½fica",
 			"contador"               => "Contador",
 			"tomador"                => "Tomador",
-			"orgao_publico"          => "Orgão Público",
+			"orgao_publico"          => "Orgï¿½o Pï¿½blico",
 			"simples"                => "Simples"
 		);
 		$conta=0;
 		$guardanome="";
-		while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+		while($dados_pesquisa = $sql_pesquisa->fetch()){
 			if ($guardanome!=$dados_pesquisa['nome'])
 			{
 				$guardanome = $dados_pesquisa['nome'];
@@ -346,8 +346,8 @@ if(mysql_num_rows($sql_pesquisa)){
 <table width="700px" class="tabela">
 <?php
 }else{
- //caso não encontre resultados, a mensagem 'Não há resultados!' será mostrada na tela
-	echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">Não há resultados!</font></center></td></b></tr>";
+ //caso nÃ£o encontre resultados, a mensagem 'NÃ£o hÃ¡ resultados!' serÃ¡ mostrada na tela
+	echo "<tr style=\"background-color:#999999\"><td colspan=\"3\"><center><b><font class=\"fonte\">NÃ£o hÃ¡ resultados!</font></center></td></b></tr>";
 }
 ?>
 </table>

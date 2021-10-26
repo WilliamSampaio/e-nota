@@ -98,8 +98,8 @@ $query = ("
 			?>
 				<table width="100%">
 					<tr bgcolor="#999999">
-						<td width="12%" align="center"><strong>N�mero</strong></td>
-						<td width="22%" align="center"><strong>C�d. Verificacao</strong></td>
+						<td width="12%" align="center"><strong>Número</strong></td>
+						<td width="22%" align="center"><strong>Cód. Verificacao</strong></td>
 						<td width="49%" align="center"><strong>CNPJ/CPF</strong></td>
 						<td width="11%" align="center"><strong>Data</strong></td>
 						<td width="6%" align="center"></td>
@@ -142,7 +142,7 @@ $query = ("
 				</table>
 			<?php
 			} else {
-				echo "<center><strong>N�o h� nenhuma nota declarada!</strong></center>";
+				echo "<center><strong>Não há nenhuma nota declarada!</strong></center>";
 			}
 			?>
 

@@ -8,7 +8,7 @@
 	
 	if($tipo == "L"){
 	
-		$sql_busca_solicitante = mysql_query("
+		$sql_busca_solicitante = $PDO->query("
 			SELECT 
 				cadastro.codigo 
 			FROM 
@@ -18,21 +18,21 @@
 			WHERE 
 				rps_solicitacoes.codigo = '$codSolicitacao'
 		");
-		list($codCadastro) = mysql_fetch_array($sql_busca_solicitante);	
+		list($codCadastro) = $sql_busca_solicitante->fetch();	
 		
-		mysql_query("UPDATE rps_solicitacoes SET estado = 'L' WHERE codigo = '$codSolicitacao'");
+		$PDO->query("UPDATE rps_solicitacoes SET estado = 'L' WHERE codigo = '$codSolicitacao'");
 		
-		$sql_testa = mysql_query("SELECT codigo,limite FROM rps_controle WHERE codcadastro = '$codCadastro'");
-		if(mysql_num_rows($sql_testa)){			
-			$dadosrps=mysql_fetch_object($sql_testa);
-			mysql_query("UPDATE rps_controle SET limite = '$novoLimite',ultimo_limite='{$dadosrps->limite}' WHERE codcadastro = '$codCadastro' ");
+		$sql_testa = $PDO->query("SELECT codigo,limite FROM rps_controle WHERE codcadastro = '$codCadastro'");
+		if($sql_testa->rowCount()){			
+			$dadosrps=$sql_testa->fetchObject();
+			$PDO->query("UPDATE rps_controle SET limite = '$novoLimite',ultimo_limite='{$dadosrps->limite}' WHERE codcadastro = '$codCadastro' ");
 		}else{
-			mysql_query("INSERT INTO rps_controle SET codcadastro = '$codCadastro', limite = '$novoLimite'");
+			$PDO->query("INSERT INTO rps_controle SET codcadastro = '$codCadastro', limite = '$novoLimite'");
 		}
 		
 	}elseif($tipo == "R"){
 	
-		mysql_query("UPDATE rps_solicitacoes SET estado = 'R' WHERE codigo = '$codSolicitacao'");
+		$PDO->query("UPDATE rps_solicitacoes SET estado = 'R' WHERE codigo = '$codSolicitacao'");
 		
 	}
 ?>

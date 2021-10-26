@@ -20,107 +20,74 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <!-- box de conteúdos -->
 <form name="frmTomadoresBox" method="post" action="tomadores.php" id="frmTomadoresBox">
-	<input type="hidden" name="txtMenu" id="txtMenu" />
-	<input type="hidden" name="txtCNPJ" id="txtCNPJ" />
+    <input type="hidden" name="txtMenu" id="txtMenu" />
+    <input type="hidden" name="txtCNPJ" id="txtCNPJ" />
 
-<table border="0" cellspacing="5" cellpadding="0">
-  <tr>
-    <td width="190" align="center" valign="top">
-    <!-- quadro da esquerda acima -->
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td height="3" bgcolor="#CCCCCC"></td>
-      </tr>
-      <tr>
-        <td height="10" bgcolor="#999999"></td>
-      </tr>
-      <tr>
-        <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;"><font class="boxTitulo">Consulta RPS</font><br />
-          <br />
-          Permite que o tomador de servi&ccedil;os que recebeu um  Recibo Provis&oacute;rio de Servi&ccedil;os &ndash; RPS consulte a sua convers&atilde;o em NFe.<br />
-          <br />
-          <div align="center"></div>          </td>
-      </tr>
-      <tr>
-        <td height="1"></td>
-      </tr>
-      <tr>
-        <td height="20" align="left" bgcolor="#859CAD">&nbsp;<img src="../img/box/web.png" width="14" height="14" /> <a onclick="document.getElementById('txtMenu').value='rps';frmTomadoresBox.submit();" href="#" class="box">Servi&ccedil;o on-line</a><a href="../contador/index.php" target="_blank"></a></td>
-      </tr>
-    </table>    </td>
-    <td width="190" align="center" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td height="3" bgcolor="#CCCCCC"></td>
-		</tr>
-		<tr>
-			<td height="10" bgcolor="#999999"></td>
-		</tr>
-		<tr>
-			<td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;"><font class="boxTitulo"> Autenticidade de NFe</font> <br />
-					<br />
-				Acesse e compare os n&uacute;meros de aprova&ccedil;&atilde;o da NFe de ISS.<br />
-				<br /></td>
-		</tr>
-		<tr>
-			<td height="1"></td>
-		</tr>
-		<tr>
-			<td height="20" align="left" bgcolor="#859CAD"><img src="../img/box/web.png" alt="" width="14" height="14" /><a onclick="document.getElementById('txtMenu').value='autenticidade';frmTomadoresBox.submit();" href="#" class="box">Servi&ccedil;o on-line</a></td>
-		</tr>
-	</table>
-	
-	<!-- Quadro do meio acima --></td>
-    <td width="190" align="center" valign="top">
-	
-	<!-- quadro direita acima --></td>
-  </tr>
-  <tr>
-  	<td>
-    
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="3" bgcolor="#CCCCCC"></td>
-          </tr>
-          <tr>
-            <td height="10" bgcolor="#999999"></td>
-          </tr>
-          <tr>
-            <td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;"><font class="boxTitulo">Tomadores: Gerar guia </font><br />
-                <br />
-              	Gerar guia de declara&ccedil;&otilde;es com ISS retido.</td>
-          </tr>
-          <tr>
-            <td height="1"></td>
-          </tr>
-          <tr>
-            <td height="20" align="left" bgcolor="#859CAD"><a onclick="document.getElementById('txtMenu').value='issretido';frmTomadoresBox.submit();" href="#" class="box">&nbsp;<img src="../img/box/web.png" alt="ISS Retido" width="14" height="14" /> Servi&ccedil;o on-line</a></td>
-          </tr>
-        </table>
+    <!-- ITENS -->
+    <div class="row">
 
-    
-    </td>
+        <div class="col-6">
+            <div class="card">
+                <!-- <img src="../img/index/iconeemitirnf.jpg" class="img-fluid" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Consulta RPS</h5>
+                    <p class="card-text">Permite que o tomador de serviços que recebeu um Recibo Provisório de Serviços - RPS consulte a sua conversão em NFe.</p>
+                </div>
+                <div class="card-footer">
+                    <img src="../img/box/web.png" width="14" height="14">
+                    <a onclick="document.getElementById('txtMenu').value='rps';frmTomadoresBox.submit();" href="#" class="box">Serviço online</a><a href="../contador/index.php" target="_blank"></a>
+                </div>
+            </div>
+        </div>
 
-  	<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td height="3" bgcolor="#CCCCCC"></td>
-		</tr>
-		<tr>
-			<td height="10" bgcolor="#999999"></td>
-		</tr>
-		<tr>
-			<td height="120" align="left" valign="top" bgcolor="#CCCCCC" style="padding:5px;"><font class="boxTitulo">Consulta Cr&eacute;ditos</font><br />
-					<br />
-				Veja o v&iacute;deo da campanha da NFeletr&ocirc;nica de ISS.<br />
-				<br /></td>
-		</tr>
-		<tr>
-			<td height="1"></td>
-		</tr>
-		<tr>
-			<td height="20" align="left" bgcolor="#859CAD"><img src="../img/box/web.png" alt="" width="14" height="14" /><a onclick="document.getElementById('txtMenu').value='creditos';frmTomadoresBox.submit();" href="#" class="box">Servi&ccedil;o on-line</a></td>
-		</tr>
-	</table></td>
-  	<td></td>	   
-  </tr>
-    </table>
-    </form>
+        <div class="col-6">
+            <div class="card" style="height: 100%;">
+                <!-- <img src="../img/index/iconeemitirnf.jpg" class="img-fluid" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Autenticidade de NFe</h5>
+                    <p class="card-text">Acesse e compare os números de aprovação da NFe de ISS.</p>
+                </div>
+                <div class="card-footer">
+                    <img src="../img/box/web.png" width="14" height="14">
+                    <a onclick="document.getElementById('txtMenu').value='autenticidade';frmTomadoresBox.submit();" href="#" class="box">Serviço online</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+
+    <!-- ITENS -->
+    <div class="row">
+
+        <div class="col-6">
+            <div class="card">
+                <!-- <img src="../img/index/iconeemitirnf.jpg" class="img-fluid" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Tomadores: Gerar guia</h5>
+                    <p class="card-text">Gerar guia de declarações com ISS retido.</p>
+                </div>
+                <div class="card-footer">
+                    <img src="../img/box/web.png" width="14" height="14">
+                    <a onclick="document.getElementById('txtMenu').value='issretido';frmTomadoresBox.submit();" href="#" class="box"><img src="../img/box/web.png" alt="ISS Retido" width="14" height="14" /> Serviço online</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card" style="height: 100%;">
+                <!-- <img src="../img/index/iconeemitirnf.jpg" class="img-fluid" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Consulta Créditos</h5>
+                    <p class="card-text">Veja o vídeo da campanha da NFeletrônica de ISS.</p>
+                </div>
+                <div class="card-footer">
+                    <img src="../img/box/web.png" width="14" height="14">
+                    <a onclick="document.getElementById('txtMenu').value='creditos';frmTomadoresBox.submit();" href="#" class="box">Serviço online</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        
+</form>

@@ -34,9 +34,9 @@ if(!(isset($_SESSION["empresa"]))){
 	$botao = $_POST['btImportarXML'];  
 	$arquivo_xml = $_POST['txtArquivoNome'];
 	if($botao == "Importar Arquivo"){
-		include("../include/conect.php");
-		include("../funcoes/util.php");
-		include("inc/funcao_logs.php");
+		require_once("../include/conect.php");
+		require_once("../include/util.php");
+		require_once("inc/funcao_logs.php");
 		$sql=$PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 		list($UltimaNota)=$sql->fetch();  
 		
@@ -180,7 +180,8 @@ if(!(isset($_SESSION["empresa"]))){
 			
 			$campo = tipoPessoa($tomador_cnpjcpf);
 			$codTipoTomador = codtipo('tomador');
-			$codTipoDec = coddeclaracao('DES Consolidada');
+			$sql_cargo = $PDO->query("SELECT codigo FROM declaracoes WHERE declaracao LIKE 'DES Consolidada'");
+			$codTipoDec = $sql_cargo->fetchColumn();
 			if($inserir_tomador == "S"){				
 				$datainicio = date("Y-m-d");
 				try

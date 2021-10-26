@@ -21,8 +21,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 session_name('contador');
 session_start();
-include("inc/conect.php");
-include("../funcoes/util.php");
+require_once("inc/conect.php");
+require_once("../include/util.php");
 
 if(isset($_SESSION['codempresa'])){
 	$codigo=$_SESSION["codempresa"];
@@ -72,7 +72,7 @@ $mesfimempresa=(int)substr($dados['datafim'],6,2);
 $anofimempresa=(int)substr($dados['datafim'],0,-6);
 $mes=date("n");
 
-$meses=array("1"=>"Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+$meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 if($anoselecionado!=""){
 echo "<select id=\"cmbMesFim\" name=\"cmbMesFim\">";
 if($pg=="nulo"){

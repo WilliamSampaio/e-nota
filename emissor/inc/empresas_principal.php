@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 if($_POST['btAtualizar'] == "Atualizar"){
-	include("empresas_editar.php");
+	require_once("empresas_editar.php");
 }
 
 
@@ -29,7 +29,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
 ?>
 
 			
-<form method="post" name="frmCadUsuarios" enctype="multipart/form-data" onsubmit="return (comprimentoSenha(5,'txtSenha|txtConfirmacao')&&(ValidaFormulario('txtEmail','Preencha os campos obrigat�rios'))&&(validaExtencao('arquivo')));">
+<form method="post" name="frmCadUsuarios" enctype="multipart/form-data" onsubmit="return (comprimentoSenha(5,'txtSenha|txtConfirmacao')&&(ValidaFormulario('txtEmail','Preencha os campos obrigatórios'))&&(validaExtencao('arquivo')));">
 <input name="hdCod" type="hidden" value="<?php echo $codigo;?>" />
     <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">
     	<tr>
@@ -57,7 +57,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
             </td>
         </tr>
         <tr>
-            <td align="left">Servi&ccedil;os</td>
+            <td align="left">Serviços</td>
             <td align="left">
 				<?php
 				$sql_serv = $PDO->query("
@@ -75,8 +75,8 @@ if($_POST['btAtualizar'] == "Atualizar"){
 				?>
              <table>
              	<tr align="left" bgcolor="#FFFFFF">
-					<td>Codigo Servi&ccedil;o</td>
-					<td>Descri&ccedil;&atilde;o</td>
+					<td>Codigo Serviço</td>
+					<td>Descrição</td>
 				</tr>
 				<?php 
 					
@@ -98,7 +98,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
 			?>
 					<table>
 						<tr>
-							<td align="center"><strong>N&atilde;o h&aacute; servi&ccedil;os cadastrados</strong>.</td>
+							<td align="center"><strong>Não há serviços cadastrados</strong>.</td>
 						</tr>
 					</table>
 			<?php
@@ -120,7 +120,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
                 <?php }
                    else		
                      {	   
-                       print("<font color=red>N�o possui logomarca</font>");
+                       print("<font color=red>Não possui logomarca</font>");
                      }
                   ?>
                   <input name="bt" type="button" value="Alterar imagem" class="botao" onclick="document.getElementById('trempresa').style.visibility='visible'" />
@@ -131,7 +131,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
             <td align="left">
                 <input type="file" size="50" maxlength="50" name="arquivo" id="arquivo" class="botao">
                 <br />
-                <font size="-2" color="#FF0000">A imagem do logo dever&aacute; estar no formato JPG.</font></td>
+                <font size="-2" color="#FF0000">A imagem do logo deverá estar no formato JPG.</font></td>
         </tr>
         <tr>
             <td>

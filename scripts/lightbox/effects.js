@@ -921,7 +921,7 @@ Effect.Morph = Class.create(Effect.Base, {
     
     if (!Object.isString(options.style)) this.style = $H(options.style);
     else {
-      if (options.style.include(':'))
+      if (options.style.require_once(':'))
         this.style = options.style.parseStyle();
       else {
         this.element.addClassName(options.style);
@@ -944,7 +944,7 @@ Effect.Morph = Class.create(Effect.Base, {
   
   setup: function(){
     function parseColor(color){
-      if (!color || ['rgba(0, 0, 0, 0)','transparent'].include(color)) color = '#ffffff';
+      if (!color || ['rgba(0, 0, 0, 0)','transparent'].require_once(color)) color = '#ffffff';
       color = color.parseColor();
       return $R(0,2).map(function(i){
         return parseInt( color.slice(i*2+1,i*2+3), 16 ) 
@@ -1058,7 +1058,7 @@ String.prototype.parseStyle = function(){
     if (style[property]) styleRules.set(property, style[property]); 
   });
   
-  if (Prototype.Browser.IE && this.include('opacity'))
+  if (Prototype.Browser.IE && this.require_once('opacity'))
     styleRules.set('opacity', this.match(/opacity:\s*((?:0|1)?(?:\.\d*)?)/)[1]);
 
   return styleRules;

@@ -20,16 +20,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php 
 $codintegracao = base64_decode($_GET['ci']);
-include("../../inc/conect.php");
-include("../../funcoes/util.php");
+require_once("../../inc/conect.php");
+require_once("../../funcoes/util.php");
 // variaveis vindas do conect.php
 // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF	
 
-$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
+$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 //preenche a variavel com os valores vindos do banco
-list($BRASAO) = mysql_fetch_array($sql_brasao);
+list($BRASAO) = $sql_brasao->fetch();
 ?>
-<title>Imprimir Relat&oacute;rio Integra�ao</title>
+<title>Imprimir Relatório Integra�ao</title>
 
 
 <style type="text/css" media="screen">
@@ -74,7 +74,7 @@ div.pagina {
         <div id="DivImprimir">
             <input type="button" onClick="print();" value="Imprimir" />
             <br />
-            <i><b>Este relat�rio � melhor visualizado em formato de impress�o em paisagem.</b></i>
+            <i><b>Este relat�rio é melhor visualizado em formato de impress�o em paisagem.</b></i>
             <br /><br />
         </div>
         <table width="95%" height="120" border="2" cellspacing="0" class="tabela" align="center">
@@ -83,7 +83,7 @@ div.pagina {
             </td>
             <td width="584" height="33" colspan="2"><span class="style1">
               <center>
-                     <p>RELAT&Oacute;RIO DE INTEGRA&Ccedil;&Atilde;O E-CIDADE/E-NOTA </p>
+                     <p>RELATÓRIO DE INTEGRAÇÃO E-CIDADE/E-NOTA </p>
                      <p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
                      <p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
               </center>
@@ -92,21 +92,21 @@ div.pagina {
         </table>
         <br />
         <?php
-		$query = mysql_query("SELECT * FROM dados_integracao WHERE codigo = $codintegracao");
-		$dados = mysql_fetch_array($query);
+		$query = $PDO->query("SELECT * FROM dados_integracao WHERE codigo = $codintegracao");
+		$dados = $query->fetch();
 		$dadosinseridos = $dados['prestadores']+$dados['prestadoressocios']+$dados['prestadoresservicos']+$dados['contadores']+$dados['contadoressocios']+$dados['guias']+$dados['guiaspagas']+$dados['guiascanceladas']+$dados['servicos']+$dados['prestadoresecidade'];
 		$dadosnaoinseridos = $dados['prestadoreserros']+$dados['prestadoressocioserros']+$dados['prestadoresservicoserros']+$dados['contadoreserros']+$dados['contadoressocioserros']+$dados['guiaserros']+$dados['servicoserros']+$dados['prestadoresecidadeerros'];
 		if(mysql_num_rows($query)>0){
 		?>
         <table width="45%" border="2" cellspacing="0" class="tabela" align="center">
           <tr bgcolor="#999999">
-          	<td colspan="9" align="center">Informa&ccedil;&otilde;es</td>
+          	<td colspan="9" align="center">Informações</td>
           </tr>
           <tr bgcolor="#CCCCCC">
             <td width="16%" align="center">Data</td>
-            <td width="17%" align="center">Hor&aacute;rio</td>
+            <td width="17%" align="center">Horário</td>
             <td width="17%" align="center">Dados Inseridos</td>
-            <td width="17%" align="center">Dados n&atilde;o Inseridos</td>
+            <td width="17%" align="center">Dados não Inseridos</td>
           </tr>
           <tr>
             <td width="16%" align="center"><?php echo DataPt(substr($dados['data'],0,10)); ?></td>
@@ -122,11 +122,11 @@ div.pagina {
           </tr>
           <tr bgcolor="#CCCCCC">
             <td width="16%" align="center">Inseridos</td>
-            <td width="17%" align="center">N&atilde;o Inseridos</td>
-            <td width="17%" align="center">S&oacute;cios</td>
-            <td width="18%" align="center">S&oacute;cios N&atilde;o Inseridos</td>
-            <td width="15%" align="center">Servi&ccedil;os</td>
-            <td width="17%" align="center">Servi&ccedil;os N&atilde;o Inseridos</td>
+            <td width="17%" align="center">Não Inseridos</td>
+            <td width="17%" align="center">Sócios</td>
+            <td width="18%" align="center">Sócios Não Inseridos</td>
+            <td width="15%" align="center">Serviços</td>
+            <td width="17%" align="center">Serviços Não Inseridos</td>
           </tr>
           <tr>
             <td width="16%" align="center"><?php echo $dados['prestadores']; ?></td>
@@ -144,9 +144,9 @@ div.pagina {
           </tr>
           <tr bgcolor="#CCCCCC">
             <td width="16%" align="center">Inseridos</td>
-            <td width="17%" align="center">N&atilde;o Inseridos</td>
-            <td width="17%" align="center">S&oacute;cios</td>
-            <td width="18%" align="center">S&oacute;cios N&atilde;o Inseridos</td>
+            <td width="17%" align="center">Não Inseridos</td>
+            <td width="17%" align="center">Sócios</td>
+            <td width="18%" align="center">Sócios Não Inseridos</td>
           </tr>
           <tr>
             <td width="16%" align="center"><?php echo $dados['contadores']; ?></td>
@@ -162,7 +162,7 @@ div.pagina {
           </tr>
           <tr bgcolor="#CCCCCC">
             <td width="16%" align="center">Inseridos</td>
-            <td width="17%" align="center">N&atilde;o Inseridos</td>
+            <td width="17%" align="center">Não Inseridos</td>
             <td width="17%" align="center">Pagos</td>
             <td width="18%" align="center">Cancelados</td>
           </tr>
@@ -177,11 +177,11 @@ div.pagina {
         <br />
         <table width="30%" border="2" cellspacing="0" class="tabela" align="center">
           <tr bgcolor="#999999">
-          	<td colspan="9" align="center">Servi&ccedil;os</td>
+          	<td colspan="9" align="center">Serviços</td>
           </tr>
           <tr bgcolor="#CCCCCC">
             <td width="16%" align="center">Inseridos</td>
-            <td width="17%" align="center">N&atilde;o inseridos</td>
+            <td width="17%" align="center">Não inseridos</td>
           </tr>
           <tr>
             <td width="16%" align="center"><?php echo $dados['servicos']; ?></td>
@@ -195,7 +195,7 @@ div.pagina {
           </tr>
           <tr bgcolor="#CCCCCC">
             <td width="16%" align="center">Inseridos</td>
-            <td width="17%" align="center">N&atilde;o Inseridos</td>
+            <td width="17%" align="center">Não Inseridos</td>
           </tr>
           <tr>
             <td width="16%" align="center"><?php echo $dados['prestadoresecidade']; ?></td>

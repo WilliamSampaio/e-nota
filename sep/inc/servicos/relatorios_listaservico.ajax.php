@@ -19,9 +19,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	include("../conect.php");
-	$sql=mysql_query("SELECT codigo, descricao FROM servicos WHERE codcategoria='".$_GET["cmbCategoria"]."'");
-	while(list($codservico,$descricao)=mysql_fetch_array($sql))
+	require_once("../conect.php");
+	$sql=$PDO->query("SELECT codigo, descricao FROM servicos WHERE codcategoria='".$_GET["cmbCategoria"]."'");
+	while(list($codservico,$descricao)=$sql->fetch())
 		{
 			echo "<option value=\"$codservico\">$descricao</option>";
 		}

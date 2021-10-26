@@ -38,18 +38,18 @@ $nomeresponsavel = $_POST["txtNomeResponsavel"];
 $cpfresponsavel  = $_POST["txtCpfResponsavel"];
 $senha			 = rand(000000,999999);
 	
-$teste_nome=mysql_query("SELECT codigo FROM orgaospublicos WHERE nome='$nome'");
-$teste_razaosocial=mysql_query("SELECT codigo FROM orgaospublicos where razaosocial='$razaosocial'");
-$teste_cnpj=mysql_query("SELECT codigo FROM orgaospublicos WHERE cnpj='$cnpj'");
+$teste_nome=$PDO->query("SELECT codigo FROM orgaospublicos WHERE nome='$nome'");
+$teste_razaosocial=$PDO->query("SELECT codigo FROM orgaospublicos where razaosocial='$razaosocial'");
+$teste_cnpj=$PDO->query("SELECT codigo FROM orgaospublicos WHERE cnpj='$cnpj'");
 
 if(mysql_num_rows($teste_nome)>0)
-{echo "<script>alert('Já existe uma empresa com este nome');</script>";}	
+{echo "<script>alert('JÃ¡ existe uma empresa com este nome');</script>";}	
 elseif(mysql_num_rows($teste_razaosocial)>0)
-{echo "<script>alert('Já existe uma empresa com esta razão social');</script>";}	
+{echo "<script>alert('JÃ¡ existe uma empresa com esta razï¿½o social');</script>";}	
 elseif(mysql_num_rows($teste_cnpj)>0)
-{echo "<script>alert('Já existe uma empresa com este CPF/CNPJ');</script>";}
+{echo "<script>alert('JÃ¡ existe uma empresa com este CPF/CNPJ');</script>";}
 else{
-mysql_query("
+$PDO->query("
 INSERT INTO orgaospublicos SET 
 nome='$nome', 
 razaosocial='$razaosocial', 

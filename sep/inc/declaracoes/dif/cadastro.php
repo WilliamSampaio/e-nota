@@ -20,8 +20,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	// busca a cidade e o estado do banco
-	$sql = mysql_query("SELECT cidade, estado FROM configuracoes");
-	list($CIDADE,$ESTADO) = mysql_fetch_array($sql);
+	$sql = $PDO->query("SELECT cidade, estado FROM configuracoes");
+	list($CIDADE,$ESTADO) = $sql->fetch();
 	
 	// recebe os dados do formulario
 	$cod             = $_POST["txtCodInst"];
@@ -46,31 +46,31 @@ Fith Floor, Boston, MA 02110-1301, USA
 	
 	
 	if($_POST["btCadastrar"]){
-		include("inc/instfinanceiras/cadastro_inserir.php");
+		require_once("inc/instfinanceiras/cadastro_inserir.php");
 		?><script>LimpaCampos('frmCadastroInst');</script><?php
 	}
 	if($_POST['btDesativar']){
 		$codigo = $_POST['hdDesativar'];
-		mysql_query("UPDATE cadastro SET estado = 'I' WHERE codigo = '$codigo'");
+		$PDO->query("UPDATE cadastro SET estado = 'I' WHERE codigo = '$codigo'");
 		add_logs('Atualizou um Cadastro: Inativo');
-		Mensagem("Instituição Financeira desativada!");
+		Mensagem("InstituiÃ§Ã£o Financeira desativada!");
 		?><script>LimpaCampos('frmCadastroInst');</script><?php
 	}
 	
 	if($_POST['btAtivar']){
 		$codigo = $_POST["hdDesativar"];
-		mysql_query("UPDATE cadastro SET estado = 'A' WHERE codigo = '$codigo'");
+		$PDO->query("UPDATE cadastro SET estado = 'A' WHERE codigo = '$codigo'");
 		add_logs('Atualizou um Cadastro: Ativo');
-		Mensagem("Instituição Financeira ativada!");
+		Mensagem("InstituiÃ§Ã£o Financeira ativada!");
 		?><script>LimpaCampos('frmCadastroInst');</script><?php
 	}
 					
 	if($_POST['btExcluir'])
 	{
 	 $codigo=$_POST["hdDesativar"];
-	 mysql_query("DELETE FROM cadastro WHERE codigo = $codigo");
+	 $PDO->query("DELETE FROM cadastro WHERE codigo = $codigo");
 	 add_logs('Excluiu um Cadastro');
-	 Mensagem("Instituição Financeira excluída com sucesso!");
+	 Mensagem("InstituiÃ§Ã£o Financeira excluï¿½da com sucesso!");
 	 ?><script>LimpaCampos('frmCadastroInst');</script><?php
 	}
 ?>  
@@ -90,11 +90,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 	}
 	-->
 	</style>
-	<div id="divBuscaInst"><?php include("inc/instfinanceiras/pesquisar.php"); ?></div> 
+	<div id="divBuscaInst"><?php require_once("inc/instfinanceiras/pesquisar.php"); ?></div> 
 	<?php
 		if($_POST["CODINST"]){
 			$codigo = $_POST["CODINST"];
-			$sql    = mysql_query("
+			$sql    = $PDO->query("
 				SELECT 
 					cadastro.codigo, 
 					cadastro.nome, 
@@ -130,20 +130,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 				WHERE 
 					cadastro.codigo = '$codigo' AND gerente.codcargo = '1' AND responsavel.codcargo = '2'
 			");
-				list($codigo,$nome,$razaosocial,$senha,$cnpj,$inscrmunicipal,$logradouro,$numero,$municipio,$bairro,$complemento,$uf,$email,$fonecomercial,$fonecelular,$estado,$cep,$codbanco,$agencia,$gerente,$gerente_cpf,$responsavel,$responsavel_cpf)=mysql_fetch_array($sql);
-				$sqlbanco = mysql_query("SELECT banco FROM bancos WHERE codigo = '$codbanco'");
-				list($banco) = mysql_fetch_array($sqlbanco);
+				list($codigo,$nome,$razaosocial,$senha,$cnpj,$inscrmunicipal,$logradouro,$numero,$municipio,$bairro,$complemento,$uf,$email,$fonecomercial,$fonecelular,$estado,$cep,$codbanco,$agencia,$gerente,$gerente_cpf,$responsavel,$responsavel_cpf)=$sql->fetch();
+				$sqlbanco = $PDO->query("SELECT banco FROM bancos WHERE codigo = '$codbanco'");
+				list($banco) = $sqlbanco->fetch();
 				switch($estado){
 					case "A" : $str_estado = "Ativo";        break;
 					case "I" : $str_estado = "Inativo";      break;
-					case "NL": $str_estado = "Não Liberado"; break;
+					case "NL": $str_estado = "NÃ£o Liberado"; break;
 				}
 			}
 	?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Institui&ccedil;&otilde;es Financeiras- Cadastro</td>  
+    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">InstituiÃ§Ãµes Financeiras- Cadastro</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -152,7 +152,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         <form method="post" id="frmCadastroInst">
         <input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
         <input type="hidden" name="txtCodInst" value="<?php echo $codigo; ?>" />
-            <fieldset><legend>Cadastro de Instituições Financeiras</legend>	
+            <fieldset><legend>Cadastro de Instituiï¿½ï¿½es Financeiras</legend>	
               <table width="100%" border="0" align="center">	   
                 <tr>
                     <td width="135" align="left">Nome<font color="#FF0000">*</font></td>
@@ -162,7 +162,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     </td>
                 </tr>
                 <tr>
-                    <td width="135" align="left">Razão Social<font color="#FF0000">*</font></td>
+                    <td width="135" align="left">RazÃ£o Social<font color="#FF0000">*</font></td>
                     <td align="left">
                     	<input type="text" size="60" maxlength="100" name="txtRazao" id="txtRazao" class="texto" 
                         value="<?php echo $razaosocial;?>">
@@ -187,7 +187,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     </td>
                 </tr>
                 <tr>
-                    <td align="left">Número<font color="#FF0000">*</font></td>
+                    <td align="left">NÃºmero<font color="#FF0000">*</font></td>
                     <td align="left">
                     	<input type="text" size="10" maxlength="10" class="texto" name="txtNumero" id="txtNumero" 
                         value="<?php echo $numero;?>"/>
@@ -235,8 +235,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <select name="txtInsUfEmpresa" id="txtInsUfEmpresa" onchange="buscaCidades(this,'txtInsMunicipioEmpresa',true)">
                             <option value=""></option>
                             <?php
-                                $sql=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-                                while(list($uf_nome) = mysql_fetch_array($sql)){
+                                $sql=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+                                while(list($uf_nome) = $sql->fetch()){
                                     echo "<option value=\"$uf\"";if($uf_nome == $uf){ echo "selected = selected"; }echo ">$uf_nome</option>";
                                 }
                             ?>
@@ -244,7 +244,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     </td>
                 </tr>
                 <tr>
-                    <td align="left">Município<font color="#FF0000">*</font></td>
+                    <td align="left">Municï¿½pio<font color="#FF0000">*</font></td>
                     <td align="left">
                         <div  id="txtInsMunicipioEmpresa">
                         	<?php
@@ -254,8 +254,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 							?>
                             <select name="txtInsMunicipioEmpresa" class="combo">
                                 <?php
-                                    $sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$uf'");
-                                    while(list($nome) = mysql_fetch_array($sql_municipio)){
+                                    $sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$uf'");
+                                    while(list($nome) = $sql_municipio->fetch()){
                                         echo "<option value=\"$nome\"";if($municipio == $nome){ echo "selected=selected";} echo ">$nome</option>";
                                     }//fim while 
                                 ?>
@@ -301,8 +301,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <select name="cmbBanco" id="cmbBanco" class="combo">
                             <option value=""></option>
                             <?php
-                                $sql_banco = mysql_query("SELECT codigo, banco FROM bancos ORDER BY banco ASC");
-                                while(list($codigo, $banco) = mysql_fetch_array($sql_banco)){
+                                $sql_banco = $PDO->query("SELECT codigo, banco FROM bancos ORDER BY banco ASC");
+                                while(list($codigo, $banco) = $sql_banco->fetch()){
                                     echo "<option value=\"$codigo\"";if($codbanco == $codigo){ echo "selected = selected"; } echo ">$banco</option>";
                                 }
                             ?>
@@ -318,17 +318,17 @@ Fith Floor, Boston, MA 02110-1301, USA
                 </tr>
              </table>
         </fieldset>
-        <fieldset><legend>Dados responsável</legend>
+        <fieldset><legend>Dados responsï¿½vel</legend>
              <table width="100%" border="0" align="center">
                 <tr>
-                    <td width="135" align="left">Responsável<font color="#FF0000">*</font></td>
+                    <td width="135" align="left">ResponsÃ¡vel<font color="#FF0000">*</font></td>
                     <td align="left">
                     	<input type="text" size="60" maxlength="100" name="txtResponsavel" id="txtResponsavel" class="texto"
                         value="<?php echo $responsavel;?>">
                     </td>
                 </tr>
                 <tr>
-                    <td align="left">Responsável CPF<font color="#FF0000">*</font></td>
+                    <td align="left">ResponsÃ¡vel CPF<font color="#FF0000">*</font></td>
                     <td align="left">
                     	<input type="text" maxlength="13" name="txtResponsavelCPF" id="txtResponsavelCPF" class="texto"
                         value="<?php echo $responsavel_cpf;?>">
@@ -341,7 +341,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             	<tr height="30" valign="bottom">
                 	<?php if(!$_POST["CODINST"]){?>
                     	<td align="left">
-                    		<input type="button" name="btCadastrar" value="Cadastrar" class="botao" onclick="return ValidaFormulario('txtNome|txtRazao|txtCNPJ|txtLogradouro|txtNumero|txtBairro|txtCEP|txtGerente|txtGerenteCPF|cmbBanco|txtAgencia|txtResponsavel|txtResponsavelCPF|txtFoneComercial|txtInsUfEmpresa|txtInsMunicipioEmpresa|txtInsEmailEmpresa','Preencha todos os campos obrigátorios!');" />
+                    		<input type="button" name="btCadastrar" value="Cadastrar" class="botao" onclick="return ValidaFormulario('txtNome|txtRazao|txtCNPJ|txtLogradouro|txtNumero|txtBairro|txtCEP|txtGerente|txtGerenteCPF|cmbBanco|txtAgencia|txtResponsavel|txtResponsavelCPF|txtFoneComercial|txtInsUfEmpresa|txtInsMunicipioEmpresa|txtInsEmailEmpresa','Preencha todos os campos obrigatÃ³rios!');" />
                         </td>
 					<?php }?>
                     <td align="left">

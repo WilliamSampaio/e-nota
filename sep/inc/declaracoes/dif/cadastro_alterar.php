@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	mysql_query("UPDATE inst_financeiras 
+	$PDO->query("UPDATE inst_financeiras 
 					SET codbanco='$codbanco',
 					nome='$nome',
 					razaosocial='$razaosocial',

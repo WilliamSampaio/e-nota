@@ -13,7 +13,7 @@
 		ORDER BY 
 			datahoraemissao
 	");
-	$sql_pesquisa = mysql_query ($query);
+	$sql_pesquisa = $PDO->query($query);
 	$result = mysql_num_rows($sql_pesquisa); //Pega quantos resultados voltaram
 	if($result){ //Se existir algum registro, mostra na tabela
 ?>
@@ -40,12 +40,12 @@
 	</tr>
 	
 <?php
-while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+while($dados_pesquisa = $sql_pesquisa->fetch()){
 	$codemissor = $dados_pesquisa['codemissor'];
 	$pesquisa = ("SELECT nome, cpf, cnpj FROM cadastro WHERE codigo = '$codemissor'");
-	$resultado = mysql_query($pesquisa);
+	$resultado = $PDO->query($pesquisa);
 	$emissor = mysql_num_rows($resultado);
-	while($dados_emissor = mysql_fetch_array($resultado)){
+	while($dados_emissor = $resultado->fetch()){
 		if($dados_emissor['cpf'] == ''){
 			$cpfcnpj = $dados_emissor['cnpj'];
 		}else{
@@ -62,7 +62,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 	</tr>
 <?php
 	}
-}//Fim do while($dados_pesquisa = mysql_fetch_array($sql_pesquisa))
+}//Fim do while($dados_pesquisa = $sql_pesquisa))
 ?>
 </table>
 <!-- Fim da Tabela -->
@@ -73,7 +73,7 @@ while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
 ?>
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999;font-weight:bold;" align="center">
-		<td>N&atilde;o h&aacute; resultados!</td>
+		<td>Não há resultados!</td>
 	</tr>
 </table>
 <?php

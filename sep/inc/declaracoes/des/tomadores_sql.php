@@ -27,19 +27,19 @@ if($_POST['hdCodTomador']){
 	$tomadorNome = $_POST['txtNome'];
 	$tomadorEmail = $_POST['txtEmail'];
 	
-	$sql_test = mysql_query("SELECT nome, logradouro FROM cadastro WHERE cnpj='$txtCNPJ' OR cpf='$txtCNPJ'");
-	list($nome_test,$endereco_test) = mysql_fetch_array($sql_test);
+	$sql_test = $PDO->query("SELECT nome, logradouro FROM cadastro WHERE cnpj='$txtCNPJ' OR cpf='$txtCNPJ'");
+	list($nome_test,$endereco_test) = $sql_test->fetch();
 	/*if(!$endereco_test){
-		mysql_query("UPDATE cadastro SET nome='$tomadorNome', email='$tomadorEmail' WHERE codigo='$cod_tomador'");
+		$PDO->query("UPDATE cadastro SET nome='$tomadorNome', email='$tomadorEmail' WHERE codigo='$cod_tomador'");
 	}*/
-	if(!mysql_num_rows($sql_test)){
+	if(!$sql_test->rowCount()){
 		Mensagem("O tomador precisa estar cadastrado no sistema!");
 	}else{
 		if (strlen($tomadorCNPJCPF)==14)
 			$tipo_tomador = "PF";
 		if (strlen($tomadorCNPJCPF)==18)
 			$tipo_tomador = "PJ";
-		$sql_regras = mysql_query("
+		$sql_regras = $PDO->query("
 			SELECT 
 				credito, 
 				valor 
@@ -52,7 +52,7 @@ if($_POST['hdCodTomador']){
 			ORDER BY valor
 		");
 		$contr=0;
-		while(list($regra_credito,$regra_valor)=mysql_fetch_array($sql_regras)) {
+		while(list($regra_credito,$regra_valor)=$sql_regras->fetch()) {
 			$regra_cred[$contr] = $regra_credito;
 			$regra_val[$contr] = $regra_valor;
 			$contr++;
@@ -67,10 +67,10 @@ if($_POST['hdCodTomador']){
 				$prestador = $_POST['txtPrestador'.$c];
 				$valor = MoedaToDec($_POST['txtValor'.$c]);
 				$codtipo = codtipo("prestador");
-				$sql_emissor = mysql_query("SELECT codigo FROM cadastro WHERE (cnpj='$prestador' OR cpf='$prestador') AND codtipo = '$codtipo'");
-				list($cod_emissor)=mysql_fetch_array($sql_emissor);
+				$sql_emissor = $PDO->query("SELECT codigo FROM cadastro WHERE (cnpj='$prestador' OR cpf='$prestador') AND codtipo = '$codtipo'");
+				list($cod_emissor)=$sql_emissor->fetch();
 	
-				$sql_nota = mysql_query("
+				$sql_nota = $PDO->query("
 					SELECT n.codigo, n.codservico, s.aliquota, s.aliquotair, n.basedecalculo
 					FROM des_servicos as n 
 					INNER JOIN des as d ON n.coddes = d.codigo
@@ -81,13 +81,13 @@ if($_POST['hdCodTomador']){
 						n.tomador_cnpjcpf = '$tomadorCNPJCPF' AND
 						n.nota_nro = '$num_guia'
 				");
-				if (!mysql_num_rows($sql_nota)) {
-					Mensagem("Nota $num_guia do prestador $prestador não encontrada! verifique os dados ou entre em contato com o prestador.");
+				if (!$sql_nota->rowCount()) {
+					Mensagem("Nota $num_guia do prestador $prestador nÃ£o encontrada! verifique os dados ou entre em contato com o prestador.");
 					/*Redireciona("../../site/des.php");
 					exit;*/
 				}else{
 				
-					list($cod_nota,$cod_serv,$aliq_serv,$aliqir_serv,$valor_nota)=mysql_fetch_array($sql_nota);
+					list($cod_nota,$cod_serv,$aliq_serv,$aliqir_serv,$valor_nota)=$sql_nota->fetch();
 					//echo mysql_error();
 					
 					if (floatval($valor_nota)!=floatval($valor)) {
@@ -105,7 +105,7 @@ if($_POST['hdCodTomador']){
 						$credito_gerado = $imposto * ($regra_cred[$regra_aplicada] / 100);
 						$total_credito += $credito_gerado;
 						
-						mysql_query("
+						$PDO->query("
 							INSERT INTO des_tomadores_notas 
 							SET cod_tomador='$cod_tomador', 
 								nota='$num_guia', 

@@ -29,7 +29,7 @@ require_once("../../../funcoes/util.php");
 $codigo = $_GET['hdcod'];
 
 //sql buscando informacoes sobre o usuario
-$sql_info = mysql_query("
+$sql_info = $PDO->query("
 	SELECT 
 		DATE_FORMAT(doc_des.data,'%d/%m/%Y') as data,
 		DATE_FORMAT(doc_des.competencia,'%m/%Y') as competencia,
@@ -55,7 +55,12 @@ $sql_info = mysql_query("
 	GROUP BY
 		doc_des_contas.coddoc_des
 	");
-	$info = mysql_fetch_array($sql_info) or die(mysql_error());
+	try{
+	$info = $sql_info->fetch();
+	}
+	catch(PDOException $e){
+		echo 'Erro: ' . $e->getMessage();
+	}
 	$info['endereco'] = $info['logradouro'].', '.$info['numero'];
 	
 	$aux = explode(" ",$info['data']);
@@ -88,13 +93,13 @@ $sql_info = mysql_query("
         <td align="left"><?php echo $info['uf'];?></td>
     </tr>
     <tr bgcolor="#FFFFFF">
-    	<td align="left">Data de geração</td>
+    	<td align="left">Data de geraÃ§Ã£o</td>
         <td align="left"><?php echo $info['data'];?></td>
-        <td align="right">Competência</td>
+        <td align="right">CompetÃªncia</td>
         <td align="left"><?php echo $info['competencia'];?></td>
     </tr>
     <tr bgcolor="#FFFFFF">
-    	<td align="left">Cod. Verificação</td>
+    	<td align="left">Cod. VerificaÃ§Ã£o</td>
         <td align="left"><?php echo $info['codverificacao'];?></td>
         <td align="right">ISS</td>
         <td align="left"><?php echo DecToMoeda($info['iss']);?></td>

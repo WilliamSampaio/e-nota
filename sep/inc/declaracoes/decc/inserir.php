@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("inc/conect.php");
+require_once("inc/conect.php");
 // Pega as variaveis que vieram por POST
 $nome               = $_POST['txtEmpresa'];
 $razaosocial        = $_POST['txtRazao'];
@@ -42,10 +42,10 @@ $btCadastrarEmpresa = "Cadastrar";
 	$simplesnacional = "N";
 }*/
 
-	$sql = mysql_query("SELECT MAX(codigo) FROM servicos_categorias");
-	list($maxcodigo) = mysql_fetch_array($sql);
-	$sql_categoria = mysql_query("SELECT codigo FROM servicos_categorias WHERE nome ='Contábil'");	
-	list($codigocategoria) = mysql_fetch_array($sql_categoria);
+	$sql = $PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
+	list($maxcodigo) = $sql->fetch();
+	$sql_categoria = $PDO->query("SELECT codigo FROM servicos_categorias WHERE nome ='Contï¿½bil'");	
+	list($codigocategoria) = $sql_categoria->fetch();
 	$categoria=1;
 	$servico=1;
 	$tipo="empresa";
@@ -63,35 +63,35 @@ $btCadastrarEmpresa = "Cadastrar";
 	}
 		
 
-    //Verifica se o login ja existe e se não há nenhuma empresa cadastrada com o mesmo nome e/ou cnpj
-	$teste_nome        = mysql_query("SELECT codigo FROM emissores WHERE nome = '$nome'");
-	$teste_razaosocial = mysql_query("SELECT codigo FROM emissores WHERE razaosocial = '$razaosocial'");
-	$teste_cnpj        = mysql_query("SELECT codigo FROM emissores WHERE cnpjcpf = '$cpfcnpj'");
-	if(mysql_num_rows($teste_nome)>0){
+    //Verifica se o login ja existe e se nÃ£o hÃ¡ nenhuma empresa cadastrada com o mesmo nome e/ou cnpj
+	$teste_nome        = $PDO->query("SELECT codigo FROM emissores WHERE nome = '$nome'");
+	$teste_razaosocial = $PDO->query("SELECT codigo FROM emissores WHERE razaosocial = '$razaosocial'");
+	$teste_cnpj        = $PDO->query("SELECT codigo FROM emissores WHERE cnpjcpf = '$cpfcnpj'");
+	if($teste_nome->rowCount()>0){
 		echo "	
 			<script>
-				alert('Já existe uma empresa com este nome');
+				alert('JÃ¡ existe uma empresa com este nome');
 				window.location='../../decc.php';
 			</script>
 		";
-	}elseif(mysql_num_rows($teste_razaosocial)>0){
+	}elseif($teste_razaosocial->rowCount()>0){
 		echo "	
 			<script>
-				alert('Já existe uma empresa com esta razão social');
+				alert('JÃ¡ existe uma empresa com esta razï¿½o social');
 				window.location='../../decc.php';
 			</script>
 		";
-	}elseif(mysql_num_rows($teste_cnpj)>0){
+	}elseif($teste_cnpj->rowCount()>0){
 		echo "	
 			<script>
-				alert('Já existe uma empresa com este CPF/CNPJ');
+				alert('JÃ¡ existe uma empresa com este CPF/CNPJ');
 				window.location='../../decc.php';
 			</script>
 		";
 	}else{		
 	   
 		// insere a empresa no banco
-		mysql_query("INSERT INTO empreiteiras SET nome='$nome', senha = '$senha', razaosocial='$razaosocial', cnpj= '$cpfcnpj', endereco='$endereco', inscrmunicipal='$inscricaomunicipal',  municipio ='$municipio', estado='NL', nfe='N', email='$email',uf='$uf', ultimanota= 0, fonecomercial = '$fone', fonecelular = '$celular'");
+		$PDO->query("INSERT INTO empreiteiras SET nome='$nome', senha = '$senha', razaosocial='$razaosocial', cnpj= '$cpfcnpj', endereco='$endereco', inscrmunicipal='$inscricaomunicipal',  municipio ='$municipio', estado='NL', nfe='N', email='$email',uf='$uf', ultimanota= 0, fonecomercial = '$fone', fonecelular = '$celular'");
 		
 		
 		
@@ -99,9 +99,9 @@ $btCadastrarEmpresa = "Cadastrar";
 	
 		$msg ="O cadastro da empresa $nome foi efetuado com sucesso.<br>
 		Dados da empresa:<br><br>
-		Razão Social: $razaosocial<br>
+		RazÃ£o Social: $razaosocial<br>
 		CPF/CNPJ: $cpfcnpj<br>
-		Município: $municipio<br>
+		Municï¿½pio: $municipio<br>
 		Endereco: $endereco<br>
 		Senha de acesso: $senha<br><br>
 		  
@@ -110,9 +110,9 @@ $btCadastrarEmpresa = "Cadastrar";
 		2- Clique no link prestadores<br>
 		3- Clique na imagem em acessar NF-e<br>
 		4- Em login insira o cpf/cnpf da empresa<br>
-		5- Sua senha é <b><font color=\"RED\">$senha</font></b><br>
-		6- Insira o código de verificação que aparece ao lado<br>
-		7- Depois de ter acessado o sistema, vá no link usuário e troque sua senha<br>";	
+		5- Sua senha Ã© <b><font color=\"RED\">$senha</font></b><br>
+		6- Insira o cÃ³digo de verificaÃ§Ã£o que aparece ao lado<br>
+		7- Depois de ter acessado o sistema, vï¿½ no link usuÃ¡rio e troque sua senha<br>";	
 		
 		$assunto = "Acesso ao Sistema NF-e ($PREFEITURA).";
 	
@@ -132,8 +132,8 @@ $btCadastrarEmpresa = "Cadastrar";
 			
 		
 		// busca empresa no banco --------------------------------------------------------------------------------------------------		
-		$sql_empresa = mysql_query("SELECT codigo FROM empreiteiras WHERE nome = '$nome' ORDER BY CODIGO DESC LIMIT 0,1");
-		list($CODEMPRESA) = mysql_fetch_array($sql_empresa);
+		$sql_empresa = $PDO->query("SELECT codigo FROM empreiteiras WHERE nome = '$nome' ORDER BY CODIGO DESC LIMIT 0,1");
+		list($CODEMPRESA) = $sql_empresa->fetch();
 	
 		
 	
@@ -143,15 +143,15 @@ $btCadastrarEmpresa = "Cadastrar";
 		//Insere os servicos no banco...		
 			
 			//vetores para adicionar servicos
-			 $sql_categoria=mysql_query("SELECT codigo,nome FROM servicos_categorias");
+			 $sql_categoria=$PDO->query("SELECT codigo,nome FROM servicos_categorias");
 			 
 			 $contpos=0;
-			 while(list($codcategoria)=mysql_fetch_array($sql_categoria)) {   
+			 while(list($codcategoria)=$sql_categoria->fetch()) {   
 			   $conts=1;
 			   for($conts=1;$conts<=5;$conts++) {    
 					$vetor_insere_servico[$contpos]=$_POST['cmbCodigo'.$codcategoria.$conts];
 					if($_POST['cmbCodigo'.$codcategoria.$conts]){
-						mysql_query("INSERT INTO empreiteiras_servicos SET codservico = '".$_POST['cmbCodigo'.$codcategoria.$conts]."', codempreiteira='$CODEMPRESA'");
+						$PDO->query("INSERT INTO empreiteiras_servicos SET codservico = '".$_POST['cmbCodigo'.$codcategoria.$conts]."', codempreiteira='$CODEMPRESA'");
 					} 
 					$contpos++;	
 			   }		
@@ -169,7 +169,7 @@ $btCadastrarEmpresa = "Cadastrar";
 	   //insere os socios no banco
 		while($contsocios < $nrosocios) {   
 			if($vetor_sociosnomes[$contsocios] != "") { 	    
-				mysql_query("INSERT INTO empreiteiras_socios SET codempreiteira='$CODEMPRESA', nome = '$vetor_sociosnomes[$contsocios]', cpf = '$vetor_socioscpf[$contsocios]'"); 
+				$PDO->query("INSERT INTO empreiteiras_socios SET codempreiteira='$CODEMPRESA', nome = '$vetor_sociosnomes[$contsocios]', cpf = '$vetor_socioscpf[$contsocios]'"); 
 			} // fim if	
 			$contsocios++;
 	   } // fim while   

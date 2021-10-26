@@ -27,16 +27,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 			$sql_aidfe=mysql_query("SELECT codigo FROM aidfe_solicitacoes WHERE solicitante = '$codigoempresa'");
 			$numero_de_solicitacoes = mysql_num_rows($sql_aidfe);
 			if($numero_de_solicitacoes>0){
-				Mensagem('Sua solicita&ccedil;&atilde;o j&aacute; foi enviada a prefeitura.');
+				Mensagem('Sua solicitação já foi enviada a prefeitura.');
 				Redireciona('aidf.php');
 			}else{
 				if($notalimite==0){
 					mysql_query("INSERT INTO aidfe_solicitacoes SET solicitante = '$codigoempresa'");
-					Mensagem('Uma solicita&ccedil;&aring;o de aumento de AIDF foi enviada &agrave; prefeitura!');
+					Mensagem('Uma solicitaç&aring;o de aumento de AIDF foi enviada à prefeitura!');
 					add_logs('Solicitou um aumento no AIDF');
 					Redireciona('aidf.php');
 				}else{
-					Mensagem('Uma solicita&ccedil;&aring;o de aumento de AIDF foi enviada &agrave; prefeitura!');
+					Mensagem('Uma solicitaç&aring;o de aumento de AIDF foi enviada à prefeitura!');
 					Redireciona('aidf.php');	
 				}
 			}
@@ -50,7 +50,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" align="center" cellpadding="0" cellspacing="1">
     <tr>
       <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">AIDF Eletr&ocirc;nico</td>
+	  <td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">AIDF Eletrônico</td>
       <td width="470" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -70,11 +70,11 @@ Fith Floor, Boston, MA 02110-1301, USA
         <table align="center" width="100%">
         	<tr>
             	<td colspan="2" bgcolor="#666666">
-                <?php echo "Raz�o Social: ".$razaocontador; ?>
+                <?php echo "Raz�o Social: ".$razaocontador; ?>
                 </td>
             </tr>
             <tr align="left" bgcolor="#FFFFFF">
-                <td width="50%">N&uacute;mero da &uacute;ltima nota emitida:</td>
+                <td width="50%">Número da última nota emitida:</td>
                 <td width="50%"><?php echo $ultimanota; ?></td>
             </tr>
             <tr align="left" bgcolor="#FFFFFF">
@@ -92,11 +92,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<table align="center" width="100%">
 					<tr>
 						<td colspan="2" bgcolor="#666666">
-						<?php echo "Raz�o Social: ".$razaocontadoremp; ?>
+						<?php echo "Raz�o Social: ".$razaocontadoremp; ?>
 						</td>
 					</tr>
 					<tr align="left" bgcolor="#FFFFFF">
-						<td width="50%">N&uacute;mero da &uacute;ltima nota emitida:</td>
+						<td width="50%">Número da última nota emitida:</td>
 						<td width="50%"><?php echo $ultimanotaemp; ?></td>
 					</tr>
 					<tr align="left" bgcolor="#FFFFFF">

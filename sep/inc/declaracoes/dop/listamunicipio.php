@@ -19,13 +19,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	include("../conect.php");
+	require_once("../conect.php");
 	// busca a cidade e o estado do banco
-	$sql=mysql_query("SELECT cidade, estado FROM configuracoes");
-	list($CIDADE,$ESTADO)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT cidade, estado FROM configuracoes");
+	list($CIDADE,$ESTADO)=$sql->fetch();
 	
-	$municipios=mysql_query("SELECT nome FROM municipios WHERE uf='".$_GET["txtUfOrgao"]."' ORDER BY nome");
-	while(list($municipio)=mysql_fetch_array($municipios))
+	$municipios=$PDO->query("SELECT nome FROM municipios WHERE uf='".$_GET["txtUfOrgao"]."' ORDER BY nome");
+	while(list($municipio)=$municipios->fetch())
 		{
 			echo "<option value=\"$municipio\" ";if($municipio==$CIDADE){echo "selected=\"selected\"";}echo">$municipio</option>";
 		}

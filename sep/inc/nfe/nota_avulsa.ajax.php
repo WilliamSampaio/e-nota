@@ -50,19 +50,19 @@ $query = ("
 	LIMIT 1
 ");
 
-$sql = mysql_query($query);
+$sql = $PDO->query($query);
 
 if (mysql_num_rows($sql) == 0) {
 	?><fieldset><strong><center>Nenhum resultado encontrado</center></strong></fieldset><?php
 } else {
-	$dados = mysql_fetch_array($sql);
+	$dados = $sql->fetch();
 	$dados['cnpj'] .= $dados['cpf'];
 	if($dados['nfe']=="S"){
-		?><fieldset><strong><center>Este contribuinte n&atilde;o pode gerar Nota Avulsa.</center></strong></fieldset><?php
+		?><fieldset><strong><center>Este contribuinte não pode gerar Nota Avulsa.</center></strong></fieldset><?php
 	}else{
-	$notas = mysql_query("SELECT * FROM notas WHERE codemissor = '$dados[codigo]'");
+	$notas = $PDO->query("SELECT * FROM notas WHERE codemissor = '$dados[codigo]'");
 	
-	$sql_servicos = mysql_query("
+	$sql_servicos = $PDO->query("
 		SELECT 
 			cadastro_servicos.codigo,
 			servicos.codigo,
@@ -80,12 +80,12 @@ if (mysql_num_rows($sql) == 0) {
 	");
 	
 	//SELECIONA A ULTIMA NOTA INSERIDA PELA EMPRESA
-	$sql = mysql_query("SELECT ultimanota, codtipo, codtipodeclaracao FROM cadastro WHERE codigo = '$dados[codigo]'");
-	list($ultimanota,$codtipo,$codtipodec)=mysql_fetch_array($sql);
+	$sql = $PDO->query("SELECT ultimanota, codtipo, codtipodeclaracao FROM cadastro WHERE codigo = '$dados[codigo]'");
+	list($ultimanota,$codtipo,$codtipodec)=$sql->fetch();
 	$ultimanota += 1;
 	
-	$sql = mysql_query("SELECT notalimite FROM cadastro WHERE codigo = '$dados[codigo]'");
-	list($notalimite) = mysql_fetch_array($sql);
+	$sql = $PDO->query("SELECT notalimite FROM cadastro WHERE codigo = '$dados[codigo]'");
+	list($notalimite) = $sql->fetch();
 	if($notalimite == 0){
 		$notalimite = "Liberado";
 	}
@@ -95,7 +95,7 @@ if (mysql_num_rows($sql) == 0) {
 	$max = strlen($CaracteresAceitos)-1;
 	$password = null;
 	 for($i=0; $i < 8; $i++) {
-	 $password .= $CaracteresAceitos{mt_rand(0, $max)}; 
+	 $password .= $CaracteresAceitos[mt_rand(0, $max)]; 
 	 $carac = strlen($password); 
 	 if($carac ==4)
 	 { 
@@ -122,7 +122,7 @@ if (mysql_num_rows($sql) == 0) {
 	
     
     
-    <fieldset><legend><strong>Informa&ccedil;&otilde;es</strong></legend>
+    <fieldset><legend><strong>Informações</strong></legend>
 	<table width="100%" border="0" cellspacing="2" cellpadding="2">
 		<tr>
 			<td bgcolor="#999999" align="center">Nome</td><td bgcolor="#FFFFFF" align="center"><?php echo $dados['nome']; ?></td>
@@ -134,7 +134,7 @@ if (mysql_num_rows($sql) == 0) {
 		</tr>
         <tr>
 			<td bgcolor="#999999" align="center">Cep</td><td bgcolor="#FFFFFF" align="center"><?php echo $dados['cep']; ?></td>
-            <td bgcolor="#999999" align="center">Munic&iacute;pio/Estado</td><td bgcolor="#FFFFFF" align="center"><?php echo $dados['municipio']."/".$dados['uf']; ?></td>
+            <td bgcolor="#999999" align="center">Município/Estado</td><td bgcolor="#FFFFFF" align="center"><?php echo $dados['municipio']."/".$dados['uf']; ?></td>
 		</tr>
         <tr>
 			<td bgcolor="#999999" align="center">Email</td><td bgcolor="#FFFFFF" align="center"><?php echo $dados['email']; ?></td>
@@ -146,16 +146,16 @@ if (mysql_num_rows($sql) == 0) {
     
     
     
-    <fieldset><legend><strong>Informa&ccedil;&otilde;es da Nota</strong></legend>
+    <fieldset><legend><strong>Informações da Nota</strong></legend>
     <input name="hdInputs" id="hdInputs" type="hidden" value="0" />
         <table width="100%" border="0" cellspacing="2" cellpadding="2" align="center">
         	<tr>    
-        		<td  align="left" colspan="3"><font color="#FF0000" size="-2">OBS: N&atilde;o utilizar a tecla Enter para alternar entre os campos.</font>  </td>
+        		<td  align="left" colspan="3"><font color="#FF0000" size="-2">OBS: Não utilizar a tecla Enter para alternar entre os campos.</font>  </td>
         	</tr>
             <tr>
-                <td align="center">N&uacute;mero</td>
-                <td align="center">Data e Hora de Emiss&atilde;o</td>
-                <td align="center">C&oacute;digo de Verifica&ccedil;&atilde;o</td>
+                <td align="center">Número</td>
+                <td align="center">Data e Hora de Emissão</td>
+                <td align="center">Código de Verificação</td>
             </tr>
             <tr>
                 <td align="center"><input name="txtNotaNumero" style="text-align:center;" type="text" size="10" class="texto" readonly="yes" value="<?php print $ultimanota;?> "></td>
@@ -168,7 +168,7 @@ if (mysql_num_rows($sql) == 0) {
         </table>
         <table width="100%" border="0" cellspacing="2" cellpadding="2" align="center">
             <tr>
-                <td align="left" colspan="3"><strong>Per&iacute;odo</strong></td>
+                <td align="left" colspan="3"><strong>Período</strong></td>
             </tr>
             <tr>    
                 <td align="left" width="100">
@@ -223,7 +223,7 @@ if (mysql_num_rows($sql) == 0) {
                                        
                                         <table width="100%" border="0" cellspacing="2" cellpadding="2"> 
                                             <tr>
-                                                <td colspan="2"><strong>Tomador de Servi&ccedil;os</strong></td>
+                                                <td colspan="2"><strong>Tomador de Serviços</strong></td>
                                             </tr>
                                             <tr>
                                                 <td align="left" width="25%">CPF/CNPJ</td>
@@ -233,21 +233,21 @@ if (mysql_num_rows($sql) == 0) {
                                         <div id="divContainer">
                                         <table width="100%" border="0" cellspacing="2" cellpadding="2"> 
                                             <tr>
-                                                <td width="25%" align="left">Nome/Raz&atilde;o Social</td>
+                                                <td width="25%" align="left">Nome/Razão Social</td>
                                                 <td width="75%" align="left"><input name="txtTomadorNome" id="txtTomadorNome" type="text" size="55" class="texto"></td>
                                             </tr>  
                                             <tr>
-                                                <td align="left">Inscri&ccedil;&atilde;o Municipal</td>
+                                                <td align="left">Inscrição Municipal</td>
                                                 <td align="left"><input name="txtTomadorIM" type="text" onkeydown="return NumbersOnly(event);"  size="30" class="texto" ></td>
                                             </tr>
                                             <!--<tr>
-                                            <td align="left">Inscri&ccedil;&atilde;o Estadual</td>
+                                            <td align="left">Inscrição Estadual</td>
                                             <td align="left"><input name="txtTomadorIE" type="text" onkeydown="return NumbersOnly(event);"  size="30" class="texto" ></td>
                                             </tr>-->
                                             <tr>
                                                 <td align="left">Logradouro</td>
                                                 <td align="left"><input name="txtTomadorLogradouro" type="text" size="30" class="texto">
-                                            &nbsp;&nbsp;N&uacute;mero <input name="txtTomadorNumero" type="text" onkeydown="return NumbersOnly( event );"  size="5" class="texto" maxlength="5"  /></td>
+                                            Número <input name="txtTomadorNumero" type="text" onkeydown="return NumbersOnly( event );"  size="5" class="texto" maxlength="5"  /></td>
                                             </tr>  
                                             <tr>
                                                 <td align="left">Complemento</td>
@@ -269,8 +269,8 @@ if (mysql_num_rows($sql) == 0) {
                                                     <select name="txtTomadorUF" id="txtTomadorUF" onchange="buscaCidades(this,'txtTomadorMunicipio')">
                                                         <option value=""></option>
                                                         <?php
-                                                            $sqlcidades=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
-                                                            while(list($uf_busca)=mysql_fetch_array($sqlcidades)){
+                                                            $sqlcidades=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+                                                            while(list($uf_busca)=$sqlcidades->fetch()){
                                                                 echo "<option value=\"$uf_busca\"";if($uf_busca == $UF_MUNICIPIO){ echo "selected=selected"; }echo ">$uf_busca</option>";
                                                             }
                                                         ?>
@@ -278,13 +278,13 @@ if (mysql_num_rows($sql) == 0) {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td align="left">Munic&iacute;pio<font color="#FF0000">*</font></td>
+                                                <td align="left">Município<font color="#FF0000">*</font></td>
                                                 <td align="left">
                                                 <div  id="txtTomadorMunicipio">
                                                     <select name="txtTomadorMunicipio" id="txtTomadorMunicipio" class="combo">
                                                         <?php
-                                                        $sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$uf_busca'");
-                                                        while(list($nome_municipio) = mysql_fetch_array($sql_municipio)){
+                                                        $sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$uf_busca'");
+                                                        while(list($nome_municipio) = $sql_municipio->fetch()){
                                                             echo "<option value=\"$nome_municipio\"";if(strtolower($nome_municipio) == strtolower($NOME_MUNICIPIO)){ echo "selected=selected";} echo ">$nome_municipio</option>";
                                                         }//fim while 
                                                         ?>
@@ -297,7 +297,7 @@ if (mysql_num_rows($sql) == 0) {
                                                 <td align="left"><input name="txtTomadorEmail" type="text" size="30" class="email"></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="8" align="right"><font color="#FF0000">**</font><i>Digite o e-mail do tomador para que o mesmo seja notificado sobre a emiss&atilde;o.</i></td>
+                                                <td colspan="8" align="right"><font color="#FF0000">**</font><i>Digite o e-mail do tomador para que o mesmo seja notificado sobre a emissão.</i></td>
                                             </tr>
                                             </table>
                                             </div>
@@ -330,7 +330,7 @@ if (mysql_num_rows($sql) == 0) {
             
             <table width="100%" id="tblServicos" cellpadding="3">
                 <tr>
-                    <td align="left"><b>Observa&ccedil;&otilde;es da nota: </b></td>
+                    <td align="left"><b>Observações da nota: </b></td>
                 </tr>
                 <tr>
                     <td align="center"><textarea name="txtObsNota" rows="0" cols="0" style="width:90%; height:60px;"></textarea></td>
@@ -339,8 +339,8 @@ if (mysql_num_rows($sql) == 0) {
             <table width="100%">
                 <tr>
                     <td align="left">
-                        <label><strong>Clique para informar os servi&ccedil;os<br /><br /></strong>
-                        <input name="btServico" type="button" value="Servi&ccedil;os" class="botao" 
+                        <label><strong>Clique para informar os serviços<br /><br /></strong>
+                        <input name="btServico" type="button" value="Serviços" class="botao" 
                         onclick="mostraDivServicos();" /></label>
                         <div id="divServicosNota" class="divServicosNota">
                             <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC" height="100%">
@@ -390,7 +390,7 @@ if (mysql_num_rows($sql) == 0) {
         <table width="100%">
 	<!-- busca a relacao dos servicos por empresa -->
 	<tr>
-		<td align="left">Base de C&aacute;lculo</td>
+		<td align="left">Base de Cálculo</td>
 		<td align="left">
 			R$ <input name="txtBaseCalculo" type="text" size="10" class="texto" id="txtBaseCalculo" style="text-align:right;" 
 			onkeyup="MaskMoeda(this);" onkeydown="return NumbersOnly(event);" onblur="ValorIss('<?php echo $regras_credito;?>')" readonly="readonly" value="0,00">
@@ -401,12 +401,12 @@ if (mysql_num_rows($sql) == 0) {
 		</td>
 	</tr>
 	<tr>
-		<td width="21%" align="left">Dedu&ccedil;&otilde;es</td>
+		<td width="21%" align="left">Deduções</td>
 		<td width="26%" align="left">R$
 			<input name="txtValorDeducoes" type="text" size="10" class="texto" id="txtValorDeducoes"  style="text-align:right;" value="0,00"
                    onkeydown="MaskMoeda(this); return NumbersOnly(event);" onblur="ValorIss('<?php echo $regras_credito;?>');" readonly="readonly" />
 		</td>
-		<td align="left">Acr&eacute;scimos</td>
+		<td align="left">Acréscimos</td>
 		<td align="left">
 			R$ 
 			<input name="txtValorAcrescimos" type="text" size="10" class="texto" id="txtValorAcrescimos" style="text-align:right" value="0,00"
@@ -445,7 +445,7 @@ if (mysql_num_rows($sql) == 0) {
             <input name="txtCofins" onblur="document.getElementById('txtBaseCalculo').onblur()" id="txtCofins" type="text" class="texto" size="10" value="0,00" onkeyup="MaskMoeda(this);"
 			onkeydown="return NumbersOnly(event);" style="text-align:right" />
 		</td>
-        <td width="21%" align="left">Contribui&ccedil;&atilde;o Social</td>
+        <td width="21%" align="left">Contribuição Social</td>
 		<td width="26%" align="left">R$
             <input name="txtContribuicaoSocial" id="txtContribuicaoSocial" onblur="document.getElementById('txtBaseCalculo').onblur()" type="text" class="texto" size="10" value="0,00" onkeyup="MaskMoeda(this);"
 			onkeydown="return NumbersOnly(event);" style="text-align:right" />
@@ -460,16 +460,16 @@ if (mysql_num_rows($sql) == 0) {
 	</tr>
     <tr>
         <td width="150" align="left">Valor liquido</td>
-        <td align="left">R$ <input name="txtValTotal" id="txtValTotal" type="text" onblur="document.getElementById('txtBaseCalculo').onblur()" size="10" class="texto" readonly="yes" style="text-align:right;" value="0,00">&nbsp;</td>
+        <td align="left">R$ <input name="txtValTotal" id="txtValTotal" type="text" onblur="document.getElementById('txtBaseCalculo').onblur()" size="10" class="texto" readonly="yes" style="text-align:right;" value="0,00"></td>
         <td width="13%" align="left">
-			Reten&ccedil;&otilde;es		</td>
+			Retenções		</td>
 		<td width="40%" align="left">
 			R$ 
 				<input name="txtValTotalRetencao" id="txtValTotalRetencao" onblur="document.getElementById('txtBaseCalculo').onblur()" type="text" class="texto" size="10" readonly="readonly" style="text-align:right" value="0,00" />
 		</td>
 	</tr>
 	<tr <?php echo $display;?>>
-		<td align="left">Cr&eacute;dito</td>
+		<td align="left">Crédito</td>
 		<td align="left">R$
 			<input name="txtCredito" id="txtCredito" type="text" onblur="document.getElementById('txtBaseCalculo').onblur()" size="10" class="texto" readonly="yes" style="text-align:right" value="0,00" >
 		</td>
@@ -482,7 +482,7 @@ if (mysql_num_rows($sql) == 0) {
        <!-- </form>-->
     <?php }else{
 		echo "<fieldset><legend>Gerar Nota Avulsa</legend>";
-		echo "<br />Nenhum servi&ccedil;o cadastrado para esse CPF/CNPJ. Cadastre um servi&ccedil;o para gerar uma Nota Avulsa.<br /><br />";
+		echo "<br />Nenhum serviço cadastrado para esse CPF/CNPJ. Cadastre um serviço para gerar uma Nota Avulsa.<br /><br />";
 		echo "</fieldset>";	
 	}?>    
 <?php

@@ -57,9 +57,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="100%" border="0" cellspacing="0" cellpadding="2">
   <tr>
     <td align="center">
-        Empresa&nbsp;
+        Empresa
       <select name="cmbEmpresaCliente" id="cmbEmpresaCliente">
-          <option value="<?php echo $codcontador; ?>"><?php echo "Pr&oacute;pria - ".$_SESSION['codempresa']; ?></option>
+          <option value="<?php echo $codcontador; ?>"><?php echo "Própria - ".$_SESSION['codempresa']; ?></option>
           <?php
             while($empresaCliente = mysql_fetch_object($sqlEmpresaCliente)){
                 if($empresaCliente->codigo == $_POST['cmbEmpresaCliente'] || $empresaCliente->codigo == $_POST['cmbCliente']){
@@ -87,14 +87,14 @@ $btInserir   = $_POST['btInserir'];
 $btPesquisar = $_REQUEST['btPesquisar'];
 
 if($_POST['btGerar']){
-	include("../livro/inserir.php");
+	require_once("../livro/inserir.php");
 }
 
 if($btInserir !="")	{
-	include("../livro/iss_gerar.php");
+	require_once("../livro/iss_gerar.php");
 }
 if($btPesquisar !="") {
-	include("../livro/iss_consultar.php");
+	require_once("../livro/iss_consultar.php");
 }
 	
 ?>

@@ -19,13 +19,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	include("../../conect.php");
-	include("../../../funcoes/util.php");
+	require_once("../../conect.php");
+	require_once("../../../funcoes/util.php");
 	
 	$cnpj = $_GET['txtCNPJ'];
     
-    $sql = mysql_query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj'");
-    list($codigo)=mysql_fetch_array($sql);
+    $sql = $PDO->query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj'");
+    list($codigo)=$sql->fetch();
 
     $anosql = $_GET['cmbAno'];
     $messql = $_GET['cmbMes'];
@@ -38,9 +38,9 @@ echo "
     <select name=\"cmbObra\" id=\"cmbObra\" style=\"width:145px;\">
 
     	<option></option>";
-    $sql = mysql_query("SELECT codigo, obra FROM obras WHERE codcadastro='$codigo' AND dataini <= '$data'");
+    $sql = $PDO->query("SELECT codigo, obra FROM obras WHERE codcadastro='$codigo' AND dataini <= '$data'");
     if(mysql_num_rows($sql)>0){
-        while($dados_obra = mysql_fetch_array($sql)){
+        while($dados_obra = $sql->fetch()){
             echo "<option value=\"".$dados_obra['codigo']."\">".$dados_obra['obra']."</option>";
         }
     }

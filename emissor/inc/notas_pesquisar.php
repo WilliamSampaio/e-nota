@@ -52,13 +52,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<td height="60" colspan="3" bgcolor="#CCCCCC">
 				<table width="100%" border="0" cellspacing="2" cellpadding="2">
 					<tr>
-						<td align="left" width="30%">N&uacute;mero da Nota</td>
+						<td align="left" width="30%">NÃºmero da Nota</td>
 						<td align="left" width="70%">
 							<input name="txtNumeroNota" type="text" size="10" class="botao" value="<?php echo $numero;?>" />
 						</td>
 					</tr>
 					<tr>
-						<td align="left">C&oacute;digo de Verificação</td>
+						<td align="left">CÃ³digo de Verificaï¿½ï¿½o</td>
 						<td align="left">
 							<input name="txtCodigoVerificacao" type="text" size="10" class="botao" value="<?php echo $codverifi;?>"/>
 						</td>

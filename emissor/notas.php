@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-// inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
+// inicia a sessÃ£o verificando se jah esta com o usuario logado, se estiver entra na pÃ¡gina admin
 session_name("emissor");
 session_start();
 if(!(isset($_SESSION["empresa"])))
@@ -32,7 +32,7 @@ if(!(isset($_SESSION["empresa"])))
 	";
 }else{
 	
-include("nocache.php");
+require_once("nocache.php");
 
 ?>
 
@@ -52,7 +52,7 @@ include("nocache.php");
 <center>
 <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
-    <td><?php include("../include/topo.php"); ?></td>
+    <td><?php require_once("../include/topo.php"); ?></td>
   </tr>
   <tr>
     <td bgcolor="#FFFFFF" height="400" valign="top" align="center">
@@ -60,13 +60,13 @@ include("nocache.php");
 <!-- frame central inicio --> 	
 <table border="0" cellspacing="0" cellpadding="0" height="100%">
   <tr>
-    <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php include("inc/menu.php"); ?></td>
+    <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php require_once("inc/menu.php"); ?></td>
     <td width="590"bgcolor="#FFFFFF" valign="top">
     <img src="../img/cabecalhos/notas.jpg" />
 
 <!-- frame central lateral direita inicio -->	
 	
-<?php include("inc/notas_principal.php"); ?>	
+<?php require_once("inc/notas_principal.php"); ?>	
 	
 	
 <!-- frame central lateral direita fim -->	
@@ -79,7 +79,7 @@ include("nocache.php");
 	</td>
   </tr>
   <tr>
-    <td><?php include("inc/rodape.php"); ?></td>
+    <td><?php require_once("inc/rodape.php"); ?></td>
   </tr>
 </table>
 </center>

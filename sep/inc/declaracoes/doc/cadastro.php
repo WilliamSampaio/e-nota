@@ -20,8 +20,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	// busca a cidade e o estado do banco
-	$sql=mysql_query("SELECT cidade, estado FROM configuracoes");
-	list($CIDADE,$ESTADO)=mysql_fetch_array($sql);
+	$sql=$PDO->query("SELECT cidade, estado FROM configuracoes");
+	list($CIDADE,$ESTADO)=$sql->fetch();
 	
 	// recebe os dados do formulario
 	$cod             = $_POST["hdCodOpr"];
@@ -46,7 +46,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	
 	//Faz o cadastro
 	if($_POST["btCadastrar"]){
-		include("inc/operadorascreditos/cadastro_inserir.php");
+		require_once("inc/operadorascreditos/cadastro_inserir.php");
 	}
 
 ?>
@@ -63,12 +63,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 	}
 	-->
 	</style>
-	<div id="divBuscaOpr"><?php include("inc/operadorascreditos/pesquisar.php"); ?></div> 
+	<div id="divBuscaOpr"><?php require_once("inc/operadorascreditos/pesquisar.php"); ?></div> 
 	<?php
 		if($_POST["CODOPR"])
 			{
 				$codigo = $_POST["CODOPR"];
-				$sql = mysql_query("
+				$sql = $PDO->query("
 					SELECT 
 						codigo,
 						nome, 
@@ -93,26 +93,26 @@ Fith Floor, Boston, MA 02110-1301, USA
 						operadoras_creditos
 					WHERE 
 						codigo = $codigo");
-				list($codopr,$nome,$razaosocial,$agencia,$cnpj,$gerente,$gerente_cpf,$responsavel,$responsavel_cpf,$inscrmunicipal,$endereco, $munic, $uf, $fone1,$fone2,$codbanco,$senha,$email,$estado)=mysql_fetch_array($sql);
-				$sqlbanco = mysql_query("SELECT banco FROM bancos WHERE codigo = '$codbanco'");
-				list($banco) = mysql_fetch_array($sqlbanco);
+				list($codopr,$nome,$razaosocial,$agencia,$cnpj,$gerente,$gerente_cpf,$responsavel,$responsavel_cpf,$inscrmunicipal,$endereco, $munic, $uf, $fone1,$fone2,$codbanco,$senha,$email,$estado)=$sql->fetch();
+				$sqlbanco = $PDO->query("SELECT banco FROM bancos WHERE codigo = '$codbanco'");
+				list($banco) = $sqlbanco->fetch();
 				switch($estado){
 					case "A"  : $estado = "Ativo";        break;
 					case "I"  : $estado = "Inativo";      break;
-					case "NL" : $estado = "Não Liberado"; break;
+					case "NL" : $estado = "NÃ£o Liberado"; break;
 				}
 			}
 	?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Operadoras de cr&eacute;dito- Cadastro</td>  
+    <td width="750" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Operadoras de crÃ©dito- Cadastro</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
     <td width="18" background="img/form/lateralesq.jpg"></td>
     <td align="left">
-					<fieldset><legend>Cadastro de Operadora de crédito</legend>	
+					<fieldset><legend>Cadastro de Operadora de crÃ©dito</legend>	
 						<table align="left">
                             <form method="post" id="frmCadastroOpr">
 							<input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
@@ -123,8 +123,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     	<?php if ($codigo) echo "<input type=\"text\" readonly=\"true\" class=\"texto\" size=\"40\" maxlength=\"15\" value=\"$banco\" />";?>
 										<select name="cmbBanco" id="cmbBanco" <?php if($codigo) echo "style=\"visibility:hidden\"" ?>>
 											<?php
-												$sql_banco=mysql_query("SELECT codigo, banco FROM bancos");
-												while(list($codbanco,$banco) = mysql_fetch_array($sql_banco))
+												$sql_banco=$PDO->query("SELECT codigo, banco FROM bancos");
+												while(list($codbanco,$banco) = $sql_banco->fetch())
 													{
 														echo "<option value=\"$codbanco\">$banco</option>";
 													}
@@ -137,7 +137,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td colspan="2"><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" size="60" name="txtNome" id="txtNome" value="<?php echo $nome; ?>" /></td>
 								</tr>
 								<tr align="left">
-									<td>Razão Social:<font color="#FF0000">*</font> </td>
+									<td>RazÃ£o Social:<font color="#FF0000">*</font> </td>
 									<td colspan="2"><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" size="60" name="txtRazao" id="txtRazao" value="<?php echo $razaosocial; ?>" /></td>
 								</tr>
 								<tr align="left">
@@ -149,11 +149,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td colspan="2"><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" size="30" name="txtInscMunicipal" value="<?php echo $inscrmunicipal; ?>" /></td>
 								</tr>
 								<tr align="left">
-									<td>Endereço:<font color="#FF0000">*</font></td>
+									<td>EndereÃ§o:<font color="#FF0000">*</font></td>
 									<td><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" name="txtEndereco" size="40" id="txtEndereco" value="<?php echo $endereco; ?>" /></td>
 								</tr>
 								<tr align="left">
-									<td>Município:<font color="#FF0000">*</font></td>
+									<td>Municï¿½pio:<font color="#FF0000">*</font></td>
 									<td colspan="2"><input type="text" class="texto" size="40" name="txtMunicipio" <?php if($codigo){ echo "value=\"$munic\" readonly=\"true\"";} else { echo "value=\"$CIDADE\"";}?>/></td>
 								</tr>
 								<tr align="left">
@@ -169,15 +169,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td colspan="2"><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" size="30" name="txtCpfGerente" onkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" maxlength="14" id="txtCpfGerente" value="<?php echo $gerente_cpf; ?>" /></td>
 								</tr>
 								<tr align="left">
-									<td>Agência:<font color="#FF0000">*</font></td>
+									<td>AgÃªncia:<font color="#FF0000">*</font></td>
 									<td colspan="2"><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" size="40" name="txtAgencia" id="txtAgencia" value="<?php echo $agencia; ?>" /></td>
 								</tr>
 								<tr align="left">
-									<td>Responsável:<font color="#FF0000">*</font></td>
+									<td>ResponsÃ¡vel:<font color="#FF0000">*</font></td>
 									<td colspan="2"><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" size="40" name="txtResponsavel" id="txtResponsavel" value="<?php echo $responsavel; ?>" /></td>
 								</tr>
 								<tr align="left">
-									<td>CPF Responsável:<font color="#FF0000">*</font></td>
+									<td>CPF ResponsÃ¡vel:<font color="#FF0000">*</font></td>
 									<td colspan="2"><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" size="30" name="txtCpfResponsavel" onkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" maxlength="14" id="txtCpfResponsavel" value="<?php echo $responsavel_cpf; ?>" /></td>
 								</tr>
 								<tr align="left">
@@ -204,22 +204,22 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td><input type="radio"  name="rdbEstado" value="A"<?php if(($estado=="")||($estado=="A")){echo "checked=\"checked\"";} ?> />Ativo</td>
 									<td colspan="2"><input type="radio" name="rdbEstado" value="I"<?php if($estado=="I"){echo "checked=\"checked\"";} ?> />Inativo</td>
 								</tr>
-								<tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigatórios</font></td></tr>
+								<tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigatï¿½rios</font></td></tr>
 								<tr align="left">
 									<td colspan="2">
-                                        <input type="submit" <?php if($codigo){echo "style=\"visibility:hidden\"";} ?> class="botao" name="btCadastrar" value="Cadastrar" onclick="return ValidaFormulario('txtNome|txtRazao|txtAgencia|txtCnpj|txtGerente|txtCpfGerente|txtResponsavel|txtCpfResponsavel|txtEndereco|txtEmail|txtFone1|txtSenha|txtConfirmaSenha', 'Preencha todos os campos obrigatórios.');" />&nbsp;                                        <?php 
-										if ($codigo){ echo "<input type=\"submit\" class=\"botao\" value=\"Voltar\" onclick=\"LimpaCampos('frmCadastroOpr');Redireciona('cadastro.php');\" />&nbsp;";
+                                        <input type="submit" <?php if($codigo){echo "style=\"visibility:hidden\"";} ?> class="botao" name="btCadastrar" value="Cadastrar" onclick="return ValidaFormulario('txtNome|txtRazao|txtAgencia|txtCnpj|txtGerente|txtCpfGerente|txtResponsavel|txtCpfResponsavel|txtEndereco|txtEmail|txtFone1|txtSenha|txtConfirmaSenha', 'Preencha todos os campos obrigatÃ³rios.');" />                                        <?php 
+										if ($codigo){ echo "<input type=\"submit\" class=\"botao\" value=\"Voltar\" onclick=\"LimpaCampos('frmCadastroOpr');Redireciona('cadastro.php');\" />";
 										}
 										if($codigo){
 											echo "<input type=\"hidden\" name=\"hdDesativar\" id=\"hdDesativar\" value=\"$codigo\"/>";
 											if($estado == "Ativo"){
-												echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar Operadora\"/>&nbsp;";
+												echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar Operadora\"/>";
 											}
 											elseif($estado == "Inativo"){
-											echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar Operadora\"/>&nbsp;";
+											echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar Operadora\"/>";
 											}
 										}
-										if ($codigo){ echo "<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir Operadora\" onclick=\"return Confirma('Deseja Excluir essa Operadora de crédito?');\" />";
+										if ($codigo){ echo "<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir Operadora\" onclick=\"return Confirma('Deseja Excluir essa Operadora de crÃ©dito?');\" />";
 										}
 				?>						
 										<input type="submit" name="btBuscarCliente" value="Buscar" class="botao" />
@@ -230,7 +230,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td>
 									<form id="frmGeraComprovante" target="_blank" action="inc/operadorascreditos/comprovante.php" method="post">
 										<input type="hidden" name="hdCodOpr" id="hdCodOpr" value="<?php echo $codopr; ?>" />
-										<input type="submit" name="btComprovante" value="Comprovante" class="botao" onclick="return ValidaFormulario('hdCodOpr', 'Busque por uma Instituição Financeira antes de gerar o comprovante')" />
+										<input type="submit" name="btComprovante" value="Comprovante" class="botao" onclick="return ValidaFormulario('hdCodOpr', 'Busque por uma InstituiÃ§Ã£o Financeira antes de gerar o comprovante')" />
 									</form>
 									</td>
 								</tr>
@@ -253,9 +253,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 				}
                 if($_POST['btDesativar']){
                 	$codigo = $_POST['hdDesativar'];
-                	mysql_query("UPDATE operadoras_creditos SET estado = 'I' WHERE codigo = '$codigo'");
-					add_logs('Atualizou uma Instituição: Desativada');
-					Mensagem("Instituição Financeira desativada!");
+                	$PDO->query("UPDATE operadoras_creditos SET estado = 'I' WHERE codigo = '$codigo'");
+					add_logs('Atualizou uma InstituiÃ§Ã£o: Desativada');
+					Mensagem("InstituiÃ§Ã£o Financeira desativada!");
 				?>
 					<script>LimpaCampos('frmCadastroOpr');</script>
 				<?php
@@ -263,9 +263,9 @@ Fith Floor, Boston, MA 02110-1301, USA
                 
                 if($_POST['btAtivar']){
                 	$codigo = $_POST["hdDesativar"];
-                	mysql_query("UPDATE operadoras_creditos SET estado = 'A' WHERE codigo = '$codigo'");
-                	add_logs('Atualizou uma Instituição: Ativada');
-					Mensagem("Instituição Financeira ativada!");
+                	$PDO->query("UPDATE operadoras_creditos SET estado = 'A' WHERE codigo = '$codigo'");
+                	add_logs('Atualizou uma InstituiÃ§Ã£o: Ativada');
+					Mensagem("InstituiÃ§Ã£o Financeira ativada!");
 				?>
 					<script>LimpaCampos('frmCadastroOpr');</script>
 				<?php
@@ -273,9 +273,9 @@ Fith Floor, Boston, MA 02110-1301, USA
                                 
                 if($_POST['btExcluir']){
                 	$codigo = $_POST["hdDesativar"];
-                	mysql_query("DELETE FROM operadoras_creditos WHERE codigo = $codigo");
-                	add_logs('Excluiu uma Instituição: Desativada');
-					Mensagem("Instituição Financeira excluída com sucesso!");
+                	$PDO->query("DELETE FROM operadoras_creditos WHERE codigo = $codigo");
+                	add_logs('Excluiu uma InstituiÃ§Ã£o: Desativada');
+					Mensagem("InstituiÃ§Ã£o Financeira excluï¿½da com sucesso!");
 				?>
 					<script>LimpaCampos('frmCadastroOpr');</script>
 				<?php

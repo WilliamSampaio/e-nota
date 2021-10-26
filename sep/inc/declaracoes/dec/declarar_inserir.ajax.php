@@ -19,17 +19,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 	<table width="100%" height="100%" bgcolor="#CCCCCC" border="0" align="center" cellpadding="5" cellspacing="0">
-		<tr height="10">&nbsp;</tr>
+		<tr height="10"></tr>
 		<tr>
 			<td colspan="2" align="center" valign="top">
 				<table border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" width="100%">
 					<tr align="center">
-						<td> Per&iacute;odo:  Mês:
+						<td> PerÃ­odo:  Mï¿½s:
 							<select name="cmbMes" id="cmbMes" onchange="SomaImpostosDes();CalculaMultaDes();">
 								<option value=""> </option>
 								<option value="1">Janeiro</option>
 								<option value="2">Fevereiro</option>
-								<option value="3">Março</option>
+								<option value="3">Marï¿½o</option>
 								<option value="4">Abril</option>
 								<option value="5">Maio</option>
 								<option value="6">Junho</option>
@@ -63,7 +63,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			//pega o numero de servicos do emissor
 			
 			
-			$num_servicos = 1;//quantos linhas vão aparecer pra preencher
+			$num_servicos = 1;//quantos linhas vï¿½o aparecer pra preencher
 			$num_serv_max = 20;// numero maximo de linhas que podem ser adicionadas
 			
 			campoHidden("hdServicos",$num_servicos);
@@ -82,8 +82,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<select style="width:285px;" id="cmbEstabelecimento<?php echo $c;?>"  name="cmbEstabelecimento<?php echo $c;?>" onchange="buscaServicosCartorioTipo(this, 'tdListarServ<?php echo $c;?>',<?php echo $c;?>);">
 								<option value="">Tipo de Estabelecimento</option>
 								<?php
-									$estabelecimento = mysql_query("SELECT cartorios_tipo.codigo, cartorios_tipo.tipocartorio FROM cartorios_tipo");
-									while(list($codcart, $tipo) = mysql_fetch_array($estabelecimento))
+									$estabelecimento = $PDO->query("SELECT cartorios_tipo.codigo, cartorios_tipo.tipocartorio FROM cartorios_tipo");
+									while(list($codcart, $tipo) = $estabelecimento->fetch())
 									{
 										echo "<option value=\"$codcart\" id=\"$tipo\">$tipo</option>";
 									}
@@ -98,11 +98,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</tr>
 					<tr height="1"></tr>
 					<tr bgcolor="#FFFFFF" align="center">
-						<td width="144" align="center">Base de C&aacute;lculo (R$)</td>
+						<td width="144" align="center">Base de CÃ¡lculo (R$)</td>
 						<td align="center" width="156">Valor do Emolumento</td>
 						<td align="center" width="69">ISS (R$)</td>
-						<td width="57" align="center">Al&iacute;q (%)</td>
-						<td align="center" width="119">N&ordm;. Documento</td>
+						<td width="57" align="center">AlÃ­q (%)</td>
+						<td align="center" width="119">NÂº. Documento</td>
 					</tr>
 					<tr bgcolor="#FFFFFF">
 						<td align="center"><?php echo "<input name=\"txtBaseCalculo$c\" id=\"txtBaseCalculo$c\" name=\"txtBaseCalculo$c\" type=\"text\" onkeyup=\"MaskMoeda(this)\" value=\"0,00\" onkeydown=\"return NumbersOnly(event);\" onblur=\"CalculaImpostoDes(txtBaseCalculo$c, txtAliquota$c, txtImposto$c);\" maxlength=\"12\" size=\"12\" class=\"texto\" style=\"text-align:right\" />"; ?></td>
@@ -132,8 +132,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 			?>
 	<tr>
 		<td colspan="2" align="right" valign="middle">
-			<input name="btServRemover" id="btServRemover" type="button" value="Remover Serviço" class="botao" disabled="disabled" onclick="EmissorRemoverServ();">
-			<input name="btServInserir" id="btServInserir" type="button" value="Inserir Serviço" class="botao" onclick="EmissorInserirServ();">
+			<input name="btServRemover" id="btServRemover" type="button" value="Remover ServiÃ§o" class="botao" disabled="disabled" onclick="EmissorRemoverServ();">
+			<input name="btServInserir" id="btServInserir" type="button" value="Inserir ServiÃ§o" class="botao" onclick="EmissorInserirServ();">
 		</td>
 	</tr>
 	<tr>
@@ -155,13 +155,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 		</td>
 	</tr>
 	<tr>
-		<td align="right" valign="middle">&nbsp;</td>
+		<td align="right" valign="middle"></td>
 		<td align="right" valign="middle"><em>* Confira seus dados antes de continuar<br>** Desabilite seu bloqueador de pop-up</em></td>
 	</tr>
 	<tr>
 		<td align="right" valign="middle">
 			<input type="submit" value="Declarar" name="btDeclarar" class="botao" 
-			onclick="return (ValidaFormMsg('txtCNPJ|cmbMes|cmbAno|cmbCodCart1|txtBaseCalculo1|txtNroDoc1|cmbEstabelecimento1|cmbCodCart1','O Período e pelo menos um serviço devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
+			onclick="return (ValidaFormMsg('txtCNPJ|cmbMes|cmbAno|cmbCodCart1|txtBaseCalculo1|txtNroDoc1|cmbEstabelecimento1|cmbCodCart1','O PerÃ­odo e pelo menos um serviÃ§o devem ser preenchidos!')) && (confirm('Confira seus dados antes de continuar'));" />
 			<input type="submit" name="btVoltar" class="botao" value="Voltar" />
 		</td>
 	</tr>

@@ -22,6 +22,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 	//Pega o codigo vindo do arquivo regra_lista.ajax.php
 	$cod_update = $_POST['hdCodMulta'];
 	
-	mysql_query("DELETE FROM multas WHERE codigo = '$cod_update'");
+	$PDO->query("DELETE FROM multas WHERE codigo = '$cod_update'");
 	Mensagem_onload("Regra de multa excluida!");
 ?>

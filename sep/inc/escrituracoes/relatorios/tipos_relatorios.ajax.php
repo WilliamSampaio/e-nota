@@ -142,7 +142,7 @@ require_once("../../nocache.php");
 	}
 	?>
 		
-			<fieldset style="width:800px"><legend><?php if($tipo!='S'){echo "Escriturações  $tipo";} ?></legend>    
+			<fieldset style="width:800px"><legend><?php if($tipo!='S'){echo "Escrituraï¿½ï¿½es  $tipo";} ?></legend>    
 					<?php
 					if($tipo!='S'){
 					$sql=Paginacao($sqltodos,'frmRelatorio','divListar');
@@ -152,14 +152,14 @@ require_once("../../nocache.php");
 						<table width="800">
                             <tr bgcolor="#999999">
                                 <td width="210" align="center">Nome</td>
-                                <td width="200" align="center">Nosso Número</td>
+                                <td width="200" align="center">Nosso NÃºmero</td>
                                 <td width="80" align="center">Valor</td>
                                 <td width="80" align="center">Pagamento</td>
-                                <td width="95" align="center">Data Emissão</td>
+                                <td width="95" align="center">Data EmissÃ£o</td>
                                 <td width="110"align="center">Data Vencimento</td>
                             </tr>
 							<?php
-							while(list($razao, $valor, $pago, $dtemissao, $dtvenc, $nossonumero) = mysql_fetch_array($sql))
+							while(list($razao, $valor, $pago, $dtemissao, $dtvenc, $nossonumero) = $sql->fetch())
 							{
 							$nomerazao = ResumeString($razao,27);
 							$dtemissao = DataPt($dtemissao);
@@ -169,7 +169,7 @@ require_once("../../nocache.php");
 							switch($pago)
 							{
 							case "S": $pago="Efetuado"; break;
-							case "N": $pago="Não Efetuado"; break;
+							case "N": $pago="NÃ£o Efetuado"; break;
 							}
 							echo "
 							<tr bgcolor=\"#FFFFFF\" title=\"$razao\">
@@ -186,13 +186,13 @@ require_once("../../nocache.php");
 						}
 						else
 						{
-						 echo "&nbsp;&nbsp;Nenhuma Guia Encontrada";
+						 echo "Nenhuma Guia Encontrada";
 						}
 							
 					}
 					else
 					{
-						echo "&nbsp;&nbsp;Escolha um Tipo";
+						echo "Escolha um Tipo";
 					}
 							?>
                     	</table>

@@ -20,20 +20,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	if($_POST['btDeclararComtomador'] == "Declarar"){
-		include("inc/declaracoes/des/gerarguia_comtomador.php");
+		require_once("inc/declaracoes/des/gerarguia_comtomador.php");
 	}
 	if($_POST['btDeclararSemtomador'] == "Declarar"){
-		include("inc/declaracoes/des/gerarguia_semtomador.php");
+		require_once("inc/declaracoes/des/gerarguia_semtomador.php");
 	}
 	if($_POST['btDeclararTomador'] == "Declarar"){
-		include("inc/declaracoes/des/tomadores_sql.php");
+		require_once("inc/declaracoes/des/tomadores_sql.php");
 	}
 	if($_POST["btBoleto"] == "Gerar Boleto"){
-		include("inc/declaracoes/des/guias/gerar_boleto.php");
+		require_once("inc/declaracoes/des/guias/gerar_boleto.php");
 	}
 ?>
 <script language="javascript">
-<!--
 	function ConsultaCnpj2(campo,cont){
 		if(campo.value!=''){
 			var req;
@@ -51,7 +50,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			
 			req.open("Get", url, true);
 				 
-			// Quando o objeto recebe o retorno, chamamos a seguinte função;
+			// Quando o objeto recebe o retorno, chamamos a seguinte funÃ§Ã£o;
 			req.onreadystatechange = function() {
 			 
 				// Exibe a mensagem "Verificando" enquanto carrega
@@ -59,17 +58,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 					document.getElementById('tdNota'+cont).innerHTML = 'Verificando...';
 				}
 			 
-				// Verifica se o Ajax realizou todas as operações corretamente (essencial)
+				// Verifica se o Ajax realizou todas as operaï¿½ï¿½es corretamente (essencial)
 				if(req.readyState == 4 && req.status == 200) {
 					// Resposta retornada pelo validacao.php
 					var resposta = req.responseText;
-					if(resposta == 'Emissor não cadastrado'){
+					if(resposta == 'Emissor nÃ£o cadastrado'){
 						//document.getElementById('hdvalidar'+cont).value='n';
 						resposta= '<font color=#ff0000>'+resposta+'</font>';
 					}else{
 						//document.getElementById('hdvalidar'+cont).value='s';
 					}
-					// Abaixo colocamos a resposta na div do campo que fez a requisição
+					// Abaixo colocamos a resposta na div do campo que fez a requisiÃ§Ã£o
 					document.getElementById('tdNota'+cont).innerHTML = resposta;
 				}
 			 
@@ -82,13 +81,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 
 	function validadeclaracao(){
-		if(ValidaFormMsg('cmbMes|cmbAno|txtTomadorCnpjCpf1|cmbCodServico1|txtBaseCalculo1|txtNroDoc1','O Período e pelo menos um serviço devem ser preenchidos!')){
+		if(ValidaFormMsg('cmbMes|cmbAno|txtTomadorCnpjCpf1|cmbCodServico1|txtBaseCalculo1|txtNroDoc1','O PerÃ­odo e pelo menos um serviÃ§o devem ser preenchidos!')){
 			var txtImpostoTotal=document.getElementById('txtImpostoTotal');
 			var total = MoedaToDec(txtImpostoTotal.value);
 			if(total != 0){
 				return true;
 			}else{
-				alert('Informe a base de calculo do serviço');
+				alert('Informe a base de calculo do serviÃ§o');
 				return false;
 			}
 			return false;
@@ -115,7 +114,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	
 	
 	function btBuscar_click(codemissor,retorno){
-		if(ValidaFormulario('_mes|_ano','Por favor selecione um mês e um ano!')){
+		if(ValidaFormulario('_mes|_ano','Por favor selecione um mï¿½s e um ano!')){
 			var codigo_emissor = document.getElementById(codemissor).value;
 			var ano = document.getElementById('_ano').value;
 			var mes = document.getElementById('_mes').value;
@@ -141,7 +140,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" class="form">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="650" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Prestadores/Ordem de Serviço<br />
+		<td width="650" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Prestadores/Ordem de ServiÃ§o<br />
 		</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
@@ -154,10 +153,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<input type="hidden" name="abertdes" id="abertdes">
 				<input type="hidden" name="hdCancelaDes" id="hdCancelaDes" />
 				<fieldset>
-				<legend>Pesquisa de declarações</legend>
+				<legend>Pesquisa de declaraï¿½ï¿½es</legend>
 				<table width="100%">
 					<tr>
-						<td align="left">Nome/Raz&atilde;o Social</td>
+						<td align="left">Nome/RazÃ£o Social</td>
 						<td align="left">
 							<input name="txtNome" type="text" class="texto" size="60" maxlength="100" />
 						</td>
@@ -169,19 +168,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 						</td>
 					</tr>
 					<tr>
-						<td align="left">N° da Des</td>
+						<td align="left">Nï¿½ da Des</td>
 						<td align="left">
 							<input name="txtNroDes" type="text" class="texto" size="10" maxlength="10" />
 						</td>
 					</tr>
 					<tr>
-						<td align="left">Compet&ecirc;cia</td>
+						<td align="left">CompetÃªcia</td>
 						<td align="left">
 							<select name="cmbMes" class="combo">
 								<option value=""></option>
 								<?php
-								//array dos meses comecando na posição 1 ate 12 e faz um for listando os meses no combo
-								$meses = array(1=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+								//array dos meses comecando na posiÃ§Ã£o 1 ate 12 e faz um for listando os meses no combo
+								$meses = array(1=>"Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 								for($x=1;$x<=12;$x++){
 									echo "<option value='$x'>$meses[$x]</option>";
 								}//fim for meses
@@ -212,7 +211,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						</td>
 					</tr>
 					<tr>
-						<td align="left">Data Emissão</td>
+						<td align="left">Data EmissÃ£o</td>
 						<td align="left">
 							<input name="txtData" type="text" class="texto" size="12" maxlength="10" />
 						</td>
@@ -221,11 +220,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<td align="left" colspan="2">
 							<input name="btPesquisar" type="submit" class="botao" value="Pesquisar" 
                     		onclick="acessoAjax('inc/declaracoes/des/declarar_pesquisa.ajax.php','frmDes','divDeclaracoesSimples')" />
-							<input name="btNova" type="submit" class="botao" value="Nova declaração" 
+							<input name="btNova" type="submit" class="botao" value="Nova declaraÃ§Ã£o" 
                     		onclick="acessoAjax('inc/declaracoes/des/verifica_cnpj.ajax.php','frmDes','divDes')" />
 							<input name="btGuia" value="Guias" type="submit" class="botao"
                             onclick="acessoAjax('inc/declaracoes/des/guias/verifica_cnpj_guias.ajax.php','frmDes','divDes')" />
-							&nbsp;
+							
 							<input name="btLimpar" type="reset" class="botao" value="Limpar" />
 						</td>
 					</tr>

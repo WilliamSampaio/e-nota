@@ -91,7 +91,7 @@ $dadosboleto["demonstrativo3"] = "PREFEITURA MUNICIPAL DE ".$PREFEITURA;
 $dadosboleto["instrucoes1"] = "";
 $dadosboleto["instrucoes2"] = "";
 $dadosboleto["instrucoes3"] = "- Em caso de dúvidas entre em contato com a Prefeitura Municipal.";
-$dadosboleto["instrucoes4"] = "&nbsp; Emitido pelo sistema de ISS DIGITAL";
+$dadosboleto["instrucoes4"] = " Emitido pelo sistema de ISS DIGITAL";
 
 // DADOS OPCIONAIS DE ACORDO COM O BANCO OU CLIENTE
 $dadosboleto["quantidade"] = "";

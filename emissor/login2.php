@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-// inicia a sess�o verificando se jah esta com o usuario logado, se estiver entra na p�gina admin
+// inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
 
 
 session_name("emissor");
@@ -44,7 +44,7 @@ if(!(isset($_SESSION["empresa"])))
 <center>
 <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
-    <td align="center"> <?php include("../include/topo.php"); ?> </td>
+    <td align="center"> <?php require_once("../include/topo.php"); ?> </td>
   </tr>
   <tr>
     <td bgcolor="#FFFFFF" height="400" background="../img/fundos/login.jpg" style="background-repeat:repeat-x">
@@ -89,7 +89,7 @@ if(!(isset($_SESSION["empresa"])))
 	 </tr>
      <tr> 
 	  <td align="left">
-	    C&oacute;digo
+	    Código
 	  </td>
 	  <td align="center">	   	   
 	   <input type="text" name="txtCodigo" id="txtCodigo" size="30" class="texto" onkeydown="return NumbersOnly(event);" />
@@ -105,12 +105,12 @@ if(!(isset($_SESSION["empresa"])))
 	 </tr>
 	 <tr valign="baseline"> 
 	  <td style="font-size:9px">
-	    C&oacute;d. Verifica&ccedil;&atilde;o
+	    Cód. Verificação
 	  </td>
 	  <td align="left" >	 
-	   <input type="text" name="codseguranca" id="codseguranca" size="6" class="texto" />  &nbsp;
-	   <img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/botoes/num_key.jpg" title="Teclado Virtual" /> &nbsp;
-	   <?php include("inc/cod_verificacao.php"); ?></td>
+	   <input type="text" name="codseguranca" id="codseguranca" size="6" class="texto" />  
+	   <img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/botoes/num_key.jpg" title="Teclado Virtual" /> 
+	   <?php require_once("inc/cod_verificacao.php"); ?></td>
 	 </tr>
 	 <tr>	 
 	  <td align="center" colspan="2">

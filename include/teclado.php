@@ -28,7 +28,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<table border="0" cellspacing="0" cellpadding="0" class="form">
 		<tr>
 			<td width="18" align="left" background="../img/form/cabecalho_fundo.jpg"><img src="../img/form/cabecalho_icone.jpg" /></td>
-			<td id="titulo_teclado" width="" background="../img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;<font color="white"><b>Teclado</b></font>
+			<td id="titulo_teclado" width="" background="../img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho"><font color="white"><b>Teclado</b></font>
 			</td>
 			<td width="19" align="right" valign="top" background="../img/form/cabecalho_fundo.jpg"><img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></td>
 		</tr>

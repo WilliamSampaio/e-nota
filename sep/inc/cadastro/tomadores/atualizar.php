@@ -39,8 +39,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	}
 	$campo = tipoPessoa($cnpjcpf);
 	//testa se ja existe algum registro no banco com o cnpjcpf informado se houver atualiza as informacoes se nao inseri novas informacoes
-	$sql_tomador = mysql_query("SELECT $campo, inscrmunicipal, inscrestadual, email FROM cadastro WHERE $campo = '$cnpjcpf'");
-	list($CNPJCPF,$INSCRMUNICIPAL,$INSCRESTADUAL,$EMAIL) = mysql_fetch_array($sql_tomador);
+	$sql_tomador = $PDO->query("SELECT $campo, inscrmunicipal, inscrestadual, email FROM cadastro WHERE $campo = '$cnpjcpf'");
+	list($CNPJCPF,$INSCRMUNICIPAL,$INSCRESTADUAL,$EMAIL) = $sql_tomador->fetch();
 	if($inscrmunicipal == ""){
 		$inscrmunicipal = $INSCRMUNICIPAL;
 	}//fim if
@@ -51,9 +51,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($email == ""){
 		$email = $EMAIL;
 	}//fim if
-	if(mysql_num_rows($sql_tomador)>0){
+	if($sql_tomador->rowCount()>0){
 		//sql que realiza a atualizacao na tabela
-		mysql_query("UPDATE cadastro SET nome = '$nome', $campo = '$cnpjcpf', inscrmunicipal = '$inscrmunicipal', inscrestadual = '$inscrestadual', logradouro = '$logradouro', complemento = '$complemento', bairro = '$bairro', numero = '$numero', cep = '$cep', municipio = '$municipio', uf = '$uf', email = '$email' WHERE codigo = '$codigo'");
+		$PDO->query("UPDATE cadastro SET nome = '$nome', $campo = '$cnpjcpf', inscrmunicipal = '$inscrmunicipal', inscrestadual = '$inscrestadual', logradouro = '$logradouro', complemento = '$complemento', bairro = '$bairro', numero = '$numero', cep = '$cep', municipio = '$municipio', uf = '$uf', email = '$email' WHERE codigo = '$codigo'");
 		add_logs('Atualizou os dados de Tomador');
 		Mensagem_onload("Atualizado");
 	}

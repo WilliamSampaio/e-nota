@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 /*function verificarNavegador(){
 	if(navigator.appName=='Microsoft Internet Explorer'){
-		alert('O sistema de nota fiscal eletrônica não é compatível com o Internet Explorer. Recomendamos o Mozilla Firefox');
+		alert('O sistema de nota fiscal eletrÃ´nica nÃ£o Ã© compatï¿½vel com o Internet Explorer. Recomendamos o Mozilla Firefox');
 		parent.location='http://br.mozdev.org';
 	}
 }
@@ -34,9 +34,9 @@ verificarNavegador();*/
 
 session_name("contador");
 session_start(); 
-include("funcao_logs.php");
-include("../../funcoes/util.php");
-// recebe a variavel que contem o número de verificação e a variavel que contém o número que o usuário digitou.
+require_once("funcao_logs.php");
+require_once("../../funcoes/util.php");
+// recebe a variavel que contem o nÃºmero de verificaï¿½ï¿½o e a variavel que contÃ©m o nÃºmero que o usuÃ¡rio digitou.
 $autenticacao = $_SESSION['autenticacao'];
 $cod_seguranca= $_POST['codseguranca'];
 
@@ -52,7 +52,7 @@ $cod_seguranca= $_POST['codseguranca'];
 
 if($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca)
 {
-include("../../include/conect.php");
+require_once("../../include/conect.php");
 $codcontador = codtipo('contador');
 if($_POST['txtLogin']){ $sql = mysql_query("SELECT * FROM cadastro WHERE $campo = '$campologin' AND codtipo = '$codcontador'"); }
 if($_POST['txtCodigo']){ $sql = mysql_query("SELECT * FROM cadastro WHERE codigo = '$campologin' AND codtipo = '$codcontador'"); }
@@ -77,10 +77,10 @@ if($_POST['txtCodigo']){ $sql = mysql_query("SELECT * FROM cadastro WHERE codigo
 	
 	if($estado == "A")
 	{	
-	 //verifica se a senha digitada confere com a que está armazenada no banco	
+	 //verifica se a senha digitada confere com a que estÃ¡ armazenada no banco	
 	 if($senha == $dados['senha'])
 	 {	   
-	  // inicia a sessão e direciona para index.		
+	  // inicia a sessÃ£o e direciona para index.		
 	  $_SESSION['codempresa'] = $dados['codigo'];
 	  $_SESSION['empresa'] = $dados['senha'];
 	  $_SESSION['login'] = $login;
@@ -90,17 +90,17 @@ if($_POST['txtCodigo']){ $sql = mysql_query("SELECT * FROM cadastro WHERE codigo
 	  $nome= $dados['nome'];
 	  print("<script language=JavaScript>parent.location='../login.php';</script>");
      }else{
-	  print("<script language=JavaScript>alert('Senha não confere com a cadastrada no sistema! Favor verificar a senha.');parent.location='../login.php';</script>");	
+	  print("<script language=JavaScript>alert('Senha nÃ£o confere com a cadastrada no sistema! Favor verificar a senha.');parent.location='../login.php';</script>");	
 	 }
 	}else{
 	 print("<script language=JavaScript>alert('Empresa desativada! Contate a Prefeitura.');parent.location='../login.php';</script>");
     }
   	 
  }else{
-   print("<script language=JavaScript>alert('CPF/CNPJ não cadastrado no sistema ou não é um contador!');parent.location='../login.php';</script>");
+   print("<script language=JavaScript>alert('CPF/CNPJ nÃ£o cadastrado no sistema ou nÃ£o Ã© um contador!');parent.location='../login.php';</script>");
  } 
 
 }else{
-  print("<script language=JavaScript>alert('Favor verificar código de segurança!');parent.location='../login.php';</script>");
+  print("<script language=JavaScript>alert('Favor verificar cÃ³digo de seguranÃ§a!');parent.location='../login.php';</script>");
 } 
 ?> 

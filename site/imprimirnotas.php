@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-include("../include/conect.php");
-include("../funcoes/util.php");
+require_once("../include/conect.php");
+require_once("../include/util.php");
 
 $notas = $_POST['hdNota'];
 ?>
@@ -124,7 +124,7 @@ for ($c = 0; $c < $notas; $c++) {
 
 		//nao tem soh endereco agora tem logradouro e numero com complemento
 		//$tomador_endereco="$tomador_logradouro, $tomador_numero";
-		//se tiver complemento, adiciona para a string de endere�o
+		//se tiver complemento, adiciona para a string de endereço
 		//if($tomador_complemento){
 		//$tomador_endereco.=", $tomador_complemento";
 		//}
@@ -194,11 +194,11 @@ for ($c = 0; $c < $notas; $c++) {
 									<td class="cab03"><?php print strtoupper($CONF_SECRETARIA); ?></td>
 								</tr>
 								<tr>
-									<td class="cab02">NOTA FISCAL ELETR&Ocirc;NICA DE SERVI&Ccedil;OS - NF-e</td>
+									<td class="cab02">NOTA FISCAL ELETR&Ocirc;NICA DE SERVIÇOS - NF-e</td>
 								</tr>
 								<?php if ($rps_numero) { ?>
 									<tr>
-										<td>RPS N&ordm; <?php print $rps_numero; ?>, emitido em <?php print(substr($rps_data, 8, 2) . "/" . substr($rps_data, 5, 2) . "/" . substr($rps_data, 0, 4)); ?>.</td>
+										<td>RPS Nº <?php print $rps_numero; ?>, emitido em <?php print(substr($rps_data, 8, 2) . "/" . substr($rps_data, 5, 2) . "/" . substr($rps_data, 0, 4)); ?>.</td>
 									</tr>
 								<?php } // fim if se tem rps 
 								?>
@@ -206,21 +206,21 @@ for ($c = 0; $c < $notas; $c++) {
 
 							<!-- tabela prefeitura fim -->
 						</td>
-						<td width="25%" colspan="2" align="left" style="border:#000000 1px solid">N�mero da Nota<br />
+						<td width="25%" colspan="2" align="left" style="border:#000000 1px solid">Número da Nota<br />
 							<div align="center">
 								<font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print $numero; ?></strong></font>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td align="left" colspan="2" style="border:#000000 1px solid">Data e Hora de Emiss�o<br />
+						<td align="left" colspan="2" style="border:#000000 1px solid">Data e Hora de Emissão<br />
 							<div align="center">
 								<font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print(substr($datahoraemissao, 8, 2) . "/" . substr($datahoraemissao, 5, 2) . "/" . substr($datahoraemissao, 0, 4) . " " . substr($datahoraemissao, 11, 2) . ":" . substr($datahoraemissao, 14, 2)); ?></strong></font>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td align="left" colspan="2" style="border:#000000 1px solid">C�digo de Verifica��o<br />
+						<td align="left" colspan="2" style="border:#000000 1px solid">Código de Verificação<br />
 							<div align="center">
 								<font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong><?php print $codverificacao; ?></strong></font>
 							</div>
@@ -232,7 +232,7 @@ for ($c = 0; $c < $notas; $c++) {
 							<!-- tabela prestador -->
 							<table width="100%" border="0" cellspacing="0" cellpadding="2">
 								<tr>
-									<td colspan="3" class="cab03" align="center">PRESTADOR DE SERVI&Ccedil;OS</td>
+									<td colspan="3" class="cab03" align="center">PRESTADOR DE SERVIÇOS</td>
 								</tr>
 								<tr>
 									<td rowspan="6">
@@ -244,21 +244,21 @@ for ($c = 0; $c < $notas; $c++) {
 										?>
 									</td>
 									<td align="left">CNPJ/CPF: <strong><?php print $empresa_cnpjcpf; ?></strong></td>
-									<td align="left">Inscri&ccedil;&atilde;o Estadual: <strong><?php print verificaCampo($empresa_inscrestadual); ?></strong></td>
+									<td align="left">Inscrição Estadual: <strong><?php print verificaCampo($empresa_inscrestadual); ?></strong></td>
 								</tr>
 								<tr>
 									<td align="left">Nome: <strong><?php echo $empresa_nome; ?></strong></td>
-									<td align="left">Inscri&ccedil;&atilde;o Municipal: <strong><?php print verificaCampo($empresa_inscrmunicipal); ?></strong></td>
+									<td align="left">Inscrição Municipal: <strong><?php print verificaCampo($empresa_inscrmunicipal); ?></strong></td>
 								</tr>
 								<tr>
-									<td align="left">Raz&atilde;o Social: <strong><?php print $empresa_razaosocial; ?></strong></td>
+									<td align="left">Razão Social: <strong><?php print $empresa_razaosocial; ?></strong></td>
 									<td align="left">PIS/PASEP: <?php echo verificaCampo($cadastropispasep); ?></td>
 								</tr>
 								<tr>
-									<td colspan="2" align="left">Endere&ccedil;o: <strong><?php print $empresa_endereco; ?></strong></td>
+									<td colspan="2" align="left">Endereço: <strong><?php print $empresa_endereco; ?></strong></td>
 								</tr>
 								<tr>
-									<td align="left">Munic&iacute;pio: <strong><?php print $empresa_municipio; ?></strong></td>
+									<td align="left">Município: <strong><?php print $empresa_municipio; ?></strong></td>
 									<td align="left">UF: <strong><?php print $empresa_uf; ?></strong></td>
 								</tr>
 							</table>
@@ -273,25 +273,25 @@ for ($c = 0; $c < $notas; $c++) {
 
 							<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center">
 								<tr>
-									<td colspan="3" class="cab03" align="center">TOMADOR DE SERVI&Ccedil;OS</td>
+									<td colspan="3" class="cab03" align="center">TOMADOR DE SERVIÇOS</td>
 								</tr>
 								<tr>
-									<td colspan="3" align="left">&nbsp;&nbsp;Nome/Raz&atilde;o Social: <strong><?php print strtoupper(verificaCampo($tomador_nome)); ?></strong></td>
+									<td colspan="3" align="left">Nome/Razão Social: <strong><?php print strtoupper(verificaCampo($tomador_nome)); ?></strong></td>
 								</tr>
 								<tr>
-									<td align="left" width="450">&nbsp;&nbsp;CPF/CNPJ: <strong><?php print strtoupper(verificaCampo($tomador_cnpjcpf)); ?></strong></td>
-									<td colspan="2" align="left">&nbsp;&nbsp;Inscri&ccedil;&atilde;o Estadual: <strong><?php print strtoupper(verificaCampo($tomador_inscrestadual)); ?></strong></td>
+									<td align="left" width="450">CPF/CNPJ: <strong><?php print strtoupper(verificaCampo($tomador_cnpjcpf)); ?></strong></td>
+									<td colspan="2" align="left">Inscrição Estadual: <strong><?php print strtoupper(verificaCampo($tomador_inscrestadual)); ?></strong></td>
 								</tr>
 								<tr>
-									<td align="left">&nbsp;&nbsp;Endere&ccedil;o: <strong><?php print strtoupper(verificaCampo($tomador_endereco)); ?></strong></td>
-									<td colspan="2" align="left">&nbsp;&nbsp;Inscri&ccedil;&atilde;o Municipal: <strong><?php print strtoupper(verificaCampo($tomador_inscrmunicipal)); ?></strong></td>
+									<td align="left">Endereço: <strong><?php print strtoupper(verificaCampo($tomador_endereco)); ?></strong></td>
+									<td colspan="2" align="left">Inscrição Municipal: <strong><?php print strtoupper(verificaCampo($tomador_inscrmunicipal)); ?></strong></td>
 								</tr>
 								<tr>
-									<td align="left">&nbsp;&nbsp;Munic&iacute;pio: <strong><?php print strtoupper(verificaCampo($tomador_municipio)); ?></strong></td>
-									<td align="left">&nbsp;&nbsp;CEP: <strong><?php print strtoupper(verificaCampo($tomador_cep)); ?></strong></td>
+									<td align="left">Município: <strong><?php print strtoupper(verificaCampo($tomador_municipio)); ?></strong></td>
+									<td align="left">CEP: <strong><?php print strtoupper(verificaCampo($tomador_cep)); ?></strong></td>
 								</tr>
 								<tr>
-									<td align="left">&nbsp;&nbsp;E-mail: <strong><?php print strtoupper(verificaCampo($tomador_email)); ?></strong></td>
+									<td align="left">E-mail: <strong><?php print strtoupper(verificaCampo($tomador_email)); ?></strong></td>
 									<td align="left">UF: <strong><?php print strtoupper(verificaCampo($tomador_uf)); ?></strong></td>
 								</tr>
 							</table>
@@ -306,7 +306,7 @@ for ($c = 0; $c < $notas; $c++) {
 
 							<table width="100%" border="0" cellspacing="0" cellpadding="2">
 								<tr>
-									<td class="cab03" align="center">DISCRIMINA&Ccedil;&Atilde;O DE SERVI&Ccedil;OS E DEDU&Ccedil;&Otilde;ES</td>
+									<td class="cab03" align="center">DISCRIMINAÇÃO DE SERVIÇOS E DEDUÇÕES</td>
 								</tr>
 								<tr>
 									<td height="400" align="left" valign="top">
@@ -333,20 +333,20 @@ for ($c = 0; $c < $notas; $c++) {
 										?>
 										<table class="gridview" align="center">
 											<tr>
-												<th align="center">C&oacute;digo</th>
-												<th align="center">Servi&ccedil;o</th>
-												<th align="center">Al&iacute;quota (%) </th>
+												<th align="center">Código</th>
+												<th align="center">Serviço</th>
+												<th align="center">Alíquota (%) </th>
 												<th align="center">Base de Calculo (R$)</th>
 												<th align="center">Iss retido (R$)</th>
 												<th align="center">Iss (R$)</th>
 											</tr>
 											<?php
 											$totalALiquota = 0;
-											while ($servicos_dados = $servicos_sql->fetchAll(PDO::FETCH_ASSOC)) {
+											while ($servicos_dados = $servicos_sql->fetch()) {
 											?>
 												<tr>
 													<td align="center" <?php if (!$servicos_dados['codservico']) {
-																			echo "title='N�o possui codigo de servi�o'";
+																			echo "title='Não possui codigo de serviço'";
 																		} ?>>
 														<?php if ($servicos_dados['codservico']) {
 															echo $servicos_dados['codservico'];
@@ -367,7 +367,7 @@ for ($c = 0; $c < $notas; $c++) {
 												<?php
 												?>
 												<tr>
-													<th colspan="6" align="left"><strong>Discrimina&ccedil;&atilde;o</strong></th>
+													<th colspan="6" align="left"><strong>Discriminação</strong></th>
 												</tr>
 												<tr>
 													<td height="30" colspan="6">
@@ -375,7 +375,7 @@ for ($c = 0; $c < $notas; $c++) {
 														if ($servicos_dados['discriminacao']) {
 															echo $servicos_dados['discriminacao'];
 														} else {
-															echo "N�o foi informado";
+															echo "Não foi informado";
 														}
 														?>
 													</td>
@@ -390,7 +390,7 @@ for ($c = 0; $c < $notas; $c++) {
 										// verifica o estado da nfe
 										if ($estado == "C") {
 											echo "<div align=center><font size=7 color=#FF0000><b>
-						ATEN&Ccedil;&Atilde;O!!<br />NFE CANCELADA</font> <br /><font size=5 color=#FF0000>
+						ATENÇÃO!!<br />NFE CANCELADA</font> <br /><font size=5 color=#FF0000>
 						Motivo do cancelamento:<br /> $motivoCanc</B></font></div>";
 										} // fim if
 
@@ -409,7 +409,7 @@ for ($c = 0; $c < $notas; $c++) {
 							<td colspan="6" align="center" style="border:#000000 1px solid">
 								<table width="100%">
 									<tr>
-										<td class="cab03" align="center">DISCRIMINA&Ccedil;&Atilde;O DA NOTA</td>
+										<td class="cab03" align="center">DISCRIMINAÇÃO DA NOTA</td>
 									</tr>
 									<tr>
 										<td align="left">
@@ -432,7 +432,7 @@ for ($c = 0; $c < $notas; $c++) {
 							<td colspan="6" align="center" style="border:#000000 1px solid">
 								<table width="100%">
 									<tr>
-										<td class="cab03" align="center">OBSERVA&Ccedil;&Otilde;ES DA NOTA</td>
+										<td class="cab03" align="center">OBSERVAÇÕES DA NOTA</td>
 									</tr>
 									<tr>
 										<td align="left">
@@ -454,17 +454,17 @@ for ($c = 0; $c < $notas; $c++) {
 						<td colspan="6" class="cab03" align="center" style="border:#000000 1px solid">VALOR TOTAL DA NOTA = R$ <?php print DecToMoeda($valortotal); ?></td>
 					</tr>
 					<!--<tr>
-			<td colspan="6" align="left" style="border:#000000 1px solid">C�digo do Servi�o<br /><strong><?php print $servico_codservico . " - " . $servico_descricao; ?></strong></td>
+			<td colspan="6" align="left" style="border:#000000 1px solid">Código do Serviço<br /><strong><?php print $servico_codservico . " - " . $servico_descricao; ?></strong></td>
 			</tr>-->
 					<tr>
 						<?php
 						if ($valoracrescimos > 0) {
 
 						?>
-							<td style="border:#000000 1px solid">Dedu&ccedil;&otilde;es (R$)<br />
+							<td style="border:#000000 1px solid">Deduções (R$)<br />
 								<div align="right"><strong><?php print DecToMoeda($valordeducoes); ?></strong></div>
 							</td>
-							<td style="border:#000000 1px solid">Acr&eacute;scimos (R$)<br />
+							<td style="border:#000000 1px solid">Acréscimos (R$)<br />
 								<div align="right"><strong><?php print DecToMoeda($valoracrescimos); ?></strong></div>
 							</td>
 						<?php
@@ -473,17 +473,17 @@ for ($c = 0; $c < $notas; $c++) {
 								$colspan = "colspan=\"3\"";
 							}
 						?>
-							<td style="border:#000000 1px solid">Valor Total das Dedu&ccedil;&otilde;es (R$)<br />
+							<td style="border:#000000 1px solid">Valor Total das Deduções (R$)<br />
 								<div align="right"><strong><?php print DecToMoeda($valordeducoes); ?></strong></div>
 							</td>
 						<?php
 						}
 						?>
-						<td style="border:#000000 1px solid" colspan="2">Base de C&aacute;lculo (R$)<br />
+						<td style="border:#000000 1px solid" colspan="2">Base de Cálculo (R$)<br />
 							<div align="right"><strong><?php print DecToMoeda($basecalculo); ?></strong></div>
 						</td>
 						<td style="border:#000000 1px solid; display:none">
-							Al&iacute;quota (%)
+							Alíquota (%)
 							<br />
 							<div align="right">
 								<strong>
@@ -518,7 +518,7 @@ for ($c = 0; $c < $notas; $c++) {
 						</td>
 
 						<td style="border:#000000 1px solid; <?php echo $display; ?>">
-							Cr&eacute;dito
+							Crédito
 							<br />
 							<div align="right">
 								<strong>
@@ -536,16 +536,16 @@ for ($c = 0; $c < $notas; $c++) {
 						</td>
 					</tr>
 					<tr>
-						<td colspan="6" style="border:#000000 1px solid" class="cab03">OUTRAS INFORMA&Ccedil;&Otilde;ES</td>
+						<td colspan="6" style="border:#000000 1px solid" class="cab03">OUTRAS INFORMAÇÕES</td>
 					</tr>
 
 					<tr>
 						<td colspan="6" style="border:#000000 1px solid" align="left">
-							- Esta NF-e foi emitida com respaldo na Lei n&ordm; <?php print $lei; ?> e no Decreto n&ordm; <?php print $decreto; ?><br />
+							- Esta NF-e foi emitida com respaldo na Lei nº <?php print $lei; ?> e no Decreto nº <?php print $decreto; ?><br />
 							<?php /*
 			if ($codtipodec == $codtipoSN)
 			{
-			  echo "- Esta NF-e n�o gera cr�ditos, pois a empresa prestadora de servi�os � optante pelo Simples Nacional<br> ";
+			  echo "- Esta NF-e não gera créditos, pois a empresa prestadora de serviços é optante pelo Simples Nacional<br> ";
 			} */
 							if ($issretido != 0) {
 								echo "- Esta NF-e possui reten��o de ISS no valor de R$ " . DecToMoeda($issretido) . "<br> ";
@@ -560,12 +560,12 @@ for ($c = 0; $c < $notas; $c++) {
 							/*
 			if(($CONF_CIDADE != $tomador_municipio) && ($codtipodec != $codtipoSN)) {
 				if($ativar_creditos == "s"){
-					echo "- Esta NF-e n�o gera cr�dito, pois o Tomador de Servi�os est� localizado fora do munic�pio de $CONF_CIDADE<br>";
+					echo "- Esta NF-e não gera crédito, pois o Tomador de Serviços  está localizado fora do município de $CONF_CIDADE<br>";
 				}
 			} // fim if	*/
 							if ($rps_numero) {
 							?>
-								- Esta NF-e substitui o RPS N&ordm; <?php print $rps_numero; ?>, emitido em <?php print(substr($rps_data, 8, 2) . "/" . substr($rps_data, 5, 2) . "/" . substr($rps_data, 0, 4)); ?><br />
+								- Esta NF-e substitui o RPS Nº <?php print $rps_numero; ?>, emitido em <?php print(substr($rps_data, 8, 2) . "/" . substr($rps_data, 5, 2) . "/" . substr($rps_data, 0, 4)); ?><br />
 							<?php
 							} //fim if rps
 							//$valorinss,$aliqinss,$valorirrf,$aliqinss

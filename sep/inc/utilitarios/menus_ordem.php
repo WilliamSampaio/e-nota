@@ -23,21 +23,21 @@ Fith Floor, Boston, MA 02110-1301, USA
 		for($cMenu=0;$cMenu<$_POST['hdCont']; $cMenu++){
 			$ordMenu = $_POST['cmbOrdMenu'.$cMenu];
 			$codMenu = $_POST['hdCodMenu'.$cMenu];
-			$sql_menu = mysql_query("UPDATE menus_prefeitura SET ordem = '$ordMenu' WHERE codigo='$codMenu'");
+			$sql_menu = $PDO->query("UPDATE menus_prefeitura SET ordem = '$ordMenu' WHERE codigo='$codMenu'");
 			
 		}
 		for($i=0; $i<$_POST['x']; $i++){
 			$ord  = $_POST['cmbOrdem'.$i];
 			$codigo = $_POST['txtCodigo'.$i];
-			$sql_submenu = mysql_query("UPDATE menus_prefeitura_submenus SET ordem = '$ord' WHERE codigo='$codigo'");
+			$sql_submenu = $PDO->query("UPDATE menus_prefeitura_submenus SET ordem = '$ord' WHERE codigo='$codigo'");
 		}
 		add_logs('Atualizou a Ordem dos Menus');
 		echo "<script>alert('Ordem dos menus alterada!');</script>";
 	}
 ?>
-<fieldset><legend>Defina a ordem em que os menus irão aparecer</legend>
+<fieldset><legend>Defina a ordem em que os menus irï¿½o aparecer</legend>
 <?php
-$sql = mysql_query("
+$sql = $PDO->query("
 	SELECT 
 		m.codigo, 
 		m.menu,
@@ -65,7 +65,7 @@ $sql = mysql_query("
 	<?php
 	$cont = 0;
 	$linhas = mysql_num_rows($sql);
-	while(list($codigo,$menu,$nivel,$ordem)=mysql_fetch_array($sql)){
+	while(list($codigo,$menu,$nivel,$ordem)=$sql->fetch()){
 	?>
 		<tr id="conteudo<?php echo $cont?>">
 			<td>

@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 
 session_start();
-include("inc/conect.php");
-include("../funcoes/util.php");
+require_once("inc/conect.php");
+require_once("../include/util.php");
 
 $codigo=$_GET['codempresa'];
 
@@ -40,8 +40,8 @@ switch($pg){
 	default: $pg="nulo";
 }
 
-$sql_emissor = mysql_query("SELECT * FROM cadastro WHERE codigo='$codigo'");
-$dados=mysql_fetch_array($sql_emissor);
+$sql_emissor = $PDO->query("SELECT * FROM cadastro WHERE codigo='$codigo'");
+$dados=$sql_emissor->fetch();
 
 $anoatual=date("Y");
 $diaatual=date("Y-m-d");
@@ -64,7 +64,7 @@ $mes=date("n");
 
 
 
-$meses=array("1"=>"Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+$meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 if($anoselecionado!=""){
 echo "<select id=\"cmbMes\" name=\"cmbMes\">";
 if($pg=="nulo"){
@@ -111,8 +111,8 @@ if($pg=="nulo"){
 	}else{
 		$str="";	
 	}
-	$declaracoes=mysql_query("SELECT DISTINCT MONTH(competencia) FROM $nometabela WHERE $codtipo='$codigo' $str AND YEAR(competencia)='$anoselecionado'");
-	while(list($competencia)=mysql_fetch_array($declaracoes)){
+	$declaracoes=$PDO->query("SELECT DISTINCT MONTH(competencia) FROM $nometabela WHERE $codtipo='$codigo' $str AND YEAR(competencia)='$anoselecionado'");
+	while(list($competencia)=$declaracoes->fetch()){
 		echo "<option value='$competencia'>{$meses[$competencia]}</option>";
 	}
 }

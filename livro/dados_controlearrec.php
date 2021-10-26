@@ -109,7 +109,7 @@ $livro = $sql_livro->fetchObject();
                 </tr>
                 <tr>
                     <td>
-                        <b>Observa��es</b>
+                        <b>Observações</b>
                     </td>
                     <td>
                         <?php echo $livro->obs;?>

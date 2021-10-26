@@ -20,14 +20,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php 
 
-include("../../inc/conect.php");
-include("../../funcoes/util.php");
+require_once("../../inc/conect.php");
+require_once("../../funcoes/util.php");
 // variaveis vindas do conect.php
 // $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF
 
-$sql_brasao = mysql_query("SELECT brasao FROM configuracoes");
+$sql_brasao = $PDO->query("SELECT brasao FROM configuracoes");
 //preenche a variavel com os valores vindos do banco
-list($BRASAO) = mysql_fetch_array($sql_brasao);
+list($BRASAO) = $sql_brasao->fetch();
 
 //print_r($_POST);
 ?>
@@ -59,14 +59,14 @@ list($BRASAO) = mysql_fetch_array($sql_brasao);
 	</tr>
 </table>
 <table width="700px" height="120" border="2" cellspacing="0" class="tabela">
-	<?php  //comando sql que mostrará as categorias e a quantidade de cada um (Lista Estatística)
-$sql = mysql_query("SELECT * FROM notas WHERE codigo={$_POST['nota']}");
+	<?php  //comando sql que mostrarï¿½ as categorias e a quantidade de cada um (Lista Estatï¿½stica)
+$sql = $PDO->query("SELECT * FROM notas WHERE codigo={$_POST['nota']}");
 //preenche a variavel com os valores vindos do banco
-$nota = mysql_fetch_array($sql);
+$nota = $sql->fetch();
 $data=DataPt(substr($nota['datahoraemissao'],0,10));
 $valor=DecToMoeda($nota['valortotal']);
 echo "<tr bgcolor=\"grey\"><td align=\"center\">Numero nota</td>
-	  <td align=\"center\">Código verificacao</td>
+	  <td align=\"center\">CÃ³digo verificacao</td>
 	  <td align=\"center\">Data</td>
 	  <td align=\"center\">Emissor</td>
 	  <td align=\"center\">Tomador</td>

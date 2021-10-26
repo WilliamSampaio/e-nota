@@ -28,10 +28,10 @@ $contrato = $_POST["txtContrato"];
 $carteira = $_POST["txtCarteira"];  
 $codfebraban = $_POST["txtCodfebraban"]; 
 $instrucoes = addslashes($_POST['txtInstrucoes']);
-$sql_boleto = mysql_query("SELECT codigo FROM boleto");
+$sql_boleto = $PDO->query("SELECT codigo FROM boleto");
 if(!mysql_num_rows($sql_boleto)){
 
-	mysql_query("
+	$PDO->query("
 		INSERT INTO 
 			boleto 
 		SET 
@@ -48,7 +48,7 @@ if(!mysql_num_rows($sql_boleto)){
 
 }else{
 
-	mysql_query("
+	$PDO->query("
 		UPDATE 
 			boleto 
 		SET 
@@ -65,7 +65,7 @@ if(!mysql_num_rows($sql_boleto)){
 	
 }
  
-add_logs('Atualizou um Boleto Bancário');
+add_logs('Atualizou um Boleto Bancï¿½rio');
 Mensagem("Dados atualizados");
 
 

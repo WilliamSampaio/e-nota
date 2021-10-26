@@ -43,18 +43,18 @@ Fith Floor, Boston, MA 02110-1301, USA
         DESC						
     ");
 	$sql_operadora = Paginacao($query,'frmAudDoc','divauditoriadoc',15);
-    if(mysql_num_rows($sql_operadora)){
+    if($sql_operadora->rowCount()){
     ?>
 <table width="100%">
     <tr bgcolor="#999999">
-        <td width="688" align="center">Cod. de verificação</td>
+        <td width="688" align="center">Cod. de verificaÃ§Ã£o</td>
         <td width="197" align="center">Data Gerado</td>
         <td width="143" align="center">Competencia</td>
-        <td width="111" align="center">Ações</td>
+        <td width="111" align="center">AÃ§Ãµes</td>
     </tr>
     <?php
         $cont = 1;
-        while(list($codigo,$codverificacao,$razao,$data_gerado,$competencia) = mysql_fetch_array($sql_operadora)){
+        while(list($codigo,$codverificacao,$razao,$data_gerado,$competencia) = $sql_operadora-''){
 
         ?>
     <tr bgcolor="#FFFFFF">
@@ -77,7 +77,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         echo "
 			<table width=\"100%\">
 				<tr>
-					<td align=\"center\"><b>Não há declarações de Cartórios</b></td>
+					<td align=\"center\"><b>NÃ£o hÃ¡ declaraï¿½ï¿½es de Cartï¿½rios</b></td>
 				</tr>
 			</table>
         ";

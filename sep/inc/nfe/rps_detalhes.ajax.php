@@ -6,7 +6,7 @@
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;NFe - RPS</td>
+		<td background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">NFe - RPS</td>
 		<td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg" onclick="document.getElementById('divDetalhesRPS').style.display='none'">
 			<img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" />
 		</td>
@@ -18,7 +18,7 @@
 			<?php
 			
 			
-			$sql_detalhes = mysql_query("
+			$sql_detalhes = $PDO->query("
 				SELECT 
 					cadastro.codigo AS codCadastro,
 					cadastro.nome,
@@ -58,7 +58,7 @@
 			?>
 			<table width="100%" cellpadding="5">
 				<tr bgcolor="#FFFFFF">
-					<td align="right">Razão Social: </td>
+					<td align="right">RazÃ£o Social: </td>
 					<td align="left" colspan="3"><?php echo $dados_RPS->razaosocial;?></td>
 				</tr>
 				<tr bgcolor="#FFFFFF">
@@ -68,7 +68,7 @@
 				<tr bgcolor="#FFFFFF">
 					<td align="right">Logradouro: </td>
 					<td align="left"><?php echo $dados_RPS->logradouro;?></td>
-					<td align="right">Número: </td>
+					<td align="right">NÃºmero: </td>
 					<td align="left"><?php echo $dados_RPS->numero;?></td>
 				</tr>
 				<tr bgcolor="#FFFFFF">
@@ -85,7 +85,7 @@
 					<td align="left" colspan="4">
 						<input name="btLiberar" type="button" class="botao" value="Liberar" 
 						onclick="liberaRPS('inc/nfe/rps_liberar_recusar.ajax.php?tipo=L&codigo=<?php echo $dados_RPS->codSolicitacao;?>','txtLimite','hdLimite','spanRetorno')" />
-						&nbsp;
+						
 						<input name="btCancelar" type="button" class="botao" value="Cancelar" onclick="document.getElementById('divDetalhesRPS').style.display='none'"/>
 						<span id="spanRetorno"></span>
 					</td>

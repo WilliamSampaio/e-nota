@@ -60,14 +60,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 	
 	
 	
-	$sql_obras = mysql_query("SELECT codempreiteira, obra, alvara, endereco, proprietario, proprietario_cnpjcpf, dataini, datafim, estado FROM obras WHERE obra LIKE '$nomeobra%' $str_where ");
-	if(mysql_num_rows($sql_obras)>0){
+	$sql_obras = $PDO->query("SELECT codempreiteira, obra, alvara, endereco, proprietario, proprietario_cnpjcpf, dataini, datafim, estado FROM obras WHERE obra LIKE '$nomeobra%' $str_where ");
+	if($sql_obras->rowCount()>0){
 ?>
 <link href="../../../css/padrao.css" rel="stylesheet" type="text/css">
 <title>Imprimir</title><input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
 	<table width="850">
     	<tr>
-        	<td><b><font size="4">Relatório de Obras</font></b></td>
+        	<td><b><font size="4">Relatï¿½rio de Obras</font></b></td>
         </tr>
         <?php
 			if($nomeobra){
@@ -112,7 +112,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td width="15%" align="center"><b>Nome</b></td>
             <td width="6%"  align="center"><b>Alvara</b></td>
             <td width="19%" align="center"><b>Endereco</b></td>
-            <td width="19%" align="center"><b>Propietário</b></td>
+            <td width="19%" align="center"><b>Propietï¿½rio</b></td>
             <td width="15%" align="center"><b>CNPJCPF</b></td>
             <td width="9%"  align="center"><b>Data inicio</b></td>	
             <td width="10%" align="center"><b>Data termino</b></td>
@@ -122,7 +122,7 @@ Fith Floor, Boston, MA 02110-1301, USA
       		<td colspan="8"><hr color="#000000" size="2" /></td>
       </tr>
         <?php
-		while($dados_obra = mysql_fetch_array($sql_obras)){
+		while($dados_obra = $sql_obras->fetch()){
             switch($dados_obra['estado']){
                 case "A" : $estado = "Aberto";    break;
                 case "C" : $estado = "Concluido"; break;
@@ -146,7 +146,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 
 	}else{
-		echo "<center><b>Não há empreiteiras cadastradas</b></center>";
+		echo "<center><b>NÃ£o hÃ¡ empreiteiras cadastradas</b></center>";
 	}
 
 ?>

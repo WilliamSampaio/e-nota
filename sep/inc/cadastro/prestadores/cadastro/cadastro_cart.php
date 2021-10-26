@@ -37,7 +37,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<option value="I"<?php if($admpublica_cart == "I"){ echo "selected=selected";}?>>Indireta</option>
 		</select>
 	</td>
-	<td align="left" width="98">N&iacute;vel<font color="#FF0000">*</font></td>
+	<td align="left" width="98">Nível<font color="#FF0000">*</font></td>
 	<td align="left" width="100">
 		<select name="cmbNivel">
 			<option value=""></option>

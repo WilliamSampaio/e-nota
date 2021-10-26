@@ -20,10 +20,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	$cnpj = $_SESSION['login'];
-	$sql_emissor = mysql_query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj' OR cpf = '$cnpj'");
-	list($codemissor) = mysql_fetch_array($sql_emissor);
-	$sql=mysql_query("SELECT inscrmunicipal, razaosocial, logradouro, numero, complemento, municipio, uf FROM cadastro WHERE codigo = '$codemissor'");
-	list($inscrmunicipal,$razaosocial,$logradouro,$numero,$complemento,$municipio,$uf)=mysql_fetch_array($sql);
+	$sql_emissor = $PDO->query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj' OR cpf = '$cnpj'");
+	list($codemissor) = $sql_emissor->fetch();
+	$sql=$PDO->query("SELECT inscrmunicipal, razaosocial, logradouro, numero, complemento, municipio, uf FROM cadastro WHERE codigo = '$codemissor'");
+	list($inscrmunicipal,$razaosocial,$logradouro,$numero,$complemento,$municipio,$uf)=$sql->fetch();
 	$endereco = "$logradouro, $numero";
 	if($complemento)
 		$endereco .= ", $complemento";
@@ -36,7 +36,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="580" border="0" cellpadding="0" cellspacing="1">
 	<tr>
 		<td width="5%" height="10" bgcolor="#FFFFFF"></td>
-		<td width="65%" align="center" bgcolor="#FFFFFF" rowspan="3" class="fieldsetCab">DESN - Declara��o Eletr�nica do Simples Nacional</td>
+		<td width="65%" align="center" bgcolor="#FFFFFF" rowspan="3" class="fieldsetCab">DESN - Declara��o Eletrônica do Simples Nacional</td>
 		<td width="30%" bgcolor="#FFFFFF"></td>
 	</tr>
 	<tr>
@@ -55,37 +55,37 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 		<table width="100%" height="100%" border="0" align="center" cellpadding="3" cellspacing="2">
 <tr>
-				<td colspan="2" align="left"><strong>C&aacute;lculo de Receita Bruta com Discrimina&ccedil;&atilde;o de Tomadores</strong><br>
-  <!--Guia destinada SOMENTE para tributa&ccedil;&atilde;o de receitas PR&Oacute;PRIAS. </strong></td>-->
+				<td colspan="2" align="left"><strong>Cálculo de Receita Bruta com Discriminação de Tomadores</strong><br>
+  <!--Guia destinada SOMENTE para tributação de receitas PRÓPRIAS. </strong></td>-->
 		</tr>
 		<tr>
 			<td width="27%" align="left" valign="middle">CNPJ:</td>
 			<td width="73%" align="left" valign="middle" bgcolor="#FFFFFF"><?php echo $cnpj; ?></td>
 		</tr>
 		<!--<tr>
-			<td align="left" valign="middle">Inscri&ccedil;&atilde;o Municipal:</td>
+			<td align="left" valign="middle">Inscrição Municipal:</td>
 			<td align="left" valign="middle"><?php //echo $inscrmunicipal;?></td>
 		</tr>-->
 		<tr>
-			<td align="left" valign="middle">Raz&atilde;o Social:</td>
+			<td align="left" valign="middle">Razão Social:</td>
 			<td align="left" valign="middle" bgcolor="#FFFFFF"><?php echo $razaosocial;?></td>
 		</tr>
 		<tr>
-			<td align="left" valign="middle">Endere&ccedil;o:</td>
+			<td align="left" valign="middle">Endereço:</td>
 			<td align="left" valign="middle" bgcolor="#FFFFFF"><?php echo "$endereco - $municipio - $uf";?></td>
 		</tr>
 		<tr>
-			<td align="left" valign="middle">&nbsp;</td>
-			<td align="left" valign="middle">&nbsp;</td>
+			<td align="left" valign="middle"></td>
+			<td align="left" valign="middle"></td>
 		</tr>
 			<tr>
-			  <td align="left" valign="middle">Per&iacute;odo</td>
+			  <td align="left" valign="middle">Período</td>
 			  <td align="left" valign="middle">
 				  <select name="cmbMes" id="cmbMes" onchange="SomaImpostosDes();CalculaMultaDes();">
 					  <option value=""> </option>
 					  <option value="1">Janeiro</option>
 					  <option value="2">Fevereiro</option>
-					  <option value="3">Mar�o</option>
+					  <option value="3">Mar�o</option>
 					  <option value="4">Abril</option>
 					  <option value="5">Maio</option>
 					  <option value="6">Junho</option>
@@ -114,11 +114,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#CCCCCC" bgcolor="#FFFFFF">
 				<tr>
 				  <td align="center" bgcolor="#CCCCCC"> Tomador (CPF/CNPJ)</td>
-				  <td align="center" bgcolor="#CCCCCC">Servi&ccedil;o / Atividade</td>
-				  <td style="display: none;" align="center" bgcolor="#CCCCCC">Al&iacute;q (%)</td>
-				  <td align="center" bgcolor="#CCCCCC">Base de C&aacute;lculo (R$)</td>
+				  <td align="center" bgcolor="#CCCCCC">Serviço / Atividade</td>
+				  <td style="display: none;" align="center" bgcolor="#CCCCCC">Alíq (%)</td>
+				  <td align="center" bgcolor="#CCCCCC">Base de Cálculo (R$)</td>
 				  <td style="display: none" align="center" bgcolor="#CCCCCC">ISS (R$)</td>
-				  <td align="center" bgcolor="#CCCCCC">N&ordm;. Documento</td>
+				  <td align="center" bgcolor="#CCCCCC">Nº. Documento</td>
 				</tr>
 				<tr>
 <?php
@@ -127,12 +127,12 @@ listaRegrasMultaDes();//cria os campos hidden com as regras pra multa da declara
 
 //pega o numero de servicos do emissor
 
-$sql_servicos = mysql_query("
+$sql_servicos = $PDO->query("
 	SELECT codservico 
 	FROM cadastro_servicos
 	WHERE codemissor='$codemissor'
 ");
-$num_servicos = 1;//quantos linhas v�o aparecer pra preencher
+$num_servicos = 1;//quantos linhas v�o aparecer pra preencher
 $num_serv_max = 20;// numero maximo de linhas que podem ser adicionadas
 
 campoHidden("hdServicos",$num_servicos);
@@ -151,13 +151,13 @@ for($c=1;$c<$num_serv_max;$c++){
 						<option></option>
 						<?php
 							
-							$sql_servicos2 = mysql_query("
+							$sql_servicos2 = $PDO->query("
 								SELECT servicos.codigo, servicos.descricao, servicos.aliquota FROM servicos 
 								INNER JOIN cadastro_servicos ON servicos.codigo=cadastro_servicos.codservico
 								INNER JOIN cadastro ON cadastro_servicos.codemissor=cadastro.codigo 
 								WHERE cadastro.codigo='$codemissor'
 							");
-							while(list($cod_serv, $desc_serv, $aliq_serv) = mysql_fetch_array($sql_servicos2))
+							while(list($cod_serv, $desc_serv, $aliq_serv) = $sql_servicos2->fetch())
 							{
 								if(strlen($desc_serv)>100)
 									$desc_serv = substr($desc_serv,0,100)."...";
@@ -203,13 +203,13 @@ for($c=1;$c<$num_serv_max;$c++){
 			  <td align="left" valign="middle"><input type="text" name="txtTotalPagar" id="txtTotalPagar" value="0,00" style="text-align:right;" readonly="readonly" size="16" class="texto" /></td>
 		  </tr>
 		  <tr>
-			  <td align="left" valign="middle">&nbsp;</td>
+			  <td align="left" valign="middle"></td>
 			  <td align="left" valign="middle"><em>* Confira seus dados antes de continuar<br>
 			  ** Desabilite seu bloqueador de pop-up</em></td>
 		  </tr>
 		  <tr>
-			  <td align="left" valign="middle">&nbsp;</td>
-			  <td align="left" valign="middle"><input type="submit" value="Declarar" class="botao" onclick="return ValidaFormMsg('cmbMes|cmbAno|txtTomadorCnpjCpf1|cmbCodServico1|txtBaseCalculo1|txtNroDoc1','O Per�odo e pelo menos um servi�o devem ser preenchidos!');" /></td>
+			  <td align="left" valign="middle"></td>
+			  <td align="left" valign="middle"><input type="submit" value="Declarar" class="botao" onclick="return ValidaFormMsg('cmbMes|cmbAno|txtTomadorCnpjCpf1|cmbCodServico1|txtBaseCalculo1|txtNroDoc1','O Período e pelo menos um serviço devem ser preenchidos!');" /></td>
 		  </tr>
 	  </table>		
 	  </td>

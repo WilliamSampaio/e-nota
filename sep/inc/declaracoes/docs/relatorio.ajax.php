@@ -19,12 +19,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-    include("../conect.php");
-    include("../../funcoes/util.php");
+    require_once("../conect.php");
+    require_once("../../funcoes/util.php");
 
     if($_GET['cmbRelatorios']=="dec"){
-       include("relatorio_dec.php");
+       require_once("relatorio_dec.php");
     }elseif($_GET['cmbRelatorios']=="cartorios"){
-       include("relatorio_cartorios.php");
+       require_once("relatorio_cartorios.php");
     }
 ?>

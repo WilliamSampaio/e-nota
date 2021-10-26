@@ -20,20 +20,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 
 <?php //Includes
-	include("../../inc/conect.php");
-	include("../../funcoes/util.php");
+	require_once("../../inc/conect.php");
+	require_once("../../funcoes/util.php");
 ?>
 
-<?php //Pega o brasão
-	$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
-	list($BRASAO) = mysql_fetch_array($sql_brasao);
+<?php //Pega o brasï¿½o
+	$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
+	list($BRASAO) = $sql_brasao->fetch();
 ?>
 
 <?php
 	$codigo = $_POST['rdbContador'];
 ?>
 
-<!-- Início do css da visualização da página -->
+<!-- Inï¿½cio do css da visualizaï¿½ï¿½o da pÃ¡gina -->
 	<style type="text/css" media="screen">
 	<!--
 	.style1 {font-family: Georgia, "Times New Roman", Times, serif}
@@ -64,26 +64,26 @@ Fith Floor, Boston, MA 02110-1301, USA
 	}
 	-->
 	</style>
-<!-- Fim do css da visualização da página -->
+<!-- Fim do css da visualizaï¿½ï¿½o da pÃ¡gina -->
 
 
-<!-- Início do css da Impressão da página -->
+<!-- Inï¿½cio do css da ImpressÃ£o da pÃ¡gina -->
 	<style type="text/css" media="print">
     #DivImprimir{
-		display: none; /*Tira a div imprimir na hora da impressão*/
+		display: none; /*Tira a div imprimir na hora da impressï¿½o*/
 	}
 	</style>
-<!-- Fim do css da Impressão da página -->
+<!-- Fim do css da ImpressÃ£o da pÃ¡gina -->
 
-<title>Imprimir Relat&oacute;rio</title>
+<title>Imprimir RelatÃ³rio</title>
 
-<div class="pagina"> <!-- Início div página -->
+<div class="pagina"> <!-- Inï¿½cio div pÃ¡gina -->
 	<div id="DivImprimir">
 		<input type="button" onClick="print();" value="Imprimir" /><br />
-		<i><b>Este relat&oacute;rio &eacute; melhor visualizado em formato de impress&atilde;o em paisagem.</b></i>
+		<i><b>Este relatÃ³rio Ã© melhor visualizado em formato de impressÃ£o em paisagem.</b></i>
 	</div>
 	
-	<!-- Início do topo com as informações -->
+	<!-- Inï¿½cio do topo com as informaï¿½ï¿½es -->
 	<div id="DivTopo">
 		<table width="95%" height="120" border="2" cellspacing="0" class="tabela" align="center">
 			<tr>
@@ -95,7 +95,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td width="584" height="33" colspan="2">
 					<span class="style1">
 						<center>
-							<p>RELAT&Oacute;RIO DE OPRERA&Ccedil;&Otilde;ES EFETUADAS POR CONTADOR </p>
+							<p>RELATÃ“RIO DE OPRERAÃ‡Ã•ES EFETUADAS POR CONTADOR </p>
 							<p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 							<p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 						</center>
@@ -104,20 +104,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 			</tr>
 		</table>
 	</div>
-	<!-- Fim do topo com as informações -->
+	<!-- Fim do topo com as informaï¿½ï¿½es -->
 	
 	<br>
 					<?php
 					$query =("SELECT * FROM cadastro WHERE codtipo = '$codigo'");
-					$sql_pesquisa = mysql_query ($query);
+					$sql_pesquisa = $PDO->query($query);
 					$result = mysql_num_rows($sql_pesquisa);
 					
 				if($result){
-				while ($dados = mysql_fetch_array($sql_pesquisa)){
+				while ($dados = $sql_pesquisa->fetch()){
 					$codcontador = $dados['codigo'];
 					$query2 = ("SELECT * FROM cadastro WHERE codcontador = '$codcontador'");
 				
-				$sql_pesquisa2 = mysql_query ($query2);
+				$sql_pesquisa2 = $PDO->query($query2);
 				$result2 = mysql_num_rows($sql_pesquisa2);
 				if(mysql_num_rows($sql_pesquisa2)){
 					if($result2 <= 1){
@@ -152,7 +152,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</td>
           		</tr>
                 <?php
-					while ($dados2 = mysql_fetch_array($sql_pesquisa2)){
+					while ($dados2 = $sql_pesquisa2->fetch()){
 					
 						if($dados['cpf'] == ''){
 							$cpfcnpj = $dados['cnpj'];
@@ -171,19 +171,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<font size="1"><?php echo $dados2['nome']; ?></font>
 					</td>
 					<td bgcolor="white"  align="center">
-						<font size="1"><?php if($dados2['contadoreaidf'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadoreaidf'] == 'S'){echo "SIM";}else{echo "NÃƒO";} ?></font>
 					</td>
 					<td bgcolor="white" align="center">
-						<font size="1"><?php if($dados2['contadornfe'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadornfe'] == 'S'){echo "SIM";}else{echo "NÃƒO";} ?></font>
 					</td>
                     <td bgcolor="white" align="center">
-						<font size="1"><?php if($dados2['contadorlivro'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadorlivro'] == 'S'){echo "SIM";}else{echo "NÃƒO";} ?></font>
 					</td>
 					<td bgcolor="white"  align="center">
-						<font size="1"><?php if($dados2['contadorguia'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadorguia'] == 'S'){echo "SIM";}else{echo "NÃƒO";} ?></font>
 					</td>
 					<td bgcolor="white" align="center">
-						<font size="1"><?php if($dados2['contadorrps'] == 'S'){echo "SIM";}else{echo "N&Atilde;O";} ?></font>
+						<font size="1"><?php if($dados2['contadorrps'] == 'S'){echo "SIM";}else{echo "NÃƒO";} ?></font>
 					</td>
 				</tr>
         	<?php
@@ -198,7 +198,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			?>
             <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
                 <tr style="background-color:#999999;font-weight:bold;" align="center">
-                    <td>N&atilde;o h&aacute; resultados!</td>
+                    <td>NÃ£o hÃ¡ resultados!</td>
                 </tr>
             </table>
 			<?php

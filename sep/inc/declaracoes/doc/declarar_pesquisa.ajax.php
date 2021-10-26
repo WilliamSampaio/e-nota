@@ -33,10 +33,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$numero      = $_GET['txtNroDoc'];
 	$cancelaDoc  = $_GET['hdCancelaDoc'];
 	
-	//se foi cancelada alguma declaração da o updade no banco e da um alert se der algum erro
+	//se foi cancelada alguma declaraÃ§Ã£o da o updade no banco e da um alert se der algum erro
 	if($cancelaDoc){
-		mysql_query("UPDATE doc_des SET estado = 'C' WHERE codigo = '$cancelaDoc'");
-		add_logs('Atualizou uma Declaração: Cancelada');
+		$PDO->query("UPDATE doc_des SET estado = 'C' WHERE codigo = '$cancelaDoc'");
+		add_logs('Atualizou uma Declaraï¿½ï¿½o: Cancelada');
 	}//fim if cacela
 	
 	//verifica quais campos foram preenchidos e concatena na variavel str_where
@@ -60,7 +60,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$str_where .= " AND doc_des.codigo = '$numero'";
 	}
 	
-	//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
+	//Sql buscando as informaï¿½ï¿½es que o usuario pediu e com o limit estipulado pela funÃ§Ã£o
 	$query = ("
 		SELECT
 			doc_des.codigo, 
@@ -86,11 +86,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 		DESC
 		");
 	$sql_pesquisa = Paginacao($query,'frmOperadoras','divDeclaracoesOperadoras',10);
-if(mysql_num_rows($sql_pesquisa)){
+if($sql_pesquisa->rowCount()){
 ?>
 <table width="100%">
 	<tr bgcolor="#999999">
-    	<td width="7%" align="center">N&deg; Dec</td>
+    	<td width="7%" align="center">NÂº Dec</td>
         <td width="38%" align="center">Nome</td>
         <td width="15%" align="center">Data</td>
         <td width="13%" align="center">Competencia</td>
@@ -99,7 +99,7 @@ if(mysql_num_rows($sql_pesquisa)){
   </tr>
     <?php
 		$x = 0;
-		while($dados_pesquisa = mysql_fetch_array($sql_pesquisa)){
+		while($dados_pesquisa = $sql_pesquisa->fetch()){
 			//alterna o valor da variavel pelo seu valor por extenso
 			switch($dados_pesquisa['estado']){
 				case "B": $str_estado = "Boleto";      break;
@@ -120,14 +120,14 @@ if(mysql_num_rows($sql_pesquisa)){
      	<td bgcolor="<?php echo $bgcolor;?>" align="center"><?php echo $dados_pesquisa['data'];?></td>
         <td bgcolor="<?php echo $bgcolor;?>" align="center"><?php echo $dados_pesquisa['competencia'];?></td>
         <td bgcolor="<?php echo $bgcolor;?>" align="center"><?php echo $str_estado;?></td>
-<td bgcolor="#FFFFFF" align="left" colspan="2">&nbsp;
+<td bgcolor="#FFFFFF" align="left" colspan="2">
         	<label title="Ver Detalhes">
         		<input name="btDetalhesDecc" id="btLupa" type="button" class="botao" value="" 
             	onClick="VisualizarNovaLinha('<?php echo $dados_pesquisa['codigo'];?>','<?php echo"tddoc".$x;?>',this,'inc/declaracoes/doc/declarar_vizualizar.ajax.php')">
             </label>
-            &nbsp;
+            
             <?php if($dados_pesquisa['estado'] != "C"){?>
-            <label title="Cancelar Declaração" id="lbCancelar<?php echo $x;?>">
+            <label title="Cancelar Declaraï¿½ï¿½o" id="lbCancelar<?php echo $x;?>">
             	<input name="btCancelarDoc" id="btX" type="button" class="botao" value=""
                 onClick="return cancelarDeclaracao('<?php echo $dados_pesquisa['codigo'];?>','<?php echo $dados_pesquisa['nome'];?>','inc/declaracoes/doc/declarar_pesquisa.ajax.php','frmOperadoras','divDeclaracoesOperadoras','hdCancelaDoc');">
             </label>
@@ -145,7 +145,7 @@ if(mysql_num_rows($sql_pesquisa)){
 </table>
 <?php
 }else{
-	echo "<center><b>Não há resultados!</b></center>";
+	echo "<center><b>NÃ£o hÃ¡ resultados!</b></center>";
 }
 
 ?>

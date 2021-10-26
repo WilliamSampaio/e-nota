@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-		include("../conect.php");
-		include("../../funcoes/util.php");
+		require_once("../conect.php");
+		require_once("../../funcoes/util.php");
 		
 		$CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
 		for($i=0; $i < 4; $i++) 
@@ -53,20 +53,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$multaJuros = MoedaToDec($_POST['txtMultaJuros']);
 		$totalPagar = MoedaToDec($_POST['txtTotalPagar']);
 		
-		mysql_query("INSERT INTO simples_des 
+		$PDO->query("INSERT INTO simples_des 
 					 SET codemissor='$cod_emissor', 
 						 competencia='$dataCompetencia', 
 						 data_gerado='$dataGerado', 
 						 total='$total', 
 						 tomador='s',
 						 codverificacao='$codverificacao'");
-		$sql_des = mysql_query("SELECT MAX(codigo) 
+		$sql_des = $PDO->query("SELECT MAX(codigo) 
 						  				 FROM simples_des");
-		list($codsimples_des)=mysql_fetch_array($sql_des);
+		list($codsimples_des)=$sql_des->fetch();
 		
 		for($c=1;$c<=$num_servicos;$c++){
 			if($baseCalculo[$c]!=""&&$codigoServico[$c]!=""){
-				mysql_query("INSERT INTO simples_des_servicos
+				$PDO->query("INSERT INTO simples_des_servicos
 							 SET codsimples_des='$codsimples_des',
 								 codservico='".$codigoServico[$c]."',
 								 basedecalculo='".$baseCalculo[$c]."',

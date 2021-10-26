@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">&nbsp;Relat&oacute;rios - Ranking de atividades </td>
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Ranking de atividades </td>
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -41,10 +41,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 			<select name="cmbOrdem" id="cmbOrdem">
             	<option value="arrecadacao DESC" selected="selected">Maior faturamento</option>
                 <option value="arrecadacao ASC">Menor faturamento</option>
-                <option value="iss DESC">Maior Gera&ccedil;&atilde;o de ISSQN</option>
-                <option value="iss ASC">Menor Gera&ccedil;&atilde;o de ISSQN</option>
-                <option value="qtdnotas DESC">Maior n&uacute;mero de notas emitidas</option>
-                <option value="qtdnotas ASC">Menor n&uacute;mero de notas emitidas</option>
+                <option value="iss DESC">Maior Geração de ISSQN</option>
+                <option value="iss ASC">Menor Geração de ISSQN</option>
+                <option value="qtdnotas DESC">Maior número de notas emitidas</option>
+                <option value="qtdnotas ASC">Menor número de notas emitidas</option>
             </select>
          </td>
     </tr>

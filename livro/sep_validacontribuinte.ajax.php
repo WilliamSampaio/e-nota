@@ -1,6 +1,6 @@
 <script type="text/javascript" src="../scripts/padrao.js"></script>
 <?php 
-include("../include/conect.php");
+require_once("../include/conect.php");
 	$sql=$PDO->query("SELECT codigo,nome,datainicio,datafim FROM cadastro WHERE cnpj='".$_POST['txtCnpjLivro']."' OR cpf='".$_POST['txtCnpjLivro']."'");
 	if($sql->rowCount()!=0){
 		$dado= $sql->fetchObject();		
@@ -13,7 +13,7 @@ include("../include/conect.php");
 		 <table>
 			<tr>
 				<td>
-				 Per�odo
+				 Período
 				</td>
 				<td>
 				<?php

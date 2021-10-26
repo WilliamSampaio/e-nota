@@ -69,7 +69,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		// Gera o arquivo CSV para download
 		$arquivo = $CODIGO_DA_EMPRESA."arquivo.csv";
         $fp = fopen("tmp/".$arquivo, "w");
-		$cabecario = "N�mero da nota;C�digo de verifica��o;Data e hora de emiss�o;N�mero do  RPS;Data do RPS;Nome do Tomador de servi�os;CPF/CNPJ do Tomador de servi�os;Inscri��o municipal do Tomador de servi�os;Logradouro do Tomador de servi�os;N�mero do Tomador de servi�os;Complemento do Tomador de servi�os;Bairro do Tomador de servi�os;CEP do Tomador de servi�os;Munic�pio do Tomador de servi�os;UF do Tomador de servi�os;Email do Tomador de servi�os;Discrimina��o da nota;Valor total da nota;Valor de dedu��es;Base de Calculo;Valor ISS;ISS retido;Credito gerado;Estado da nota;Discrimina��o de Servi�os\n";
+		$cabecario = "Número da nota;Código de verificação;Data e hora de emissão;Número do  RPS;Data do RPS;Nome do Tomador de serviços;CPF/CNPJ do Tomador de serviços;Inscrição municipal do Tomador de serviços;Logradouro do Tomador de serviços;Número do Tomador de serviços;Complemento do Tomador de serviços;Bairro do Tomador de serviços;CEP do Tomador de serviços;Município do Tomador de serviços;UF do Tomador de serviços;Email do Tomador de serviços;Discriminação da nota;Valor total da nota;Valor de deduções;Base de Calculo;Valor ISS;ISS retido;Credito gerado;Estado da nota;Discriminação de Serviços\n";
 		fwrite($fp, $cabecario);
 		
 		while($cadastro = $sql->fetch()) {
@@ -91,11 +91,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 			fwrite($fp, $registros); // Grava a linha no arquivo
 		}
 		fclose($fp);
-		// Mensagem de conclu�do
+		// Mensagem de concluído
 		/*$display = "Arquivo gerado com sucesso.<bR>\n
-		Clique com o bot�o direito do mouse em cima de &quot;CLIQUE AQUI&quot; e depois em salvar destino.<br>*/
+		Clique com o botão direito do mouse em cima de &quot;CLIQUE AQUI&quot; e depois em salvar destino.<br>*/
 	  }else{
-	  	print("<script language=JavaScript>alert('Selecione um m�s e um ano!!')</script>");
+	  	print("<script language=JavaScript>alert('Selecione um mês e um ano!!')</script>");
 	  }
   }
   ?>
@@ -122,12 +122,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td height="60" colspan="3" bgcolor="#CCCCCC">
   <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">	       
    <tr>
-	<td align="left" width="30%">Per�odo das Notas</td>
+	<td align="left" width="30%">Período das Notas</td>
 	<td align="left" width="70%">
 	<select name="cmbMes" class="combo">
-	  <option value="">== M�s ==</option>
+	  <option value="">== Mês ==</option>
 	  <?php
-	  $meses=array(1 => "Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+	  $meses=array(1 => "Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 	  foreach($meses as $num => $mes){
 	  	echo "<option value='$num' "; 
 		if($cmbMes==$num){echo "selected=selected";}
@@ -156,8 +156,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<td colspan="2" align="center">
 	<?php if(($btExportar !="") && ($cmbMes !="") && ($cmbAno !=""))
 	{
-	  print("Exporta��o conclu�da com sucesso!<br>
-	  <a href='../download?/emissor/tmp/$arquivo'><img src='../img/imgcsv.jpg' border='0'></a> &nbsp; 
+	  print("Exportação concluída com sucesso!<br>
+	  <a href='../download?/emissor/tmp/$arquivo'><img src='../img/imgcsv.jpg' border='0'></a>  
 	  <a href='../download?/emissor/tmp/$arquivo'>Clique aqui</a> para baixar o arquivo");
 	} ?>
 	

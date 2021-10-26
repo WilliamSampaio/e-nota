@@ -26,7 +26,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td><input type="text" class="texto" name="txtCNPJCPF" onkeypress="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" /></td>
 			</tr>
 			<tr align="left">
-				<td>N&uacute;mero do RPS<font color="#FF0000">*</font></td>
+				<td>Número do RPS<font color="#FF0000">*</font></td>
 				<td><input type="text" class="texto" name="txtNroRPS" onkeypress="return NumbersOnly( event );" /></td>
 			</tr>
 			<tr align="left">
@@ -37,7 +37,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			</tr>
 			<tr align="left">
 				<td><input type="submit" class="botao" name="btConsultaRPS" value="Consultar" /></td>
-				<td><font color="#FF0000">* Dados obrigat&oacute;rios</font></td>
+				<td><font color="#FF0000">* Dados obrigatórios</font></td>
 			</tr>
 		</table>
 	</form>
@@ -56,9 +56,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 			else
 				{
 					$txtDataRPS=implode("-",array_reverse(explode("/",$txtDataRPS)));
-					$sql_tomador=mysql_query("SELECT tomador_nome FROM notas WHERE tomador_cnpjcpf='$txtCNPJCPF' LIMIT 1");
-					list($tomador)=mysql_fetch_array($sql_tomador);
-					$sql=mysql_query("
+					$sql_tomador=$PDO->query("SELECT tomador_nome FROM notas WHERE tomador_cnpjcpf='$txtCNPJCPF' LIMIT 1");
+					list($tomador)=$sql_tomador->fetch();
+					$sql=$PDO->query("
 						SELECT notas.numero, 
 						notas.valortotal, 
 						notas.estado, 
@@ -70,21 +70,21 @@ Fith Floor, Boston, MA 02110-1301, USA
 						AND rps_data='$txtDataRPS'
 						AND rps_numero='$txtNroRPS'
 					");
-					if(mysql_num_rows($sql)>0)
+					if($sql->rowcount()>0)
 						{
 							echo "
 								<table align=\"center\" width=\"100%\">
 									<tr align=\"left\" bgcolor=\"#999999\">
-										<td colspan=\"4\">Recibos Provis&oacute;rios de Servi&ccedil;o do tomador $tomador</td>
+										<td colspan=\"4\">Recibos Provisórios de Serviço do tomador $tomador</td>
 									</tr>
 									<tr align=\"left\" bgcolor=\"#999999\">
-										<td>N&uacute;mero da Nota</td>
+										<td>Número da Nota</td>
 										<td>Valor total da Nota</td>
 										<td>Estado da Nota</td>
 										<td>Emissor</td>
 									</tr>
 							";
-							list($nro,$valor,$estado,$emissor)=mysql_fetch_array($sql);
+							list($nro,$valor,$estado,$emissor)=$sql->fetch();
 							if($estado=="N"){$estado="Normal";}
 							elseif($estado=="C"){$estado="Cancelada";}
 							elseif($estado=="B"){$estado="Boleto";}

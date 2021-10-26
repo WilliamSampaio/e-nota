@@ -29,8 +29,8 @@ $codverificacao  = gera_codverificacao();
 $cnpjdec         = $_POST['hdCnpjDec'];
 $iss_emo         = MoedaToDec($_POST['txtImpostoTotal']);
 
-$sql_busca_cod = mysql_query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj'");
-list($codigo) = mysql_fetch_array($sql_busca_cod);
+$sql_busca_cod = $PDO->query("SELECT codigo FROM cadastro WHERE cnpj = '$cnpj'");
+list($codigo) = $sql_busca_cod->fetch();
 
 for($c=1;$c<=$num_servicos;$c++){
 	$baseCalculo[$c]    = MoedaToDec($_POST['txtBaseCalculo'.$c]);
@@ -45,7 +45,7 @@ for($c=1;$c<=$num_servicos;$c++){
 $multaJuros = MoedaToDec($_POST['txtMultaJuros']);
 $totalPagar = MoedaToDec($_POST['txtTotalPagar']);
 
-mysql_query("
+$PDO->query("
 	INSERT INTO cartorios_des 
 	SET codcartorio='$codigo', 
 		competencia='$dataCompetencia', 
@@ -54,12 +54,12 @@ mysql_query("
 		iss_emo='$iss_emo',
 		codverificacao='$codverificacao'
 ");
-$sql_des = mysql_query("SELECT MAX(codigo) FROM cartorios_des WHERE codcartorio = '$codigo'");
-list($cod_des) = mysql_fetch_array($sql_des);
+$sql_des = $PDO->query("SELECT MAX(codigo) FROM cartorios_des WHERE codcartorio = '$codigo'");
+list($cod_des) = $sql_des->fetch();
 
 for($c=1;$c<=$num_servicos;$c++){
 	if($baseCalculo[$c]!=""&&$codigoServico[$c]!=""){
-		mysql_query("
+		$PDO->query("
 			 INSERT INTO cartorios_des_notas
 			 SET coddec_des='$cod_des',
 				 emolumento='".$emo[$c]."',

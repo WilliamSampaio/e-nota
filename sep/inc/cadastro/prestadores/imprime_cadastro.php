@@ -19,19 +19,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php 
-include("../../conect.php");
-include("../../../funcoes/util.php");
-//Recebe as vari�veis 
+require_once("../../conect.php");
+require_once("../../../funcoes/util.php");
+//Recebe as variáveis 
 
 //Seleciona o brasao da seguinte prefeitura
-$sql_brs= mysql_query("SELECT brasao FROM configuracoes"); 
-//lista a vari�vel q receber� ao seguinte bras�o
-list($BRASAO) = mysql_fetch_array($sql_brs);
+$sql_brs= $PDO->query("SELECT brasao FROM configuracoes"); 
+//lista a variável q receber� ao seguinte bras�o
+list($BRASAO) = $sql_brs->fetch();
 
 $codigo = $_POST['CODEMISSOR'];
 
 $cnpj = $_POST["txtCNPJ"];
-$sql_instituicaologada = mysql_query("
+$sql_instituicaologada = $PDO->query("
 	SELECT 
 		c.codigo, 
 		c.nome, 
@@ -66,14 +66,14 @@ $sql_instituicaologada = mysql_query("
 ");
 //echo mysql_error();
 list($codigo,$nome,$razao_soc,$senha,$cnpj,$cpf,$insc_municip,$logradouro,$bairro,$cep,$numero,$complemento,$municipio,$uf,
-	$email,$fone_comercial,$fone_celular,$estado,$tipo_declaracao,$nfe,$tipo,$tipo_declaracao) = mysql_fetch_array($sql_instituicaologada);
+	$email,$fone_comercial,$fone_celular,$estado,$tipo_declaracao,$nfe,$tipo,$tipo_declaracao) = $sql_instituicaologada->fetch();
 $endereco = "$logradouro, $numero";
 if($complemento)
 	$endereco .= ", $complemento";
 $cpf_cnpj = $cnpj . $cpf;
 
 switch($estado){
-		case "NL": $estado = "Aguardando a Libera&ccedil;&atilde;o da prefeitura";		break;
+		case "NL": $estado = "Aguardando a Liberação da prefeitura";		break;
 		case "A" : $estado = "Liberado";									break;
 		case "I" : $estado = "Empresa inativa";								break;
 }//fim switch estado
@@ -83,8 +83,8 @@ switch($estado){
 /*$tipo = $_POST['cmbCodtipo'];
 // separa o caracter especifico do tipo e cria array para mostrar somente o nome isolado
 $tipo = explode('|',$tipo);
-$sql_tipo = mysql_query("SELECT nome FROM tipo WHERE codigo='".$tipo[0]."'");
-list($tipo) = mysql_fetch_array($sql_tipo);
+$sql_tipo = $PDO->query("SELECT nome FROM tipo WHERE codigo='".$tipo[0]."'");
+list($tipo) = $sql_tipo);
 $nome = $_POST['txtInsNomeEmpresa'];
 $razao_soc = $_POST['txtInsRazaoSocial'];
 $cpf_cnpj = $_POST['txtInsCpfCnpjEmpresa'];
@@ -105,14 +105,14 @@ $tipo_declaracao = $_POST['cmbTipoDec'];
 $nfe = strtoupper($_POST['txtNfe']);
 
 // busca nome por extenso conforme codigo do tipo da declaracao
-$busca_tipo_declaracao = mysql_query("SELECT declaracoes.declaracao FROM declaracoes INNER JOIN cadastro ON declaracoes.codigo = cadastro.codtipodeclaracao WHERE cadastro.codigo ='$codigo'");
-list($tipo_declaracao_extens) = mysql_fetch_array($busca_tipo_declaracao);
+$busca_tipo_declaracao = $PDO->query("SELECT declaracoes.declaracao FROM declaracoes INNER JOIN cadastro ON declaracoes.codigo = cadastro.codtipodeclaracao WHERE cadastro.codigo ='$codigo'");
+list($tipo_declaracao_extens) = $busca_tipo_declaracao);
 */
 // converte 's' e 'n' para 'sim' e 'nao'
 if($nfe == 's')
 {$nfe = 'SIM';}
 elseif ($nfe == 'n')
-{$nfe = 'N�O';}
+{$nfe = 'NÃO';}
 
 
 
@@ -121,7 +121,7 @@ elseif ($nfe == 'n')
 elseif($estado == 'I')
 {$estado = 'INATIVO';}
 elseif($estado == "")
-{$estado = 'N�o Informado';}
+{$estado = 'Não Informado';}
 */
 
 // verifica se os campos nao obrigatorios estao vazios, caso estejam, mostra mensagem de valor Nao Informado
@@ -133,7 +133,7 @@ $nfe = verificacampo($nfe);
 ?>
 <html>
 <head>
-<title>Imprimir Libera&ccedil;&atilde;o</title>
+<title>Imprimir Liberação</title>
 <style type="text/css">
 <!--
 .style1 {
@@ -149,7 +149,7 @@ $nfe = verificacampo($nfe);
 </style>
 </head>
 
-<body>�
+<body>�
 <div id="DivImprimir">
   <input name="button" type="button" onClick="print();this.style.display = 'none';" value="Imprimir" />
 </div>
@@ -180,7 +180,7 @@ $nfe = verificacampo($nfe);
     <td colspan="2"><strong>Nome </strong>:<?php echo $nome; ?></td>
   </tr>
   <tr>
-    <td colspan="2"><strong>Raz&atilde;o Social </strong>:<?php echo $razao_soc; ?></td>
+    <td colspan="2"><strong>Razão Social </strong>:<?php echo $razao_soc; ?></td>
   </tr>
   <tr>
     <td colspan="2"><strong>CNPJ/CPF </strong>: <?php echo $cpf_cnpj; ?></td>
@@ -192,7 +192,7 @@ $nfe = verificacampo($nfe);
     <td colspan="2"><strong>Logradouro </strong>: <?php echo $logradouro; ?></td>
   </tr>
   <tr>
-    <td colspan="2"><strong>N&uacute;mero </strong>: <?php echo $numero; ?></td>
+    <td colspan="2"><strong>Número </strong>: <?php echo $numero; ?></td>
   </tr>
   <tr>
     <td colspan="2"><strong>Complemento </strong>: <?php echo $complemento; ?></td>
@@ -213,13 +213,13 @@ $nfe = verificacampo($nfe);
     <td colspan="2"><strong>UF </strong>: <?php echo $uf; ?></td>
   </tr>
   <tr>
-    <td colspan="2"><strong>Munic&iacute;pio </strong>: <?php echo $municipio; ?></td>
+    <td colspan="2"><strong>Município </strong>: <?php echo $municipio; ?></td>
   </tr>
   <tr>
     <td colspan="2"><strong>E-mail </strong>: <?php echo $email; ?></td>
   </tr>
   <tr>
-    <td colspan="2"><strong>Tipo de Declara&ccedil;&atilde;o  </strong>: <?php echo $tipo_declaracao_extens; ?></td>
+    <td colspan="2"><strong>Tipo de Declaração  </strong>: <?php echo $tipo_declaracao_extens; ?></td>
   </tr>
   <tr>
     <td colspan="2"><strong>Emite NFe  </strong>: <?php echo $nfe; ?></td>
@@ -230,25 +230,25 @@ $nfe = verificacampo($nfe);
   </tr>
   <tr>
   	<?php 
-  	$codcargo = codcargo('Respons&aacute;vel');
+  	$codcargo = codcargo('Responsável');
     if(!empty($codigo) && !empty($codcargo)){
-        $busca_resp = mysql_query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = '$codigo' AND codcargo=$codcargo");
-        list($responsavel,$cpf_resp) = mysql_fetch_array($busca_resp);
+        $busca_resp = $PDO->query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = '$codigo' AND codcargo=$codcargo");
+        list($responsavel,$cpf_resp) = $busca_resp->fetch();
     }
   	?>
-    <td width="383"><strong>Respons&aacute;vel </strong>: <?php echo $responsavel;?>  </td>
+    <td width="383"><strong>Responsável </strong>: <?php echo $responsavel;?>  </td>
     <td width="311"><strong>CPF </strong>: <?php echo $cpf_resp;?></td>
   </tr>
   
  <?php
   if(!empty($codigo) && !empty($codcargo)){
-      $codcargo = codcargo('S&oacute;cio');
-      $busca_socio = mysql_query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = '$codigo' AND codcargo=$codcargo");
+      $codcargo = codcargo('Sócio');
+      $busca_socio = $PDO->query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = '$codigo' AND codcargo=$codcargo");
       // uso do while para exibir cada registro encontrado
-      while(list ($nome_socio,$cpf_socio) = mysql_fetch_array($busca_socio)){
+      while(list ($nome_socio,$cpf_socio) = $busca_socio->fetch()){
       ?>
       <tr>
-        <td><strong>S&oacute;cio </strong>: <?php echo $nome_socio; "<br>"?> </td>
+        <td><strong>Sócio </strong>: <?php echo $nome_socio; "<br>"?> </td>
         <td><strong>CPF </strong>: <?php echo $cpf_socio; ?></td>
       </tr>
       <?php
@@ -256,7 +256,7 @@ $nfe = verificacampo($nfe);
   }
   ?>
   <?php 
-  $busca_categoria = mysql_query("
+  $busca_categoria = $PDO->query("
   	SELECT 
   		servicos_categorias.nome 
   	FROM 
@@ -272,7 +272,7 @@ $nfe = verificacampo($nfe);
   	ORDER BY 
   		servicos_categorias.nome;");
   // uso do while para exibir cada registro encontrado
-  while(list($categoria) = mysql_fetch_array($busca_categoria)){
+  while(list($categoria) = $busca_categoria->fetch()){
   ?>
   <tr>
     <td colspan="2"><strong>Categoria </strong>: <?php 

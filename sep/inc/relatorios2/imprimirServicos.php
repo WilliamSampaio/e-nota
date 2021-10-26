@@ -20,40 +20,40 @@
 ?>
 
 <?php //Includes
-	include("../../inc/conect.php");
-	include("../../funcoes/util.php");
+	require_once("../../inc/conect.php");
+	require_once("../../funcoes/util.php");
 ?>
 
-<?php //Pega o brasão e o estado
-	$sql_brasao = mysql_query("SELECT brasao_nfe FROM configuracoes");
-	list($BRASAO) = mysql_fetch_array($sql_brasao);
+<?php //Pega o brasï¿½o e o estado
+	$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
+	list($BRASAO) = $sql_brasao->fetch();
 	
-	$sql_estado = mysql_query("SELECT estado FROM configuracoes");
-	list($ESTADO) = mysql_fetch_array($sql_estado);
+	$sql_estado = $PDO->query("SELECT estado FROM configuracoes");
+	list($ESTADO) = $sql_estado->fetch();
 ?>
 
-<?php //Define o título do relatório de acordo com o que vem do rdbServicos
+<?php //Define o tÃ­tulo do relatï¿½rio de acordo com o que vem do rdbServicos
 	if ($_POST['rdbServicos'] == 'lista')
-		$titulo = 'LISTA DE SERVIÇOS';
+		$titulo = 'LISTA DE SERVIï¿½OS';
 	
 	else if ($_POST['rdbServicos'] == 'vinculadas')
 		$titulo = 'EMPRESAS VINCULADAS POR ATIVIDADE';
 	
 	else if ($_POST['rdbServicos'] == 'media')
-		$titulo = 'COMPARATIVO POR MÉDIA DE TODAS AS ATIVIDADES';
+		$titulo = 'COMPARATIVO POR Mï¿½DIA DE TODAS AS ATIVIDADES';
 	
 	else if ($_POST['rdbServicos'] == 'municipio')
-		$titulo = 'ATIVIDADES ADQUIRIDAS DE EMPRESAS DE FORA DO MUNICÍPIO';
+		$titulo = 'ATIVIDADES ADQUIRIDAS DE EMPRESAS DE FORA DO MUNICï¿½PIO';
 	
 	else
 		$titulo = 'RESUMO DAS ATIVIDADES EFETUADAS';
 ?>
 
-<?php //Pega o mês que veio por post
+<?php //Pega o mï¿½s que veio por post
 	$mes = $_POST['cmbMes'];
 ?>
 
-<!-- Início do css da visualização da página -->
+<!-- Inï¿½cio do css da visualizaï¿½ï¿½o da pÃ¡gina -->
 	<style type="text/css" media="screen">
 	.style1 {
 		font-family: Georgia, "Times New Roman", Times, serif;
@@ -77,26 +77,26 @@
 		height: 100%;
 	}
 	</style>
-<!-- Fim do css da visualização da página -->
+<!-- Fim do css da visualizaï¿½ï¿½o da pÃ¡gina -->
 
 
-<!-- Início do css da Impressão da página -->
+<!-- Inï¿½cio do css da ImpressÃ£o da pÃ¡gina -->
 	<style type="text/css" media="print">
 	#DivImprimir{
-		display: none; /*Tira a div imprimir na hora da impressão*/
+		display: none; /*Tira a div imprimir na hora da impressï¿½o*/
 	}
 	</style>
-<!-- Fim do css da Impressão da página -->
+<!-- Fim do css da ImpressÃ£o da pÃ¡gina -->
 
 
-<title>Relat&oacute;rio de Servi&ccedil;os</title>
+<title>RelatÃ³rio de ServiÃ§os</title>
 
-<div class="pagina"> <!-- Início div página -->
+<div class="pagina"> <!-- Inï¿½cio div pÃ¡gina -->
 	<div id="DivImprimir">
 		<input type="button" onClick="print();" value="Imprimir" /><br />
 	</div>
 	
-	<!-- Início do topo com as informações -->
+	<!-- Inï¿½cio do topo com as informaï¿½ï¿½es -->
 	<div id="DivTopo">
 		<table width="95%" height="120" border="2" cellspacing="0" class="tabela" align="center">
 			<tr>
@@ -108,7 +108,7 @@
 				<td width="584" height="33" colspan="2">
 					<span class="style1">
 						<center>
-							<p>RELAT&Oacute;RIO - <?php print strtoupper($titulo); ?> </p>
+							<p>RELATÃ“RIO - <?php print strtoupper($titulo); ?> </p>
 							<p>PREFEITURA MUNICIPAL DE <?php print strtoupper($CONF_CIDADE); ?> </p>
 							<p><?php print strtoupper($CONF_SECRETARIA); ?> </p>
 						</center>
@@ -117,24 +117,24 @@
 			</tr>
 		</table>
 	</div>
-	<!-- Fim do topo com as informações -->
+	<!-- Fim do topo com as informaï¿½ï¿½es -->
 	
 	<br>
 
-<?php //Verifica a opção marcada e chama o arquivo que vai gerar o relarório
+<?php //Verifica a opÃ§Ã£o marcada e chama o arquivo que vai gerar o relarï¿½rio
 	if ($_POST['rdbServicos'] == 'lista')
-		include("imprimirServicosLista.php");
+		require_once("imprimirServicosLista.php");
 		
 	else if ($_POST['rdbServicos'] == 'vinculadas')
-		include("imprimirServicosVinculadas.php");
+		require_once("imprimirServicosVinculadas.php");
 		
 	else if ($_POST['rdbServicos'] == 'media')
-		include("imprimirServicosMedia.php");
+		require_once("imprimirServicosMedia.php");
 		
 	else if ($_POST['rdbServicos'] == 'municipio')
-		include("imprimirServicosMunicipio.php");
+		require_once("imprimirServicosMunicipio.php");
 		
 	else
-		include("imprimirServicosResumo.php");
+		require_once("imprimirServicosResumo.php");
 ?>
-</div> <!-- Fim div página -->
+</div> <!-- Fim div pÃ¡gina -->

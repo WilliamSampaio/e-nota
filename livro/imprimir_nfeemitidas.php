@@ -57,35 +57,35 @@ $sql_notas = $PDO->query("
   <tr>
     <td width="150" rowspan="4" align="center"><?php echo $livro->codcadastro;?> <?php if($cabecalho->logo==NULL) {echo 'sem imagem';} else {echo "<img src=\"../img/logos/$cabecalho->logo\" width=\"120\" height=\"120\" />";}; ?> </td>
 	
-    <td width="800" colspan="4" align="center" class="titulo1">REGISTRO E APURA&Ccedil;&Atilde;O DO ISS </td>
-    <td width="150" rowspan="4" align="center"><?php if($CONF_BRASAO ==NULL) {echo 'sem imagem';} else {echo "<img src=\"../img/brasoes/$CONF_BRASAO\" width=\"120\" height=\"120\"/>";}; ?>  &nbsp; </td>
+    <td width="800" colspan="4" align="center" class="titulo1">REGISTRO E APURAÇÃO DO ISS </td>
+    <td width="150" rowspan="4" align="center"><?php if($CONF_BRASAO ==NULL) {echo 'sem imagem';} else {echo "<img src=\"../img/brasoes/$CONF_BRASAO\" width=\"120\" height=\"120\"/>";}; ?>   </td>
   </tr>
   <tr>
     <td width="150" class="field1">Contribuinte:</td>
-    <td colspan="3" class="field1"><?php echo $cabecalho->razaosocial; ?>&nbsp;</td>
+    <td colspan="3" class="field1"><?php echo $cabecalho->razaosocial; ?></td>
     </tr>
   <tr>
     <td class="field1">CNPJ/CPF:</td>
-    <td width="250"><?php echo $cabecalho->cnpj.$cabecalho->cpf; ?>&nbsp;</td>
-    <td width="150" class="field1">Per&iacute;odo:</td>
+    <td width="250"><?php echo $cabecalho->cnpj.$cabecalho->cpf; ?></td>
+    <td width="150" class="field1">Período:</td>
     <td width="250">
 			<?php
 			$periodof = substr($cabecalho->periodo,5,2); 
 			$periodof = $periodof."/".substr($cabecalho->periodo,0,4);
-			echo $periodof; ?>&nbsp;
+			echo $periodof; ?>
 	</td>
     </tr>
   <tr>
     <td class="field1">Inscr. Municipal: </td>
-    <td colspan="3" class="field1"><?php echo $cabecalho->inscrmunicipal; ?> &nbsp;</td>
+    <td colspan="3" class="field1"><?php echo $cabecalho->inscrmunicipal; ?> </td>
     </tr>
   <tr>
-    <td class="field1">Observa&ccedil;&otilde;es:</td>
-    <td colspan="5"><?php echo $cabecalho->obs; ?>&nbsp;</td>
+    <td class="field1">Observações:</td>
+    <td colspan="5"><?php echo $cabecalho->obs; ?></td>
     </tr>
   <tr>
-    <td class="field1">Data da Gera&ccedil;&atilde;o: </td>
-    <td colspan="5"><?php echo $cabecalho->geracao; ?>&nbsp;</td>
+    <td class="field1">Data da Geração: </td>
+    <td colspan="5"><?php echo $cabecalho->geracao; ?></td>
     </tr>
 </table>
 	
@@ -101,24 +101,24 @@ $sql_notas = $PDO->query("
     <td colspan="12" align="center" class="titulo1">NOTAS FISCAIS ELETR&Ocirc;NICAS EMITIDAS </td>
     </tr>
   <tr>
-    <td colspan="3" align="center" class="field2">NFEletr&ocirc;nica</td>
+    <td colspan="3" align="center" class="field2">NFEletrônica</td>
     <td colspan="2" align="center" class="field2">Tomador</td>
-    <td colspan="3" align="center" class="field2">Servi&ccedil;os</td>
-    <td colspan="2" align="center" class="field2">Imposto Pr&oacute;prio </td>
+    <td colspan="3" align="center" class="field2">Serviços</td>
+    <td colspan="2" align="center" class="field2">Imposto Próprio </td>
     <td colspan="2" align="center" class="field2">Imposto Retido </td>
   </tr>
   <tr align="center">
     <td width="5%">Data</td>
-    <td width="3%">N&uacute;mero</td>
+    <td width="3%">Número</td>
     <td width="3%">Estado</td>
     <td width="12%">CNPJ/CPF</td>
     <td width="12%">Inscr. Municipal </td>
-    <td width="6%">C&oacute;d. Servi&ccedil;o </td>
-    <td width="6%">Valor Servi&ccedil;os </td>
-    <td width="6%">Valor L&iacute;quido </td>
-    <td width="10%">Base C&aacute;lculo </td>
+    <td width="6%">Cód. Serviço </td>
+    <td width="6%">Valor Serviços </td>
+    <td width="6%">Valor Líquido </td>
+    <td width="10%">Base Cálculo </td>
     <td width="6%">Valor ISS </td>
-    <td width="12%">Base C&aacute;lculo </td>
+    <td width="12%">Base Cálculo </td>
     <td width="17%">Valor ISS </td>
   </tr>
 <?php while($notas = $sql_notas->fetchObject()) { ?>

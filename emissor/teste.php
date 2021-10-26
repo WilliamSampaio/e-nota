@@ -105,10 +105,10 @@ Fith Floor, Boston, MA 02110-1301, USA
    function $(e) {
     return document.getElementById(e);
    }
-   function addEvent(obj, evType, fn) { //Fun��o adaptada da original de Christian Heilmann, em http://www.onlinetools.org/articles/unobtrusivejavascript/chapter4.html
+   function addEvent(obj, evType, fn) { //Função adaptada da original de Christian Heilmann, em http://www.onlinetools.org/articles/unobtrusivejavascript/chapter4.html
     if (typeof obj == "string") {
      if (null == (obj = document.getElementById(obj))) {
-      throw new Error("Elemento HTML n�o encontrado. N�o foi poss�vel adicionar o evento.");
+      throw new Error("Elemento HTML não encontrado. Não foi poss�vel adicionar o evento.");
      }
     }
     if (obj.attachEvent) {
@@ -116,18 +116,18 @@ Fith Floor, Boston, MA 02110-1301, USA
     } else if (obj.addEventListener) {
      return obj.addEventListener(evType, fn, true);
     } else {
-     throw new Error("Seu browser n�o suporta adi��o de eventos.");
+     throw new Error("Seu browser não suporta adi��o de eventos.");
     }
    }
    function init() {
     /*
-    msgbox_show('T�tulo', 'Data inv�lida!', 'alert'); //alert com fun��o padr�o
-    msgbox_show('T�tulo', 'Data inv�lida!', 'alert', funcao1); //alert passando a fun��o que ser� executada no bot�o OK
-    msgbox_show('T�tulo', 'Data inv�lida!', 'confirm'); //confirm com bot�es padr�o
-    msgbox_show('T�tulo', 'Data inv�lida!', 'confirm', funcao1); //confirm passando a fun��o que ser� executada no bot�o SIM e deixando o bot�o N�O padr�o
-    msgbox_show('T�tulo', 'Data inv�lida!', 'confirm', funcao1, funcao2); //confirm passando a fun��o que ser� executada no bot�o SIM (funcao1) e no bot�o N�O (funcao2)
+    msgbox_show('Título', 'Data inv�lida!', 'alert'); //alert com função padr�o
+    msgbox_show('Título', 'Data inv�lida!', 'alert', funcao1); //alert passando a função que será executada no bot�o OK
+    msgbox_show('Título', 'Data inv�lida!', 'confirm'); //confirm com bot�es padr�o
+    msgbox_show('Título', 'Data inv�lida!', 'confirm', funcao1); //confirm passando a função que será executada no bot�o SIM e deixando o bot�o NÃO padr�o
+    msgbox_show('Título', 'Data inv�lida!', 'confirm', funcao1, funcao2); //confirm passando a função que será executada no bot�o SIM (funcao1) e no bot�o NÃO (funcao2)
     */
-    msgbox_show('T�tulo', 'Data inv�lida!', 'alert'); //alert com fun��o padr�o
+    msgbox_show('Título', 'Data inv�lida!', 'alert'); //alert com função padr�o
     $('fechar').href = '#';
     addEvent('fechar', 'click', msgbox_hide);
    }
@@ -176,7 +176,7 @@ Fith Floor, Boston, MA 02110-1301, USA
      <p><a href="" name="fechar" id="fechar" title="Fechar">[X]</a></p>
     </span>
     <span id="tit" name="tit">
-     <p id="ptit" name="ptit">T�tulo</p>
+     <p id="ptit" name="ptit">Título</p>
     </span>
    </div>
    <div id="conteudo" name="conteudo">
@@ -185,7 +185,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     </div>
     <div id="botoes" name="botoes">
      <p id="pOk" name="pOk" class="hidden"><a href="" name="btnOk" id="btnOk" title="OK">Ok</a></p>
-     <p id="pSN" name="pSN" class="hidden"><a href="" name="btnSim" id="btnSim" title="Sim">Sim</a><a href="" name="btnNao" id="btnNao" title="N�o">N�o</a></p>
+     <p id="pSN" name="pSN" class="hidden"><a href="" name="btnSim" id="btnSim" title="Sim">Sim</a><a href="" name="btnNao" id="btnNao" title="Não">Não</a></p>
     </div>
    </div>
   </div>

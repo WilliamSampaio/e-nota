@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php  
-	include("../include/conect.php");
+	require_once("../include/conect.php");
 	$sql=mysql_query("
 				SELECT especificacao, tomador_cnpj, tomador_email, rps_numero, 
 				rps_data, rps_valor, datareclamacao, responsavel, dataatendimento, descricao
@@ -32,11 +32,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <table width="100%">
 	<tr align="left">
-		<td>Especificação:</td>
+		<td>EspecificaÃ§Ã£o:</td>
 		<td><?php echo $especificacao; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Descrição:</td>
+		<td>DescriÃ§Ã£o:</td>
 		<td><?php echo $descricao; ?></td>
 	</tr>
 	<tr align="left">
@@ -48,7 +48,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo $email; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Nº do RPS/NFe:</td>
+		<td>Nï¿½ do RPS/NFe:</td>
 		<td><?php echo $nro; ?></td>
 	</tr>
 	<tr align="left">
@@ -60,11 +60,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo "R$ ".$valor; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Data da Reclamação:</td>
+		<td>Data da ReclamaÃ§Ã£o:</td>
 		<td><?php echo $reclamacao; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Responsável:</td>
+		<td>Responsï¿½vel:</td>
 		<td><?php echo $responsavel; ?></td>
 	</tr>
 	<tr align="left">
