@@ -31,7 +31,7 @@ list($BRASAO) = $sql_brasao->fetch();
 
 
 ?>
-<title>Listagem por &Aacute;rea de Atuação</title>
+<title>Listagem por Área de Atuação</title>
 
 <style type="text/css">
 

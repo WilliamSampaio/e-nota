@@ -53,7 +53,7 @@ list($CIDADE, $UF) = $sql->fetch();
 			<br /><br />
 			A senha cadastrada é intransferível e configura a assinatura eletrônica da pessoa física ou jurídica que a cadastrou.
 			<br /><br />
-			<strong>ALERTAMOS QUE CABER&Aacute; EXCLUSIVAMENTE AO CONTRIBUINTE TODA RESPONSABILIDADE DECORRENTE DO USO INDEVIDO DA SENHA, QUE DEVER&Aacute; SER GUARDADA EM TOTAL SEGURANÇA.</strong>
+			<strong>ALERTAMOS QUE CABERÁ EXCLUSIVAMENTE AO CONTRIBUINTE TODA RESPONSABILIDADE DECORRENTE DO USO INDEVIDO DA SENHA, QUE DEVERÁ SER GUARDADA EM TOTAL SEGURANÇA.</strong>
 			<br /><br />
 			<!--action="inc/prestadores/inserir.php"-->
 			<form action="inc/prestadores/inserir.php" method="post" name="frmCadastroEmpresa" id="frmCadastroEmpresa">
