@@ -110,6 +110,7 @@ if (!(isset($_SESSION["empresa"]))) {
 			</div>
 		</div>
 	<?php
+		require_once '../site/inc/footer.php';
 	} else {
 		header('Location: ' . BASE_URL . 'emissor/aplic.php');
 	}
