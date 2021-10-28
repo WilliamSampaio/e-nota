@@ -47,7 +47,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					}
 				}
 				
-				$sql_rps_controle = mysql_query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$codLogado'");
+				$sql_rps_controle = $PDO->query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$codLogado'");
 				if(mysql_num_rows($sql_rps_controle)){
 					list($ultimoRPS,$limiteRPS) = mysql_fetch_array($sql_rps_controle);
 				}else{
@@ -57,7 +57,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				}
 				
 				
-				$sql_testa_solicitacao = mysql_query("SELECT codigo FROM rps_solicitacoes WHERE codcadastro = '$codLogado' AND estado = 'A'");
+				$sql_testa_solicitacao = $PDO->query("SELECT codigo FROM rps_solicitacoes WHERE codcadastro = '$codLogado' AND estado = 'A'");
 				if(mysql_num_rows($sql_testa_solicitacao)){
 					$disabled = "disabled=\"disabled\"";
 					$styleSpan = "";
@@ -126,7 +126,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		
 			<?php
 			//SELECIONA A ULTIMA NOTA INSERIDA PELA EMPRESA
-			$sql_ultimanota = mysql_query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$codLogado'");
+			$sql_ultimanota = $PDO->query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$codLogado'");
 			list($ultimanota,$notalimite)=mysql_fetch_array($sql_ultimanota);
 			$proximaNota = $ultimanota + 1;
 			//Verifica se o prestador pode ou não emitir notas

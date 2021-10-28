@@ -18,126 +18,88 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php 
+<?php
 // inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
 session_name("contador");
 session_start();
-$_SESSION['autenticacao'] = rand(10000,99999);
 
-if(!(isset($_SESSION["empresa"])))
-{   ?>
- 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>e-Nota</title>
-<script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
-<script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
-<link href="../css/padrao_emissor.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" language="javascript" src="../scripts/funcoes_emissor.js"></script>
-</head>
+require_once '../autoload.php';
+require_once DIR_CONTADOR . 'include/header.php';
 
-<body>
-<center>
-<table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td><?php require_once("../include/topo.php"); ?></td>
-  </tr>
-  <tr>
-    <td bgcolor="#FFFFFF" height="400" background="../img/fundos/login.jpg" style="background-repeat:repeat-x">
-	
- 
- 
-<!-- formulario de login --> 
-<form action="inc/verifica.php" method="post" onsubmit="return verificaCnpjCpfCodigo();ValidaLogin('txtSenha|codseguranca');" >
-<table border="0" align="center" cellpadding="0" cellspacing="1">
-    <tr>
-      <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">Acesso Restrito</td>
-      <td width="200" bgcolor="#FFFFFF"></td>
-	</tr>
-	<tr>
-	  <td height="1" bgcolor="#CCCCCC"></td>
-      <td bgcolor="#CCCCCC"></td>
-	</tr>
-	<tr>
-	  <td height="10" bgcolor="#FFFFFF"></td>
-      <td bgcolor="#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
-	</tr>
-	<tr>
-		<td height="60" colspan="3" bgcolor="#CCCCCC">
+$_SESSION['autenticacao'] = rand(10000, 99999);
 
-    <table border="0" align="center">
-	 <tr> 
-	  <td align="left">
-	    CPF/CNPJ
-	  </td>
-	  <td>	   	   
-	   <input type="text" name="txtLogin" id="txtLogin" size="30" class="texto" onkeyup="CNPJCPFMsk( this )" onkeydown="return NumbersOnly( event );"/>
-	  </td>
-	 </tr>
-     <tr>
-	 </tr>
-	 <tr>
-	  <td align="left">
-	    Senha
-	  </td>
-	  <td>	 
-	   <input type="password" name="txtSenha" id="txtSenha" size="30" class="texto" />
-	  </td>
-	 </tr>
-	 <tr valign="baseline"> 
-	  <td style="font-size:9px">
-	    Cód. Verificação
-	  </td>
-	  <td align="left" >	 
-	   <input type="text" name="codseguranca" id="codseguranca" size="6" class="texto" />  
-	   <img style="cursor: pointer;" onclick="mostrar_teclado();" src="../img/botoes/num_key.jpg" title="Teclado Virtual" /> 
-	   <?php require_once("inc/cod_verificacao.php"); ?></td>
-	 </tr>
-	 <tr>	 
-	  <td align="center" colspan="2">
-	   <input type="submit" name="btEntrar" size="30" value="Entrar" class="botao" />
-	  </td>
-	 </tr>
-     <tr>
-      <td align="center" colspan="2"><a href="../site/recuperarsenha.php">Recuperar Senha</a></td>
-     </tr>
-	</table>			
-		</td>
-	</tr>
-	<tr>
-    	<td height="1" colspan="3" bgcolor="#CCCCCC"></td>
-	</tr>
-</table>    
-</form>  
-<!-- formulario de login Fim -->	 
-	
-	
-	</td>
-  </tr>
-</table>
+if (!isset($_SESSION["empresa"])) {
+?>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" background="../img/rodapes/fundo.jpg">
-  <tr>
-    <td align="center"><img src="../img/rodapes/rodape_login.jpg" alt="" /></td>
-  </tr>
-</table>
-</center>
+	<body class="">
 
-</body>
-</html>
+		<?php require_once DIR_CONTADOR . 'include/navbar.php' ?>
 
-<?php 
+		<div class="container bg-light">
+			<div class="row align-items-center" style="padding-top: 128px; padding-bottom: 128px;">
+				<div class="col-sm-12 col-md-2 col-lg-3"></div>
+				<div class="col-sm-12 col-md-8 col-lg-6">
 
-}else {
+					<?php if (isset($_SESSION['error'])) { ?>
+						<div class="alert alert-danger">
+							<?php echo $_SESSION['error'];
+							unset($_SESSION['error']); ?>
+						</div>
+					<?php } ?>
 
-print("<script language=JavaScript>parent.location='aplic.php';</script>");
- 
-} 
+					<form action="inc/verifica.php" method="post" onsubmit="return verificaCnpjCpfCodigo();ValidaLogin('txtSenha|codseguranca');">
+						<!-- formulario de login -->
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Acesso Restrito</h5>
+								<div class="card-body">
+									<!-- CPF ou CNPJ -->
+									<div class="form-floating mb-3">
+										<input class="form-control" type="text" name="txtLogin" id="txtLogin" size="30" onkeyup="CNPJCPFMsk( this )" onkeydown="return NumbersOnly(event); " required>
+										<label for="txtLogin">CPF/CNPJ</label>
+									</div>
+									<!-- SENHA -->
+									<div class="form-floating mb-3">
+										<input class="form-control" type="password" name="txtSenha" id="txtSenha" size="30" required>
+										<label for="txtSenha">Senha</label>
+									</div>
+									<hr>
+									<div class="row g-2">
+										<div class="col-md">
+											<div class="form-floating">
+												<input class="form-control" type="text" name="codseguranca" id="codseguranca" size="6">
+												<label for="codseguranca">Cód. Verificação</label>
+											</div>
+										</div>
 
-?>  
+										<div class="col-md">
+											<div class="form-group mb-3" style="height: 100%;">
+												<input style="text-align: center; height: 100%;" class="form-control" type="text" id="cod" value="<?php echo generateCodVerification($_SESSION['autenticacao']) ?>" disabled>
+												<!-- <label for="cod">Senha</label> -->
+											</div>
+										</div>
+									</div>
+									<br>
+									<div class="text-center">
+										<input class="btn btn-primary large" type="submit" name="btEntrar" size="30" value="Entrar">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<br>
+						<div class="text-center">
+							<a href="../site/recuperarsenha.php">Recuperar Senha</a>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+	</body>
+<?php
+} else {
+	header('Location: aplic.php');
+}
+?>

@@ -18,59 +18,55 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php 
-// inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
+<?php
+
 session_name("contador");
 session_start();
-if(!(isset($_SESSION["empresa"])))
-{   
-  echo "
+
+require_once '../autoload.php';
+
+if (!(isset($_SESSION["empresa"]))) {
+	echo "
 	  <script>
 		  alert('Acesso Negado!!');
 		  window.location='login.php';
 	  </script>
   ";
-}else{?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>e-Nota</title>
-<link href="../css/padrao_contador.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<center>
-	<table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
-		<tr>
-			<td>
-				<?php require_once("../include/topo.php"); ?>
-			</td>
-		</tr>
-		<tr>
-			<td bgcolor="#FFFFFF" height="400" valign="top" align="center">
-				<!-- frame central inicio -->
-				<table border="0" cellspacing="0" cellpadding="0" height="100%">
-					<tr>
-						<td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top">
-							<?php require_once("inc/menu.php"); ?>
-						</td>
-						<td width="590" bgcolor="#FFFFFF" valign="top">
-							<!-- frame central lateral direita inicio -->
-						<img src="../img/nfelogo.jpg"></img>
-							<!-- frame central lateral direita fim -->
-						</td>
-					</tr>
-				</table>
-				<!-- frame central fim -->
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<?php require_once("inc/rodape.php"); ?>
-			</td>
-		</tr>
-	</table>
-</center>
-</body>
-</html>
-<?php }?>
+} else {
+
+	require_once DIR_CONTADOR . 'include/header.php';
+
+?>
+
+	<body>
+
+		<?php require_once DIR_CONTADOR . 'include/navbar.php' ?>
+
+		<div class="container bg-light">
+			<div class="row align-items-start">
+				<!-- MENU -->
+				<div class="col-sm-12 col-md-3 col-lg-3">
+					<?php require_once DIR_CONTADOR . 'include/menu.php' ?>
+				</div>
+
+				<!-- CONTEÚDO -->
+				<div class="col-sm-12 col-md-9 col-lg-9">
+
+					<br>
+					<h1>e-Nota</h1>
+					<h5 class="card-title">Documento emitido e armazenado eletronicamente com o objetivo de registrar as operações de prestação de serviços e será utilizada em substituição às notas fiscais de serviços convencionais.</h5>
+					<hr><br>
+
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+		</div>
+
+	<?php
+
+	require_once DIR_CONTADOR . 'include/footer.php';
+}
+
+	?>

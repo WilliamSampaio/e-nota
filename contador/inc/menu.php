@@ -27,8 +27,8 @@
 		$codCliente = null;
 		$_SESSION['codCliente'] = null;
 	}
-	$sql_tipo_declaracao = mysql_query("SELECT codtipodeclaracao, isentoiss FROM cadastro WHERE codigo = '$codDaSessao'");
-	list($codtipodeclaracao,$isentoiss) = mysql_fetch_array($sql_tipo_declaracao);
+	$sql_tipo_declaracao = $PDO->query("SELECT codtipodeclaracao, isentoiss FROM cadastro WHERE codigo = '$codDaSessao'");
+	list($codtipodeclaracao,$isentoiss) = $sql_tipo_declaracao->fetch();
 	$codtipodec = coddeclaracao('Simples Nacional');
 	
 	if($codtipodeclaracao == $codtipodec && is_null($codCliente)){

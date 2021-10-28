@@ -26,7 +26,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			$cmbMes="0".$cmbMes;
 		}
 	   $periodo = $cmbAno."-".$cmbMes;	   
-	   $sql = mysql_query("
+	   $sql = $PDO->query("
 		SELECT 
 			notas.numero,
 			notas.codverificacao,

@@ -28,7 +28,7 @@ $cod_guia = $_GET['hdCodGuia'];
 //$cod_des_temp = base64_encode($cod_des_temp);
 
 // busca o codigo do banco e o arquivo q gera o boleto
-$sql = mysql_query("SELECT bancos.boleto, boleto.tipo FROM boleto INNER JOIN bancos ON bancos.codigo = boleto.codbanco");
+$sql = $PDO->query("SELECT bancos.boleto, boleto.tipo FROM boleto INNER JOIN bancos ON bancos.codigo = boleto.codbanco");
 list($boleto,$tipoboleto) = mysql_fetch_array($sql);
 if($tipoboleto == "R"){
 	$tipoboleto = "recebimento";

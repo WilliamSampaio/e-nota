@@ -26,7 +26,7 @@ if(!$_POST['cmbEmpresaCliente']){
 }else{
     $empresa = $_POST['cmbEmpresaCliente'];
 }
-$sql_cliente_isento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo = '$empresa'");
+$sql_cliente_isento = $PDO->query("SELECT isentoiss FROM cadastro WHERE codigo = '$empresa'");
 list($isentoiss) = mysql_fetch_array($sql_cliente_isento);
 if($isentoiss == "S"){
 	Mensagem("Este emissor está isento de iss");
@@ -34,7 +34,7 @@ if($isentoiss == "S"){
 }
 
 //determina o emissor
-$sql_login=mysql_query("SELECT * FROM cadastro WHERE codigo = '$empresa'");
+$sql_login=$PDO->query("SELECT * FROM cadastro WHERE codigo = '$empresa'");
 $dados=mysql_fetch_array($sql_login);
 
 if(mysql_num_rows($sql_login)<1){
@@ -74,7 +74,7 @@ function AbrirGuias(ano, mes, tipo, codigo){
 		<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
 	</tr>
 	<?php
-    $qryano=mysql_query("SELECT DISTINCT SUBSTRING(periodo,1,4) FROM livro WHERE codcadastro='{$dados['codigo']}' AND estado='N'");
+    $qryano=$PDO->query("SELECT DISTINCT SUBSTRING(periodo,1,4) FROM livro WHERE codcadastro='{$dados['codigo']}' AND estado='N'");
     $diaatual=date("Y-m-d");
     if($dados['datainicio']==NULL || $dados['datainicio']==0000-00-00){ $dados['datainicio'] = $diaatual; }
     $anoatual=date("Y");

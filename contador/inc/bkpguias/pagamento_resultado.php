@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php 
 
-$sql=mysql_query("
+$sql=$PDO->query("
 				SELECT 
 					codigo,numero,tomador_nome,valoriss,estado, 
 					DATE_FORMAT(datahoraemissao,'%d/%m/%Y')
@@ -34,11 +34,11 @@ $sql=mysql_query("
 					estado != 'E'
 				");
 
-$sql01=mysql_query("SELECT codbanco FROM boleto");
+$sql01=$PDO->query("SELECT codbanco FROM boleto");
 list($BANCOMONETARIO)=mysql_fetch_array($sql01);
  
 if($BANCOMONETARIO ==""){
-	print("<center>a Prefeitura não definiu qual o banco monetário, favor entre em contato com a prefeitura</center>");
+	print("<center>a Prefeitura nï¿½o definiu qual o banco monetï¿½rio, favor entre em contato com a prefeitura</center>");
 }elseif(mysql_num_rows($sql) ==""){
 	print("<center>Sem resultados</center>");
 }else{

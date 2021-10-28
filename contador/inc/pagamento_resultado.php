@@ -22,15 +22,15 @@ Fith Floor, Boston, MA 02110-1301, USA
  //Recebe a variavel com o codigo do banco selecionado pelo usuario
  $codbanco01 = $_POST["cmbBanco"];
  
- $sql=mysql_query("SELECT codigo,numero,tomador_nome,valoriss,estado FROM notas 
+ $sql=$PDO->query("SELECT codigo,numero,tomador_nome,valoriss,estado FROM notas 
 WHERE SUBSTRING(datahoraemissao,1,4) = '$cmbAno' AND SUBSTRING(datahoraemissao,6,2) = '$cmbMes' AND codemissor='$CODIGO_DA_EMPRESA' AND estado != 'C' AND estado != 'E'");
 
- $sql01=mysql_query("SELECT bancos.banco FROM bancos INNER JOIN boleto ON boleto.codbanco = bancos.codigo WHERE codbanco = '$codbanco01'");
+ $sql01=$PDO->query("SELECT bancos.banco FROM bancos INNER JOIN boleto ON boleto.codbanco = bancos.codigo WHERE codbanco = '$codbanco01'");
  list($BANCOMONETARIO)=mysql_fetch_array($sql01);
  
  if($BANCOMONETARIO =="")
  {
-  print("<center>a Prefeitura não definiu qual o banco monetário, favor entre em contato com a prefeitura</center>");
+  print("<center>a Prefeitura nï¿½o definiu qual o banco monetï¿½rio, favor entre em contato com a prefeitura</center>");
  } 
  elseif(mysql_num_rows($sql) =="")
  {

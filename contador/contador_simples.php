@@ -62,9 +62,9 @@ if(!(isset($_SESSION["empresa"])))
     <br /><br />
     <form method="post">
         <?php
-            $sql = mysql_query("SELECT codigo FROM tipo WHERE nome LIKE '%Simples Nacional%'");
+            $sql = $PDO->query("SELECT codigo FROM tipo WHERE nome LIKE '%Simples Nacional%'");
             list($codSimples) = mysql_fetch_array($sql);
-            $sqlCliente = mysql_query("
+            $sqlCliente = $PDO->query("
                 SELECT
                     codigo,
                     nome,

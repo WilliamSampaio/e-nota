@@ -24,10 +24,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($btSelecionarEmpresa==""){
 		$cmbEmpresa=$_POST['cmbEmpresa'];
 		$campo = tipoPessoa($login);
-		$sql=mysql_query("SELECT codigo FROM cadastro WHERE codigo='$login'");
+		$sql=$PDO->query("SELECT codigo FROM cadastro WHERE codigo='$login'");
 		list($codcontador)=mysql_fetch_array($sql);
 		$declaracao = coddeclaracao('Simples Nacional');
-		$sql=mysql_query("SELECT codigo, razaosocial,contadornfe FROM cadastro WHERE codcontador='$codcontador' AND contadornfe = 'S'");
+		$sql=$PDO->query("SELECT codigo, razaosocial,contadornfe FROM cadastro WHERE codcontador='$codcontador' AND contadornfe = 'S'");
 		if(mysql_num_rows($sql)>0){
 		
 ?>	
@@ -105,12 +105,12 @@ if($btSelecionarEmpresa!=""){
 		$cofins                  = $_POST['txtCofins'];
 	
 		//Seleciona a ultima nota inserida pela empresa
-		$sql = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+		$sql = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 		list($ultimanota)=mysql_fetch_array($sql);
 		$ultimanota ++;
 		
 		//busca o limite de notas desse emissor
-		$sql=mysql_query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
+		$sql=$PDO->query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
 		list($notalimite)=mysql_fetch_array($sql);
 		
 		//testa se o numero de notas limites ja foi ultrapassado se ja tiver ultrapassado avisa-o
@@ -129,10 +129,10 @@ if($btSelecionarEmpresa!=""){
 		
 				//Faz uma busca pelo tomador
 				if($tomadorCnpj!=""){
-					$sql = mysql_query("SELECT * FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
+					$sql = $PDO->query("SELECT * FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
 					$campo = tipoPessoa($tomadorCnpj);
 				}else{
-					$sql = mysql_query("SELECT * FROM cadastro WHERE nome = '$tomadorNome' or razaosocial = '$tomadorNome'");
+					$sql = $PDO->query("SELECT * FROM cadastro WHERE nome = '$tomadorNome' or razaosocial = '$tomadorNome'");
 					$campo = "cnpj";
 					$notaCredito = 0;
 				}
@@ -142,7 +142,7 @@ if($btSelecionarEmpresa!=""){
 				
 					$codtipo = codtipo('tomador');
 					$codtipodec = coddeclaracao('DES Simplificada');
-					mysql_query("
+					$PDO->query("
 						INSERT INTO 
 							cadastro
 						SET 
@@ -168,7 +168,7 @@ if($btSelecionarEmpresa!=""){
 			
 				}else{
 					if($tomadorCnpj!=""){
-					mysql_query("
+					$PDO->query("
 						UPDATE
 							cadastro
 						SET
@@ -194,7 +194,7 @@ if($btSelecionarEmpresa!=""){
 				}
 	
 				//verifica a isen��o do prestador
-				$sqlIsento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
+				$sqlIsento = $PDO->query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
 				list($issIsento) = mysql_fetch_array($sqlIsento);
 				if($issIsento == 'S'){
 					$notaTotalValorISS = 0;
@@ -202,9 +202,9 @@ if($btSelecionarEmpresa!=""){
 				}
 				
 				//verifica se o prestador é do MEI
-				$sqlMei = mysql_query("SELECT codigo FROM declaracoes WHERE declaracao = 'MEI'");
+				$sqlMei = $PDO->query("SELECT codigo FROM declaracoes WHERE declaracao = 'MEI'");
 				list($codmei) = mysql_fetch_array($sqlMei);
-				$sqlTipoDeclaracao = mysql_query("SELECT codtipodeclaracao FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+				$sqlTipoDeclaracao = $PDO->query("SELECT codtipodeclaracao FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 				list($codTipoDeclaracao) = mysql_fetch_array($sqlTipoDeclaracao);
 				if($codmei == $codTipoDeclaracao){
 					$notaTotalValorISS = 0;
@@ -212,7 +212,7 @@ if($btSelecionarEmpresa!=""){
 				}
 	
 				//Sql que insere os dados da nota emitida no banco
-				$sql = mysql_query("
+				$sql = $PDO->query("
 					INSERT INTO 
 						notas 
 					SET 
@@ -276,7 +276,7 @@ if($btSelecionarEmpresa!=""){
 						$servicoISSRetido = 0;
 					}
 	
-					$sql_servicos_notas = mysql_query("
+					$sql_servicos_notas = $PDO->query("
 						INSERT INTO 
 							notas_servicos
 						SET
@@ -294,17 +294,17 @@ if($btSelecionarEmpresa!=""){
 					$notaRpsData   = DataMysql($_POST['txtDataRps']);
 				
 					//Pega o ultimo rps emitido
-					$sql_rps_ultimo = mysql_query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+					$sql_rps_ultimo = $PDO->query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
 					list($ultimoRPS) = mysql_fetch_array($sql_rps_ultimo);
 					
 					$notaRpsNumero = $ultimoRPS + 1;
 					
-					mysql_query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$CODIGO_DA_EMPRESA' AND codigo = '$codigoUltimaNota'");
-					mysql_query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+					$PDO->query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$CODIGO_DA_EMPRESA' AND codigo = '$codigoUltimaNota'");
+					$PDO->query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
 				
 				}
 				
-				$sql = mysql_query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$CODIGO_DA_EMPRESA'");
+				$sql = $PDO->query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$CODIGO_DA_EMPRESA'");
 				add_logs('Emitiu nota fiscal');
 				
 				//Envia o email informando o tomador que foi inserida uma nfe
@@ -336,7 +336,7 @@ if($btSelecionarEmpresa!=""){
 
 
 // SELECIONA A ULTIMA NOTA INSERIDA PELA EMPRESA
-$sql=mysql_query("SELECT ultimanota, codtipodeclaracao, cpf, cnpj FROM cadastro WHERE codigo ='$cmbEmpresa'");
+$sql=$PDO->query("SELECT ultimanota, codtipodeclaracao, cpf, cnpj FROM cadastro WHERE codigo ='$cmbEmpresa'");
 list($ultimanota,$codtipodeclaracao,$emp_cpf,$emp_cnpj)=mysql_fetch_array($sql);
 $ultimanota += 1;
 
@@ -355,7 +355,7 @@ $password = null;
  } 
 }
 
-$sql_servicos=mysql_query("
+$sql_servicos=$PDO->query("
 	  SELECT 
 		  cadastro_servicos.codigo,
 		  servicos.codigo,
@@ -368,14 +368,14 @@ $sql_servicos=mysql_query("
 	  INNER JOIN cadastro_servicos ON servicos.codigo = cadastro_servicos.codservico
 	  WHERE cadastro_servicos.codemissor = '$cmbEmpresa'");
 
-$sql_lista_regrasdecredito = mysql_query("SELECT credito, tipopessoa, issretido, valor FROM nfe_creditos WHERE estado = 'A' ORDER BY valor DESC");
+$sql_lista_regrasdecredito = $PDO->query("SELECT credito, tipopessoa, issretido, valor FROM nfe_creditos WHERE estado = 'A' ORDER BY valor DESC");
 while(list($nfe_cred,$nfe_tipo_pessoa,$nfe_issretido,$nfe_valor) = mysql_fetch_array($sql_lista_regrasdecredito)){
 	$array_regras_credito[] = $nfe_tipo_pessoa."|".$nfe_issretido."|".$nfe_valor."|".$nfe_cred;
 }
 
 $regras_credito = implode("|",$array_regras_credito);
 
-$sql_rps = mysql_query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$cmbEmpresa'");
+$sql_rps = $PDO->query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '$cmbEmpresa'");
 list($ultimoRPS,$limiteRPS) = mysql_fetch_array($sql_rps);
 
 if($ultimoRPS < 1){
@@ -390,7 +390,7 @@ if($limiteRPS < 1){
 <br>
 <form name="frmInserir" method="post" action="notas.php?btEmpresa=T&btInserir=T&btSelecionarEmpresa=T&btInserirNota=T" id="frmInserir" onsubmit="return ValidarInserirNota()">
 <?php
-	$sql_municipio = mysql_query("SELECT cidade FROM configuracoes");
+	$sql_municipio = $PDO->query("SELECT cidade FROM configuracoes");
 	list($UF_MUNICIPIO) = mysql_fetch_array($sql_municipio);
 ?>
 <input type="hidden" id="hdMunicpio" name="hdMunicpio" value="<?php echo $UF_MUNICIPIO;?>" />
@@ -530,7 +530,7 @@ if($limiteRPS < 1){
         <select name="txtTomadorUF" id="txtTomadorUF" onchange="buscaCidades(this,'txtTomadorMunicipio')">
             <option value=""></option>
             <?php
-                $sqlcidades=mysql_query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
+                $sqlcidades=$PDO->query("SELECT uf FROM municipios GROUP BY uf ORDER BY uf");
                 while(list($uf_busca)=mysql_fetch_array($sqlcidades)){
                     echo "<option value=\"$uf_busca\"";if($uf_busca == $UF_MUNICIPIO){ echo "selected=selected"; }echo ">$uf_busca</option>";
                 }
@@ -545,7 +545,7 @@ if($limiteRPS < 1){
         <div  id="divTomadorMunicipio">
             <select name="txtTomadorMunicipio" id="txtTomadorMunicipio" class="combo">
                 <?php
-                    $sql_municipio = mysql_query("SELECT nome FROM municipios WHERE uf = '$uf_busca'");
+                    $sql_municipio = $PDO->query("SELECT nome FROM municipios WHERE uf = '$uf_busca'");
                     while(list($nome_municipio) = mysql_fetch_array($sql_municipio)){
                         echo "<option value=\"$nome_municipio\"";if(strtolower($nome_municipio) == strtolower($NOME_MUNICIPIO)){ echo "selected=selected";} echo ">$nome_municipio</option>";
                     }//fim while 

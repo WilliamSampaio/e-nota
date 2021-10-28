@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 	if($_POST['btCancelarGuia'] != ""){
-		$sql = mysql_query("
+		$sql = $PDO->query("
 			SELECT 
 			guias_declaracoes.codrelacionamento,
 			guias_declaracoes.codguia
@@ -33,14 +33,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 		");
 		list($COD_NOTA,$COD_GUIA) = mysql_fetch_array($sql);
 		//usa o codigo encontrado com a pesquisa sql e efetua a a tualizacao
-		mysql_query("UPDATE notas SET estado = 'N' WHERE codigo = '$COD_NOTA'");
+		$PDO->query("UPDATE notas SET estado = 'N' WHERE codigo = '$COD_NOTA'");
 		//deleta a guia de pagamento	
-		mysql_query("DELETE FROM guia_pagamento WHERE codigo = '$COD_GUIA'");
-		mysql_query("DELETE FROM guias_declaracoes WHERE codguia = '$COD_GUIA'");
+		$PDO->query("DELETE FROM guia_pagamento WHERE codigo = '$COD_GUIA'");
+		$PDO->query("DELETE FROM guias_declaracoes WHERE codguia = '$COD_GUIA'");
 		echo "<script>alert('Guia Cancelada');</script>";
 		add_logs('Cancelou uma guia');
 	}
-  $sql=mysql_query("
+  $sql=$PDO->query("
   	SELECT 
 		guia_pagamento.codigo,
 		guia_pagamento.datavencimento,
@@ -78,7 +78,7 @@ if(mysql_num_rows($sql)>0){
    <td width="85" align="center">
       <b>Valor</b>   </td>
    <td width="109" align="center">
-      <b>N° controle</b>   </td>
+      <b>Nï¿½ controle</b>   </td>
    <td width="84">   </td>  
  </tr>
  <?php
@@ -115,7 +115,7 @@ if(mysql_num_rows($sql)>0){
 }else{
 ?>
 	<tr>
-		<td align="center" colspan="4">Não há guias emitidas</td>
+		<td align="center" colspan="4">Nï¿½o hï¿½ guias emitidas</td>
 	</tr>
 <?php
 }

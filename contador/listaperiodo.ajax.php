@@ -48,7 +48,7 @@ switch($pg){
 	default: $pg="nulo";
 }
 
-$sql_emissor = mysql_query("SELECT * FROM cadastro WHERE codigo='$codigo'");
+$sql_emissor = $PDO->query("SELECT * FROM cadastro WHERE codigo='$codigo'");
 $dados=mysql_fetch_array($sql_emissor);
 
 $anoatual=date("Y");
@@ -133,7 +133,7 @@ if($pg=="nulo"){
 	}else{
 		$str="";	
 	}
-	$declaracoes=mysql_query("SELECT DISTINCT SUBSTRING(periodo,6,2) FROM livro WHERE $codtipo='$codigo' AND SUBSTRING(periodo,1,4)='$anoselecionado' $str");
+	$declaracoes=$PDO->query("SELECT DISTINCT SUBSTRING(periodo,6,2) FROM livro WHERE $codtipo='$codigo' AND SUBSTRING(periodo,1,4)='$anoselecionado' $str");
 	if($competencia<10){
 		$competencia = "0".$competencia;
 	}

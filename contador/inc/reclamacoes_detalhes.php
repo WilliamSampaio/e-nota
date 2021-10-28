@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php  
 	require_once("../include/conect.php");
-	$sql=mysql_query("
+	$sql=$PDO->query("
 				SELECT especificacao, tomador_cnpj, tomador_email, rps_numero, 
 				rps_data, rps_valor, datareclamacao, responsavel, dataatendimento, descricao
 				FROM reclamacoes 

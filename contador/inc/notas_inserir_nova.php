@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 $sessioncnpj = $_SESSION['login'];
 if($sessioncnpj==$_POST['txtTomadorCNPJ']){
-	Mensagem('O tomador nao pode ser o próprio contador');
+	Mensagem('O tomador nao pode ser o prï¿½prio contador');
 }else{
 	$servico = explode("|",$_POST['cmbCodServico1']);
 	if($servico[1]!=0){
@@ -69,12 +69,12 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 		$aliquotapercentual      = MoedaToDec($_POST['txtAliqServico1']);
 	
 		//Seleciona a ultima nota inserida pela empresa
-		$sql = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+		$sql = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 		list($ultimanota)=mysql_fetch_array($sql);
 		$ultimanota ++;
 		
 		//busca o limite de notas desse emissor
-		$sql=mysql_query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
+		$sql=$PDO->query("SELECT notalimite FROM cadastro WHERE codigo = $CODIGO_DA_EMPRESA");
 		list($notalimite)=mysql_fetch_array($sql);
 		
 		//testa se o numero de notas limites ja foi ultrapassado se ja tiver ultrapassado avisa-o
@@ -93,10 +93,10 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 		
 				//Faz uma busca pelo tomador
 				if($tomadorCnpj!=""){
-					$sql = mysql_query("SELECT * FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
+					$sql = $PDO->query("SELECT * FROM cadastro WHERE cnpj='$tomadorCnpj' or cpf='$tomadorCnpj'");
 					$campo = tipoPessoa($tomadorCnpj);
 				}else{
-					$sql = mysql_query("SELECT * FROM cadastro WHERE nome = '$tomadorNome' or razaosocial = '$tomadorNome'");
+					$sql = $PDO->query("SELECT * FROM cadastro WHERE nome = '$tomadorNome' or razaosocial = '$tomadorNome'");
 					$campo = "cnpj";
 					$notaCredito = 0;
 				}
@@ -107,7 +107,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					$codtipo = codtipo('tomador');
 					$codtipodec = coddeclaracao('DES Simplificada');
 					$diaatual = date("Y-m-d");
-					mysql_query("
+					$PDO->query("
 						INSERT INTO 
 							cadastro
 						SET 
@@ -133,7 +133,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 			
 				}else{
 					if($tomadorCnpj!=""){
-					mysql_query("
+					$PDO->query("
 						UPDATE
 							cadastro
 						SET
@@ -158,18 +158,18 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					}
 				}
 	
-				//verifica a isenção do prestador
-				$sqlIsento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
+				//verifica a isenï¿½ï¿½o do prestador
+				$sqlIsento = $PDO->query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
 				list($issIsento) = mysql_fetch_array($sqlIsento);
 				if($issIsento == 'S'){
 					$notaTotalValorISS = 0;
 					$notaTotalValorISSRetido = 0;
 				}
 				
-				//verifica se o prestador é do MEI
-				$sqlMei = mysql_query("SELECT codigo FROM declaracoes WHERE declaracao = 'MEI'");
+				//verifica se o prestador ï¿½ do MEI
+				$sqlMei = $PDO->query("SELECT codigo FROM declaracoes WHERE declaracao = 'MEI'");
 				list($codmei) = mysql_fetch_array($sqlMei);
-				$sqlTipoDeclaracao = mysql_query("SELECT codtipodeclaracao FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+				$sqlTipoDeclaracao = $PDO->query("SELECT codtipodeclaracao FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 				list($codTipoDeclaracao) = mysql_fetch_array($sqlTipoDeclaracao);
 				if($codmei == $codTipoDeclaracao){
 					$notaTotalValorISS = 0;
@@ -177,7 +177,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 				}
 	
 				//Sql que insere os dados da nota emitida no banco
-				$sql = mysql_query("
+				$sql = $PDO->query("
 					INSERT INTO 
 						notas 
 					SET 
@@ -235,7 +235,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					$servicoISSRetido = MoedaToDec($_POST['txtISSRetidoManual'.$cont]);
 					$servicoDiscr     = htmlentities($_POST['txtDiscriminacaoServico'.$cont]);
 					
-					if($servicoDiscr == htmlentities("Discriminação do serviço")){
+					if($servicoDiscr == htmlentities("Discriminaï¿½ï¿½o do serviï¿½o")){
 						$servicoDiscr = "";
 					}
 	
@@ -249,7 +249,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 						$servicoISSRetido = 0;
 					}
 					
-					$sql_servicos_notas = mysql_query("
+					$sql_servicos_notas = $PDO->query("
 						INSERT INTO 
 							notas_servicos
 						SET
@@ -268,17 +268,17 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					$notaRpsData   = DataMysql($_POST['txtDataRps']);
 				
 					//Pega o ultimo rps emitido
-					$sql_rps_ultimo = mysql_query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+					$sql_rps_ultimo = $PDO->query("SELECT ultimorps FROM rps_controle WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
 					list($ultimoRPS) = mysql_fetch_array($sql_rps_ultimo);
 					
 					$notaRpsNumero = $ultimoRPS + 1;
 					
-					mysql_query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$CODIGO_DA_EMPRESA' AND codigo = '$codigoUltimaNota'");
-					mysql_query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
+					$PDO->query("UPDATE notas SET rps_numero = '$notaRpsNumero', rps_data = '$notaRpsData' WHERE codemissor = '$CODIGO_DA_EMPRESA' AND codigo = '$codigoUltimaNota'");
+					$PDO->query("UPDATE rps_controle SET ultimorps = '$notaRpsNumero' WHERE codcadastro = '$CODIGO_DA_EMPRESA'");
 				
 				}
 				
-				$sql = mysql_query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$CODIGO_DA_EMPRESA'");
+				$sql = $PDO->query("UPDATE cadastro SET ultimanota= '$ultimanota' WHERE codigo = '$CODIGO_DA_EMPRESA'");
 				add_logs('Emitiu nota fiscal');
 				
 				//Envia o email informando o tomador que foi inserida uma nfe
@@ -299,11 +299,11 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					echo "<script>window.location='notas.php';</script>";
 				}
 			}else{
-				print("<script language=JavaScript>alert('Favor preencher campos obrigatórios')</script>");
+				print("<script language=JavaScript>alert('Favor preencher campos obrigatï¿½rios')</script>");
 			}
 		}
 	}else{
-		print("<script language=JavaScript>alert('É necessário selecionar um serviço para a emissão da nota.')</script>");
+		print("<script language=JavaScript>alert('ï¿½ necessï¿½rio selecionar um serviï¿½o para a emissï¿½o da nota.')</script>");
 	}
 }
 ?>

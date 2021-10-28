@@ -21,8 +21,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 //--------------------Update------------------------------ 
 if($txtSenha !=""){
-	$sql=mysql_query("UPDATE usuarios SET senha='$txtSenha' WHERE login='$login'");
-	print("<script language=JavaScript>alert('Usuário atualizado com sucesso!!')</script>");
+	$sql=$PDO->query("UPDATE usuarios SET senha='$txtSenha' WHERE login='$login'");
+	print("<script language=JavaScript>alert('Usuï¿½rio atualizado com sucesso!!')</script>");
 	add_logs('Alterou a senha');
 }else{
 	print("<script language=JavaScript>alert('O campo senha deve ser preenchido!!')</script>");

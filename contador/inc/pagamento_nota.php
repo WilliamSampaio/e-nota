@@ -62,7 +62,7 @@ Fith Floor, Boston, MA 02110-1301, USA
      <td align="left">
 	 	<select name="cmbBanco" class="combo">
 			<?php
-				$sql_bancos = mysql_query("SELECT boleto.codbanco, bancos.banco FROM boleto INNER JOIN bancos ON boleto.codbanco = bancos.codigo");
+				$sql_bancos = $PDO->query("SELECT boleto.codbanco, bancos.banco FROM boleto INNER JOIN bancos ON boleto.codbanco = bancos.codigo");
 				while(list($codbanco,$nomebanco) = mysql_fetch_array($sql_bancos)){
 					echo "<option value=\"$codbanco\">$nomebanco</option>";
 				}

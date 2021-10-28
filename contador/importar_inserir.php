@@ -36,10 +36,10 @@ if(!(isset($_SESSION["codempresa"]))){
 		require_once("../include/conect.php");
 		require_once("../include/util.php");
 		require_once("inc/funcao_logs.php");
-		$sql=mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'");
+		$sql=$PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'");
 		list($UltimaNota)=mysql_fetch_array($sql);  
 		
-		$sql=mysql_query("SELECT codigo FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'"); 
+		$sql=$PDO->query("SELECT codigo FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'"); 
 		list($codigoEmpresa)=mysql_fetch_array($sql);  
 		
 		$xml = simplexml_load_file("importar/$arquivo_xml"); // l� o arquivo XML 
@@ -48,7 +48,7 @@ if(!(isset($_SESSION["codempresa"]))){
 		foreach($xml->children() as $elemento => $valor){   
 					
 			$tomador_cnpjcpf = $xml->nota[$cont]->tomador_cnpjcpf;
-			$sql_verifica_tomador = mysql_query("
+			$sql_verifica_tomador = $PDO->query("
 				SELECT
 					codtipo,
 					cpf,
@@ -146,7 +146,7 @@ if(!(isset($_SESSION["codempresa"]))){
 		$rps_data		= $xml->nota[$cont]->rps_data;
 		$credito		= $xml->nota[$cont]->credito;
 			
-			$sql_verifica_rps = mysql_query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '".$_POST['hdCodEmpresa']."'");
+			$sql_verifica_rps = $PDO->query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '".$_POST['hdCodEmpresa']."'");
 			if(mysql_num_rows($sql_verifica_rps)){
 				Mensagem("A nota com o número de RPS $rps_numero, já foi emitida!");
 				exit;
@@ -184,7 +184,7 @@ if(!(isset($_SESSION["codempresa"]))){
 			$codTipoDec = coddeclaracao('DES Consolidada');
 			if($inserir_tomador == "S"){				
 				$datainicio = date("Y-m-d");
-				mysql_query("
+				$PDO->query("
 					INSERT INTO
 						cadastro
 					SET
@@ -207,7 +207,7 @@ if(!(isset($_SESSION["codempresa"]))){
 				")or die(mysql_error());
 			}else{
 				if($dadosTomador['codtipo'] == $codTipoTomador){
-					mysql_query("
+					$PDO->query("
 						UPDATE 
 							cadastro
 						SET
@@ -235,12 +235,12 @@ if(!(isset($_SESSION["codempresa"]))){
 			$horaAtual = date("H:i:s");
 			
 			//Pega o numero da ultima nota
-			$sql_numero = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'");
+			$sql_numero = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'");
 			list($max_numero) = mysql_fetch_array($sql_numero);
 			$max_numero++;
 			
 			//Insere os dados no banco
-			mysql_query("
+			$PDO->query("
 				INSERT INTO 
 					notas 
 				SET 
@@ -283,14 +283,14 @@ if(!(isset($_SESSION["codempresa"]))){
 			//Pega o codigo da ultima nota inserida no banco
 			$codUltimaNota = mysql_insert_id();
 			
-			$sqlIsento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'");
+			$sqlIsento = $PDO->query("SELECT isentoiss FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'");
 			list($isento) = mysql_fetch_array($sqlIsento);
 			if($isento == 'S'){
 				$iss       = 0;
 				$issretido = 0;
 			}
 
-			mysql_query("
+			$PDO->query("
 				INSERT INTO
 					notas_servicos
 				SET
@@ -329,7 +329,7 @@ if(!(isset($_SESSION["codempresa"]))){
 			}elseif($issretido > 0){
 				$value = $issretido;
 			}
-			$sql_credito = mysql_query("
+			$sql_credito = $PDO->query("
 				SELECT 
 					credito 
 				FROM 
@@ -348,19 +348,19 @@ if(!(isset($_SESSION["codempresa"]))){
 					$credito = $issretido*creditoPercent/100;
 				}
 				$credito = number_format($credito,2,'.','');
-				mysql_query("UPDATE notas SET credito = '$credito' WHERE codigo = '$codUltimaNota'") or die(mysql_error());
+				$PDO->query("UPDATE notas SET credito = '$credito' WHERE codigo = '$codUltimaNota'") or die(mysql_error());
 			}
 			
 			//Atualiza a ultima nota
-			$sql = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'");
+			$sql = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'");
 			list($ultimaNota) = mysql_fetch_array($sql);
 			$notificacao = notificaTomador($_POST['hdCodEmpresa'],$ultimaNota);
 			
 			$ultimaNota += 1;
 			
-			$sql = mysql_query("UPDATE cadastro SET ultimanota = '$ultimaNota' WHERE codigo = '".$_POST['hdCodEmpresa']."'")or die(mysql_error());
+			$sql = $PDO->query("UPDATE cadastro SET ultimanota = '$ultimaNota' WHERE codigo = '".$_POST['hdCodEmpresa']."'")or die(mysql_error());
 			
-			mysql_query("UPDATE rps_controle SET ultimorps = '$rps_numero' WHERE codcadastro = '".$_POST['hdCodEmpresa']."'")or die(mysql_error());
+			$PDO->query("UPDATE rps_controle SET ultimorps = '$rps_numero' WHERE codcadastro = '".$_POST['hdCodEmpresa']."'")or die(mysql_error());
 			
 			$cont++;
 		}// foreach

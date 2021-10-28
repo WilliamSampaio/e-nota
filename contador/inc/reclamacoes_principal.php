@@ -23,10 +23,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 $cnpjcpf = $_SESSION['login'];
 $campo   = tipoPessoa($cnpjcpf);
 
-$sql = mysql_query("SELECT $campo FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+$sql = $PDO->query("SELECT $campo FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 list($prestador_cnpjcpf) = mysql_fetch_array($sql);
 //SQL de filtragem de serviços
-$sql_listaPendentes = mysql_query("SELECT codigo, especificacao, datareclamacao, responsavel, tomador_cnpj FROM reclamacoes WHERE estado = 'pendente' AND emissor_cnpjcpf = '$prestador_cnpjcpf' ORDER BY datareclamacao DESC LIMIT 0,10");
+$sql_listaPendentes = $PDO->query("SELECT codigo, especificacao, datareclamacao, responsavel, tomador_cnpj FROM reclamacoes WHERE estado = 'pendente' AND emissor_cnpjcpf = '$prestador_cnpjcpf' ORDER BY datareclamacao DESC LIMIT 0,10");
 
 ?>
  
@@ -111,7 +111,7 @@ if(mysql_num_rows($sql_listaPendentes)>0){
 
 
 //SQL de filtragem de reclamacoes atendidas
-$sql_listaAtendidas = mysql_query("
+$sql_listaAtendidas = $PDO->query("
 SELECT codigo, especificacao, dataatendimento, responsavel, tomador_cnpj
 FROM reclamacoes
 WHERE estado = 'atendida' AND emissor_cnpjcpf = '$prestador_cnpjcpf'

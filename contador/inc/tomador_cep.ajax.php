@@ -25,9 +25,9 @@ Fith Floor, Boston, MA 02110-1301, USA
   $cep =$_GET['cep'];
   $cepexplode=explode('-',$cep);
 	if($cepexplode[0]!="" && $cepexplode[1]!=""){
-		$query=mysql_query("SELECT cep_uf FROM cep_log_index WHERE cep5='".$cepexplode[0]."'");
+		$query=$PDO->query("SELECT cep_uf FROM cep_log_index WHERE cep5='".$cepexplode[0]."'");
 		$dados=mysql_fetch_object($query);
-		$querycep=mysql_query("SELECT cidade, bairro, tp_logradouro, logradouro FROM cep_".$dados->cep_uf." WHERE cep = '".$cep."'");
+		$querycep=$PDO->query("SELECT cidade, bairro, tp_logradouro, logradouro FROM cep_".$dados->cep_uf." WHERE cep = '".$cep."'");
 		$resultado=mysql_fetch_array($querycep);
 		
 		$bairro = htmlentities($resultado['bairro']);
@@ -52,9 +52,9 @@ $cep = $_GET['cep'];
   $cepexplode=explode('-',$cep);
   $retorno = "";
 	if($cepexplode[0]!="" && $cepexplode[1]!=""){
-		$query=mysql_query("SELECT cep_uf FROM cep_log_index WHERE cep5='".$cepexplode[0]."'");
+		$query=$PDO->query("SELECT cep_uf FROM cep_log_index WHERE cep5='".$cepexplode[0]."'");
 		$dados=mysql_fetch_object($query);
-		$querycep=mysql_query("SELECT cidade, bairro, tp_logradouro, logradouro FROM cep_".$dados->cep_uf." WHERE cep = '".$cep."'");
+		$querycep=$PDO->query("SELECT cidade, bairro, tp_logradouro, logradouro FROM cep_".$dados->cep_uf." WHERE cep = '".$cep."'");
 		$resultado=mysql_fetch_array($querycep);
 		if(mysql_num_rows($query)>0){
 			if(mysql_num_rows($querycep)>0){

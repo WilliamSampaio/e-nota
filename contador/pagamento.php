@@ -89,7 +89,7 @@ if(!(isset($_SESSION["empresa"])))
 if($_POST["btBoleto"]){			
 		$codigolivro		= $_POST["hdLivro"];
 		$codemissor		= $_POST["txtEmissor"];
-		$sql_livro		= mysql_query("SELECT * FROM livro WHERE codigo = '$codigolivro'");
+		$sql_livro		= $PDO->query("SELECT * FROM livro WHERE codigo = '$codigolivro'");
 		$dados_livro		= mysql_fetch_array($sql_livro);
 		$hoje=date("Y-m-d");
 		$dataem     = explode("-",$hoje);
@@ -101,7 +101,7 @@ if($_POST["btBoleto"]){
 	
 		$multa = calculaMultaDes($dias, $dados_livro['valorisstotal']);
 	
-		$sql_banco=mysql_query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
+		$sql_banco=$PDO->query("SELECT bancos.codigo, bancos.boleto FROM bancos INNER JOIN boleto ON bancos.codigo=boleto.codbanco");
 		list($codbanco,$boleto)=mysql_fetch_array($sql_banco);
 	
 		if($DIRETORIOINTEGRACAO){
@@ -133,21 +133,21 @@ if($_POST["btBoleto"]){
             ");
 
 
-			if(mysql_query($insere_guia)){
-				$sqlguia=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
+			if($PDO->query($insere_guia)){
+				$sqlguia=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
 				list($codguiapag)=mysql_fetch_array($sqlguia);
 				
 				$nossonumero = gerar_nossonumero($codguiapag,$dados_livro['vencimento']);
 				$chavecontroledoc = gerar_chavecontrole($dados_livro["codigo"],$codguiapag);
 				
-				mysql_query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguiapag'");
+				$PDO->query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguiapag'");
 				
-				$sql_boleto=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
+				$sql_boleto=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
 				list($codigoboleto)=mysql_fetch_array($sql_boleto);	
 		
 					$atualiza_livro = ("UPDATE livro SET estado='B' WHERE codigo='$codigolivro'");
 					
-					if(mysql_query($atualiza_livro)){
+					if($PDO->query($atualiza_livro)){
 						Mensagem("Boleto gerado com sucesso");
 						imprimirGuia($codigoboleto);
 						Redireciona("pagamento.php");	

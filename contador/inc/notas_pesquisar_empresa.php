@@ -32,7 +32,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$login = $_SESSION['codempresa'];
 	if($btSelecionarEmpresa==""){
 	$codcontador=$login;
-	$sql=mysql_query("SELECT codigo, razaosocial FROM cadastro WHERE codcontador='$codcontador' AND contadornfe='S'");
+	$sql=$PDO->query("SELECT codigo, razaosocial FROM cadastro WHERE codcontador='$codcontador' AND contadornfe='S'");
 	if(mysql_num_rows($sql)>0){
 ?>	
 <form method="post" action="notas.php" id="frmCancelarNota" name="frmCancelarNota" onsubmit="return CancelarNota()">

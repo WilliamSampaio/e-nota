@@ -76,8 +76,8 @@ if(!(isset($_SESSION["empresa"])))
 	</tr>
 	<tr>
 		<td colspan="3" height="1" bgcolor="#CCCCCC">
-		  <?php // $sql_lista_empresas = mysql_query("SELECT codigo, razaosocial, cnpj, cpf FROM cadastro WHERE codcontador = '$CODIGO_DA_EMPRESA' AND contadorrps = 'S'");			
-			$sql_logado = mysql_query("
+		  <?php // $sql_lista_empresas = $PDO->query("SELECT codigo, razaosocial, cnpj, cpf FROM cadastro WHERE codcontador = '$CODIGO_DA_EMPRESA' AND contadorrps = 'S'");			
+			$sql_logado = $PDO->query("
 				SELECT 
 					codigo,
 					razaosocial,
@@ -95,7 +95,7 @@ if(!(isset($_SESSION["empresa"])))
           <option value="<?php echo $empresa->codigo;?>">
 		  	<?php echo $empresa->razaosocial." - ".$cnpjcpf;?>
 		  </option>
-          <?php $sql_lista_empresas = mysql_query("SELECT codigo, razaosocial, cnpj, cpf FROM cadastro WHERE codcontador = '$CODIGO_DA_EMPRESA' AND contadorrps = 'S'");
+          <?php $sql_lista_empresas = $PDO->query("SELECT codigo, razaosocial, cnpj, cpf FROM cadastro WHERE codcontador = '$CODIGO_DA_EMPRESA' AND contadorrps = 'S'");
 				while($listaEmpresa = mysql_fetch_object($sql_lista_empresas)){
 					$cnpjcpf = $listaEmpresa->cnpj.$listaEmpresa->cpf;
 					echo "<option value=\"{$listaEmpresa->codigo}\">{$listaEmpresa->razaosocial} - {$cnpjcpf}</option>";
@@ -118,7 +118,7 @@ if(!(isset($_SESSION["empresa"])))
 							<?php
 							if($_POST['btOK']){
 								$codEmpresaDefinida = $_POST['cmbEmissor'];
-								$sql_empresa_definida = mysql_query("SELECT razaosocial FROM cadastro WHERE codigo = '$codEmpresaDefinida'");
+								$sql_empresa_definida = $PDO->query("SELECT razaosocial FROM cadastro WHERE codigo = '$codEmpresaDefinida'");
 								list($razaosocial) = mysql_fetch_array($sql_empresa_definida);
 								echo "Empresa definida: <font color=\"#FF0000\"><strong>$razaosocial</strong></font>";
 							}

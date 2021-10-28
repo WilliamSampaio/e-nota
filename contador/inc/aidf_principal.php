@@ -22,16 +22,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($btSolicitar!="")
 		{
 			$codigoempresa = $_POST['cmbEmpresa'];
-			$notaempresa=mysql_query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$codigoempresa'");
+			$notaempresa=$PDO->query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$codigoempresa'");
 			list($ultimanota,$notalimite)=mysql_fetch_array($notaempresa);
-			$sql_aidfe=mysql_query("SELECT codigo FROM aidfe_solicitacoes WHERE solicitante = '$codigoempresa'");
+			$sql_aidfe=$PDO->query("SELECT codigo FROM aidfe_solicitacoes WHERE solicitante = '$codigoempresa'");
 			$numero_de_solicitacoes = mysql_num_rows($sql_aidfe);
 			if($numero_de_solicitacoes>0){
 				Mensagem('Sua solicitação já foi enviada a prefeitura.');
 				Redireciona('aidf.php');
 			}else{
 				if($notalimite==0){
-					mysql_query("INSERT INTO aidfe_solicitacoes SET solicitante = '$codigoempresa'");
+					$PDO->query("INSERT INTO aidfe_solicitacoes SET solicitante = '$codigoempresa'");
 					Mensagem('Uma solicitaç&aring;o de aumento de AIDF foi enviada à prefeitura!');
 					add_logs('Solicitou um aumento no AIDF');
 					Redireciona('aidf.php');
@@ -41,10 +41,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 				}
 			}
 		}
-	$sql=mysql_query("SELECT ultimanota, notalimite, razaosocial FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
+	$sql=$PDO->query("SELECT ultimanota, notalimite, razaosocial FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
 	list($ultimanota,$notalimite,$razaocontador)=mysql_fetch_array($sql);
 	if($notalimite==0){$notalimite="Liberado";}
-	$sqlempresas=mysql_query("SELECT ultimanota, notalimite, razaosocial FROM cadastro WHERE codcontador = '$CODIGO_DA_EMPRESA'");
+	$sqlempresas=$PDO->query("SELECT ultimanota, notalimite, razaosocial FROM cadastro WHERE codcontador = '$CODIGO_DA_EMPRESA'");
 ?>
 <form method="post">
 <table border="0" align="center" cellpadding="0" cellspacing="1">
@@ -108,7 +108,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			}
 		}
 	        if($notalimite != "Liberado"){
-    	    $sqlcontadores=mysql_query("SELECT codigo, razaosocial,contadornfe FROM cadastro WHERE codcontador='$CODIGO_DA_EMPRESA' AND contadornfe = 'S'");?>	
+    	    $sqlcontadores=$PDO->query("SELECT codigo, razaosocial,contadornfe FROM cadastro WHERE codcontador='$CODIGO_DA_EMPRESA' AND contadornfe = 'S'");?>	
         		<table align="center" width="100%">
 					<tr>
                         <td align="left" width="25%">Solicitante de Aidf-e:</td>

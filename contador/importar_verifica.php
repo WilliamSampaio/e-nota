@@ -58,7 +58,7 @@ else {
 			move_uploaded_file($arq_tmp,"importar/".$arq);
     		//verifica se o upload funcionou   
     		if(file_exists('importar/'.$arq)) {    
-	 			$sql=mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST["cmbEmissor"]."'");
+	 			$sql=$PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST["cmbEmissor"]."'");
 	 			list($UltimaNota)=mysql_fetch_array($sql);
 				/*if(!validaXmlImportacao("./importar/$arq")){
 					die("<p align=\"center\"><strong>O arquivo de importação de RPS é incompatível com o modelo.</strong></p>");
@@ -72,16 +72,16 @@ else {
 				$rps_invalidos = "";
 	 			
 				//Verifica se os creditos estao ativos
-				$sql_creditos_ativos = mysql_query("SELECT ativar_creditos FROM configuracoes");
+				$sql_creditos_ativos = $PDO->query("SELECT ativar_creditos FROM configuracoes");
 				list($situacaoCreditos) = mysql_fetch_array($sql_creditos_ativos);
 				
-				$sql = mysql_query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST["cmbEmissor"]."'");
+				$sql = $PDO->query("SELECT ultimanota FROM cadastro WHERE codigo = '".$_POST["cmbEmissor"]."'");
 				list($notaNumero) = mysql_fetch_array($sql);
 				$notaNumero++;
 
 				//busca os dados do arquivo XML 
     			foreach($xml->children() as $elemento => $valor) {
-					$sql_verifica_servico = mysql_query("SELECT codigo FROM servicos WHERE codigo = '".$xml->nota[$cont]->codservico."'");  
+					$sql_verifica_servico = $PDO->query("SELECT codigo FROM servicos WHERE codigo = '".$xml->nota[$cont]->codservico."'");  
 					if(mysql_num_rows($sql_verifica_servico) != 1){
 						die("<center><b>Não existe nenhum serviço com o código ".$xml->nota[$cont]->codservico."</b></center>");
 					}else{
@@ -99,12 +99,12 @@ else {
 					}
 					$rps_data = $xml->nota[$cont]->rps_data;
 					$rpsnum	  = $xml->nota[$cont]->rps_numero;
-					$sql_verifica_rps = mysql_query("SELECT COUNT(codigo) FROM notas WHERE rps_numero = '$rpsnum' AND codemissor = '".$_SESSION['codempresa']."'");
+					$sql_verifica_rps = $PDO->query("SELECT COUNT(codigo) FROM notas WHERE rps_numero = '$rpsnum' AND codemissor = '".$_SESSION['codempresa']."'");
 					list($verifica_rps) = mysql_fetch_array($sql_verifica_rps);
 					if($verifica_rps > 0){
 						die("<p align=\"center\"><strong>Já existe um RPS com este número</strong></p>");
 					}
-					$sql_verifica_rps = mysql_query("SELECT COUNT(codigo) AS qtd, limite FROM rps_controle WHERE codcadastro = '".$_SESSION['codempresa']."'");					
+					$sql_verifica_rps = $PDO->query("SELECT COUNT(codigo) AS qtd, limite FROM rps_controle WHERE codcadastro = '".$_SESSION['codempresa']."'");					
 					$verifica_rps = mysql_fetch_array($sql_verifica_rps);
 					if($verifica_rps['qtd'] == 0){
 						die("<p align=\"center\"><strong>Prestador não autorizado para emissão de RPS</strong></p>");
@@ -113,7 +113,7 @@ else {
 					}
 					
 					$tomador_cnpjcpf = $xml->nota[$cont]->tomador_cnpjcpf;
-					$sql_verifica_tomador = mysql_query("
+					$sql_verifica_tomador = $PDO->query("
 						SELECT 
 							nome,
 							inscrmunicipal,
@@ -188,7 +188,7 @@ else {
 					
 					//Verifica a valida��o do XML
 					require_once("inc/importar_erros.php") ;
-					$sql_verifica_rps = mysql_query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '".$_POST["cmbEmissor"]."'");
+					$sql_verifica_rps = $PDO->query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '".$_POST["cmbEmissor"]."'");
 					if(mysql_num_rows($sql_verifica_rps)){
 						echo "<center><b>A nota com o número de RPS $rps_numero, já foi emitida!</b></center>";
 						exit;
@@ -197,7 +197,7 @@ else {
 				}
 				
 				//Verifica se o prestador pode declarar todas as notas que estao no arquivo xml
-				$sql_verifica_ultimanota = mysql_query("SELECT ultimanota, notalimite, nome, razaosocial FROM cadastro WHERE codigo = '".$_POST["cmbEmissor"]."'");
+				$sql_verifica_ultimanota = $PDO->query("SELECT ultimanota, notalimite, nome, razaosocial FROM cadastro WHERE codigo = '".$_POST["cmbEmissor"]."'");
 				list($ultimaNota,$limite,$nomePrestador,$razaoPrestador) = mysql_fetch_array($sql_verifica_ultimanota);
 				if(($limite != 0) && ($limite)){
 					$proximoUltimanota = $ultimaNota + $cont;
@@ -211,7 +211,7 @@ else {
 				}
 				
 				//Verifica se o RPS das notas do xml estao ok
-				$sql_verifica_ultimorps = mysql_query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '".$_POST["cmbEmissor"]."'");
+				$sql_verifica_ultimorps = $PDO->query("SELECT ultimorps, limite FROM rps_controle WHERE codcadastro = '".$_POST["cmbEmissor"]."'");
 				list($ultimoRPS,$limite) = mysql_fetch_array($sql_verifica_ultimorps);
 				if($limite > 0){
 					$proximoUltimoRPS = $ultimoRPS + $cont;
@@ -277,7 +277,7 @@ else {
 		$rpsnum			= $xml->nota[$cont]->rps_numero;
 		$tomador_cnpjcpf = $xml->nota[$cont]->tomador_cnpjcpf;
 		
-		$sql_verifica_tomador = mysql_query("
+		$sql_verifica_tomador = $PDO->query("
 			SELECT 
 				nome,
 				inscrmunicipal,
@@ -452,7 +452,7 @@ else {
 		</table>
 		<br />
 			<?php
-				$sql_descricao = mysql_query("SELECT descricao FROM servicos WHERE codservico = '$codservico'");
+				$sql_descricao = $PDO->query("SELECT descricao FROM servicos WHERE codservico = '$codservico'");
 				list($descricao) = mysql_fetch_array($sql_descricao);
 			?>
 			<table width="100%" style="border:1px solid #000" cellspacing="0">

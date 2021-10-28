@@ -3,7 +3,7 @@
 	require_once("../../funcoes/util.php");
 
 	$codnota = $_POST['txtNotaEmail'];
-	$sql = mysql_query("
+	$sql = $PDO->query("
 		SELECT
 			notas.numero,
 			notas.codemissor

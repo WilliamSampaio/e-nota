@@ -21,13 +21,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
     $login = $_SESSION['codempresa']; //$publicarBtn = array("s" => "Não Publicar", "n" => "Publicar");
 
-    $sql = mysql_query("
+    $sql = $PDO->query("
         SELECT codigo FROM cadastro
        WHERE codigo='".$login."'
     ");
     list($codcontador) = mysql_fetch_array($sql);
 
-    $sqlSimples = mysql_query("
+    $sqlSimples = $PDO->query("
         SELECT COUNT(cadastro.codigo) FROM cadastro
         INNER JOIN tipo ON cadastro.codtipodeclaracao = tipo.codigo
         WHERE cadastro.codtipo = 10 AND tipo.nome LIKE '%simples nacional%'
@@ -36,7 +36,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
     list($simples) = mysql_fetch_array($sqlSimples);
 
-    $sqlEmpresaCliente = mysql_query("
+    $sqlEmpresaCliente = $PDO->query("
         SELECT codigo,
         if(cnpj<>'',cnpj, cpf) AS documento,
         nome

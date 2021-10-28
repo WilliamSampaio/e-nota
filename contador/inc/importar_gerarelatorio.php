@@ -53,7 +53,7 @@ if(!(isset($_SESSION["empresa"]))){
 		$string .= " AND YEAR(datahoraemissao) = '$ano'";
 	}
 	
-	$sql = mysql_query("
+	$sql = $PDO->query("
 		SELECT 
 			numero, 
 			codverificacao, 

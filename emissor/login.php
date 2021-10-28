@@ -51,7 +51,6 @@ if (!(isset($_SESSION["empresa"]))) {
 
 					<!-- formulario de login -->
 					<form action="inc/verifica.php" method="post" onsubmit="return verificaCnpjCpfCodigo();ValidaLogin('txtSenha|codseguranca');">
-
 						<div class="card">
 							<div class="card-body">
 								<h5 class="card-title">Acesso Restrito</h5>
@@ -82,7 +81,6 @@ if (!(isset($_SESSION["empresa"]))) {
 												<!-- <label for="cod">Senha</label> -->
 											</div>
 										</div>
-
 									</div>
 									<br>
 									<div class="text-center">

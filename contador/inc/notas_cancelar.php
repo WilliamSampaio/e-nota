@@ -22,9 +22,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 $CODIGO = $_REQUEST['txtCodigo']; ?>
 <?php 
 
- $sql = mysql_query("UPDATE notas SET estado='C', motivo_cancelamento='$txtMotivoCancelar' WHERE codigo='$txtCodigo'"); 
+ $sql = $PDO->query("UPDATE notas SET estado='C', motivo_cancelamento='$txtMotivoCancelar' WHERE codigo='$txtCodigo'"); 
  
- $sql=mysql_query("
+ $sql=$PDO->query("
  SELECT 
  cadastro.codigo,
  notas.tomador_email,
@@ -42,13 +42,13 @@ $CODIGO = $_REQUEST['txtCodigo']; ?>
  list($codigo_emp,$email,$num_nota,$num_rps,$nome_empresa,$em_cnpj,$em_cpf,$dataehora,$codverificacao,$empresa_email)=mysql_fetch_array($sql);
  $cpfcnpf_empresa = $em_cnpj ? $em_cnpj : $em_cpf;
 
-    $msg = "Comunicamos que a NFE com os seguintes dados foi cancelada pela empresa prestadora de serviço:<br><br>
-	- Número da nota: $num_nota;<br>
-	- Com data e hora de emissão de: $dataehora ;<br>
-	- Código de verificação: $codverificacao ;<br>
-	- RPS Número: $num_rps <br>	
-	- Prestador de serviço: $nome_empresa ;<br>
-	- CPF/CNPJ do prestador de serviço: $cpfcnpf_empresa ;<br>  ";
+    $msg = "Comunicamos que a NFE com os seguintes dados foi cancelada pela empresa prestadora de serviï¿½o:<br><br>
+	- Nï¿½mero da nota: $num_nota;<br>
+	- Com data e hora de emissï¿½o de: $dataehora ;<br>
+	- Cï¿½digo de verificaï¿½ï¿½o: $codverificacao ;<br>
+	- RPS Nï¿½mero: $num_rps <br>	
+	- Prestador de serviï¿½o: $nome_empresa ;<br>
+	- CPF/CNPJ do prestador de serviï¿½o: $cpfcnpf_empresa ;<br>  ";
 	
 	
 	

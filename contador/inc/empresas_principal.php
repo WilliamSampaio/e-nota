@@ -24,7 +24,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
 }
 
 
- $sql = mysql_query("SELECT codigo, email, senha FROM cadastro WHERE nome = '$NOME'");
+ $sql = $PDO->query("SELECT codigo, email, senha FROM cadastro WHERE nome = '$NOME'");
  list($codigo,$email,$senha) = mysql_fetch_array($sql); 
 ?>
 
@@ -61,7 +61,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
                 Logomarca atual</td>
             <td align="left"><br />
                 <?php
-					$sql_logo = mysql_query("SELECT logo FROM cadastro WHERE nome = '$NOME'");
+					$sql_logo = $PDO->query("SELECT logo FROM cadastro WHERE nome = '$NOME'");
 					list($logo) = mysql_fetch_array($sql_logo);
                    if ($logo !="")
                      {

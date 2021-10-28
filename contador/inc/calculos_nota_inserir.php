@@ -180,7 +180,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 </table>
 		</fieldset>
 	<?php
-  	$sql_verifica_creditos = mysql_query("SELECT ativar_creditos FROM configuracoes");
+  	$sql_verifica_creditos = $PDO->query("SELECT ativar_creditos FROM configuracoes");
 	list($ativar_creditos) = mysql_fetch_array($sql_verifica_creditos);
 	
 	if($ativar_creditos == "n"){

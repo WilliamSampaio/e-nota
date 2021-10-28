@@ -25,7 +25,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$campo = tipoPessoa($cnpj);
 	
 	//determina o emissor
-	$sql_login = mysql_query("SELECT codigo FROM cadastro WHERE $campo = '$cnpj'");
+	$sql_login = $PDO->query("SELECT codigo FROM cadastro WHERE $campo = '$cnpj'");
 	list($codemissor) = mysql_fetch_array($sql_login);
 	
 	// carrega as regras de multa por atraso
@@ -56,10 +56,10 @@ Fith Floor, Boston, MA 02110-1301, USA
             <tr>
                 <td>
                     <select name="cmbMes" id="_mes">
-                        <option value="">==MÊS==</option>
+                        <option value="">==Mï¿½S==</option>
                         <option value="01">Janeiro</option>
                         <option value="02">Fevereiro</option>
-                        <option value="03">Março</option>
+                        <option value="03">Marï¿½o</option>
                         <option value="04">Abril</option>
                         <option value="05">Maio</option>
                         <option value="06">Junho</option>
@@ -84,7 +84,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                         ?>
                     </select>
                 </td>
-                <td><input type="submit" class="botao" name="btBuscar" value="Buscar" onclick="return ValidaFormulario('_mes|_ano','Por favor selecione um mês e um ano!')"/></td>
+                <td><input type="submit" class="botao" name="btBuscar" value="Buscar" onclick="return ValidaFormulario('_mes|_ano','Por favor selecione um mï¿½s e um ano!')"/></td>
             </tr>
         </table>
     </form>
@@ -93,7 +93,7 @@ if($_POST["btBuscar"] == "Buscar")
 {
     $ano = $_POST["cmbAno"];
     $mes = $_POST["cmbMes"];
-    $sql = mysql_query("
+    $sql = $PDO->query("
         SELECT 
             codigo,
             datahoraemissao,
@@ -130,7 +130,7 @@ if($_POST["btBuscar"] == "Buscar")
                         </tr>
                         <tr bgcolor="#FFFFFF" align="center">
                           <td width="100" align="center">Data Gerado</td>
-                          <td width="100" align="center">Cod. Verificação</td>
+                          <td width="100" align="center">Cod. Verificaï¿½ï¿½o</td>
                           <td width="100" align="center">Valor</td>
                           <td align="center"></td>
                         </tr>
@@ -216,7 +216,7 @@ if($_POST["btBuscar"] == "Buscar")
 				$datavencimento = UltDiaUtil($data[1],$data[0]);
 				
 				// busca o codigo do banco e o arquivo q gera o boleto
-				$sql = mysql_query("SELECT bancos.boleto, boleto.tipo FROM boleto INNER JOIN bancos ON bancos.codigo = boleto.codbanco");
+				$sql = $PDO->query("SELECT bancos.boleto, boleto.tipo FROM boleto INNER JOIN bancos ON bancos.codigo = boleto.codbanco");
 				list($boleto,$tipoboleto) = mysql_fetch_array($sql);
 				if($tipoboleto == "R"){
 					$tipoboleto = "recebimento";
@@ -226,23 +226,23 @@ if($_POST["btBuscar"] == "Buscar")
 				}
 				
 				// inseri a guia de pagamento no db
-				mysql_query("INSERT INTO guia_pagamento SET valor = '$total', valormulta = '$multa', dataemissao = '$dataemissao', datavencimento = '$datavencimento', pago='N'");
+				$PDO->query("INSERT INTO guia_pagamento SET valor = '$total', valormulta = '$multa', dataemissao = '$dataemissao', datavencimento = '$datavencimento', pago='N'");
 				
 				// busca o codigo da guia de pagamento recem inserida
-				$sql=mysql_query("SELECT MAX(codigo) FROM guia_pagamento");
+				$sql=$PDO->query("SELECT MAX(codigo) FROM guia_pagamento");
 				list($codguia) = mysql_fetch_array($sql);
 				
 				// relaciona a guia de pagamento com as delcaracoes
 				for($i=0; $i<$cont; $i++) {
 					if($_POST["ckISS".$i]) {
 						$coddeclaracao = explode("|", $_POST["ckISS".$i]);
-						mysql_query("INSERT INTO guias_declaracoes SET codguia = '$codguia', codrelacionamento = '$coddeclaracao[1]', relacionamento = 'nfe'");
-						mysql_query("UPDATE notas SET estado = 'B' WHERE codigo = '$coddeclaracao[1]'");
+						$PDO->query("INSERT INTO guias_declaracoes SET codguia = '$codguia', codrelacionamento = '$coddeclaracao[1]', relacionamento = 'nfe'");
+						$PDO->query("UPDATE notas SET estado = 'B' WHERE codigo = '$coddeclaracao[1]'");
 					}
 				}
 				
 				// retorna o codigo do ultimo relacionamento
-				$sql = mysql_query("SELECT MAX(codigo) FROM guias_declaracoes");
+				$sql = $PDO->query("SELECT MAX(codigo) FROM guias_declaracoes");
 				list($codrelacionamento)=mysql_fetch_array($sql);
 				
 				// gera o nossonumero e chavecontroledoc
@@ -250,7 +250,7 @@ if($_POST["btBuscar"] == "Buscar")
 				$chavecontroledoc = gerar_chavecontrole($codrelacionamento,$codguia);
 				
 				// seta o nossonumero e a chavecontroledoc no banco
-				mysql_query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguia'");
+				$PDO->query("UPDATE guia_pagamento SET nossonumero='$nossonumero', chavecontroledoc='$chavecontroledoc' WHERE codigo='$codguia'");
 				
 				// gera o boleto
 				Mensagem("Boleto gerado com sucesso");

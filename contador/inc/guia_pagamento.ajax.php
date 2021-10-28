@@ -10,7 +10,7 @@ $mes=$_GET["cmbMes"];
 if($mes<10){ $mes="0".$mes; }
 $codcadastro=$_GET["cmbEmpresaCliente"];
 $hoje=date("Y-m-d");
-$sql=mysql_query("SELECT codigo, valorisstotal, geracao, periodo, vencimento FROM livro WHERE codcadastro='$codcadastro' AND SUBSTRING(periodo,1,4)='$ano' AND SUBSTRING(periodo,6,2)='$mes' AND valoriss >= 0 AND codcadastro='$codcadastro' AND estado='N'") or die(mysql_error());
+$sql=$PDO->query("SELECT codigo, valorisstotal, geracao, periodo, vencimento FROM livro WHERE codcadastro='$codcadastro' AND SUBSTRING(periodo,1,4)='$ano' AND SUBSTRING(periodo,6,2)='$mes' AND valoriss >= 0 AND codcadastro='$codcadastro' AND estado='N'") or die(mysql_error());
 
 if(mysql_num_rows($sql)>0){ ?>
 <script>

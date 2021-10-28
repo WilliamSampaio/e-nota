@@ -99,7 +99,7 @@ WHERE
 						while(list($codigo, $numero, $codverificacao, $datahoraemissao, $codempresa, $tomador_nome, $tomador_cnpjcpf, $estado, $codtomador) = mysql_fetch_array($sql)) {
 						
 						if($codtomador){
-							$sql_tomador = mysql_query("SELECT nome, razaosocial FROM cadastro WHERE codigo = '$codtomador'");
+							$sql_tomador = $PDO->query("SELECT nome, razaosocial FROM cadastro WHERE codigo = '$codtomador'");
 							list($tomador_nome,$tomador_razaosocial) = mysql_fetch_array($sql_tomador);
 							if(!$tomador_nome){
 								$tomador_nome = $tomador_razaosocial;
