@@ -45,7 +45,7 @@ require_once DIR_SITE . 'include/header.php';
 
     </script>
 
-    <?php require_once 'inc/navbar.php'; ?>
+    <?php require_once DIR_SITE . 'include/navbar.php' ?>
 
     <div class="container bg-light">
         <div class="row align-items-start">
