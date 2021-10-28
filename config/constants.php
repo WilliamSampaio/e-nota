@@ -17,7 +17,7 @@ define('CONFIG_FILE', ROOT_PATH . '/.config.ini');
 define('DIR_CLASS', ROOT_PATH . '/class/');
 define('DIR_CONFIG', ROOT_PATH . '/config/');
 
-define('DIR_SITE', require_once DIR_SITE . '');
+define('DIR_SITE', ROOT_PATH . '/site/');
 define('DIR_SEP', ROOT_PATH . '/sep/');
 define('DIR_EMISSOR', ROOT_PATH . '/emissor/');
 define('DIR_CONTADOR', ROOT_PATH . '/contador/');
