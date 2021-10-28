@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 
 require_once '../autoload.php';
-require_once 'inc/header.php';
+require_once DIR_SITE . 'include/header.php';
 
 ?>
 
@@ -33,7 +33,7 @@ require_once 'inc/header.php';
         <div class="row align-items-start">
             <!-- MENU -->
             <div class="col-sm-12 col-md-3 col-lg-3">
-                <?php require_once 'inc/menu.php' ?>
+                <?php require_once DIR_SITE . 'include/menu.php' ?>
             </div>
 
             <!-- CONTEÚDO -->
@@ -158,4 +158,4 @@ require_once 'inc/header.php';
         <br>
     </div>
 
-    <?php require_once 'inc/footer.php'; ?>
+    <?php require_once DIR_SITE . 'include/footer.php'; ?>

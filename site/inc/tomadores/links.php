@@ -69,7 +69,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 </div>
                 <div class="card-footer">
                     <img src="../img/box/web.png" width="14" height="14">
-                    <a onclick="document.getElementById('txtMenu').value='issretido';frmTomadoresBox.submit();" href="#" class="box"><img src="../img/box/web.png" alt="ISS Retido" width="14" height="14" /> Serviço online</a>
+                    <a onclick="document.getElementById('txtMenu').value='issretido';frmTomadoresBox.submit();" href="#" class="box">Serviço online</a>
                 </div>
             </div>
         </div>
