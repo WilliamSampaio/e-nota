@@ -1,7 +1,5 @@
 <?php
 
-require_once 'config.php';
-
 /**
  *  ARQUIVOS COM AS CONSTANTES DO SISTEMA.
  */
@@ -18,6 +16,11 @@ define('CONFIG_FILE', ROOT_PATH . '/.config.ini');
 // DEFINE DIRETORIOS
 define('DIR_CLASS', ROOT_PATH . '/class/');
 define('DIR_CONFIG', ROOT_PATH . '/config/');
+
+define('DIR_SITE', require_once DIR_SITE . '');
+define('DIR_SEP', ROOT_PATH . '/sep/');
+define('DIR_EMISSOR', ROOT_PATH . '/emissor/');
+define('DIR_CONTADOR', ROOT_PATH . '/contador/');
 
 // SUBDOMAIN
 if($config['subdomain'])
