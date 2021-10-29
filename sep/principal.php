@@ -1,4 +1,4 @@
-	<?php
+<?php
 /*
 COPYRIGHT 2008 - 2010 DO PORTAL PUBLICO INFORMATICA LTDA
 
@@ -19,72 +19,65 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
+
 session_start();
-$_SESSION['autenticacao'] = rand(10000,99999);
-if(isset($_SESSION["logado"]))
-{   ?>
+require_once '../autoload.php';
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>SEP - Sistema Eletrônico de Prefeitura v1.0</title>
-<link href="css/padrao.css" rel="stylesheet" type="text/css">
-<link href="css/menu.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="css/jquery.tabs.css" type="text/css" media="print, projection, screen">
-<link type="text/css" href="css/dark-hive/jquery-ui-1.8.2.custom.css" rel="stylesheet" />	
-<?php require_once("scripts.php");?>
-</head>
-<body class="principal">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td align="left" valign="middle" bgcolor="#3c5c72" background="img/form/bg.png">
-	<?php require_once("inc/menu.php"); ?>
-	</td>
-  </tr>
-  <tr>
-  
-    <td align="left" valign="top">	
-    <?php
-	if($_GET['d']){
-		if(substr($_GET['d'],0,6)== 'janela'){
-			include_janela(substr($_GET['d'],8),'JANELA',substr($_GET['d'],6,1));
-			//Mensagem(substr('janela1:a',7,1));
-		}else{
-			include $_GET['d'];
-		}
-	}else if($_GET['j']){
-		if($btDetalhesPrestadorVisualizar){
-			$_POST['include'] = str_replace('tomadores','prestadores',$_POST['include']);
-			$_POST['CODEMISSOR']  = $_POST['CODTOMADOR'];
-		}	
- 		include_janela($_POST['include']);
-	}else
-    if($_POST['include']){  
-		if($btDetalhesPrestadorVisualizar){
-			$_POST['include'] = str_replace('tomadores','prestadores',$_POST['include']);
-			$_POST['CODEMISSOR']  = $_POST['CODTOMADOR'];
-		}	
-	
- 		require_once($_POST['include']);
-	}
-	?>	
-	</td>
-  </tr>
-</table>
-
-</body>
-</html>
-
-
-
-<?php
-
-}
-else
-{
-  require_once("funcoes/util.php");
-  Mensagem('Sem permissão de acesso!!!');
- print("<script language=JavaScript>parent.location='login.php';</script>"); 
-}
+$_SESSION['autenticacao'] = rand(10000, 99999);
+if (isset($_SESSION["logado"])) {
+	require_once DIR_SEP . "include/header.php";
 
 ?>
+
+	<body class='bg-light'>
+
+		<?php require_once DIR_SEP . 'include/navbar.php' ?>
+		<?php require_once DIR_SEP . 'include/menu.php' ?>
+
+		<div class="container bg-light">
+			<div class="row align-items-start">
+
+				<!-- CONTEÚDO -->
+				<div class="col-sm-12 col-md-12 col-lg-12">
+
+					<tr>
+
+						<td align="left" valign="top">
+							<?php
+							if ($_GET['d']) {
+								if (substr($_GET['d'], 0, 6) == 'janela') {
+									include_janela(substr($_GET['d'], 8), 'JANELA', substr($_GET['d'], 6, 1));
+									//Mensagem(substr('janela1:a',7,1));
+								} else {
+									include $_GET['d'];
+								}
+							} else if ($_GET['j']) {
+								if ($btDetalhesPrestadorVisualizar) {
+									$_POST['include'] = str_replace('tomadores', 'prestadores', $_POST['include']);
+									$_POST['CODEMISSOR']  = $_POST['CODTOMADOR'];
+								}
+								include_janela($_POST['include']);
+							} else
+    if ($_POST['include']) {
+								if ($btDetalhesPrestadorVisualizar) {
+									$_POST['include'] = str_replace('tomadores', 'prestadores', $_POST['include']);
+									$_POST['CODEMISSOR']  = $_POST['CODTOMADOR'];
+								}
+
+								require_once($_POST['include']);
+							}
+							?>
+						</td>
+					</tr>
+					</table>
+
+				<?php
+
+				require_once DIR_SEP . "include/footer.php";
+			} else {
+				require_once("funcoes/util.php");
+				Mensagem('Sem permissão de acesso!!!');
+				print("<script language=JavaScript>parent.location='login.php';</script>");
+			}
+
+				?>
