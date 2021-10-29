@@ -64,8 +64,8 @@ Fith Floor, Boston, MA 02110-1301, USA
         </td>
         <td>
 			<select name="cmbPeriodo" id="cmbPeriodo">
-            	<option value="24">&Uacute;ltimos 24 meses</option>
-                <option value="12">&Uacute;ltimos 12 meses</option>
+            	<option value="24">Últimos 24 meses</option>
+                <option value="12">Últimos 12 meses</option>
             </select>
          </td>
     </tr>

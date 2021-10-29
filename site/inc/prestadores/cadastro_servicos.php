@@ -18,83 +18,102 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php 
+<?php
 
 $nroservicos = 5;
 $contservico = 1;
 
 while ($contservico <= $nroservicos) {
-	// sql para consultar o servico 
+
 ?>
-	<!------------------- SERVICO <?php print $contservico; ?> ------------------------------------------------------>
-	<tr id="linha01servico<?php echo $contservico; ?>" style="display:none">
-		<td height="0"></td>
-	</tr>
-	<tr id="camposservico<?php echo $contservico; ?>" style="display:none">
-		<td align="left" bgcolor="#999999">
-			<?php
-			$sql_maxcodcat = $PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
-			list($maxcodcat) = $sql_maxcodcat->fetch();
-			?>
 
-			<select name="cmbCategoria<?php echo $contservico; ?>" id="cmbCategoria<?php echo $contservico; ?>" onchange="ServicosCategorias(this);" style="width:440px;">
-				<option value=""></option>
-				<?php
-				$sql_categoria = $PDO->query("SELECT codigo, nome FROM servicos_categorias");
-				while (list($codcat, $nomecat) = $sql_categoria->fetch()) {
-					print("<option value=\"$codcat|$contservico|$maxcodcat\">$nomecat</option>");
-				}
-				?>
-			</select>
-			<?php
-			if ($contservico > 1) { ?>
-				<input type="button" name="btexcluiServico<?php echo "|" . $maxcodcat . "|" . $contservico; ?>" class="botao" value="X" onclick="excluirServico(this);" />
-			<?php } ?>
+	<!------------------- SERVICO <?php print $contservico ?> ------------------->
+	<tbody id="linha01servico<?php echo $contservico ?>" style="display:none"></tbody>
+	<tbody id="camposservico<?php echo $contservico ?>" style="display:none">
 
-			<?php
-			$sql_categoria = $PDO->query("SELECT codigo,nome FROM servicos_categorias");
-			while (list($codcategoria) = $sql_categoria->fetch()) { ?>
-				<div id="div<?php echo $codcategoria . $contservico; ?>" style="display:none">
-					<?php
-					$sql_servicos = $PDO->query("
-					SELECT 
-						codigo,
-						codservico,
-						descricao,
-						aliquota,
-						estado
-					FROM 
-						servicos
-					WHERE 
-						estado = 'A' AND codcategoria = '$codcategoria' 
-					ORDER BY 
-						codservico
-						");
-					?>
-					<select name="cmbCodigo<?php echo $codcategoria . $contservico; ?>" id="cmbCodigo<?php echo $codcategoria . $contservico; ?>" style="width:440px">
-						<option value="">Código | Descrição | Aliquota %</option>
+		<?php
+
+		$sql_maxcodcat = $PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
+		list($maxcodcat) = $sql_maxcodcat->fetch();
+
+		?>
+
+		<tr>
+			<td>
+				<div class="form-floating mb-3">
+
+					<select class="form-select" name="cmbCategoria<?php echo $contservico ?>" id="cmbCategoria<?php echo $contservico ?>" onchange="ServicosCategorias(this);">
+						<option value=""></option>
 						<?php
-						// laco para display das opcoes no combo
-						while (list($codigo, $codservico, $descricao, $aliquota, $estado) = $sql_servicos->fetch()) {
-							print("<option value=$codigo>$codservico | " . substr($descricao, 0, 70) . "... | $aliquota</option>");
-						} // fecha while
+						$sql_categoria = $PDO->query("SELECT codigo, nome FROM servicos_categorias");
+						while (list($codcat, $nomecat) = $sql_categoria->fetch()) {
+							print("<option value=\"$codcat|$contservico|$maxcodcat\">$nomecat</option>");
+						}
 						?>
 					</select>
-				</div>
-			<?php
-			} ?>
+					<label for="cmbCategoria<?php echo $contservico ?>"><?php print(($cont < 10 ? '0' . $cont : $cont) . ' - Serviço') ?></label>
 
-			<input type="hidden" value="<?php print $maxcodcat ?>" name="txtMAXCODIGOCAT" />
-			<input type="hidden" value="<?php print $nroservicos ?>" name="txtNumeroServicos" />
-			<input type="hidden" value="<?php print $contservico ?>" name="txtContServicos" />
-		</td>
-	</tr>
-	<tr id="linha02socio<?php echo $contservico; ?>" style="display:none">
-		<td height="0"></td>
-	</tr>
+				</div>
+			</td>
+
+			<td>
+				<div class="form-floating mb-3">
+					<?php if ($contservico > 1) { ?>
+						<input class="btn btn-danger" type="button" name="btexcluiServico<?php echo "|" . $maxcodcat . "|" . $contservico ?>" value="X" onclick="excluirServico(this);">
+					<?php } else { ?>
+						<input class="btn btn-danger" type="button" name="btexcluiServico<?php echo "|" . $maxcodcat . "|" . $contservico ?>" value="X" onclick="excluirServico(this);" disabled>
+					<?php } ?>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<?php
+				$sql_categoria = $PDO->query("SELECT codigo,nome FROM servicos_categorias");
+				while (list($codcategoria) = $sql_categoria->fetch()) {
+				?>
+
+					<div class="form-floating mb-3" id="div<?php echo $codcategoria . $contservico ?>" style="display:none">
+						<?php
+						$sql_servicos = $PDO->query("
+							SELECT 
+								codigo,
+								codservico,
+								descricao,
+								aliquota,
+								estado
+							FROM 
+								servicos
+							WHERE 
+								estado = 'A' AND codcategoria = '$codcategoria' 
+							ORDER BY 
+								codservico
+							");
+						?>
+						<select class="form-select" name="cmbCodigo<?php echo $codcategoria . $contservico ?>" id="cmbCodigo<?php echo $codcategoria . $contservico ?>">
+							<option value="">Código | Descrição | Aliquota %</option>
+							<?php
+							// laco para display das opcoes no combo
+							while (list($codigo, $codservico, $descricao, $aliquota, $estado) = $sql_servicos->fetch()) {
+								print("<option value=$codigo>$codservico | " . substr($descricao, 0, 70) . "... | $aliquota</option>");
+							} // fecha while
+							?>
+						</select>
+						<label for="cmbCodigo<?php echo $codcategoria . $contservico ?>">Aliquota</label>
+					</div>
+
+				<?php } ?>
+			</td>
+		</tr>
+		<input type="hidden" value="<?php print $maxcodcat ?>" name="txtMAXCODIGOCAT" />
+		<input type="hidden" value="<?php print $nroservicos ?>" name="txtNumeroServicos" />
+		<input type="hidden" value="<?php print $contservico ?>" name="txtContServicos" />
+	</tbody>
+	<tbody id="linha02socio<?php echo $contservico ?>" style="display:none"></tbody>
+
 <?php
 	$contservico++;
 }
-die('kkkkkkkkkkkkkkkkkk');
 
 ?>

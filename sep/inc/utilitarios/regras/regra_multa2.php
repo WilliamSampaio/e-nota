@@ -123,10 +123,10 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     <table width="100%">
                                         <tr>
                                             <td width="25%">
-                                                <fieldset><legend>Parcela &Uacute;nica</legend>
+                                                <fieldset><legend>Parcela Única</legend>
                                                     <table height="50">
                                                         <tr>
-                                                            <td>At�:<input type="text" class="texto" name="txtParcelaUnica" value="0,00" style="width:90px;"></td>
+                                                            <td>Até:<input type="text" class="texto" name="txtParcelaUnica" value="0,00" style="width:90px;"></td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
@@ -147,7 +147,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                                 <fieldset><legend>Outras Parcelas</legend>
                                                     <table height="50">
                                                         <tr>
-                                                            <td>At�:<input type="text" class="texto" name="txtOutrasParcelas" value="0,00" style="width:90px;"></td>
+                                                            <td>Até:<input type="text" class="texto" name="txtOutrasParcelas" value="0,00" style="width:90px;"></td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
