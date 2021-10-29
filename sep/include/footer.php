@@ -19,12 +19,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 
-<footer class="text-center text-white align-items-end bg-dark">
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2021 Copyright | <a class="text-white" href="https://github.com/WilliamSampaio/e-nota">e-Nota on GitHub</a>
-    </div>
-</footer>
-
 <script type="text/javascript" src="/scripts/java_site.js"></script>
 <script type="text/javascript" src="/scripts/padrao.js"></script>
 <script type="text/javascript" src="/scripts/java.js"></script>
@@ -44,3 +38,4 @@ Fith Floor, Boston, MA 02110-1301, USA
 </body>
 
 </html>
+
