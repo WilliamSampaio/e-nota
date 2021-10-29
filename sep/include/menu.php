@@ -18,69 +18,191 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
+<?php
+if (!$_GET['m']) {
+?>
 
-<br>
-<ul class="nav nav-pills flex-column bg-light">
-	<?php
-
-	function isActive($href)
-	{
-		$final_url_part = end(explode('/', $_SERVER['REQUEST_URI']));
-		$final_url_part == '' ? $final_url_part = 'index.php' : '';
-
-		if($href == $final_url_part){
-			return 'active';
-		}
-	}
-
-	?>
-
-	<li class="nav-item">
-		<a class="nav-link <? echo isActive('index.php') ?>" aria-current="page" href="index.php">Início</a>
-	</li>
-
-	<li class="nav-item dropdown">
-		<a class="nav-link <? echo isActive('prestadores.php') ?>" aria-current="page" href="prestadores.php">Prestadores</a>
-		<ul>
-			<li><a class="nav-link <? echo isActive('prestadores-cadastro.php') ?>" href="prestadores-cadastro.php">Cadastro</a></li>
-			<li><a class="nav-link <? echo isActive('prestadores-consulta.php') ?>" href="prestadores-consulta.php">Consulta</a></li>
-		</ul>
-	</li>
-
-	<li class="nav-item">
-		<a class="nav-link <? echo isActive('contadores.php') ?>" aria-current="page" href="contadores.php">Contadores</a>
-	</li>
-
-	<li class="nav-item">
-		<a class="nav-link <? echo isActive('tomadores.php') ?>" aria-current="page" href="tomadores.php">Tomadores</a>
-	</li>
-
-	<li class="nav-item">
-		<a class="nav-link <? echo isActive('rps.php') ?>" aria-current="page" href="rps.php">RPS</a>
-	</li>
-
-	<li class="nav-item">
-		<a class="nav-link <? echo isActive('beneficios.php') ?>" aria-current="page" href="beneficios.php">Benefícios</a>
-	</li>
-
-	<li class="nav-item">
-		<a class="nav-link <? echo isActive('faq.php') ?>" aria-current="page" href="faq.php">Perguntas e Respostas</a>
-	</li>
-
-	<li class="nav-item dropdown">
-		<a class="nav-link <? echo isActive('ouvidoria.php') ?>" aria-current="page" href="ouvidoria.php">Reclamações</a>
-		<ul>
-			<li><a class="nav-link <? echo isActive('ouvidoria-cadastro.php') ?>" href="ouvidoria-cadastro.php">Cadastro</a></li>
-			<li><a class="nav-link <? echo isActive('ouvidoria-consulta.php') ?>" href="ouvidoria-consulta.php">Consulta</a></li>
-		</ul>
-	</li>
-
-	<li class="nav-item">
-		<a class="nav-link <? echo isActive('noticias.php') ?>" aria-current="page" href="noticias.php">Notícias</a>
-	</li>
-
-	<li class="nav-item">
-		<a class="nav-link <? echo isActive('legislacao.php') ?>" aria-current="page" href="legislacao.php">Legislação</a>
-	</li>
-
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Menu Principal</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastro</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Prestador e Contador</a></li>
+      <li><a class="dropdown-item" href="#">Prestadores</a></li>
+      <li><a class="dropdown-item" href="#">Tomadores</a></li>
+      <!-- <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+    </ul>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Serviços</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Cunsutar Cadastro</a></li>
+      <li><a class="dropdown-item" href="#">Consutar por Categoria</a></li>
+      <!-- <li><a class="dropdown-item" href="#">Tomadores</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#">Separated link</a></li>  -->
+    </ul>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Consulta NFS-e</a>
+    <ul class="dropdown-menu">
+      <!-- <li><a class="dropdown-item" href="#">NFe's</a></li> -->
+      <li><a class="dropdown-item" href="#">Liberar NFS-e</a></li>
+	  <li><a class="dropdown-item" href="#">Consulta NFS-e</a></li>
+	  <li><a class="dropdown-item" href="#">Consultar Nota Avulsa</a></li>
+	  <li><a class="dropdown-item" href="#">Nota Avulsa</a></li>
+	  <!-- <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+      <li><a class="dropdown-item" href="#">AIDFe</a></li>
+	  <li><a class="dropdown-item" href="#">RPS</a></li>
+	  
+	  <li><a class="dropdown-item" href="#">Escrituração</a></li>
+	  
+      <!-- <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="logout.php">Sair</a>
+  </li>
 </ul>
+<!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
+	<link rel="stylesheet" type="text/css" href="css/menu_anylinkmenu.css" />
+	<script type="text/javascript" src="scripts/menu_menucontents.js"></script>
+	<script type="text/javascript" src="scripts/menu_anylinkmenu.js"></script>
+	<script type="text/javascript">
+		anylinkmenu.init("menuanchorclass");
+		var anylinkmenu2 = {
+			divclass: 'anylinkmenu',
+			linktarget: '_new'
+		};
+		anylinkmenu2.items = [
+			["a", "http://www.cnn.com/"],
+			["s", "http://www.msnbc.com/"],
+			["d", "http://www.google.com/"],
+			["c", "http://news.bbc.co.uk"]
+		];
+		var anylinkmenu3 = {
+			divclass: 'anylinkmenu',
+			linktarget: '_parent'
+		};
+		anylinkmenu3.items = [
+			["Cadastro", "javascript:chamaForm('cadastro','liberar.php')"],
+			["teste2", "http://www.msnbc.com/"],
+			["0", "javascript:alert(0);"]
+		];
+	</script>
+	<?php
+	$cont_menu = 1;
+	$sql_menus = $PDO->query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
+	while (list($codmenu, $menu, $link) = $sql_menus->fetch()) {
+		$sql_submenus = $PDO->query("
+				SELECT
+				  menus_prefeitura.link, submenus_prefeitura.menu, submenus_prefeitura.link
+				FROM
+				  menus_prefeitura 
+				INNER JOIN
+				  menus_prefeitura_submenus ON menus_prefeitura.codigo = menus_prefeitura_submenus.codmenu 
+				INNER JOIN
+				  submenus_prefeitura ON submenus_prefeitura.codigo = menus_prefeitura_submenus.codsubmenu
+				WHERE
+				  menus_prefeitura.codigo = $codmenu AND menus_prefeitura_submenus.visivel='S' AND nfe = 'S' $string
+				ORDER BY
+				  menus_prefeitura_submenus.ordem
+		");
+		if ($sql_submenus->rowCount()) {
+			//Verifica o nivel de permissao do usuario
+			$string = "";
+			if ($_SESSION['nivel_de_acesso'] == "M") {
+				$string = " AND menus_prefeitura_submenus.nivel <> 'A'";
+			} elseif ($_SESSION['nivel_de_acesso'] == "B") {
+				$string = " AND menus_prefeitura_submenus.nivel = 'B'";
+			}
+
+			// submenu
+			echo "
+				<script> 
+					var menu_content$cont_menu = {divclass:'anylinkmenu', linktarget:'_parent'};
+					menu_content$cont_menu.items = [
+			";
+			while (list($menulink, $submenu, $submenulink) = $sql_submenus->fetch()) {
+
+				$menu_content[$cont_menu][] = "['$submenu',\"javascript:chamaForm('$menulink','$submenulink');\"]";
+
+				/*	<li><a  class="submenua" id="submenua" onClick="chamaForm('<?php echo $menulink; ?>','<?php echo $submenulink; ?>')"><?php echo $submenu; ?></a></li>
+			*/
+			} // fim while submenus       
+			echo implode(',', $menu_content[$cont_menu]) . "];</script>";
+	?>
+			<a href="#" class="menuanchorclass menua" rel="menu_content<?php echo $cont_menu ?>[mouseover]" rev="up"><?php echo $menu; ?></a>
+	<?php
+		} //end if
+		$cont_menu++;
+	} // fim while
+	?>
+	<a href="logout.php" class="menua">Sair</a>
+
+	<form method="post" name="frmMenu" id="frmMenu">
+		<input type="hidden" name="include" id="include" />
+	</form>
+<?php
+} else {
+?>
+	<ul id="nav">
+		<?php
+		$sql_menus = $PDO->query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
+		while (list($codmenu, $menu, $link) = $sql_menus->fetch()) {
+			$sql_submenus = $PDO->query("
+				SELECT
+				  menus_prefeitura.link, submenus_prefeitura.menu, submenus_prefeitura.link
+				FROM
+				  menus_prefeitura 
+				INNER JOIN
+				  menus_prefeitura_submenus ON menus_prefeitura.codigo = menus_prefeitura_submenus.codmenu 
+				INNER JOIN
+				  submenus_prefeitura ON submenus_prefeitura.codigo = menus_prefeitura_submenus.codsubmenu
+				WHERE
+				  menus_prefeitura.codigo = $codmenu AND menus_prefeitura_submenus.visivel='S' AND nfe = 'S' $string
+				ORDER BY
+				  menus_prefeitura_submenus.ordem
+		");
+			if ($sql_submenus->rowCount()) {
+		?>
+				<li><a class="menua" href="principal.php" target="_parent"><?php echo $menu; ?></a>
+					<ul>
+						<?php
+						//Verifica o nivel de permiss�o do usuario
+						$string = "";
+						if ($_SESSION['nivel_de_acesso'] == "M") {
+							$string = " AND menus_prefeitura_submenus.nivel <> 'A'";
+						} elseif ($_SESSION['nivel_de_acesso'] == "B") {
+							$string = " AND menus_prefeitura_submenus.nivel = 'B'";
+						}
+
+						// submenu
+
+						while (list($menulink, $submenu, $submenulink) = $sql_submenus->fetch()) {
+						?>
+							<li><a class="submenua" id="submenua" onClick="chamaForm('<?php echo $menulink; ?>','<?php echo $submenulink; ?>')"><?php echo $submenu; ?></a></li>
+						<?php
+						} // fim while submenus        
+						?>
+					</ul>
+				</li>
+		<?php
+			} //end if
+		} // fim while
+		?>
+		<li><a class="menua" href="logout.php">Sair</a></li>
+	</ul>
+
+	<form method="post" name="frmMenu" id="frmMenu">
+		<input type="hidden" name="include" id="include" />
+	</form>
+<?php } ?>
