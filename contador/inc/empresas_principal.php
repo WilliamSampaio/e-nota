@@ -25,7 +25,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
 
 
  $sql = $PDO->query("SELECT codigo, email, senha FROM cadastro WHERE nome = '$NOME'");
- list($codigo,$email,$senha) = mysql_fetch_array($sql); 
+ list($codigo,$email,$senha) = $sql->fetch(); 
 ?>
 
 			
@@ -62,7 +62,7 @@ if($_POST['btAtualizar'] == "Atualizar"){
             <td align="left"><br />
                 <?php
 					$sql_logo = $PDO->query("SELECT logo FROM cadastro WHERE nome = '$NOME'");
-					list($logo) = mysql_fetch_array($sql_logo);
+					list($logo) = $sql_logo->fetch();
                    if ($logo !="")
                      {
 				?>

@@ -23,6 +23,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 session_name("contador");
 session_start();
 header("Cache-Control: no-cache, must-revalidate");
+
+require_once '../autoload.php';
+
 if(!(isset($_SESSION["empresa"])))
 {   
 	echo "
@@ -31,9 +34,14 @@ if(!(isset($_SESSION["empresa"])))
 			window.location='login.php';
 		</script>
 	";
-}else{?>
+}else{
+	
+	require_once DIR_CONTADOR . 'include/header.php';	
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?>
+
+
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -42,51 +50,74 @@ if(!(isset($_SESSION["empresa"])))
 <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
 <script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
 <link href="../css/padrao_emissor.css" rel="stylesheet" type="text/css" />
-</head>
+</head> -->
 
 <body>
-<center>
-<table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td><?php require_once("../include/topo.php"); ?></td>
-  </tr>
-  <tr>
-    <td bgcolor="#FFFFFF" height="400" valign="top" align="center">
+
+<?php require_once DIR_CONTADOR . 'include/navbar.php'; 
+?>
 	
 <!-- frame central inicio --> 	
-<table border="0" cellspacing="0" cellpadding="0" height="100%">
+<!-- <table border="0" cellspacing="0" cellpadding="0" height="100%">
   <tr>
-    <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php require_once("inc/menu.php"); ?></td>
+    <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php //require_once("include/menu.php"); ?></td>
     <td width="590" bgcolor="#FFFFFF" valign="top" align="center">
-	<img src="../img/cabecalhos/cadastro.jpg" />
+	<img src="../img/cabecalhos/cadastro.jpg" /> -->
     
+	<div class="container bg-light">
+			<div class="row align-items-start">
+				<!-- MENU -->
+				<div class="col-sm-12 col-md-3 col-lg-3">
+					<?php require_once DIR_CONTADOR . 'include/menu.php' ?>
+				</div>
+
+				<!-- CONTEÚDO -->
+				<div class="col-sm-12 col-md-9 col-lg-9">
+
+					<table border="0" align="center" cellpadding="0" cellspacing="1">
+						<tr>
+						<td width="10" height="10" bgcolor="#FFFFFF"></td>
+						<td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Atualizar Cadastro</td>
+						<td width="400" bgcolor="#FFFFFF"></td>
+						</tr>
+						<tr>
+						<td height="1" bgcolor="#CCCCCC"></td>
+						<td bgcolor="#CCCCCC"></td>
+						</tr>
+						<tr>
+						<td height="10" bgcolor="#FFFFFF"></td>
+						<td bgcolor="#FFFFFF"></td>
+						</tr>
+						<tr>
+							<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
+						</tr>
+						<tr>
+							<td height="60" colspan="3" bgcolor="#CCCCCC">
+							<?php require_once("inc/empresas_principal.php"); ?>
+							</td>
+						</tr>
+						<tr>
+							<td height="1" colspan="3" bgcolor="#CCCCCC"></td>
+						</tr>
+					</table>3e4r
+					<!-- <br>
+					<h1>e-Nota</h1>
+					<h5 class="card-title">Documento emitido e armazenado eletronicamente com o objetivo de registrar as operações de prestação de serviços e será utilizada em substituição às notas fiscais de serviços convencionais.</h5>
+					<hr><br> -->
+
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+		</div>
+
+
+
+
+
 <!-- frame central lateral direita inicio -->	
-<table border="0" align="center" cellpadding="0" cellspacing="1">
-    <tr>
-      <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Atualizar Cadastro</td>
-      <td width="400" bgcolor="#FFFFFF"></td>
-	</tr>
-	<tr>
-	  <td height="1" bgcolor="#CCCCCC"></td>
-      <td bgcolor="#CCCCCC"></td>
-	</tr>
-	<tr>
-	  <td height="10" bgcolor="#FFFFFF"></td>
-      <td bgcolor="#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
-	</tr>
-	<tr>
-		<td height="60" colspan="3" bgcolor="#CCCCCC">
-		<?php require_once("inc/empresas_principal.php"); ?>
-		</td>
-	</tr>
-	<tr>
-    	<td height="1" colspan="3" bgcolor="#CCCCCC"></td>
-	</tr>
-</table>         
+         
 
 
 
@@ -101,11 +132,11 @@ if(!(isset($_SESSION["empresa"])))
 <!-- frame central fim --> 	
 	</td>
   </tr>
+  
   <tr>
-    <td><?php require_once("inc/rodape.php"); ?></td>
+    <td><?php require_once("include/footer.php"); ?></td>
   </tr>
 </table>
-</center>
 
 </body>
 </html>
