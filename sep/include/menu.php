@@ -22,57 +22,71 @@ Fith Floor, Boston, MA 02110-1301, USA
 if (!$_GET['m']) {
 ?>
 
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Menu Principal</a>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastro</a>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Prestador e Contador</a></li>
-      <li><a class="dropdown-item" href="#">Prestadores</a></li>
-      <li><a class="dropdown-item" href="#">Tomadores</a></li>
-      <!-- <li><hr class="dropdown-divider"></li>
+	<ul class="nav nav-pills">
+		<li class="nav-item">
+			<a class="nav-link active" aria-current="page" href="#">Menu Principal</a>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastro</a>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="#">Prestador e Contador</a></li>
+				<li><a class="dropdown-item" href="#">Prestadores</a></li>
+				<li><a class="dropdown-item" href="#">Tomadores</a></li>
+				<!-- <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item" href="#">Separated link</a></li> -->
-    </ul>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Serviços</a>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Cunsutar Cadastro</a></li>
-      <li><a class="dropdown-item" href="#">Consutar por Categoria</a></li>
-      <!-- <li><a class="dropdown-item" href="#">Tomadores</a></li>
+			</ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Serviços</a>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="#">Cunsutar Cadastro</a></li>
+				<li><a class="dropdown-item" href="#">Consutar por Categoria</a></li>
+				<!-- <li><a class="dropdown-item" href="#">Tomadores</a></li>
       <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item" href="#">Separated link</a></li>  -->
-    </ul>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Consulta NFS-e</a>
-    <ul class="dropdown-menu">
-      <!-- <li><a class="dropdown-item" href="#">NFe's</a></li> -->
-      <li><a class="dropdown-item" href="#">Liberar NFS-e</a></li>
-	  <li><a class="dropdown-item" href="#">Consulta NFS-e</a></li>
-	  <li><a class="dropdown-item" href="#">Consultar Nota Avulsa</a></li>
-	  <li><a class="dropdown-item" href="#">Nota Avulsa</a></li>
-	  <!-- <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Separated link</a></li> -->
-      <li><a class="dropdown-item" href="#">AIDFe</a></li>
-	  <li><a class="dropdown-item" href="#">RPS</a></li>
-	  
-	  <li><a class="dropdown-item" href="#">Escrituração</a></li>
-	  
-      <!-- <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Separated link</a></li> -->
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="logout.php">Sair</a>
-  </li>
-</ul>
-<!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
+			</ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Consulta NFS-e</a>
+			<ul class="dropdown-menu">
+				<!-- <li><a class="dropdown-item" href="#">NFe's</a></li> -->
+				<li><a class="dropdown-item" href="#">Liberar NFS-e</a></li>
+				<li><a class="dropdown-item" href="#">Consulta NFS-e</a></li>
+				<li><a class="dropdown-item" href="#">Consultar Nota Avulsa</a></li>
+		
+				<li>
+					<hr class="dropdown-divider">
+				</li>
+				<li><a class="dropdown-item" href="#"></a></li>
+				<li><a class="dropdown-item" href="#">AIDFe</a></li>
+				<li><a class="dropdown-item" href="#">RPS</a></li>
+				<li><a class="dropdown-item" href="#">Escrituração</a></li>
+				<!-- <li><hr class="dropdown-divider"></li>
+     		    <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+			</ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Livro Digital</a>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="#">Gerar Livro Digital</a></li>
+				<li><a class="dropdown-item" href="#">Consutar Livros Digital</a>
+		</li>
+			</ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Guia de Pagamento</a>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="#">Cunsutar Guia</a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Link</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="logout.php">Sair</a>
+		</li>
+	</ul>
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
 	<link rel="stylesheet" type="text/css" href="css/menu_anylinkmenu.css" />
 	<script type="text/javascript" src="scripts/menu_menucontents.js"></script>
 	<script type="text/javascript" src="scripts/menu_anylinkmenu.js"></script>
