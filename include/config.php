@@ -35,7 +35,7 @@ function getSubdominio()
     // return 'subdominio1';
 }
 
-$config = parse_ini_file(ROOTPATH . '/.config.ini', TRUE);
+$config = parse_ini_file(ROOT_PATH . '/.config.ini', TRUE);
 
 // $str  = $config[getSubdominio()]['DB_HOST'];
 // $str .= $config[getSubdominio()]['DB_DATABASE'];
