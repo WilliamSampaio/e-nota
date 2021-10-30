@@ -39,8 +39,8 @@ if (!$_GET['m']) {
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Serviços</a>
 			<ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="#">Cunsutar Cadastro</a></li>
-				<li><a class="dropdown-item" href="#">Consutar por Categoria</a></li>
+				<li><a class="dropdown-item" href="#">Consultar Cadastro</a></li>
+				<li><a class="dropdown-item" href="#">Consultar por Categoria</a></li>
 				<!-- <li><a class="dropdown-item" href="#">Tomadores</a></li>
       <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item" href="#">Separated link</a></li>  -->
@@ -51,7 +51,7 @@ if (!$_GET['m']) {
 			<ul class="dropdown-menu">
 				<!-- <li><a class="dropdown-item" href="#">NFe's</a></li> -->
 				<li><a class="dropdown-item" href="#">Liberar NFS-e</a></li>
-				<li><a class="dropdown-item" href="#">Consulta NFS-e</a></li>
+				<li><a class="dropdown-item" href="#">Consultar NFS-e</a></li>
 				<li><a class="dropdown-item" href="#">Consultar Nota Avulsa</a></li>
 		
 				<li>
@@ -69,14 +69,14 @@ if (!$_GET['m']) {
 			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Livro Digital</a>
 			<ul class="dropdown-menu">
 				<li><a class="dropdown-item" href="#">Gerar Livro Digital</a></li>
-				<li><a class="dropdown-item" href="#">Consutar Livros Digital</a>
+				<li><a class="dropdown-item" href="#">Consultar Livros Digital</a>
 		</li>
 			</ul>
 		</li>
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Guia de Pagamento</a>
 			<ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="#">Cunsutar Guia</a></li>
+				<li><a class="dropdown-item" href="#">Consultar Guia</a></li>
 			</ul>
 		</li>
 		<li class="nav-item">
