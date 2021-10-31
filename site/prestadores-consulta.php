@@ -211,7 +211,7 @@ require_once DIR_SITE . 'include/header.php';
                                         <th scope="col">Responsável:</th>
                                         <td scope="col"><?php echo verificaCampo($nome_resp) ?></td>
                                         <th scope="col">CPF:</th>
-                                        <td scope="col"><?php echo verificaCampo($cpf_respZz) ?></td>
+                                        <td scope="col"><?php echo verificaCampo($cpf_resp) ?></td>
                                     </tr>
 
                                 <?php
