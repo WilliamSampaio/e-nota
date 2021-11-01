@@ -50,7 +50,7 @@ Fith Floor, Boston, MA 02110-1301, USA
   </tr>
   </tr>  
   <tr>
-    <td align="left">Inscri��o Municipal</td>
+    <td align="left">Inscrição Municipal</td>
     <td align="left"><input name="txtTomadorIM" id="txtTomadorIM" onkeydown="return NumbersOnly( event );"  type="text" size="30" class="texto" value="<?php echo $dados->inscrmunicipal ;?>"<?php echo $disable; ?>></td>
   </tr>
   <tr>

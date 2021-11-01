@@ -173,7 +173,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtCnpj" size="25" nkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" maxlength="18" id="txtCnpj" value="<?php echo $cnpj; ?>" /></td>
                                 </tr>
                                 <tr align="left">
-                                    <td>Inscri��o Municipal:</td>
+                                    <td>Inscrição Municipal:</td>
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtInscMunicipal" size="60" id="txtInscMunicipal" value="<?php echo $inscmunicipal; ?>" /></td>
                                 </tr>
                                 <tr align="left">

@@ -102,11 +102,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 		}else{
 			if($compmes){ ?>
 		<tr>
-			<td><b>M�s de compet�ncia:</b> <?php echo $compmes; ?></td>
+			<td><b>M�s de competência:</b> <?php echo $compmes; ?></td>
 		</tr>
 		<?php } if($compano){ ?>
 		<tr>
-			<td><b>Ano de compet�ncia:</b> <?php echo $compano; ?></td>
+			<td><b>Ano de competência:</b> <?php echo $compano; ?></td>
 		</tr>
 		<?php }
 		}//fim if compmes e compano

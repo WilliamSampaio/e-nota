@@ -37,7 +37,7 @@ $livro = $sql_livro->fetchObject();
                 </tr>
                 <tr>	
                     <td>
-                        <b>Inscri��o Municipal:</b>
+                        <b>Inscrição Municipal:</b>
                     </td>
                     <td>
                         <?php echo $livro->inscmunicipal;?>

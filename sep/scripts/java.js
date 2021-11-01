@@ -186,12 +186,12 @@ function ValidarDesIssRetido() {
 
 	if ((!(document.getElementById('cmbAno').value))
 			|| (!(document.getElementById('cmbMes').value))) {
-		alert('Informe a compet�ncia da declara��o !');
+		alert('Informe a competência da declaração !');
 		return false;
 	}
 
 	if (!(document.getElementById('txtRazaoNome').value)) {
-		alert('Informe sua Raz�oSocial/Nome!');
+		alert('Informe sua Razão Social/Nome!');
 		return false;
 	}
 	for (c = 1; total >= c; total--) {
@@ -199,7 +199,7 @@ function ValidarDesIssRetido() {
 		if ((!(document.getElementById('txtcnpjcpf' + total).value))
 				|| (!(document.getElementById('txtNroNota' + total).value))
 				|| (!(document.getElementById('txtValIssRetido' + total).value))) {
-			alert('Preencha os campos Obrigat�rios para realizar a declara��o!');
+			alert('Preencha os campos Obrigat�rios para realizar a declaração!');
 			return false;
 		}
 		if (document.getElementById('hdvalidar' + total).value == 'n') {
@@ -459,7 +459,7 @@ function ValidaCkbDec(campo){
 	if(total>0){
 		return true;
 	}else{
-		alert('� necess�rio que escolha ao menos uma declara��o');
+		alert('� necess�rio que escolha ao menos uma declaração');
 		return false;
 	}
 }//teste se tem pelo penos uma declaracao selecionada para gerar a guia
@@ -479,7 +479,7 @@ function ValidarDesTomador() {
 				|| (!(document.getElementById('txtValor' + total).value))
 				|| (document.getElementById('txtValor' + total).value == '0,00')
 				|| (!document.getElementById('txtDataEmissao' + total).value)) {
-			alert('Preencha os todos os campos para realizar a declara��o!');
+			alert('Preencha os todos os campos para realizar a declaração!');
 			return false;
 		}
 		if (document.getElementById('tdNota' + total).innerHTML == '<font color="#ff0000">Emissor não cadastrado</font>') {

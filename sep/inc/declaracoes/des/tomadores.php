@@ -26,7 +26,7 @@ if ($_GET['txtInscMunicipal']){
 								  FROM cadastro 
 								  WHERE inscrmunicipal = '$tomador_IM' AND codtipo = $codtipo");
 	if(!$sql_IM_tomador->rowCount()){
-		Mensagem("Inscri��o Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF");
+		Mensagem("Inscrição Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF");
 	}else{
 		list($tomador_CNPJ,$tomador_CPF) = $sql_IM_tomador->fetch();
 	}

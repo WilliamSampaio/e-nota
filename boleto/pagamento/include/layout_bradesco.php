@@ -207,7 +207,7 @@
     <tbody>
       <tr>
         <td class=ct valign=top width=7 height=13><img height=13 src=imagens/1.png width=1 border=0></td>
-        <td class=ct valign=top colspan=3 height=13>N�mero
+        <td class=ct valign=top colspan=3 height=13>Número
           do documento</td>
         <td class=ct valign=top width=7 height=13><img height=13 src=imagens/1.png width=1 border=0></td>
         <td class=ct valign=top width=132 height=13>CPF/CNPJ</td>

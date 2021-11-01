@@ -31,7 +31,7 @@ if ($_GET['txtInscMunicipal']){
 		WHERE inscrmunicipal='$tomador_IM'
 	");
 	if(!$sql_IM_tomador->rowCount())	{
-		echo "Inscri��o Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF";
+		echo "Inscrição Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF";
 		exit();
 	}else{	
 		list($tomador_CNPJ)=$sql_IM_tomador->fetch();

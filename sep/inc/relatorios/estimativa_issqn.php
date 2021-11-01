@@ -35,7 +35,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <tbody>
     <tr>
         <td>
-            Escolha o Per�odo
+            Escolha o Período
         </td>
         <td>
 			<?php

@@ -40,7 +40,7 @@ Fith Floor, Boston, MA 02110-1301, USA
  <input class="texto" type="text" maxlength="100" size="60" name="txtNomeValor"> </td>
 </tr>
             <td>
-            Escolha o Per�odo: 
+            Escolha o Período: 
             </td>
         <td>    
 			<?php

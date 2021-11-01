@@ -93,7 +93,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	    </td>
 	  </tr>
       <tr>
-        <td width="22%" align="left"> Nome/RazãoSocial </td>
+        <td width="22%" align="left"> Nome/Razão Social </td>
         <td align="left" colspan="2"><input type="text" class="texto" name="txtNomeEmissor" id="txtNomeEmissor" />
         </td>
       </tr>

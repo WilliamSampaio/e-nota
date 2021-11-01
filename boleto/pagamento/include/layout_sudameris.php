@@ -116,7 +116,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>CPF/CNPJ</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>N�mero do documento</td>
+		<td class=ct>Número do documento</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Espécie</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
@@ -254,7 +254,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Data do documento</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td colspan=3 class=ct>N�mero do documento</td>
+		<td colspan=3 class=ct>Número do documento</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Espécie doc.</td>
 		<td><img src=imagens/1.png width=1 height=13></td>

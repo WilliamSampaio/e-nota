@@ -113,12 +113,12 @@ switch($estado){
 	}else{
 		if($compmes){ ?>
 	<tr>
-		<td><b>M�s de compet�ncia:</b></td>
+		<td><b>M�s de competência:</b></td>
 		<td><?php echo $compmes; ?></td>
 	</tr>
 	<?php } if($compano){ ?>
 	<tr>
-		<td><b>Ano de compet�ncia:</b></td>
+		<td><b>Ano de competência:</b></td>
 		<td><?php echo $compano; ?></td>
 	</tr>
 	<?php }
