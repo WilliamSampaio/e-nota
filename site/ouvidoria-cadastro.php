@@ -104,8 +104,6 @@ require_once DIR_SITE . 'include/header.php';
 
 				<form method="post">
 
-					<input type="hidden" name="txtMenu" value="<?php echo $_POST['txtMenu']; ?>">
-
 					<div class="mb-3">
 						<p>Assunto: Nota Fiscal Eletrônica de Serviços</p>
 					</div>
