@@ -1,0 +1,33 @@
+
+1.      inicio                  OK
+
+2.      prestadores             OK
+2.1.    cadastro                OK
+2.2.    consulta                OK
+
+3.      contadores
+3.1.    cadastro
+3.2.    consulta
+
+4.      tomadores
+4.1     consultar RPS
+4.2     autenticidade de NFe    OK
+4.3     tomadores: gerar guia
+4.4     consultar creditos
+
+5.      RPS
+
+6.      beneficios              OK
+6.1     Prestador Emissor       OK
+6.2     Tomador de Serviços     OK
+6.3     Prefeitura Municipal    OK
+
+7.      Perguntas e Respostas   OK
+
+8.      Ouvidoria               OK
+8.1     Reclamações             OK
+8.2     Consulta                OK
+
+9.      Notícias                OK
+
+10.     Legislação              OK
