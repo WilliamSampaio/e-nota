@@ -106,7 +106,7 @@ function recusaRPS(url){
 
 function comunicarPartesRPS(url,comunicado){
 	if(comunicado == "S"){
-		if(confirm('Voc� j� comunicou esta solicita��o, deseja comunicar novamente?')){
+		if(confirm('Você j� comunicou esta solicita��o, deseja comunicar novamente?')){
 			ajax({
 				url:url,
 				espera: function(){
@@ -118,7 +118,7 @@ function comunicarPartesRPS(url,comunicado){
 					if(respostaAjax == 1){
 						alert("Solicitante comunicado");
 					}else{
-						alert("N�o foi possivel comunicar o solicitante, verifique se o mesmo possui e-mail cadastrado!");
+						alert("Não foi possivel comunicar o solicitante, verifique se o mesmo possui e-mail cadastrado!");
 					}
 				}
 			});
@@ -131,7 +131,7 @@ function comunicarPartesRPS(url,comunicado){
 					alert("Solicitante comunicado");
 					document.getElementById('btBuscar').click();
 				}else{
-					alert("N�o foi possivel comunicar o solicitante, verifique se o mesmo possui e-mail cadastrado!");
+					alert("Não foi possivel comunicar o solicitante, verifique se o mesmo possui e-mail cadastrado!");
 				}
 			}
 		});
@@ -203,7 +203,7 @@ function ValidarDesIssRetido() {
 			return false;
 		}
 		if (document.getElementById('hdvalidar' + total).value == 'n') {
-			alert('Emissor Digitado n�o consta em nosso sistema, Favor verifique os dados !');
+			alert('Emissor Digitado não consta em nosso sistema, Favor verifique os dados !');
 			document.getElementById('txtcnpjcpf' + total).focus();
 			return false;
 		}
@@ -334,7 +334,7 @@ function ConsultaCnpj(campo, cont) {
 		},
 		sucesso: function() {
 			var resposta = respostaAjax;
-			if (resposta == 'Emissor n�o cadastrado') {
+			if (resposta == 'Emissor não cadastrado') {
 				document.getElementById('hdvalidar' + cont).value = 'n';
 				resposta = '<font color=#ff0000>' + resposta + '</font>';
 			} else {
@@ -371,7 +371,7 @@ function ConsultaCnpj(campo, cont) {
 		if (req.readyState == 4 && req.status == 200) {
 			// Resposta retornada pelo validacao.php
 			var resposta = req.responseText;
-			if (resposta == 'Emissor n�o cadastrado') {
+			if (resposta == 'Emissor não cadastrado') {
 				document.getElementById('hdvalidar' + cont).value = 'n';
 				resposta = '<font color=#ff0000>' + resposta + '</font>';
 			} else {
@@ -482,8 +482,8 @@ function ValidarDesTomador() {
 			alert('Preencha os todos os campos para realizar a declara��o!');
 			return false;
 		}
-		if (document.getElementById('tdNota' + total).innerHTML == '<font color="#ff0000">Emissor n�o cadastrado</font>') {
-			alert('Emissor Digitado n�o consta em nosso sistema, Favor verifique os dados!');
+		if (document.getElementById('tdNota' + total).innerHTML == '<font color="#ff0000">Emissor não cadastrado</font>') {
+			alert('Emissor Digitado não consta em nosso sistema, Favor verifique os dados!');
 			document.getElementById('txtPrestador' + total).focus();
 			return false;
 		}
@@ -1628,7 +1628,7 @@ function CalculaIssRetido(campovaltotal,campoissretido)
 		}
 	else
 		{
-			alert('N�o pode reter mais do que 100% de iss');		
+			alert('Não pode reter mais do que 100% de iss');		
 		}
 }
 	
@@ -1654,7 +1654,7 @@ function SomaDeduc(campodeduc,campovaltotal)
 * - sMask (mascara que define o
 * formato que o dado ser� apresentado,
 * usando o algarismo "9" para
-* definir n�meros e o s�mbolo "!" para
+* definir números e o s�mbolo "!" para
 * qualquer caracter...
 * - evtKeyPress (evento)
 * Uso.......: <input type="textbox"
@@ -1723,9 +1723,9 @@ while (i <= mskLen) {
 objForm[strField].value = sCod;
 
 if (nTecla != 8) { // backspace
-		if (sMask.charAt(i-1) == "9") { // apenas n�meros...
+		if (sMask.charAt(i-1) == "9") { // apenas números...
 			return ((nTecla > 47) && (nTecla < 58)); 
-		} // n�meros de 0 a 9
+		} // números de 0 a 9
 		else { // qualquer caracter...
 			return true;
 		} 
