@@ -40,6 +40,13 @@ require_once DIR_SITE . 'include/header.php';
 
 			<!-- CONTEÚDO -->
 			<div class="col-sm-12 col-md-9 col-lg-9">
+				<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index.php">Início</a></li>
+						<li class="breadcrumb-item"><a href="ouvidoria.php">Ouvidoria</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Consulta de Reclamações</li>
+					</ol>
+				</nav>
 
 				<br>
 				<h1>Ouvidoria</h1>
@@ -68,9 +75,9 @@ require_once DIR_SITE . 'include/header.php';
 				</form>
 
 				<?php
-				
+
 				if ($_POST['btConsultar'] != "") {
-					
+
 					echo '<hr>';
 
 					$sql = $PDO->query("SELECT rps_numero,datareclamacao,estado FROM reclamacoes WHERE  tomador_cnpj='" . $_POST['txtCpfCnpjTomador'] . "'");
@@ -122,7 +129,7 @@ require_once DIR_SITE . 'include/header.php';
 					}
 				}
 				?>
-				
+
 				<hr>
 				<a class="btn btn-primary" href="ouvidoria.php">Voltar</a>
 			</div>
