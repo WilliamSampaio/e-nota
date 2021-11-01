@@ -5,9 +5,9 @@
 2.1.    cadastro                OK
 2.2.    consulta                OK
 
-3.      contadores
-3.1.    cadastro
-3.2.    consulta
+3.      contadores              OK
+3.1.    cadastro                OK
+3.2.    consulta                OK
 
 4.      tomadores
 4.1     consultar RPS
