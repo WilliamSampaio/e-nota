@@ -38,7 +38,6 @@ require_once DIR_SITE . 'include/header.php';
 
             <!-- CONTEÚDO -->
             <div class="col-sm-12 col-xl-9">
-
                 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Início</a></li>
@@ -49,8 +48,7 @@ require_once DIR_SITE . 'include/header.php';
 
                 <br>
                 <h1>Prestadores</h1>
-                <h5 class="card-title">Área destinada aos <strong>Prestadores de Serviços</strong> para acesso ao
-                    sistema de emissão e cadastro</h5>
+                <h5 class="card-title">Área destinada aos <strong>Prestadores de Serviços</strong> para acesso ao sistema de emissão e cadastro</h5>
                 <hr><br>
 
                 <h2>Cadastro de Prestadores</h2>
@@ -65,7 +63,7 @@ require_once DIR_SITE . 'include/header.php';
 
                 <!-- Formulário de inserção de empresa -->
                 <p><strong>Prezado Contribuinte</strong></p>
-                <p>nossa Prefeitura Municipal vem empreendendo esforços para aprimorar continuamente a qualidade dos serviços oferecidos aos contribuintes. Neste sentido, a internet apresenta-se como um importante instrumento capaz de atende-los com agilidade e segurança.</p>
+                <p>A nossa Prefeitura Municipal vem empreendendo esforços para aprimorar continuamente a qualidade dos serviços oferecidos aos contribuintes. Neste sentido, a internet apresenta-se como um importante instrumento capaz de atende-los com agilidade e segurança.</p>
                 <p>E por falar em segurança, o contribuinte deverá cadastrar uma senha individual que permitirá o acesso à área restrita, de seu exclusivo interesse, no endereço eletrônico da Prefeitura.</p>
                 <p>A senha cadastrada é intransferível e configura a assinatura eletrônica da pessoa física ou jurídica que a cadastrou.</p>
                 <p><strong>ALERTAMOS QUE CABERÁ EXCLUSIVAMENTE AO CONTRIBUINTE TODA RESPONSABILIDADE DECORRENTE DO USO INDEVIDO DA SENHA, QUE DEVERÁ SER GUARDADA EM TOTAL SEGURANÇA.</strong></p>
@@ -218,7 +216,7 @@ require_once DIR_SITE . 'include/header.php';
 
                     <div class="table-responsive">
                         <table>
-                            <?php require_once 'inc/prestadores/cadastro_socios.php' ?>
+                            <?php require_once 'include/cadastro_socios.php' ?>
                         </table>
                     </div>
 
@@ -231,7 +229,7 @@ require_once DIR_SITE . 'include/header.php';
 
                     <div class="table-responsive">
                         <table>
-                            <?php require_once 'inc/prestadores/cadastro_servicos.php' ?>
+                            <?php require_once 'include/cadastro_servicos.php' ?>
                         </table>
                     </div>
 
@@ -306,5 +304,4 @@ require_once DIR_SITE . 'include/header.php';
         }
 
         buscarEstados(document.getElementById('txtInsUfEmpresa'));
-
     </script>

@@ -19,8 +19,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-require_once("../../../include/conect.php");
-require_once("../../../funcoes/util.php");
+
+require_once '../../../autoload.php';
 
 // Pega as variaveis que vieram por POST
 $nome               = trataString($_POST['txtInsNomeEmpresa']);
@@ -272,6 +272,28 @@ while (list($codcategoria) = $sql_categoria->fetch()) {
 $contsocios = 0;
 $nrosocios = 10;
 
+$txtNomeSocio1 = $_POST['txtNomeSocio1'];
+$txtNomeSocio2 = $_POST['txtNomeSocio2'];
+$txtNomeSocio3 = $_POST['txtNomeSocio3'];
+$txtNomeSocio4 = $_POST['txtNomeSocio4'];
+$txtNomeSocio5 = $_POST['txtNomeSocio5'];
+$txtNomeSocio6 = $_POST['txtNomeSocio6'];
+$txtNomeSocio7 = $_POST['txtNomeSocio7'];
+$txtNomeSocio8 = $_POST['txtNomeSocio8'];
+$txtNomeSocio9 = $_POST['txtNomeSocio9'];
+$txtNomeSocio10 = $_POST['txtNomeSocio10'];
+
+$txtCpfSocio1 = $_POST['txtCpfSocio1'];
+$txtCpfSocio2 = $_POST['txtCpfSocio2'];
+$txtCpfSocio3 = $_POST['txtCpfSocio3'];
+$txtCpfSocio4 = $_POST['txtCpfSocio4'];
+$txtCpfSocio5 = $_POST['txtCpfSocio5'];
+$txtCpfSocio6 = $_POST['txtCpfSocio6'];
+$txtCpfSocio7 = $_POST['txtCpfSocio7'];
+$txtCpfSocio8 = $_POST['txtCpfSocio8'];
+$txtCpfSocio9 = $_POST['txtCpfSocio9'];
+$txtCpfSocio10 = $_POST['txtCpfSocio10'];
+
 $vetor_sociosnomes = array($txtNomeSocio1, $txtNomeSocio2, $txtNomeSocio3, $txtNomeSocio4, $txtNomeSocio5, $txtNomeSocio6, $txtNomeSocio7, $txtNomeSocio8, $txtNomeSocio9, $txtNomeSocio10);
 $vetor_socioscpf = array($txtCpfSocio1, $txtCpfSocio2, $txtCpfSocio3, $txtCpfSocio4, $txtCpfSocio5, $txtCpfSocio6, $txtCpfSocio7, $txtCpfSocio8, $txtCpfSocio9, $txtCpfSocio10);
 //insere os socios no banco
@@ -296,11 +318,11 @@ while ($contsocios < $nrosocios) {
 
 //gera o comprovante em pdf 
 $CodEmp = base64_encode($CODEMPRESA);
-Mensagem("Contador cadastrado! Não esqueça de Imprimir o comprovante de cadastro que abrirá em uma nova janela!");
-print "
-		<script language=JavaScript> 
-			window.open('../../../reports/cadastro_comprovante.php?COD=$CodEmp');
-			window.location='../../contadores.php';
-		</script>
-	";
+
+echo "<script type='text/javascript'>
+alert('Contador cadastrado! Não esqueça de Imprimir o comprovante de cadastro que abrirá em uma nova janela!');
+window.open('../../../reports/cadastro_comprovante.php?COD=$CodEmp');
+window.location='../../contadores.php';
+</script>";
+
 ?>

@@ -136,7 +136,7 @@ require_once DIR_SITE . 'include/header.php';
                                     $estado = '<span style="color: green;"><b>Cadastro liberado</b></span>';
                                     break;
                                 case "I":
-                                    $estado = '<span color="#FF0000"><b>Contador inativo, entre em contato com a prefeitura.</b></span>';
+                                    $estado = '<span style="color: red;"><b>Contador inativo, entre em contato com a prefeitura.</b></span>';
                                     break;
                             } //fim switch estado
 

@@ -119,10 +119,10 @@ require_once DIR_SITE . 'include/header.php';
                             $estado = '<b>Aguarde a liberação da prefeitura</b>';
                             break;
                         case "A":
-                            $estado = '<font color="#006600"><b>Cadastro liberado</b></font>';
+                            $estado = '<span style="color: green;"><b>Cadastro liberado</b></span>';
                             break;
                         case "I":
-                            $estado = '<font color="#FF0000"><b>Prestador inativo, entre em contato com a prefeitura.</b></font>';
+                            $estado = '<span style="color: red;"><b>Prestador inativo, entre em contato com a prefeitura.</b></span>';
                             break;
                     } //fim switch estado
 
