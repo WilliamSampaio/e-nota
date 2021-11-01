@@ -86,7 +86,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     ?>
                 </select>
             </td>
-            <td align="center"><input type="submit" class="botao" name="btBuscar" value="Buscar" onclick="return ValidaFormulario('_mes|_ano','Por favor selecione um m�s e um ano!')"/></td>
+            <td align="center"><input type="submit" class="botao" name="btBuscar" value="Buscar" onclick="return ValidaFormulario('_mes|_ano','Por favor selecione um mês e um ano!')"/></td>
         </tr>
     </table>
 

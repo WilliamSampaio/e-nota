@@ -178,7 +178,7 @@ $configuracoes = $sql_leidecreto->fetchObject();
 							<td class="cab03"><?php print strtoupper($CONF_SECRETARIA); ?></td>
 						</tr>
 						<tr>
-							<td class="cab02">NOTA FISCAL ELETR&Ocirc;NICA DE SERVI�OS TOMADOS - NF-e Tomada</td>
+							<td class="cab02">NOTA FISCAL ELETRÔNICA DE SERVIÇOS TOMADOS - NF-e Tomada</td>
 						</tr>
 					</table>
 					<!-- tabela prefeitura fim -->

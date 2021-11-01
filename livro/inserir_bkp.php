@@ -9,7 +9,7 @@
 	$mes= $_POST['cmbMes'];
 	$ano= $_POST['cmbAno'];
 	if ($mes==date("m") && $ano==date("Y")){
-                Mensagem("O livro só pode ser gerado ao m�s anterior do atual!");
+                Mensagem("O livro só pode ser gerado ao mês anterior do atual!");
         }else{
             $dataemissao    = date("Y-m-d");
             $data           = explode("-",$dataemissao);

@@ -60,7 +60,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     
 <fieldset><legend>Resultados</legend>
 <?php	
-	//Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
+	//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
 	$query = ("
 			SELECT 
 				decc_des.codigo,

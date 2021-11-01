@@ -73,7 +73,7 @@ Fith Floor, Boston, MA 02110-1301, USA
    <tr>	  
 	<td colspan="2" align="center">
 	 <input type="hidden" name="btOp" value="Gerar Guia"/>
-	 <input type="submit" value="Pesquisar" name="btPesquisar" class="botao" onclick="return ValidaFormulario('cmbMes|cmbAno','Defina o m�s e o ano')"></td>
+	 <input type="submit" value="Pesquisar" name="btPesquisar" class="botao" onclick="return ValidaFormulario('cmbMes|cmbAno','Defina o mês e o ano')"></td>
    </tr>   
   </table>   
   </form>

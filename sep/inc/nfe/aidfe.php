@@ -65,7 +65,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 	</table>
 	<?php
 	}else{?>
-		<center><b>Não há solicita��es</b></center>
+		<center><b>Não há solicitações</b></center>
 	<?php
 	}
 	?>
@@ -156,7 +156,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 </form>	
 <?php
 	if($btBusca!=""){// Verifica se a busca foi feita
-	if($btAtualizar!="")// Se a atualiza��o foi feita, registra as informa��es no banco
+	if($btAtualizar!="")// Se a atualização foi feita, registra as informações no banco
 		{?>
 			<form name="frmAIDF" method="post" id="frmAIDF">
 			<input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
@@ -206,7 +206,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 	<input name="txtCNPJ" type="hidden" value="<?php echo $_POST['txtCNPJ'];?>"/> 
 	<?php
 	if($sql->rowCount()==0){
-		echo "<center><b>Não há solicita��es</b></center>";
+		echo "<center><b>Não há solicitações</b></center>";
 	}else{
 		?>
 		<table align="left" width="100%">

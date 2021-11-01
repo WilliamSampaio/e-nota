@@ -65,7 +65,6 @@
 ?>
 
 <style type="text/css">
-<!--
 
 #divCabecalhoEmitidas {
 	margin-top:2px;
@@ -81,7 +80,7 @@
 	margin-top:10px;
 	margin-bottom:10px;
 }
--->
+
 </style>
 </head>
 
@@ -146,7 +145,7 @@
     <div id="divIssEmitidas">
     <table width="100%" border="1" cellpadding="5" cellspacing="0" style="margin: 0 auto;">
       <tr>
-        <td colspan="12" align="center" class="titulo1">NOTAS FISCAIS ELETR&Ocirc;NICAS EMITIDAS </td>
+        <td colspan="12" align="center" class="titulo1">NOTAS FISCAIS ELETRÔNICAS EMITIDAS </td>
         </tr>
       <tr>
         <td colspan="3" align="center" class="field2">NFEletrônica</td>
@@ -271,7 +270,7 @@
 
 <?php
 }else{
-	echo "<div id=\"divIssEmitidas\"><table width=\"1100\" style=\"margin:0 auto;\" border=\"0\" cellpadding=\"5\" cellspacing=\"0\"><tr><td colspan=\"12\" align=\"center\" class=\"titulo1\">NENHUMA NOTA FISCAL ELETR&Ocirc;NICA EMITIDA </td></tr></table></div>";	
+	echo "<div id=\"divIssEmitidas\"><table width=\"1100\" style=\"margin:0 auto;\" border=\"0\" cellpadding=\"5\" cellspacing=\"0\"><tr><td colspan=\"12\" align=\"center\" class=\"titulo1\">NENHUMA NOTA FISCAL ELETRÔNICA EMITIDA </td></tr></table></div>";	
 }
 ?>
 

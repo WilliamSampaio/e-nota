@@ -171,7 +171,7 @@ list($aliquotapercentual, $codigo, $numero, $codverificacao, $datahoraemissao, $
 			<td class="cab03"><?php print strtoupper($CONF_SECRETARIA); ?></td>
 		  </tr>
 		  <tr>
-			<td class="cab02">NOTA FISCAL ELETR&Ocirc;NICA DE SERVIÇOS - NF-e</td>
+			<td class="cab02">NOTA FISCAL ELETRÔNICA DE SERVIÇOS - NF-e</td>
 		  </tr>
 		  <?php if($rps_numero){ ?>
 		  <tr>

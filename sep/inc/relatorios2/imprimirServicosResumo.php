@@ -31,7 +31,7 @@
 	if($result){ //Se existir algum registro, mostra na tabela
 	?>
 	
-<!-- In�cio da Tabela -->
+<!-- Início da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999">
 		<?php

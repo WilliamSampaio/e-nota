@@ -19,72 +19,78 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <style type="text/css" media="all">
-<!--
 	#divBuscaPrestador {
-		position:absolute;
-		left:40%;
-		top:20%;
-		width:298px;
-		height:276px;
-		z-index:1;
-	 visibility:<?php if(isset($btBuscarPrestador)) { echo"visible"; }else { echo"hidden";}?>
+		position: absolute;
+		left: 40%;
+		top: 20%;
+		width: 298px;
+		height: 276px;
+		z-index: 1;
+		visibility: <?php if (isset($btBuscarPrestador)) {
+						echo "visible";
+					} else {
+						echo "hidden";
+					} ?>
 	}
-	
+
 	#divBuscaContador {
-		position:absolute;
-		left:40%;
-		top:20%;
-		width:298px;
-		height:276px;
-		z-index:1;
-	 visibility:<?php if(isset($btBuscarContador)) { echo"visible"; }else { echo"hidden"; }?>
+		position: absolute;
+		left: 40%;
+		top: 20%;
+		width: 298px;
+		height: 276px;
+		z-index: 1;
+		visibility: <?php if (isset($btBuscarContador)) {
+						echo "visible";
+					} else {
+						echo "hidden";
+					} ?>
 	}
-	
-	
-	input[type*="text"]{
-		text-transform:uppercase;
+
+
+	input[type*="text"] {
+		text-transform: uppercase;
 	}
- -->
 </style>
-<div id="divBuscaPrestador"  >
+<div id="divBuscaPrestador">
 	<?php require_once("inc/cadastro/prestadores/busca_prestador_cont.php"); ?>
 </div>
-<div id="divBuscaContador"  >
+<div id="divBuscaContador">
 	<?php require_once("inc/cadastro/prestadores/busca_contador.php"); ?>
 </div>
 <?php
-	//Testa se o usuario acionou o botao de inserção de novo contador se sim direciona para o cadastro de prestadores
-	if($_POST['btNovoContador']){
-		RedirecionaPost("principal.php?include=inc/cadastro/prestadores/cadastro.php");
-		die();
-	}
+//Testa se o usuario acionou o botao de inserção de novo contador se sim direciona para o cadastro de prestadores
+if ($_POST['btNovoContador']) {
+	RedirecionaPost("principal.php?include=inc/cadastro/prestadores/cadastro.php");
+	die();
+}
 
 
-	//Testa se algum dos bot�es foi acionado
-	if(($_POST['btAdcionar'] == "Adcionar Contador") || ($_POST['btAtualizar'] == "Atualizar Contador")){
-		$cod_prest = $_POST['CODPRESTADOR'];
-		$cod_cont  = $_POST['CODCONTADOR'];
-		$PDO->query("UPDATE cadastro SET 
+//Testa se algum dos bot�es foi acionado
+if (($_POST['btAdcionar'] == "Adcionar Contador") || ($_POST['btAtualizar'] == "Atualizar Contador")) {
+	$cod_prest = $_POST['CODPRESTADOR'];
+	$cod_cont  = $_POST['CODCONTADOR'];
+	$PDO->query("UPDATE cadastro SET 
 						contadornfe ='{$_POST['txtNfe']}',
 						contadorlivro ='{$_POST['txtLivro']}',
 						contadorguia='{$_POST['txtGuia']}',
 						contadorrps='{$_POST['txtRps']}',
 						codcontador = '$cod_cont' 
 						WHERE codigo = '$cod_prest'");
-		if($_POST['btAdcionar'] == "Adcionar Contador"){
-			add_logs('Inseriu Contador para uma Empresa');
-			Mensagem("Inserido contador para a empresa!");
-		}else{
-			add_logs('Atualizou Contador para uma Empresa');
-			Mensagem("Contador da empresa atualizado!");
-		}
+	if ($_POST['btAdcionar'] == "Adcionar Contador") {
+		add_logs('Inseriu Contador para uma Empresa');
+		Mensagem("Inserido contador para a empresa!");
+	} else {
+		add_logs('Atualizou Contador para uma Empresa');
+		Mensagem("Contador da empresa atualizado!");
 	}
-		
-	//Verifica se foi feita uma busca pelo prestador se sim traz as informa��es do banco sobre o mesmo
-	if($_POST['CODPRESTADOR']){
-		$codigo_prestador = $_POST['CODPRESTADOR'];
-		$codigo_contador  = $_POST['CODCONTADOR'];
-		$sql_prestador = $PDO->query("
+}
+
+//Verifica se foi feita uma busca pelo prestador se sim traz as informações do banco sobre o mesmo
+if ($_POST['CODPRESTADOR']) {
+	$codigo_prestador = $_POST['CODPRESTADOR'];
+	$codigo_contador  = $_POST['CODCONTADOR'];
+	$sql_prestador = $PDO->query("
 			SELECT
 				nome,
 				razaosocial,
@@ -99,15 +105,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 			WHERE 
 				codigo = '$codigo_prestador'
 		");
-		list($nome,$razaosocial,$cnpjcpf,$codcontador,$contnfe,$contlivro,$contguia,$contrps) = $sql_prestador->fetch();
-		
-		//testa se o prestador ja possui um contador
-		if(!$codigo_contador){
-			$codigo_contador = $codcontador;
-		}
-		
-		//busca as informa��es do contador referente ao prestador ou informa��es referentes ao contador buscado pelo usuario
-		$sql_contador = $PDO->query("
+	list($nome, $razaosocial, $cnpjcpf, $codcontador, $contnfe, $contlivro, $contguia, $contrps) = $sql_prestador->fetch();
+
+	//testa se o prestador ja possui um contador
+	if (!$codigo_contador) {
+		$codigo_contador = $codcontador;
+	}
+
+	//busca as informações do contador referente ao prestador ou informações referentes ao contador buscado pelo usuario
+	$sql_contador = $PDO->query("
 			SELECT
 				razaosocial,
 				IF(cnpj <> '',cnpj,cpf) AS cnpjcpf,
@@ -117,8 +123,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 			WHERE 
 				codigo = '$codigo_contador'
 		");
-		list($nome_cont,$cnpjcpf_cont,$fone_cont) = $sql_contador->fetch();
-	}
+	list($nome_cont, $cnpjcpf_cont, $fone_cont) = $sql_contador->fetch();
+}
 ?>
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
 	<tr>
@@ -129,12 +135,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<tr>
 		<td width="18" background="img/form/lateralesq.jpg"></td>
 		<td align="center">
-		
+
 			<form method="post">
-				<input type="hidden" name="include" id="include" value="<?php echo $_POST['include'];?>" />
-				<input type="hidden" name="CODPRESTADOR" value="<?php echo $_POST['CODPRESTADOR'];?>" />
-				<input type="hidden" name="CODCONTADOR" value="<?php echo $_POST['CODCONTADOR'];?>" />
-				<fieldset><legend>Inserção do contador para o Prestador</legend>
+				<input type="hidden" name="include" id="include" value="<?php echo $_POST['include']; ?>" />
+				<input type="hidden" name="CODPRESTADOR" value="<?php echo $_POST['CODPRESTADOR']; ?>" />
+				<input type="hidden" name="CODCONTADOR" value="<?php echo $_POST['CODCONTADOR']; ?>" />
+				<fieldset>
+					<legend>Inserção do contador para o Prestador</legend>
 					<table width="100%">
 						<tr>
 							<td align="left" colspan="2"><b>Informaçães da Empresa</b></td>
@@ -142,116 +149,153 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<tr>
 							<td align="left"> Nome </td>
 							<td align="left">
-								<input type="text" size="70" maxlength="100" name="txtNomeEmp" class="texto" value="<?php if(isset($nome)){echo $nome;} ?>">
+								<input type="text" size="70" maxlength="100" name="txtNomeEmp" class="texto" value="<?php if (isset($nome)) {
+																														echo $nome;
+																													} ?>">
 							</td>
 						</tr>
 						<tr>
 							<td align="left"> Razão Social </td>
 							<td align="left">
-								<input type="text" size="70" maxlength="100" name="txtRazaoEmp" class="texto" 
-								value="<?php if(isset($razaosocial)){echo $razaosocial;} ?>">
+								<input type="text" size="70" maxlength="100" name="txtRazaoEmp" class="texto" value="<?php if (isset($razaosocial)) {
+																															echo $razaosocial;
+																														} ?>">
 							</td>
 						</tr>
 						<tr>
 							<td align="left"> CNPJ/CPF </td>
 							<td align="left">
-								<input type="text" size="20"  name="txtCNPJEmp" class="texto" 
-								value="<?php if(isset($cnpjcpf)){echo $cnpjcpf;} ?>" maxlength="18" />
+								<input type="text" size="20" name="txtCNPJEmp" class="texto" value="<?php if (isset($cnpjcpf)) {
+																										echo $cnpjcpf;
+																									} ?>" maxlength="18" />
 							</td>
 						</tr>
 						<tr>
 							<td align="left" colspan="2">
-								<input name="btPesquisar" type="button" class="botao" value="Buscar Prestador" 
-								onclick="document.getElementById('divBuscaPrestador').style.visibility='visible';document.getElementById('divBuscaContador').style.visibility='hidden'">
+								<input name="btPesquisar" type="button" class="botao" value="Buscar Prestador" onclick="document.getElementById('divBuscaPrestador').style.visibility='visible';document.getElementById('divBuscaContador').style.visibility='hidden'">
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2"><hr size="1" color="#000000"></td>
+							<td colspan="2">
+								<hr size="1" color="#000000">
+							</td>
 						</tr>
 						<tr>
 							<td align="left" colspan="2"><b>Informações do Contador</b></td>
 						</tr>
 						<tr>
-							<td align="left"> Nome<font color="#FF0000">*</font> </td>
+							<td align="left"> Nome<font color="#FF0000">*</font>
+							</td>
 							<td align="left">
-								<input type="text" size="70" maxlength="100" name="txtNomeCont" id="txtNomeCont" class="texto"  
-								value="<?php if(isset($nome_cont)){echo $nome_cont;} ?>" <?php if(!isset($nome_cont)){ echo "disabled=\"disabled\"";}?>>
+								<input type="text" size="70" maxlength="100" name="txtNomeCont" id="txtNomeCont" class="texto" value="<?php if (isset($nome_cont)) {
+																																			echo $nome_cont;
+																																		} ?>" <?php if (!isset($nome_cont)) {
+																																															echo "disabled=\"disabled\"";
+																																														} ?>>
 							</td>
 						</tr>
 						<tr>
-							<td align="left"> CNPJ/CPF<font color="#FF0000">*</font> </td>
+							<td align="left"> CNPJ/CPF<font color="#FF0000">*</font>
+							</td>
 							<td align="left">
-								<input type="text" size="20"  name="txtCNPJEmp" id="txtCNPJEmp" class="texto" 
-								value="<?php if(isset($cnpjcpf_cont)){echo $cnpjcpf_cont;} ?>" maxlength="18" <?php if(!isset($cnpjcpf_cont)){echo "disabled=\"disabled\"";}?> />
+								<input type="text" size="20" name="txtCNPJEmp" id="txtCNPJEmp" class="texto" value="<?php if (isset($cnpjcpf_cont)) {
+																														echo $cnpjcpf_cont;
+																													} ?>" maxlength="18" <?php if (!isset($cnpjcpf_cont)) {
+																																																echo "disabled=\"disabled\"";
+																																															} ?> />
 							</td>
 						</tr>
 						<tr>
-							<td align="left"> Telefone<font color="#FF0000">*</font> </td>
+							<td align="left"> Telefone<font color="#FF0000">*</font>
+							</td>
 							<td align="left">
-								<input type="text" class="texto" size="20" maxlength="15" name="txtFoneComercial" id="txtFoneComercial"
-								 value="<?php if(isset($fone_cont)){ echo $fone_cont;} ?>" <?php if(!isset($fone_cont)){ echo "disabled=\"disabled\"";}?>/>
+								<input type="text" class="texto" size="20" maxlength="15" name="txtFoneComercial" id="txtFoneComercial" value="<?php if (isset($fone_cont)) {
+																																					echo $fone_cont;
+																																				} ?>" <?php if (!isset($fone_cont)) {
+																																																		echo "disabled=\"disabled\"";
+																																																	} ?> />
 							</td>
 						</tr>
-                         <tr>
-                            <td> 
-                                NFE: </td>
-                            
-                            <td>Sim
-                            
-                              <input type="radio" name="txtNfe"  value="S" id="txtNfe" <?php if($contnfe == 'S'){ echo "checked=checked"; } ?> />
-                    Não
-                                <input type="radio" name="txtNfe"  value="N" id="txtNfe" <?php if($contnfe == 'N'){ echo "checked=checked"; } ?> /></td>
-                        </tr>
-                        <tr>
-                            <td>Livro: </td>
-                            <td>Sim		
-                              <input type="radio" name="txtLivro" value="S"  id="txtLivro" <?php if($contlivro == 'S'){ echo "checked=checked"; } ?> />
-                    Não
-                    <input type="radio" name="txtLivro" value="N"  id="txtLivro" <?php if($contlivro == 'N'){ echo "checked=checked"; } ?> /></td>
-                        </tr>
-                            <tr>
-                                <td>Guia: </td>
-                                <td>Sim
-                                 <input type="radio" name="txtGuia" value="S" id="txtGuia" <?php if($contguia == 'S'){ echo "checked=checked"; } ?> />
-                    Não
-                    <input type="radio" name="txtGuia" value="N" id="txtGuia" <?php if($contguia == 'N'){ echo "checked=checked"; } ?> /></td>
-                            </tr>
-                            <tr>
-                                <td>RPS: </td>
-                                <td>Sim
-                                  <input type="radio" name="txtRps" value="S" id="txtRps" <?php if($contrps == 'S'){ echo "checked=checked"; } ?> />
-                    Não
-                                <input type="radio" name="txtRps" value="N" id="txtRps" <?php if($contrps == 'N'){ echo "checked=checked"; } ?> /></td>
-                            </tr>
+						<tr>
+							<td>
+								NFE: </td>
+
+							<td>Sim
+
+								<input type="radio" name="txtNfe" value="S" id="txtNfe" <?php if ($contnfe == 'S') {
+																							echo "checked=checked";
+																						} ?> />
+								Não
+								<input type="radio" name="txtNfe" value="N" id="txtNfe" <?php if ($contnfe == 'N') {
+																							echo "checked=checked";
+																						} ?> />
+							</td>
+						</tr>
+						<tr>
+							<td>Livro: </td>
+							<td>Sim
+								<input type="radio" name="txtLivro" value="S" id="txtLivro" <?php if ($contlivro == 'S') {
+																								echo "checked=checked";
+																							} ?> />
+								Não
+								<input type="radio" name="txtLivro" value="N" id="txtLivro" <?php if ($contlivro == 'N') {
+																								echo "checked=checked";
+																							} ?> />
+							</td>
+						</tr>
+						<tr>
+							<td>Guia: </td>
+							<td>Sim
+								<input type="radio" name="txtGuia" value="S" id="txtGuia" <?php if ($contguia == 'S') {
+																								echo "checked=checked";
+																							} ?> />
+								Não
+								<input type="radio" name="txtGuia" value="N" id="txtGuia" <?php if ($contguia == 'N') {
+																								echo "checked=checked";
+																							} ?> />
+							</td>
+						</tr>
+						<tr>
+							<td>RPS: </td>
+							<td>Sim
+								<input type="radio" name="txtRps" value="S" id="txtRps" <?php if ($contrps == 'S') {
+																							echo "checked=checked";
+																						} ?> />
+								Não
+								<input type="radio" name="txtRps" value="N" id="txtRps" <?php if ($contrps == 'N') {
+																							echo "checked=checked";
+																						} ?> />
+							</td>
+						</tr>
 					</table>
 				</fieldset>
 				<fieldset>
 					<table width="100%">
 						<tr>
 							<td width="23%" align="left">
-								<?php if(!isset($codcontador)){?>
-									<input name="btAdcionar" type="submit" class="botao" value="Adcionar Contador" <?php if(!isset($_POST['CODPRESTADOR'])){ echo "disabled=\"disabled\"";}?>
-									onclick="return ValidaFormulario('txtNomeCont|txtCNPJEmp|txtFoneComercial|txtNfe|txtLivro|txtGuia|txtRps','Você deve buscar algum contador cadastrado no sistema!')">
-								<?php }?>
-								<?php if(isset($codcontador)){?><input name="btAtualizar" type="submit" class="botao" value="Atualizar Contador" /><?php }?>
+								<?php if (!isset($codcontador)) { ?>
+									<input name="btAdcionar" type="submit" class="botao" value="Adcionar Contador" <?php if (!isset($_POST['CODPRESTADOR'])) {
+																														echo "disabled=\"disabled\"";
+																													} ?> onclick="return ValidaFormulario('txtNomeCont|txtCNPJEmp|txtFoneComercial|txtNfe|txtLivro|txtGuia|txtRps','Você deve buscar algum contador cadastrado no sistema!')">
+								<?php } ?>
+								<?php if (isset($codcontador)) { ?><input name="btAtualizar" type="submit" class="botao" value="Atualizar Contador" /><?php } ?>
 							</td>
 							<td width="77%" align="left">
 								<?php
-									if(isset($_POST['CODPRESTADOR'])){
+								if (isset($_POST['CODPRESTADOR'])) {
 								?>
-									<input name="btPesquisar" type="button" class="botao" value="Buscar Contador" 
-									onclick="document.getElementById('divBuscaPrestador').style.visibility='hidden';document.getElementById('divBuscaContador').style.visibility='visible'">
+									<input name="btPesquisar" type="button" class="botao" value="Buscar Contador" onclick="document.getElementById('divBuscaPrestador').style.visibility='hidden';document.getElementById('divBuscaContador').style.visibility='visible'">
 									<input name="btNovoContador" type="submit" class="botao" value="Novo Contador" />
 								<?php
-									}
+								}
 								?>
 							</td>
 						</tr>
-                        
+
 					</table>
 				</fieldset>
 			</form>
-		
+
 		</td>
 		<td width="19" background="img/form/lateraldir.jpg"></td>
 	</tr>

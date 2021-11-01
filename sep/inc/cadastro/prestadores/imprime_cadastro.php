@@ -25,7 +25,7 @@ require_once("../../../funcoes/util.php");
 
 //Seleciona o brasao da seguinte prefeitura
 $sql_brs= $PDO->query("SELECT brasao FROM configuracoes"); 
-//lista a variável q receber� ao seguinte bras�o
+//lista a variável q receber� ao seguinte brasão
 list($BRASAO) = $sql_brs->fetch();
 
 $codigo = $_POST['CODEMISSOR'];
@@ -135,7 +135,7 @@ $nfe = verificacampo($nfe);
 <head>
 <title>Imprimir Liberação</title>
 <style type="text/css">
-<!--
+
 .style1 {
 	font-family: Georgia, "Times New Roman", Times, serif
 }
@@ -145,7 +145,7 @@ $nfe = verificacampo($nfe);
 	border-collapse:collapse;
 	border: 1px solid #000000;
 }
--->
+
 </style>
 </head>
 

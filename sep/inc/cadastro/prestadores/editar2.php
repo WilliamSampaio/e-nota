@@ -184,7 +184,7 @@ $sql_resp = $PDO->query("SELECT nome, cpf FROM cadastro_resp WHERE codemissor = 
 list($Nome_Responsavel,$Cpf_Responsavel) = $sql_resp->fetch();
 
 
-//Busca as informa��es que são extra para cada tipo de prestador
+//Busca as informações que são extra para cada tipo de prestador
 $sql_info_instituicoes = $PDO->query("SELECT agencia, codbanco FROM inst_financeiras WHERE codcadastro = '$codigoempresa'");
 list($Agencia_Inst,$Codbanco_Inst) = $sql_info_instituicoes->fetch();
 
@@ -279,7 +279,7 @@ if(($nomeempresa != $Nempresa) ||($razaosocial != $Rempresa)|| ($cnpjcpfempresa 
 	  
 	  
 	  
-   //Pega os codtipo dos prestadores que tem informa��es extras
+   //Pega os codtipo dos prestadores que tem informações extras
    $codtipo_inst = codtipo('instituicao_financeira');
    $codtipo_opr  = codtipo('operadora_credito');
    $codtipo_cart = codtipo('cartorio');

@@ -62,7 +62,7 @@ if($numero){
 <fieldset>
 <legend>Resultado</legend>
 <?php	
-	//Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
+	//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
 	$query=("
 			SELECT 
 				doc_des.codigo,

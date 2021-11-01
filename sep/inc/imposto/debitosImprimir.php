@@ -19,7 +19,7 @@
     <td class="cab03"><?php print strtoupper($CONF_SECRETARIA); ?></td>
   </tr>
   <tr>
-    <td class="cab02">NOTA FISCAL ELETR�NICA DE SERVI�OS - e-NOTA</td>
+    <td class="cab02">NOTA FISCAL ELETRÔNICA DE SERVIÇOS - e-NOTA</td>
   </tr>
   <?php if($rps_numero){ ?>
   <tr>

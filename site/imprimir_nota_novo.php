@@ -174,7 +174,7 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
               <td class="cab03"><?php print strtoupper($CONF_SECRETARIA); ?></td>
             </tr>
             <tr>
-              <td class="cab02">NOTA FISCAL ELETR&Ocirc;NICA DE SERVI�OS - NF-e</td>
+              <td class="cab02">NOTA FISCAL ELETRÔNICA DE SERVIÇOS - NF-e</td>
             </tr>
             <?php if ($rps_numero) { ?>
               <tr>

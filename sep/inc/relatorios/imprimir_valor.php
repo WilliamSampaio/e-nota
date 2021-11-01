@@ -238,7 +238,7 @@ $ano=$PDO->query("SELECT year (datahoraemissao from notas");
 		$str_where .= " AND cadastro.nfe = '$nfe'";
 	}
 	
-//Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
+//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
 	if ($nome=="" && $ano=="" && $mes=="")
 	{
 		$query = ("

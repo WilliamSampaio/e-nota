@@ -83,10 +83,10 @@ $PREFEITURA = "Prefeitura Municipal de ".$CIDADE;
     <td class="cab03"><?php print strtoupper($SECRETARIA); ?></td>
   </tr>
   <tr>
-    <td class="cab02">NOTA FISCAL ELETR�NICA DE SERVI�OS - NF-e</td>
+    <td class="cab02">NOTA FISCAL ELETRÔNICA DE SERVIÇOS - NF-e</td>
   </tr>
   <tr>
-    <td><strong>COMUNICADO DE NOTIFICA��O ENTRE PARTES</strong></td>
+    <td><strong>COMUNICADO DE NOTIFICAÇÃO ENTRE PARTES</strong></td>
   </tr>
 </table>
 
@@ -130,10 +130,10 @@ $PREFEITURA = "Prefeitura Municipal de ".$CIDADE;
 	
 <table width="95%" border="0" cellspacing="0" cellpadding="2">
   <tr>
-    <td class="cab03">A T E N é � O</td>
+    <td class="cab03">A T E N S Ã O</td>
   </tr>
   <tr>
-    <td height="200" align="left" valign="top"><br />A <strong><?php echo $PREFEITURA; ?></strong>, atrav�s deste e-mail, entra em contato com a empresa <strong><?php echo $empresa_nome; ?></strong>, registrada nesta Prefeitura Municipal com CNPJ/CPF <strong><?php echo $empresa_cnpjcpf; ?></strong>, na qual está cadastrada e registrada como emissora de NFe - ISS (Nota Fiscal Eletrônica de Serviços ), para comunicar que foi enviado uma notifica��o de reclamação quanto a <strong><?php echo $especificacao; ?></strong> por parte do seguinte tomador:<br /><br />
+    <td height="200" align="left" valign="top"><br />A <strong><?php echo $PREFEITURA; ?></strong>, através deste e-mail, entra em contato com a empresa <strong><?php echo $empresa_nome; ?></strong>, registrada nesta Prefeitura Municipal com CNPJ/CPF <strong><?php echo $empresa_cnpjcpf; ?></strong>, na qual está cadastrada e registrada como emissora de NFe - ISS (Nota Fiscal Eletrônica de Serviços ), para comunicar que foi enviado uma notificação de reclamação quanto a <strong><?php echo $especificacao; ?></strong> por parte do seguinte tomador:<br /><br />
 	- Tomador CNPJ/CPF: <strong><?php print $tomador_cnpj; ?></strong><br /><br />
 	- Tomador e-mail: <strong><?php print $tomador_email; ?></strong></td>
   </tr>
@@ -155,10 +155,10 @@ $PREFEITURA = "Prefeitura Municipal de ".$CIDADE;
 	
 <table width=95% border=0 cellspacing=0 cellpadding=2>
   <tr>
-    <td class=cab03>A T E N é � O</td>
+    <td class=cab03>A T E N S Ã O</td>
   </tr>
   <tr>
-    <td height=200 align=left valign=top><br />A <strong>$PREFEITURA</strong>, atrav�s deste e-mail, entra em contato com a empresa <strong>$empresa_nome</strong>, registrada nesta Prefeitura Municipal com CNPJ/CPF <strong>$empresa_cnpjcpf;</strong>, na qual está cadastrada e registrada como emissora de NFe - ISS (Nota Fiscal Eletrônica de Serviços ), para comunicar que foi enviado uma notifica��o de reclamação quanto a <strong>$especificacao</strong> por parte do seguinte tomador:<br /><br />
+    <td height=200 align=left valign=top><br />A <strong>$PREFEITURA</strong>, através deste e-mail, entra em contato com a empresa <strong>$empresa_nome</strong>, registrada nesta Prefeitura Municipal com CNPJ/CPF <strong>$empresa_cnpjcpf;</strong>, na qual está cadastrada e registrada como emissora de NFe - ISS (Nota Fiscal Eletrônica de Serviços ), para comunicar que foi enviado uma notificação de reclamação quanto a <strong>$especificacao</strong> por parte do seguinte tomador:<br /><br />
 	- Tomador CNPJ/CPF: <strong>$tomador_cnpj</strong><br /><br />
 	- Tomador e-mail: <strong>$tomador_email</strong></td>
   </tr>

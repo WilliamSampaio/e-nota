@@ -80,7 +80,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			echo "
 				<table width=\"\">
 					<tr>
-						<td align=\"center\">Não há solicita��es de ativa��o</td>
+						<td align=\"center\">Não há solicitações de ativação</td>
 					</tr>
 				</table>
 			";

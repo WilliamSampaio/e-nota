@@ -57,7 +57,7 @@ $dados_municipio=$sql_municipio->fetch();
 </script>
 <!-- Formulário de inserção de empresa  -->
 <style type="text/css">
-<!--
+
 #divBusca {
 	position:absolute;
 	left:30%;
@@ -72,7 +72,7 @@ $dados_municipio=$sql_municipio->fetch();
 input[type*="text"]{
 	text-transform:uppercase;
 }
--->
+
 </style>
 <div id="divBusca"  >
 	<?php require_once("inc/cadastro/prestadores/busca.php"); ?>
@@ -123,7 +123,7 @@ input[type*="text"]{
 		list($nome_responsavel,$cpf_responsavel) = $sql_resp->fetch();
 		
 		
-		//Busca as informa��es que são extra para cada tipo de prestador
+		//Busca as informações que são extra para cada tipo de prestador
 		$sql_info_instituicoes = $PDO->query("SELECT agencia, codbanco FROM inst_financeiras WHERE codcadastro = '$codigo'");
 		list($agencia_inst,$codbanco_inst) = $sql_info_instituicoes->fetch();
 		

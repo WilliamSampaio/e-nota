@@ -95,7 +95,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								<td align="left">
 									<select name="cmbEstado" class="combo">
 										<option value="">Todos</option>
-										<?php //Pega o estado do banco e muda a descricao para a vizualiza��o do usuario no combobox
+										<?php //Pega o estado do banco e muda a descricao para a vizualização do usuario no combobox
 											$sql = $PDO->query("SELECT estado FROM notas GROUP BY estado");
 											while(list($estado) = $sql->fetch())
 												{

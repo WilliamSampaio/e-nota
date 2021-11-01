@@ -94,7 +94,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		/*$display = "Arquivo gerado com sucesso.<bR>\n
 		Clique com o bot�o direito do mouse em cima de &quot;CLIQUE AQUI&quot; e depois em salvar destino.<br>*/
 	  }else{
-	  	print("<script language=JavaScript>alert('Selecione um m�s e um ano!!')</script>");
+	  	print("<script language=JavaScript>alert('Selecione um mês e um ano!!')</script>");
 	  }
   }
   ?>

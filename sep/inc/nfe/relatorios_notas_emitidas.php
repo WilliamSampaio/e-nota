@@ -194,7 +194,7 @@ if(mysql_num_rows($sql)>0){	//mostra se os resultados existem
 			<?php 
 				while(list($numero, $codverif, $data, $tomador_nome, $estado, $rps, $emissor) = $sql->fetch())
 					{
-						switch($estado) //transforma o valor que veio do banco para uma melhor vizualiza��o do usuario na impress�o
+						switch($estado) //transforma o valor que veio do banco para uma melhor vizualização do usuario na impressão
 							{
 								case "N": $tipo = "Emitida"; 	 break;
 								case "B": $tipo = "Boleto";   	 break;

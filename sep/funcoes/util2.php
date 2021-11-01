@@ -681,7 +681,7 @@ function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test é pa
 	$pagina_sql = ($pagina-1)*$quantporpagina;          //Calcula a variavel que vai ter o incio do limit
 	$pagina_sql .= ",$quantporpagina";                  //Concatena a quantidade de paginas escolhida com o inicio do limit do sql
 	
-	//Sql buscando as informa��es e o limit estipulado pela função
+	//Sql buscando as informações e o limit estipulado pela função
 	$sql_pesquisa = $PDO->query("$query LIMIT $pagina_sql");
 	if(!$sql_pesquisa){ 
 		return $sql_pesquisa;
@@ -815,7 +815,7 @@ function estadoExtenso($sigla) {
 	return $estados[$sigla];
 }
 
-//Func�o que retorna somente o m�s 
+//Func�o que retorna somente o mês 
  function mesExtenso($mesxt) {
  	$mes = array(
 		'01' => 'Janeiro',

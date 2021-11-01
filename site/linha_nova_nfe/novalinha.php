@@ -46,7 +46,7 @@ list($isento) = $sqlIsento->fetch();
 
 $isento = ($isento == "S") ? $isento = "style='display:none;' disabled='disabled'" : $isento = "";
 
-//PEGANDO SERVI�OS
+//PEGANDO SERVIÇOS
 $sql_servicos = $PDO->query("
 		SELECT 
 			cadastro_servicos.codigo,

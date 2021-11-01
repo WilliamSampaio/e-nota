@@ -83,9 +83,9 @@ Fith Floor, Boston, MA 02110-1301, USA
         <td align="left"><?php echo $contacontabil;?></td>
     </tr>
     <tr>
-    	<td align="left">Saldo m�s anterior</td>
+    	<td align="left">Saldo mês anterior</td>
         <td align="left"><?php echo "R$ ".DecToMoeda($saldo_mesanterior);?></td>
-        <td align="left">Saldo m�s atual</td>
+        <td align="left">Saldo mês atual</td>
         <td align="left"><?php echo "R$ ".DecToMoeda($saldo_mesatual);?></td>
     </tr>
     <tr>

@@ -157,7 +157,7 @@ $include=$_POST['include'];
 		list($codigoempresa) = $sql_busca_cod->fetch();
 							
 							
-	   //Pega os codtipo dos prestadores que tem informa��es extras
+	   //Pega os codtipo dos prestadores que tem informações extras
 	   $codtipo_inst = codtipo('instituicao_financeira');
 	   $codtipo_opr  = codtipo('operadora_credito');
 	   $codtipo_cart = codtipo('cartorio');

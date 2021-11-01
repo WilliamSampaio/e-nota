@@ -108,7 +108,7 @@ $sql_notas = $PDO->query("
 	<div id="divIssTomadas">
 <table width="1100" border="0" cellpadding="5" cellspacing="0" style="margin:0 auto;">
   <tr>
-    <td colspan="11" align="center" class="titulo1">NOTAS FISCAIS ELETR&Ocirc;NICAS TOMADAS </td>
+    <td colspan="11" align="center" class="titulo1">NOTAS FISCAIS ELETRÔNICAS TOMADAS</td>
     </tr>
   <tr>
     <td colspan="3"  width="30%" align="center" class="field2">NFEletrônica</td>
@@ -179,7 +179,7 @@ $totais= $sql_totais->fetchObject();
   </div>
 <?php
 }else{
-	echo "<div id=\"divIssTomadas\"><table style=\"margin:0 auto;\" width=\"1100\" border=\"0\" cellpadding=\"5\" cellspacing=\"0\"><tr><td colspan=\"12\" align=\"center\" class=\"titulo1\">NENHUMA NOTA FISCAL ELETR&Ocirc;NICA TOMADA </td></tr></table></div>";	
+	echo "<div id=\"divIssTomadas\"><table style=\"margin:0 auto;\" width=\"1100\" border=\"0\" cellpadding=\"5\" cellspacing=\"0\"><tr><td colspan=\"12\" align=\"center\" class=\"titulo1\">NENHUMA NOTA FISCAL ELETRÔNICA TOMADA </td></tr></table></div>";	
 }
 ?>
 

@@ -146,7 +146,7 @@ if($_POST["btBoleto"] == "Boleto"){
 								<img src="img/brasoes/<?php echo $brasao;?>" width="100" height="100" />
 							<?php
 							}else{
-								echo "<font color=\"#FF0000\"><strong>A prefeitura não possui bras�o</strong></font>";
+								echo "<font color=\"#FF0000\"><strong>A prefeitura não possui brasão</strong></font>";
 							}
 							?>
 						</td>

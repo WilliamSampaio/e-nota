@@ -57,7 +57,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     
 <fieldset><legend>Resultados</legend>
 <?php	
-	//Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
+	//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
 	$query = ("
 			SELECT 
 				decc_des.codigo,
@@ -81,7 +81,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		
 		$sql_declaracoes = Paginacao($query,'frmRelatorio','divgraficoDecc',10);
 						
-if(mysql_num_rows($sql_declaracoes)){
+if($sql_declaracoes->rowCount()){
 ?>
 	<table width="100%">
     	<tr>
@@ -103,7 +103,7 @@ if(mysql_num_rows($sql_declaracoes)){
         <td width="10%" align="center">Estado</td>
     </tr>
     <?php
-		while(list($codigo,$data,$total,$iss,$codverificacao,$estado,$competencia,$nome) = $sql_declaracoes)){
+		while(list($codigo,$data,$total,$iss,$codverificacao,$estado,$competencia,$nome) = $sql_declaracoes->fetch()){
 			switch($estado){
 				case "B": $estado = "Boleto";      break;
 				case "N": $estado = "Normal";      break;

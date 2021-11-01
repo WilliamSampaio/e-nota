@@ -35,7 +35,6 @@ $sql_notas = $PDO->query("
 ?>
 
 <style type="text/css">
-<!--
 
 #divCabecalhoEmitidas {
 	margin-top:2px;
@@ -46,7 +45,7 @@ $sql_notas = $PDO->query("
 	margin-bottom:100px;
 
 }
--->
+
 </style>
 </head>
 
@@ -98,7 +97,7 @@ $sql_notas = $PDO->query("
 	<div id="divIssEmitidas">
 <table width="1100" border="0" cellpadding="5" cellspacing="0" style="margin: 0 auto;">
   <tr>
-    <td colspan="12" align="center" class="titulo1">NOTAS FISCAIS ELETR&Ocirc;NICAS EMITIDAS </td>
+    <td colspan="12" align="center" class="titulo1">NOTAS FISCAIS ELETRÔNICAS EMITIDAS </td>
     </tr>
   <tr>
     <td colspan="3" align="center" class="field2">NFEletrônica</td>
@@ -178,7 +177,7 @@ $totais= $sql_totais->fetchObject();
 
 <?php
 }else{
-	echo "<div id=\"divIssEmitidas\"><table width=\"1100\" style=\"margin:0 auto;\" border=\"0\" cellpadding=\"5\" cellspacing=\"0\"><tr><td colspan=\"12\" align=\"center\" class=\"titulo1\">NENHUMA NOTA FISCAL ELETR&Ocirc;NICA EMITIDA </td></tr></table></div>";	
+	echo "<div id=\"divIssEmitidas\"><table width=\"1100\" style=\"margin:0 auto;\" border=\"0\" cellpadding=\"5\" cellspacing=\"0\"><tr><td colspan=\"12\" align=\"center\" class=\"titulo1\">NENHUMA NOTA FISCAL ELETRÔNICA EMITIDA </td></tr></table></div>";	
 }
 ?>
 

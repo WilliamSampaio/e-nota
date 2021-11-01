@@ -38,12 +38,12 @@
 	$msg = "
 		".$razaoSocial.",<br />
 		<br />
-		Esta é uma notifica��o, informando que sua solicitação de aumento do limite de RPS, ".$str_estado.".<br />
+		Esta é uma notificação, informando que sua solicitação de aumento do limite de RPS, ".$str_estado.".<br />
 		<br />
 		para maiores detalhes favor entrar em contato com a prefeitura.
 	";
 	
-	$retorno = envia_email($email,"Solicita��o de RPS",$msg);
+	$retorno = envia_email($email,"Solicitação de RPS",$msg);
 	if($retorno == 1){
 		$PDO->query("UPDATE rps_solicitacoes SET comunicado = 'S' WHERE codigo = '$codSolicitacao'");
 	}

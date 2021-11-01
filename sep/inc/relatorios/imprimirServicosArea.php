@@ -1,4 +1,4 @@
-<!-- In�cio da Tabela -->
+<!-- Início da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
     <tr style="background-color:#999999; font-weight:bold" align="center">
         <td width="50%" align="center">Descrição</td>

@@ -20,7 +20,7 @@
 	if($result){ //Se existir algum registro, mostra na tabela
 ?>
 
-<!-- In�cio da Tabela -->
+<!-- Início da Tabela -->
 	<?php
 	while($dados_pesquisa = $sql_pesquisa->fetch()){
 		$uf = ($dados_pesquisa['tomador_uf']);

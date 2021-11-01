@@ -33,7 +33,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     <tr align="left">
                         <td width="10%">Escolha</td>
                         <td>
-                            <!--escolhe o tipo de relat�rio e chama por Ajax-->
+                            <!--escolhe o tipo de relatório e chama por Ajax-->
                             <select name="cmbOpcao" id="cmbOpcao" onchange="acessoAjax('inc/instfinanceiras/relatorio.ajax.php','frmRelatorio','detalhes')">
                                 <option value=""></option>
                                 <option value="instfinanceiras">Inst.Financeiras</option>

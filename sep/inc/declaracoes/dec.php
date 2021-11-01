@@ -28,7 +28,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <script>
 	function btBuscar_click(codemissor,retorno){
-		if(ValidaFormulario('_mes|_ano','Por favor selecione um m�s e um ano!')){
+		if(ValidaFormulario('_mes|_ano','Por favor selecione um mês e um ano!')){
 			var codigo_emissor = document.getElementById(codemissor).value;
 			var ano = document.getElementById('_ano').value;
 			var mes = document.getElementById('_mes').value;

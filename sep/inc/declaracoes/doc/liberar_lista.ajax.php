@@ -27,7 +27,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		//Ativa os usuarios mudando no banco de NL para A
 		$codigo = $_GET["hdCodSolicitacao"];
 		$PDO->query("UPDATE cadastro SET estado = 'A' WHERE codigo = '$codigo'");
-		add_logs('Atualizou uma Solicita��o: Ativada');
+		add_logs('Atualizou uma Solicitação: Ativada');
 		//Mensagem("Cadastro ativado");
 	}
 
@@ -70,7 +70,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			echo "
 				<table width=\"\">
 					<tr>
-						<td align=\"center\">Não há solicita��es de ativa��o</td>
+						<td align=\"center\">Não há solicitações de ativação</td>
 					</tr>
 				</table>
 			";
