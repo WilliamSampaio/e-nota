@@ -68,7 +68,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	</li>
 
 	<li class="nav-item dropdown">
-		<a class="nav-link <? echo isActive('ouvidoria.php') ?>" aria-current="page" href="ouvidoria.php">Reclamações</a>
+		<a class="nav-link <? echo isActive('ouvidoria.php') ?>" aria-current="page" href="ouvidoria.php">Ouvidoria</a>
 		<ul>
 			<li><a class="nav-link <? echo isActive('ouvidoria-cadastro.php') ?>" href="ouvidoria-cadastro.php">Cadastro</a></li>
 			<li><a class="nav-link <? echo isActive('ouvidoria-consulta.php') ?>" href="ouvidoria-consulta.php">Consulta</a></li>
