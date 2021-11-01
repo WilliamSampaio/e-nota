@@ -27,24 +27,6 @@ require_once DIR_SITE . 'include/header.php';
 
 <body>
 
-    <?php
-
-    ini_set("allow_url_fopen", 1);
-    $json = file_get_contents('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
-    $ufs = json_decode($json, true);
-
-    /*foreach($ufs as $uf)
-    {
-        echo $uf['nome'] . '<br>';
-    }*/
-
-    ?>
-
-    <script type="text/javascript">
-
-
-    </script>
-
     <?php require_once DIR_SITE . 'include/navbar.php' ?>
 
     <div class="container bg-light">
