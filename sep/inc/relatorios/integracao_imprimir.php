@@ -29,7 +29,7 @@ $sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 //preenche a variavel com os valores vindos do banco
 list($BRASAO) = $sql_brasao->fetch();
 ?>
-<title>Imprimir Relatório Integra�ao</title>
+<title>Imprimir Relatório Integração</title>
 
 
 <style type="text/css" media="screen">

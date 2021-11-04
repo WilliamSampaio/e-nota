@@ -108,7 +108,7 @@ list($codigo, $assunto, $especificacao, $tomador_cnpj, $tomador_email, $rps_nume
 			  </tr>
 			  <tr>
 				<td></td>
-				<td align="right"><font color="#FF0000">*</font> Campos com permiss�o de alteração!</td>
+				<td align="right"><font color="#FF0000">*</font> Campos com permissão de alteração!</td>
 			  </tr>
 			  <tr>
 				<td><input name="btSalvar" type="submit" value="Salvar" class="botao" style="width:120px;" /></td>

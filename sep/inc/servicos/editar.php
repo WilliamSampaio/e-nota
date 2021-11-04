@@ -93,11 +93,11 @@ if ($_POST['btCadastrar'] !=""){
 					codigo= '$Cod'
 			");
 			add_logs('Atualizou Serviço');	
-			Mensagem(htmlentities("Alterações conclu�das com sucesso!")); 
+			Mensagem(htmlentities("Alterações concluídas com sucesso!")); 
 		}	
 	} else {
-		/*print "<script language=JavaScript> alert('� necess�rio no m�nimo uma alteração nos campos.');</script>";*/
-		Mensagem(htmlentities('� necess�rio no m�nimo uma alteração nos campos'));
+		/*print "<script language=JavaScript> alert('� necessário no mínimo uma alteração nos campos.');</script>";*/
+		Mensagem(htmlentities('� necessário no mínimo uma alteração nos campos'));
 	}  
 	
 }

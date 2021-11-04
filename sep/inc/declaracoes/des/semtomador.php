@@ -88,7 +88,7 @@ if($sql_emissor->rowCount()){
 					$mes_atual = date('n');
 					$ano_atual = date('Y');
 					//array de meses comencando em 1 ate 12
-					$meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+					$meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 					?>
 					  <select name="cmbMes" id="cmbMes" onchange="SomaImpostosDes();CalculaMultaDes();">
 						  <option value=""></option>

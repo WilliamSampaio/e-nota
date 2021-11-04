@@ -32,7 +32,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					else
 						{	
 							$sql = $PDO->query("INSERT INTO cartorios_tipo SET tipocartorio='$categoria'");
-							add_logs('Inseriu uma categoria de Cart�rio');
+							add_logs('Inseriu uma categoria de Cartório');
 							Mensagem("Categoria inserida com sucesso!");
 						}	
 				}

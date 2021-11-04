@@ -69,7 +69,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			switch($codtipo){
 				case $codprest 	  : $codtipo = "Prestador"; break;
 				case $codsimples  : $codtipo = "Simples";   break;
-				case $codgraf 	  : $codtipo = "Gr�fica";   break;
+				case $codgraf 	  : $codtipo = "Gráfica";   break;
 				case $codcontador : $codtipo = "Contador";  break;
 			}
 			$nome_curto = ResumeString($nome,60);

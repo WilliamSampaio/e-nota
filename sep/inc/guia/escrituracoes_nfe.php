@@ -110,7 +110,7 @@ if ($_POST['btConfirmar']) {
 								<select name="cmbMesDAF607" id="cmbMesDAF607">
 									<option value="">Selecione</option>
 									<?php
-										$meses = array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+										$meses = array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 										$cont = 1;
 										while($cont <= 12){
 										?>

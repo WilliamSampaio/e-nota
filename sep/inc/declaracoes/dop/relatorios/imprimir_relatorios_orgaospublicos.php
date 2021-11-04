@@ -86,9 +86,9 @@ $sql = $PDO->query("
 				");
 
 ?>
-<script src="../../scripts/padrao.js" type="text/javascript"></script><title>Relatorios - �rg�os P�blicos</title>
+<script src="../../scripts/padrao.js" type="text/javascript"></script><title>Relatorios - Orgãos Públicos</title>
 <div id="DivImprimir"><input type="button" onClick="EscondeDiv('DivImprimir'); print();" value="Imprimir" /></div>
-<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relat�rio de �rg�os P�blicos</b></p>
+<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relatório de Orgãos Públicos</b></p>
 <table>
 	<?php if($nomePOST){?>
 	<tr>
@@ -117,7 +117,7 @@ $sql = $PDO->query("
 	</tr>
 	<?php } if($adminPOST){ ?>
 	<tr>
-		<td><b>Administra��o:</b></td>
+		<td><b>Administração:</b></td>
 		<td><?php echo $admpublica; ?></td>
 	</tr>
 	<?php } if($nivelPOST){ ?>
@@ -129,18 +129,18 @@ $sql = $PDO->query("
 </table>
 <table>
 	<tr>
-		<td colspan="2"><strong><?php echo $sql->rowCount(); ?> �rg�os P�blicos registrados</strong></td>
+		<td colspan="2"><strong><?php echo $sql->rowCount(); ?> Orgãos Públicos registrados</strong></td>
 	</tr>
 </table>
 <table width="700" style="font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif">
 	<tr>
 		<td align="center" width="240"><b>Nome</b></td>
 		<td align="center" width="130"><b>CNPJ</b></td>
-		<td align="center" width="130"><b>Munic�pio</b></td>
+		<td align="center" width="130"><b>Município</b></td>
 		<td align="center" width="30"><b>UF</b></td>
-		<td align="center" width="100"><b>Administra��o</b></td>
-		<td align="center" width="60"><b>N�vel</b></td>
-		<td align="center"><b>Situa��o</b></td>	
+		<td align="center" width="100"><b>Administração</b></td>
+		<td align="center" width="60"><b>Nível</b></td>
+		<td align="center"><b>Situação</b></td>	
 	</tr>
 	<tr>
 		<td colspan="7"><hr size="1px" color="#000000"/></td>

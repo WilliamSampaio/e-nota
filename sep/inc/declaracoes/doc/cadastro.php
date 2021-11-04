@@ -51,7 +51,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 ?>
 	<style type="text/css">
-	<!--
 	#divBuscaOpr {
 		position:absolute;
 		left:40%;
@@ -61,7 +60,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 		z-index:1;
 		visibility:<?php if(isset($btBuscarCliente)){ echo"visible";}else{ echo"hidden";} ?>
 	}
-	-->
 	</style>
 	<div id="divBuscaOpr"><?php require_once("inc/operadorascreditos/pesquisar.php"); ?></div> 
 	<?php
@@ -153,7 +151,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" name="txtEndereco" size="40" id="txtEndereco" value="<?php echo $endereco; ?>" /></td>
 								</tr>
 								<tr align="left">
-									<td>Munic�pio:<font color="#FF0000">*</font></td>
+									<td>Município:<font color="#FF0000">*</font></td>
 									<td colspan="2"><input type="text" class="texto" size="40" name="txtMunicipio" <?php if($codigo){ echo "value=\"$munic\" readonly=\"true\"";} else { echo "value=\"$CIDADE\"";}?>/></td>
 								</tr>
 								<tr align="left">
@@ -275,7 +273,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 	$codigo = $_POST["hdDesativar"];
                 	$PDO->query("DELETE FROM operadoras_creditos WHERE codigo = $codigo");
                 	add_logs('Excluiu uma Instituição: Desativada');
-					Mensagem("Instituição Financeira exclu�da com sucesso!");
+					Mensagem("Instituição Financeira excluída com sucesso!");
 				?>
 					<script>LimpaCampos('frmCadastroOpr');</script>
 				<?php

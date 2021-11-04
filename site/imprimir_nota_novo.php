@@ -398,7 +398,7 @@ list($lei, $decreto) = $sql_leidecreto->fetch();
           if ($valorirrf > 0) { //soh mostra se tiver valor
             echo "- Retenção de IRRF " . DecToMoeda($aliqirrf) . "% com valor de R$ " . DecToMoeda($valorirrf) . "";
             if ($deducao_irrf > 0) {
-              echo ". Dedu��o de R$ " . DecToMoeda($deducao_irrf);
+              echo ". Dedução de R$ " . DecToMoeda($deducao_irrf);
             }
             echo "<br>";
           }

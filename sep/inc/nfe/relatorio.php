@@ -34,7 +34,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<table width="760" align="left">
 		<tr>
 			<td>
-				<fieldset><legend>Relat�rio geral</legend>
+				<fieldset><legend>Relatório geral</legend>
 				<?php  
 				//pega o numero total de notas emitidas
 				$sql_relatorios = $PDO->query("SELECT * FROM notas");
@@ -84,7 +84,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</tr>
 					</table>
 				</fieldset>
-				<fieldset><legend>Relat�rio de notas</legend>
+				<fieldset><legend>Relatório de notas</legend>
 					<form method="post" name="frmNotas">
 					<input type="hidden" name="include" id="include" value="<?php echo $_POST["include"]; ?>" />
 					<input type="hidden" name="btNotas" id="btNotas" value="<?php echo $_POST["btNotas"]; ?>" />
@@ -136,7 +136,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</form>
 				</fieldset>
 				<?php if($_POST["btProcurar"]) {?>
-				<fieldset><legend>Relat�rio</legend>
+				<fieldset><legend>Relatório</legend>
 					<table align="center">
 						<tr>
 							<td>

@@ -166,7 +166,7 @@ $sql = $PDO->query("
 ?>
 <script src="../../scripts/padrao.js" type="text/javascript"></script><title>Relatorios - Notas</title>
 <div id="DivImprimir"><input type="button" onClick="EscondeDiv('DivImprimir'); print();" value="Imprimir" /></div>
-<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relat�rio de Notas eletrônicas</b></p>
+<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relatório de Notas eletrônicas</b></p>
 <table>
 	<?php if($_POST["cmbEstado"]){?>
 	<tr>
@@ -180,7 +180,7 @@ $sql = $PDO->query("
 	</tr>
 	<?php } if($_POST["txtDataFim"]){ ?>
 	<tr>
-		<td><strong>At� a data:</strong></td>
+		<td><strong>Até a data:</strong></td>
 		<td><?php echo $_POST["txtDataFim"]; ?></td>
 	</tr>
 	<?php } if($_POST["txtEmpresa"]) {?>

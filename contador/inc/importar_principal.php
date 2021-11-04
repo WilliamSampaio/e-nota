@@ -207,7 +207,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<input name="codLogado" type="hidden" value="<?php echo $codLogado;?>" />
     <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">
         <tr>
-            <td align="left" width="30%"> Defina o per�odo: </td>
+            <td align="left" width="30%"> Defina o período: </td>
             <td align="left" width="70%">
                 <select name="cmbMes" class="combo">
                     <option value=""> selecione mês </option>

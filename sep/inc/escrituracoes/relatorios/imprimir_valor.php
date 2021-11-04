@@ -39,7 +39,6 @@ list($BRASAO) = $sql_brasao->fetch();
 
 
 <style type="text/css">
-<!--
 .style1 {font-family: Georgia, "Times New Roman", Times, serif}
 
 .tabela {
@@ -61,7 +60,6 @@ list($BRASAO) = $sql_brasao->fetch();
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
 }
--->
 </style>
 </head>
 
@@ -290,9 +288,9 @@ if(mysql_num_rows($sql_pesquisa)){
 	?>
       <td width="30%" align="center"><strong>Nome</strong></td>
       <td width="20%" align="center"><strong>Valor arrecadado</strong></td>
-      <td width="15%" align="center"><strong>Dedu��es</strong></td>
+      <td width="15%" align="center"><strong>Deduções</strong></td>
       <td width="12%" align="center"><strong>ISS</strong></td>
-      <td width="20%" align="center"><strong>Total reten��o</strong></td>
+      <td width="20%" align="center"><strong>Total retenção</strong></td>
 
   </tr>
   <?php
@@ -302,12 +300,12 @@ if(mysql_num_rows($sql_pesquisa)){
 			"prestador"              => "Prestador",
 			"empreiteira"            => "Empreiteira",
 			"instituicao_financeira" => "Instituição Financeira",
-			"cartorio"               => "Cart�rio",
+			"cartorio"               => "Cartório",
 			"operadora_credito"      => "Operadora de Crédito",
-			"grafica"                => "Gr�fica",
+			"grafica"                => "Gráfica",
 			"contador"               => "Contador",
 			"tomador"                => "Tomador",
-			"orgao_publico"          => "Org�o P�blico",
+			"orgao_publico"          => "Orgão Público",
 			"simples"                => "Simples"
 		);
 		$conta=0;

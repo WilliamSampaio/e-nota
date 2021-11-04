@@ -50,7 +50,7 @@ $sql = $PDO->query("SELECT * FROM usuarios WHERE login = '".$_POST['txtLogin']."
 	}
 } 
 else {
-  print("<script language=JavaScript>alert('Usu�rio inexistente! Favor verificar usuário.');parent.location='../login.php';</script>");
+  print("<script language=JavaScript>alert('Usuário inexistente! Favor verificar usuário.');parent.location='../login.php';</script>");
  } 
 
 }else{

@@ -36,7 +36,7 @@ session_name("contador");
 session_start(); 
 require_once("funcao_logs.php");
 require_once("../../funcoes/util.php");
-// recebe a variavel que contem o número de verifica��o e a variavel que contém o número que o usuário digitou.
+// recebe a variavel que contem o número de verificação e a variavel que contém o número que o usuário digitou.
 $autenticacao = $_SESSION['autenticacao'];
 $cod_seguranca= $_POST['codseguranca'];
 

@@ -34,7 +34,6 @@ $dados_municipio=$sql_municipio->fetch();
 ?>
 	 <!-- Formulário de inserção de empresa  -----------------------------------------------------------------------------> 
 	<style type="text/css">
-	<!--
 	#divBusca {
 		position:absolute;
 		left:40%;
@@ -44,7 +43,6 @@ $dados_municipio=$sql_municipio->fetch();
 		z-index:1;
 		visibility:<?php if(isset($btBuscarCliente)){ echo"visible";}else{ echo"hidden";} ?>
 	}
-	-->
 	</style>
 	<div id="divBusca"  ><?php require_once("inc/prestadores/busca.php"); ?></div> 
 	 
@@ -122,7 +120,7 @@ $dados_municipio=$sql_municipio->fetch();
        </tr>
        <tr>
 	     <td align="left">
-		  Munic�pio<font color="#FF0000">*</font>		 </td>
+		  Município<font color="#FF0000">*</font>		 </td>
 	     <td align="left">
           <input type="text" size="30" maxlength="100" name="txtMunicipio" class="texto" value="<?php if(isset($municipio)){echo $municipio;} else{echo $dados_municipio['cidade'];} ?>" />		 </td>
 	     </tr>

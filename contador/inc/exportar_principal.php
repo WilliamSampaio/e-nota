@@ -68,7 +68,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		// Gera o arquivo CSV para download
 		$arquivo = $CODIGO_DA_EMPRESA."arquivo.csv";
 		$fp = fopen("tmp/".$arquivo, "w");
-		$cabecario = "Número da nota;Código de verifica��o;Data e hora de emissão;Número do  RPS;Data do RPS;Nome do Tomador de serviços;CPF/CNPJ do Tomador de serviços;Inscrição municipal do Tomador de serviços;Logradouro do Tomador de serviços;Número do Tomador de serviços;Complemento do Tomador de serviços;Bairro do Tomador de serviços;CEP do Tomador de serviços;Munic�pio do Tomador de serviços;UF do Tomador de serviços;Email do Tomador de serviços;Discrimina��o da nota;Valor total da nota;Valor de deduções;Base de Calculo;Valor ISS;ISS retido;Cr�dito gerado;Estado da nota;Discrimina��o de Servi�os\n";
+		$cabecario = "Número da nota;Código de verificação;Data e hora de emissão;Número do  RPS;Data do RPS;Nome do Tomador de serviços;CPF/CNPJ do Tomador de serviços;Inscrição municipal do Tomador de serviços;Logradouro do Tomador de serviços;Número do Tomador de serviços;Complemento do Tomador de serviços;Bairro do Tomador de serviços;CEP do Tomador de serviços;Município do Tomador de serviços;UF do Tomador de serviços;Email do Tomador de serviços;Discrimina��o da nota;Valor total da nota;Valor de deduções;Base de Calculo;Valor ISS;ISS retido;Crédito gerado;Estado da nota;Discrimina��o de Servi�os\n";
 		fwrite($fp, $cabecario);
 		
 		while($cadastro = mysql_fetch_array($sql)) {
@@ -124,7 +124,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<td align="left" width="30%">Período das Notas</td>
 	<td align="left" width="70%">
 	<select name="cmbMes" class="combo">
-	  <option value="">== M�s ==</option>
+	  <option value="">== Mês ==</option>
 	  <?php
 	  $meses=array(1 => "Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 	  foreach($meses as $num => $mes){

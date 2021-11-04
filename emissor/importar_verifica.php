@@ -61,9 +61,9 @@ else {
 				/*if(!validaXmlImportacao("./importar/$arq")){
 					die("<p align=\"center\"><strong>O arquivo de importação de RPS é incompatível com o modelo.</strong></p>");
 				}else{
-					$xml = simplexml_load_file("importar/$arq"); // l� o arquivo XML 
+					$xml = simplexml_load_file("importar/$arq"); // lê o arquivo XML 
 				}*/
-				$xml = simplexml_load_file("importar/$arq"); // l� o arquivo XML 
+				$xml = simplexml_load_file("importar/$arq"); // lê o arquivo XML 
      			$cont =0; 
 	 			$erro =0; 
 				$contServicos = 0;
@@ -227,7 +227,7 @@ else {
 				if($erro > 0){
 					unlink("importar/$arq");
 				}
-				// verifica a formata��o do arquivo XML
+				// verifica a formatação do arquivo XML
 	 			if($erro ==1){
 					print ("<center><b>Arquivo contém dados inconsistentes fora do padr�o</b></center>");
 				}	
@@ -238,13 +238,13 @@ else {
 	  				print ("<center><b>Arquivo contém um código de serviço que a empresa não pode emitir nota</b></center>");
 				}
 	 			elseif($erro ==4){
-	  				print ("<center><b>CPF/CNPJ não contém uma formata��o v�lida </b></center>");
+	  				print ("<center><b>CPF/CNPJ não contém uma formatação válida </b></center>");
 	 			} 
 	 			elseif($erro ==5){
-					print ("<center><b>Data do RPS não contém uma formata��o v�lida </b></center>");
+					print ("<center><b>Data do RPS não contém uma formatação válida </b></center>");
 	 			} 
 	 			elseif($erro ==6){
-					print ("<center><b>CEP do tomador não contém uma formata��o v�lida </b></center>");
+					print ("<center><b>CEP do tomador não contém uma formatação válida </b></center>");
 	 			}elseif($erro == 7){
 					echo "<center><b>A nota com o número de RPS $rps_numero, já foi emitida!</b></center>";
 				}elseif($erro == 8){
@@ -253,7 +253,7 @@ else {
 					echo "<center><b>O prestador já emitiu $ultimoRPS RPS(s), o xml contém $cont RPS(s) e seu limite de RPS é de $limite RPS(s)! 
 					Por favor solicite um limite de RPS maior.</b></center>";
 				}elseif($erro == 10){
-					echo "<center><b>� necess�rio solicitar um limite de RPS para poder declarar o xml.</b></center>";
+					echo "<center><b>� necessário solicitar um limite de RPS para poder declarar o xml.</b></center>";
 				}else {
 	  				$cont =0; 
       				//tabela que mostra os dados que vieram no XML 	 
@@ -501,7 +501,7 @@ else {
 				<tr>
 					<td>Base de cálculo:</td>
 					<td>R$ <?php echo DecToMoeda($basecalc); ?></td>
-					<td>Dedu��es da nota:</td>
+					<td>Deduções da nota:</td>
 					<td>R$ <?php echo DecToMoeda($deducoes);?></td>
 				</tr>
 				<tr>

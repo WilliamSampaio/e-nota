@@ -121,13 +121,13 @@ Fith Floor, Boston, MA 02110-1301, USA
    }
    function init() {
     /*
-    msgbox_show('Título', 'Data inv�lida!', 'alert'); //alert com função padr�o
-    msgbox_show('Título', 'Data inv�lida!', 'alert', funcao1); //alert passando a função que será executada no bot�o OK
-    msgbox_show('Título', 'Data inv�lida!', 'confirm'); //confirm com bot�es padr�o
-    msgbox_show('Título', 'Data inv�lida!', 'confirm', funcao1); //confirm passando a função que será executada no bot�o SIM e deixando o bot�o NÃO padr�o
-    msgbox_show('Título', 'Data inv�lida!', 'confirm', funcao1, funcao2); //confirm passando a função que será executada no bot�o SIM (funcao1) e no bot�o NÃO (funcao2)
+    msgbox_show('Título', 'Data inválida!', 'alert'); //alert com função padr�o
+    msgbox_show('Título', 'Data inválida!', 'alert', funcao1); //alert passando a função que será executada no bot�o OK
+    msgbox_show('Título', 'Data inválida!', 'confirm'); //confirm com bot�es padr�o
+    msgbox_show('Título', 'Data inválida!', 'confirm', funcao1); //confirm passando a função que será executada no bot�o SIM e deixando o bot�o NÃO padr�o
+    msgbox_show('Título', 'Data inválida!', 'confirm', funcao1, funcao2); //confirm passando a função que será executada no bot�o SIM (funcao1) e no bot�o NÃO (funcao2)
     */
-    msgbox_show('Título', 'Data inv�lida!', 'alert'); //alert com função padr�o
+    msgbox_show('Título', 'Data inválida!', 'alert'); //alert com função padr�o
     $('fechar').href = '#';
     addEvent('fechar', 'click', msgbox_hide);
    }

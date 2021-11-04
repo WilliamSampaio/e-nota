@@ -37,8 +37,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <select name="cmbRelatorios" class="combo" 
                         onchange="acessoAjax('inc/orgaospublicos/relatorios/relatorios_opcoes.ajax.php','frmRelatorio','divRelatorios')">
                         <option value=""></option>
-                        <option value="O">�rg�os P�blicos</option>
-                        <option value="D">Declara��es</option>
+                        <option value="O">Orgãos Públicos</option>
+                        <option value="D">Declarações</option>
                         </select>
                         </td>
                   </tr>

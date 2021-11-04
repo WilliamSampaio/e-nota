@@ -93,11 +93,11 @@ if($combo == "issretido"){
 	}//fim for
 	echo "Total de tomadores: ".count($tomadores)."<br>";
 	echo "Total de notas: $totalnotas<br>";
-	echo "Total de declara��es: $totaldeclaracoes<br>";
+	echo "Total de declarações: $totaldeclaracoes<br>";
 	
 	echo"<br>Media de notas por declaração: ".round($totalnotas/$totaldeclaracoes);
-	echo"<br> Maior número de declara��es: $maior_declaracoes por $nome_maior_declaracoes";
-	echo"<br> Menor número de declara��es: $menor_declaracoes por $nome_menor_declaracoes";
+	echo"<br> Maior número de declarações: $maior_declaracoes por $nome_maior_declaracoes";
+	echo"<br> Menor número de declarações: $menor_declaracoes por $nome_menor_declaracoes";
 }
 if($combo == "tomadores"){
 	$ctom = 0; //contador de tomadores;
@@ -254,11 +254,11 @@ if($combo == "emissores"){
 	$emissores_temp = mysql_num_rows($sql_emissores_temp);
 	echo "Total de prestadores: ".(count($emissores)+$emissores_temp)."<br>";
 	echo "Total de notas: $totalnotas<br>";
-	echo "Total de declara��es: $totaldeclaracoes<br>";
+	echo "Total de declarações: $totaldeclaracoes<br>";
 	
 	echo"<br>Media de notas por declaração: ".round($totalnotas/$totaldeclaracoes);
-	echo"<br> Maior número de declara��es: $maior_declaracoes por $nome_maior_declaracoes";
-	echo"<br> Menor número de declara��es: $menor_declaracoes por $nome_menor_declaracoes";
+	echo"<br> Maior número de declarações: $maior_declaracoes por $nome_maior_declaracoes";
+	echo"<br> Menor número de declarações: $menor_declaracoes por $nome_menor_declaracoes";
 }
 
 ?>

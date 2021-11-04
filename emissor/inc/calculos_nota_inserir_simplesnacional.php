@@ -184,7 +184,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			R$ <input name="txtValTotal" id="txtValTotal" type="text" size="10" class="texto" readonly="yes" style="text-align:right;" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" >
 		</td>
 		<td width="13%" align="left">
-			Reten�ões		</td>
+			Retenções		</td>
 		<td width="40%" align="left">
 			R$ 
 				<input name="txtValTotalRetencao" id="txtValTotalRetencao" type="text" class="texto" size="10" readonly="readonly" style="text-align:right" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" />

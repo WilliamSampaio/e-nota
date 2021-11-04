@@ -274,7 +274,7 @@ input[type*="text"]{
 			<tr>
 				<td colspan="4">
 					
-					<!-- Tabela institui��o e operadoras -->
+					<!-- Tabela instituição e operadoras -->
 					
 					<table width="100%" border="0" cellspacing="1" cellpadding="2" align="left" id="tbl_inst_opr" style="display:none; margin:0px">
 						<?php

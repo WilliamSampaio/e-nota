@@ -39,7 +39,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         $meses = array(
             1  => "Janeiro",
             2  => "Fevereiro",
-            3  => "Mar�o",
+            3  => "Março",
             4  => "Abril",
             5  => "Maio",
             6  => "Junho",

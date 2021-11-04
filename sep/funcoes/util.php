@@ -588,9 +588,9 @@ function DataPtExt(){
 	$dia    = date("d");   //pega dia do mes
 	$m      = date("n");   //pega o mes em numero
 	$ano    = date("Y");   //pega o ano atual
-	$semana = array("Sun" => "Domingo", "Mon" => "Segunda-feira", "Tue" => "Ter�a-feira", "Wed" => "Quarta-feira", "Thu" => "Quinta-feira", "Fri" => "Sexta-feira", "Sat" => "S�bado"); 
+	$semana = array("Sun" => "Domingo", "Mon" => "Segunda-feira", "Tue" => "Terça-feira", "Wed" => "Quarta-feira", "Thu" => "Quinta-feira", "Fri" => "Sexta-feira", "Sat" => "Sábado"); 
 	/* Dias da Semana.  troca o valor da semana em ingles para portugues */
-	$mes = array(1 =>"Janeiro", "Fevereiro", "Mar�o", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"); 
+	$mes = array(1 =>"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"); 
 	/* Meses troca o valor de numero pelo seu valor por extenso */
 	return $semana[$s].", ".$dia." de ".$mes[$m]." de ".$ano; //imprime na tela a data concatenada por extenso  
 }//by lucas.
@@ -829,7 +829,7 @@ function notificaTomador($codigo_empresa,$ultimanota){
 	
 	$imagemTratada = $_SERVER['HTTP_HOST']."/img/brasoes/".rawurlencode($CONF_BRASAO);
 	$msg = ("
-	<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Bras�o Prefeitura\" title=\"Bras�o\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
+	<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Brasão Prefeitura\" title=\"Brasão\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
 	Este e-mail foi enviado, para notificar que a empresa ". strtoupper($empresa_razaosocial) .",<br>
 	emitiu uma NF-e com ". strtoupper($tomador_nome) .", como tomador.<br>
 	Abaixo segue o link para visualizar esta NF-e:<br>
@@ -840,7 +840,7 @@ function notificaTomador($codigo_empresa,$ultimanota){
 	$CONF_SECRETARIA de $CONF_CIDADE.
 	");
 	
-	$assunto = "Notifica��o de emissão de NF-e.";
+	$assunto = "Notificação de emissão de NF-e.";
 
 	$headers  = "MIME-Version: 1.0\r\n";
 
@@ -1029,11 +1029,11 @@ function UltDiaUtil($mes,$ano){
 	switch($dia_semana){  
 		case"0": $dia_semana = "Domingo";       break;  
 		case"1": $dia_semana = "Segunda-Feira"; break;  
-		case"2": $dia_semana = "Ter�a-Feira";   break;  
+		case"2": $dia_semana = "Terça-Feira";   break;  
 		case"3": $dia_semana = "Quarta-Feira";  break;  
 		case"4": $dia_semana = "Quinta-Feira";  break;  
 		case"5": $dia_semana = "Sexta-Feira";   break;  
-		case"6": $dia_semana = "S�bado";        break;  
+		case"6": $dia_semana = "Sábado";        break;  
 	}
 	*/
 

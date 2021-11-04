@@ -21,14 +21,14 @@ Fith Floor, Boston, MA 02110-1301, USA
  <table border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Instituições Financeiras - Relat�rios</td>
+    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Instituições Financeiras - Relatórios</td>
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
     <td width="18" background="img/form/lateralesq.jpg"></td>
     <td align="center">       
         <form id="frmRelatorio">
-           <fieldset><legend>Relat�rios de Inst. Financeiras</legend>
+           <fieldset><legend>Relatórios de Inst. Financeiras</legend>
                 <table align="center" width="100%">
                     <tr align="left">
                         <td width="10%">Escolha</td>
@@ -37,7 +37,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                             <select name="cmbOpcao" id="cmbOpcao" onchange="acessoAjax('inc/instfinanceiras/relatorio.ajax.php','frmRelatorio','detalhes')">
                                 <option value=""></option>
                                 <option value="instfinanceiras">Inst.Financeiras</option>
-                                <option value="dif">Declara��es</option>
+                                <option value="dif">Declarações</option>
                             </select>
                         </td>
                     </tr>

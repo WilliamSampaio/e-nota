@@ -120,7 +120,7 @@ if ($sql->rowCount() <= 0) {
 	</tr>
 	<?php } if($_POST["txtDataFim"]){ ?>
 	<tr>
-		<td><strong>At� a data:</strong></td>
+		<td><strong>Até a data:</strong></td>
 		<td><?php echo $_POST["txtDataFim"]; ?></td>
 	</tr>
 	<?php } if($_POST["txtCnpjPrestador"]) {?>

@@ -107,7 +107,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="100%">
 	<!-- busca a relacao dos servicos por empresa -->
 	<tr>
-		<td align="left">Base de C�lculo</td>
+		<td align="left">Base de Cálculo</td>
 		<td align="left">
 			R$ <input name="txtBaseCalculo" type="text" size="10" class="texto" id="txtBaseCalculo" style="text-align:right;" 
 			onkeyup="MaskMoeda(this);" onkeydown="return NumbersOnly(event);" onblur="ValorIss('<?php echo $regras_credito;?>')" readonly="readonly" value="0,00">
@@ -118,12 +118,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 		</td>
 	</tr>
 	<tr>
-		<td width="21%" align="left">Dedu��es</td>
+		<td width="21%" align="left">Deduções</td>
 		<td width="26%" align="left">R$
 			<input name="txtValorDeducoes" type="text" size="12" class="texto" id="txtValorDeducoes"  style="text-align:right;" value="0,00"
 			onkeydown="MaskMoeda(this); return NumbersOnly(event);" onblur="ValorIss('<?php echo $regras_credito;?>')" />
 		</td>
-		<td width="13%" align="left">Acr�scimos</td>
+		<td width="13%" align="left">Acréscimos</td>
 		<td width="40%" align="left">
 			R$ 
 			<input name="txtValorAcrescimos" type="text" size="12" class="texto" id="txtValorAcrescimos" style="text-align:right" value="0,00" 
@@ -171,7 +171,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <input name="txtCofins" id="txtCofins" type="text" class="texto" size="10" value="0,00" onkeyup="MaskMoeda(this);"
 			onkeydown="return NumbersOnly(event);" style="text-align:right" onblur="ValorIss('<?php echo $regras_credito;?>')" />
 		</td>
-        <td width="21%" align="left">Contribui��o Social</td>
+        <td width="21%" align="left">Contribuição Social</td>
 		<td width="26%" align="left">R$
             <input name="txtContribuicaoSocial" id="txtContribuicaoSocial" type="text" class="texto" size="10" value="0,00" onkeyup="MaskMoeda(this);"
 			onkeydown="return NumbersOnly(event);" style="text-align:right" onblur="ValorIss('<?php echo $regras_credito;?>')" />
@@ -197,14 +197,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 			R$ <input name="txtValTotal" id="txtValTotal" type="text" size="10" class="texto" readonly="yes" style="text-align:right;" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" >
 		</td>
 		<td width="13%" align="left">
-			Reten�ões		</td>
+			Retenções		</td>
 		<td width="40%" align="left">
 			R$ 
 				<input name="txtValTotalRetencao" id="txtValTotalRetencao" type="text" class="texto" size="10" readonly="readonly" style="text-align:right" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" />
 		</td>
 	</tr>
 	<tr <?php echo $display;?>>
-		<td align="left">Cr�dito</td>
+		<td align="left">Crédito</td>
 		<td align="left">R$
 			<input name="txtCredito" id="txtCredito" type="text" onblur="document.getElementById('txtBaseCalculo').onblur()" size="10" class="texto" readonly="yes" style="text-align:right" value="0,00" onblur="ValorIss('<?php echo $regras_credito;?>')" >
 		</td>

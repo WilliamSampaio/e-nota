@@ -193,7 +193,7 @@ $include=$_POST['include'];
 		Dados da empresa:<br><br>
 		Razão Social: $razaosocial<br>
 		CPF/CNPJ: $cpfcnpj<br>
-		Munic�pio: $municipio<br>
+		Município: $municipio<br>
 		Endereco: $logradouro, $numero<br><br>
 		  
 		Veja passo a passo como acessar o sistema:	<br><br>

@@ -57,13 +57,13 @@ echo "</div><br>";
 <div id="divResultado" style="width:800px">
 <?php 
 if($valor == 'tomadores') {
-	echo"<center><h1>Relat�rio Tomadores $anoComp</h1></center>";
+	echo"<center><h1>Relatório Tomadores $anoComp</h1></center>";
 }
 if($valor == 'issretido') {
-	echo"<center><h1>Relat�rio ISS Retido $anoComp</h1></center>";
+	echo"<center><h1>Relatório ISS Retido $anoComp</h1></center>";
 }
 if($valor == 'emissores') {
-	echo"<center><h1>Relat�rio Emissores $anoComp</h1></center>";
+	echo"<center><h1>Relatório Emissores $anoComp</h1></center>";
 }
 
 

@@ -624,9 +624,9 @@ function DataPtExt(){
 	$dia    = date("d");   //pega dia do mes
 	$m      = date("n");   //pega o mes em numero
 	$ano    = date("Y");   //pega o ano atual
-	$semana = array("Sun" => "Domingo", "Mon" => "Segunda-feira", "Tue" => "Ter�a-feira", "Wed" => "Quarta-feira", "Thu" => "Quinta-feira", "Fri" => "Sexta-feira", "Sat" => "S�bado"); 
+	$semana = array("Sun" => "Domingo", "Mon" => "Segunda-feira", "Tue" => "Terça-feira", "Wed" => "Quarta-feira", "Thu" => "Quinta-feira", "Fri" => "Sexta-feira", "Sat" => "Sábado"); 
 	/* Dias da Semana.  troca o valor da semana em ingles para portugues */
-	$mes = array(1 =>"Janeiro", "Fevereiro", "Mar�o", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"); 
+	$mes = array(1 =>"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"); 
 	/* Meses troca o valor de numero pelo seu valor por extenso */
 	return $semana[$s].", ".$dia." de ".$mes[$m]." de ".$ano; //imprime na tela a data concatenada por extenso  
 }//by lucas.
@@ -820,7 +820,7 @@ function estadoExtenso($sigla) {
  	$mes = array(
 		'01' => 'Janeiro',
 		'02' => 'Fevereiro',
-		'03' => 'Mar�o',
+		'03' => 'Março',
 		'04' => 'Abril',
 		'05' =>	'Maio',
 		'06' =>	'Junho',
@@ -1011,11 +1011,11 @@ function UltDiaUtil($mes,$ano){
 	switch($dia_semana){  
 		case"0": $dia_semana = "Domingo";       break;  
 		case"1": $dia_semana = "Segunda-Feira"; break;  
-		case"2": $dia_semana = "Ter�a-Feira";   break;  
+		case"2": $dia_semana = "Terça-Feira";   break;  
 		case"3": $dia_semana = "Quarta-Feira";  break;  
 		case"4": $dia_semana = "Quinta-Feira";  break;  
 		case"5": $dia_semana = "Sexta-Feira";   break;  
-		case"6": $dia_semana = "S�bado";        break;  
+		case"6": $dia_semana = "Sábado";        break;  
 	}
 	*/
 

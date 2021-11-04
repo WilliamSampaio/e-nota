@@ -21,14 +21,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="850" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Cart�rios - Relóe;rios</td>
+    <td width="850" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Cartórios - Relóe;rios</td>
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
     <td width="18" background="img/form/lateralesq.jpg"></td>
     <td align="center">
     	<form method="post" name="frmRelatorio" id="frmRelatorio" onsubmit="return false">
-        	<fieldset><legend>Relatórios de Cart�rios</legend>
+        	<fieldset><legend>Relatórios de Cartórios</legend>
                 <table width="100%">
                     <tr>
                         <td width="17%" align="left">Assunto</td>
@@ -36,8 +36,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                             <select name="cmbRelatorios" class="combo"
                             onchange="acessoAjax('inc/cartorios/relatorio.ajax.php','frmRelatorio','divRelatorios')">
                                 <option value=""></option>
-                                <option value="cartorios">Cart�rios</option>
-                                <option value="dec">Declara��es</option>
+                                <option value="cartorios">Cartórios</option>
+                                <option value="dec">Declarações</option>
                             </select>
                         </td>
                   </tr>

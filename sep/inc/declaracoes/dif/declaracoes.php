@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td align="center">
         <form name="frmDecc" id="frmInstituicao" method="post" onsubmit="return false">
 			<input type="hidden" name="hdCancelaDif" id="hdCancelaDif" />
-            <fieldset><legend>Pesquisa de declara��es</legend>
+            <fieldset><legend>Pesquisa de declarações</legend>
                 <table width="100%">
                     <tr>
                         <td align="left">Nome/Razão Social</td>
@@ -40,7 +40,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <td align="left"><input name="txtCNPJ" type="text" class="texto" size="20" maxlength="18" /></td>
                     </tr>
                     <tr>
-                    	<td align="left">N� da Decc</td>
+                    	<td align="left">Nº da Decc</td>
                         <td align="left"><input name="txtNroDif" type="text" class="texto" size="10" maxlength="10" /></td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                 <option value=""></option>
                                 <?php
                                 //array dos meses comecando na posição 1 ate 12 e faz um for listando os meses no combo
-                                $meses = array(1=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+                                $meses = array(1=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
                                 for($x=1;$x<=12;$x++){
                                     echo "<option value='$x'>$meses[$x]</option>";
                                 }//fim for meses

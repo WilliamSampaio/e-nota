@@ -459,7 +459,7 @@ function ValidaCkbDec(campo){
 	if(total>0){
 		return true;
 	}else{
-		alert('� necess�rio que escolha ao menos uma declaração');
+		alert('� necessário que escolha ao menos uma declaração');
 		return false;
 	}
 }//teste se tem pelo penos uma declaracao selecionada para gerar a guia
@@ -685,7 +685,7 @@ var dop = {
 		if(confirm('Deseja cancelar a declaracao N�'+codigo+' de '+nome+'?')){
 			document.getElementById('hdCancelaDop').value=codigo;
 			acessoAjax('inc/declaracoes/dop/declarar_pesquisa.ajax.php','frmDop','spanDop');
-			alert('Declara��o de �rg�o P�blico cancelada!');
+			alert('Declaração de Orgão Público cancelada!');
 		}
 	},
 	buscaServicos : function (campo ,cont ){
@@ -1683,7 +1683,7 @@ if(document.all) { // Internet Explorer
 
 sValue = objForm[strField].value;
 
-// Limpa todos os caracteres de formata��o que
+// Limpa todos os caracteres de formatação que
 // j� estiverem no campo.
 sValue = sValue.toString().replace( "-", "" );
 sValue = sValue.toString().replace( "-", "" );

@@ -27,7 +27,7 @@ $periodomysql=$ano."-".$mes;
 
 
 if($ano==NULL || $mes==NULL){
-	Mensagem("Escolha Ano e M�s para gerar a Nota Avulsa.");
+	Mensagem("Escolha Ano e Mês para gerar a Nota Avulsa.");
 }else{
 	$sessioncnpj = $_POST['txtCnpjPrestador'];
 	if($sessioncnpj==$_POST['txtTomadorCNPJ']){

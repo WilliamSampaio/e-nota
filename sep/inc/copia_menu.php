@@ -59,7 +59,7 @@ if(!$_GET['m']){
 				  menus_prefeitura_submenus.ordem
 		");
 		if($sql_submenus->rowCount()){
-			//Verifica o nivel de permiss�o do usuario
+			//Verifica o nivel de permissão do usuario
 			$string = "";
 			if($_SESSION['nivel_de_acesso'] == "M"){
 				$string = " AND menus_prefeitura_submenus.nivel <> 'A'";
@@ -119,7 +119,7 @@ if(!$_GET['m']){
 		<li><a class="menua" href="principal.php" target="_parent"><?php echo $menu; ?></a>
         	<ul>
 			<?php
-			//Verifica o nivel de permiss�o do usuario
+			//Verifica o nivel de permissão do usuario
 			$string = "";
 			if($_SESSION['nivel_de_acesso'] == "M"){
 				$string = " AND menus_prefeitura_submenus.nivel <> 'A'";

@@ -49,7 +49,7 @@ $sqldesnotas=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER
 $sqldes=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='des'");
 $sqldesissretido=$PDO->query("SELECT guia_pagamento.codigo FROM guia_pagamento INNER JOIN guias_declaracoes ON guia_pagamento.codigo=guias_declaracoes.codguia WHERE guias_declaracoes.relacionamento='des_issretido'");
 ?>
-	<fieldset style="width:800px"><legend>Relat�rio de Escritura��es</legend>
+	<fieldset style="width:800px"><legend>Relatório de Escriturações</legend>
         <table width="100%">
             <tr>
                 <td width="195">Total de Guias:</td>

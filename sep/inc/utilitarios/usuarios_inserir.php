@@ -41,20 +41,20 @@ Fith Floor, Boston, MA 02110-1301, USA
 		//atualiza os campos do banco
 		
 		$PDO->query("UPDATE usuarios SET nome = '$nome', login = '$login', $str nivel = '$nivel' WHERE codigo = '$codedit'");
-		add_logs('Atualizou Configura��es de um Usu�rio');
+		add_logs('Atualizou Configurações de um Usuário');
 		Mensagem("Usuario atualizado");
 	}//fim if
 	if($_POST["btDeletar"] == "Excluir"){
 		$coddel = $_POST["hdCodDel"];
 		$PDO->query("DELETE FROM usuarios WHERE codigo = '$coddel'");
-		add_logs('Excluiu Configura��es de um Usu�rio');
+		add_logs('Excluiu Configurações de um Usuário');
 		Mensagem("Usuario excluido");
 	}//fim if
 ?>
 <form method="post" id="frmUsuario" name="frmUsuario">
 	<input type="hidden" name="include" id="include" value="<?php echo $_POST["include"];?>" />
 	<input type="hidden" name="btUsuarios" value="<?php echo $_POST["btUsuarios"];?>">
-	<fieldset><legend>Cadastro de Usu�rios</legend>
+	<fieldset><legend>Cadastro de Usuários</legend>
 		<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
 			<tr>
 				<td align="left" width="20%">Nome<font color="#FF0000">*</font></td>
@@ -69,12 +69,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<td align="left"><input type="password" size="10" maxlength="10" name="txtSenha" id="txtSenha" class="texto">No máximo 10 caracteres</td>
 			</tr>
 			<tr>
-				<td align="left">N�vel de permiss�o</td>
+				<td align="left">Nível de permissão</td>
 				<td align="left">
 					<select name="cmbNivel" id="cmbNivel">
 						<option value=""></option>
 						<option value="A">Alto</option>
-						<option value="M">M�dio</option>
+						<option value="M">Médio</option>
 						<option value="B">Baixo</option>
 					</select>
 				</td>
@@ -92,13 +92,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($result>0){
 ?>
 	<!-- cabe�alho da pesquisa --> 
-	<fieldset><legend>Usu�rios Cadastrados: <?php echo $result; ?></legend>
+	<fieldset><legend>Usuários Cadastrados: <?php echo $result; ?></legend>
 		<table width="100%">  
 			<tr bgcolor="#999999">
 				<td width="136" align="center">Nome</td>
 				<td width="138" align="center">Login</td>
-				<td width="49" align="center">N�vel</td>
-				<td width="126" align="center">�lt login</td>
+				<td width="49" align="center">Nível</td>
+				<td width="126" align="center">Últ login</td>
 				<td width="49" align="center"></td>
 				<td align="center"></td>
 			</tr>

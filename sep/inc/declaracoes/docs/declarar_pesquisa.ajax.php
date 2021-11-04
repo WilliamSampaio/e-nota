@@ -120,7 +120,7 @@ if($sql_pesquisa->rowCount()){
             </label>
             
             <?php if($dados_pesquisa['estado'] != "C"){?>
-            <label title="Cancelar Declara��o" id="lbCancelar<?php echo $x;?>">
+            <label title="Cancelar Declaração" id="lbCancelar<?php echo $x;?>">
             	<input name="btCancelarDoc" id="btX" type="button" class="botao" value=""
                 onClick="return cancelarDeclaracao('<?php echo $dados_pesquisa['codigo'];?>','<?php echo $dados_pesquisa['nome'];?>','inc/declaracoes/doc/declarar_pesquisa.ajax.php','frmOperadoras','divDeclaracoesOperadoras','hdCancelaDoc');">
             </label>

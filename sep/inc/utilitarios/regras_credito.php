@@ -47,7 +47,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$estadoedit     = $_POST['cmbEstadoEdit'];
 		$PDO->query("UPDATE nfe_creditos SET credito = '$creditoedit', tipopessoa = '$tipopessoaedit', issretido = '$issretidoedit', valor = '$valoredit', estado = '$estadoedit' WHERE codigo = '$codigoedit'");
 		add_logs('Atualizou uma regra');
-		Mensagem("Informa��es da regra atualizadas!");
+		Mensagem("Informações da regra atualizadas!");
 	}
 	
 	if($_POST['btExcluir'] != ""){

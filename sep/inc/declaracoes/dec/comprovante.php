@@ -42,7 +42,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         <td width="520" style="border:0px;" align="left" valign="middle">
 		<font class="prefeitura">Prefeitura Municipal de <?php echo $CIDADE; ?></font><br>
 		<font class="secretaria"><?php echo $SECRETARIA; ?><br>
-		Comprovante de Cadastro de Cart�rio </font></td>
+		Comprovante de Cadastro de Cartório </font></td>
       </tr>
     </table></td>
   </tr>
@@ -71,13 +71,13 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>CERTIFICAÇÃO</strong></td>
   </tr>
   <tr>
-    <td height="200" colspan="4" align="center" valign="middle"><span class="style1">A Prefeitura Municipal de <font class="prefeitura"><?php echo $CIDADE; ?></font> certifica que o Cart�rio citado acima foi devidamente cadastrado no sistema de ISSDigital do município<font class="prefeitura"><?php echo $CIDADE ?></font>.</span>   </td>
+    <td height="200" colspan="4" align="center" valign="middle"><span class="style1">A Prefeitura Municipal de <font class="prefeitura"><?php echo $CIDADE; ?></font> certifica que o Cartório citado acima foi devidamente cadastrado no sistema de ISSDigital do município<font class="prefeitura"><?php echo $CIDADE ?></font>.</span>   </td>
   </tr>
   <tr>
     <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>OBSERVAÇÕES</strong></td>
   </tr>
   <tr>
-    <td colspan="4"><p>- A senha de acesso do Cart�rio ao sistema de ISSDigital do município é de uso exclusivo e intransferível do Cart�rio, bem como a responsabilidade sobre o uso indevido da mesma.
+    <td colspan="4"><p>- A senha de acesso do Cartório ao sistema de ISSDigital do município é de uso exclusivo e intransferível do Cartório, bem como a responsabilidade sobre o uso indevido da mesma.
     </p></td>
   </tr>
   <tr>

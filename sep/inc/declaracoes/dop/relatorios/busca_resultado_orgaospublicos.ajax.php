@@ -84,11 +84,11 @@ if($sql->rowCount()>0){
 	<tr bgcolor="#999999">
 		<td align="center" width="240">Nome</td>
 		<td align="center" width="130">CNPJ</td>
-		<td align="center" width="130">Munic�pio</td>
+		<td align="center" width="130">Município</td>
 		<td align="center" width="30">UF</td>
-		<td align="center" width="100">Administra��o</td>
-		<td align="center" width="60">N�vel</td>
-		<td align="center">Situa��o</td>	
+		<td align="center" width="100">Administração</td>
+		<td align="center" width="60">Nível</td>
+		<td align="center">Situação</td>	
 	</tr>
 	<?php
 	while(list($codigo,$nome,$razaosocial,$cnpj,$municipio,$uf,$admpublica,$nivel,$estado) = $sql->fetch()){										

@@ -77,7 +77,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         echo "
 			<table width=\"100%\">
 				<tr>
-					<td align=\"center\"><b>Não há declara��es de Cart�rios</b></td>
+					<td align=\"center\"><b>Não há declarações de Cartórios</b></td>
 				</tr>
 			</table>
         ";

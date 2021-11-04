@@ -31,10 +31,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<td align="left" width="30%">Período do Imposto</td>
 	<td align="left" width="70%">
 	<select name="cmbMes" id="cmbMes" class="combo">
-	  <option value="">== M�s ==</option>
+	  <option value="">== Mês ==</option>
 	  <option value="01">Janeiro</option>
 	  <option value="02">Fevereiro</option>
-	  <option value="03">Mar�o</option>
+	  <option value="03">Março</option>
 	  <option value="04">Abril</option>
 	  <option value="05">Maio</option>
 	  <option value="06">Junho</option>

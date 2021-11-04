@@ -330,7 +330,7 @@ if($btSelecionarEmpresa!=""){
 			}
 	 }
 	}else{
-		print("<script language=JavaScript>alert('� necess�rio selecionar um serviço para a emissão da nota.')</script>");
+		print("<script language=JavaScript>alert('� necessário selecionar um serviço para a emissão da nota.')</script>");
 	}
 }
 
@@ -540,7 +540,7 @@ if($limiteRPS < 1){
   </tr>
   <tr>
     <td>
-		Munic�pio<font color="#FF0000">*</font></td>
+		Município<font color="#FF0000">*</font></td>
     <td>
         <div  id="divTomadorMunicipio">
             <select name="txtTomadorMunicipio" id="txtTomadorMunicipio" class="combo">
@@ -566,7 +566,7 @@ if($limiteRPS < 1){
 
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
   <tr>
-    <td><strong>Discriminação dos Serviços  e/ou Dedu��es</strong></td>
+    <td><strong>Discriminação dos Serviços e/ou Deduções</strong></td>
   </tr>
   <tr>
    <td align="center">

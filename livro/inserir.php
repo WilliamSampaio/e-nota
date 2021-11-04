@@ -86,7 +86,7 @@
                     	Mensagem("Para gerar o livro, é preciso ter notas tomadas ou emitidas. A competência selecionada nao possui nenhuma nota.");
                     }
             }else{
-				Mensagem("Livro deste contribuinte neste per�odo já foi gerado anteriormente. Informe outro contribuinte ou outro per�odo");
+				Mensagem("Livro deste contribuinte neste período já foi gerado anteriormente. Informe outro contribuinte ou outro período");
             }
         }
 ?>

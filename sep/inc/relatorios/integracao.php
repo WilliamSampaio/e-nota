@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC" width="700">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Integra�ao </td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Relatórios - Integração </td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -30,7 +30,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
         <form id="frmIntegracao" onsubmit="return false" method="post">
             <fieldset>
-            	<legend><strong>Integra�ao DBSeller x Portal P�blico</strong></legend>
+            	<legend><strong>Integração DBSeller x Portal Público</strong></legend>
                 <table align="left" width="100%" height="100%">
                 	<tr>
                     	<td width="9%" align="left">Data Inicial: </td>
@@ -41,7 +41,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <td width="91%" align="left"><input name="txtDataFinal" type="text" id="txtDataFinal" size="20" value="<?php echo DataPt($dataFinal);?>" class="texto" /></td>
                     </tr>
                     <tr>
-                    	<td colspan="4">* Para uma data espec�fica, coloque a data apenas no campo 'Data Inicial'.</td>
+                    	<td colspan="4">* Para uma data específica, coloque a data apenas no campo 'Data Inicial'.</td>
                     </tr>
                     <tr>
                     	<td colspan="4"><input name="btPesquisar" onclick="acessoAjax('inc/relatorios/integracao.ajax.php','frmIntegracao','divRelatIntegracao')" type="button" class="botao" value="Buscar"/></td>

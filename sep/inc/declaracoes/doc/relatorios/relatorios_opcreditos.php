@@ -37,7 +37,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$nl=$sql->fetchColumn(3);
 	
 ?>
-<fieldset><legend>Informa��es sobre Operadoras de créditos</legend>
+<fieldset><legend>Informações sobre Operadoras de créditos</legend>
 <table width="100%" border="0" cellpadding="0">
     <tr>
         <td width="15%" align="left">Cadastradas:</td>
@@ -78,7 +78,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			</td>
 		</tr>
 		<tr>
-			<td>Munic�pio:</td>
+			<td>Município:</td>
 			<td><input type="text" name="txtCidade" class="texto" /></td>
 			<td>UF:</td>
 			<td><input type="text" name="txtUF" class="texto" maxlength="2" size="2" /></td>

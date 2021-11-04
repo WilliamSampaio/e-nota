@@ -50,9 +50,9 @@ if(mysql_num_rows($sql_empreiteiras)>0)
     <tr bgcolor="#999999">
         <td align="center" width="170">Nome</td>
         <td align="center" width="110">CNPJ</td>
-        <td align="center" width="130">Munic�pio</td>
+        <td align="center" width="130">Município</td>
         <td align="center" width="30">UF</td>
-        <?php if(!$estado){?><td align="center" width="90">Libera��o</td><?php }?>
+        <?php if(!$estado){?><td align="center" width="90">Liberação</td><?php }?>
     </tr>
     <?php
     while(list($nome,$razaosocial,$cnpj,$municipio,$uf,$estado_emp,$codigo) = $sql_empreiteiras)){										

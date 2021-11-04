@@ -30,7 +30,7 @@ if(($servicos !="") &&($aliquota !=""))
   {
    $sql= $PDO->query("INSERT INTO cartorios_servicos SET servicos='$servicos', aliquota= '$aliquota', estado='$estado', codtipo='$codcategoria'");
    print "<script language=JavaScript> alert('Serviço inserido com sucesso');</script>";   
-   add_logs('Inseriu novo serviço de Cart�rio');	
+   add_logs('Inseriu novo serviço de Cartório');	
   }
   else
   {

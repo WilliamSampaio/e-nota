@@ -29,7 +29,7 @@ $sqlpago = ("SELECT guias_declaracoes.relacionamento, guia_pagamento.codigo FROM
 	<table width="800" bgcolor="#CCCCCC" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-				<fieldset style="width:800px"><legend>Busca de Escritura��es Não Pagas</legend>
+				<fieldset style="width:800px"><legend>Busca de Escriturações Não Pagas</legend>
 				<?php
                 $sql=Paginacao($sqlpago,'frmListando','divListar');
                 $resultados=$sql->rowCount();

@@ -1264,7 +1264,7 @@ function MascaraMoeda(objTextBox, SeparadorMilesimo, SeparadorDecimal, e){
     var whichCode = (window.event) ? e.keyCode : e.which;
     if ((whichCode == 13)||(whichCode == 8)||(whichCode == 0)) return true;
     key = String.fromCharCode(whichCode); // Valor para o código da Chave
-    if (strCheck.indexOf(key) == -1) return false; // Chave inv�lida
+    if (strCheck.indexOf(key) == -1) return false; // Chave inválida
     len = objTextBox.value.length;
     for(i = 0; i < len; i++)
         if ((objTextBox.value.charAt(i) != '0') && (objTextBox.value.charAt(i) != SeparadorDecimal)) break;
@@ -1670,7 +1670,7 @@ function cancelarDeclaracao(codigo,nome,url,form,retorno,hdcanc){
 	if(confirm('Deseja cancelar a declaracao N�'+codigo+' de '+nome+'?')){
 		document.getElementById(hdcanc).value = codigo;
 		acessoAjax(url,form,retorno);
-		alert('Declara��o cancelada!');
+		alert('Declaração cancelada!');
 	}
 }
 

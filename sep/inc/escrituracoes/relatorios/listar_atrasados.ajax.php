@@ -34,7 +34,7 @@ $ano = date("Y");
 	<table width="800" bgcolor="#CCCCCC" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-				<fieldset style="width:800px"><legend>Busca de Escritura��es Atrasadas</legend>
+				<fieldset style="width:800px"><legend>Busca de Escriturações Atrasadas</legend>
 					<?php
                     $sql=Paginacao($sqlnaopago,'frmListando','divListar');
                     $resultados=$sql->rowCount();

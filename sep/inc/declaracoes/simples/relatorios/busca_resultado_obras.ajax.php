@@ -68,7 +68,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td width="15%" align="center">Nome</td>
             <td width="6%"  align="center">Alvara</td>
             <td width="19%" align="center">Endereco</td>
-            <td width="19%" align="center">Propiet�rio</td>
+            <td width="19%" align="center">Proprietário</td>
             <td width="15%" align="center">CNPJCPF</td>
             <td width="9%"  align="center">Data inicio</td>	
             <td width="10%" align="center">Data termino</td>

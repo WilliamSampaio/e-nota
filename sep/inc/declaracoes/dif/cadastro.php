@@ -70,7 +70,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	 $codigo=$_POST["hdDesativar"];
 	 $PDO->query("DELETE FROM cadastro WHERE codigo = $codigo");
 	 add_logs('Excluiu um Cadastro');
-	 Mensagem("Instituição Financeira exclu�da com sucesso!");
+	 Mensagem("Instituição Financeira excluída com sucesso!");
 	 ?><script>LimpaCampos('frmCadastroInst');</script><?php
 	}
 ?>  
@@ -78,7 +78,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 
 	<style type="text/css">
-	<!--
 	#divBuscaInst {
 		position:absolute;
 		left:40%;
@@ -88,7 +87,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 		z-index:1;
 		visibility:<?php if(isset($_POST['btBuscarCliente'])){ echo"visible";}else{ echo"hidden";} ?>
 	}
-	-->
 	</style>
 	<div id="divBuscaInst"><?php require_once("inc/instfinanceiras/pesquisar.php"); ?></div> 
 	<?php
@@ -152,7 +150,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         <form method="post" id="frmCadastroInst">
         <input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
         <input type="hidden" name="txtCodInst" value="<?php echo $codigo; ?>" />
-            <fieldset><legend>Cadastro de Institui��es Financeiras</legend>	
+            <fieldset><legend>Cadastro de Instituições Financeiras</legend>	
               <table width="100%" border="0" align="center">	   
                 <tr>
                     <td width="135" align="left">Nome<font color="#FF0000">*</font></td>
@@ -244,7 +242,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     </td>
                 </tr>
                 <tr>
-                    <td align="left">Munic�pio<font color="#FF0000">*</font></td>
+                    <td align="left">Município<font color="#FF0000">*</font></td>
                     <td align="left">
                         <div  id="txtInsMunicipioEmpresa">
                         	<?php

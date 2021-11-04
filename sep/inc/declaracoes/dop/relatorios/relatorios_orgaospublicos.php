@@ -37,23 +37,23 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$nl=$sql->fetchColumn(3);
 	
 ?>
-<fieldset><legend>Informa��es sobre �rg�os P�blicos</legend>
+<fieldset><legend>Informações sobre Orgãos Públicos</legend>
 <table width="100%" border="0" cellpadding="0">
     <tr>
         <td width="15%" align="left">Cadastradas:</td>
-      <td align="left"><?php if($cadastradas != 0){ echo $cadastradas;}else{ echo "Não há �rg�os p�blicos cadastrados";}?></td>
+      <td align="left"><?php if($cadastradas != 0){ echo $cadastradas;}else{ echo "Não há Orgãos p�blicos cadastrados";}?></td>
     </tr>
     <tr>
         <td align="left">Ativas:</td>
-        <td align="left"><?php if($ativas != 0){ echo $ativas;}else{ echo "Não há �rg�os p�blicos ativos";}?></td>
+        <td align="left"><?php if($ativas != 0){ echo $ativas;}else{ echo "Não há Orgãos p�blicos ativos";}?></td>
     </tr>
     <tr>
         <td align="left">Inativas:</td>
-        <td align="left"><?php if($inativas != 0){ echo $inativas;}else{ echo "Não há �rg�os p�blicos inativos";}?></td>
+        <td align="left"><?php if($inativas != 0){ echo $inativas;}else{ echo "Não há Orgãos p�blicos inativos";}?></td>
     </tr>
     <tr>
         <td align="left">Não Liberadas:</td>
-        <td width="85%" align="left"><?php if($nl != 0){ echo $nl;}else{ echo "Não há �rg�os p�blicos não liberados";}?></td>
+        <td width="85%" align="left"><?php if($nl != 0){ echo $nl;}else{ echo "Não há Orgãos p�blicos não liberados";}?></td>
   </tr>
 </table>
 </fieldset>
@@ -78,13 +78,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 			</td>
 		</tr>
 		<tr>
-			<td>Munic�pio:</td>
+			<td>Município:</td>
 			<td><input type="text" name="txtCidade" class="texto" /></td>
 			<td>UF:</td>
 			<td><input type="text" name="txtUF" class="texto" maxlength="2" size="2" /></td>
 		</tr>
 		<tr>
-			<td>Administra��o:</td>
+			<td>Administração:</td>
 			<td>
 				<select name="cmbAdmin" class="combo">
 					<option value=""></option>

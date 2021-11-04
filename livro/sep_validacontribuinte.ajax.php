@@ -5,7 +5,7 @@ require_once("../include/conect.php");
 	if($sql->rowCount()!=0){
 		$dado= $sql->fetchObject();		
 		echo $dado->nome."<br><br>";
-		$meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");		
+		$meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");		
 		 ?>
          <form name="frmSep" id="frmSep" method="post" onsubmit="return ValidaFormulario('txtObs|cmbMes|cmbAno');">
          <input type="hidden" name="include" id="include" value="<?php echo $_POST["include"];?>" />

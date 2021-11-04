@@ -90,7 +90,7 @@ switch($estado){
 <script src="../../scripts/padrao.js" type="text/javascript"></script>
 <title>Relatorios - Operadoras de Créditos</title>
 <input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
-<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relat�rio de Declarações de Operadoras de Créditos</b></p>
+<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relatório de Declarações de Operadoras de Créditos</b></p>
 <table>
 	<?php if($nome){?>
 	<tr>
@@ -113,7 +113,7 @@ switch($estado){
 	}else{
 		if($compmes){ ?>
 	<tr>
-		<td><b>M�s de competência:</b></td>
+		<td><b>Mês de competência:</b></td>
 		<td><?php echo $compmes; ?></td>
 	</tr>
 	<?php } if($compano){ ?>
@@ -130,7 +130,7 @@ switch($estado){
 	</tr>
 	<?php } if($datafim){ ?>
 	<tr>
-		<td><b>At� a data:</b></td>
+		<td><b>Até a data:</b></td>
 		<td><?php echo DataPt($datafim); ?></td>
 	</tr>
 	<?php } if($estado){ ?>
@@ -140,7 +140,7 @@ switch($estado){
 	</tr>
 	<?php } if($numero){ ?>
 	<tr>
-		<td><b>N� DOC:</b></td>
+		<td><b>Nº DOC:</b></td>
 		<td><?php echo $numero; ?></td>
 	</tr>
 	<?php }?>
@@ -150,7 +150,7 @@ switch($estado){
 		if($sql->rowCount()>1){
 		echo $sql->rowCount(); ?> Declarações registradas
 		<?php }else{
-			echo "1 Declara��o encontrada";
+			echo "1 Declaração encontrada";
 		} ?>
 		</strong></td>
 	</tr>

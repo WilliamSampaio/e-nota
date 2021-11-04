@@ -28,14 +28,14 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="820" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Ouvidoria - Relat�rio</td>  
+    <td width="820" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Ouvidoria - Relatório</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
     <td width="18" background="img/form/lateralesq.jpg"></td>
     <td align="center">
 	<form method="post" id="frmReclamacoes" name="frmReclamacoes">
-			<fieldset><legend>Relat�rio de Reclamações</legend>
+			<fieldset><legend>Relatório de Reclamações</legend>
 				<table width="100%">
 					<tr>
 						<td width="23%">Reclamações Pendentes:</td>

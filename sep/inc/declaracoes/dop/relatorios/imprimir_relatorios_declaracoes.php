@@ -89,9 +89,9 @@ switch($estado){
 ?>
 <link href="../../../css/padrao.css" rel="stylesheet" type="text/css">
 <script src="../../scripts/padrao.js" type="text/javascript"></script>
-<title>Relatorios - �rg�os P�blicos</title>
+<title>Relatorios - Orgãos Públicos</title>
 <input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
-<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relat�rio de Declarações de �rg�os P�blicos</b></p>
+<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relatório de Declarações de Orgãos Públicos</b></p>
 <table>
 	<?php if($nome){?>
 	<tr>
@@ -114,7 +114,7 @@ switch($estado){
 	}else{
 		if($compmes){ ?>
 	<tr>
-		<td><b>M�s de competência:</b></td>
+		<td><b>Mês de competência:</b></td>
 		<td><?php echo $compmes; ?></td>
 	</tr>
 	<?php } if($compano){ ?>
@@ -131,7 +131,7 @@ switch($estado){
 	</tr>
 	<?php } if($datafim){ ?>
 	<tr>
-		<td><b>At� a data:</b></td>
+		<td><b>Até a data:</b></td>
 		<td><?php echo DataPt($datafim); ?></td>
 	</tr>
 	<?php } if($estado){ ?>
@@ -141,7 +141,7 @@ switch($estado){
 	</tr>
 	<?php } if($numero){ ?>
 	<tr>
-		<td><b>N� DOP:</b></td>
+		<td><b>Nº DOP:</b></td>
 		<td><?php echo $numero; ?></td>
 	</tr>
 	<?php }?>
@@ -151,7 +151,7 @@ switch($estado){
 		if($sql->rowCount()>1){
 		echo $sql->rowCount(); ?> Declarações registradas
 		<?php }else{
-			echo "1 Declara��o encontrada";
+			echo "1 Declaração encontrada";
 		} ?>
 		</strong></td>
 	</tr>
@@ -161,7 +161,7 @@ switch($estado){
     <tr>
         <td width="6%" align="center"><b>Nº Dec</b></td>
         <td width="14%" align="center"><b>Cod verificação</b></td>
-        <td width="33%" align="center"><b>Nome do �rg�o P�blico</b></td>
+        <td width="33%" align="center"><b>Nome do Orgão Público</b></td>
         <td width="8%" align="center"><b>Total</b></td>
         <td width="7%" align="center"><b>Iss</b></td>
         <td width="11%" align="center"><b>Data</b></td>

@@ -80,27 +80,27 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <td><?php echo $dados_auditoria['cnpjcpf']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Cód. Verificação Declara��o do Tomador:</td>
+                        <td>Cód. Verificação Declaração do Tomador:</td>
                         <td><?php echo $dados_auditoria['codigoverificaissretido']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Cód. Verificação Declara��o da Empreiteira:</td>
+                        <td>Cód. Verificação Declaração da Empreiteira:</td>
                         <td><?php echo $dados_auditoria['codverificacao']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Competência Declara��o do Tomador:</td>
+                        <td>Competência Declaração do Tomador:</td>
                         <td><?php echo $dados_auditoria['competenciaissretido']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Competência Declara��o da Empreiteira:</td>
+                        <td>Competência Declaração da Empreiteira:</td>
                         <td><?php echo $dados_auditoria['competencia']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Estado Declara��o do Tomador:</td>
+                        <td>Estado Declaração do Tomador:</td>
                         <td><?php echo $dados_auditoria['estadoissretido']; ?></td>
                     </tr>
                     <tr align="left">
-                        <td>Estado Declara��o da Empreiteira:</td>
+                        <td>Estado Declaração da Empreiteira:</td>
                         <td><?php echo $dados_auditoria['estado']; ?></td>
                     </tr>
                 </table>
@@ -112,7 +112,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     $sql_notas_tomador=$PDO->query("SELECT nota_nro AS numero, valor_nota AS valor FROM des_issretido_notas WHERE coddes_issretido='".$dados_auditoria['codissretido']."'");
     $sql_notas_prestador=$PDO->query("SELECT nronota AS numero, valornota AS valor FROM decc_des_notas WHERE coddecc_des='$coddecc_des'");
     ?>
-        <fieldset><legend>Notas relacionadas na Declara��o do Tomador</legend>
+        <fieldset><legend>Notas relacionadas na Declaração do Tomador</legend>
             <table width="50%" align="center">
                 <tr align="center" bgcolor="999999">
                     <td>Número</td>
@@ -130,7 +130,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 ?>
             </table>
         </fieldset>
-        <fieldset><legend>Notas Relacionadas na Declara��o da Empreiteira</legend>
+        <fieldset><legend>Notas Relacionadas na Declaração da Empreiteira</legend>
             <table width="50%" align="center">
                 <tr align="center" bgcolor="999999">
                     <td>Número</td>

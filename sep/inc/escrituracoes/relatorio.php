@@ -43,7 +43,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								</tr>								
 								<tr>
 									<td colspan="2"><br />					
-										<input type="button" name="btnTodos" id="btnTodos" value="Relat�rio" class="botao" onclick="acessoAjax('inc/escrituracoes/relatorios/busca_todos.ajax.php','frmRelatorio','divBuscar');"/>					
+										<input type="button" name="btnTodos" id="btnTodos" value="Relatorio" class="botao" onclick="acessoAjax('inc/escrituracoes/relatorios/busca_todos.ajax.php','frmRelatorio','divBuscar');"/>					
 									</td>
 								</tr>
 							</table>

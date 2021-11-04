@@ -34,7 +34,7 @@ if($valor == 'issretido') {
 if($valor == 'emissores') {
 	$Des = "Emissores";
 }
-echo "<title>SEP - Relat�rio $Des</title>";
+echo "<title>SEP - Relatório $Des</title>";
 ?>
 </head>
 <body style="margin-left: 5%;" >
@@ -63,7 +63,7 @@ echo "</div><br>";
 <div id="divResultado" style="width:800px">
 <?php 
 
-echo"<center><h1>Relat�rio $Des $anoComp</h1></center>";
+echo"<center><h1>Relatório $Des $anoComp</h1></center>";
 
 
 if($valor =='tomadores'){

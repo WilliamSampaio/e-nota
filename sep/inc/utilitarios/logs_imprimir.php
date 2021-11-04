@@ -77,10 +77,10 @@ if($result>0){
 					<td height="25" colspan="5" align="center" valign="middle" bgcolor="#CCCCCC" class="tblTitulo">REGISTRO DE AÇÕES</td>
 				</tr>
 				<tr bgcolor="#999999"> 
-					<td width="156" align="center">Usu�rio</td>
+					<td width="156" align="center">Usuário</td>
 					<td width="130" align="center">IP</td>
 					<td width="155" align="center">Data e Hora</td>
-					<td align="center">A��o</td>   
+					<td align="center">Ação</td>   
 				</tr>
 					<?php
 					while(list($usuario, $ip,$data, $acao) = $query->fetch()){

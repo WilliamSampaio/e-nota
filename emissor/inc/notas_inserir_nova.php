@@ -298,7 +298,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 			}
 		}
 	}else{
-		print("<script language=JavaScript>alert('� necess�rio selecionar um serviço para a emissão da nota.')</script>");
+		print("<script language=JavaScript>alert('� necessário selecionar um serviço para a emissão da nota.')</script>");
 	}
 }
 ?>

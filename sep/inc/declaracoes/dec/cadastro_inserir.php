@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$sql_verifica=$PDO->query("SELECT cnpj FROM cadastro WHERE cnpj='$cnpj'");
 	if($sql_verifica->rowCount()>0)
 		{
-			Mensagem("Já existe um Cart�rio cadastrado com este CNPJ");
+			Mensagem("Já existe um Cartório cadastrado com este CNPJ");
 		}
 	else
 		{

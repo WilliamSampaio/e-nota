@@ -25,7 +25,7 @@ $regra_cred_rpa = "'$cred_pf_n','$val_pf_n','$cred_pf_s','$val_pf_s','$cred_pj_n
 if(false){?><table><?php }
 ?>
   <tr>
-    <td align="left">Valor Total das Dedu��es</td>
+    <td align="left">Valor Total das Deduções</td>
     <td align="left">R$ 
 	    <input name="txtValorDeducoes" type="text" size="12" class="texto" id="txtValorDeducoes"  style="text-align:right;" value="0"
     	 onkeydown="MaskMoeda(this); return NumbersOnly(event);" <?php print "onblur=\"ValorIssRPA($regra_cred_rpa)\"";?> > 		

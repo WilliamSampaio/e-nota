@@ -20,13 +20,13 @@
                 </td>
             </tr>
             <tr>
-                <td>M�s</td>
+                <td>Mês</td>
                 <td>
                     <select name="cmbMesDebito" id="cmbMesDebiro">
                         <option></option>
                         <option value="01">Janeiro</option>
                         <option value="02">Fevereiro</option>
-                        <option value="03">Mar�o</option>
+                        <option value="03">Março</option>
                         <option value="04">Abril</option>
                         <option value="05">Maio</option>
                         <option value="06">Junho</option>

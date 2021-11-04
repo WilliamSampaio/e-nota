@@ -28,7 +28,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			$codigo = $_POST['excluir'];
 			//Mensagem('Serviço excluido!');
 			$PDO->query("DELETE FROM cartorios_servicos WHERE codigo='$codigo'");
-			add_logs('Excluiu um serviço de Cart�rio');
+			add_logs('Excluiu um serviço de Cartório');
 			unset($codigo);
 		}
 	?>

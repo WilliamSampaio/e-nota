@@ -19,17 +19,17 @@ Versão 3, 29 de junho de 2007
 
 Este programa é software livre: você pode redistribu�-lo e / ou modificar sob os termos da GNU General Public License como publicado pela Free Software Foundation, tanto a versão 3 da Licença, ou�(por sua opção) qualquer versão posterior.
 
-Este programa é distribu�do na esperan�a que possa ser �til, mas SEM QUALQUER GARANTIA, sem mesmo a garantia impl�cita de COMERCIALIZA��O ou ADEQUA��O A UM DETERMINADO PROP�SITO. Veja a GNU General Public License para mais detalhes.
+Este programa é distribuído na esperança que possa ser útil, mas SEM QUALQUER GARANTIA, sem mesmo a garantia impl�cita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO PROPÓSITO. Veja a GNU General Public License para mais detalhes.
 
-Você deve ter recebido uma cópia da GNU General Public License��junto com este programa. Se não, veja <http://www.gnu.org/licenses/>.
+Você deve ter recebido uma cópia da GNU General Public License junto com este programa. Se não, veja <http://www.gnu.org/licenses/>.
 
 
 This is an unofficial translation of the GNU General Public License into Portuguese. It was not published by the Free Software Foundation, and does not legally state the distribution terms for software that uses the GNU GPL é only the original English text of the GNU GPL does that. However, we hope that this translation will help Portuguese speakers understand the GNU GPL better.
 
-Esta é uma tradu��o não oficial em portugu�s da Licença P�blica Geral GNU (da sigla em ingl�s GNU GPL). Ela não é publicada pela Free Software Foundation e não declara legalmente os termos de distribui��o para softwares que a utilizam é somente o texto original da licen�a, escrita em ingl�s, faz isto. Entretanto, acreditamos que esta tradu��o ajudar� aos falantes do portugu�s a entend�-la melhor.
+Esta é uma tradução não oficial em português da Licença Pública Geral GNU (da sigla em ingl�s GNU GPL). Ela não é publicada pela Free Software Foundation e não declara legalmente os termos de distribui��o para softwares que a utilizam é somente o texto original da licen�a, escrita em ingl�s, faz isto. Entretanto, acreditamos que esta tradução ajudará aos falantes do português a entendê-la melhor.
 
 
-// Originado do Projeto ISS Digital é Portal P�blico que tiveram colaborações de Vin�cius Kampff, 
+// Originado do Projeto ISS Digital é Portal Público que tiveram colaborações de Vin�cius Kampff, 
 // Rafael Romeu, Lucas dos Santos, Guilherme Flores, Maikon Farias, Jean Farias e Daniel Bohn
 // Acesse o site do Projeto www.portalpublico.com.br             |
 // Equipe Coordenação Projeto ISS Digital: <informatica@portalpublico.com.br>   |
@@ -183,7 +183,7 @@ $sql=Paginacao($query,'frmNfe','divResultado');
 		?>
 		
 		<img style="cursor:pointer;" title="Cancelar Nota" src="img/botoes/botao_cancelar.jpg" 
-		onclick="CancelaNota('<?php echo $crypto;?>','Cancelar nota N� <?php echo "$numero de $emissor_nome"; ?>?');" />
+		onclick="CancelaNota('<?php echo $crypto;?>','Cancelar nota Nº <?php echo "$numero de $emissor_nome"; ?>?');" />
 		<?php
 		} // fecha if
 		?>

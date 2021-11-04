@@ -63,7 +63,7 @@ $grafico->img->SetMargin(60,30,30,30);
 
 $grafico->SetScale("textlin");
 
-$grafico->title->Set('Relat�rios de Empreiteiras');
+$grafico->title->Set('Relatórios de Empreiteiras');
 // definir sub-titulo
 $grafico->subtitle->Set('');
 

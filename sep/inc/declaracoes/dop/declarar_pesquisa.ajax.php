@@ -120,13 +120,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td width="80px" <?php echo $cor; ?> align="center"><?php echo $data_gerado;?></td>
 									<td width="80px" <?php echo $cor; ?> align="center"><?php echo $competencia;?></td>
 									<td>
-									<input name="btVizualizar" id="btLupa" title="Vizualizar Declara��o" type="button" value="" class="botao" 
+									<input name="btVizualizar" id="btLupa" title="Vizualizar Declaração" type="button" value="" class="botao" 
 									onClick="VisualizarNovaLinha(
 									'<?php echo $codigo;?>',
 									'<?php echo"tdDop".$cont;?>',
 									this,'inc/declaracoes/dop/declarar_vizualizar.ajax.php')" />
 									<?php if($estado!="C"){//if mostra o botao cancelar se a declaração nao esta cancelada ?>
-									<input name="btCancelar" id="btX" title="Cancelar Declara��o" type="button" value="" class="botao" 
+									<input name="btCancelar" id="btX" title="Cancelar Declaração" type="button" value="" class="botao" 
 									onClick="document.getElementById('hdPrimeiro').value=1; dop.cancelarDeclaracao('<?php echo $codigo; ?>','<?php echo $razao; ?>');" />
 									<?php }//fim if mostra o botao cancelar se ainda nao estiver cancelada ?>
 									</td>
@@ -141,7 +141,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						</table>
 						<?php
 					}else{
-						echo "<b>Não há declara��es de Org�os P�blicos com a pesquisa solicitada</b>";
+						echo "<b>Não há declarações de Orgãos Públicos com a pesquisa solicitada</b>";
 					}//fim if
 					?>
 				</div>

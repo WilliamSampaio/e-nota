@@ -167,7 +167,7 @@ if(mysql_num_rows($sql)>0){	//mostra se os resultados existem
 
 
 <form method="post" name="frmRelatorio" id="frmRelatorio" action="inc/nfe/relatorios_notas_emitidas_imprimir.php" target="_blank">
-	<input type="submit" name="btImprimir" value="Imprimir Relat�rio" class="botao" />
+	<input type="submit" name="btImprimir" value="Imprimir Relatório" class="botao" />
 	<input type="hidden" name="txtDataIni" value="<?php echo $_POST["txtDataIni"]; ?>" />
 	<input type="hidden" name="txtDataFim" value="<?php echo $_POST["txtDataFim"]; ?>" />
 	<input type="hidden" name="cmbEstado" value="<?php echo $_POST["cmbEstado"]; ?>" />

@@ -102,7 +102,7 @@ $btCadastrarEmpresa = "Cadastrar";
 		Dados da empresa:<br><br>
 		Razão Social: $razaosocial<br>
 		CPF/CNPJ: $cpfcnpj<br>
-		Munic�pio: $municipio<br>
+		Município: $municipio<br>
 		Endereco: $endereco<br>
 		Senha de acesso: $senha<br><br>
 		  

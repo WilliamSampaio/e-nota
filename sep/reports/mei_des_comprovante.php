@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Comprovante de Declara��o de MEI</title>
+<title>Comprovante de Declaração de MEI</title>
 <link href="../css/imprimir_descomprovantes.css" rel="stylesheet" type="text/css"></head>
 <?php 
     session_start();    

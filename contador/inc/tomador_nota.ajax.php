@@ -87,7 +87,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
   <tr>
     <td align="left">
-		Munic�pio<font color="#FF0000">*</font></td>
+		Município<font color="#FF0000">*</font></td>
     <td align="left">
         <div  id="divTomadorMunicipio">
         	<input type="hidden" name="txtTomadorMunicipio" id="txtTomadorMunicipio" value="<?php echo $dados->municipio ;?>" />
