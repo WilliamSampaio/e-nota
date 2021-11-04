@@ -19,6 +19,12 @@
     <style>
         body {
             background-color: lightgray;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        footer {
+            margin-top: auto;
         }
     </style>
 </head>

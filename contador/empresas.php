@@ -18,11 +18,11 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php 
+    <?php 
 // inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
 session_name("contador");
 session_start();
-header("Cache-Control: no-cache, must-revalidate");
+//header("Cache-Control: no-cache, must-revalidate");
 
 require_once '../autoload.php';
 
@@ -36,108 +36,91 @@ if(!(isset($_SESSION["empresa"])))
 	";
 }else{
 	
-	require_once DIR_CONTADOR . 'include/header.php';	
+	//require_once DIR_CONTADOR . 'include/header.php';	
 
 ?>
 
+    <!DOCTYPE html>
+    <html lang="pt-bt">
 
-<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>e-Nota</title>
-<script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
-<script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
-<script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
-<link href="../css/padrao_emissor.css" rel="stylesheet" type="text/css" />
-</head> -->
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>e-Nota</title>
+		<link href="./inc/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="../css/padrao_emissor.css" rel="stylesheet" type="text/css" />
 
-<body>
+		<style type="text/css">
+		body {
+            background-color: lightgray;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-<?php require_once DIR_CONTADOR . 'include/navbar.php'; 
+		#content{
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+		}
+
+        footer {
+            margin-top: auto;
+        }
+		</style>
+    </head>
+
+    <body>
+
+        <?php
+ //require_once DIR_CONTADOR . 'include/navbar.php'; 
+ require_once("../include/topo.php");
+ //require_once "../include/navbar.php";
 ?>
-	
-<!-- frame central inicio --> 	
-<!-- <table border="0" cellspacing="0" cellpadding="0" height="100%">
+
+            <!-- frame central inicio -->
+            <!-- <table border="0" cellspacing="0" cellpadding="0" height="100%">
   <tr>
     <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php //require_once("include/menu.php"); ?></td>
     <td width="590" bgcolor="#FFFFFF" valign="top" align="center">
 	<img src="../img/cabecalhos/cadastro.jpg" /> -->
-    
-	<div class="container bg-light">
-			<div class="row align-items-start">
-				<!-- MENU -->
-				<div class="col-sm-12 col-md-3 col-lg-3">
-					<?php require_once DIR_CONTADOR . 'include/menu.php' ?>
-				</div>
 
-				<!-- CONTEÚDO -->
-				<div class="col-sm-12 col-md-9 col-lg-9">
+            <div id="content" class="container bg-light">
+                <div class="row align-items-start">
+                    <!-- MENU -->
+                    <div class="col-md-3">
+                        <?php 
+						//require_once DIR_CONTADOR . 'include/menu.php' 
+						require_once("./inc/menu.php");
+						?>
+                    </div>
 
-					<table border="0" align="center" cellpadding="0" cellspacing="1">
-						<tr>
-						<td width="10" height="10" bgcolor="#FFFFFF"></td>
-						<td width="170" align="center" bgcolor="#FFFFFF" rowspan="3">Atualizar Cadastro</td>
-						<td width="400" bgcolor="#FFFFFF"></td>
-						</tr>
-						<tr>
-						<td height="1" bgcolor="#CCCCCC"></td>
-						<td bgcolor="#CCCCCC"></td>
-						</tr>
-						<tr>
-						<td height="10" bgcolor="#FFFFFF"></td>
-						<td bgcolor="#FFFFFF"></td>
-						</tr>
-						<tr>
-							<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
-						</tr>
-						<tr>
-							<td height="60" colspan="3" bgcolor="#CCCCCC">
-							<?php require_once("inc/empresas_principal.php"); ?>
-							</td>
-						</tr>
-						<tr>
-							<td height="1" colspan="3" bgcolor="#CCCCCC"></td>
-						</tr>
-					</table>3e4r
-					<!-- <br>
-					<h1>e-Nota</h1>
-					<h5 class="card-title">Documento emitido e armazenado eletronicamente com o objetivo de registrar as operações de prestação de serviços e será utilizada em substituição às notas fiscais de serviços convencionais.</h5>
-					<hr><br> -->
+					<div class="col-md">
+					<br>
+					<h1>Ataulizar Cadastro</h1>
+					<h5>Atualização do cadastro de sua empresa.</h5>
+					<hr><br>
+                     <?php require_once("inc/empresas_principal.php"); ?>
+                    
+					</div>
 
-				</div>
-			</div>
-			<br>
-			<br>
-			<br>
-		</div>
+                    
+
+                </div>
+                <br>
+            </div>
 
 
 
+			<?php require_once("include/footer.php"); ?>
 
 
-<!-- frame central lateral direita inicio -->	
-         
+            <script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
+            <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
+            <script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
 
+    </body>
 
-
-
-
-<!-- frame central lateral direita fim -->	
-	</td>
-  </tr>
-</table>
-
-
-<!-- frame central fim --> 	
-	</td>
-  </tr>
-  
-  <tr>
-    <td><?php require_once("include/footer.php"); ?></td>
-  </tr>
-</table>
-
-</body>
-</html>
-<?php }?>
+    </html>
+    <?php }?>

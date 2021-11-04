@@ -27,18 +27,28 @@ require_once '../funcoes/funcao_logs.php';
 require_once 'teclado.php';
 
 ?>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" height="130">
-  <tr>
-    <td width="15%" align="left" valign="middle">
-      <a href="index.php" class="menuTopo">
-        <?php if ($CONF_BRASAO) {
-          echo "<img src=../img/brasoes/" . rawurlencode($CONF_BRASAO) . " height='100' width='100'>";
-        } ?>
-      </a>
-    </td>
-    <td width="85%" align="left" valign="middle">
-      <font class="prefeituraTitulo" color="#FFFFFF" size="-1"><b><?php echo strtoupper('Prefeitura Municipal de ' . $CONF_CIDADE); ?></b></font><br />
-      <font class="secretariaTitulo" color="#FFFFFF" size="+1"><b><?php echo $CONF_SECRETARIA; ?></b></font>
-    </td>
-  </tr>
-</table>
+
+<nav class="navbar navbar-light bg-dark">
+  <div class="container" style='height: 96px;'>
+      <table width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+              <td width="15%" valign="middle">
+                  <a class="navbar-brand" href="index.php">
+                      <img src="
+                          <?php
+                          if ($CONF_BRASAO) {
+                              echo "../img/brasoes/" . isTenancyAppBySubdomain() . rawurlencode($CONF_BRASAO);
+                          }
+                          ?>" alt="" width="64" height="64" class="d-inline-block align-text-top">
+                  </a>
+              </td>
+              <td width="100%">
+                  <p class="prefeituraTitulo" style="margin-top: auto; margin-bottom: auto; color: white; font-size: medium;">
+                    <span class="text-white"><?php echo strtoupper("Prefeitura Municipal de ") . $CONF_CIDADE; ?></span><br>
+                    <span class="text-white small"><?php echo $CONF_SECRETARIA; ?></span>                    
+                  </p>
+              </td>
+          </tr>
+      </table>
+  </div>
+</nav>
