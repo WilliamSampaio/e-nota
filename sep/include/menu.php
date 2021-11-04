@@ -87,7 +87,7 @@ if (!$_GET['m']) {
 		</li>
 	</ul>
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
-	<link rel="stylesheet" type="text/css" href="css/menu_anylinkmenu.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="css/menu_anylinkmenu.css" />
 	<script type="text/javascript" src="scripts/menu_menucontents.js"></script>
 	<script type="text/javascript" src="scripts/menu_anylinkmenu.js"></script>
 	<script type="text/javascript">
@@ -111,7 +111,7 @@ if (!$_GET['m']) {
 			["teste2", "http://www.msnbc.com/"],
 			["0", "javascript:alert(0);"]
 		];
-	</script>
+	</script> -->
 	<?php
 	$cont_menu = 1;
 	$sql_menus = $PDO->query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
