@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
-require_once '../autoload.php';
+require_once __DIR__.'/../autoload.php';
 require_once DIR_SITE . 'include/header.php';
 
 ?>

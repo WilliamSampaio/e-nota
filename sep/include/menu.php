@@ -26,7 +26,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <div class="container-fluid bg-light">
 	<div class="row">
-		<div class="col-auto">
+		<div class="col-12">
 			<ul class="nav nav-pills">
 
 				<?php
@@ -74,8 +74,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<?php } ?>
 
 				<?php } ?>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="logout.php">Sair</a>
+				<li class="nav-item" style="margin-left: auto;">
+					<a class="nav-link" aria-current="page" href="logout.php" style="color: red;">Sair <i class="fas fa-times"></i></a>
 				</li>
 			</ul>
 		</div>

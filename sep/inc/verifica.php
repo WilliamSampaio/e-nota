@@ -25,36 +25,34 @@ require_once '../../autoload.php';
 
 // recebe a variavel que contem o número de verificação e a variavel que contém o número que o usuário digitou.
 $autenticacao = $_SESSION['autenticacao'];
-$cod_seguranca= $_POST['codseguranca'];
-$txtSenha= $_POST['txtSenha'];
-if($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca)
-{
+$cod_seguranca = $_POST['codseguranca'];
 
-$sql = $PDO->query("SELECT * FROM usuarios WHERE login = '".$_POST['txtLogin']."' and tipo = 'prefeitura' ");	
- if($sql->rowCount() > 0) 
- { 
- 	$dados = $sql->fetch();
-	 //verifica se a senha digitada confere com a que está armazenada no banco	
-	if(md5($txtSenha) == $dados['senha']) {
-		// inicia a sessão e direciona para index.		
-		$_SESSION['logado'] = $dados['codigo'];
-		$_SESSION['login'] = $dados['login'];
-		$_SESSION['nivel_de_acesso'] = $dados['nivel'];
-		//add_logs('Efetuou o Login');
-		$nome = $dados['nome'];
-		//Salva no banco o ultimo login do usuario
-		$sql=$PDO->query("UPDATE usuarios SET ultlogin= NOW()  WHERE nome = '$nome'"); 
-		print("<script language=JavaScript>parent.location='../login.php';</script>");
-    }
-	else{
-	  print("<script language=JavaScript>alert('Senha não confere com a cadastrada no sistema! Favor verificar a senha.');parent.location='../login.php';</script>");	
+$txtLogin = $_POST['txtLogin'];
+$txtSenha = $_POST['txtSenha'];
+
+if ($cod_seguranca == $_SESSION['autenticacao'] && $cod_seguranca) {
+
+	$sql = $PDO->query("SELECT * FROM usuarios WHERE login = '" . $txtLogin . "' and tipo = 'prefeitura' ");
+	if ($sql->rowCount() > 0) {
+		$dados = $sql->fetch();
+		//verifica se a senha digitada confere com a que está armazenada no banco	
+		if (md5($txtSenha) == $dados['senha']) {
+			// inicia a sessão e direciona para index.		
+			$_SESSION['logado'] = $dados['codigo'];
+			$_SESSION['login'] = $dados['login'];
+			$_SESSION['nivel_de_acesso'] = $dados['nivel'];
+			//add_logs('Efetuou o Login');
+			$nome = $dados['nome'];
+			//Salva no banco o ultimo login do usuario
+			$sql = $PDO->query("UPDATE usuarios SET ultlogin= NOW()  WHERE nome = '$nome'");
+			print("<script language=JavaScript>parent.location='../login.php';</script>");
+		} else {
+			print("<script language=JavaScript>alert('Senha não confere com a cadastrada no sistema! Favor verificar a senha.');parent.location='../login.php';</script>");
+		}
+	} else {
+		print("<script language=JavaScript>alert('Usuário inexistente! Favor verificar usuário.');parent.location='../login.php';</script>");
 	}
-} 
-else {
-  print("<script language=JavaScript>alert('Usuário inexistente! Favor verificar usuário.');parent.location='../login.php';</script>");
- } 
-
-}else{
-  print("<script language=JavaScript>alert('Favor verificar código de segurança!');parent.location='../login.php';</script>");
-} 
+} else {
+	print("<script language=JavaScript>alert('Favor verificar código de segurança!');parent.location='../login.php';</script>");
+}
 ?> 

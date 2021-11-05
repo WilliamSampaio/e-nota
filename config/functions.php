@@ -9,7 +9,7 @@ function getSubdominio()
 	} else {
 		//return $dominioArray[0];
 	}
-	return 'db_teste2';
+	return 'subdominio2';
 	// return 'subdominio1';
 }
 

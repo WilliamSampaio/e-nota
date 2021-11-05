@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 session_start();
 
-require_once '../autoload.php';
+require_once __DIR__.'/../autoload.php';
 require_once '../funcoes/funcao_logs.php';
 require_once 'teclado.php';
 

@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 function add_logs($acao)
 {
-    require_once '../autoload.php';
+    require_once __DIR__.'/../autoload.php';
     
     $usuario = $_SESSION["nome"];
     $ip = getenv("REMOTE_ADDR");

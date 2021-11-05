@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 session_name("emissor");
 session_start();
 
-require_once '../autoload.php';
+require_once __DIR__.'/../autoload.php';
 require_once '../site/inc/header.php';
 
 if (!(isset($_SESSION["empresa"]))) {

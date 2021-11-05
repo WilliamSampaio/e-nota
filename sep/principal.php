@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 
 session_start();
-require_once '../autoload.php';
+require_once __DIR__.'/../autoload.php';
 
 $_SESSION['autenticacao'] = rand(10000, 99999);
 if (isset($_SESSION["logado"])) {

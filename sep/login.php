@@ -18,101 +18,98 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php 
-/* Inicia a sessão */
+<?php
 
 session_start();
-$_SESSION['autenticacao'] = rand(10000,99999);
-if(!(isset($_SESSION["logado"])))
-{?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>SEP-ISS</title>
-<link href="css/padrao.css" rel="stylesheet" type="text/css" >
-<script src="scripts/jquery.js" type="text/javascript"></script>
-<script src="../scripts/padrao.js" type="text/javascript"></script>
 
-</head>
+require_once __DIR__ . '/../autoload.php';
+require_once '../sep/include/header.php';
 
-<body class="principal" onLoad="window.toolbar.visible='false';">
-<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle">
-  <tr>
-  	<td height="30%">&nbsp</td>
-  </tr>
-  <tr>
-    <td align="center" valign="middle" height="40%">
-<form name="frmLogin" action="inc/verifica.php" method="post">
-<table border="0" cellspacing="0" cellpadding="1">
-      <tr>
-        <td colspan="3" height="1" bgcolor="#FFFFFF"></td>
-        </tr>
+if (!(isset($_SESSION["logado"]))) {
 
-      <tr>
-        <td colspan="3" height="25" bgcolor="#CCCCCC"></td>
-        </tr>
-      <tr>
-        <td colspan="3" align="center" bgcolor="#FFFFFF"><img src="img/logosep.jpg" width="370" height="70"></td>
-        </tr>
-      <tr>
-        <td width="118" bgcolor="#FFFFFF"></td>
-        <td width="182" bgcolor="#FFFFFF"></td>
-        <td width="100" bgcolor="#FFFFFF"></td>
-      </tr>
-      <tr>
-        <td height="28" align="right" bgcolor="#FFFFFF"><strong>Usuário</strong></td>
-        <td align="center" bgcolor="#FFFFFF"><input name="txtLogin" type="text" id="txtLogin" class="texto" tabindex="1"></td>
-        <td rowspan="3" bgcolor="#FFFFFF"><input type="image" name="imageField" src="img/chave.jpg" tabindex="4"></td>
-      </tr>
-      <tr>
-        <td height="29" align="right" bgcolor="#FFFFFF"><strong>Senha</strong></td>
-        <td align="center" bgcolor="#FFFFFF"><input name="txtSenha" type="password" id="txtSenha" class="texto" tabindex="2"></td>
-      </tr>
-	  <tr>
-        <td height="29" align="right" bgcolor="#FFFFFF"><strong>Cód Verificação</strong></td>
-        <td align="center" valign="middle" bgcolor="#FFFFFF">
-        	<input name="codseguranca" type="text" id="codseguranca" class="texto" size="5" maxlength="5" tabindex="3"> 
-        	<img style="cursor: pointer;" onClick="mostrar_teclado();" src="img/botoes/num_key.jpg" title="Teclado Virtual" > 
-        	<?php require_once("inc/cod_verificacao.php");?>
-        </td>		
-      </tr>	
-      <tr>	  
-        <td bgcolor="#FFFFFF"></td>
-        <td bgcolor="#FFFFFF"></td>
-        <td bgcolor="#FFFFFF"></td>
-      </tr>	  
-      <tr>
-        <td colspan="3" height="25" bgcolor="#CCCCCC"></td>
-      </tr>
-      <tr>
-        <td colspan="3" height="1" bgcolor="#FFFFFF"></td>
-      </tr>
-      <tr>
-        <td colspan="3" height="25" align="center"><font size="1" color="#FFFFFF">&copy; Portal Público Informática - 2009</font></td>
-      </tr>
-      <tr>
-        <td colspan="3" height="1" bgcolor="#FFFFFF"></td>
-      </tr>
-    </table>
-	</form>
-	
-	
-  
-	</td>
-  </tr>
-  <tr>
-  	<td height="30%">&nbsp</td>
-  </tr>
-</table>
+    $_SESSION['autenticacao'] = rand(10000, 99999);
 
+?>
 
-<?php include 'inc/teclado.php';?>
-</body>
-</html>
+    <body>
 
-<?php 
-}else {
-print("<script language=JavaScript>parent.location='principal.php';</script>"); 
-} 
+        <?php require_once __DIR__ . '/../sep/include/navbar.php'; ?>
+
+        <div class="container bg-light">
+            <div class="row align-items-center" style="padding-top: 96px; padding-bottom: 96px;">
+
+                <div class="col-sm-12 col-md-2 col-lg-3"></div>
+                <div class="col-sm-12 col-md-8 col-lg-6">
+
+                    <?php if (isset($_SESSION['error'])) { ?>
+                        <div class="alert alert-danger">
+                            <?php echo $_SESSION['error'];
+                            unset($_SESSION['error']); ?>
+                        </div>
+                    <?php } ?>
+
+                    <form name="frmLogin" action="../sep/inc/verifica.php" method="post">
+
+                        <div class="card">
+
+                            <div class="card-header">
+                                <h5 class="card-title text-center"><i class="fas fa-globe-americas fa-3x" style="color: darkblue;">SEP</i><br><span>Sistema Eletrônico de Prefeitura</span></h5>
+                            </div>
+
+                            <div class="card-body">
+                                <!-- CPF ou CNPJ -->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="text" name="txtLogin" id="txtLogin" size="30" onkeyup="CNPJCPFMsk( this )" onkeydown="return NumbersOnly(event); " required>
+                                    <label for="txtLogin">Usuário</label>
+                                </div>
+                                <!-- SENHA -->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="password" name="txtSenha" id="txtSenha" size="30" required>
+                                    <label for="txtSenha">Senha</label>
+                                </div>
+                                <hr>
+                                <div class="row g-2">
+
+                                    <div class="col-md">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" name="codseguranca" id="codseguranca" size="6">
+                                            <label for="codseguranca">Cód. Verificação</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md">
+                                        <div class="form-group mb-3" style="height: 100%;">
+                                            <input style="text-align: center; height: 100%;" class="form-control" type="text" id="cod" value="<?php echo generateCodVerification($_SESSION['autenticacao']) ?>" disabled>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br>
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="text-center">
+                                    <input class="btn btn-primary btn-lg" type="submit" name="btEntrar" value="Entrar">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-3"></div>
+
+            </div>
+        </div>
+
+        <script src="../../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+
+<?php
+
+} else {
+    header('Location: principal.php');
+}
 
 ?>

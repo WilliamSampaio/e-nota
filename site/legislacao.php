@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 session_start();
 
-require_once '../autoload.php';
+require_once __DIR__.'/../autoload.php';
 require_once DIR_SITE . 'include/header.php';
 
 ?>
@@ -97,13 +97,14 @@ require_once DIR_SITE . 'include/header.php';
                                             <h4><?php echo $titulo ?></h4>
                                             <p><?php echo $texto ?></p>
                                             <p>
+                                                <i class="fas fa-file-pdf fa-2x" style="color: darkred;"></i>
                                                 <?php
 
                                                 $data_formatada = substr($data, 8, 2) . "/" . substr($data, 5, 2) . "/" . substr($data, 0, 4);
                                                 echo $data_formatada . ' | ';
 
                                                 ?>
-                                                <a href=" ../legislacao/<?php echo isTenancyAppBySubdomain() . "/" . $arquivo; ?>" target="_blank"> [Download] <img src="../img/pdf.jpg" title="Download do pdf" /></a>
+                                                <a href=" ../legislacao/<?php echo isTenancyAppBySubdomain() . "/" . $arquivo; ?>" target="_blank"> [Download] </a>
 
                                             </p>
                                         </div>
