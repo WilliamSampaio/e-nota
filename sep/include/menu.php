@@ -24,20 +24,23 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<input type="submit" value="submit" style="display: none;">
 </form>
 
-<ul class="nav nav-pills">
+<div class="container-fluid bg-light">
+	<div class="row">
+		<div class="col-auto">
+			<ul class="nav nav-pills">
 
-	<?php
+				<?php
 
-	$sql_menus = $PDO->query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
-	while (list($codmenu, $menu, $link) = $sql_menus->fetch()) {
+				$sql_menus = $PDO->query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
+				while (list($codmenu, $menu, $link) = $sql_menus->fetch()) {
 
-		if ($_SESSION['nivel_de_acesso'] == "M") {
-			$string = " AND menus_prefeitura_submenus.nivel <> 'A'";
-		} elseif ($_SESSION['nivel_de_acesso'] == "B") {
-			$string = " AND menus_prefeitura_submenus.nivel = 'B'";
-		}
+					if ($_SESSION['nivel_de_acesso'] == "M") {
+						$string = " AND menus_prefeitura_submenus.nivel <> 'A'";
+					} elseif ($_SESSION['nivel_de_acesso'] == "B") {
+						$string = " AND menus_prefeitura_submenus.nivel = 'B'";
+					}
 
-		$sql_submenus = "SELECT
+					$sql_submenus = "SELECT
 				menus_prefeitura.link, submenus_prefeitura.menu, submenus_prefeitura.link
 				FROM
 				menus_prefeitura 
@@ -50,28 +53,31 @@ Fith Floor, Boston, MA 02110-1301, USA
 				ORDER BY
 				menus_prefeitura_submenus.ordem";
 
-		$sql_submenus = $PDO->query($sql_submenus);
+					$sql_submenus = $PDO->query($sql_submenus);
 
-		if ($sql_submenus->rowCount() > 0) { ?>
+					if ($sql_submenus->rowCount() > 0) { ?>
 
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $menu ?></a>
-				<ul class="dropdown-menu">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $menu ?></a>
+							<ul class="dropdown-menu">
 
-					<?php while (list($menulink, $submenu, $submenulink) = $sql_submenus->fetch()) { ?>
+								<?php while (list($menulink, $submenu, $submenulink) = $sql_submenus->fetch()) { ?>
 
-						<li>
-							<a class="dropdown-item" href="#" onclick="document.getElementById('opcao').value='<?php echo $menulink . '/' . $submenulink ?>';document.getElementById('form-opcao').submit();"><?php echo $submenu ?></a>
+									<li>
+										<a class="dropdown-item" href="#" onclick="document.getElementById('opcao').value='<?php echo $menulink . '/' . $submenulink ?>';document.getElementById('form-opcao').submit();"><?php echo $submenu ?></a>
+									</li>
+
+								<?php } ?>
+							</ul>
 						</li>
 
 					<?php } ?>
-				</ul>
-			</li>
 
-		<?php } ?>
-
-	<?php } ?>
-	<li class="nav-item">
-		<a class="nav-link" aria-current="page" href="logout.php">Sair</a>
-	</li>
-</ul>
+				<?php } ?>
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="logout.php">Sair</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

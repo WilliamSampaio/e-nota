@@ -29,17 +29,19 @@ if (isset($_SESSION["logado"])) {
 
 ?>
 
-	<body class='bg-light'>
+	<body>
 
 		<?php require_once DIR_SEP . 'include/navbar.php' ?>
 		<?php require_once DIR_SEP . 'include/menu.php' ?>
 
-		<div class="container bg-light">
+		<div class="container" style="background-color: lightgray;">
+
 			<div class="row align-items-start">
 
 				<!-- CONTEÚDO -->
 				<div class="col-sm-12 col-md-12 col-lg-12">
-
+					<br>
+					
 					<?php
 
 					if (isset($_GET['opcao'])) {
