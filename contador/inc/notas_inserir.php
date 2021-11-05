@@ -36,7 +36,7 @@ if($notalimite == 0){
 	$notalimite = "Liberado";
 }
 
-//GERA O C�DIGO DE VERIFICA��O
+//GERA O CÓDIGO DE VERIFICAÇÃO
 $CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
 $max = strlen($CaracteresAceitos)-1;
 $password = null;

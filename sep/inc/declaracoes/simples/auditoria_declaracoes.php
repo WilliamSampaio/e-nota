@@ -66,7 +66,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             }else{
                 echo "
                     <tr>
-                        <td align=\"center\"><b>Não há declara��es de Empreiteiras</b></td>
+                        <td align=\"center\"><b>Não há declarações de Empreiteiras</b></td>
                     </tr>
                 ";
             }//fim if

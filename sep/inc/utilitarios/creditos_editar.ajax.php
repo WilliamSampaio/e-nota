@@ -33,7 +33,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td width="13%" align="center">
 			<select name="cmbTipoPessoaEdit" class="combo">
 				<option value="PF"<?php if($tipopessoa == "PF"){ echo "selected=selected";}?>>Pessoa Fisica</option>
-				<option value="PJ"<?php if($tipopessoa == "PJ"){ echo "selected=selected";}?>>Pessoa Jur�dica</option>
+				<option value="PJ"<?php if($tipopessoa == "PJ"){ echo "selected=selected";}?>>Pessoa Jurídica</option>
 				<option value="PFPJ"<?php if($tipopessoa == "PFPJ"){ echo "selected=selected";}?>>Ambas</option>
 			</select>
 		</td>

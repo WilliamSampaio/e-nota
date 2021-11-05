@@ -35,7 +35,7 @@ LIMIT 0,10");
 		<td>
 		
 		
-<!-- cabe�alho da pesquisa-----> 
+<!-- cabeçalho da pesquisa-----> 
 <fieldset style="width:730px;"><legend>Dez últimas Reclamações Pendentes</legend>      
 <form name="frmListaReclamacoesPendentes" method="post" id="frmListaReclamacoesPendentes" >
 	<input type="hidden" name="include" id="include" value="<?php echo $_POST['include'];?>">
@@ -79,7 +79,7 @@ LIMIT 0,10");
 
 ?>
  
-<!-- cabe�alho da pesquisa-----> 
+<!-- cabeçalho da pesquisa-----> 
 <fieldset style="width:730px;"><legend>Dez últimas Reclamações Atendidas</legend>      
 <form name="frmListaReclamacoesAtendidas" method="post" id="frmListaReclamacoesAtendidas">
 	<input type="hidden" name="include" id="include" value="<?php echo $_POST['include'];?>">

@@ -93,7 +93,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	    </td>
 	  </tr>
       <tr>
-        <td width="22%" align="left"> Nome/RazãoSocial </td>
+        <td width="22%" align="left"> Nome/Razão Social </td>
         <td align="left" colspan="2"><input type="text" class="texto" name="txtNomeEmissor" id="txtNomeEmissor" />
         </td>
       </tr>
@@ -109,7 +109,7 @@ Fith Floor, Boston, MA 02110-1301, USA
               <option value=""> </option>
               <option value="01">Janeiro</option>
               <option value="02">Fevereiro</option>
-              <option value="03">Mar�o</option>
+              <option value="03">Março</option>
               <option value="04">Abril</option>
               <option value="05">Maio</option>
               <option value="06">Junho</option>

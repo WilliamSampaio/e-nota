@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	// SELECIONA OS BANCOS DISPONIVEIS DO BANCO DE DADOS
 	$sqlbancos = $PDO->query("SELECT banco FROM bancos");
 	
-	// TESTA SE O BOT�O CONFIRMAR FOI CLICADO E REALIZA A OPERACAO
+	// TESTA SE O BOTÃO CONFIRMAR FOI CLICADO E REALIZA A OPERACAO
 	if($_POST['btConfirmar']=="Confirmar")
 		{
 			if($txtNossoNumero == '')
@@ -143,7 +143,7 @@ if($_POST['btnImportar'] =="Importar"){
             <table width="100%">
              <tr>
               <td align="center" bgcolor="#999999">Nome</td>
-              <td align="center" bgcolor="#999999">Boleto N�</td>
+              <td align="center" bgcolor="#999999">Boleto Nº</td>
               <td align="center" bgcolor="#999999">Pagamento</td>
              </tr>
 <?php
@@ -319,7 +319,7 @@ if($_POST['btnImportar'] =="Importar"){
 	//echo "<tr><td colspan=\"2\"><input type=\"button\" class=\"botao\" value=\"Voltar\" onClick=\"window.location='importar.php';\" /></td></tr>";
 	echo "
 		   <script>
-		    alert('Importa��o de dados conclu�da com sucesso!');
+		    alert('Importação de dados concluída com sucesso!');
 		   </script>
 	";
   } //FIM DO IF ARQUIVO

@@ -48,7 +48,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo $email; ?></td>
 	</tr>
 	<tr align="left">
-		<td>N� do RPS/NFe:</td>
+		<td>Nº do RPS/NFe:</td>
 		<td><?php echo $nro; ?></td>
 	</tr>
 	<tr align="left">
@@ -64,7 +64,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo $reclamacao; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Respons�vel:</td>
+		<td>Responsável:</td>
 		<td><?php echo $responsavel; ?></td>
 	</tr>
 	<tr align="left">

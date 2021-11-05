@@ -77,7 +77,7 @@ WHERE
 					?>
 					<tr>
 						<td width="5%" align="center">Nº</td>
-						<td width="13%" align="center">C�d Verif</td>
+						<td width="13%" align="center">Cód Verif</td>
 						<td width="16%" align="center">D/H Emissão</td>
 						<td width="40%" align="center">Tomador Nome </td>
 						<td width="13%" align="center">Estado</td>

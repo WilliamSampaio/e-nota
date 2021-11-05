@@ -29,12 +29,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 			elseif(($baixo == "")&&($medio == "")){$valor = "A";}
 			$sql = $PDO->query("UPDATE menus_prefeitura_submenus SET nivel = '$valor' WHERE codigo='$codigo'");
 		}
-		add_logs('Atualizou o N�vel de Usu�rios');
+		add_logs('Atualizou o Nível de Usuários');
 		echo "<script>alert('Dados alterados com sucesso');</script>";
 	}
 ?>
-<fieldset><legend>Defina as op��es do menu para cada n�vel de usuário</legend>
-	<p align="center">Os usuários com n�vel de permiss�o Alto tem acesso a todos os menus </p>
+<fieldset><legend>Defina as opções do menu para cada nível de usuário</legend>
+	<p align="center">Os usuários com nível de permissão Alto tem acesso a todos os menus </p>
 	<?php
 		$sql = $PDO->query("
 			SELECT 

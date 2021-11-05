@@ -8,7 +8,7 @@ if(!$_POST['cmbEmpresaCliente']){
 $empresas=$PDO->query("SELECT * FROM cadastro WHERE codigo='{$empresa}'");
 $dados=$empresas->fetch();
 ?>
-<?php $meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"); ?>
+<?php $meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"); ?>
     <form method="post" id="FrmLivro" onsubmit="return ValidaFormulario('txtObs|cmbMes|cmbAno');">
 	<table border="0" align="center" cellpadding="0" cellspacing="1">
 		<tr>
@@ -84,7 +84,7 @@ $dados=$empresas->fetch();
                             <input type="submit" name="btGerar" value="Gerar Livro" class="botao">
                         </td>
                         <td align="right"> 
-				<font color="#FF0000">*</font>Campos Obrigat�rios
+				<font color="#FF0000">*</font>Campos Obrigatórios
                         </td>
                     </tr>
                 </table>

@@ -24,7 +24,7 @@ if($txtSenha !="")
 {
  $campo = tipoPessoa($login);
  $sql = $PDO->query("UPDATE cadastro SET senha = '$txtSenha' WHERE $campo = '$login'");
- print("<script language=JavaScript>alert('Usu�rio atualizado com sucesso!!')</script>");
+ print("<script language=JavaScript>alert('Usuário atualizado com sucesso!!')</script>");
  add_logs('Alterou a senha');
 }
 else

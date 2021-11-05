@@ -29,7 +29,7 @@ $sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 //preenche a variavel com os valores vindos do banco
 list($BRASAO) = $sql_brasao->fetch();
 ?>
-<title>Imprimir Relatório Integra�ao</title>
+<title>Imprimir Relatório Integração</title>
 
 
 <style type="text/css" media="screen">
@@ -74,7 +74,7 @@ div.pagina {
         <div id="DivImprimir">
             <input type="button" onClick="print();" value="Imprimir" />
             <br />
-            <i><b>Este relat�rio é melhor visualizado em formato de impress�o em paisagem.</b></i>
+            <i><b>Este relatório é melhor visualizado em formato de impressão em paisagem.</b></i>
             <br /><br />
         </div>
         <table width="95%" height="120" border="2" cellspacing="0" class="tabela" align="center">

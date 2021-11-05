@@ -58,10 +58,10 @@ Fith Floor, Boston, MA 02110-1301, USA
         <tr>
             <td align="center">
                 <select name="cmbMes" id="_mes">
-                    <option value="">==M�S==</option>
+                    <option value="">==Mês==</option>
                     <option value="01">Janeiro</option>
                     <option value="02">Fevereiro</option>
-                    <option value="03">Mar�o</option>
+                    <option value="03">Março</option>
                     <option value="04">Abril</option>
                     <option value="05">Maio</option>
                     <option value="06">Junho</option>
@@ -86,7 +86,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                     ?>
                 </select>
             </td>
-            <td align="center"><input type="submit" class="botao" name="btBuscar" value="Buscar" onclick="return ValidaFormulario('_mes|_ano','Por favor selecione um m�s e um ano!')"/></td>
+            <td align="center"><input type="submit" class="botao" name="btBuscar" value="Buscar" onclick="return ValidaFormulario('_mes|_ano','Por favor selecione um mês e um ano!')"/></td>
         </tr>
     </table>
 

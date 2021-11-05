@@ -148,7 +148,7 @@ elseif($cmbEstado == "Escriturada")
 			$querysql = "";
 		}
 			
-// SQL CONCATENANDO COM A VARIAVEL $querysql QUE EST� DENTRO DE ALGUMA CONDI��O DOS IF'S
+// SQL CONCATENANDO COM A VARIAVEL $querysql QUE ESTÁ DENTRO DE ALGUMA CONDIÇÃO DOS IF'S
 			
 $sql = $PDO->query("
 	SELECT 
@@ -167,7 +167,7 @@ if(mysql_num_rows($sql)>0){	//mostra se os resultados existem
 
 
 <form method="post" name="frmRelatorio" id="frmRelatorio" action="inc/nfe/relatorios_notas_emitidas_imprimir.php" target="_blank">
-	<input type="submit" name="btImprimir" value="Imprimir Relat�rio" class="botao" />
+	<input type="submit" name="btImprimir" value="Imprimir Relatório" class="botao" />
 	<input type="hidden" name="txtDataIni" value="<?php echo $_POST["txtDataIni"]; ?>" />
 	<input type="hidden" name="txtDataFim" value="<?php echo $_POST["txtDataFim"]; ?>" />
 	<input type="hidden" name="cmbEstado" value="<?php echo $_POST["cmbEstado"]; ?>" />
@@ -180,8 +180,8 @@ if(mysql_num_rows($sql)>0){	//mostra se os resultados existem
 		<td>
 			<table width="700" style="font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif">
 				<tr>
-					<td width="50" align="center" bgcolor="#999999"><b>N�</b></td>
-					<td width="90" align="center" bgcolor="#999999"><b>C�d Verif</b></td>
+					<td width="50" align="center" bgcolor="#999999"><b>Nº</b></td>
+					<td width="90" align="center" bgcolor="#999999"><b>Cód Verif</b></td>
 					<td width="75" align="center" bgcolor="#999999"><b>D/H Emissão</b></td>
 					<td width="200" align="center" bgcolor="#999999"><b>Nome Emissor</b></td>
 					<td width="200" align="center" bgcolor="#999999"><b>Nome Tomador</b></td>
@@ -194,7 +194,7 @@ if(mysql_num_rows($sql)>0){	//mostra se os resultados existem
 			<?php 
 				while(list($numero, $codverif, $data, $tomador_nome, $estado, $rps, $emissor) = $sql->fetch())
 					{
-						switch($estado) //transforma o valor que veio do banco para uma melhor vizualiza��o do usuario na impress�o
+						switch($estado) //transforma o valor que veio do banco para uma melhor vizualização do usuario na impressão
 							{
 								case "N": $tipo = "Emitida"; 	 break;
 								case "B": $tipo = "Boleto";   	 break;

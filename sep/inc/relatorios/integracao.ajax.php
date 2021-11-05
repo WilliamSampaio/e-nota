@@ -23,10 +23,10 @@
         <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#CCCCCC" bgcolor="#FFFFFF">
             <tr>
                 <td align="center" bgcolor="#CCCCCC">Data</td>
-                <td align="center" bgcolor="#CCCCCC">Hor�rio</td>
+                <td align="center" bgcolor="#CCCCCC">Horário</td>
                 <td align="center" bgcolor="#CCCCCC">Dados Inseridos</td>
                 <td align="center" bgcolor="#CCCCCC">Dados Nao Inseridos</td>
-                <td align="center" bgcolor="#CCCCCC">A�oes</td>
+                <td align="center" bgcolor="#CCCCCC">Ações</td>
             </tr>
 		<?php
 		$cont=1;

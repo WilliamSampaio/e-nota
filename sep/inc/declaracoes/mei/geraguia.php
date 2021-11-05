@@ -80,7 +80,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		
 		
 		$codmei_des = base64_encode($codmei_des);
-		Mensagem("Declara��o efetuada com sucesso!");
+		Mensagem("Declaração efetuada com sucesso!");
 		NovaJanela("reports/mei_des_comprovante.php?COD=$codmei_des");
 		//Redireciona('../../principal.php');
 		

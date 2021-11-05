@@ -36,7 +36,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	   if($sql->rowCount()>0){
 		   $arq = $razao.$data.'.xml';		
 		   move_uploaded_file($arq_tmp,"xmls/doc/".$arq);   	   	
-		   $xml = simplexml_load_file("xmls/doc/".$arq); // l� o arquivo XML      							   	   	   
+		   $xml = simplexml_load_file("xmls/doc/".$arq); // lê o arquivo XML      							   	   	   
 	
 		   if($xml){
 			   $verifica=0;
@@ -115,7 +115,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							codigo='$CodDocDes'
 					");
 					
-				 Mensagem("Declara��o efetuada com sucesso!!")			 	;
+				 Mensagem("Declaração efetuada com sucesso!!")			 	;
 				 /*$vencimento = DataVencimento();
 				 $PDO->query("
 					INSERT INTO 
@@ -164,7 +164,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				 NovaJanela("reports/doc_comprovante.php?COD=$CodDocDes");
 				 
 				 }else{		 
-					Mensagem("Conteúdo do arquivo não contém Conta Oficial v�lida.");
+					Mensagem("Conteúdo do arquivo não contém Conta Oficial válida.");
 				 }			 
 			}else{		 
 				Mensagem("O arquivo enviado contém erros. Favor verificar!!");

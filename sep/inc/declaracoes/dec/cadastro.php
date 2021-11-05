@@ -58,26 +58,25 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$codigo=$_POST['hdDesativar'];
 		$PDO->query("UPDATE cadastro SET estado = 'I' WHERE codigo='$codigo'");
 		$codigo="";
-		Mensagem("Cart�rio desativado!");
+		Mensagem("Cartório desativado!");
 	}
 	
 	if($_POST['btAtivar']){
 		$codigo=$_POST["hdDesativar"];
 		$PDO->query("UPDATE cadastro SET estado = 'A' WHERE codigo='$codigo'");
 		$codigo="";
-		Mensagem("Cart�rio ativado!");
+		Mensagem("Cartório ativado!");
 	}
 					
 	if($_POST['btExcluir']){
 		$codigo=$_POST["hdDesativar"];
 		$PDO->query("DELETE FROM cadastro WHERE codigo=$codigo");
 		$codigo="";
-		Mensagem("Cart�rio exclu�do com sucesso!");
+		Mensagem("Cartório excluído com sucesso!");
 	}
 ?>
 <!--cria a div de consulta de cartorios-->
 <style type="text/css">
-<!--
 #divBuscaCart {
 	position:absolute;
 	left:40%;
@@ -87,7 +86,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 	z-index:1;
 	visibility:<?php if(isset($btBuscarCliente)){ echo"visible";}else{ echo"hidden";} ?>
 }
--->
 </style>
 <div id="divBuscaCart"  ><?php require_once("inc/cartorios/pesquisar.php"); ?></div>
 
@@ -146,7 +144,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC" width="700">
 	<tr>
 		<td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-		<td width="671" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Cart�rios - Cadastro</td>  
+		<td width="671" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Cartórios - Cadastro</td>  
 		<td width="30" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
 	</tr>
 	<tr>
@@ -158,7 +156,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                         <form method="post" id="frmCadastroCart">
                         <input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
                         <input type="hidden" name="txtCodCart" value="<?php echo $codcart; ?>" />
-                        <fieldset><legend>Cadastro de Cart�rios</legend>
+                        <fieldset><legend>Cadastro de Cartórios</legend>
                             <table align="left">
                                 <tr align="left">
                                     <td width="150"><font color="#FF0000">*</font> Nome:</td>
@@ -173,7 +171,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtCnpj" size="25" nkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" maxlength="18" id="txtCnpj" value="<?php echo $cnpj; ?>" /></td>
                                 </tr>
                                 <tr align="left">
-                                    <td>Inscri��o Municipal:</td>
+                                    <td>Inscrição Municipal:</td>
                                     <td colspan="2"><input type="text" class="texto" <?php if($codigo) echo "disabled=\"disabled\""; ?> name="txtInscMunicipal" size="60" id="txtInscMunicipal" value="<?php echo $inscmunicipal; ?>" /></td>
                                 </tr>
                                 <tr align="left">
@@ -215,7 +213,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="left"><font color="#FF0000">*</font> Munic�pio</td>
+                                    <td align="left"><font color="#FF0000">*</font> Município</td>
                                     <td align="left" colspan="2" <?php if($codigo) echo "style=\"display:none\"" ?>>
                                         <div  id="txtMunicipioEmpresa" >
                                             <select name="txtMunicipioEmpresa" id="txtMunicipioEmpresa" class="combo">
@@ -265,7 +263,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                 </tr>
                                 <tr><td colspan="3"><hr /></td></tr>
                                 <tr align="left">
-                                    <td><font color="#FF0000">*</font> Adm. P�blica</td>
+                                    <td><font color="#FF0000">*</font> Adm. Pública</td>
                                     <td colspan="2">
                                         <select name="cmbAdmPublica" id="cmbAdmPublica" <?php if($codigo) echo "style=\"display:none\"" ?>>
                                             <?php
@@ -283,7 +281,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     </td>
                                 </tr>
                                 <tr align="left">
-                                    <td><font color="#FF0000">*</font> N�vel</td>
+                                    <td><font color="#FF0000">*</font> Nível</td>
                                     <td colspan="2">
                                         <select name="cmbNivel" id="cmbNivel" <?php if($codigo) echo "style=\"display:none\"" ?>>
                                             <?php
@@ -324,7 +322,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                             </tr>";
                                         }
                                     ?>
-                                <tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigat�rios</font></td></tr>
+                                <tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigatórios</font></td></tr>
                                 <tr align="left">
                                     <td colspan="2">
                                         <input type="submit" name="btBuscarCliente" value="Buscar" class="botao" />
@@ -332,12 +330,12 @@ Fith Floor, Boston, MA 02110-1301, USA
                                                 if ($codigo){
                                                     echo "<input type=\"submit\" class=\"botao\" value=\"Voltar\" onclick=\"LimpaCampos('frmCadastroCart');Redireciona('cadastro.php');\" /><input type=\"hidden\" name=\"hdDesativar\" id=\"hdDesativar\" value=\"$codigo\"/><input type=\"submit\" name=\"btComprovante\" value=\"Comprovante\" class=\"botao\" onclick=\"return ValidaFormulario('txtCodCart', 'Busque por uma Instituição Financeira antes de gerar o comprovante')\" />";
                                                 }
-												/*<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir Cart�rio\" onclick=\"return Confirma('Deseja Excluir Cart�rio?');\" />*/
+												/*<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir Cartório\" onclick=\"return Confirma('Deseja Excluir Cartório?');\" />*/
                                                 if($estado == "Ativo"){
-                                                    echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar Cart�rio\"/>";
+                                                    echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar Cartório\"/>";
                                                 }
                                                 elseif($estado == "Inativo"){
-                                                    echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar Cart�rio\"/>";
+                                                    echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar Cartório\"/>";
                                                 }
                                             ?>
                                         <input type="submit" class="botao" name="btCadastrar" <?php if($codigo){echo "style=\"display:none\"";} ?> value="Cadastrar" onclick="return ValidaFormulario('txtCpfDiretor|txtCpfResponsavel|txtMunicipioEmpresa|txtUfEmpresa|rdbEstado|cmbAdmPublica|cmbNivel|txtNome|txtComplemento|txtRazao|txtCnpj|txtDiretor|txtResponsavel|txtInscMunicipal|txtLogradouro|txtBairro|txtCEP|txtLogradouroNro|txtEmail|txtFoneComercial|txtFoneAdicional|txtSenha|txtSenhaConf', 'Preencha todos os campos obrigatórios.')" />

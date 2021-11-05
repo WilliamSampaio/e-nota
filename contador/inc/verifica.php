@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 /*function verificarNavegador(){
 	if(navigator.appName=='Microsoft Internet Explorer'){
-		alert('O sistema de nota fiscal eletrônica não é compat�vel com o Internet Explorer. Recomendamos o Mozilla Firefox');
+		alert('O sistema de nota fiscal eletrônica não é compatível com o Internet Explorer. Recomendamos o Mozilla Firefox');
 		parent.location='http://br.mozdev.org';
 	}
 }
@@ -36,7 +36,7 @@ session_name("contador");
 session_start(); 
 require_once("funcao_logs.php");
 require_once("../../funcoes/util.php");
-// recebe a variavel que contem o número de verifica��o e a variavel que contém o número que o usuário digitou.
+// recebe a variavel que contem o número de verificação e a variavel que contém o número que o usuário digitou.
 $autenticacao = $_SESSION['autenticacao'];
 $cod_seguranca= $_POST['codseguranca'];
 

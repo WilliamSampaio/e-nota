@@ -49,7 +49,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			if(form){
 				if(!confirm('Excluir este serviço?')) return;
 				var cod = id('COD').value;
-				alert('Servi�o exluido!');
+				alert('Serviço exluido!');
 				id('COD').value = null;
 				var input = document.createElement('input');
 				input.setAttribute('type', 'hidden');

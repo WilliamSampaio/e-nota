@@ -18,7 +18,7 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<fieldset><legend>Not�cias Inseridas</legend>
+<fieldset><legend>Notícias Inseridas</legend>
 <?php
 	// Conexao ao banco MySQL e consulta
 	require_once("../conect.php");
@@ -35,7 +35,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 <b>Título</b>
 			</td>
             <td width="45%" align="center">
-                <b>Not�cia</b>						
+                <b>Notícia</b>						
 			</td>
             <td width="10%" align="center">
                 <b>Data</b>						
@@ -60,7 +60,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td align="center"><input name="btVer" id="btLupa" value="" title="Ver Conteúdo completo" 
             	onclick="VisualizarNovaLinha('<?php echo $codigo;?>','tdnoticia<?php echo $x;?>',this,'inc/utilitarios/noticias_ver.ajax.php');" />
     			<input name="btExcluir" id="btX" value=" " class="botao" type="submit" 
-				onclick="document.getElementById('hdCodNt').value = <?php echo $codigo;?>;return confirm('Deseja Excluir esta Not�cia?')" />
+				onclick="document.getElementById('hdCodNt').value = <?php echo $codigo;?>;return confirm('Deseja Excluir esta Notícia?')" />
 			</td>
 		</tr>
         <tr>

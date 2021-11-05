@@ -21,7 +21,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Declarações - Relat�rios</td>  
+    <td width="600" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Declarações - Relatórios</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -41,7 +41,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <div style="visibility:visible;" id="divPesquisar">
 
 <fieldset>
-<legend>Relat�rio DES</legend>
+<legend>Relatório DES</legend>
 <form method="post" id="formDes" action="reports/relatorio_des.php" target="_blank	">
 	<input type="hidden" name="hdRelatorio" id="hdRelatorio" value="true">
 	<script type="text/javascript">

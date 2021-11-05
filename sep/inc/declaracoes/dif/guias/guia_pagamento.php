@@ -35,13 +35,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 		listaRegrasMultaDes();
 ?>
 <input type="hidden" value="<?php echo $codemissor;?>" name="CODEMISSOR" id="CODEMISSOR" />
-<p align="center">Escolha o per�odo</p>
+<p align="center">Escolha o período</p>
 <table>
     <tr>
         <td>
     <?php
     //array de meses comencando em 1 ate 12
-    $meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+    $meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
     $mes = date("n");
     $ano = date("Y");						
     ?>
@@ -72,6 +72,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 <div id="divBuscarGuias"></div>
 <?php
 	}else{
-		echo "<b>Este cnpj não é uma institui��o financeira ou não está cadastrado!</b>";
+		echo "<b>Este cnpj não é uma instituição financeira ou não está cadastrado!</b>";
 	}
 ?>

@@ -45,7 +45,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<legend>Regras de multa para emissão de guia</legend>
 				<table width="100%" border="0">
 					<tr>
-						<td width="27%" align="left">Dias de toler�ncia<font color="#FF0000">*</font></td>
+						<td width="27%" align="left">Dias de tolerância<font color="#FF0000">*</font></td>
 						<td align="left" colspan="2"><input name="txtDias" id="txtDias" type="text" maxlength="3" size="3" class="texto"></td>
 					</tr>
 					<tr>

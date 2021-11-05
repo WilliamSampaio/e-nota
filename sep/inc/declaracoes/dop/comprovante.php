@@ -46,7 +46,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     </table></td>
   </tr>
   <tr>
-    <td align="center" width="50%" bgcolor="#CCCCCC" colspan="2"><strong>N&Uacute;MERO DO DOCUMENTO</strong></td>
+    <td align="center" width="50%" bgcolor="#CCCCCC" colspan="2"><strong>NÚMERO DO DOCUMENTO</strong></td>
     <td align="center" bgcolor="#CCCCCC" colspan="2"><strong>DATA DE EMISSÃO </strong></td>
   </tr>
   <tr>
@@ -54,7 +54,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td align="center" colspan="2"><font class="prefeitura"><?php echo DataPtExt(); ?></font></td>
   </tr>
   <tr>
-    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICAÇÃO DO ÓRGÃO P&Uacute;BLICO </strong></td>
+    <td height="30" colspan="4" align="center" bgcolor="#CCCCCC"><strong>IDENTIFICAÇÃO DO ÓRGÃO PÚBLICO </strong></td>
   </tr>
   </table>
   <table align="center" width="800" border="0" cellspacing="0" cellpadding="5" style="border: 0px;">

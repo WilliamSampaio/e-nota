@@ -1,11 +1,11 @@
-<!-- In�cio da Tabela -->
+<!-- Início da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
       <tr style="background-color:#999999; font-weight:bold" align="center">
           <td align="center">Categoria</td>
           <td align="center">Quantidade de Serviços</td>
           <td align="center">Percentual</td>
       </tr>
-      <?php  //comando sql que mostrar� as categorias e a quantidade de cada um (Lista Estat�stica)
+      <?php  //comando sql que mostrará as categorias e a quantidade de cada um (Lista Estatística)
         $sqlTotal = $PDO->query("SELECT COUNT(codigo) FROM servicos");
         list($total) = $sqlTotal->fetch();
 

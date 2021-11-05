@@ -57,7 +57,7 @@ $dados_municipio=$sql_municipio->fetch();
 </script>
 <!-- Formulário de inserção de empresa  -->
 <style type="text/css">
-<!--
+
 #divBusca {
 	position:absolute;
 	left:30%;
@@ -72,7 +72,7 @@ $dados_municipio=$sql_municipio->fetch();
 input[type*="text"]{
 	text-transform:uppercase;
 }
--->
+
 </style>
 <div id="divBusca"  >
 	<?php require_once("inc/cadastro/prestadores/busca.php"); ?>
@@ -123,7 +123,7 @@ input[type*="text"]{
 		list($nome_responsavel,$cpf_responsavel) = $sql_resp->fetch();
 		
 		
-		//Busca as informa��es que são extra para cada tipo de prestador
+		//Busca as informações que são extra para cada tipo de prestador
 		$sql_info_instituicoes = $PDO->query("SELECT agencia, codbanco FROM inst_financeiras WHERE codcadastro = '$codigo'");
 		list($agencia_inst,$codbanco_inst) = $sql_info_instituicoes->fetch();
 		
@@ -252,7 +252,7 @@ input[type*="text"]{
 			<tr>
 				<td colspan="4">
 					
-					<!-- Tabela institui��o e operadoras -->
+					<!-- Tabela instituição e operadoras -->
 					
 					<table width="100%" border="0" cellspacing="1" cellpadding="2" align="left" id="tbl_inst_opr" style="display:none; margin:0px">
 						<?php
@@ -260,7 +260,7 @@ input[type*="text"]{
 						?>
 					</table>
 					
-					<!-- Tabela C�rtorios -->
+					<!-- Tabela Cártorios -->
 					
 					<table width="100%" border="0" cellspacing="1" cellpadding="2" align="left" id="tbl_cart" style="display:none; margin:0px">
 						<?php
@@ -429,17 +429,17 @@ input[type*="text"]{
 			</tr>
 			<tr>
 				<td colspan="4" align="left">
-					<!-- bot�o que chama a função JS e mostra + um s�cio-->
+					<!-- botão que chama a função JS e mostra + um sócio-->
 					<input type="button" value="Adicionar Responsável/Sócio" name="btAddSocio" class="botao" onclick="incluirSocio()" />
 					<font color="#FF0000">*</font></td>
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
-					<!--CAMPO S�CIOS --------------------------------------------------------------------------->
+					<!--CAMPO SÓCIOS --------------------------------------------------------------------------->
 					<table width="100%" border="0" cellspacing="1" cellpadding="2">
 						<?php require_once("socios.php")?>
 					</table>
-					<!-- CAMPO S�CIOS FIM -->				</td>
+					<!-- CAMPO SÓCIOS FIM -->				</td>
 			</tr>
 			<tr>
 				<td colspan="4" align="left">
@@ -491,7 +491,7 @@ input[type*="text"]{
 			
 			<tr id="trBotao">
 				<td colspan="4" align="left">
-					<!-- bot�o que chama a função JS e mostra + um serviço-->
+					<!-- botão que chama a função JS e mostra + um serviço-->
                                         <input type="button" value="Adicionar Serviços" name="btAddServicos" class="botao" onclick="incluirServico()" />
 					<font color="#FF0000">*</font></td>
 			</tr>

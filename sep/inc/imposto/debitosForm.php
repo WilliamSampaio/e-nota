@@ -1,5 +1,5 @@
 <fieldset>
-    <legend>D�bitos</legend>
+    <legend>Débitos</legend>
     <form method="post" id="formDebitos" name="formDebitos" action="./inc/imposto/debitosImprimir.php" target="_blank">
         <table align="left" width="100%">
             <tr>
@@ -20,13 +20,13 @@
                 </td>
             </tr>
             <tr>
-                <td>M�s</td>
+                <td>Mês</td>
                 <td>
                     <select name="cmbMesDebito" id="cmbMesDebiro">
                         <option></option>
                         <option value="01">Janeiro</option>
                         <option value="02">Fevereiro</option>
-                        <option value="03">Mar�o</option>
+                        <option value="03">Março</option>
                         <option value="04">Abril</option>
                         <option value="05">Maio</option>
                         <option value="06">Junho</option>

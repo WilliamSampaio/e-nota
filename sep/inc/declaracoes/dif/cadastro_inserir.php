@@ -51,8 +51,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 			//monta o corpo do email
 			$assunto="ISSDigital";
 			$corpo="
-				A Prefeitura Municipal de $CIDADE informa que esta institui��o financeira foi cadastrada no sitema de ISSDigital do municipio.<br>
-				Para acessar o o sistema do ISSDigital acesse o site {$config['host']}, o login é próprio CNPJ da institui��o. A senha, gerada pelo sistema, �: $senha<br>
+				A Prefeitura Municipal de $CIDADE informa que esta instituição financeira foi cadastrada no sitema de ISSDigital do municipio.<br>
+				Para acessar o o sistema do ISSDigital acesse o site {$config['host']}, o login é próprio CNPJ da instituição. A senha, gerada pelo sistema, é: $senha<br>
 				Para sua maior segurança, altere sua senha.
 			";
 			

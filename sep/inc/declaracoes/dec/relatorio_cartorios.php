@@ -24,7 +24,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     $sql_inativos=$PDO->query("SELECT codigo FROM cartorios WHERE estado='I'");
     $sql_pendentes=$PDO->query("SELECT codigo FROM cartorios WHERE estado='NL'");
 ?>
-<fieldset><legend>Informa��es dos Cart�rios</legend>
+<fieldset><legend>Informações dos Cartórios</legend>
     <table align="left">
         <tr align="left">
             <td>Cadastrados:</td>

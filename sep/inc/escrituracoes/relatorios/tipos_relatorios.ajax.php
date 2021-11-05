@@ -142,7 +142,7 @@ require_once("../../nocache.php");
 	}
 	?>
 		
-			<fieldset style="width:800px"><legend><?php if($tipo!='S'){echo "Escritura��es  $tipo";} ?></legend>    
+			<fieldset style="width:800px"><legend><?php if($tipo!='S'){echo "Escriturações  $tipo";} ?></legend>    
 					<?php
 					if($tipo!='S'){
 					$sql=Paginacao($sqltodos,'frmRelatorio','divListar');

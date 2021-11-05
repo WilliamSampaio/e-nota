@@ -36,7 +36,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	//se foi cancelada alguma declaração da o updade no banco e da um alert se der algum erro
 	if($cancelaDoc){
 		$PDO->query("UPDATE doc_des SET estado = 'C' WHERE codigo = '$cancelaDoc'");
-		add_logs('Atualizou uma Declara��o: Cancelada');
+		add_logs('Atualizou uma Declaração: Cancelada');
 	}//fim if cacela
 	
 	//verifica quais campos foram preenchidos e concatena na variavel str_where
@@ -60,7 +60,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		$str_where .= " AND doc_des.codigo = '$numero'";
 	}
 	
-	//Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
+	//Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
 	$query = ("
 		SELECT
 			doc_des.codigo, 
@@ -127,7 +127,7 @@ if($sql_pesquisa->rowCount()){
             </label>
             
             <?php if($dados_pesquisa['estado'] != "C"){?>
-            <label title="Cancelar Declara��o" id="lbCancelar<?php echo $x;?>">
+            <label title="Cancelar Declaração" id="lbCancelar<?php echo $x;?>">
             	<input name="btCancelarDoc" id="btX" type="button" class="botao" value=""
                 onClick="return cancelarDeclaracao('<?php echo $dados_pesquisa['codigo'];?>','<?php echo $dados_pesquisa['nome'];?>','inc/declaracoes/doc/declarar_pesquisa.ajax.php','frmOperadoras','divDeclaracoesOperadoras','hdCancelaDoc');">
             </label>

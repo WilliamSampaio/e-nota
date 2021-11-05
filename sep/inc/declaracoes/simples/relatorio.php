@@ -37,7 +37,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                         onchange="acessoAjax('inc/empreiteiras/relatorios/relatorios_opcoes.ajax.php','frmRelatorio','divRelatorios')">
                         <option value=""></option>
                         <option value="E">Empreiteiras</option>
-                        <option value="D">Declara��es</option>
+                        <option value="D">Declarações</option>
                         <option value="O">Obras</option>
                         </select>
                         </td>

@@ -102,7 +102,7 @@ require_once("../include/util.php");
   </div>
   <table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
     <tr>
-      <td><?php require_once 'inc/navbar.php'; ?></td>
+      <td><?php require_once DIR_SITE . 'include/navbar.php' ?></td>
     </tr>
     <tr>
       <td bgcolor="#FFFFFF" valign="top" align="center">

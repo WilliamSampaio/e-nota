@@ -76,7 +76,7 @@ $include=$_POST['include'];
 	// define se é ou nao contador
     $sql=$PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
 	list($maxcodigo)=$sql->fetch();
-	$sql_categoria=$PDO->query("SELECT codigo FROM servicos_categorias WHERE nome = 'Cont�bil'");	
+	$sql_categoria=$PDO->query("SELECT codigo FROM servicos_categorias WHERE nome = 'Contábil'");	
 	list($codigocategoria)=$sql_categoria->fetch();
 	$categoria=1;
 	$servico=1;
@@ -160,7 +160,7 @@ $include=$_POST['include'];
 		list($codigoempresa) = $sql_busca_cod->fetch();
 							
 							
-	   //Pega os codtipo dos prestadores que tem informa��es extras
+	   //Pega os codtipo dos prestadores que tem informações extras
 	   $codtipo_inst = codtipo('instituicao_financeira');
 	   $codtipo_opr  = codtipo('operadora_credito');
 	   $codtipo_cart = codtipo('cartorio');

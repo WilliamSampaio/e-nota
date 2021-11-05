@@ -18,9 +18,9 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<fieldset><legend>Informa��es sobre as Int. Fiinanceiras</legend>
+<fieldset><legend>Informações sobre as Int. Fiinanceiras</legend>
     <?php
-        // chama os dados por estado para relat�rios mais detalhados
+        // chama os dados por estado para relatórios mais detalhados
         $sql_ativas=$PDO->query("SELECT razaosocial FROM inst_financeiras WHERE estado='A'");
         $sql_inativas=$PDO->query("SELECT razaosocial FROM inst_financeiras WHERE estado='I'");
         $sql_nl=$PDO->query("SELECT razaosocial FROM inst_financeiras WHERE estado='NL'");

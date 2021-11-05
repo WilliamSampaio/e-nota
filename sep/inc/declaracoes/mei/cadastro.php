@@ -36,7 +36,6 @@ $dados_municipio=$sql_municipio->fetch();
 ?>
 	 <!-- Formulário de inserção de empresa  -----------------------------------------------------------------------------> 
 	<style type="text/css">
-	<!--
 	#divBusca {
 		position:absolute;
 		left:40%;
@@ -46,7 +45,6 @@ $dados_municipio=$sql_municipio->fetch();
 		z-index:1;
 		visibility:<?php if(isset($btBuscarCliente)){ echo"visible";}else{ echo"hidden";} ?>
 	}
-	-->
 	</style>
 	<div id="divBusca"  ><?php require_once("inc/prestadores/busca.php"); ?></div> 
 	 
@@ -124,7 +122,7 @@ $dados_municipio=$sql_municipio->fetch();
        </tr>
        <tr>
 	     <td align="left">
-		  Munic�pio<font color="#FF0000">*</font>		 </td>
+		  Município<font color="#FF0000">*</font>		 </td>
 	     <td align="left">
           <input type="text" size="30" maxlength="100" name="txtMunicipio" class="texto" value="<?php if(isset($municipio)){echo $municipio;} else{echo $dados_municipio['cidade'];} ?>" />		 </td>
 	     </tr>
@@ -173,7 +171,7 @@ $dados_municipio=$sql_municipio->fetch();
 					$cont_aux_socios = $contsocios;	  
 					print("<tr>
 							  <td colspan=4 align=left>
-							   <b>Respos�vel/Socio</b>
+							   <b>Responsável/Socio</b>
 							  </td>
 							 </tr>
 							");
@@ -201,18 +199,18 @@ $dados_municipio=$sql_municipio->fetch();
 		 </tr>
 	   <tr>
          <td colspan="2" align="left">
-		   <!-- bot�o que chama a função JS e mostra + um s�cio-->
+		   <!-- botão que chama a função JS e mostra + um sócio-->
 		  <input type="button" value="Adicionar Responsável/Sócio" name="btAddSocio" class="botao" onclick="incluirSocio()" /> 
 		  <font color="#FF0000">*</font></td>
        </tr>
 	   <tr>
 	     <td colspan="2" align="center">		  
 		  
-			<!--CAMPO S�CIOS --------------------------------------------------------------------------->	   
+			<!--CAMPO SÓCIOS --------------------------------------------------------------------------->	   
 			<table width="100%" border="0" cellspacing="1" cellpadding="2">       
 				 <?php require_once("cadastro_socios.php")?>
 			</table>
-			<!-- CAMPO S�CIOS FIM -->   	     
+			<!-- CAMPO SÓCIOS FIM -->   	     
 		</td>
 	   </tr>
 	   <tr>
@@ -272,7 +270,7 @@ $dados_municipio=$sql_municipio->fetch();
 	   </tr>	   
 	   <tr>
          <td colspan="2" align="left">
-		  <!-- bot�o que chama a função JS e mostra + um serviço-->
+		  <!-- botão que chama a função JS e mostra + um serviço-->
 		  <input type="button" value="Adicionar Serviços " name="btAddServicos" class="botao" onclick="incluirServico()" /> 
 		  <font color="#FF0000">*</font></td>
        </tr>	   

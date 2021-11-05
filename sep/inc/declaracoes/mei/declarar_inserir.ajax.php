@@ -36,7 +36,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					  <option value=""> </option>
 					  <option value="1">Janeiro</option>
 					  <option value="2">Fevereiro</option>
-					  <option value="3">Mar�o</option>
+					  <option value="3">Março</option>
 					  <option value="4">Abril</option>
 					  <option value="5">Maio</option>
 					  <option value="6">Junho</option>
@@ -83,7 +83,7 @@ $sql_servicos = $PDO->query("
 	FROM cadastro_servicos
 	WHERE codemissor='$codemissor'
 ");
-$num_servicos = 1;//quantos linhas v�o aparecer pra preencher
+$num_servicos = 1;//quantos linhas vão aparecer pra preencher
 $num_serv_max = 20;// numero maximo de linhas que podem ser adicionadas
 
 campoHidden("hdServicos",$num_servicos);

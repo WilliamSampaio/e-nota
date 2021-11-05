@@ -126,7 +126,7 @@ if(!$codprestador){
 				<td width="4%" align="center">Data</td>
 				<td width="6%" align="center">Nº Nota</td>
 				<td width="6%" align="center">Valor (R$)</td>
-				<td width="25%" align="center">Inconsist�ncia(s)</td>
+				<td width="25%" align="center">Inconsistência(s)</td>
 				<?php
 				}else{
 				?>
@@ -291,8 +291,8 @@ if(!$codprestador){
 			<td width="6%" align="center">Data</td>
 			<td width="5%" align="center">Nº nota</td>
 			<td width="10%" align="center">Valor (R$)</td>
-            <td width="8%" align="center">Situa�ao</td>
-			<td width="30%" align="center">Inconsist�ncia(s)</td>
+            <td width="8%" align="center">Situação</td>
+			<td width="30%" align="center">Inconsistência(s)</td>
 		</tr>
 	
 		<?php

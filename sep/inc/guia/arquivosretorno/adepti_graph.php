@@ -67,7 +67,7 @@ $bar_data=array( //array de teste, nao é inportante.
                   "Maikon" => 58,
                   "Rafa" => 25,
                   "Vini" => 45,
-                  "Algu�m" => 17
+                  "Alguêm" => 17
                );
 */
 /* Find highest number */

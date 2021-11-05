@@ -37,7 +37,7 @@ if($_POST["btBoleto"] == "Boleto"){
 <table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Utilitários - Configura��es</td>  
+    <td width="700" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Utilitários - Configurações</td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -45,7 +45,7 @@ if($_POST["btBoleto"] == "Boleto"){
     <td align="center">
 		<form method="post" id="frmConfiguracoes" enctype="multipart/form-data">
 			<input name="include" id="include" type="hidden" value="<?php echo $_POST["include"];?>" />
-			<fieldset><legend>Configura��es</legend>
+			<fieldset><legend>Configurações</legend>
 				<table width="100%">
 					<tr align="left">
 						<td align="left"><label for="txtEndereco">Endereço:</label></td>
@@ -94,23 +94,23 @@ if($_POST["btBoleto"] == "Boleto"){
 					<tr align="left">
 						<td><label for="txtSecretaria">Secretaria:</label></td>
 						<td><input name="txtSecretaria" id="txtSecretaria" type="text" class="texto" value="<?php echo $secretaria;?>" ></td>
-						<td><label for="txtSecretario">Secret�rio:</label></td>
+						<td><label for="txtSecretario">Secretário:</label></td>
 						<td colspan="2"><input name="txtSecretario" id="txtSecretario" type="text" class="texto" value="<?php echo $secretario;?>" ></td>
 					</tr>
 					
 					<tr align="left">
 						
-						<td><label for="txtData">Dia tributa��o:</label></td>
+						<td><label for="txtData">Dia tributação:</label></td>
 						<td colspan="4">
 							<input name="txtData" id="txtData" maxlength="2" size="3" type="text"  class="texto" value="<?php echo $data_tributacao;?>" />
-							<label><input name="ckbData" type="checkbox" id="ckbData" onclick="DesabilitarDataTributo()" />�ltimo dia do m�s</label>
+							<label><input name="ckbData" type="checkbox" id="ckbData" onclick="DesabilitarDataTributo()" />último dia do mês</label>
 						</td>
 					</tr>
 					<tr align="left">
-						<td><label for="flBrasao">Bras�o</label></td>
+						<td><label for="flBrasao">Brasão</label></td>
 						<td><input name="flBrasao" id="flBrasao" type="file" class="texto" ></td>
 						<td>
-							<label>Gerar guia para declara��es pelo site</label>
+							<label>Gerar guia para declarações pelo site</label>
 						</td>
 						<td>
 							<label><input type="radio" name="rbGuias" id="rbGuiasS" value="t" <?php if($gerar_guia_site=='t'){echo 'checked="checked"';}?> /> Todas</label>
@@ -136,7 +136,7 @@ if($_POST["btBoleto"] == "Boleto"){
 					</tr>
 					-->
 					<tr>
-						<td colspan="4" align="left"><strong>Bras�o atual: </strong>
+						<td colspan="4" align="left"><strong>Brasão atual: </strong>
 					</td>
 					<tr>
 						<td align="left" colspan="4">
@@ -146,7 +146,7 @@ if($_POST["btBoleto"] == "Boleto"){
 								<img src="img/brasoes/<?php echo $brasao;?>" width="100" height="100" />
 							<?php
 							}else{
-								echo "<font color=\"#FF0000\"><strong>A prefeitura não possui bras�o</strong></font>";
+								echo "<font color=\"#FF0000\"><strong>A prefeitura não possui brasão</strong></font>";
 							}
 							?>
 						</td>

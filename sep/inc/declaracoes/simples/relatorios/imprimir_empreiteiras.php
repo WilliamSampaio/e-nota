@@ -50,7 +50,7 @@ if(mysql_num_rows($sql_empreiteiras)>0){
 <title>Imprimir</title><input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
 <table width="750">
 	<tr>
-    	<td><b><font size="4">Relat�rio de Declarações</font></b></td>
+    	<td><b><font size="4">Relatório de Declarações</font></b></td>
     </tr>
 <?php
 	if($nome){
@@ -80,9 +80,9 @@ if(mysql_num_rows($sql_empreiteiras)>0){
     <tr>
         <td align="center" width="170"><b>Nome</b></td>
         <td align="center" width="110"><b>CNPJ</b></td>
-        <td align="center" width="130"><b>Munic�pio</b></td>
+        <td align="center" width="130"><b>Município</b></td>
         <td align="center" width="30"><b>UF</b></td>
-        <?php if(!$estado){?><td align="center" width="90"><b>Libera��o</b></td><?php }?>
+        <?php if(!$estado){?><td align="center" width="90"><b>Liberação</b></td><?php }?>
     </tr>
     <tr>
     	<td colspan="5"><hr color="#000000" size="2"></td>

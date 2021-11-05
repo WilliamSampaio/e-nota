@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		//Ativa os usuarios mudando no banco de NL para A
 		$codigo = $_POST["hdCodSolicitacaoCartorio"];
 		$PDO->query("UPDATE cartorios SET estado = 'A' WHERE codigo = '$codigo'");
-		add_logs('Atualizou um Cart�rio: Ativado');
+		add_logs('Atualizou um Cartório: Ativado');
 		Mensagem("Cadastro ativado");
 	}
 ?>

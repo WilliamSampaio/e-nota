@@ -51,12 +51,12 @@ if(mysql_num_rows($sql_pesquisa)){
 			"prestador"              => "Prestador",
 			"empreiteira"            => "Empreiteira",
 			"instituicao_financeira" => "Instituição Financeira",
-			"cartorio"               => "Cart�rio",
+			"cartorio"               => "Cartório",
 			"operadora_credito"      => "Operadora de Crédito",
-			"grafica"                => "Gr�fica",
+			"grafica"                => "Gráfica",
 			"contador"               => "Contador",
 			"tomador"                => "Tomador",
-			"orgao_publico"          => "Org�o P�blico",
+			"orgao_publico"          => "Orgão Público",
 			"simples"                => "Simples"
 		);
 		while($dados_pesquisa = $sql_pesquisa->fetch()){

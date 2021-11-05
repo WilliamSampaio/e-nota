@@ -20,7 +20,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <!-- Formulário de insercao de tomadores  --> 
 <style type="text/css">
-<!--
 #divBuscaOrgaos {
 	position:absolute;
 	left:40%;
@@ -30,7 +29,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 	z-index:1;
 	visibility:<?php if(isset($btBuscarCliente)){ echo"visible";}else{ echo"hidden";} ?>
 }
--->
 </style>
 <div id="divBuscaOrgaos" ><?php require_once("inc/orgaospublicos/visualizar.php"); ?></div>
 <?php
@@ -97,7 +95,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td align="left"><input <?php if($codigo) echo "readonly=\"true\""; ?> type="text" class="texto" size="20" maxlength="15" name="txtFoneAdicional"  value="<?php echo $telefone_adicional; ?>" /></td>
 						</tr>
 								<tr align="left">
-									<td><font color="#FF0000">*</font> Munic�pio:</td><td></td>
+									<td><font color="#FF0000">*</font> Município:</td><td></td>
 									<td colspan="2"><input type="text" class="texto" size="40" name="txtInsMunicipioOrgao" <?php if($codigo){ echo "value=\"$municipio\" readonly=\"true\"";} else { echo "value=\"$CIDADE\"";}?>/></td>
 								</tr>
 								<tr align="left">
@@ -105,7 +103,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td colspan="2"><input type="text" class="texto" size="40" name="txtUfOrgao" <?php if($codigo){ echo "value=\"$uf\" readonly=\"true\"";} else { echo "value=\"$ESTADO\"";}?>/></td>
 								</tr>
 						<tr>
-							<td><font color="#FF0000">*</font> Administra��o P�blica</td><td></td>
+							<td><font color="#FF0000">*</font> Administração Pública</td><td></td>
 							<td>
 								<?php if ($codigo) echo "<input type=\"text\" readonly=\"true\" class=\"texto\" size=\"40\" maxlength=\"15\" value=\"$admpublica\" />";?>
 								<select <?php if($codigo) echo "style=\"visibility:hidden\"" ?> name="cmbAdmPublica" id="cmbAdmPublica">
@@ -115,7 +113,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							</td>
 						</tr>
 						<tr>
-							<td><font color="#FF0000">*</font> N�vel</td><td></td>
+							<td><font color="#FF0000">*</font> Nível</td><td></td>
 							<td>
 								<?php if ($codigo) echo "<input type=\"text\" readonly=\"true\" class=\"texto\" size=\"40\" maxlength=\"15\" value=\"$nivel\" />";?>
 								<select <?php if($codigo) echo "style=\"visibility:hidden\"" ?> name="cmbNivel" id="cmbNivel">
@@ -153,7 +151,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td align="left"><font color="#FF0000">*</font> Cpf</td><td></td>
 							<td align="left"><input <?php if($codigo) echo "readonly=\"true\""; ?> name="txtCpfResponsavel" id="txtCpfResponsavel" type="text" onkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" class="texto" size="18" maxlength="18" value="<?php echo $responsavel_cpf; ?>"></td>
 						</tr>
-						<tr align="right"><td colspan="3"><font color="#FF0000">* Campos Obrigat�rios</font></td></tr>
+						<tr align="right"><td colspan="3"><font color="#FF0000">* Campos Obrigatórios</font></td></tr>
 			
                 </table>
 				</fieldset>
@@ -167,17 +165,17 @@ Fith Floor, Boston, MA 02110-1301, USA
 				if($codigo){
 				echo "<input type=\"hidden\" name=\"hdDesativar\" id=\"hdDesativar\" value=\"$codigo\"/>";
 					if($estado == "A"){
-						echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar �rg�o\" />";
+						echo "<input type=\"submit\" class=\"botao\" name=\"btDesativar\" id=\"btDesativar\" value=\"Desativar Orgão\" />";
 					}
 					elseif($estado == "I"){
-					echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar �rg�o\" />";
+					echo "<input type=\"submit\" class=\"botao\" name=\"btAtivar\" id=\"btAtivar\" value=\"Ativar Orgão\" />";
 					}
 				}
 				?>
 				</td>
 				<td>			
 				<?php
-				if ($codigo) echo "<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir �rg�o\" onclick=\"return Confirma('Deseja Excluir �rg�o P�blico?');\" />";
+				if ($codigo) echo "<input type=\"submit\" class=\"botao\" name=\"btExcluir\" id=\"btExcluir\" value=\"Excluir Orgão\" onclick=\"return Confirma('Deseja Excluir Orgão Público?');\" />";
 				?>
 				</td>
 				<td>
@@ -227,7 +225,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				{
 				 $codigo=$_POST['hdDesativar'];
 				 $PDO->query("UPDATE orgaospublicos SET estado = 'I' WHERE codigo=$codigo");
-				 Mensagem("�rg�o P�blico desativado!");
+				 Mensagem("Orgão Público desativado!");
 				 ?><script>LimpaCampos('frmCadastroOrgao');</script><?php
 				}
 				
@@ -235,7 +233,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				{
 				 $codigo=$_POST['hdDesativar'];
 				 $PDO->query("UPDATE orgaospublicos SET estado = 'A' WHERE codigo='$codigo'");
-				 Mensagem("�rg�o P�blico ativado!");
+				 Mensagem("Orgão Público ativado!");
 				 ?><script>LimpaCampos('frmCadastroOrgao');</script><?php
 				}
 				
@@ -243,7 +241,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				{
 			 	 $codigo=$_POST["hdDesativar"];
 				 $PDO->query("DELETE FROM orgaospublicos WHERE codigo=$codigo");
-				 Mensagem("�rg�o P�blico exclu�do com sucesso!");
+				 Mensagem("Orgão Público excluído com sucesso!");
 				 ?><script>LimpaCampos('frmCadastroOrgao');</script><?php
 				}
 			?>

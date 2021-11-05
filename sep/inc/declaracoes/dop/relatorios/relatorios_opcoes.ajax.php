@@ -33,5 +33,5 @@ if($relatorio == "O"){
 	require_once("relatorios_orgaospublicos.php");
 }elseif($relatorio == "D"){
 	require_once("relatorios_declaracoes.php");
-}//fim if declara��es
+}//fim if declarações
 ?>

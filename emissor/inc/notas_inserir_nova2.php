@@ -144,7 +144,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 					list($codtomador) = $sql->fetch();
 				}
 			
-				//verifica a isen��o do prestador
+				//verifica a isenção do prestador
 				$sqlIsento = $PDO->query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
 				list($issIsento) = $sqlIsento->fetch();
 				if($issIsento == 'S'){
@@ -269,7 +269,7 @@ if($sessioncnpj==$_POST['txtTomadorCNPJ']){
 			}
 		}
 	}else{
-		print("<script language=JavaScript>alert('� necess�rio selecionar um serviço para a emissão da nota.')</script>");
+		print("<script language=JavaScript>alert('É necessário selecionar um serviço para a emissão da nota.')</script>");
 	}
 }
 ?>

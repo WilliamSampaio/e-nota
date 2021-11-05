@@ -44,7 +44,7 @@ $btCadastrarEmpresa = "Cadastrar";
 
 	$sql = $PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
 	list($maxcodigo) = $sql->fetch();
-	$sql_categoria = $PDO->query("SELECT codigo FROM servicos_categorias WHERE nome ='Cont�bil'");	
+	$sql_categoria = $PDO->query("SELECT codigo FROM servicos_categorias WHERE nome ='Contábil'");	
 	list($codigocategoria) = $sql_categoria->fetch();
 	$categoria=1;
 	$servico=1;
@@ -77,7 +77,7 @@ $btCadastrarEmpresa = "Cadastrar";
 	}elseif($teste_razaosocial->rowCount()>0){
 		echo "	
 			<script>
-				alert('Já existe uma empresa com esta raz�o social');
+				alert('Já existe uma empresa com esta razão social');
 				window.location='../../decc.php';
 			</script>
 		";
@@ -102,7 +102,7 @@ $btCadastrarEmpresa = "Cadastrar";
 		Dados da empresa:<br><br>
 		Razão Social: $razaosocial<br>
 		CPF/CNPJ: $cpfcnpj<br>
-		Munic�pio: $municipio<br>
+		Município: $municipio<br>
 		Endereco: $endereco<br>
 		Senha de acesso: $senha<br><br>
 		  
@@ -113,7 +113,7 @@ $btCadastrarEmpresa = "Cadastrar";
 		4- Em login insira o cpf/cnpf da empresa<br>
 		5- Sua senha é <b><font color=\"RED\">$senha</font></b><br>
 		6- Insira o código de verificação que aparece ao lado<br>
-		7- Depois de ter acessado o sistema, v� no link usuário e troque sua senha<br>";	
+		7- Depois de ter acessado o sistema, vá no link usuário e troque sua senha<br>";	
 		
 		$assunto = "Acesso ao Sistema NF-e ($PREFEITURA).";
 	

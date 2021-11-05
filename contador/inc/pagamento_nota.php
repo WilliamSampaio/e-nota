@@ -31,10 +31,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<td align="left" width="30%">Período do Imposto</td>
 	<td align="left" width="70%">
 	<select name="cmbMes" id="cmbMes" class="combo">
-	  <option value="">== M�s ==</option>
+	  <option value="">== Mês ==</option>
 	  <option value="01">Janeiro</option>
 	  <option value="02">Fevereiro</option>
-	  <option value="03">Mar�o</option>
+	  <option value="03">Março</option>
 	  <option value="04">Abril</option>
 	  <option value="05">Maio</option>
 	  <option value="06">Junho</option>
@@ -73,7 +73,7 @@ Fith Floor, Boston, MA 02110-1301, USA
    <tr>	  
 	<td colspan="2" align="center">
 	 <input type="hidden" name="btOp" value="Gerar Guia"/>
-	 <input type="submit" value="Pesquisar" name="btPesquisar" class="botao" onclick="return ValidaFormulario('cmbMes|cmbAno','Defina o m�s e o ano')"></td>
+	 <input type="submit" value="Pesquisar" name="btPesquisar" class="botao" onclick="return ValidaFormulario('cmbMes|cmbAno','Defina o mês e o ano')"></td>
    </tr>   
   </table>   
   </form>

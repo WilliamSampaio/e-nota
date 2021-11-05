@@ -29,7 +29,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 	<table width="100%">
 		<tr bgcolor="#999999">
-			<td width="3%" align="center">N�</td>
+			<td width="3%" align="center">Nº</td>
 			<td width="22%" align="center">Tipo Pessoa</td>
 			<td width="13%" align="center">ISS Retido</td>
 			<td width="15%" align="center">ISS</td>
@@ -45,7 +45,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						$tipopessoa = "Pessoa Fisica";
 					  break;
 					case "PJ":
-						$tipopessoa = "Pessoa Jur�dica";
+						$tipopessoa = "Pessoa Jurídica";
 					  break;
 					case "PFPJ":
 						$tipopessoa = "Ambas";

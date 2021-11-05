@@ -25,7 +25,7 @@ $regra_cred_rpa = "'$cred_pf_n','$val_pf_n','$cred_pf_s','$val_pf_s','$cred_pj_n
 if(false){?><table><?php }
 ?>
   <tr>
-    <td align="left">Valor Total das Dedu��es</td>
+    <td align="left">Valor Total das Deduções</td>
     <td align="left">R$ 
 	    <input name="txtValorDeducoes" type="text" size="12" class="texto" id="txtValorDeducoes"  style="text-align:right;" value="0"
     	 onkeydown="MaskMoeda(this); return NumbersOnly(event);" <?php print "onblur=\"ValorIssRPA($regra_cred_rpa)\"";?> > 		
@@ -57,7 +57,7 @@ if(false){?><table><?php }
 						<!-- busca a relacao dos servicos por empresa -->
 						<select name="cmbCodServico" size="1" style="width:295px;" id="cmbCodServico" onchange="MostraValorRPA(); 
 						<?php print "ValorIssRPA($regra_cred_rpa)";?>" >
-						<option value="0">Selecione o Servi�o</option>	   	        
+						<option value="0">Selecione o Serviço</option>	   	        
 						<?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota,$issretido,$valor_rpa)=mysql_fetch_array($sql_servicos))
 						{	   
 							print("<option value=\"$valor_rpa|$codigo|$issretido\"> $descricao </option>");
@@ -199,7 +199,7 @@ if(false){?><table><?php }
 		<!-- busca a relacao dos servicos por empresa -->
 		<select name="cmbCodServico" size="1" style="width:295px;" id="cmbCodServico" onchange="MostraValorRPA(); 
 		<?php print "ValorIssRPA($regra_cred_rpa)";?>" >
-		<option value="0">Selecione o Servi�o</option>	   	        
+		<option value="0">Selecione o Serviço</option>	   	        
 		<?php while(list($codigo_empresas_servicos,$codigo,$codservico,$descricao,$aliquota,$issretido,$valor_rpa)=mysql_fetch_array($sql_servicos))
 		{	   
 			print("<option value=\"$valor_rpa|$codigo|$issretido\"> $descricao </option>");
@@ -220,7 +220,7 @@ if(false){?><table><?php }
   <tr>    
   <tr>
     <td align="left">
-	  Al�quota de INSS
+	  Alíquota de INSS
 	</td>
     <td align="left">	
  	 <input name="txtAliquotaINSS" id="txtAliquotaINSS" type="text" size="5" class="texto" style="text-align:right;" onkeyup="MaskPercent(this)" 
@@ -233,7 +233,7 @@ if(false){?><table><?php }
   </tr> 
   <tr>
     <td align="left">
-	  Al�quota de IRRF
+	  Alíquota de IRRF
 	</td>
     <td align="left">	
  	 <input name="txtIRRF" id="txtIRRF" type="text" size="5" class="texto" style="text-align:right;" onkeyup="MaskPercent(this)" 

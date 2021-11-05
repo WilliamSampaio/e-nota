@@ -127,7 +127,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								<input name="btRemover" type="button" value="Remover pedido*" class="botao" 
 								onclick="removerCadastro('<?php echo $codigo;?>','divlistanfe');" />
 							</td>
-							<td colspan="4" align="right"><font color="#FF0000">*</font>Remover� o cadastro</td>
+							<td colspan="4" align="right"><font color="#FF0000">*</font>Removerá o cadastro</td>
 						</tr>
 					</table>
 				<?php

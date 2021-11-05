@@ -111,7 +111,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             </tr>
         </table>
         <?php
-            //Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
+            //Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
             $varcont= $_POST['hdContador'];
 			
 			//$sqlnotas = "SELECT COUNT(codigo) AS qtdnotas FROM notas GROUP BY codemissor ORDER BY qtdnotas ASC";

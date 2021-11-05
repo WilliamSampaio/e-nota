@@ -24,7 +24,7 @@
 	require_once("../../funcoes/util.php");
 ?>
 
-<?php //Pega o bras�o e o estado
+<?php //Pega o brasão e o estado
 	$sql_brasao = $PDO->query("SELECT brasao_nfe FROM configuracoes");
 	list($BRASAO) = $sql_brasao->fetch();
 	
@@ -32,34 +32,34 @@
 	list($ESTADO) = $sql_estado->fetch();
 ?>
 
-<?php //Define o título do relat�rio de acordo com o que vem do rdbServicos
+<?php //Define o título do relatório de acordo com o que vem do rdbServicos
 	if ($_POST['rdbServicos'] == 'lista')
-		$titulo = 'LISTA DE SERVI�OS';
+		$titulo = 'LISTA DE SERVIÇOS';
 	
 	else if ($_POST['rdbServicos'] == 'vinculadas')
 		$titulo = 'EMPRESAS VINCULADAS POR ATIVIDADE';
 	
 	else if ($_POST['rdbServicos'] == 'media')
-		$titulo = 'COMPARATIVO POR M�DIA DE TODAS AS ATIVIDADES';
+		$titulo = 'COMPARATIVO POR MÉDIA DE TODAS AS ATIVIDADES';
 	
 	else if ($_POST['rdbServicos'] == 'municipio')
-		$titulo = 'ATIVIDADES ADQUIRIDAS DE EMPRESAS DE FORA DO MUNIC�PIO';
+		$titulo = 'ATIVIDADES ADQUIRIDAS DE EMPRESAS DE FORA DO MUNICÍPIO';
 	
 	else if($_POST['rdbServicos'] == 'resumo')
 		$titulo = 'RESUMO DAS ATIVIDADES EFETUADAS';
 		
 	else if($_POST['rdbServicos'] == 'area')
-		$titulo = 'LISTA DE SERVI�OS POR CATEGORIA E SERVI�O';
+		$titulo = 'LISTA DE SERVIÇOS POR CATEGORIA E SERVIÇO';
 		
 	else if($_POST['rdbServicos'] == 'categ')
-		$titulo = 'LISTA ESTATÉSTICA DE SERVI�OS POR CATEGORIA';
+		$titulo = 'LISTA ESTATÉSTICA DE SERVIÇOS POR CATEGORIA';
 		
 		
-	 //Pega o m�s que veio por post
+	 //Pega o mês que veio por post
 	$mes = $_POST['cmbMes'];
 ?>
 
-<!-- In�cio do css da visualiza��o da página -->
+<!-- Início do css da visualização da página -->
 	<style type="text/css" media="screen">
 	.style1 {
 		font-family: Georgia, "Times New Roman", Times, serif;
@@ -84,13 +84,13 @@
 		height: 100%;
 	}
 	</style>
-<!-- Fim do css da visualiza��o da página -->
+<!-- Fim do css da visualização da página -->
 
 
-<!-- In�cio do css da Impressão da página -->
+<!-- Início do css da Impressão da página -->
 	<style type="text/css" media="print">
 	#DivImprimir{
-		display: none; /*Tira a div imprimir na hora da impress�o*/
+		display: none; /*Tira a div imprimir na hora da impressão*/
 	}
 	</style>
 <!-- Fim do css da Impressão da página -->
@@ -98,12 +98,12 @@
 
 <title>Relatório de Serviços</title>
 
-<div class="pagina"> <!-- In�cio div página -->
+<div class="pagina"> <!-- Início div página -->
 	<div id="DivImprimir">
 		<input type="button" onClick="print();" value="Imprimir" /><br />
 	</div>
 	
-	<!-- In�cio do topo com as informa��es -->
+	<!-- Início do topo com as informações -->
 	<div id="DivTopo">
 		<table width="95%" height="120" border="2" cellspacing="0" class="tabela" align="center">
 			<tr>
@@ -124,11 +124,11 @@
 			</tr>
 		</table>
 	</div>
-	<!-- Fim do topo com as informa��es -->
+	<!-- Fim do topo com as informações -->
 	
 	<br>
 
-<?php //Verifica a opção marcada e chama o arquivo que vai gerar o relar�rio
+<?php //Verifica a opção marcada e chama o arquivo que vai gerar o relatório
 	if ($_POST['rdbServicos'] == 'lista')
 		require_once("imprimirServicosLista.php");
 		

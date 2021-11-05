@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <script>
 	function btBuscar_click(codemissor,retorno){
-		if(ValidaFormulario('_mes|_ano','Por favor selecione um m�s e um ano!')){
+		if(ValidaFormulario('_mes|_ano','Por favor selecione um mês e um ano!')){
 			var codigo_emissor = document.getElementById(codemissor).value;
 			var ano = document.getElementById('_ano').value;
 			var mes = document.getElementById('_mes').value;
@@ -49,7 +49,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="760" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Declaração de Org�os P�blicos (DOP)<br /></td>  
+    <td width="760" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Declaração de Orgãos Públicos (DOP)<br /></td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -84,7 +84,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 												<option value=""></option>
 												<?php
 												//array dos meses comecando na posição 1 ate 12 e faz um for listando os meses no combo
-												$meses= array(1=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+												$meses= array(1=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 												for($i=1;$i<=12;$i++){
 													echo "<option value='$i'>$meses[$i]</option>";
 												}//fim for meses

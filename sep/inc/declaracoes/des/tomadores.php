@@ -26,7 +26,7 @@ if ($_GET['txtInscMunicipal']){
 								  FROM cadastro 
 								  WHERE inscrmunicipal = '$tomador_IM' AND codtipo = $codtipo");
 	if(!$sql_IM_tomador->rowCount()){
-		Mensagem("Inscri��o Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF");
+		Mensagem("Inscrição Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF");
 	}else{
 		list($tomador_CNPJ,$tomador_CPF) = $sql_IM_tomador->fetch();
 	}
@@ -158,7 +158,7 @@ if($sql_tomador->rowCount()<=0){
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="left" valign="middle"><font color="#FF0000">*</font><em> Campos com preenchimento obrigat�rio<br />
+			<td colspan="2" align="left" valign="middle"><font color="#FF0000">*</font><em> Campos com preenchimento obrigatório<br />
 				** Desabilite seu bloqueador de pop-up</em></td>
 		</tr>
 		<tr>

@@ -117,7 +117,7 @@ elseif($_POST['btExcluirRegra'])
    while(list($codigo,$credito,$tipopessoa,$issretido,$valor)=$sql->fetch())      
    {
      $issretidodisplay = $issretido=="S"?"Sim":"Não";     
-	 $tipopessoadisplay = $tipopessoa == 'PF' ? 'Pessoa F�sica' : 'Pessoa Jur�dica';   
+	 $tipopessoadisplay = $tipopessoa == 'PF' ? 'Pessoa Física' : 'Pessoa Jurídica';   
 	  echo"
 	   
 	   <div style=\"display:block\" id=\"DivBusca$cont\">	       

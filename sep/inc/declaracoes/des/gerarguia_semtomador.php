@@ -105,7 +105,7 @@ $PDO->query("UPDATE guia_pagamento SET nossonumero ='$nossonumero', chavecontrol
 $cod_guia =base64_encode($cod_guia);
 $cod_des = base64_encode($cod_des);
 
-Mensagem("Declara��o efetuada com sucesso!");
+Mensagem("Declaração efetuada com sucesso!");
 echo"<script>window.open('reports/des_prestadores_comprovante.php?COD=$cod_des');</script>"; 
 /*		echo"<script>window.open('../../boleto/boleto_bb.php?COD=$cod_guia');</script>"; */
 //Redireciona("../../boleto/boleto_bb.php?COD=$cod_guia");

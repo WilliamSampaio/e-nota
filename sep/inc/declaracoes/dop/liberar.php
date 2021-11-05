@@ -22,7 +22,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($_POST["btLiberar"] == "Liberar"){
 		$codigo = $_POST["hdCodSolicitacao"];
 		$PDO->query("UPDATE orgaospublicos SET estado = 'A' WHERE codigo = '$codigo'");
-		Mensagem("Libera��o de �rg�o Ativada");
+		Mensagem("Liberação de Orgão Ativada");
 	}
 ?>
 
@@ -47,7 +47,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<td width="180" align="center">Nome</td>
 						<td width="130" align="center">Cnpj</td>
 						<td width="200" align="center">Razão Social</td>
-						<td width="130" align="center">N�vel</td>
+						<td width="130" align="center">Nível</td>
 						<td align="center" width="50">Ações</td>
 					</tr>
 					<?php
@@ -72,7 +72,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					}else{
 						echo "
 							<tr>
-								<td align=\"center\">Não há solicita��es de ativa��o</td>
+								<td align=\"center\">Não há solicitações de ativação</td>
 							</tr>
 						";
 					}//fim if

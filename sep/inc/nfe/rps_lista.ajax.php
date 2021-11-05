@@ -113,7 +113,7 @@
 	</table>
 <?php
 	}else{
-		echo "<center><strong>Não há solicita��es de RPS</strong></center>";
+		echo "<center><strong>Não há solicitações de RPS</strong></center>";
 	}
 ?>
 </fieldset>

@@ -61,7 +61,7 @@ if($emissor_CNPJ){
 					echo "<b>Este cnpj/cpf não está cadastrado ou não foi liberado!</b>";
 				}
 			}else{
-				echo "<b>O CNPJ/CPF está em um formato inv�lido</b>";
+				echo "<b>O CNPJ/CPF está em um formato inválido</b>";
 			}
 		}elseif($tipo == "T"){
 			require_once("tomadores.php");

@@ -37,8 +37,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<select name="cmbRelatorios" class="combo" 
                         onchange="acessoAjax('inc/operadorascreditos/relatorios/relatorios_opcoes.ajax.php','frmRelatorio','divRelatorios')">
 								<option value=""></option>
-								<option value="O">Operadoras de Cr�ditos</option>
-								<option value="D">Declara��es</option>
+								<option value="O">Operadoras de Créditos</option>
+								<option value="D">Declarações</option>
 							</select>
 						</td>
 					</tr>

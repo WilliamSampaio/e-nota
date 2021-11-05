@@ -20,7 +20,7 @@
 							<td width="89%" align="left"><input name="txtCNPJ" type="text" class="texto" /></td>
 						</tr>
 						<tr>
-							<td align="right">N�mero: </td>
+							<td align="right">Número: </td>
 							<td align="left"><input name="txtNumero" type="text" class="texto" /></td>
 						</tr>
 						<tr>

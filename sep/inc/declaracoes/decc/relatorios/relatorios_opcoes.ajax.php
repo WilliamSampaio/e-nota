@@ -47,7 +47,7 @@ if($relatorio == "E"){
 		$cont++;
 	}
 ?>
-<fieldset><legend>Informa��es sobre as Empreiteiras</legend>
+<fieldset><legend>Informações sobre as Empreiteiras</legend>
 <table width="100%" border="0" cellpadding="0">
     <tr>
         <td width="15%" align="left">Cadastradas:</td>
@@ -117,7 +117,7 @@ if($relatorio == "E"){
         <td align="left"><input name="txtCNPJ" type="text" class="texto" size="20" maxlength="18" /></td>
     </tr>
     <tr>
-        <td align="left">N� da Decc</td>
+        <td align="left">Nº da Decc</td>
         <td align="left"><input name="txtNroDecc" type="text" class="texto" size="10" maxlength="10" /></td>
     </tr>
     <tr>
@@ -127,7 +127,7 @@ if($relatorio == "E"){
                 <option value=""></option>
                 <?php
                 //array dos meses comecando na posição 1 ate 12 e faz um for listando os meses no combo
-                $meses = array(1=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+                $meses = array(1=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
                 for($x=1;$x<=12;$x++){
                     echo "<option value='$x'>$meses[$x]</option>";
                 }//fim for meses
@@ -193,7 +193,7 @@ if($relatorio == "E"){
 <fieldset>
 <table width="100%">
 	<tr>
-    	<td align="left" colspan="2"><b>Informa��es das Obras</b></td>
+    	<td align="left" colspan="2"><b>Informações das Obras</b></td>
     </tr>
     <tr>
     	<td width="16%" align="left">Cadastradas</td>

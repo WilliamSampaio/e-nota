@@ -27,7 +27,7 @@ require_once DIR_SITE . 'include/header.php';
 
 <body>
 
-    <?php require_once 'inc/navbar.php' ?>
+    <?php require_once DIR_SITE . 'include/navbar.php' ?>
 
     <div class="container bg-light">
         <div class="row align-items-start">
@@ -119,10 +119,10 @@ require_once DIR_SITE . 'include/header.php';
                             $estado = '<b>Aguarde a liberação da prefeitura</b>';
                             break;
                         case "A":
-                            $estado = '<font color="#006600"><b>Cadastro liberado</b></font>';
+                            $estado = '<span style="color: green;"><b>Cadastro liberado</b></span>';
                             break;
                         case "I":
-                            $estado = '<font color="#FF0000"><b>Prestador inativo, entre em contato com a prefeitura.</b></font>';
+                            $estado = '<span style="color: red;"><b>Prestador inativo, entre em contato com a prefeitura.</b></span>';
                             break;
                     } //fim switch estado
 
@@ -211,7 +211,7 @@ require_once DIR_SITE . 'include/header.php';
                                         <th scope="col">Responsável:</th>
                                         <td scope="col"><?php echo verificaCampo($nome_resp) ?></td>
                                         <th scope="col">CPF:</th>
-                                        <td scope="col"><?php echo verificaCampo($cpf_respZz) ?></td>
+                                        <td scope="col"><?php echo verificaCampo($cpf_resp) ?></td>
                                     </tr>
 
                                 <?php

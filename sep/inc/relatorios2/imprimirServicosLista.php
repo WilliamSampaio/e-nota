@@ -49,7 +49,7 @@
 ?>
 
 
-<!-- In�cio da Tabela -->
+<!-- Início da Tabela -->
 <table width="95%" class="tabela" border="1" cellspacing="0" style="page-break-after: always" align="center">
 	<tr style="background-color:#999999">
 		<?php
@@ -82,7 +82,7 @@ while($dados_pesquisa = $sql_pesquisa->fetch()){
 			break;
 	}//Fim do switch
 	
-	if(strlen($dados_pesquisa['descricao']) > 55) //Contas os caracteres da descri��o; se passar de 55, coloca "..."
+	if(strlen($dados_pesquisa['descricao']) > 55) //Contas os caracteres da descrição; se passar de 55, coloca "..."
 		$desc = ResumeString($dados_pesquisa['descricao'],55);
 	else
 		$desc = $dados_pesquisa['descricao'];

@@ -64,7 +64,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <title>Imprimir</title><input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
 	<table width="850">
     	<tr>
-        	<td><b><font size="4">Relat�rio de Obras</font></b></td>
+        	<td><b><font size="4">Relatório de Obras</font></b></td>
         </tr>
         <?php
 			if($nomeobra){
@@ -109,7 +109,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <td width="15%" align="center"><b>Nome</b></td>
             <td width="6%"  align="center"><b>Alvara</b></td>
             <td width="19%" align="center"><b>Endereco</b></td>
-            <td width="19%" align="center"><b>Propiet�rio</b></td>
+            <td width="19%" align="center"><b>Proprietário</b></td>
             <td width="15%" align="center"><b>CNPJCPF</b></td>
             <td width="9%"  align="center"><b>Data inicio</b></td>	
             <td width="10%" align="center"><b>Data termino</b></td>

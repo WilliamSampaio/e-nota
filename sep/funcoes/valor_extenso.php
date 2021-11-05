@@ -21,9 +21,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 <?php
 
 function valorPorExtenso($valor) {
-	$singular = array("centavo", "real", "mil", "milh�o", "bilh�o", "trilh�o", "quatrilh�o");
-	$plural = array("centavos", "reais", "mil", "milh�es", "bilh�es", "trilh�es",
-"quatrilh�es");
+	$singular = array("centavo", "real", "mil", "milhão", "bilhão", "trilhão", "quatrilhão");
+	$plural = array("centavos", "reais", "mil", "milhões", "bilhões", "trilhões", "quatrilhões");
 
 	$c = array("", "cem", "duzentos", "trezentos", "quatrocentos",
 "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos");
@@ -31,7 +30,7 @@ function valorPorExtenso($valor) {
 "sessenta", "setenta", "oitenta", "noventa");
 	$d10 = array("dez", "onze", "doze", "treze", "quatorze", "quinze",
 "dezesseis", "dezesete", "dezoito", "dezenove");
-	$u = array("", "um", "dois", "tr�s", "quatro", "cinco", "seis",
+	$u = array("", "um", "dois", "três", "quatro", "cinco", "seis",
 "sete", "oito", "nove");
 
 	$z=0;
@@ -42,7 +41,7 @@ function valorPorExtenso($valor) {
 		for($ii=strlen($inteiro[$i]);$ii<3;$ii++)
 			$inteiro[$i] = "0".$inteiro[$i];
 
-	// $fim identifica onde que deve se dar jun��o de centenas por "e" ou por "," ;)
+	// $fim identifica onde que deve se dar junção de centenas por "e" ou por "," ;)
 	$fim = count($inteiro) - ($inteiro[count($inteiro)-1] > 0 ? 1 : 2);
 	for ($i=0;$i<count($inteiro);$i++) {
 		$valor = $inteiro[$i];

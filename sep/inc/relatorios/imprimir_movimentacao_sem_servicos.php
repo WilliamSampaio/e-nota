@@ -50,12 +50,12 @@ while(list($codServ)=$sql_pesquisa->fetch()){
 			"prestador"              => "Prestador",
 			"empreiteira"            => "Empreiteira",
 			"instituicao_financeira" => "Instituição Financeira",
-			"cartorio"               => "Cart�rio",
+			"cartorio"               => "Cartório",
 			"operadora_credito"      => "Operadora de Crédito",
-			"grafica"                => "Gr�fica",
+			"grafica"                => "Gráfica",
 			"contador"               => "Contador",
 			"tomador"                => "Tomador",
-			"orgao_publico"          => "Org�o P�blico",
+			"orgao_publico"          => "Orgão Público",
 			"simples"                => "Simples"
 		);
 		while(list($movimentacao, $issretido, $iss, $codigo) = $query_serv->fetch()){

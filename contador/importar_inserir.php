@@ -42,7 +42,7 @@ if(!(isset($_SESSION["codempresa"]))){
 		$sql=mysql_query("SELECT codigo FROM cadastro WHERE codigo = '".$_POST['hdCodEmpresa']."'"); 
 		list($codigoEmpresa)=mysql_fetch_array($sql);  
 		
-		$xml = simplexml_load_file("importar/$arquivo_xml"); // l� o arquivo XML 
+		$xml = simplexml_load_file("importar/$arquivo_xml"); // lê o arquivo XML 
 		$cont = 0; 
 		$inserir_tomador = "N";
 		foreach($xml->children() as $elemento => $valor){   
@@ -167,7 +167,7 @@ if(!(isset($_SESSION["codempresa"]))){
 				  break;
 			}
 			
-			//GERA O C�DIGO DE VERIFICA��O
+			//GERA O CÓDIGO DE VERIFICAÇÃO
 			$CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';	
 			$max = strlen($CaracteresAceitos)-1;
 			$password = null;
@@ -366,7 +366,7 @@ if(!(isset($_SESSION["codempresa"]))){
 		}// foreach
 		unlink("importar/$arquivo_xml");
 		add_logs('Importou Arquivo');
-		print("<script language=JavaScript>alert('Importa��o efetuada com sucesso !');window.close();</script>");
+		print("<script language=JavaScript>alert('Importação efetuada com sucesso !');window.close();</script>");
 	}else{
 		print("Acesso Negado!!");
 	}	

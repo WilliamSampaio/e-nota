@@ -71,7 +71,7 @@ Fith Floor, Boston, MA 02110-1301, USA
             <table width="100%" align="center">
                 <tr align="center" bgcolor="999999">
                     <td>Cód. de Verificação</td>
-                    <td>Cart�rio</td>                    
+                    <td>Cartório</td>                    
                     <td>Data de Emissão</td>
                     <td>Competência</td>
                     <td>Valor Total</td>

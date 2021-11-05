@@ -73,7 +73,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <title>Imprimir</title><input name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();">
 	<table width="850">
     	<tr>
-        	<td><b><font size="4">Relat�rio de Declarações</font></b></td>
+        	<td><b><font size="4">Relatório de Declarações</font></b></td>
         </tr>
         <?php
 			if($nome){
@@ -99,11 +99,11 @@ Fith Floor, Boston, MA 02110-1301, USA
 		}else{
 			if($compmes){ ?>
 		<tr>
-			<td><b>M�s de compet�ncia:</b> <?php echo $compmes; ?></td>
+			<td><b>Mês de competência:</b> <?php echo $compmes; ?></td>
 		</tr>
 		<?php } if($compano){ ?>
 		<tr>
-			<td><b>Ano de compet�ncia:</b> <?php echo $compano; ?></td>
+			<td><b>Ano de competência:</b> <?php echo $compano; ?></td>
 		</tr>
 		<?php }
 		}//fim if compmes e compano

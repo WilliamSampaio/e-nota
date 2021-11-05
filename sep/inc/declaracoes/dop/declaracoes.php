@@ -39,7 +39,7 @@ function mudarpagina(valor){
 <table border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
     <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="760" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Declaração de Org�os P�blicos (DOP)<br /></td>  
+    <td width="760" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Declaração de Orgãos Públicos (DOP)<br /></td>  
     <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
   </tr>
   <tr>
@@ -72,7 +72,7 @@ function mudarpagina(valor){
 												<option value=""></option>
 												<?php
 												//array dos meses comecando na posição 1 ate 12 e faz um for listando os meses no combo
-												$meses= array(1=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+												$meses= array(1=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 												for($i=1;$i<=12;$i++){
 													echo "<option value='$i'>$meses[$i]</option>";
 												}//fim for meses
@@ -85,7 +85,7 @@ function mudarpagina(valor){
 												$sql_ano = $PDO->query("SELECT YEAR(competencia) FROM dop_des GROUP BY YEAR(competencia) ORDER BY YEAR(competencia) DESC");
 												while(list($ano) = $sql_ano->fetch()){
 													echo "<option value='$ano'>$ano</option>";
-												}//while para listar os anos que existem declara��es
+												}//while para listar os anos que existem declarações
 												?>
 											</select>
 										</td>

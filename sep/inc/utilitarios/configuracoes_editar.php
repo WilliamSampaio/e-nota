@@ -153,10 +153,10 @@ if(!mysql_num_rows($sql)){
 				gerar_guia_site='$gerar_guia_site'
 		");
 }		
-add_logs('Atualizou uma Configura��o');
+add_logs('Atualizou uma Configuração');
 if($alerta != 1){
 	Mensagem_onload("Dados atualizados");
 }else{
-	Mensagem_onload("O Logo, Bras�o e Topo devem ter, no máximo, 100 pixels de altura por 100 pixels de largura cada.");
+	Mensagem_onload("O Logo, Brasão e Topo devem ter, no máximo, 100 pixels de altura por 100 pixels de largura cada.");
 }
 ?>

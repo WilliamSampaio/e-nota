@@ -185,7 +185,7 @@ for ($c = 0; $c < $notas; $c++) {
 									<td class="cab03"><?php print strtoupper($CONF_SECRETARIA); ?></td>
 								</tr>
 								<tr>
-									<td class="cab02">NOTA FISCAL ELETR&Ocirc;NICA DE SERVIÇOS - NF-e</td>
+									<td class="cab02">NOTA FISCAL ELETRÔNICA DE SERVIÇOS - NF-e</td>
 								</tr>
 								<?php if ($rps_numero) { ?>
 									<tr>
@@ -537,11 +537,11 @@ for ($c = 0; $c < $notas; $c++) {
 			  echo "- Esta NF-e não gera créditos, pois a empresa prestadora de serviços é optante pelo Simples Nacional<br> ";
 			} */
 							if ($issretido != 0) {
-								echo "- Esta NF-e possui reten��o de ISS no valor de R$ " . DecToMoeda($issretido) . "<br> ";
+								echo "- Esta NF-e possui retenção de ISS no valor de R$ " . DecToMoeda($issretido) . "<br> ";
 							}
 
 							if ($pispasep > 0) {
-								echo "- Est� NF-e possui PIS/PASEP no valor de R$ " . DecToMoeda($pispasep) . "<br />";
+								echo "- Esta NF-e possui PIS/PASEP no valor de R$ " . DecToMoeda($pispasep) . "<br />";
 							}
 
 
@@ -562,22 +562,22 @@ for ($c = 0; $c < $notas; $c++) {
 							if ($valorinss > 0) { //soh mostra se tiver valor
 
 								if ($aliqinss > 0) {
-									echo "- Reten��o de INSS " . DecToMoeda($aliqinss) . "% com valor de R$ " . DecToMoeda($valorinss) . " <br>";
+									echo "- Retenção de INSS " . DecToMoeda($aliqinss) . "% com valor de R$ " . DecToMoeda($valorinss) . " <br>";
 								} else {
-									echo "- Reten��o de INSS com valor de R$ " . DecToMoeda($valorinss) . " <br>";
+									echo "- Retenção de INSS com valor de R$ " . DecToMoeda($valorinss) . " <br>";
 								}
 							}
 							if ($valorirrf > 0) { //soh mostra se tiver valor
 								if ($aliqirrf > 0) {
-									echo "- Reten��o de IRRF " . DecToMoeda($aliqirrf) . "% com valor de R$ " . DecToMoeda($valorirrf) . "";
+									echo "- Retenção de IRRF " . DecToMoeda($aliqirrf) . "% com valor de R$ " . DecToMoeda($valorirrf) . "";
 									if ($deducao_irrf > 0) {
-										echo ". Dedu��o de R$ " . DecToMoeda($deducao_irrf);
+										echo ". Dedução de R$ " . DecToMoeda($deducao_irrf);
 									}
 									echo "<br>";
 								} else {
-									echo "- Reten��o de IRRF com valor de R$ " . DecToMoeda($valorirrf) . "";
+									echo "- Retenção de IRRF com valor de R$ " . DecToMoeda($valorirrf) . "";
 									if ($deducao_irrf > 0) {
-										echo ". Dedu��o de R$ " . DecToMoeda($deducao_irrf);
+										echo ". Dedução de R$ " . DecToMoeda($deducao_irrf);
 									}
 									echo "<br>";
 								}
@@ -587,7 +587,7 @@ for ($c = 0; $c < $notas; $c++) {
 							}
 
 							if ($total_retencao > 0) {
-								echo "- Total de reten��es da nota R$ " . DecToMoeda($total_retencao) . " <br>";
+								echo "- Total de retenções da nota R$ " . DecToMoeda($total_retencao) . " <br>";
 							}
 							?>
 						</td>

@@ -193,7 +193,7 @@ if($btSelecionarEmpresa!=""){
 					}	
 				}
 	
-				//verifica a isen��o do prestador
+				//verifica a isenção do prestador
 				$sqlIsento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
 				list($issIsento) = mysql_fetch_array($sqlIsento);
 				if($issIsento == 'S'){
@@ -330,7 +330,7 @@ if($btSelecionarEmpresa!=""){
 			}
 	 }
 	}else{
-		print("<script language=JavaScript>alert('� necess�rio selecionar um serviço para a emissão da nota.')</script>");
+		print("<script language=JavaScript>alert('É necessário selecionar um serviço para a emissão da nota.')</script>");
 	}
 }
 
@@ -342,7 +342,7 @@ $ultimanota += 1;
 
 $emp_cnpj.=$emp_cpf;
 
-//GERA O C�DIGO DE VERIFICA��O
+//GERA O CÓDIGO DE VERIFICAÇÃO
 $CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
 $max = strlen($CaracteresAceitos)-1;
 $password = null;
@@ -540,7 +540,7 @@ if($limiteRPS < 1){
   </tr>
   <tr>
     <td>
-		Munic�pio<font color="#FF0000">*</font></td>
+		Município<font color="#FF0000">*</font></td>
     <td>
         <div  id="divTomadorMunicipio">
             <select name="txtTomadorMunicipio" id="txtTomadorMunicipio" class="combo">
@@ -566,7 +566,7 @@ if($limiteRPS < 1){
 
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
   <tr>
-    <td><strong>Discriminação dos Serviços  e/ou Dedu��es</strong></td>
+    <td><strong>Discriminação dos Serviços e/ou Deduções</strong></td>
   </tr>
   <tr>
    <td align="center">

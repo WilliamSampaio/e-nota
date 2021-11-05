@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-// retorna o �ltimo dia do mes corrente
+// retorna o último dia do mes corrente
 function ultimoDiaMes($mes,$ano = null){
     if(empty($ano)){
         $ano = date("Y");
@@ -300,7 +300,7 @@ function diasDecorridos($dataInicio,$dataFim){
 	return $dias_diferenca; 
 }
 
-//GERA O C�DIGO DE VERIFICA��O
+//GERA O CÓDIGO DE VERIFICAÇÃO
 function gera_codverificacao(){
 	$CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
 	$max = strlen($CaracteresAceitos)-1;
@@ -459,7 +459,7 @@ function Uploadimagem($campo,$destino,$cod=NULL){
 		$imagem['extensao'] = strtolower(end(explode('.', $_FILES[$campo]['name'])));
 		//varre o array verificando se a variavel extensao entra na condicional
 		if(array_search($imagem['extensao'], $extpermitidas) === false){
-			Mensagem("Por favor, envie arquivos com as seguintes extens�es: jpeg, jpg, gif");
+			Mensagem("Por favor, envie arquivos com as seguintes extensões: jpeg, jpg, gif");
 		}else{
 			//Verifica qual metodo de upload veio pelo parametro
 			if($cod == "rand"){
@@ -529,17 +529,17 @@ function UploadGenerico($destino,$campo,$extensoes=NULL){
 	 
 	// Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
 	if($_FILES[$campo]['error'] != 0) {
-		Mensagem_onload("Não foi poss�vel fazer o upload, erro: ". $array_upload['erros'][$_FILES[$campo]['error']]);
+		Mensagem_onload("Não foi possível fazer o upload, erro: ". $array_upload['erros'][$_FILES[$campo]['error']]);
 		return false;
 	}//fim if
 	
 	// Se a varivel vinda por parametro tiver valor, faz a verificacao da extensao do arquivo
 	 if($array_upload['extensoes']){
 	 	if(count($array_upload['extensoes'])>1){
-			$msg  = "Por favor, envie arquivos com as seguintes extens�es: ";
+			$msg  = "Por favor, envie arquivos com as seguintes extensões: ";
 			$msg2 = "Este arquivo não está em nenhum dos formatos permitidos: ";
 		}else{
-			$msg  = "Por favor, envie arquivos com a seguinte extens�o: ";
+			$msg  = "Por favor, envie arquivos com a seguinte extensão: ";
 			$msg2 = "Este arquivo não está no formato permitido: ";
 		}
 		$extensao = strtolower(end(explode('.', $_FILES[$campo]['name'])));
@@ -557,19 +557,19 @@ function UploadGenerico($destino,$campo,$extensoes=NULL){
 		}elseif($array_upload['tamanho'] < $_FILES[$campo]['size']){
 			Mensagem_onload("O arquivo enviado é muito grande, envie arquivos de até 2Mb.");
 		}else{ 
-			// O arquivo passou em todas as verifica��es, agora tenta movelo para a pasta
+			// O arquivo passou em todas as verificações, agora tenta movelo para a pasta
 			//acrescenta numeros randomicos ao nome do arquivo
 			$rand = mt_rand(00000,99999);
 			$ext  = explode(".",$_FILES[$campo]['name']);
 			$nome_final = $rand.".".$ext[1];
 			
-			// Depois verifica se e poss�vel mover o arquivo para a pasta escolhida
+			// Depois verifica se e possível mover o arquivo para a pasta escolhida
 			if(move_uploaded_file($_FILES[$campo]['tmp_name'], $array_upload['pasta'] .$nome_final)){
 				//se tudo der certo retorna o nome do arquivo que foi salvo no diretorio informado
 				return $nome_final;
 			}else{
-				// Não foi poss�vel fazer o upload, provavelmente a pasta está incorreta
-				Mensagem_onload("Não foi poss�vel enviar o arquivo, tente novamente");
+				// Não foi possível fazer o upload, provavelmente a pasta está incorreta
+				Mensagem_onload("Não foi possível enviar o arquivo, tente novamente");
 			}//fim else
 		}//fim else
 	}//fim if
@@ -588,9 +588,9 @@ function DataPtExt(){
 	$dia    = date("d");   //pega dia do mes
 	$m      = date("n");   //pega o mes em numero
 	$ano    = date("Y");   //pega o ano atual
-	$semana = array("Sun" => "Domingo", "Mon" => "Segunda-feira", "Tue" => "Ter�a-feira", "Wed" => "Quarta-feira", "Thu" => "Quinta-feira", "Fri" => "Sexta-feira", "Sat" => "S�bado"); 
+	$semana = array("Sun" => "Domingo", "Mon" => "Segunda-feira", "Tue" => "Terça-feira", "Wed" => "Quarta-feira", "Thu" => "Quinta-feira", "Fri" => "Sexta-feira", "Sat" => "Sábado"); 
 	/* Dias da Semana.  troca o valor da semana em ingles para portugues */
-	$mes = array(1 =>"Janeiro", "Fevereiro", "Mar�o", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"); 
+	$mes = array(1 =>"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"); 
 	/* Meses troca o valor de numero pelo seu valor por extenso */
 	return $semana[$s].", ".$dia." de ".$mes[$m]." de ".$ano; //imprime na tela a data concatenada por extenso  
 }//by lucas.
@@ -644,7 +644,7 @@ function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test é pa
 	$pagina_sql = ($pagina-1)*$quantporpagina;          //Calcula a variavel que vai ter o incio do limit
 	$pagina_sql .= ",$quantporpagina";                  //Concatena a quantidade de paginas escolhida com o inicio do limit do sql
 	
-	//Sql buscando as informa��es e o limit estipulado pela função
+	//Sql buscando as informações e o limit estipulado pela função
 	$sql_pesquisa = $PDO->query("$query LIMIT $pagina_sql");
 	if(!$sql_pesquisa){ 
 		return $sql_pesquisa;
@@ -663,7 +663,7 @@ function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test é pa
 					<input type=\"button\" name=\"btAnterior\" value=\"Anterior\" class=\"botao\" 
 					onclick=\"document.getElementById('hdPrimeiro').value=1;
 					mudarpagina('a','hdPagina','$arquivo','$form','$retorno');\" "; if($pagina == 1){ $botoes.= "disabled = disabled";} $botoes.= " />
-					<input type=\"button\" name=\"btProximo\" value=\"Pr�ximo\" class=\"botao\" 
+					<input type=\"button\" name=\"btProximo\" value=\"Próximo\" class=\"botao\" 
 					onclick=\"document.getElementById('hdPrimeiro').value=1;
 					mudarpagina('p','hdPagina','$arquivo','$form','$retorno');\" "; if($pagina == $total_paginas){ $botoes.= "disabled = disabled";} $botoes.= " />
 					<input type=\"hidden\" name=\"hdPagina\" id=\"hdPagina\" value=\"$pagina\" />
@@ -775,7 +775,7 @@ function estadoExtenso($sigla) {
 	return $estados[$sigla];
 }
 
-//Func�o que retorna somente o m�s 
+//Função que retorna somente o mês 
  function mesExtenso($mesxt) {
  	$mes = array(
 		'01' => 'Janeiro',
@@ -829,7 +829,7 @@ function notificaTomador($codigo_empresa,$ultimanota){
 	
 	$imagemTratada = $_SERVER['HTTP_HOST']."/img/brasoes/".rawurlencode($CONF_BRASAO);
 	$msg = ("
-	<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Bras�o Prefeitura\" title=\"Bras�o\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
+	<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Brasão Prefeitura\" title=\"Brasão\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
 	Este e-mail foi enviado, para notificar que a empresa ". strtoupper($empresa_razaosocial) .",<br>
 	emitiu uma NF-e com ". strtoupper($tomador_nome) .", como tomador.<br>
 	Abaixo segue o link para visualizar esta NF-e:<br>
@@ -840,7 +840,7 @@ function notificaTomador($codigo_empresa,$ultimanota){
 	$CONF_SECRETARIA de $CONF_CIDADE.
 	");
 	
-	$assunto = "Notifica��o de emissão de NF-e.";
+	$assunto = "Notificação de emissão de NF-e.";
 
 	$headers  = "MIME-Version: 1.0\r\n";
 
@@ -1012,8 +1012,8 @@ function UltDiaUtil($mes,$ano){
   	$dia_semana = date("w", $ultimo);
   
   	// domingo = 0;
-  	// s�bado = 6;
-  	// verifica s�bado e domingo
+  	// sábado = 6;
+  	// verifica sábado e domingo
   
   	if($dia_semana == 0){
     	$dia--;
@@ -1029,11 +1029,11 @@ function UltDiaUtil($mes,$ano){
 	switch($dia_semana){  
 		case"0": $dia_semana = "Domingo";       break;  
 		case"1": $dia_semana = "Segunda-Feira"; break;  
-		case"2": $dia_semana = "Ter�a-Feira";   break;  
+		case"2": $dia_semana = "Terça-Feira";   break;  
 		case"3": $dia_semana = "Quarta-Feira";  break;  
 		case"4": $dia_semana = "Quinta-Feira";  break;  
 		case"5": $dia_semana = "Sexta-Feira";   break;  
-		case"6": $dia_semana = "S�bado";        break;  
+		case"6": $dia_semana = "Sábado";        break;  
 	}
 	*/
 

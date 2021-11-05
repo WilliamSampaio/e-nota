@@ -49,7 +49,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                         <tr>
                                             <td>Juros por mês (%)</td>
                                             <td><input class="texto" type="text" name="txtJurosMes" id="txtJurosMes" value="0,00"></td>
-                                            <td>Fra��o Di�ria</td>
+                                            <td>Fração Diária</td>
                                             <td>
                                                 <select class="texto" name="slFracao" id="slFracao">
                                                     <option value="S">Sim</option>
@@ -83,32 +83,32 @@ Fith Floor, Boston, MA 02110-1301, USA
                                                 <fieldset><legend>Mensal</legend>
                                                     <table height="150">
                                                         <tr>
-                                                            <td>At�<input type="text" name="Mes01" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct01">%</td>
+                                                            <td>Até<input type="text" name="Mes01" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct01">%</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>At�<input type="text" name="Mes02" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct02">%</td>
+                                                            <td>Até<input type="text" name="Mes02" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct02">%</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>At�<input type="text" name="Mes03" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct03">%</td>
+                                                            <td>Até<input type="text" name="Mes03" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct03">%</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>At�<input type="text" name="Mes04" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct04">%</td>
+                                                            <td>Até<input type="text" name="Mes04" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct04">%</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>At�<input type="text" name="Mes05" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct05">%</td>
+                                                            <td>Até<input type="text" name="Mes05" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct05">%</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>At�<input type="text" name="Mes06" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct06">%</td>
+                                                            <td>Até<input type="text" name="Mes06" class="texto"></td><td><input type="text" value="0,00" class="texto" name="Pct06">%</td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
                                             </td>
                                             <td>ou</td>
                                             <td>
-                                                <fieldset><legend>Di�ria</legend>
+                                                <fieldset><legend>Diária</legend>
                                                     <table height="150">
                                                         <tr>
-                                                            <td valign="bottom">Fra��o Multa:</td><td valign="bottom"><input type="text" value="0,00" class="texto" name="PctFracao">%</td>
+                                                            <td valign="bottom">Fração Multa:</td><td valign="bottom"><input type="text" value="0,00" class="texto" name="PctFracao">%</td>
                                                         </tr>
                                                         <tr>
                                                             <td valign="top">Limite:</td><td valign="top"><input type="text" value="0,00" class="texto" name="PctLimite">%</td>
@@ -123,10 +123,10 @@ Fith Floor, Boston, MA 02110-1301, USA
                                     <table width="100%">
                                         <tr>
                                             <td width="25%">
-                                                <fieldset><legend>Parcela &Uacute;nica</legend>
+                                                <fieldset><legend>Parcela Única</legend>
                                                     <table height="50">
                                                         <tr>
-                                                            <td>At�:<input type="text" class="texto" name="txtParcelaUnica" value="0,00" style="width:90px;"></td>
+                                                            <td>Até:<input type="text" class="texto" name="txtParcelaUnica" value="0,00" style="width:90px;"></td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
@@ -147,7 +147,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                                 <fieldset><legend>Outras Parcelas</legend>
                                                     <table height="50">
                                                         <tr>
-                                                            <td>At�:<input type="text" class="texto" name="txtOutrasParcelas" value="0,00" style="width:90px;"></td>
+                                                            <td>Até:<input type="text" class="texto" name="txtOutrasParcelas" value="0,00" style="width:90px;"></td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
@@ -158,7 +158,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				
                 <table width="100%">
 <!--					<tr>
-						<td width="27%" align="left">Dias de toler�ncia<font color="#FF0000">*</font></td>
+						<td width="27%" align="left">Dias de tolerância<font color="#FF0000">*</font></td>
 						<td align="left" colspan="2"><input name="txtDias" id="txtDias" type="text" maxlength="2" size="3" class="texto"></td>
 					</tr>
 					<tr>

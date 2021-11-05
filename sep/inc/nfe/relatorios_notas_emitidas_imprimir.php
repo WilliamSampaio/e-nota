@@ -150,7 +150,7 @@ elseif($cmbEstado == "Escriturada")
 			$querysql = "";
 		}
 			
-// SQL CONCATENANDO COM A VARIAVEL $querysql QUE EST� DENTRO DE ALGUMA CONDI��O DOS IF'S
+// SQL CONCATENANDO COM A VARIAVEL $querysql QUE ESTÁ DENTRO DE ALGUMA CONDIÇÃO DOS IF'S
 			
 $sql = $PDO->query("
 	SELECT 
@@ -166,7 +166,7 @@ $sql = $PDO->query("
 ?>
 <script src="../../scripts/padrao.js" type="text/javascript"></script><title>Relatorios - Notas</title>
 <div id="DivImprimir"><input type="button" onClick="EscondeDiv('DivImprimir'); print();" value="Imprimir" /></div>
-<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relat�rio de Notas eletrônicas</b></p>
+<p style="font:Verdana, Arial, Helvetica, sans-serif; font-size:20px"><b>Relatório de Notas eletrônicas</b></p>
 <table>
 	<?php if($_POST["cmbEstado"]){?>
 	<tr>
@@ -180,7 +180,7 @@ $sql = $PDO->query("
 	</tr>
 	<?php } if($_POST["txtDataFim"]){ ?>
 	<tr>
-		<td><strong>At� a data:</strong></td>
+		<td><strong>Até a data:</strong></td>
 		<td><?php echo $_POST["txtDataFim"]; ?></td>
 	</tr>
 	<?php } if($_POST["txtEmpresa"]) {?>
@@ -199,8 +199,8 @@ $sql = $PDO->query("
 		<td>
 			<table width="700" style="font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif">
 				<tr>
-					<td width="50" align="center"><b>N�</b></td>
-					<td width="90" align="center"><b>C�d Verif</b></td>
+					<td width="50" align="center"><b>Nº</b></td>
+					<td width="90" align="center"><b>Cód Verif</b></td>
 					<td width="75" align="center"><b>D/H Emissão</b></td>
 					<td width="270" align="center"><b>Nome Emissor</b></td>
 					<td width="270" align="center"><b>Nome Tomador</b></td>
@@ -213,7 +213,7 @@ $sql = $PDO->query("
 				<?php
 				while(list($numero, $codverif, $data, $tomador_nome, $estado, $rps, $emissor) = $sql->fetch())
 					{
-						switch($estado) //transforma o valor que veio do banco para uma melhor vizualiza��o do usuario na impress�o
+						switch($estado) //transforma o valor que veio do banco para uma melhor vizualização do usuario na impressão
 							{
 								case "N": $tipo = "Emitida"; 	 break;
 								case "B": $tipo = "Boleto";   	 break;

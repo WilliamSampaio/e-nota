@@ -36,7 +36,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	if($sql->rowCount()>0){
 		$arq = $razao.$data.'.xml';		
 		move_uploaded_file($arq_tmp,"xmls/dif/".$arq);   	   	
-		$xml = simplexml_load_file("xmls/dif/".$arq); // l� o arquivo XML      							   	   	   
+		$xml = simplexml_load_file("xmls/dif/".$arq); // lê o arquivo XML      							   	   	   
 	
 		if($xml){
 			$verifica=0;
@@ -112,7 +112,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			");
 	
 					
-			 Mensagem("Declara��o efetuada com sucesso!!");
+			 Mensagem("Declaração efetuada com sucesso!!");
 			 /*$vencimento = DataVencimento();
 			 $PDO->query("
 				INSERT INTO 
@@ -141,12 +141,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 			 $CodDifDes = base64_encode($CodDifDes);
 			 NovaJanela("reports/dif_comprovante.php?COD=$CodDifDes");
 			 }else{		 
-				Mensagem("Conteúdo do arquivo não contém Conta Oficial v�lida.");
+				Mensagem("Conteúdo do arquivo não contém Conta Oficial válida.");
 			 }	 
 		}else{
 			Mensagem("O arquivo enviado contém erros. Favor verificar!");
 		}
 	}else{
-		Mensagem("Este cnpj não está cadastrado ou não é uma institui��o financeira!");
+		Mensagem("Este cnpj não está cadastrado ou não é uma instituição financeira!");
 	}
 ?>

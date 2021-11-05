@@ -112,7 +112,7 @@ if($erro != 1){
 		$PDO->query("INSERT INTO autos_infracao SET codcadastro='$codcadastro',origem='$origem', assunto='$assunto',data_hora=NOW()");
 	}
 	
-	registraAutoInfracao($cod_emissor,"DES Consolidada","Declara��o com tomador emitida");
+	registraAutoInfracao($cod_emissor,"DES Consolidada","Declaração com tomador emitida");
 		
 	$sql_guia = $PDO->query("SELECT MAX(codigo) 
 							 FROM guia_pagamento;");
@@ -126,7 +126,7 @@ if($erro != 1){
 	$cod_guia =base64_encode($cod_guia);
 	$cod_des = base64_encode($cod_des); 
 	
-	Mensagem("Declara��o efetuada com sucesso!");
+	Mensagem("Declaração efetuada com sucesso!");
 	echo"<script>window.open('reports/des_prestadores_comprovante.php?COD=$cod_des');</script>"; 
 	//Redireciona("../../boleto/boleto_bb.php?COD=$cod_guia");   
 }

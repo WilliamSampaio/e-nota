@@ -35,12 +35,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 <tbody>
     <tr>
         <td>
-            Escolha o Per�odo
+            Escolha o Período
         </td>
         <td>
 			<?php
   		  	//array de meses comencando em 1 ate 12
-    		$meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+    		$meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
     		$mes = date("n");
     		$ano = date("Y");
     		?>

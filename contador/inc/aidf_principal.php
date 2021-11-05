@@ -70,7 +70,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         <table align="center" width="100%">
         	<tr>
             	<td colspan="2" bgcolor="#666666">
-                <?php echo "Raz�o Social: ".$razaocontador; ?>
+                <?php echo "Razão Social: ".$razaocontador; ?>
                 </td>
             </tr>
             <tr align="left" bgcolor="#FFFFFF">
@@ -92,7 +92,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<table align="center" width="100%">
 					<tr>
 						<td colspan="2" bgcolor="#666666">
-						<?php echo "Raz�o Social: ".$razaocontadoremp; ?>
+						<?php echo "Razão Social: ".$razaocontadoremp; ?>
 						</td>
 					</tr>
 					<tr align="left" bgcolor="#FFFFFF">

@@ -172,23 +172,23 @@ Fith Floor, Boston, MA 02110-1301, USA
                 </td>
                 <td valign="top">
                    <?php
-                       echo "<b>M�dia alíquota percentual:</b> ".DecToMoeda($valores->aliqpercentual);
+                       echo "<b>Média alíquota percentual:</b> ".DecToMoeda($valores->aliqpercentual);
                    ?>
                 </td>
                 <td>
                     <?php
-                       echo "<b>M�dia alíquota INSS:</b> ".DecToMoeda($valores->aliqinss);
+                       echo "<b>Média alíquota INSS:</b> ".DecToMoeda($valores->aliqinss);
                     ?>
                 </td>
                 <td>
                     <?php
-                       echo "<b>M�dia alíquota IRRF:</b> ".DecToMoeda($valores->aliqirrf);
+                       echo "<b>Média alíquota IRRF:</b> ".DecToMoeda($valores->aliqirrf);
                     ?>
                 </td>
             </tr>
         </table>
         <?php
-            //Sql buscando as informa��es que o usuario pediu e com o limit estipulado pela função
+            //Sql buscando as informações que o usuario pediu e com o limit estipulado pela função
             $varcont= $_POST['hdContador'];
 
             $query = ("

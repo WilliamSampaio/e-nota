@@ -35,7 +35,7 @@ function convertDate(data)
         d=new date();
     return d
 }
-/* Valida��es */
+/* Validações */
 function FmtValorMonetario(Dado)
 {
       var Result, i;
@@ -250,7 +250,7 @@ function isCpf(elem, msgbox)
 	var digitos = dvCpfCnpj(base, false);
 	var algUnico, i;
 
-	// Valida d�gitos verificadores
+	// Valida dígitos verificadores
 	
 	if (numero != base + digitos) {
 	    if (msgbox)
@@ -259,7 +259,7 @@ function isCpf(elem, msgbox)
 		return false;
 	}
 
-	/* Não seráo considerados v�lidos os seguintes CPF:
+	/* Não seráo considerados válidos os seguintes CPF:
 	 * 000.000.000-00, 111.111.111-11, 222.222.222-22, 333.333.333-33, 444.444.444-44,
 	 * 555.555.555-55, 666.666.666-66, 777.777.777-77, 888.888.888-88, 999.999.999-99.
 	 */
@@ -302,7 +302,7 @@ function isCnpj(elem, msgbox)
 	var digitos = dvCpfCnpj(base + ordem, true);
 	var algUnico;
 
-	// Valida d�gitos verificadores
+	// Valida dígitos verificadores
 	if (numero != base + ordem + digitos)
 	{
 	    if (msgbox)
@@ -312,7 +312,7 @@ function isCnpj(elem, msgbox)
 	}
 
 
-	/* Não seráo considerados v�lidos os CNPJ com os seguintes números B�SICOS:
+	/* Não seráo considerados válidos os CNPJ com os seguintes números BÁSICOS:
 	 * 11.111.111, 22.222.222, 33.333.333, 44.444.444, 55.555.555,
 	 * 66.666.666, 77.777.777, 88.888.888, 99.999.999.
 	 */
@@ -325,14 +325,14 @@ function isCnpj(elem, msgbox)
 	if (algUnico) 
 	{
 	    if (msgbox)
-		    alert (utf8_decode('CNPJ inv�lido (' + pCnpj + ').'));
+		    alert (utf8_decode('CNPJ inválido (' + pCnpj + ').'));
 		//elem.value = "";
 		return false;
 	}
 
 
-	/* Não será considerado v�lido CNPJ com número de ORDEM igual a 0000.
-	 * Esta cr�tica não será feita quando o B�SICO do CNPJ for igual a 00.000.000.
+	/* Não será considerado válido CNPJ com número de ORDEM igual a 0000.
+	 * Esta crítica não será feita quando o BÁSICO do CNPJ for igual a 00.000.000.
 	*/ 
 	if (ordem == "0000")
 	{
@@ -344,7 +344,7 @@ function isCnpj(elem, msgbox)
 	
 /*	if (!(base == "00000000" || base.substring(0, 3) != "000"))
 	{
-		alert ('CNPJ (' + pCnpj + ') inv�lido.');
+		alert ('CNPJ (' + pCnpj + ') inválido.');
 		alert('base : ' + base);
 		elem.value = "";
 		return false;
@@ -449,7 +449,7 @@ function validaCnpj(source, args)
 }
 
 
-/* M�scaras */
+/* Máscaras */
 function strip( str, c ) {
 	var tmp = str.split( c );
 	return tmp.join("");

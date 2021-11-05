@@ -31,12 +31,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 					elseif(($baixo == "")&&($medio == "")){$valor = "A";}
 					$sql = $PDO->query("UPDATE menus_prefeitura SET nivel='$valor' WHERE codigo='$codigo'");
 				}
-			add_logs('Atualizou o N�vel de Usu�rios');
+			add_logs('Atualizou o Nível de Usuários');
 			echo "<script>alert('Dados alterados com sucesso');</script>";
 		}
 ?>
-<fieldset><legend>Defina as op��es do menu para cada n�vel de usuário</legend>
-	<p align="center">Os us�rios com n�vel de permiss�o Alto tem acesso a todos os menus </p>
+<fieldset><legend>Defina as opções do menu para cada nível de usuário</legend>
+	<p align="center">Os usuários com nível de permissão Alto tem acesso a todos os menus </p>
 	<?php
 		$sql = $PDO->query("SELECT codigo, menu, nivel FROM menus_prefeitura WHERE menu<>'Sair' AND menu<>'Manuais de Ajuda' ORDER BY ordem");
 		$x=0;
@@ -52,7 +52,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					<tr>
 						<td align=\"left\">$menu</td>
 						<td align=\"left\">
-							<input type=\"checkbox\" id=\"medio$x\" name=\"medio$x\" value=\"M\" />M�dio
+							<input type=\"checkbox\" id=\"medio$x\" name=\"medio$x\" value=\"M\" />Médio
 							<input type=\"hidden\" name=\"txtCodigo$x\" value=\"$codigo\" />
 						</td>
 						<td align=\"left\">

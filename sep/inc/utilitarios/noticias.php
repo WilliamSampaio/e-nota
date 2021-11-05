@@ -24,16 +24,16 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$texto  = $_POST["txtText"];
 	if($_POST["btInserir"] == "Inserir Nova"){
 		$PDO->query("INSERT INTO noticias SET titulo = '$titulo', texto = '$texto', data = NOW(), sistema='nfe'");
-		add_logs('Inseriu uma Not�cia');
-		Mensagem(htmlentities("Not�cia inserida"));
+		add_logs('Inseriu uma Notícia');
+		Mensagem(htmlentities("Notícia inserida"));
 	}//fim if
 	 if($_POST["btExcluir"] == " "){
 		$cod_nt= $_POST['hdCodNt'];
 		$sql_busca_nt = $PDO->query("SELECT texto FROM noticias WHERE codigo = '$cod_nt'");
 		list($exc_nt) = $sql_busca_nt->fetch();
 		$PDO->query("DELETE FROM noticias WHERE codigo ='$cod_nt'"); 
-		add_logs('Excluiu uma Not�cia');
-		Mensagem(htmlentities("Not�cia excluida!"));
+		add_logs('Excluiu uma Notícia');
+		Mensagem(htmlentities("Notícia excluida!"));
 		}
 			
 ?>
@@ -49,7 +49,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     <td align="center">
 		<form method="post" id="frmNoticias">
 			<input name="include" id="include" type="hidden" value="<?php echo $_POST["include"];?>" />
-				<fieldset><legend>Not�cias</legend>
+				<fieldset><legend>Notícias</legend>
 					<table width="100%">
 						<tr>
 							<td width="12%" align="left">Título</td>

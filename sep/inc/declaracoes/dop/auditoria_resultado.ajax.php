@@ -97,7 +97,7 @@ if($str_where){
 		echo "
 			<table width='100%'>
 				<tr>
-					<td align=\"center\"><b>Não há declara��es para auditar em Org�os P�blicos</b></td>
+					<td align=\"center\"><b>Não há declarações para auditar em Orgãos Públicos</b></td>
 				</tr>
 			</table>
 		";

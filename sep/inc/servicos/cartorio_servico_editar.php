@@ -53,11 +53,11 @@ if ($_POST['btCadastrar'] !=""){
 			WHERE 
 				codigo= '$Cod'
 		");
-		add_logs('Atualizou Serviço de Cart�rio');	
-		Mensagem("Alterações conclu�das com sucesso!"); 
+		add_logs('Atualizou Serviço de Cartório');	
+		Mensagem("Alterações concluídas com sucesso!"); 
 	} else {
-		/*print "<script language=JavaScript> alert('� necess�rio no m�nimo uma alteração nos campos.');</script>";*/
-		Mensagem('� necess�rio no m�nimo uma alteração nos campos');
+		/*print "<script language=JavaScript> alert('É necessário no mínimo uma alteração nos campos.');</script>";*/
+		Mensagem('É necessário no mínimo uma alteração nos campos');
 	}  
 	
 }

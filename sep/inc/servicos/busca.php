@@ -88,7 +88,7 @@ $sql=$PDO->query("
 				");
 if(mysql_num_rows($sql)>0){
 ?> 
-<!-- cabe�alho da pesquisa --> 
+<!-- cabeçalho da pesquisa --> 
 <fieldset><legend>Resultado da Pesquisa</legend>      
 <input type="hidden" name="include" id="include" value="<?php echo  $_POST['include'];?>" />
 <input type="hidden" name="COD" id="COD" />
