@@ -1,5 +1,7 @@
 {
     "require": {
-        "openboleto/openboleto": "^1.0"
+        "openboleto/openboleto": "^1.0",
+        "components/font-awesome": "^5.15",
+        "twbs/bootstrap": "5.1.3"
     }
 }
