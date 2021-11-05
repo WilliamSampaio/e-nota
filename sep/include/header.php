@@ -3,12 +3,12 @@
 
 <head>
     <!-- Required meta tags -->
-    <!-- <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>e-Nota</title>
+    <title>SEP</title>
 
-    <link rel="stylesheet" href="/css/lightbox.css" type="text/css" media="screen" /> -->
+    <link rel="stylesheet" href="/css/lightbox.css" type="text/css" media="screen" />
     <!-- <link rel="stylesheet" href="../../css/padrao_site.css" type="text/css" /> -->
 
     <!-- Bootstrap CSS -->
@@ -18,7 +18,7 @@
 
     <link href="../../vendor/components/font-awesome/css/all.css" rel="stylesheet">
 
-    <link rel="icon" type="image/png" href="/img/brasoes/<?php echo isTenancyAppBySubdomain() . rawurlencode($CONF_BRASAO) ?>">
+    <link rel="icon" type="image/png" href="../img/brasoes/<?php echo isTenancyAppBySubdomain() . rawurlencode($CONF_BRASAO) ?>">
 
     <style>
         body {

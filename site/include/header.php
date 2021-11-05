@@ -18,7 +18,7 @@
 
     <link href="../../vendor/components/font-awesome/css/all.css" rel="stylesheet">
 
-    <link rel="icon" type="image/png" href="../../img/brasoes/<?php echo isTenancyAppBySubdomain() . rawurlencode($CONF_BRASAO) ?>">
+    <link rel="icon" type="image/png" href="../img/brasoes/<?php echo isTenancyAppBySubdomain() . rawurlencode($CONF_BRASAO) ?>">
 
     <style>
         body {
