@@ -19,7 +19,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 
-<form method="post" id='form-opcao'>
+<form id='form-opcao'>
 	<input name='opcao' id='opcao' type='hidden' value=''>
 	<input type="submit" value="submit" style="display: none;">
 </form>

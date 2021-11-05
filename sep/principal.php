@@ -42,8 +42,8 @@ if (isset($_SESSION["logado"])) {
 
 					<?php
 
-					if (isset($_POST['opcao'])) {
-						include __DIR__ . '/../sep/inc/' . $_POST['opcao'];
+					if (isset($_GET['opcao'])) {
+						include __DIR__ . '/../sep/inc/' . $_GET['opcao'];
 					}
 
 					?>
