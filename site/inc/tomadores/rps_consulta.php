@@ -20,32 +20,32 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
-	if(($txtNumeroRps !="")&&($txtDataRps !="") &&($txtPrestCpfCnpj !="")&&($txtTomCpfCnpj !=""))
-	{
+$txtNumeroRps = $_POST['txtNumeroRps'];
+$txtDataRps = $_POST['txtDataRps'];
+$txtPrestCpfCnpj = $_POST['txtPrestCpfCnpj'];
+$txtTomCpfCnpj = $_POST['txtTomCpfCnpj'];
 
-		$campo = tipoPessoa($txtPrestCpfCnpj);
-		$datarps = implode("-",array_reverse(explode("/", $txtDataRps)));
-		if($campo)
-		{
+if (($txtNumeroRps != "") && ($txtDataRps != "") && ($txtPrestCpfCnpj != "") && ($txtTomCpfCnpj != "")) {
 
-			$sql=mysql_query("SELECT notas.codigo FROM notas INNER JOIN cadastro ON
+	$campo = tipoPessoa($txtPrestCpfCnpj);
+	$datarps = implode("-", array_reverse(explode("/", $txtDataRps)));
+	if ($campo) {
+
+		$sql = $PDO->query("SELECT notas.codigo FROM notas INNER JOIN cadastro ON
 			`notas`.`codemissor` = `cadastro`.`codigo` WHERE notas.rps_numero='$txtNumeroRps' AND notas.rps_data='$datarps' AND 
-			notas.tomador_cnpjcpf='$txtTomCpfCnpj' AND cadastro.$campo ='$txtPrestCpfCnpj'"); 		
-			$registros=mysql_num_rows($sql);
-				if($registros >0)
-				{
-					list($cod_nota)=mysql_fetch_array($sql);
-					$codigo = base64_encode($cod_nota); 
-					print("<script language=\"javascript\">  window.open('../reports/nfe_imprimir.php?CODIGO=$codigo&CAMPO=$txtPrestCpfCnpj');</script>");
-				}		
-				else{			
-					print("<script language=JavaScript>alert('Não existe nota cadastrada com estes dados!');parent.location='tomadores.php';</script>");
-				}
-		}else{
-		 		print("<script language=JavaScript>alert('Não existe nota cadastrada com estes dados!');parent.location='tomadores.php';</script>");		  		 
+			notas.tomador_cnpjcpf='$txtTomCpfCnpj' AND cadastro.$campo ='$txtPrestCpfCnpj'");
+		$registros = $sql->rowCount();
+		if ($registros > 0) {
+			list($cod_nota) = $sql->fetch();
+			$codigo = base64_encode($cod_nota);
+			print("<script language=\"javascript\"> window.open('../reports/nfe_imprimir.php?CODIGO=$codigo&CAMPO=$txtPrestCpfCnpj');</script>");
+		} else {
+			print("<script language=JavaScript>alert('NÃ£o existe nota cadastrada com estes dados!');parent.location='tomadores.php';</script>");
 		}
-		 		
-	}else{
-		print("<script language=JavaScript>alert('Todos os campos devem ser preenchidos para realizar a consulta.');</script>"); 
+	} else {
+		print("<script language=JavaScript>alert('NÃ£o existe nota cadastrada com estes dados!');parent.location='tomadores.php';</script>");
 	}
+} else {
+	print("<script language=JavaScript>alert('Todos os campos devem ser preenchidos para realizar a consulta.');</script>");
+}
 ?>

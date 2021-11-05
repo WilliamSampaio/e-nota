@@ -9,11 +9,11 @@
 3.1.    cadastro                OK
 3.2.    consulta                OK
 
-4.      tomadores
-4.1     consultar RPS
+4.      tomadores               OK
+4.1     consultar RPS           OK
 4.2     autenticidade de NFe    OK
-4.3     tomadores: gerar guia
-4.4     consultar creditos
+4.3     tomadores: gerar guia   OK
+4.4     consultar creditos      ---
 
 5.      RPS
 
@@ -31,3 +31,6 @@
 9.      Notícias                OK
 
 10.     Legislação              OK
+
+
+�

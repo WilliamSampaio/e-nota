@@ -19,7 +19,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-require_once("../../../include/conect.php");
+
+require_once '../../../autoload.php';
+
 // require_once("../../../../../middleware/pmfeliz/autoload.php");
 // $imoveis = new Postgre_Smabas01();
 // $imoveis->setNumCad($_GET["q"]);

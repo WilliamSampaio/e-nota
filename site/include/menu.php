@@ -42,8 +42,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<li class="nav-item dropdown">
 		<a class="nav-link <? echo isActive('prestadores.php') ?>" aria-current="page" href="prestadores.php">Prestadores</a>
 		<ul>
-			<li><a class="nav-link <? echo isActive('prestadores-cadastro.php') ?>" href="prestadores-cadastro.php">Cadastro</a></li>
-			<li><a class="nav-link <? echo isActive('prestadores-consulta.php') ?>" href="prestadores-consulta.php">Consulta</a></li>
+			<!-- <li><a class="nav-link <? //echo isActive('prestadores-cadastro.php') ?>" href="prestadores-cadastro.php">Cadastro</a></li> -->
+			<!-- <li><a class="nav-link <? //echo isActive('prestadores-consulta.php') ?>" href="prestadores-consulta.php">Consulta</a></li> -->
 		</ul>
 	</li>
 
@@ -70,8 +70,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<li class="nav-item dropdown">
 		<a class="nav-link <? echo isActive('ouvidoria.php') ?>" aria-current="page" href="ouvidoria.php">Ouvidoria</a>
 		<ul>
-			<li><a class="nav-link <? echo isActive('ouvidoria-cadastro.php') ?>" href="ouvidoria-cadastro.php">Cadastro</a></li>
-			<li><a class="nav-link <? echo isActive('ouvidoria-consulta.php') ?>" href="ouvidoria-consulta.php">Consulta</a></li>
+			<!-- <li><a class="nav-link <? //echo isActive('ouvidoria-cadastro.php') ?>" href="ouvidoria-cadastro.php">Cadastro</a></li> -->
+			<!-- <li><a class="nav-link <? //echo isActive('ouvidoria-consulta.php') ?>" href="ouvidoria-consulta.php">Consulta</a></li> -->
 		</ul>
 	</li>
 

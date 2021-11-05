@@ -119,7 +119,7 @@ if ($_POST['txtInscMunicipal']){
 		WHERE inscrmunicipal='$tomador_IM'
 	");
 	if(!$sql_IM_tomador->rowCount())	{
-		Mensagem("Inscri��o Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF");
+		Mensagem("Inscrição Municipal não encontrada, verifique os dados ou tente pelo CNPJ/CPF");
 		Redireciona("tomadores.php");
 	}else{
 		list($tomador_CNPJ,$tomador_CPF)=$sql_IM_tomador->fetch();
@@ -204,7 +204,7 @@ if($codtipo != $codtipo_tomador){
 			</td>
 			<td align="left">  
         <?php
-				$meses=array("1"=>"Janeiro","Fevereiro","Mar�o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+				$meses=array("1"=>"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 				$mes=date("n");
 				$ano=date("Y");						
 				if($DEC_ATRAZADAS == 'n'){//var que vem do conect.php
@@ -233,7 +233,7 @@ if($codtipo != $codtipo_tomador){
 						?>
 				  </select>
 				<?php
-				}//else se é permitudo declarac�es atrazadas
+				}//else se é permitudo declarações atrazadas
 				?>
 				
 				<input name="btBuscar" type="button" class="botao" value="Buscar" 

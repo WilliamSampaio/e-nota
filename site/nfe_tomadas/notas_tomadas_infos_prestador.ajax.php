@@ -74,7 +74,7 @@ if ($sql_infos_prestador->rowCount()) {
 				<tr>
 					<td width="24%" align="left">UF: </td>
 					<td width="3%" align="left" bgcolor="#FFFFFF"><?php echo $infos_prestador->uf; ?> </td>
-					<td width="5%" align="left">Munic�pio: </td>
+					<td width="5%" align="left">Município: </td>
 					<td width="68%" align="left" bgcolor="#FFFFFF"><?php echo $infos_prestador->municipio; ?> </td>
 				</tr>
 			</table>
