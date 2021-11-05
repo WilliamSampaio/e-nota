@@ -203,7 +203,7 @@ list($LINK_ACESSO) = $sql_url_site->fetch();
 
 $imagemTratada = $_SERVER['HTTP_HOST'] . "/img/brasoes/" . rawurlencode($CONF_BRASAO);
 $msg = "
-		<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Bras�o Prefeitura\" title=\"Bras�o\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
+		<a href=\"$LINK_ACESSO\" style=\"text-decoration:none\" ><img src=\"$imagemTratada\" alt=\"Brasão Prefeitura\" title=\"Brasão\" border=\"0\" width=\"100\" height=\"100\" /></a><br><br>
 		O cadastro da empresa $nome foi efetuado com sucesso.<br>
 		Dados da empresa:<br><br>
 		Razão Social: $razaosocial<br>

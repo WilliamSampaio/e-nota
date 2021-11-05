@@ -122,14 +122,14 @@ require_once("../include/util.php");
 						$senha = rand(000000, 999999);
 						$PDO->query("UPDATE cadastro SET senha = '" . md5($senha) . "' WHERE (cnpj='$cnpj' OR cpf='$cnpj')");
 
-						$corpo_email = "Ol� $nome,\nSua nova senha �: $senha\n\nEm caso de duvidas entrar em contato com a prefeitura.\nObrigado.";
+						$corpo_email = "Olá $nome,\nSua nova senha é: $senha\n\nEm caso de duvidas entrar em contato com a prefeitura.\nObrigado.";
 						$headers  = "MIME-Version: 1.0\r\n";
 						$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
 						$headers .= "From: $CONF_SECRETARIA de $CONF_CIDADE <$CONF_EMAIL>  \r\n";
 						$headers .= "Cc: \r\n";
 						$headers .= "Bcc: \r\n";
 
-						mail($email, "Recupera��o de Senha do e-Nota", $corpo_email, $headers);
+						mail($email, "Recuperação de Senha do e-Nota", $corpo_email, $headers);
 						Mensagem("A senha foi enviada para seu Email!");
 						Redireciona("recuperarsenha.php");
 					}

@@ -89,7 +89,7 @@ if ($_POST['btDeclarar'] == "Declarar") {
 			}
 			$cont++;
 		}
-		Mensagem_onload("Declara��o de nota tomada realizada com sucesso!");
+		Mensagem_onload("Declaração de nota tomada realizada com sucesso!");
 	}
 }
 

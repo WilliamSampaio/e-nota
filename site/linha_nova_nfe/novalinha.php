@@ -10,7 +10,7 @@ $codemissor = $_GET['codemissor'];
 $simples = coddeclaracao("Simples Nacional");
 $mei     = coddeclaracao("MEI");
 
-//PEGANDO DECLARA��O
+//PEGANDO DECLARAÇÃO
 $sqlSimples = $PDO->query("
 		SELECT 
 			codtipodeclaracao 
@@ -32,7 +32,7 @@ if ($simples == $coddeclaracao) {
 	$readonly = "readonly='readonly'";
 }
 
-//PEGANDO ISEN��O
+//PEGANDO ISENÇÃO
 $sqlIsento = $PDO->query("
 		SELECT 
 			isentoiss 
