@@ -118,7 +118,7 @@ INNER JOIN aidfe_solicitacoes ON cadastro.codigo = aidfe_solicitacoes.solicitant
 		
 		$headers = "MIME-Version: 1.1\r\n";
 		$headers .= "Content-type: text/plain; charset=iso-8859-1\r\n";
-		mail($email, "Liberação de AIDOF", "Ol� $razaosocial a prefeitura municipal de $CONF_CIDADE aprovou sua solicitação de AIDOF, seu limite de notas é $notalimite", $headers);
+		mail($email, "Liberação de AIDOF", "Olá $razaosocial a prefeitura municipal de $CONF_CIDADE aprovou sua solicitação de AIDOF, seu limite de notas é $notalimite", $headers);
 		$sql=$PDO->query("UPDATE cadastro SET notalimite='$txtAIDF' WHERE codigo='$txtCodigo'");		
 		$sql=$PDO->query("DELETE FROM aidfe_solicitacoes WHERE solicitante='$txtCodigo'");
 		add_logs('Liberou nota limite de AIDF');

@@ -56,8 +56,8 @@ if ($_POST['btCadastrar'] !=""){
 		add_logs('Atualizou Serviço de Cartório');	
 		Mensagem("Alterações concluídas com sucesso!"); 
 	} else {
-		/*print "<script language=JavaScript> alert('� necessário no mínimo uma alteração nos campos.');</script>";*/
-		Mensagem('� necessário no mínimo uma alteração nos campos');
+		/*print "<script language=JavaScript> alert('É necessário no mínimo uma alteração nos campos.');</script>";*/
+		Mensagem('É necessário no mínimo uma alteração nos campos');
 	}  
 	
 }

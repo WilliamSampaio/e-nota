@@ -75,12 +75,12 @@ WHERE
 				?>
 				<tr>
 					<td width="5%" align="center">Nº</td>
-					<td width="13%" align="center">C�d Verif</td>
+					<td width="13%" align="center">Cód Verif</td>
 					<td width="19%" align="center">D/H Emissão</td>
 					<td width="36%" align="center">Tomador Nome </td>
 					<td width="10%" align="center">Estado</td>
 					<td width="10%" align="center">
-                    	<input type="submit" name="btImprimir" id="btImprimir" class="botao" value="Imprimir sele��o" />
+                    	<input type="submit" name="btImprimir" id="btImprimir" class="botao" value="Imprimir seleção" />
                     </td>
 				</tr>
 				<tr>

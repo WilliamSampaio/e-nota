@@ -139,7 +139,7 @@ div.pagina {
                <tr >
         <?php
 
-        //Comando sql que selecionar� do banco a quantidade de prestadores por estado
+        //Comando sql que selecionará do banco a quantidade de prestadores por estado
         $sql = $PDO->query("
             SELECT
                 uf ,

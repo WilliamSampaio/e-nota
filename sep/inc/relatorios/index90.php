@@ -29,7 +29,7 @@ require_once("../../funcoes/util.php");
 ?>
 
 
-  <?php  //comando sql que mostrar� as categorias e a quantidade de cada um (Lista Estat�stica)
+  <?php  //comando sql que mostrará as categorias e a quantidade de cada um (Lista Estatística)
 
 $sql_categ = $PDO->query("SELECT
 						  servicos.codcategoria, servicos_categorias.nome, COUNT(servicos_categorias.nome)

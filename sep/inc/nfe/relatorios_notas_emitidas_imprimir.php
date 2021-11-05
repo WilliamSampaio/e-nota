@@ -150,7 +150,7 @@ elseif($cmbEstado == "Escriturada")
 			$querysql = "";
 		}
 			
-// SQL CONCATENANDO COM A VARIAVEL $querysql QUE EST� DENTRO DE ALGUMA CONDI��O DOS IF'S
+// SQL CONCATENANDO COM A VARIAVEL $querysql QUE ESTÁ DENTRO DE ALGUMA CONDIÇÃO DOS IF'S
 			
 $sql = $PDO->query("
 	SELECT 
@@ -199,8 +199,8 @@ $sql = $PDO->query("
 		<td>
 			<table width="700" style="font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif">
 				<tr>
-					<td width="50" align="center"><b>N�</b></td>
-					<td width="90" align="center"><b>C�d Verif</b></td>
+					<td width="50" align="center"><b>Nº</b></td>
+					<td width="90" align="center"><b>Cód Verif</b></td>
 					<td width="75" align="center"><b>D/H Emissão</b></td>
 					<td width="270" align="center"><b>Nome Emissor</b></td>
 					<td width="270" align="center"><b>Nome Tomador</b></td>

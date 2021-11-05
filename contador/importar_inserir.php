@@ -167,7 +167,7 @@ if(!(isset($_SESSION["codempresa"]))){
 				  break;
 			}
 			
-			//GERA O C�DIGO DE VERIFICA��O
+			//GERA O CÓDIGO DE VERIFICAÇÃO
 			$CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';	
 			$max = strlen($CaracteresAceitos)-1;
 			$password = null;
@@ -366,7 +366,7 @@ if(!(isset($_SESSION["codempresa"]))){
 		}// foreach
 		unlink("importar/$arquivo_xml");
 		add_logs('Importou Arquivo');
-		print("<script language=JavaScript>alert('Importa��o efetuada com sucesso !');window.close();</script>");
+		print("<script language=JavaScript>alert('Importação efetuada com sucesso !');window.close();</script>");
 	}else{
 		print("Acesso Negado!!");
 	}	

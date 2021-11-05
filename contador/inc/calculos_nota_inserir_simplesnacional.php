@@ -24,7 +24,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 <table width="100%" id="tblServicos" cellpadding="3">
 	<tr>
-		<td align="left"><b>Observa��es da nota: </b></td>
+		<td align="left"><b>Observaçães da nota: </b></td>
 	</tr>
 	<tr>
 		<td align="center"><textarea name="txtObsNota" rows="0" cols="0" style="width:90%; height:60px;"></textarea></td>
@@ -34,7 +34,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<tr>
 		<td align="left">
 			<label><strong>Clique para informar os serviços<br /><br /></strong>
-			<input name="btServico" type="button" value="Servi�os" class="botao" 
+			<input name="btServico" type="button" value="Serviços" class="botao" 
 			onclick="mostraDivServicos()" /></label>
 			<div id="divServicosNota" class="divServicosNota">
 				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC" height="100%">
@@ -57,7 +57,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 						<td>
 							<!--<table width="100%">
 								<tr align="center" bgcolor="#999999">
-									<td width="33%" align="center"><b>Seleciona o Servi�o</b></td>
+									<td width="33%" align="center"><b>Seleciona o Serviço</b></td>
 									<td width="20%" align="center"><b>Base Calc.(R$)</b></td>
 									<td width="15%" align="center"><b>Aliquota(%)</b></td>
 									<td width="12%" align="center"><b>ISS(R$)</b></td>

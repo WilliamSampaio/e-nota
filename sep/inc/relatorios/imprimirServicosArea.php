@@ -8,7 +8,7 @@
         <td width="10%" align="center">Cod. Serviço</td>
         <td width="8%" align="center">Estado</td>
     </tr>
-  <?php  //comando sql que mostrar� as categorias e os serviços 
+  <?php  //comando sql que mostrará as categorias e os serviços 
 					
 	$sql_serv = $PDO->query("
         SELECT

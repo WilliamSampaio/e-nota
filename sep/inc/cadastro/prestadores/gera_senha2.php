@@ -33,7 +33,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		Foi gerado uma nova senha de acesso ao sistema.<br>
 		Sua senha é : $novasenha<br>
 		<br>
-		Caso não tenha solicitado uma renovaç�o de senha, favor entrar em contato com a prefeitura.
+		Caso não tenha solicitado uma renovação de senha, favor entrar em contato com a prefeitura.
 	";	
 	
 	$assunto = "Nova senha de acesso ao sistema de NF-e.";

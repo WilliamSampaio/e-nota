@@ -178,7 +178,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 </td>
                 <td valign="top">
                    <?php
-                       echo "<b>Total de inadimpl�ncias:</b> ".$total_inadimplentes;
+                       echo "<b>Total de inadimplências:</b> ".$total_inadimplentes;
                    ?>
                 </td>
                 <td>

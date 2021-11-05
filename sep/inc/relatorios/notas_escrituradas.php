@@ -2,7 +2,7 @@
 /*
 LICENÇA PÚBLICA GERAL GNU
 Versão 3, 29 de junho de 2007
-    Copyright (C) <2010>  <PORTAL PÚBLICO INFORM�?TICA LTDA>
+    Copyright (C) <2010>  <PORTAL PÚBLICO INFORMÁTICA LTDA>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

@@ -1,8 +1,8 @@
 <?php
 /*
-LICEN�A P�BLICA GERAL GNU
+LICENÇA PÚBLICA GERAL GNU
 Versão 3, 29 de junho de 2007
-    Copyright (C) <2010>  <PORTAL P�BLICO INFORM�TICA LTDA>
+    Copyright (C) <2010>  <PORTAL PÚBLICO INFORMÁTICA LTDA>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,19 +17,19 @@ Versão 3, 29 de junho de 2007
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Este programa é software livre: você pode redistribu�-lo e / ou modificar sob os termos da GNU General Public License como publicado pela Free Software Foundation, tanto a versão 3 da Licença, ou�(por sua opção) qualquer versão posterior.
+Este programa é software livre: você pode redistribuí-lo e / ou modificar sob os termos da GNU General Public License como publicado pela Free Software Foundation, tanto a versão 3 da Licença, ou (por sua opção) qualquer versão posterior.
 
-Este programa é distribuído na esperança que possa ser útil, mas SEM QUALQUER GARANTIA, sem mesmo a garantia impl�cita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO PROPÓSITO. Veja a GNU General Public License para mais detalhes.
+Este programa é distribuído na esperança que possa ser útil, mas SEM QUALQUER GARANTIA, sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO PROPÓSITO. Veja a GNU General Public License para mais detalhes.
 
 Você deve ter recebido uma cópia da GNU General Public License junto com este programa. Se não, veja <http://www.gnu.org/licenses/>.
 
 
 This is an unofficial translation of the GNU General Public License into Portuguese. It was not published by the Free Software Foundation, and does not legally state the distribution terms for software that uses the GNU GPL é only the original English text of the GNU GPL does that. However, we hope that this translation will help Portuguese speakers understand the GNU GPL better.
 
-Esta é uma tradução não oficial em português da Licença Pública Geral GNU (da sigla em ingl�s GNU GPL). Ela não é publicada pela Free Software Foundation e não declara legalmente os termos de distribui��o para softwares que a utilizam é somente o texto original da licen�a, escrita em ingl�s, faz isto. Entretanto, acreditamos que esta tradução ajudará aos falantes do português a entendê-la melhor.
+Esta é uma tradução não oficial em português da Licença Pública Geral GNU (da sigla em inglês GNU GPL). Ela não é publicada pela Free Software Foundation e não declara legalmente os termos de distribuição para softwares que a utilizam é somente o texto original da licença, escrita em inglês, faz isto. Entretanto, acreditamos que esta tradução ajudará aos falantes do português a entendê-la melhor.
 
 
-// Originado do Projeto ISS Digital é Portal Público que tiveram colaborações de Vin�cius Kampff, 
+// Originado do Projeto ISS Digital é Portal Público que tiveram colaborações de Vinícius Kampff, 
 // Rafael Romeu, Lucas dos Santos, Guilherme Flores, Maikon Farias, Jean Farias e Daniel Bohn
 // Acesse o site do Projeto www.portalpublico.com.br             |
 // Equipe Coordenação Projeto ISS Digital: <informatica@portalpublico.com.br>   |
@@ -38,7 +38,6 @@ Esta é uma tradução não oficial em português da Licença Pública Geral GNU
 ?>
 <!-- Formulario de insercao de empresa  -->
 <style type="text/css">
-<!--
 #divBusca {
 	position:absolute;
 	left:30%;
@@ -51,7 +50,6 @@ Esta é uma tradução não oficial em português da Licença Pública Geral GNU
 input[type*="text"]{
 	text-transform:uppercase;
 }
--->
 </style>
 <div id="divBusca"  >
 	<?php require_once("inc/nfe/busca_prestador.php"); ?>

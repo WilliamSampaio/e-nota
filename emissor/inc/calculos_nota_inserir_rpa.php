@@ -220,7 +220,7 @@ if(false){?><table><?php }
   <tr>    
   <tr>
     <td align="left">
-	  Al�quota de INSS
+	  Alíquota de INSS
 	</td>
     <td align="left">	
  	 <input name="txtAliquotaINSS" id="txtAliquotaINSS" type="text" size="5" class="texto" style="text-align:right;" onkeyup="MaskPercent(this)" 
@@ -233,7 +233,7 @@ if(false){?><table><?php }
   </tr> 
   <tr>
     <td align="left">
-	  Al�quota de IRRF
+	  Alíquota de IRRF
 	</td>
     <td align="left">	
  	 <input name="txtIRRF" id="txtIRRF" type="text" size="5" class="texto" style="text-align:right;" onkeyup="MaskPercent(this)" 

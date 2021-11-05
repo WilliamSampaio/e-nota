@@ -72,6 +72,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 <div id="divBuscarGuias"></div>
 <?php
 	}else{
-		echo "<b>Este cnpj não é um org�o p�blico ou não está cadastrado!</b>";
+		echo "<b>Este cnpj não é um orgão público ou não está cadastrado!</b>";
 	}
 ?>

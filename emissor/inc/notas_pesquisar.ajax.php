@@ -84,7 +84,7 @@ WHERE
 					<td width="36%" align="center">Tomador Nome </td>
 					<td width="10%" align="center">Estado</td>
 					<td width="10%" align="center">
-                    	<input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir sele��o" onclick="document.getElementById('frmPesquisar').action='../site/imprimirnotas.php';document.getElementById('frmPesquisar').target='_blank';submit();" />
+                    	<input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir seleção" onclick="document.getElementById('frmPesquisar').action='../site/imprimirnotas.php';document.getElementById('frmPesquisar').target='_blank';submit();" />
                     </td>
 				</tr>
 				<tr>

@@ -32,7 +32,7 @@
     $query = $_POST['hdQuery'];
 
     if(empty ($query)){
-        echo "<center><b>Nenhum d�bito a ser impresso</b></center>";
+        echo "<center><b>Nenhum débito a ser impresso</b></center>";
     }else{
         ?>
         <table width="800" align="center" border="0" cellspacing="0" style="border:1px solid #000000;">
@@ -47,7 +47,7 @@
                 </td>
                 <td bgcolor="#999999" align="center"
                 style="border-right:1px solid #000000; border-bottom:1px solid #000000;">
-                    D�bito
+                    Débito
                 </td>
                 <td bgcolor="#999999" align="center" style=" border-bottom:1px solid #000000;">
                     Estado

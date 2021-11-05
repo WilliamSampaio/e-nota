@@ -49,7 +49,7 @@
 		$titulo = 'RESUMO DAS ATIVIDADES EFETUADAS';
 		
 	else if($_POST['rdbServicos'] == 'area')
-		$titulo = 'LISTA DE SERVIÇOS POR CATEGORIA E SERVI�O';
+		$titulo = 'LISTA DE SERVIÇOS POR CATEGORIA E SERVIÇO';
 		
 	else if($_POST['rdbServicos'] == 'categ')
 		$titulo = 'LISTA ESTATÉSTICA DE SERVIÇOS POR CATEGORIA';

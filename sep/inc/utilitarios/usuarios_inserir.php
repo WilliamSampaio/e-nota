@@ -91,7 +91,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$result = $sql->rowCount();
 	if($result>0){
 ?>
-	<!-- cabe�alho da pesquisa --> 
+	<!-- cabeçalho da pesquisa --> 
 	<fieldset><legend>Usuários Cadastrados: <?php echo $result; ?></legend>
 		<table width="100%">  
 			<tr bgcolor="#999999">

@@ -31,11 +31,11 @@ require_once("../include/conect.php");
 require_once("../include/util.php");
 
 if (!$_GET['CODV']) {
-  Mensagem(" COD Inv�lido");
+  Mensagem(" COD Inválido");
   Redireciona("../site/certidoes.php");
 }
 if (!$_SESSION['SESSAO_cnpj_emissor']) {
-  Mensagem(" CNPJ Inv�lido");
+  Mensagem(" CNPJ Inválido");
   Redireciona("../site/certidoes.php");
 }
 
@@ -71,7 +71,7 @@ list($nrodoc, $codverificacao, $dataemissao, $val, $nomeempresa, $cnpjcpf, $ende
             <td width="520" style="border:0px;" align="left" valign="middle">
               <font class="prefeitura">Prefeitura Municipal de <?php echo $CONF_CIDADE; ?></font><br>
               <font class="secretaria"><?php echo $CONF_SECRETARIA; ?><br>
-                Certid�o Negativa de Débitos de ISS</font>
+                Certidão Negativa de Débitos de ISS</font>
             </td>
           </tr>
         </table>

@@ -103,7 +103,7 @@ if($_POST["btBoleto"] == "Boleto"){
 						<td><label for="txtData">Dia tributação:</label></td>
 						<td colspan="4">
 							<input name="txtData" id="txtData" maxlength="2" size="3" type="text"  class="texto" value="<?php echo $data_tributacao;?>" />
-							<label><input name="ckbData" type="checkbox" id="ckbData" onclick="DesabilitarDataTributo()" />�ltimo dia do m�s</label>
+							<label><input name="ckbData" type="checkbox" id="ckbData" onclick="DesabilitarDataTributo()" />último dia do mês</label>
 						</td>
 					</tr>
 					<tr align="left">

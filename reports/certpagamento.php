@@ -23,11 +23,11 @@ session_start();
 require_once("../include/conect.php");
 require_once("../include/util.php");
 if (!$_GET['CODV']) {
-	Mensagem(" COD Inv�lido");
+	Mensagem(" COD Inválido");
 	Redireciona("../site/certidoes.php");
 }
 if (!$_SESSION['SESSAO_cnpj_emissor']) {
-	Mensagem(" CNPJ Inv�lido");
+	Mensagem(" CNPJ Inválido");
 	Redireciona("../site/certidoes.php");
 }
 

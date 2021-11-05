@@ -53,7 +53,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				}else{
 					$ultimoRPS = 0;
 					$limiteRPS = 0;
-					$mensagem  = "Fa�a uma solicita��o de RPS";
+					$mensagem  = "Faça uma solicitação de RPS";
 				}
 				
 				
@@ -61,7 +61,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				if(mysql_num_rows($sql_testa_solicitacao)){
 					$disabled = "disabled=\"disabled\"";
 					$styleSpan = "";
-					$mensagem = "Aguarde libera��o da prefeitura";
+					$mensagem = "Aguarde liberação da prefeitura";
 				}else{
 					$disabled = "";
 					if($limiteRPS > 0){

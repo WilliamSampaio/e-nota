@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 /*function verificarNavegador(){
 	if(navigator.appName=='Microsoft Internet Explorer'){
-		alert('O sistema de nota fiscal eletrônica não é compat�vel com o Internet Explorer. Recomendamos o Mozilla Firefox');
+		alert('O sistema de nota fiscal eletrônica não é compatível com o Internet Explorer. Recomendamos o Mozilla Firefox');
 		parent.location='http://br.mozdev.org';
 	}
 }

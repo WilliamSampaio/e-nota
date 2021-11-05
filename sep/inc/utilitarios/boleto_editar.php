@@ -65,7 +65,7 @@ if(!mysql_num_rows($sql_boleto)){
 	
 }
  
-add_logs('Atualizou um Boleto Banc�rio');
+add_logs('Atualizou um Boleto Bancário');
 Mensagem("Dados atualizados");
 
 

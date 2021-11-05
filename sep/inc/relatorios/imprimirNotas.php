@@ -34,7 +34,7 @@
 		$titulo = 'CANCELADAS';
 	
 	else
-		$titulo = 'RETEN��O DO ISSQN';
+		$titulo = 'RETENÇÃO DO ISSQN';
 
 ?>
 

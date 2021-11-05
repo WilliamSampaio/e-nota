@@ -20,7 +20,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 ?>
 <?php
 
-// retorna o �ltimo dia do mes corrente
+// retorna o último dia do mes corrente
 function ultimoDiaMes($mes,$ano = null){
     if(empty($ano)){
         $ano = date("Y");
@@ -274,7 +274,7 @@ function diasDecorridos($dataInicio,$dataFim){
 	return $dias_diferenca; 
 }
 
-//GERA O C�DIGO DE VERIFICA��O
+//GERA O CÓDIGO DE VERIFICAÇÃO
 function gera_codverificacao(){
 	//require_once('../../include/conect.php');
 	$CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
@@ -333,7 +333,7 @@ function gera_codverificacao(){
 // 	return $dias_diferenca; 
 // }
 
-//GERA O C�DIGO DE VERIFICA��O
+//GERA O CÓDIGO DE VERIFICAÇÃO
 // function gera_codverificacao(){
 // 	//require_once('../../include/conect.php');
 // 	$CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
@@ -495,7 +495,7 @@ function Uploadimagem($campo,$destino,$cod=NULL){
 		$imagem['extensao'] = strtolower(end(explode('.', $_FILES[$campo]['name'])));
 		//varre o array verificando se a variavel extensao entra na condicional
 		if(array_search($imagem['extensao'], $extpermitidas) === false){
-			Mensagem("Por favor, envie arquivos com as seguintes extens�es: jpeg, jpg, gif");
+			Mensagem("Por favor, envie arquivos com as seguintes extensões: jpeg, jpg, gif");
 		}else{
 			//Verifica qual metodo de upload veio pelo parametro
 			if($cod == "rand"){
@@ -565,17 +565,17 @@ function UploadGenerico($destino,$campo,$extensoes=NULL){
 	 
 	// Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
 	if($_FILES[$campo]['error'] != 0) {
-		Mensagem_onload("Não foi poss�vel fazer o upload, erro: ". $array_upload['erros'][$_FILES[$campo]['error']]);
+		Mensagem_onload("Não foi possível fazer o upload, erro: ". $array_upload['erros'][$_FILES[$campo]['error']]);
 		return false;
 	}//fim if
 	
 	// Se a varivel vinda por parametro tiver valor, faz a verificacao da extensao do arquivo
 	 if($array_upload['extensoes']){
 	 	if(count($array_upload['extensoes'])>1){
-			$msg  = "Por favor, envie arquivos com as seguintes extens�es: ";
+			$msg  = "Por favor, envie arquivos com as seguintes extensões: ";
 			$msg2 = "Este arquivo não está em nenhum dos formatos permitidos: ";
 		}else{
-			$msg  = "Por favor, envie arquivos com a seguinte extens�o: ";
+			$msg  = "Por favor, envie arquivos com a seguinte extensão: ";
 			$msg2 = "Este arquivo não está no formato permitido: ";
 		}
 		$extensao = strtolower(end(explode('.', $_FILES[$campo]['name'])));
@@ -593,19 +593,19 @@ function UploadGenerico($destino,$campo,$extensoes=NULL){
 		}elseif($array_upload['tamanho'] < $_FILES[$campo]['size']){
 			Mensagem_onload("O arquivo enviado é muito grande, envie arquivos de até 2Mb.");
 		}else{ 
-			// O arquivo passou em todas as verifica��es, agora tenta movelo para a pasta
+			// O arquivo passou em todas as verificações, agora tenta movelo para a pasta
 			//acrescenta numeros randomicos ao nome do arquivo
 			$rand = mt_rand(00000,99999);
 			$ext  = explode(".",$_FILES[$campo]['name']);
 			$nome_final = $rand.".".$ext[1];
 			
-			// Depois verifica se e poss�vel mover o arquivo para a pasta escolhida
+			// Depois verifica se e possível mover o arquivo para a pasta escolhida
 			if(move_uploaded_file($_FILES[$campo]['tmp_name'], $array_upload['pasta'] .$nome_final)){
 				//se tudo der certo retorna o nome do arquivo que foi salvo no diretorio informado
 				return $nome_final;
 			}else{
-				// Não foi poss�vel fazer o upload, provavelmente a pasta está incorreta
-				Mensagem_onload("Não foi poss�vel enviar o arquivo, tente novamente");
+				// Não foi possível fazer o upload, provavelmente a pasta está incorreta
+				Mensagem_onload("Não foi possível enviar o arquivo, tente novamente");
 			}//fim else
 		}//fim else
 	}//fim if
@@ -700,7 +700,7 @@ function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test é pa
 					<input type=\"button\" name=\"btAnterior\" value=\"Anterior\" class=\"botao\" 
 					onclick=\"document.getElementById('hdPrimeiro').value=1;
 					mudarpagina('a','hdPagina','$arquivo','$form','$retorno');\" "; if($pagina == 1){ $botoes.= "disabled = disabled";} $botoes.= " />
-					<input type=\"button\" name=\"btProximo\" value=\"Pr�ximo\" class=\"botao\" 
+					<input type=\"button\" name=\"btProximo\" value=\"Próximo\" class=\"botao\" 
 					onclick=\"document.getElementById('hdPrimeiro').value=1;
 					mudarpagina('p','hdPagina','$arquivo','$form','$retorno');\" "; if($pagina == $total_paginas){ $botoes.= "disabled = disabled";} $botoes.= " />
 					<input type=\"hidden\" name=\"hdPagina\" id=\"hdPagina\" value=\"$pagina\" />
@@ -787,35 +787,35 @@ function estadoExtenso($sigla) {
  	$estados = array(
 		'AC' => 'do Acre',
 		'AL' => 'do Alagoas',
-		'AP' => 'do Amap�',
+		'AP' => 'do Amapá',
 		'AM' => 'do Amazonas',
 		'BA' => 'da Bahia',
-		'CE' => 'do Cear�',
+		'CE' => 'do Ceará',
 		'DF' => 'do Distrito Federal',
-		'ES' => 'do Esp�rito Santo',
-		'GO' => 'de Goi�s',
-		'MA' => 'do Maranh�o',
+		'ES' => 'do Espírito Santo',
+		'GO' => 'de Goiás',
+		'MA' => 'do Maranhão',
 		'MG' => 'de Minas Gerais',
 		'MT' => 'do Mato Grosso',
 		'MS' => 'do Mato Grosso do Sul',
-		'PA' => 'do Par�',
-		'PR' => 'do Paran�',
+		'PA' => 'do Pará',
+		'PR' => 'do Paraná',
 		'PE' => 'de Penambuco',
-		'PI' => 'do Piau�',
+		'PI' => 'do Piauí',
 		'RJ' => 'do Rio de Janeiro',
 		'RN' => 'do Rio Grande do Norte',
 		'RS' => 'do Rio Grande do Sul',
-		'RO' => 'de Rond�nia',
+		'RO' => 'de Rondônia',
 		'RR' => 'de Roraima',
 		'SC' => 'de Santa Catarina',
-		'SP' => 'de S�o Paulo',
+		'SP' => 'de São Paulo',
 		'SE' => 'do Sergipe',
 		'TO' => 'do Tocantins'
 	);
 	return $estados[$sigla];
 }
 
-//Func�o que retorna somente o mês 
+//Função que retorna somente o mês 
  function mesExtenso($mesxt) {
  	$mes = array(
 		'01' => 'Janeiro',
@@ -994,8 +994,8 @@ function UltDiaUtil($mes,$ano){
   	$dia_semana = date("w", $ultimo);
   
   	// domingo = 0;
-  	// s�bado = 6;
-  	// verifica s�bado e domingo
+  	// sábado = 6;
+  	// verifica sábado e domingo
   
   	if($dia_semana == 0){
     	$dia--;

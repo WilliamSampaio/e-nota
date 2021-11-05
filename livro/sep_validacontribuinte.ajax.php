@@ -70,6 +70,6 @@ require_once("../include/conect.php");
         </form>
 <?php
 }else{		
-		echo "<font style=\"color:#FF0000\">Contribuinte inv�lido, Informe um Cnpj ou CPF v�lido para gerar o livro do contribuinte</font>";
+		echo "<font style=\"color:#FF0000\">Contribuinte inválido, Informe um Cnpj ou CPF válido para gerar o livro do contribuinte</font>";
 }?>            
 <!--<font style="font-size:10px;font-family:Verdana, Arial, Helvetica, sans-serif"><?php echo $retorno;?></font> -->

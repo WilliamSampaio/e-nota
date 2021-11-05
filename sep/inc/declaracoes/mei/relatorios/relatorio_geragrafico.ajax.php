@@ -90,7 +90,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	$titulos = serialize($arraydata);
 ?>
 <link href="css/padrao.css" rel="stylesheet" type="text/css">
-<fieldset><legend>Gr�fico</legend>
+<fieldset><legend>Gráfico</legend>
 <table width="100%">
 	<tr>
     	<td><input name="btImprimir" type="button" class="botao" value="Imprimir"></td>

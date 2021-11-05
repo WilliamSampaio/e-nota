@@ -36,7 +36,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	//se foi cancelada alguma declaração da o updade no banco e da um alert se der algum erro
 	if($cancelaDec){
 		$PDO->query("UPDATE cartorios_des SET estado = 'C' WHERE codigo = '$cancelaDec'");
-		add_logs('Atualizou uma Decalara��o de Cartório');
+		add_logs('Atualizou uma Decalaração de Cartório');
 	}//fim if cacela
 	
 	//verifica quais campos foram preenchidos e concatena na variavel str_where

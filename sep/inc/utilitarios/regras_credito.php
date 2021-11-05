@@ -100,7 +100,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			</form>
 			<form method="post" name="frmCreditos" id="frmCreditos">
 				<input type="hidden" name="include" id="include" value="<?php echo $_POST["include"];?>" />
-				<fieldset><legend>Inserá�o de regras de créditos</legend>
+				<fieldset><legend>Inserção de regras de créditos</legend>
 					<table width="100%">
 						<tr>
 							<td width="17%" align="left">Tipo Pessoa<font color="#FF0000">*</font></td>
@@ -108,7 +108,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								<select name="cmbTipoPessoa" id="cmbTipoPessoa" class="combo">
 									<option value=""></option>
 									<option value="PF"<?php if($tipopessoa == "PF"){ echo "selected=selected";}?>>Pessoa Fisica</option>
-									<option value="PJ"<?php if($tipopessoa == "PJ"){ echo "selected=selected";}?>>Pessoa Jur�dica</option>
+									<option value="PJ"<?php if($tipopessoa == "PJ"){ echo "selected=selected";}?>>Pessoa Jurídica</option>
 									<option value="PFPJ"<?php if($tipopessoa == "PFPJ"){ echo "selected=selected";}?>>Ambas</option>
 								</select>
 							</td>

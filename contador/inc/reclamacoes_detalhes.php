@@ -64,7 +64,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo $reclamacao; ?></td>
 	</tr>
 	<tr align="left">
-		<td>Respons�vel:</td>
+		<td>Responsável:</td>
 		<td><?php echo $responsavel; ?></td>
 	</tr>
 	<tr align="left">

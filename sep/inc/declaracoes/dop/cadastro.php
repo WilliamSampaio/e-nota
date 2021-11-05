@@ -151,7 +151,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 							<td align="left"><font color="#FF0000">*</font> Cpf</td><td></td>
 							<td align="left"><input <?php if($codigo) echo "readonly=\"true\""; ?> name="txtCpfResponsavel" id="txtCpfResponsavel" type="text" onkeydown="return NumbersOnly( event );" onkeyup="CNPJCPFMsk( this );" class="texto" size="18" maxlength="18" value="<?php echo $responsavel_cpf; ?>"></td>
 						</tr>
-						<tr align="right"><td colspan="3"><font color="#FF0000">* Campos Obrigat�rios</font></td></tr>
+						<tr align="right"><td colspan="3"><font color="#FF0000">* Campos Obrigatórios</font></td></tr>
 			
                 </table>
 				</fieldset>

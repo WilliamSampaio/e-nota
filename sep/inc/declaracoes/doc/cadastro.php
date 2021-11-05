@@ -202,7 +202,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td><input type="radio"  name="rdbEstado" value="A"<?php if(($estado=="")||($estado=="A")){echo "checked=\"checked\"";} ?> />Ativo</td>
 									<td colspan="2"><input type="radio" name="rdbEstado" value="I"<?php if($estado=="I"){echo "checked=\"checked\"";} ?> />Inativo</td>
 								</tr>
-								<tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigat�rios</font></td></tr>
+								<tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigatórios</font></td></tr>
 								<tr align="left">
 									<td colspan="2">
                                         <input type="submit" <?php if($codigo){echo "style=\"visibility:hidden\"";} ?> class="botao" name="btCadastrar" value="Cadastrar" onclick="return ValidaFormulario('txtNome|txtRazao|txtAgencia|txtCnpj|txtGerente|txtCpfGerente|txtResponsavel|txtCpfResponsavel|txtEndereco|txtEmail|txtFone1|txtSenha|txtConfirmaSenha', 'Preencha todos os campos obrigatórios.');" />                                        <?php 

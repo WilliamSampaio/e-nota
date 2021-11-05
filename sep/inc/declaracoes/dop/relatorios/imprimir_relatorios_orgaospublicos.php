@@ -46,7 +46,7 @@ switch($estadoPOST){
 }//fim switch estado
 
 //faz um where de acordo com oque foi preenchido no from
-$sql_where=" ";//comeca a var do where como um espa�o
+$sql_where=" ";//comeca a var do where como um espaço
 if($cnpjPOST){
 	$sql_where.=" AND orgaospublicos.cnpj='$cnpjPOST'";
 }//fim if cnpj

@@ -106,7 +106,7 @@ if($_POST["btDeletar"] == "Excluir"){
 		<form method="post" id="frmLegislacao" enctype="multipart/form-data">
 			<input type="hidden" name="include" id="include" value="<?php echo $_POST["include"];?>" />
 			<input type="hidden" name="hdTipo" value="nfe" />
-			<fieldset><legend>Inserá�o de Lei</legend>
+			<fieldset><legend>Inserção de Lei</legend>
 				<table border="0" cellspacing="2" cellpadding="2" width="95%">
 					<tr>
 						<td width="12%" align="left">Titulo</td>
@@ -121,7 +121,7 @@ if($_POST["btDeletar"] == "Excluir"){
 						<td align="left">
                         	<input type="file" name="txtArq" id="txtArq" size="31" class="texto"/>
                             	<font color="#FF0000">
-                                	<br />O arquivo PDF não poder� estar nomeado com acentos , é e caracteres especias.
+                                	<br />O arquivo PDF não poderá estar nomeado com acentos , é e caracteres especias.
                                 </font>
                         </td>
 					</tr>     

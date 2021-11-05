@@ -46,8 +46,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td width="23%" align="left">	      Tipo de Pessoa:		 </td>
    <td align="left">  
 		   <input type="hidden" name="btRegra" value="Inserir Regra">
-		   <input type="radio" name="rdTipoPessoa" id="rdTipoPessoa" value="PF">Pessoa F�sica		
-		   <input type="radio" name="rdTipoPessoa" id="rdTipoPessoa" value="PJ" checked="checked">Pessoa Jur�dica
+		   <input type="radio" name="rdTipoPessoa" id="rdTipoPessoa" value="PF">Pessoa Física		
+		   <input type="radio" name="rdTipoPessoa" id="rdTipoPessoa" value="PJ" checked="checked">Pessoa Jurídica
 		</td>	
 	</tr>
 	<tr>

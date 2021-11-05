@@ -84,7 +84,7 @@ $dados=$empresas->fetch();
                             <input type="submit" name="btGerar" value="Gerar Livro" class="botao">
                         </td>
                         <td align="right"> 
-				<font color="#FF0000">*</font>Campos Obrigat�rios
+				<font color="#FF0000">*</font>Campos Obrigatórios
                         </td>
                     </tr>
                 </table>

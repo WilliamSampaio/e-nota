@@ -46,7 +46,7 @@ function tipoPessoa($cnpjcpf){
 // escapa as aspas e apostrofes e retira todas as tags html
 function trataString($texto){
     $texto = strip_tags(trim($texto));
-    $texto = str_replace("'","�",$texto);
+    $texto = str_replace("'","`",$texto);
     $texto = str_replace('"','',$texto);
     return $texto;
 }
@@ -209,7 +209,7 @@ function diasDecorridos($dataInicio,$dataFim){
 	return $dias_diferenca; 
 }
 
-//GERA O C�DIGO DE VERIFICA��O
+//GERA O CÓDIGO DE VERIFICAÇÃO
 function gera_codverificacao(){
 	$CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
 	$max = strlen($CaracteresAceitos)-1;
@@ -379,7 +379,7 @@ function Uploadimagem($campo,$destino,$cod=NULL){
 		$imagem['extensao'] = strtolower(end(explode('.', $_FILES[$campo]['name'])));
 		//varre o array verificando se a variavel extensao entra na condicional
 		if(array_search($imagem['extensao'], $extpermitidas) === false){
-			Mensagem("Por favor, envie arquivos com as seguintes extens�es: jpeg, jpg, gif");
+			Mensagem("Por favor, envie arquivos com as seguintes extensões: jpeg, jpg, gif");
 		}else{
 			//Verifica qual metodo de upload veio pelo parametro
 			if($cod == "rand"){
@@ -422,7 +422,7 @@ function UploadGenerico($destino,$campo,$extensoes=NULL){
 	 
 	// Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
 	if($_FILES[$campo]['error'] != 0) {
-		Mensagem("Não foi poss�vel fazer o upload, erro: ". $array_upload['erros'][$_FILES[$campo]['error']]);
+		Mensagem("Não foi possível fazer o upload, erro: ". $array_upload['erros'][$_FILES[$campo]['error']]);
 		exit; // Para a execucao do script
 	}//fim if
 	
@@ -431,7 +431,7 @@ function UploadGenerico($destino,$campo,$extensoes=NULL){
 		$extensao = strtolower(end(explode('.', $_FILES[$campo]['name'])));
 		//varre o array verificando se a variavel extensao entra na condicional
 		if(array_search($extensao, $array_upload['extensoes']) === false){
-			Mensagem("Por favor, envie arquivos com as seguintes extens�es: ". str_replace("|",", ",$extensoes));
+			Mensagem("Por favor, envie arquivos com as seguintes extensões: ". str_replace("|",", ",$extensoes));
 		}//fim if
 	
 	 
@@ -439,19 +439,19 @@ function UploadGenerico($destino,$campo,$extensoes=NULL){
 		elseif($array_upload['tamanho'] < $_FILES[$campo]['size']){
 			Mensagem("O arquivo enviado é muito grande, envie arquivos de até 2Mb.");
 		}else{ 
-			// O arquivo passou em todas as verifica��es, agora tenta movelo para a pasta
+			// O arquivo passou em todas as verificações, agora tenta movelo para a pasta
 			//acrescenta numeros randomicos ao nome do arquivo
 			$rand = rand(00000,99999);
 			$ext = explode(".",$_FILES[$campo]['name']);
 			$nome_final = $rand.".".$ext[1];
 			
-			// Depois verifica se e poss�vel mover o arquivo para a pasta escolhida
+			// Depois verifica se e possível mover o arquivo para a pasta escolhida
 			if(move_uploaded_file($_FILES[$campo]['tmp_name'], $array_upload['pasta'] .$nome_final)){
 				//se tudo der certo retorna o nome do arquivo que foi salvo no diretorio informado
 				return $nome_final;
 			}else{
-			// Não foi poss�vel fazer o upload, provavelmente a pasta está incorreta
-			Mensagem("Não foi poss�vel enviar o arquivo, tente novamente");
+			// Não foi possível fazer o upload, provavelmente a pasta está incorreta
+			Mensagem("Não foi possível enviar o arquivo, tente novamente");
 			}//fim else
 		}//fim else
 	}//fim if
@@ -510,7 +510,7 @@ function Paginacao($query,$form,$retorno,$quant=NULL,$test=false){// $test é pa
 					<input type=\"button\" name=\"btAnterior\" value=\"Anterior\" class=\"botao\" 
 					onclick=\"document.getElementById('hdPrimeiro').value=1;
 					mudarpagina('a','hdPagina','$arquivo','$form','$retorno');\" "; if($pagina == 1){ $botoes.= "disabled = disabled";} $botoes.= " />
-					<input type=\"button\" name=\"btProximo\" value=\"Pr�ximo\" class=\"botao\" 
+					<input type=\"button\" name=\"btProximo\" value=\"Próximo\" class=\"botao\" 
 					onclick=\"document.getElementById('hdPrimeiro').value=1;
 					mudarpagina('p','hdPagina','$arquivo','$form','$retorno');\" "; if($pagina == $total_paginas){ $botoes.= "disabled = disabled";} $botoes.= " />
 					<input type=\"hidden\" name=\"hdPagina\" id=\"hdPagina\" value=\"$pagina\" />

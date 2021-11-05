@@ -31,7 +31,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 				<tr>
 					<td>
 						<form method="post" id="frmRelatorio" name="frmRelatorio" onsubmit="return false">						
-                        <fieldset style="width:800px"  ><legend>Buscar Escritura��o por Nosso Número:</legend>
+                        <fieldset style="width:800px"  ><legend>Buscar Escrituração por Nosso Número:</legend>
 						<input type="hidden" name="include" id="include" value="<?php echo $_POST['include']; ?>">
 							<table width="100%" border="0" cellpadding="0"align="center">
 								<tr>

@@ -22,10 +22,10 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 
 <?php 
-// Inclus�o da biblioteca
+// Inclusão da biblioteca
 require_once ("../../../../jpgraph/src/jpgraph.php");    
 require_once ("../../../../jpgraph/src/jpgraph_bar.php"); 
-// Conex�o ao banco MySQL e consulta
+// Conexão ao banco MySQL e consulta
 $valores = unserialize($_GET['valor']);
 $titulos = unserialize($_GET['titulo']);
 
@@ -55,7 +55,7 @@ while(list($mes, $valor)=$sql->fetch()){
 }*/
        
 
-// margem das partes principais do gr�fico (dados), o que está
+// margem das partes principais do gráfico (dados), o que está
 // fora da margem fica separado para as labels, títulos, etc
 $grafico = new graph(800,250,"png");
 $grafico->img->SetMargin(60,30,30,30);
@@ -67,8 +67,8 @@ $grafico->title->Set('Relatórios de Empreiteiras');
 // definir sub-titulo
 $grafico->subtitle->Set('');
 
-// pedir para mostrar os grides no fundo do gr�fico,
-// o ygrid é marcado como true por padr�o
+// pedir para mostrar os grides no fundo do gráfico,
+// o ygrid é marcado como true por padrão
 $grafico->ygrid->Show(true);
 $grafico->xgrid->Show(true);
 
@@ -77,7 +77,7 @@ $gBarras->SetFillColor("blue");
 $gBarras->SetShadow("darkblue"); 
 
 
-// título dos v�rtices
+// título dos vértices
 $grafico->yaxis->title->Set("");
 $grafico->xaxis->title->Set("");
 // título das barras

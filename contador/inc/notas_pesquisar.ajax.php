@@ -83,12 +83,12 @@ WHERE
 					?>
 					<tr>
 						<td width="5%" align="center">Nº</td>
-						<td width="13%" align="center">C�d Verif</td>
+						<td width="13%" align="center">Cód Verif</td>
 						<td width="16%" align="center">D/H Emissão</td>
 						<td width="40%" align="center">Tomador Nome </td>
 						<td width="13%" align="center">Estado</td>
 						<td width="10%" align="center">
-                    		<input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir sele��o" onclick="document.getElementById('frmPesquisar').action='../site/imprimirnotas.php';document.getElementById('frmPesquisar').target='_blank';submit();"/>
+                    		<input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir seleção" onclick="document.getElementById('frmPesquisar').action='../site/imprimirnotas.php';document.getElementById('frmPesquisar').target='_blank';submit();"/>
                     	</td>
 					</tr>
 					<tr>

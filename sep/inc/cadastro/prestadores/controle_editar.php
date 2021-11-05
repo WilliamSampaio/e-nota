@@ -105,7 +105,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		   print("<br /><input type=\"checkbox\" value=\"S\"  name=\"txtSimplesNacional\"/>");
 		  }?>
 		  <font size="-2">
-	        Esta empresa esta enquadrada no Simples Nacional, conforme Lei Complementar n�123/2006	      
+	        Esta empresa esta enquadrada no Simples Nacional, conforme Lei Complementar nº123/2006	      
 		  </font><br /><br />
 		 </td>
        </tr>
@@ -135,7 +135,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	  $cont_aux_socios = $contsocios;	  
 	  print("<tr>
 		      <td colspan=4 align=left>
-		       <b>Respos�vel/Socio</b>
+		       <b>Responsável/Socio</b>
 		      </td>
 	         </tr>
 	        ");

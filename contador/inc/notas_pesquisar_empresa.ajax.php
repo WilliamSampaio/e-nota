@@ -89,7 +89,7 @@ if(mysql_num_rows($sql)>0){
     <td width="40%" align="center">Tomador Nome </td>
 	<td width="14%" align="center">Estado</td>
     <td width="10%" align="center">
-        <input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir sele��o" onclick="document.getElementById('frmCancelarNota').action='../site/imprimirnotas.php';document.getElementById('frmCancelarNota').target='_blank';submit();" />
+        <input type="button" name="btImprimir" id="btImprimir" class="botao" value="Imprimir seleção" onclick="document.getElementById('frmCancelarNota').action='../site/imprimirnotas.php';document.getElementById('frmCancelarNota').target='_blank';submit();" />
     </td>
   </tr>
   <tr>

@@ -193,7 +193,7 @@ if($btSelecionarEmpresa!=""){
 					}	
 				}
 	
-				//verifica a isen��o do prestador
+				//verifica a isenção do prestador
 				$sqlIsento = mysql_query("SELECT isentoiss FROM cadastro WHERE codigo='$CODIGO_DA_EMPRESA'");
 				list($issIsento) = mysql_fetch_array($sqlIsento);
 				if($issIsento == 'S'){
@@ -330,7 +330,7 @@ if($btSelecionarEmpresa!=""){
 			}
 	 }
 	}else{
-		print("<script language=JavaScript>alert('� necessário selecionar um serviço para a emissão da nota.')</script>");
+		print("<script language=JavaScript>alert('É necessário selecionar um serviço para a emissão da nota.')</script>");
 	}
 }
 
@@ -342,7 +342,7 @@ $ultimanota += 1;
 
 $emp_cnpj.=$emp_cpf;
 
-//GERA O C�DIGO DE VERIFICA��O
+//GERA O CÓDIGO DE VERIFICAÇÃO
 $CaracteresAceitos = 'ABCDEFGHIJKLMNOPQRXTUVWXYZ';
 $max = strlen($CaracteresAceitos)-1;
 $password = null;

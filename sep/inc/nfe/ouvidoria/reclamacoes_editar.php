@@ -54,7 +54,7 @@ if(!$empresas_cnpj){
 ?>
 
 
-<!-- cabe�alho da pesquisa-----> 
+<!-- cabeçalho da pesquisa-----> 
 
 			<fieldset style="width:730;"><legend>Cadastro de Reclamação</legend>      
 			<form name="frmCadastroReclamcao" method="post">

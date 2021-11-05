@@ -74,7 +74,7 @@ $include=$_POST['include'];
 	// define se é ou nao contador
     $sql=$PDO->query("SELECT MAX(codigo) FROM servicos_categorias");
 	list($maxcodigo)=$sql->fetch();
-	$sql_categoria=$PDO->query("SELECT codigo FROM servicos_categorias WHERE nome = 'Cont�bil'");	
+	$sql_categoria=$PDO->query("SELECT codigo FROM servicos_categorias WHERE nome = 'Contábil'");	
 	list($codigocategoria)=$sql_categoria->fetch();
 	$categoria=1;
 	$servico=1;

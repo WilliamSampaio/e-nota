@@ -41,19 +41,19 @@ Fith Floor, Boston, MA 02110-1301, USA
 <table width="100%" border="0" cellpadding="0">
     <tr>
         <td width="15%" align="left">Cadastradas:</td>
-      <td align="left"><?php if($cadastradas != 0){ echo $cadastradas;}else{ echo "Não há Orgãos p�blicos cadastrados";}?></td>
+      <td align="left"><?php if($cadastradas != 0){ echo $cadastradas;}else{ echo "Não há Orgãos públicos cadastrados";}?></td>
     </tr>
     <tr>
         <td align="left">Ativas:</td>
-        <td align="left"><?php if($ativas != 0){ echo $ativas;}else{ echo "Não há Orgãos p�blicos ativos";}?></td>
+        <td align="left"><?php if($ativas != 0){ echo $ativas;}else{ echo "Não há Orgãos públicos ativos";}?></td>
     </tr>
     <tr>
         <td align="left">Inativas:</td>
-        <td align="left"><?php if($inativas != 0){ echo $inativas;}else{ echo "Não há Orgãos p�blicos inativos";}?></td>
+        <td align="left"><?php if($inativas != 0){ echo $inativas;}else{ echo "Não há Orgãos públicos inativos";}?></td>
     </tr>
     <tr>
         <td align="left">Não Liberadas:</td>
-        <td width="85%" align="left"><?php if($nl != 0){ echo $nl;}else{ echo "Não há Orgãos p�blicos não liberados";}?></td>
+        <td width="85%" align="left"><?php if($nl != 0){ echo $nl;}else{ echo "Não há Orgãos públicos não liberados";}?></td>
   </tr>
 </table>
 </fieldset>

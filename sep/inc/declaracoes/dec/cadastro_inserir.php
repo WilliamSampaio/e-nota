@@ -63,7 +63,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			$assunto="ISSDigital";
 			$corpo="
 				A Prefeitura Municipal de $CIDADE informa que este cartório foi cadastrad no sitema de ISSDigital do municipio.<br>
-				Para acessar o o sistema do ISSDigital acesse o site {$config['host']}, o login é próprio CNPJ do cartório. A senha, gerada pelo sistema, �: $senha<br>
+				Para acessar o o sistema do ISSDigital acesse o site {$config['host']}, o login é próprio CNPJ do cartório. A senha, gerada pelo sistema, é: $senha<br>
 				Para sua maior segurança, altere sua senha.
 			";
 			

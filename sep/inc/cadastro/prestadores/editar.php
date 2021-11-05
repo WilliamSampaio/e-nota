@@ -135,7 +135,7 @@ $vetor_exluir_servicos = array($checkExcluiServico1,$checkExcluiServico2,$checkE
 
 
 
-//vetores para editar s�cio
+//vetores para editar sócio
 $vetor_sociosnomes = array($txtnomesocio1,$txtnomesocio2,$txtnomesocio3,$txtnomesocio4,$txtnomesocio5,$txtnomesocio6,$txtnomesocio7,$txtnomesocio8,$txtnomesocio9,$txtnomesocio10);
 
 $vetor_socioscpf = array($txtcpfsocio1,$txtcpfsocio2,$txtcpfsocio3,$txtcpfsocio4,$txtcpfsocio5,$txtcpfsocio6,$txtcpfsocio7,$txtcpfsocio8,$txtcpfsocio9,$txtcpfsocio10);
@@ -148,7 +148,7 @@ $checkExcluiSocio6,$checkExcluiSocio7,$checkExcluiSocio8,$checkExcluiSocio9,$che
 
 
 
-//vetores para inserir s�cio
+//vetores para inserir sócio
 
 $vetor_nome_socios = array($txtNomeSocio1,$txtNomeSocio2,$txtNomeSocio3,$txtNomeSocio4,$txtNomeSocio5,$txtNomeSocio6,
 $txtNomeSocio7,$txtNomeSocio8,$txtNomeSocio9,$txtNomeSocio10);

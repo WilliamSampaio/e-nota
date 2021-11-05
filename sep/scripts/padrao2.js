@@ -243,7 +243,7 @@ function ajax(p) {
 		if (req.readyState == 1&& espera) {
 			espera();
 		}
-		// Verifica se o Ajax realizou todas as opera��es corretamente
+		// Verifica se o Ajax realizou todas as operações corretamente
 		if (req.readyState == 4 && req.status == 200) {
 			// Resposta retornada pelo ajax
 			respostaAjax="";
@@ -292,7 +292,7 @@ function acessoAjax(url,form,retorno){
   	      //document.getElementById('').innerHTML = '<font color="gray">Verificando...</font>';
 		  document.getElementById(retorno).innerHTML = 'Pesquisando...';
 		}
-		// Verifica se o Ajax realizou todas as opera��es corretamente (essencial)
+		// Verifica se o Ajax realizou todas as operações corretamente (essencial)
 		if(req.readyState == 4 && req.status == 200){			
 			// Resposta retornada pelo validacao.php
 			var resposta = req.responseText;			
@@ -683,7 +683,7 @@ function convertDate(data)
         d=new date();
     return d
 }
-/* Valida��es */
+/* Validações */
 function FmtValorMonetario(Dado)
 {
       var Result, i;
@@ -908,7 +908,7 @@ function isCpf(elem, msgbox)
 		return false;
 	}
 
-	/* Não seráo considerados v�lidos os seguintes CPF:
+	/* Não seráo considerados válidos os seguintes CPF:
 	 * 000.000.000-00, 111.111.111-11, 222.222.222-22, 333.333.333-33, 444.444.444-44,
 	 * 555.555.555-55, 666.666.666-66, 777.777.777-77, 888.888.888-88, 999.999.999-99.
 	 */
@@ -961,7 +961,7 @@ function isCnpj(elem, msgbox)
 	}
 
 
-	/* Não seráo considerados v�lidos os CNPJ com os seguintes números B�SICOS:
+	/* Não seráo considerados válidos os CNPJ com os seguintes números BÁSICOS:
 	 * 11.111.111, 22.222.222, 33.333.333, 44.444.444, 55.555.555,
 	 * 66.666.666, 77.777.777, 88.888.888, 99.999.999.
 	 */
@@ -980,8 +980,8 @@ function isCnpj(elem, msgbox)
 	}
 
 
-	/* Não será considerado v�lido CNPJ com número de ORDEM igual a 0000.
-	 * Esta cr�tica não será feita quando o B�SICO do CNPJ for igual a 00.000.000.
+	/* Não será considerado válido CNPJ com número de ORDEM igual a 0000.
+	 * Esta crítica não será feita quando o BÁSICO do CNPJ for igual a 00.000.000.
 	*/ 
 	if (ordem == "0000")
 	{
@@ -993,7 +993,7 @@ function isCnpj(elem, msgbox)
 	
 /*	if (!(base == "00000000" || base.substring(0, 3) != "000"))
 	{
-		alert ('CNPJ (' + pCnpj + ') inv�lido.');
+		alert ('CNPJ (' + pCnpj + ') inválido.');
 		alert('base : ' + base);
 		elem.value = "";
 		return false;
@@ -1098,7 +1098,7 @@ function validaCnpj(source, args)
 }
 
 
-/* M�scaras */
+/* Máscaras */
 function strip( str, c ) {
 	var tmp = str.split( c );
 	return tmp.join("");
@@ -1235,7 +1235,7 @@ function VerificacaoMsk( aWidget )
    }
 
 
-/*Exemplo de utiliza��o:
+/*Exemplo de utilização:
 <input type="text" name="valor"  onKeyPress="return(MascaraMoeda(this,'.',',',event))">*/
 
 
@@ -1460,11 +1460,11 @@ function diasDecorridos(dt1, dt2){
 	dt2.setMinutes(0);
 	dt2.setSeconds(0);
 	
-	// determina o fuso hor�rio de cada objeto Date
+	// determina o fuso horário de cada objeto Date
 	var fh1 = dt1.getTimezoneOffset();
 	var fh2 = dt2.getTimezoneOffset(); 
 	
-	// retira a diferen�a do hor�rio de ver�o
+	// retira a diferença do horário de verão
 	if(dt2 > dt1){
 	  horarioVerao = (fh2 - fh1) * minuto;
 	} 
@@ -1583,7 +1583,7 @@ function cancelaAction(formid,formaction,formtarget)
 	document.getElementById(formid).submit();
 }
 
-var hdtd = ''; //variavel que será usada na fun�ao VisualizarNovaLinha()
+var hdtd = ''; //variavel que será usada na função VisualizarNovaLinha()
 function VisualizarNovaLinha(cod,area,obj,url){
 	if(hdtd){         										//verifica se o hidden da td ja tem valor
 		var idtd = hdtd;									//recebe o valor da do input hidden com o id da td e manda para a variavel
@@ -1667,7 +1667,7 @@ function NovaLinha(obj,areaid,url,codigo,cont){
 }
 
 function cancelarDeclaracao(codigo,nome,url,form,retorno,hdcanc){
-	if(confirm('Deseja cancelar a declaracao N�'+codigo+' de '+nome+'?')){
+	if(confirm('Deseja cancelar a declaracao Nº'+codigo+' de '+nome+'?')){
 		document.getElementById(hdcanc).value = codigo;
 		acessoAjax(url,form,retorno);
 		alert('Declaração cancelada!');

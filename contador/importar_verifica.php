@@ -50,7 +50,7 @@ else {
 	if($import != "") {
 		$arq = $_FILES["import"]['name'];
 		$arq_tmp = $_FILES['import']['tmp_name'];   
-		$extensao = substr($arq,-3);// pega a extens�o do arquivo 
+		$extensao = substr($arq,-3);// pega a extensão do arquivo 
   		//$randomico = rand(00000,99999);
 		$arq = $_POST["cmbEmissor"].$arq;
 		if(($extensao =="xml")||($extensao =="XML")) {
@@ -109,7 +109,7 @@ else {
 					if($verifica_rps['qtd'] == 0){
 						die("<p align=\"center\"><strong>Prestador não autorizado para emissão de RPS</strong></p>");
 					}elseif($rpsnum > $verifica_rps['limite']){
-						die("<p align=\"center\"><strong>Seu limite de RPS �: ".$verifica_rps['limite']."</strong></p>");
+						die("<p align=\"center\"><strong>Seu limite de RPS é: ".$verifica_rps['limite']."</strong></p>");
 					}
 					
 					$tomador_cnpjcpf = $xml->nota[$cont]->tomador_cnpjcpf;
@@ -186,7 +186,7 @@ else {
 					$deducoes = $xml->nota[$cont]->deducoes;
 					$estado   = $xml->nota[$cont]->estado;
 					
-					//Verifica a valida��o do XML
+					//Verifica a validação do XML
 					require_once("inc/importar_erros.php") ;
 					$sql_verifica_rps = mysql_query("SELECT codigo FROM notas WHERE rps_numero = '$rps_numero' AND codemissor = '".$_POST["cmbEmissor"]."'");
 					if(mysql_num_rows($sql_verifica_rps)){
@@ -227,10 +227,10 @@ else {
 				}
 				// verifica a formatação do arquivo XML
 	 			if($erro ==1){
-					print ("<center><b>Arquivo contém dados inconsistentes fora do padr�o</b></center>");
+					print ("<center><b>Arquivo contém dados inconsistentes fora do padrão</b></center>");
 				}	
 	 			elseif($erro ==2){
-	  				print ("<center><b>Arquivo contém código de servico inv�lido </b></center>");
+	  				print ("<center><b>Arquivo contém código de servico inválido </b></center>");
 	 			} // fim elseif
 				elseif($erro ==3){
 	  				print ("<center><b>Arquivo contém um código de serviço que a empresa não pode emitir nota</b></center>");
@@ -251,7 +251,7 @@ else {
 					echo "<center><b>O prestador já emitiu $ultimoRPS RPS(s), o xml contém $cont RPS(s) e seu limite de RPS é de $limite RPS(s)! 
 					Por favor solicite um limite de RPS maior.</b></center>";
 				}elseif($erro == 10){
-					echo "<center><b>� necessário solicitar um limite de RPS para poder declarar o xml.</b></center>";
+					echo "<center><b>É necessário solicitar um limite de RPS para poder declarar o xml.</b></center>";
 				}else {
 	  				$cont =0; 
       				//tabela que mostra os dados que vieram no XML 	 
@@ -524,7 +524,7 @@ else {
 				<tr>
 					<td>Acréscimos:</td>
 					<td>R$ <?php echo DecToMoeda($acrescimo);?></td>
-					<td>Reten��es:</td>
+					<td>Retenções:</td>
 					<td>R$ <?php echo DecToMoeda($totalretencoes);?></td>
 				</tr>
 				<tr>
@@ -563,13 +563,13 @@ else {
 	else{
 		print("<center><b>Falha ao tentar abrir o arquivo XML</b></center>");     
 	}
-	}// if entens�o do arquivo
+	}// if entensão do arquivo
 	else{
-		print("<center><b>O arquivo Importado não tem a extens�o XML</b></center>");    
+		print("<center><b>O arquivo Importado não tem a extensão XML</b></center>");    
 	}   
 	}// end if campo text import
 	else {
-		print("<center><b>Insira o arquivo para a importa��o</b></center>");
+		print("<center><b>Insira o arquivo para a importação</b></center>");
 	}
 }  
 

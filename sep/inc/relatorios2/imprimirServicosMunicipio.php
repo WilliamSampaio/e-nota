@@ -3,7 +3,7 @@
 		$where = "AND datahoraemissao LIKE '___%-$mes-%__'";
 	else
 		$where = "";
-	//Seleciona os municipios nas notas, que forem diferentes do municipio cadastrado nas configura��es.
+	//Seleciona os municipios nas notas, que forem diferentes do municipio cadastrado nas configurações.
 	$query =("
 		SELECT 
 			tomador_uf
@@ -69,7 +69,7 @@
 		<td>Incidência</td>
 	</tr>
 	<?php
-		while($dados_servicos = $sql_tomador->fetch()){ //enquanto receber tomadores, exibe seu nome e a descri��o do  serviço que tomou
+		while($dados_servicos = $sql_tomador->fetch()){ //enquanto receber tomadores, exibe seu nome e a descrição do  serviço que tomou
 			if(strlen($dados_servicos['descricao']) > 100)
 				$desc = ResumeString($dados_servicos['descricao'],100);
 			else

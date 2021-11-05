@@ -156,7 +156,7 @@ if($ano==NULL || $mes==NULL){
 						list($codtomador) = $sql->fetch();
 					}
 				
-					//verifica a isen��o do prestador
+					//verifica a isenção do prestador
 					$sqlIsento = $PDO->query("SELECT isentoiss FROM cadastro WHERE codigo='$_POST[codempresa]'");
 					list($issIsento) = $sqlIsento->fetch();
 					if($issIsento == 'S'){

@@ -316,7 +316,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                 </tr>
              </table>
         </fieldset>
-        <fieldset><legend>Dados respons�vel</legend>
+        <fieldset><legend>Dados responsável</legend>
              <table width="100%" border="0" align="center">
                 <tr>
                     <td width="135" align="left">Responsável<font color="#FF0000">*</font></td>

@@ -45,7 +45,7 @@ $teste_cnpj=$PDO->query("SELECT codigo FROM orgaospublicos WHERE cnpj='$cnpj'");
 if(mysql_num_rows($teste_nome)>0)
 {echo "<script>alert('Já existe uma empresa com este nome');</script>";}	
 elseif(mysql_num_rows($teste_razaosocial)>0)
-{echo "<script>alert('Já existe uma empresa com esta raz�o social');</script>";}	
+{echo "<script>alert('Já existe uma empresa com esta razão social');</script>";}	
 elseif(mysql_num_rows($teste_cnpj)>0)
 {echo "<script>alert('Já existe uma empresa com este CPF/CNPJ');</script>";}
 else{

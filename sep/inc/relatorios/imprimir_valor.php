@@ -131,7 +131,7 @@ list($BRASAO) = $sql_brasao->fetch();
        <tr >
 <?php
 
-//Comando sql que selecionar� do banco a quantidade de prestadores por estado
+//Comando sql que selecionará do banco a quantidade de prestadores por estado
 $sql = $PDO->query("
 	SELECT 
 		uf , 
@@ -176,7 +176,7 @@ $ano=$PDO->query("SELECT year (datahoraemissao from notas");
 		<td width="34%" valign="top">
 			<table>
             <?php 
-			//Comando sql que selecionar� do banco os tipos de declaracoes e quantidade de cada
+			//Comando sql que selecionará do banco os tipos de declaracoes e quantidade de cada
 			$sql_tipodec = $PDO->query("SELECT declaracoes.declaracao, COUNT(*)
 										FROM
 										  declaracoes 

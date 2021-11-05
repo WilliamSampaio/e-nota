@@ -29,7 +29,7 @@ $codtipodec = $sql_cargo->fetchColumn();
 
 if($codtipodeclaracao == $codtipodec){
 	// itens de menu
-	$menu = array("Cadastro","AIDF Eletrônico","Notas Eletrônicas"/*,"NF-e Tomadas"*/,"Relatorio","Livro Digital","RPS","Contador","Exportar Notas","Ouvidoria","Utilit�rios","Sair");
+	$menu = array("Cadastro","AIDF Eletrônico","Notas Eletrônicas"/*,"NF-e Tomadas"*/,"Relatorio","Livro Digital","RPS","Contador","Exportar Notas","Ouvidoria","Utilitários","Sair");
 	$links = array("empresas.php","aidf.php","notas.php"/*,"notas_tomadas.php"*/,"relatorio.php","livro.php","importar.php","definir_contador.php","exportar.php","reclamacoes.php","utilitarios.php","logout.php");
 }else{
 	// itens de menu

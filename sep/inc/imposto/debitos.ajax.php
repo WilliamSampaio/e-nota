@@ -89,7 +89,7 @@
     $query .= " GROUP BY cadastro.razaosocial,competencia ORDER BY competencia DESC";
     
     if(mysql_num_rows($PDO->query($query)) == 0){
-        echo "<center><b>Nenhum d�bito encontrado</b></center>";
+        echo "<center><b>Nenhum débito encontrado</b></center>";
     }else{
    
         $resultado = Paginacao($query,'formDebitos','divRetorno',15);
@@ -106,7 +106,7 @@
                 </td>
                 <td bgcolor="#999999" align="center"
                 style="border-right:1px solid #000000; border-bottom:1px solid #000000;">
-                    D�bito
+                    Débito
                 </td>
                 <td bgcolor="#999999" align="center" style=" border-bottom:1px solid #000000;">
                     Estado

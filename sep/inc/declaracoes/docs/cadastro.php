@@ -322,7 +322,7 @@ Fith Floor, Boston, MA 02110-1301, USA
                                             </tr>";
                                         }
                                     ?>
-                                <tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigat�rios</font></td></tr>
+                                <tr align="left"><td colspan="2"><font color="#FF0000">* Campos Obrigatórios</font></td></tr>
                                 <tr align="left">
                                     <td colspan="2">
                                         <input type="submit" name="btBuscarCliente" value="Buscar" class="botao" />

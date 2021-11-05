@@ -108,7 +108,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="left">Nro. de notas com inconsist�ncias: </td>
+					<td colspan="2" align="left">Nro. de notas com inconsistências: </td>
 					<td align="left">
 						<input name="txtNfInconsistencias" type="text" id="txtNfInconsistencias" size="10" class="texto" 
 						value="<?php echo $nf_inconsistentes;?>" />

@@ -58,7 +58,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		<td><?php echo $dados_obra['dataini']; ?></td>
 	</tr>
     <tr align="left">
-        <td>Data de Conclus�o</td>
+        <td>Data de Conclusão</td>
         <td>
             <?php
                 if($dados_obra['estado']=="C"){

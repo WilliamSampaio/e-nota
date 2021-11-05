@@ -70,7 +70,7 @@ list($BRASAO) = $sql_brasao->fetch();
           <td align="center">Quantidade de Serviços</td>
           <td align="center">Percentual</td>
       </tr>
-      <?php  //comando sql que mostrar� as categorias e a quantidade de cada um (Lista Estat�stica)
+      <?php  //comando sql que mostrará as categorias e a quantidade de cada um (Lista Estatística)
         $sqlTotal = $PDO->query("SELECT COUNT(codigo) FROM servicos");
         list($total) = $sqlTotal->fetch();
 

@@ -63,7 +63,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 									<td align="center"><button class="tecla">j</button></td>
 									<td align="center"><button class="tecla">k</button></td>
 									<td align="center"><button class="tecla">l</button></td>
-									<td align="center"><button class="tecla">�</button></td>
+									<td align="center"><button class="tecla">ç</button></td>
 								</tr>
 								<tr>
 									<td align="center"><button class="tecla">z</button></td>
@@ -79,7 +79,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 								</tr>
 								<tr>
 									<td colspan="10" align="center">
-										<input style="width: 200px;" type="button" class="tecla" value="Espa�o" onclick="if((focused.value.length < focused.maxLength||focused.maxLength == -1)&&!focused.readOnly)focused.value+=' ';focused.focus();">
+										<input style="width: 200px;" type="button" class="tecla" value="Espaco" onclick="if((focused.value.length < focused.maxLength||focused.maxLength == -1)&&!focused.readOnly)focused.value+=' ';focused.focus();">
 
 									</td>
 								</tr>

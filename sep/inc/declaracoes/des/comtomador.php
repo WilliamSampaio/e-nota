@@ -133,7 +133,7 @@ if($sql_tomador->rowCount()<=0) {
 	$sql_servicos = $PDO->query("SELECT codservico 
 								 FROM cadastro_servicos
 								 WHERE codemissor='$cod_emissor'");
-	$num_servicos = 1;//quantos linhas v�o aparecer pra preencher
+	$num_servicos = 1;//quantos linhas vão aparecer pra preencher
 	$num_serv_max = 20;// numero maximo de linhas que podem ser adicionadas
 	
 	campoHidden("hdServicos",$num_servicos);

@@ -988,7 +988,7 @@ function ValorIss(regras_de_credito)
 
 			
 			
-			//calcula o crédito final que o tomador receber� ao emitir a nota
+			//calcula o crédito final que o tomador receberá ao emitir a nota
 			var somaiss= iss+issretido;
 			credito_final = (somaiss * parseFloat(credito))/100;
 			
@@ -1239,7 +1239,7 @@ function ValorIssRPA(cred_pf_n,val_pf_n,cred_pf_s,val_pf_s,cred_pj_n,val_pj_n,cr
 			   iss = iss.toFixed(2);
 			   document.getElementById('txtISS').value=DecToMoeda(iss);	  
 			  
-				  //verifica a quantidade de créditos que o tomador receber�, baseando-se no tipo de pessoa e se tem iss retido ou não.
+				  //verifica a quantidade de créditos que o tomador receberá, baseando-se no tipo de pessoa e se tem iss retido ou não.
 				  if( tipopessoa == 14)
 				   {	   
 					 if (issretido[2] != 0)
@@ -1326,7 +1326,7 @@ function ValorIssRPA(cred_pf_n,val_pf_n,cred_pf_s,val_pf_s,cred_pj_n,val_pj_n,cr
 			//   total = a.toFixed(2);
 			document.getElementById('txtValTotal').value=DecToMoeda(total);
 		   
-			//calcula o crédito final que o tomador receber� ao emitir a nota
+			//calcula o crédito final que o tomador receberá ao emitir a nota
 			credito_final = (parseFloat(iss) * parseFloat(credito))/100;
 			//credito_final = credito_final.toFixed(2);
 			document.getElementById('txtCredito').value=DecToMoeda(credito_final);
@@ -1368,7 +1368,7 @@ function ValidarInserirNota()
 			}
 	}
 	
-//função gen�rica que requisita confirmação de envio
+//função genérica que requisita confirmação de envio
 
 function ConfirmaForm()
 	{
@@ -1546,7 +1546,7 @@ function creditosNfe($regras_de_credito){
 				}
 			}
 		}				
-	//calcula o crédito final que o tomador receber� ao emitir a nota
+	//calcula o crédito final que o tomador receberá ao emitir a nota
 	credito_final = (iss * parseFloat(credito))/100;
 	//credito_final = credito_final.toFixed(2);
 	document.getElementById('txtCredito').value=DecToMoeda(credito_final);	

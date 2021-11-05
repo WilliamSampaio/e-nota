@@ -38,7 +38,7 @@ if(($descricao !="") &&($aliquota !="") &&($aliquotair !="")){
 	  if(mysql_num_rows($sql_codservico) > 0){
 	  	print("<script language=JavaScript> alert('Já existe um servico com este código de serviço');</script>"); 
 	  }elseif(mysql_num_rows($sql_descricao) > 0){
-		print("<script language=JavaScript> alert('Já existe um servico com esta descri��o');</script>"); 	  
+		print("<script language=JavaScript> alert('Já existe um servico com esta descrição');</script>"); 	  
 	  }else{
 		  $sql=$PDO->query("
 			  INSERT INTO servicos

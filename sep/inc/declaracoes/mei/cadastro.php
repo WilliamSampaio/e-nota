@@ -171,7 +171,7 @@ $dados_municipio=$sql_municipio->fetch();
 					$cont_aux_socios = $contsocios;	  
 					print("<tr>
 							  <td colspan=4 align=left>
-							   <b>Respos�vel/Socio</b>
+							   <b>Responsável/Socio</b>
 							  </td>
 							 </tr>
 							");
@@ -199,18 +199,18 @@ $dados_municipio=$sql_municipio->fetch();
 		 </tr>
 	   <tr>
          <td colspan="2" align="left">
-		   <!-- bot�o que chama a função JS e mostra + um s�cio-->
+		   <!-- botão que chama a função JS e mostra + um sócio-->
 		  <input type="button" value="Adicionar Responsável/Sócio" name="btAddSocio" class="botao" onclick="incluirSocio()" /> 
 		  <font color="#FF0000">*</font></td>
        </tr>
 	   <tr>
 	     <td colspan="2" align="center">		  
 		  
-			<!--CAMPO S�CIOS --------------------------------------------------------------------------->	   
+			<!--CAMPO SÓCIOS --------------------------------------------------------------------------->	   
 			<table width="100%" border="0" cellspacing="1" cellpadding="2">       
 				 <?php require_once("cadastro_socios.php")?>
 			</table>
-			<!-- CAMPO S�CIOS FIM -->   	     
+			<!-- CAMPO SÓCIOS FIM -->   	     
 		</td>
 	   </tr>
 	   <tr>
@@ -270,7 +270,7 @@ $dados_municipio=$sql_municipio->fetch();
 	   </tr>	   
 	   <tr>
          <td colspan="2" align="left">
-		  <!-- bot�o que chama a função JS e mostra + um serviço-->
+		  <!-- botão que chama a função JS e mostra + um serviço-->
 		  <input type="button" value="Adicionar Serviços " name="btAddServicos" class="botao" onclick="incluirServico()" /> 
 		  <font color="#FF0000">*</font></td>
        </tr>	   

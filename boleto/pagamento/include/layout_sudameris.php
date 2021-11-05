@@ -23,7 +23,7 @@
 
 // +----------------------------------------------------------------------+
 // | Equipe Coordenação Projeto BoletoPhp: <boletophp@boletophp.com.br>   |
-// | Desenvolvimento Boleto Sudameris: Fl�vio Yutaka Nakamura         	  |
+// | Desenvolvimento Boleto Sudameris: Flávio Yutaka Nakamura         	  |
 // +----------------------------------------------------------------------+
 ?>
 
@@ -49,10 +49,10 @@
 de Impressão</DIV></TD></TR><TR><TD valign=top class=cp><DIV ALIGN="left">
 <p>
 <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo econômico).<br>
-<li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e � direita do formul�rio.<br>
+<li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita do formulário.<br>
 <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de barras.<br>
 <li>Caso não apareça o código de barras no final, clique em F5 para atualizar esta tela.
-<li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletr�nico ou no internet banking:<br><br>
+<li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico ou no internet banking:<br><br>
 <span class="ld2">
 Linha Digitável;<?php echo $dadosboleto["linha_digitavel"]?><br>
 Valor: R$ <?php echo $dadosboleto["valor_boleto"]?><br>
@@ -99,7 +99,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td colspan=7 class=ct>Cedente</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Ag�ncia/C�digo do Cedente</td>
+		<td class=ct>Agência/Código do Cedente</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
 		<td class=ct>Vencimento</td>
 	</tr>
@@ -241,7 +241,7 @@ do Sacado</b></div></TD></tr></tbody></table><table width=666 cellspacing=5 cell
 		<td height=13><img src=imagens/1.png width=1 height=13></td>
 		<td colspan=11 class=ct>Cedente</td>
 		<td><img src=imagens/1.png width=1 height=13></td>
-		<td class=ct>Ag�ncia/C�digo cedente</td>
+		<td class=ct>Agência/Código cedente</td>
 	</tr>
 	<tr>
 		<td height=12><img src=imagens/1.png width=1 height=12></td>

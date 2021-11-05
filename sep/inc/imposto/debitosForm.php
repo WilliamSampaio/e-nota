@@ -1,5 +1,5 @@
 <fieldset>
-    <legend>D�bitos</legend>
+    <legend>Débitos</legend>
     <form method="post" id="formDebitos" name="formDebitos" action="./inc/imposto/debitosImprimir.php" target="_blank">
         <table align="left" width="100%">
             <tr>

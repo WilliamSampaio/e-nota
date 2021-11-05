@@ -38,7 +38,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 	<tr>
 		<td>
 			<fieldset style="width:500px">
-			<legend>Atualiza��o da senha do usuário <?php print ("<b><font color=RED>$NOME</font></b>");?></legend>
+			<legend>Atualização da senha do usuário <?php print ("<b><font color=RED>$NOME</font></b>");?></legend>
 			<form action="usuarios.php" method="post" name="frmCadUsuarios" onsubmit="return ValidaSenha('txtSenha','txtSenhaConfirm')" >
 				<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
 					<tr>
@@ -70,8 +70,8 @@ Fith Floor, Boston, MA 02110-1301, USA
 </tr>
 <tr>
 	<td>
-		<!-- Formulário de Edi��o e Ativa��o de serviços --->
-		<!-- Formulário de Edi��o e Ativa��o de serviços Fim --->
+		<!-- Formulário de Edição e Ativação de serviços --->
+		<!-- Formulário de Edição e Ativação de serviços Fim --->
 	</td>
 </tr>
 </table>

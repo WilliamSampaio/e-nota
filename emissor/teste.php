@@ -23,7 +23,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <head>
   <!--<title>Msg Box - by tmferreira</title>-->
   <title>e-Nota</title>
-  <style><!--
+  <style>
    * {
     margin: 0;
     padding: 0;
@@ -100,7 +100,7 @@ Fith Floor, Boston, MA 02110-1301, USA
     border: 1px solid #AAA;
     background: #FFF;
    }
-  --></style>
+  </style>
   <script type='text/javascript'>
    function $(e) {
     return document.getElementById(e);
@@ -108,7 +108,7 @@ Fith Floor, Boston, MA 02110-1301, USA
    function addEvent(obj, evType, fn) { //Função adaptada da original de Christian Heilmann, em http://www.onlinetools.org/articles/unobtrusivejavascript/chapter4.html
     if (typeof obj == "string") {
      if (null == (obj = document.getElementById(obj))) {
-      throw new Error("Elemento HTML não encontrado. Não foi poss�vel adicionar o evento.");
+      throw new Error("Elemento HTML não encontrado. Não foi possível adicionar o evento.");
      }
     }
     if (obj.attachEvent) {
@@ -116,18 +116,18 @@ Fith Floor, Boston, MA 02110-1301, USA
     } else if (obj.addEventListener) {
      return obj.addEventListener(evType, fn, true);
     } else {
-     throw new Error("Seu browser não suporta adi��o de eventos.");
+     throw new Error("Seu browser não suporta adição de eventos.");
     }
    }
    function init() {
     /*
-    msgbox_show('Título', 'Data inválida!', 'alert'); //alert com função padr�o
-    msgbox_show('Título', 'Data inválida!', 'alert', funcao1); //alert passando a função que será executada no bot�o OK
-    msgbox_show('Título', 'Data inválida!', 'confirm'); //confirm com bot�es padr�o
-    msgbox_show('Título', 'Data inválida!', 'confirm', funcao1); //confirm passando a função que será executada no bot�o SIM e deixando o bot�o NÃO padr�o
-    msgbox_show('Título', 'Data inválida!', 'confirm', funcao1, funcao2); //confirm passando a função que será executada no bot�o SIM (funcao1) e no bot�o NÃO (funcao2)
+    msgbox_show('Título', 'Data inválida!', 'alert'); //alert com função padrão
+    msgbox_show('Título', 'Data inválida!', 'alert', funcao1); //alert passando a função que será executada no botão OK
+    msgbox_show('Título', 'Data inválida!', 'confirm'); //confirm com botões padrão
+    msgbox_show('Título', 'Data inválida!', 'confirm', funcao1); //confirm passando a função que será executada no botão SIM e deixando o botão NÃO padrão
+    msgbox_show('Título', 'Data inválida!', 'confirm', funcao1, funcao2); //confirm passando a função que será executada no botão SIM (funcao1) e no botão NÃO (funcao2)
     */
-    msgbox_show('Título', 'Data inválida!', 'alert'); //alert com função padr�o
+    msgbox_show('Título', 'Data inválida!', 'alert'); //alert com função padrão
     $('fechar').href = '#';
     addEvent('fechar', 'click', msgbox_hide);
    }

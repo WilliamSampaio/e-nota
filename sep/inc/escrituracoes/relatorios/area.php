@@ -64,7 +64,7 @@ list($BRASAO) = $sql_brasao->fetch();
   </table>
   
     <table width="95%" height="120" cellspacing="0" class="tabela" style="page-break-after: always">
-  <?php  //comando sql que mostrar� as categorias e os serviços 
+  <?php  //comando sql que mostrará as categorias e os serviços 
 
 $sql_descr = $PDO->query("SELECT
 						  servicos_categorias.codigo, servicos_categorias.nome, COUNT(servicos_categorias.nome),

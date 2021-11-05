@@ -63,7 +63,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 			//pega o numero de servicos do emissor
 			
 			
-			$num_servicos = 1;//quantos linhas v�o aparecer pra preencher
+			$num_servicos = 1;//quantos linhas vão aparecer pra preencher
 			$num_serv_max = 20;// numero maximo de linhas que podem ser adicionadas
 			
 			campoHidden("hdServicos",$num_servicos);

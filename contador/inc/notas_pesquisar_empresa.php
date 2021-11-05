@@ -59,7 +59,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         <td align="left" width="70%"><input name="txtNumeroNota" type="text" size="10" class="botao" value="<?php echo $numero;?>" /></td>
       </tr>
       <tr>
-        <td align="left">C�digo de Verifica��o</td>
+        <td align="left">Código de Verificação</td>
         <td align="left"><input name="txtCodigoVerificacao" type="text" size="10" class="botao" value="<?php echo $codverificacao;?>" style="text-transform:uppercase" /></td>
       </tr>
       <tr>

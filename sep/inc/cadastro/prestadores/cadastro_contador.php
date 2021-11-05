@@ -66,7 +66,7 @@ if ($_POST['btNovoContador']) {
 }
 
 
-//Testa se algum dos bot�es foi acionado
+//Testa se algum dos botões foi acionado
 if (($_POST['btAdcionar'] == "Adcionar Contador") || ($_POST['btAtualizar'] == "Atualizar Contador")) {
 	$cod_prest = $_POST['CODPRESTADOR'];
 	$cod_cont  = $_POST['CODCONTADOR'];

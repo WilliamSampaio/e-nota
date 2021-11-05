@@ -68,7 +68,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 		// Gera o arquivo CSV para download
 		$arquivo = $CODIGO_DA_EMPRESA."arquivo.csv";
 		$fp = fopen("tmp/".$arquivo, "w");
-		$cabecario = "Número da nota;Código de verificação;Data e hora de emissão;Número do  RPS;Data do RPS;Nome do Tomador de serviços;CPF/CNPJ do Tomador de serviços;Inscrição municipal do Tomador de serviços;Logradouro do Tomador de serviços;Número do Tomador de serviços;Complemento do Tomador de serviços;Bairro do Tomador de serviços;CEP do Tomador de serviços;Município do Tomador de serviços;UF do Tomador de serviços;Email do Tomador de serviços;Discrimina��o da nota;Valor total da nota;Valor de deduções;Base de Calculo;Valor ISS;ISS retido;Crédito gerado;Estado da nota;Discrimina��o de Servi�os\n";
+		$cabecario = "Número da nota;Código de verificação;Data e hora de emissão;Número do  RPS;Data do RPS;Nome do Tomador de serviços;CPF/CNPJ do Tomador de serviços;Inscrição municipal do Tomador de serviços;Logradouro do Tomador de serviços;Número do Tomador de serviços;Complemento do Tomador de serviços;Bairro do Tomador de serviços;CEP do Tomador de serviços;Município do Tomador de serviços;UF do Tomador de serviços;Email do Tomador de serviços;Discriminação da nota;Valor total da nota;Valor de deduções;Base de Calculo;Valor ISS;ISS retido;Crédito gerado;Estado da nota;Discriminação de Serviços\n";
 		fwrite($fp, $cabecario);
 		
 		while($cadastro = mysql_fetch_array($sql)) {
@@ -90,9 +90,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 			fwrite($fp, $registros); // Grava a linha no arquivo
 		}
 		fclose($fp);
-		// Mensagem de conclu�do
+		// Mensagem de concluído
 		/*$display = "Arquivo gerado com sucesso.<bR>\n
-		Clique com o bot�o direito do mouse em cima de &quot;CLIQUE AQUI&quot; e depois em salvar destino.<br>*/
+		Clique com o botão direito do mouse em cima de &quot;CLIQUE AQUI&quot; e depois em salvar destino.<br>*/
 	  }else{
 	  	print("<script language=JavaScript>alert('Selecione um mês e um ano!!')</script>");
 	  }
