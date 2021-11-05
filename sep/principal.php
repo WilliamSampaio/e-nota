@@ -40,44 +40,20 @@ if (isset($_SESSION["logado"])) {
 				<!-- CONTEÚDO -->
 				<div class="col-sm-12 col-md-12 col-lg-12">
 
-					<tr>
+					<?php
 
-						<td align="left" valign="top">
-							<?php
-							if ($_GET['d']) {
-								if (substr($_GET['d'], 0, 6) == 'janela') {
-									include_janela(substr($_GET['d'], 8), 'JANELA', substr($_GET['d'], 6, 1));
-									//Mensagem(substr('janela1:a',7,1));
-								} else {
-									include $_GET['d'];
-								}
-							} else if ($_GET['j']) {
-								if ($btDetalhesPrestadorVisualizar) {
-									$_POST['include'] = str_replace('tomadores', 'prestadores', $_POST['include']);
-									$_POST['CODEMISSOR']  = $_POST['CODTOMADOR'];
-								}
-								include_janela($_POST['include']);
-							} else
-    if ($_POST['include']) {
-								if ($btDetalhesPrestadorVisualizar) {
-									$_POST['include'] = str_replace('tomadores', 'prestadores', $_POST['include']);
-									$_POST['CODEMISSOR']  = $_POST['CODTOMADOR'];
-								}
+					if (isset($_POST['opcao'])) {
+						include __DIR__ . '/../sep/inc/' . $_POST['opcao'];
+					}
 
-								require_once($_POST['include']);
-							}
-							?>
-						</td>
-					</tr>
-					</table>
+					?>
 
-				<?php
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+		</div>
 
-				require_once DIR_SEP . "include/footer.php";
-			} else {
-				require_once("funcoes/util.php");
-				Mensagem('Sem permissão de acesso!!!');
-				print("<script language=JavaScript>parent.location='login.php';</script>");
-			}
-
-				?>
+	<?php require_once DIR_SEP . "include/footer.php";
+} ?>

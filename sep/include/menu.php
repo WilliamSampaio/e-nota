@@ -18,24 +18,26 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<?php
-if (!$_GET['m']) {
-?>
 
-	<ul class="nav nav-pills">
+<form method="post" id='form-opcao'>
+	<input name='opcao' id='opcao' type='hidden' value=''>
+	<input type="submit" value="submit" style="display: none;">
+</form>
 
-		<?php
+<ul class="nav nav-pills">
 
-		$sql_menus = $PDO->query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
-		while (list($codmenu, $menu, $link) = $sql_menus->fetch()) {
+	<?php
 
-			if ($_SESSION['nivel_de_acesso'] == "M") {
-				$string = " AND menus_prefeitura_submenus.nivel <> 'A'";
-			} elseif ($_SESSION['nivel_de_acesso'] == "B") {
-				$string = " AND menus_prefeitura_submenus.nivel = 'B'";
-			}
+	$sql_menus = $PDO->query("SELECT codigo, menu, link FROM menus_prefeitura ORDER BY ordem");
+	while (list($codmenu, $menu, $link) = $sql_menus->fetch()) {
 
-			$sql_submenus = "SELECT
+		if ($_SESSION['nivel_de_acesso'] == "M") {
+			$string = " AND menus_prefeitura_submenus.nivel <> 'A'";
+		} elseif ($_SESSION['nivel_de_acesso'] == "B") {
+			$string = " AND menus_prefeitura_submenus.nivel = 'B'";
+		}
+
+		$sql_submenus = "SELECT
 				menus_prefeitura.link, submenus_prefeitura.menu, submenus_prefeitura.link
 				FROM
 				menus_prefeitura 
@@ -48,28 +50,28 @@ if (!$_GET['m']) {
 				ORDER BY
 				menus_prefeitura_submenus.ordem";
 
-			$sql_submenus = $PDO->query($sql_submenus);
+		$sql_submenus = $PDO->query($sql_submenus);
 
-			if ($sql_submenus->rowCount() > 0) { ?>
+		if ($sql_submenus->rowCount() > 0) { ?>
 
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $menu ?></a>
-					<ul class="dropdown-menu">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $menu ?></a>
+				<ul class="dropdown-menu">
 
-						<?php while (list($menulink, $submenu, $submenulink) = $sql_submenus->fetch()) { ?>
+					<?php while (list($menulink, $submenu, $submenulink) = $sql_submenus->fetch()) { ?>
 
-							<li><a class="dropdown-item" href="<?php echo $submenulink ?>"><?php echo $submenu ?></a></li>
+						<li>
+							<a class="dropdown-item" href="#" onclick="document.getElementById('opcao').value='<?php echo $menulink . '/' . $submenulink ?>';document.getElementById('form-opcao').submit();"><?php echo $submenu ?></a>
+						</li>
 
-						<?php } ?>
-					</ul>
-				</li>
-
-			<?php } ?>
+					<?php } ?>
+				</ul>
+			</li>
 
 		<?php } ?>
-		<li class="nav-item">
-			<a class="nav-link" aria-current="page" href="logout.php">Sair</a>
-		</li>
-	</ul>
 
-<?php } ?>
+	<?php } ?>
+	<li class="nav-item">
+		<a class="nav-link" aria-current="page" href="logout.php">Sair</a>
+	</li>
+</ul>
