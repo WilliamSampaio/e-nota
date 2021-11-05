@@ -59,12 +59,12 @@ if (!(isset($_SESSION["logado"]))) {
                             <div class="card-body">
                                 <!-- CPF ou CNPJ -->
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" type="text" name="txtLogin" id="txtLogin" size="30" onkeyup="CNPJCPFMsk( this )" onkeydown="return NumbersOnly(event); " required>
+                                    <input class="form-control" type="text" name="txtLogin" id="txtLogin" required>
                                     <label for="txtLogin">Usuário</label>
                                 </div>
                                 <!-- SENHA -->
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" type="password" name="txtSenha" id="txtSenha" size="30" required>
+                                    <input class="form-control" type="password" name="txtSenha" id="txtSenha" required>
                                     <label for="txtSenha">Senha</label>
                                 </div>
                                 <hr>
@@ -72,7 +72,7 @@ if (!(isset($_SESSION["logado"]))) {
 
                                     <div class="col-md">
                                         <div class="form-floating">
-                                            <input class="form-control" type="text" name="codseguranca" id="codseguranca" size="6">
+                                            <input class="form-control" type="text" name="codseguranca" id="codseguranca">
                                             <label for="codseguranca">Cód. Verificação</label>
                                         </div>
                                     </div>
@@ -103,13 +103,11 @@ if (!(isset($_SESSION["logado"]))) {
             </div>
         </div>
 
-        <script src="../../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    </body>
+    <?php
 
-<?php
-
+    require_once __DIR__ . '/../sep/include/footer.php';
 } else {
     header('Location: principal.php');
 }
 
-?>
+    ?>
