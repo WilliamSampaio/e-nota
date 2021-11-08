@@ -24,8 +24,21 @@ Fith Floor, Boston, MA 02110-1301, USA
 //assim reduz muita a chance de dar um erros,
 //e isso esta aki no util porque tem que estar em todas as paginas
 
-function getConnection(){
+function getConnection()
+{
 	return new Connection(CONFIG_FILE);
+}
+
+function add_logs($acao)
+{
+	$usuario = $_SESSION["nome"];
+	$ip = getenv("REMOTE_ADDR");
+	$sql = getConnection()->query("INSERT INTO logs SET usuario='$usuario', ip='$ip', datas=NOW(),acao = '$acao'");
+}
+
+function message_alert($msg)
+{
+	return print("<script type='text/javascript'>alert('" . $msg . "');</script>");
 }
 
 function validaXmlImportacao($xml)
@@ -649,45 +662,41 @@ function Paginacao($query, $form, $retorno, $quant = NULL, $test = false)
 	$GLOBALS['pagina'] = $pagina;
 	//Monta a table com os botoes onde chamou a função
 	if ($sql_pesquisa->rowCount() > 0) {
-		$botoes = "
-		<table width=\"100%\">
-			<tr>
-				<td align=\"center\">
-					<b>";
-		if ($total_sql == 1) {
-			$botoes .= "1 Resultado";
-		} else {
-			$botoes .= "$total_sql Resultados";
-		}
-		$botoes .= ", página: $pagina de $total_paginas</b>
-					<input type=\"button\" name=\"btAnterior\" value=\"Anterior\" class=\"botao\" 
-					onclick=\"document.getElementById('hdPrimeiro').value=1;
-					mudarpagina('a','hdPagina','$arquivo','$form','$retorno');\" ";
-		if ($pagina == 1) {
-			$botoes .= "disabled = disabled";
-		}
-		$botoes .= " />
-					<input type=\"button\" name=\"btProximo\" value=\"Próximo\" class=\"botao\" 
-					onclick=\"document.getElementById('hdPrimeiro').value=1;
-					mudarpagina('p','hdPagina','$arquivo','$form','$retorno');\" ";
-		if ($pagina == $total_paginas) {
-			$botoes .= "disabled = disabled";
-		}
-		$botoes .= " />
-					<input type=\"hidden\" name=\"hdPagina\" id=\"hdPagina\" value=\"$pagina\" />
-					<input type=\"hidden\" name=\"hdPrimeiro\" id=\"hdPrimeiro\" />
-				</td>
-			 </tr>
-		</table>";
+
+?>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li class="page-item">
+					<a type="button" class="page-link" aria-label="Previous" onclick="document.getElementById('hdPrimeiro').value=1;
+					mudarpagina('a','hdPagina','<?php echo $arquivo ?>','<?php echo $form ?>','<?php echo $retorno ?>');">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<?php for ($i = 1; $i <= $total_paginas; $i++) { ?>
+					<li class="page-item <?php echo ($pagina == $i ? 'active' : '') ?>">
+						<a type="button" class="page-link" onclick="document.getElementById('hdPrimeiro').value=1;
+					mudarpagina(<?php echo $i ?>,'hdPagina','<?php echo $arquivo ?>','<?php echo $form ?>','<?php echo $retorno ?>');" <?php echo ($pagina == $i ? 'disabled' : '') ?>>
+							<?php echo $i ?>
+						</a>
+					</li>
+				<?php } ?>
+				<li class="page-item">
+					<a type="button" class="page-link" aria-label="Next" onclick="document.getElementById('hdPrimeiro').value=1;
+					mudarpagina('p','hdPagina','<?php echo $arquivo ?>','<?php echo $form ?>','<?php echo $retorno ?>');">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<input type='hidden' name='hdPagina' id='hdPagina' value='<?php echo $pagina ?>'>
+		<input type='hidden' name='hdPrimeiro' id='hdPrimeiro'>
+
+<?php
+
 	} //fim if se existe resultado
 
 	if ($test == false) { //test para botar os botoes direto com echo ou passar para uma array com o return
-		echo $botoes;
 		return $sql_pesquisa;
-	} else {
-		$return['sql'] = $sql_pesquisa;
-		$return['botoes'] = $botoes;
-		return $return;
 	}
 } //fim function Paginacao()
 
@@ -915,4 +924,3 @@ function resize($arquivo, $caminho, $largura = NULL)
 }
 
 ?>
-
