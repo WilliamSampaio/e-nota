@@ -19,69 +19,86 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-	//recebimento de variaveis por post
-	$titulo = $_POST["txtTitulo"];
-	$texto  = $_POST["txtText"];
-	if($_POST["btInserir"] == "Inserir Nova"){
-		$PDO->query("INSERT INTO noticias SET titulo = '$titulo', texto = '$texto', data = NOW(), sistema='nfe'");
-		add_logs('Inseriu uma Notícia');
-		Mensagem(htmlentities("Notícia inserida"));
-	}//fim if
-	 if($_POST["btExcluir"] == " "){
-		$cod_nt= $_POST['hdCodNt'];
-		$sql_busca_nt = $PDO->query("SELECT texto FROM noticias WHERE codigo = '$cod_nt'");
-		list($exc_nt) = $sql_busca_nt->fetch();
-		$PDO->query("DELETE FROM noticias WHERE codigo ='$cod_nt'"); 
-		add_logs('Excluiu uma Notícia');
-		Mensagem(htmlentities("Notícia excluida!"));
-		}
-			
+
+require_once __DIR__ . '/../../../autoload.php';
+
+//recebimento de variaveis por post
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$titulo = $_POST["txtTitulo"];
+$texto  = $_POST["txtText"];
+
+if ($_POST["btInserir"] == "Inserir Nova") {
+	$PDO->query("INSERT INTO noticias SET titulo = '$titulo', texto = '$texto', data = NOW(), sistema='nfe'");
+	add_logs('Inseriu uma Notícia - ' . $titulo);
+	$_SESSION['success'] = 'Notícia inserida com sucesso!';
+	header('Location: ' . $actual_link);
+	die;
+}
+
+if ($_POST["btExcluir"] == "excluir") {
+	$cod_nt = $_POST['hdCodNt'];
+	$sql_busca_nt = $PDO->query("SELECT texto FROM noticias WHERE codigo = '$cod_nt'");
+	list($exc_nt) = $sql_busca_nt->fetch();
+	$PDO->query("DELETE FROM noticias WHERE codigo ='$cod_nt'");
+	add_logs('Excluiu uma Notícia');
+	$_SESSION['error'] = 'Notícia excluida!';
+	header('Location: ' . $actual_link);
+	die;
+}
+
 ?>
-<div id="divnoticias" style="position:absolute; left:30%; top:40%; display:none"></div>
-<table border="0" cellspacing="0" cellpadding="0" bgcolor="#CCCCCC">
-  <tr>
-    <td width="18" align="left" background="img/form/cabecalho_fundo.jpg"><img src="img/form/cabecalho_icone.jpg" /></td>
-    <td width="730" background="img/form/cabecalho_fundo.jpg" align="left" class="formCabecalho">Utilitários - Notícias</td>  
-    <td width="19" align="right" valign="top" background="img/form/cabecalho_fundo.jpg"><a href=""><img src="img/form/cabecalho_btfechar.jpg" width="19" height="21" border="0" /></a></td>
-  </tr>
-  <tr>
-    <td width="18" background="img/form/lateralesq.jpg"></td>
-    <td align="center">
+
+
+<div class="card">
+	<div class="card-header">
+		<h5 class="card-title">
+			Utilitários - Notícias
+		</h5>
+
+	</div>
+	<div class="card-body">
+		<h5 class="card-title">
+			Notícias
+		</h5>
+		<hr>
+
+		<?php
+		if (isset($_SESSION['error'])) {
+			echo "<div class='alert alert-danger'>" . $_SESSION['error'] . "</div>";
+			unset($_SESSION['error']);
+		} elseif (isset($_SESSION['success'])) {
+			echo "<div class='alert alert-success'>" . $_SESSION['success'] . "</div>";
+			unset($_SESSION['success']);
+		}
+		?>
+
 		<form method="post" id="frmNoticias">
-			<input name="include" id="include" type="hidden" value="<?php echo $_POST["include"];?>" />
-				<fieldset><legend>Notícias</legend>
-					<table width="100%">
-						<tr>
-							<td width="12%" align="left">Título</td>
-							<td width="88%" align="left"><input type="text" name="txtTitulo" id="txtTitulo" size="50" class="texto" /></td>
-						</tr>
-						<tr>
-							<td colspan="2" align="left">Conteúdo</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td align="left"><textarea name="txtText" id="txtText" cols="50" rows="6" class="texto"></textarea></td>
-						</tr>
-						<tr>
-							<td align="left">
-                            	<input type="submit" name="btInserir" class="botao" value="Inserir Nova" 
-                            	onclick="return ValidaFormulario('txtTitulo|txtText','Os campos titulo e noticia devem ser preenchidos!')" />
-                            </td>
-                            <td align="left">
-                            	<input type="button" name="btInserir" class="botao" value="Mostrar Noticias" 
-                            	onclick="acessoAjax('inc/utilitarios/noticias_lista.ajax.php','frmNoticias','divnoticiaslista')" />
-                            </td>
-						</tr>
-					</table>
-				</fieldset>	
-                <div id="divnoticiaslista"></div>
-			</form>
-			</td>
-		<td width="19" background="img/form/lateraldir.jpg"></td>
-  </tr>
-  <tr>
-    <td align="left" background="img/form/rodape_fundo.jpg"><img src="img/form/rodape_cantoesq.jpg" /></td>
-    <td background="img/form/rodape_fundo.jpg"></td>
-    <td align="right" background="img/form/rodape_fundo.jpg"><img src="img/form/rodape_cantodir.jpg" /></td>
-  </tr>
-</table>
+			<input name="include" id="include" type="hidden" value="<?php echo $_POST["include"]; ?>" />
+
+			<div class="mb-3">
+				<label for="txtTitulo" class="form-label">Título</label>
+				<input type="text" class="form-control" id="txtTitulo" name="txtTitulo">
+			</div>
+
+
+			<div class="mb-3">
+				<label for="txtText" class="form-label">Conteúdo</label>
+				<textarea class="form-control" id="txtText" name="txtText" rows="3"></textarea>
+			</div>
+
+			<hr>
+
+			<div class="row g-3">
+				<div class="col-auto">
+					<input type="submit" class="btn btn-primary mb-3" name="btInserir" value="Inserir Nova" onclick="return ValidaFormulario('txtTitulo|txtText','Os campos titulo e noticia devem ser preenchidos!')">
+				</div>
+				<div class="col-auto">
+					<input type="button" class="btn btn-primary mb-3" name="btInserir" value="Mostrar Noticias" onclick="acessoAjax('inc/utilitarios/noticias_lista.ajax.php','frmNoticias','divnoticiaslista')">
+				</div>
+			</div>
+
+			<div class="table-responsive" id="divnoticiaslista"></div>
+		</form>
+
+	</div>
+</div>
