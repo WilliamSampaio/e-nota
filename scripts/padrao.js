@@ -22,12 +22,12 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 /**
  * Parametros em objeto com chaves separados por virgula
- * a ordem dos parametros não altera o resultado, e os opcionais não precisam ser chamados
+ * a ordem dos parametros nï¿½o altera o resultado, e os opcionais nï¿½o precisam ser chamados
  * 
  * @url: string, obrigatorio
  * @tipo: string, GET ou POST, padrao GET
  * @parametros: string, se for POST, exemplo "var=1&cont=2&nome=alguem"
- * @espera: function, o que vai acontecer enquanto espera a resposta, se vazio não acontece nada
+ * @espera: function, o que vai acontecer enquanto espera a resposta, se vazio nï¿½o acontece nada
  * @sucesso: function, o que vai acontecer quando retornar o resultado, a resposta esta na variavel global respostaAjax
  * @erro: function, em caso de erro executa essa funcao
  * @assincrona: boolean, se for false o browser vai esperar resposta, usuario nao podera mexer, padrao TRUE;
@@ -158,7 +158,7 @@ function ajax(p) {
 		return;
 	var url = p.url;
 	var tipo = p.tipo || "GET"; //se nao for informado usa o padrao GET
-	var param = p.parametros || null; // se nao for informado não sera utilizado
+	var param = p.parametros || null; // se nao for informado nï¿½o sera utilizado
 	var a = p.assincrona || true; // se nao for informado padrao TRUE
 	var espera = p.espera;
 	var sucesso = p.sucesso;
@@ -177,14 +177,14 @@ function ajax(p) {
 	
 	req.open(tipo, p.url, a);
 
-	// Quando o objeto recebe o retorno, chamamos a seguinte função;
+	// Quando o objeto recebe o retorno, chamamos a seguinte funï¿½ï¿½o;
 	req.onreadystatechange = function() {
 
 		// enquanto carrega
 		if (req.readyState == 1&& espera) {
 			espera();
 		}
-		// Verifica se o Ajax realizou todas as operações corretamente
+		// Verifica se o Ajax realizou todas as operaï¿½ï¿½es corretamente
 		if (req.readyState == 4 && req.status == 200) {
 			// Resposta retornada pelo ajax
 			respostaAjax = "";
@@ -201,12 +201,12 @@ function ajax(p) {
 
 //  FUNCOES GERADAS POR ULTIMO ------------------------------------------------------------------------------------------------------------------>
 
-/**Função desabilitaSN
+/**Funï¿½ï¿½o desabilitaSN
 *Parametros :
 *obj  = campo de cnpj/cpf
 *idSN = id do campo checkbox do simples nacional
 *lbTexto = Label ou alguma tag que tenha o texto descritivo dentro ex: <font>Texto aqui</font>
-*A função no evento onblur conta quantos caracteres foi passado para verificar se tem RPA, se tiver
+*A funï¿½ï¿½o no evento onblur conta quantos caracteres foi passado para verificar se tem RPA, se tiver
 *desabilita o campo simples nacional e muda a cor do texto
 */
 function desabilitaSN(obj,idSN,lbTexto){
@@ -229,7 +229,7 @@ function mudarpagina(valor,hdpag,url,form,retorno){
 		hdpagina = parseInt(hdpagina) + 1;
 	}else if(valor == 'a'){
 		hdpagina = parseInt(hdpagina) - 1;
-	}else if(typeof valor == "int"){
+	}else if(Number.isInteger(valor)){
 		hdpagina = valor;		
 	}
 	
@@ -239,10 +239,10 @@ function mudarpagina(valor,hdpag,url,form,retorno){
 }
 
 function cancelarNfe(codigo,nome,url,form,retorno,hdcanc){
-	if(confirm('Deseja cancelar a declaracao N°'+codigo+' de '+nome+'?')){
+	if(confirm('Deseja cancelar a declaracao Nï¿½'+codigo+' de '+nome+'?')){
 		document.getElementById(hdcanc).value = codigo;
 		acessoAjax(url,form,retorno);
-		alert(('Declaração cancelada!'));
+		alert(('Declaraï¿½ï¿½o cancelada!'));
 	}
 }
 
@@ -250,7 +250,7 @@ function id(elementId){//atalho para pegar o elemento por ID
 	return document.getElementById(elementId);
 }
 
-var hdtd = ''; //variavel que será usada na funçao VisualizarNovaLinha()
+var hdtd = ''; //variavel que serï¿½ usada na funï¿½ao VisualizarNovaLinha()
 function VisualizarNovaLinha(cod,area,obj,url){	
 	if(hdtd){         										//verifica se o hidden da td ja tem valor
 		var idtd = hdtd;									//recebe o valor da do input hidden com o id da td e manda para a variavel
@@ -335,14 +335,14 @@ function ValidaSenha(campo1,campo2){
 					return false;
 				}
 			}else{
-				alert(('As senhas não conferem'));
+				alert(('As senhas nï¿½o conferem'));
 				document.getElementById(campo1).value = '';
 				document.getElementById(campo2).value = '';
 				document.getElementById(campo1).focus();
 				return false;
 			}
 		}else{
-			alert(('Digite a confirmação da senha'));
+			alert(('Digite a confirmaï¿½ï¿½o da senha'));
 			document.getElementById(campo2).focus();
 			return false;
 		}
@@ -358,7 +358,7 @@ function ValidaSenha(campo1,campo2){
 	var form = obj.form.id;
 	acessoAjax('inc/verifica_cnpj.ajax.php',form,idretorno);
 }*/
-//Função que verifica o CNPJ no banco de dados
+//Funï¿½ï¿½o que verifica o CNPJ no banco de dados
 function ValidaCNPJ(obj,idretorno){
 	var form = obj.form.id;
 	var cnpj = id('txtCNPJ').value;
@@ -372,7 +372,7 @@ function ValidaCNPJ(obj,idretorno){
 }
 
 
-//Função que valida se o CNPJ foi inserido corretamente ou não
+//Funï¿½ï¿½o que valida se o CNPJ foi inserido corretamente ou nï¿½o
 function ConfereCNPJ(obj){
 	if(document.getElementById('hdCNPJ')){
 		alert(('Verifique os campos!'));
@@ -393,10 +393,10 @@ function criaSpanSenha(elemento) {
 	}
 }
 
-/**Função verificaForca
+/**Funï¿½ï¿½o verificaForca
 *Parametro:
 *obj = campo de tipo senha
-*Esta função verifica a quantidade de caracteres e a força da senha inserida pelo usuario
+*Esta funï¿½ï¿½o verifica a quantidade de caracteres e a forï¿½a da senha inserida pelo usuario
 */
 function verificaForca(obj) {
 	var valor    = obj.value;
@@ -491,7 +491,7 @@ function acessoAjax(url,form,retorno,retorna){
 	}	
    	var url= url+'?'+parametros;	
 	req.open("Get", url, true);		 
-	// Quando o objeto recebe o retorno, chamamos a seguinte função;
+	// Quando o objeto recebe o retorno, chamamos a seguinte funï¿½ï¿½o;
 	req.onreadystatechange = function() {			
 		if(req.readyState == 1) {				
   	      //document.getElementById('').innerHTML = '<font color="gray">Verificando...</font>';
@@ -502,11 +502,11 @@ function acessoAjax(url,form,retorno,retorna){
 		  
 		}
 		
-		// Verifica se o Ajax realizou todas as operações corretamente (essencial)
+		// Verifica se o Ajax realizou todas as operaï¿½ï¿½es corretamente (essencial)
 		if(req.readyState == 4 && req.status == 200) {			
 		// Resposta retornada pelo validacao.php
 		var resposta = Trim(req.responseText);			
-		// Abaixo colocamos a resposta na div do campo que fez a requisição					
+		// Abaixo colocamos a resposta na div do campo que fez a requisiï¿½ï¿½o					
 		 	document.getElementById(retorno).innerHTML = resposta;
 			if(document.getElementById('txtTomadorNome')){
 				document.getElementById('txtTomadorNome').focus();
@@ -703,7 +703,7 @@ function acessoAjax(url,form,retorno,retorna){
 	
 	function ValidaFormulario(inputs,mensagem)
 	{
-		var msg = mensagem === undefined ? "Favor preencher todos os campos obrigatórios!" : mensagem;
+		var msg = mensagem === undefined ? "Favor preencher todos os campos obrigatï¿½rios!" : mensagem;
     	var aux;
         var falso=0;
 		var aux= inputs.split("|");				
@@ -726,13 +726,13 @@ function acessoAjax(url,form,retorno,retorna){
 		if (document.getElementById('txtLogin')) {
 			if (!document.getElementById('txtLogin').value
 					&& !document.getElementById('txtCodigo').value) {
-				alert(('Favor preencher todos os campos obrigatórios!'));
+				alert(('Favor preencher todos os campos obrigatï¿½rios!'));
 				document.getElementById('txtLogin').focus();
 				return false;
 			}
 			if (document.getElementById('txtLogin').value
 					&& document.getElementById('txtCodigo').value) {
-				alert(('Preencher apenas um dos campos CNPJ/CPF ou Código!'));
+				alert(('Preencher apenas um dos campos CNPJ/CPF ou Cï¿½digo!'));
 				document.getElementById('txtLogin').focus();
 				return false;
 			}
@@ -762,7 +762,7 @@ function acessoAjax(url,form,retorno,retorna){
 		return true;
 	}
 	
-	//Funcao pára limpar os campos da tabela
+	//Funcao pï¿½ra limpar os campos da tabela
 	function LimpaFormulario(inputs)
 	{
 		var aux;
@@ -884,7 +884,7 @@ function convertDate(data)
         d=new date();
     return d
 }
-/* Validações */
+/* Validaï¿½ï¿½es */
 function FmtValorMonetario(Dado)
 {
       var Result, i;
@@ -1089,7 +1089,7 @@ function isCpf(elem, msgbox)
 		return true;
 	if (pCpf.length < 14) {
 	    if (msgbox)
-		    alert(('CPF inválido (' + pCpf + ').'));
+		    alert(('CPF invï¿½lido (' + pCpf + ').'));
 		//elem.value = "";
 		return false;
 	}
@@ -1101,16 +1101,16 @@ function isCpf(elem, msgbox)
 	var digitos = dvCpfCnpj(base, false);
 	var algUnico, i;
 
-	// Valida dígitos verificadores
+	// Valida dï¿½gitos verificadores
 	
 	if (numero != base + digitos) {
 	    if (msgbox)
-		    alert(('CPF inválido (' + pCpf + ').'));
+		    alert(('CPF invï¿½lido (' + pCpf + ').'));
 		//elem.value = "";
 		return false;
 	}
 
-	/* Não serão considerados válidos os seguintes CPF:
+	/* Nï¿½o serï¿½o considerados vï¿½lidos os seguintes CPF:
 	 * 000.000.000-00, 111.111.111-11, 222.222.222-22, 333.333.333-33, 444.444.444-44,
 	 * 555.555.555-55, 666.666.666-66, 777.777.777-77, 888.888.888-88, 999.999.999-99.
 	 */
@@ -1122,7 +1122,7 @@ function isCpf(elem, msgbox)
 	if (algUnico)
 	{
 	    if (msgbox)
-	        alert(('CPF inválido (' + pCpf + ').'));
+	        alert(('CPF invï¿½lido (' + pCpf + ').'));
 		//elem.value = "";
 		return false;
 	}
@@ -1140,7 +1140,7 @@ function isCnpj(elem, msgbox)
 	if (pCnpj.length < 18)
 	{
 	    if (msgbox)
-		    alert(('CNPJ inválido (' + pCnpj + ').'));
+		    alert(('CNPJ invï¿½lido (' + pCnpj + ').'));
 		//elem.value = "";
 		return false;
 	}
@@ -1153,17 +1153,17 @@ function isCnpj(elem, msgbox)
 	var digitos = dvCpfCnpj(base + ordem, true);
 	var algUnico;
 
-	// Valida dígitos verificadores
+	// Valida dï¿½gitos verificadores
 	if (numero != base + ordem + digitos)
 	{
 	    if (msgbox)
-		    alert(('CNPJ inválido (' + pCnpj + ').'));
+		    alert(('CNPJ invï¿½lido (' + pCnpj + ').'));
 		//elem.value = "";
 		return false;
 	}
 
 
-	/* Não serão considerados válidos os CNPJ com os seguintes números BÁSICOS:
+	/* Nï¿½o serï¿½o considerados vï¿½lidos os CNPJ com os seguintes nï¿½meros Bï¿½SICOS:
 	 * 11.111.111, 22.222.222, 33.333.333, 44.444.444, 55.555.555,
 	 * 66.666.666, 77.777.777, 88.888.888, 99.999.999.
 	 */
@@ -1176,26 +1176,26 @@ function isCnpj(elem, msgbox)
 	if (algUnico) 
 	{
 	    if (msgbox)
-		    alert(('CNPJ inválido (' + pCnpj + ').'));
+		    alert(('CNPJ invï¿½lido (' + pCnpj + ').'));
 		//elem.value = "";
 		return false;
 	}
 
 
-	/* Não será considerado válido CNPJ com número de ORDEM igual a 0000.
-	 * Esta crítica não será feita quando o BÁSICO do CNPJ for igual a 00.000.000.
+	/* Nï¿½o serï¿½ considerado vï¿½lido CNPJ com nï¿½mero de ORDEM igual a 0000.
+	 * Esta crï¿½tica nï¿½o serï¿½ feita quando o Bï¿½SICO do CNPJ for igual a 00.000.000.
 	*/ 
 	if (ordem == "0000")
 	{
 	    if (msgbox)
-		    alert(('CNPJ inválido (' + pCnpj + ').'));
+		    alert(('CNPJ invï¿½lido (' + pCnpj + ').'));
 		//elem.value = "";
 		return false;
 	}
 	
 /*	if (!(base == "00000000" || base.substring(0, 3) != "000"))
 	{
-		alert(('CNPJ (' + pCnpj + ') inválido.'));
+		alert(('CNPJ (' + pCnpj + ') invï¿½lido.'));
 		alert('base : ' + base);
 		elem.value = "";
 		return false;
@@ -1300,7 +1300,7 @@ function validaCnpj(source, args)
 }
 
 
-/* Máscaras */
+/* Mï¿½scaras */
 function strip( str, c ) {
 	var tmp = str.split( c );
 	return tmp.join("");
@@ -1438,7 +1438,7 @@ function VerificacaoMsk( aWidget )
    }
 
 
-/*Exemplo de utilização:
+/*Exemplo de utilizaï¿½ï¿½o:
 <input type="text" name="valor"  onKeyPress="return(MascaraMoeda(this,'.',',',event))">*/
 
 
@@ -1466,8 +1466,8 @@ function MascaraMoeda(objTextBox, SeparadorMilesimo, SeparadorDecimal, e){
     var aux = aux2 = '';
     var whichCode = (window.event) ? e.keyCode : e.which;
     if ((whichCode == 13)||(whichCode == 8)||(whichCode == 0)) return true;
-    key = String.fromCharCode(whichCode); // Valor para o código da Chave
-    if (strCheck.indexOf(key) == -1) return false; // Chave inválida
+    key = String.fromCharCode(whichCode); // Valor para o cï¿½digo da Chave
+    if (strCheck.indexOf(key) == -1) return false; // Chave invï¿½lida
     len = objTextBox.value.length;
     for(i = 0; i < len; i++)
         if ((objTextBox.value.charAt(i) != '0') && (objTextBox.value.charAt(i) != SeparadorDecimal)) break;
@@ -1674,7 +1674,7 @@ function FormataValor1(campo,tammax,teclapres)
 // -------------------------------- Money 2 ----------------------------------
 
 function diasDecorridos(dt1, dt2){
-	// variáveis auxiliares
+	// variï¿½veis auxiliares
 	var minuto = 60000; 
 	var dia = minuto * 60 * 24;
 	var horarioVerao = 0;
@@ -1687,11 +1687,11 @@ function diasDecorridos(dt1, dt2){
 	dt2.setMinutes(0);
 	dt2.setSeconds(0);
 	
-	// determina o fuso horário de cada objeto Date
+	// determina o fuso horï¿½rio de cada objeto Date
 	var fh1 = dt1.getTimezoneOffset();
 	var fh2 = dt2.getTimezoneOffset(); 
 	
-	// retira a diferença do horário de verão
+	// retira a diferenï¿½a do horï¿½rio de verï¿½o
 	if(dt2 > dt1){
 	  horarioVerao = (fh2 - fh1) * minuto;
 	} 
@@ -1819,7 +1819,7 @@ function validaExtencao(file){
 	if(extencao[key] == ''){
 		return true;
 	}else if((extencao[key] != 'jpg')&&(extencao[key] != 'jpeg')&&(extencao[key] != 'gif')&&(extencao[key] != 'png')&&(extencao[key] != 'JPG')&&(extencao[key] != 'JPEG')&&(extencao[key] != 'GIF')&&(extencao[key] != 'PNG')){
-		alert(("A extenção "+extencao[key]+" não é válida"));
+		alert(("A extenï¿½ï¿½o "+extencao[key]+" nï¿½o ï¿½ vï¿½lida"));
 		return false;
 	}
 	return true;
@@ -1855,7 +1855,7 @@ function buscacep(){
 				});
 				document.getElementById('txtTomadorIM').focus();
 			}else{
-				alert('Cep não encontrado em nosso sistema.'); 
+				alert('Cep nï¿½o encontrado em nosso sistema.'); 
 				/*document.getElementById('txtTomadorLogradouro').value = '';
 				document.getElementById('txtTomadorBairro').value = '';
 				document.getElementById('txtTomadorUF').value = '';
@@ -1896,7 +1896,7 @@ function buscacep(){
 			document.getElementById('txtTomadorIM').focus();
 		 },
 		 error: function(){
-			alert('Cep não encontrado em nosso sistema.'); 
+			alert('Cep nï¿½o encontrado em nosso sistema.'); 
 		 	document.getElementById('txtTomadorLogradouro').value = '';
 			document.getElementById('txtTomadorBairro').value = '';
 			document.getElementById('txtTomadorUF').value = '';
