@@ -22,7 +22,6 @@ Fith Floor, Boston, MA 02110-1301, USA
 // inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
 session_name("contador");
 session_start();
-//header("Cache-Control: no-cache, must-revalidate");
 
 require_once '../autoload.php';
 
@@ -36,11 +35,10 @@ if(!(isset($_SESSION["empresa"])))
 	";
 }else{
 	
-	//require_once DIR_CONTADOR . 'include/header.php';	
+	require_once DIR_CONTADOR . 'include/header.php';	
 
 ?>
-
-    <!DOCTYPE html>
+    <!-- <!DOCTYPE html>
     <html lang="pt-bt">
 
     <head>
@@ -69,52 +67,43 @@ if(!(isset($_SESSION["empresa"])))
             margin-top: auto;
         }
 		</style>
-    </head>
+    </head> -->
 
     <body>
 
         <?php
- //require_once DIR_CONTADOR . 'include/navbar.php'; 
- require_once("../include/topo.php");
+require_once DIR_CONTADOR . 'include/navbar.php'; 
+// require_once("../include/topo.php");
  //require_once "../include/navbar.php";
 ?>
-
-            <!-- frame central inicio -->
-            <!-- <table border="0" cellspacing="0" cellpadding="0" height="100%">
-  <tr>
-    <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php //require_once("include/menu.php"); ?></td>
-    <td width="590" bgcolor="#FFFFFF" valign="top" align="center">
-	<img src="../img/cabecalhos/cadastro.jpg" /> -->
-
-            <div id="content" class="container bg-light">
-                <div class="row align-items-start">
-                    <!-- MENU -->
-                    <div class="col-md-3">
-                        <?php 
-						//require_once DIR_CONTADOR . 'include/menu.php' 
-						require_once("./inc/menu.php");
-						?>
-                    </div>
-
-					<div class="col-md">
-					<br>
-					<h1>Ataulizar Cadastro</h1>
-					<h5>Atualização do cadastro de sua empresa.</h5>
-					<hr><br>
-                     <?php require_once("inc/empresas_principal.php"); ?>
-                    
-					</div>
-
-                    
-
+        <div id="content" class="container bg-light">
+            <div class="row align-items-start">
+                <!-- MENU -->
+                <div class="col-md-3">
+                    <?php 
+                    //require_once DIR_CONTADOR . 'include/menu.php' 
+                    require_once("include/menu.php");
+                    ?>
                 </div>
+
+                <div class="col-md">
                 <br>
+                <h1>Atualizar Cadastro</h1>
+                <h5>Atualização do cadastro de sua empresa.</h5>
+                <hr>
+                    <?php require_once("inc/empresas_principal.php"); ?>
+                
+                </div>
+
+                
+
             </div>
+            <br>
+        </div>
 
 
 
 			<?php require_once("include/footer.php"); ?>
-
 
             <script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
             <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>

@@ -33,7 +33,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         SELECT codigo FROM cadastro
         WHERE codigo='".$_SESSION['codempresa']."'
     ");
-    list($codcontador) = mysql_fetch_array($sql);
+    list($codcontador) = $sql->fetch();
 
     $sqlSimples = $PDO->query("
         SELECT COUNT(cadastro.codigo) FROM cadastro
@@ -42,7 +42,7 @@ Fith Floor, Boston, MA 02110-1301, USA
         AND cadastro.codigo = $codcontador
     ");
 
-    list($simples) = mysql_fetch_array($sqlSimples);
+    list($simples) = $sqlSimples->fetch();
 
     $sqlEmpresaCliente = $PDO->query("
         SELECT codigo,
@@ -61,7 +61,7 @@ Fith Floor, Boston, MA 02110-1301, USA
       <select name="cmbEmpresaCliente" id="cmbEmpresaCliente">
           <option value="<?php echo $codcontador; ?>"><?php echo "Própria - ".$_SESSION['codempresa']; ?></option>
           <?php
-            while($empresaCliente = mysql_fetch_object($sqlEmpresaCliente)){
+            while($empresaCliente = $sqlEmpresaCliente->fetchObject()){
                 if($empresaCliente->codigo == $_POST['cmbEmpresaCliente'] || $empresaCliente->codigo == $_POST['cmbCliente']){
                     $selected = "selected='selected'";
                 }else{

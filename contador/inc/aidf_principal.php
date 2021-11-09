@@ -19,13 +19,15 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
+//require_once "../../autoload.php";
+
 	if($btSolicitar!="")
 		{
 			$codigoempresa = $_POST['cmbEmpresa'];
 			$notaempresa=$PDO->query("SELECT ultimanota, notalimite FROM cadastro WHERE codigo = '$codigoempresa'");
-			list($ultimanota,$notalimite)=mysql_fetch_array($notaempresa);
+			list($ultimanota,$notalimite)=$notaempresa->fetch();
 			$sql_aidfe=$PDO->query("SELECT codigo FROM aidfe_solicitacoes WHERE solicitante = '$codigoempresa'");
-			$numero_de_solicitacoes = mysql_num_rows($sql_aidfe);
+			$numero_de_solicitacoes = $sql_aidfe->rowCount();
 			if($numero_de_solicitacoes>0){
 				Mensagem('Sua solicitação já foi enviada a prefeitura.');
 				Redireciona('aidf.php');
@@ -42,68 +44,49 @@ Fith Floor, Boston, MA 02110-1301, USA
 			}
 		}
 	$sql=$PDO->query("SELECT ultimanota, notalimite, razaosocial FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-	list($ultimanota,$notalimite,$razaocontador)=mysql_fetch_array($sql);
+	list($ultimanota,$notalimite,$razaocontador)=$sql->fetch();
 	if($notalimite==0){$notalimite="Liberado";}
 	$sqlempresas=$PDO->query("SELECT ultimanota, notalimite, razaosocial FROM cadastro WHERE codcontador = '$CODIGO_DA_EMPRESA'");
 ?>
-<form method="post">
-<table border="0" align="center" cellpadding="0" cellspacing="1">
-    <tr>
-      <td width="10" height="10" bgcolor="#FFFFFF"></td>
-	  <td width="100" align="center" bgcolor="#FFFFFF" rowspan="3">AIDF Eletrônico</td>
-      <td width="470" bgcolor="#FFFFFF"></td>
-	</tr>
-	<tr>
-	  <td height="1" bgcolor="#CCCCCC"></td>
-      <td bgcolor="#CCCCCC"></td>
-	</tr>
-	<tr>
-	  <td height="10" bgcolor="#FFFFFF"></td>
-      <td bgcolor="#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td colspan="3" height="1" bgcolor="#CCCCCC"></td>
-	</tr>
-	<tr>
-		<td height="60" colspan="3" bgcolor="#CCCCCC">	
 
-        <table align="center" width="100%">
-        	<tr>
-            	<td colspan="2" bgcolor="#666666">
+<form method="post">
+        <div align="left" width="100%">
+        	<div>
+            	<td colspan="2">
                 <?php echo "Razão Social: ".$razaocontador; ?>
                 </td>
-            </tr>
-            <tr align="left" bgcolor="#FFFFFF">
+			</div>
+            <div align="left" >
                 <td width="50%">Número da última nota emitida:</td>
                 <td width="50%"><?php echo $ultimanota; ?></td>
-            </tr>
-            <tr align="left" bgcolor="#FFFFFF">
+			</div>
+            <div align="left" >
                 <td>Nota limite / AIDF:</td>
                 <td><?php echo $notalimite; ?></td>
-            </tr>
-        </table>
+			</div>
+		</div>
         <?php
-		if(mysql_num_rows($sqlempresas)>0){
-			while(list($ultimanotaemp,$notalimiteemp,$razaocontadoremp)=mysql_fetch_array($sqlempresas)){
+		if($sqlempresas->rowCount()>0){
+			while(list($ultimanotaemp,$notalimiteemp,$razaocontadoremp)=$sqlempresas->fetch()){
 				if($notalimiteemp==0){
 					$notalimiteemp="Liberado";
 				}
 				?>
-				<table align="center" width="100%">
-					<tr>
-						<td colspan="2" bgcolor="#666666">
-						<?php echo "Razão Social: ".$razaocontadoremp; ?>
-						</td>
-					</tr>
-					<tr align="left" bgcolor="#FFFFFF">
-						<td width="50%">Número da última nota emitida:</td>
-						<td width="50%"><?php echo $ultimanotaemp; ?></td>
-					</tr>
-					<tr align="left" bgcolor="#FFFFFF">
-						<td>Nota limite / AIDF:</td>
-						<td><?php echo $notalimiteemp; ?></td>
-					</tr>
-				</table>
+					<div align="left" width="100%">
+						<div>
+							<td colspan="2">
+							<?php echo "Razão Social: ".$razaocontador; ?>
+							</td>
+						</div>
+						<div align="left" >
+							<td width="50%">Número da última nota emitida:</td>
+							<td width="50%"><?php echo $ultimanota; ?></td>
+						</div>	
+						<div align="left" >
+							<td>Nota limite / AIDF:</td>
+							<td><?php echo $notalimite; ?></td>
+						</div>
+					</div>
 				<?php
 			}
 		}
@@ -116,8 +99,8 @@ Fith Floor, Boston, MA 02110-1301, USA
                             <select name="cmbEmpresa" id="cmbEmpresa">
                                 <option value="<?php echo $CODIGO_DA_EMPRESA; ?>"><?php echo $razaocontador; ?></option>
 									<?php
-                                        if(mysql_num_rows($sqlcontadores)>0){
-                                            while(list($codigo,$razaosocial,$Nfe)= mysql_fetch_array($sqlcontadores)){
+                                        if($sqlcontadores->rowCount()>0){
+                                            while(list($codigo,$razaosocial,$Nfe)= $sqlcontadores->fetch()){
                                                 echo "<option value=\"$codigo\">$razaosocial </option>";
                                             }
                                         }
@@ -134,8 +117,10 @@ Fith Floor, Boston, MA 02110-1301, USA
         <?php } ?>
 		</td>
 	</tr>
+
 	<tr>
-    	<td height="1" colspan="3" bgcolor="#CCCCCC"></td>
+    	<td height="1" colspan="3" ></td>
 	</tr>
 </table>   
 </form>	
+

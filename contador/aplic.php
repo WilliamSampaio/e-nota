@@ -38,31 +38,31 @@ if (!(isset($_SESSION["empresa"]))) {
 
 ?>
 
-	<body>
+<body>
 
-		<?php require_once DIR_CONTADOR . 'include/navbar.php' ?>
+	<?php require_once DIR_CONTADOR . 'include/navbar.php' ?>
 
-		<div class="container bg-light">
-			<div class="row align-items-start">
-				<!-- MENU -->
-				<div class="col-sm-12 col-md-3 col-lg-3">
-					<?php require_once DIR_CONTADOR . 'include/menu.php' ?>
-				</div>
-				<!-- CONTEÚDO -->
-				<div class="col-sm-12 col-md-9 col-lg-9">
-					<br>
-					<h1>e-Nota</h1>
-					<h5 class="card-title">Documento emitido e armazenado eletronicamente com o objetivo de registrar as operações de prestação de serviços e será utilizada em substituição às notas fiscais de serviços convencionais.</h5>
-					<hr><br>
-				</div>
+	<div class="container bg-light">
+		<div class="row align-items-start">
+			<!-- MENU -->
+			<div class="col-sm-12 col-md-3 col-lg-3">
+				<?php require_once DIR_CONTADOR . 'include/menu.php' ?>
 			</div>
-			<br>
-			<br>
-			<br>
+			<!-- CONTEÚDO -->
+			<div class="col-sm-12 col-md-9 col-lg-9">
+				<br>
+				<h1>e-Nota</h1>
+				<h5 class="card-title">Documento emitido e armazenado eletronicamente com o objetivo de registrar as operações de prestação de serviços e será utilizada em substituição às notas fiscais de serviços convencionais.</h5>
+				<hr><br>
+			</div>
 		</div>
-	<?php
-
+		<br>
+		<br>
+		<br>
+	</div>
+</body>
+<?php
 	require_once DIR_CONTADOR . 'include/footer.php';
 }
 
-	?>
+?>
