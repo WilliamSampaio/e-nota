@@ -19,21 +19,23 @@ Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
 <?php
-require_once("../conect.php");
-require_once("../../funcoes/util.php");
+
+require_once __DIR__.'/../../../autoload.php';
+
 //recebimento por get das variaveis
 $combo = $_GET["cmbLogs"];
 
 //altera o valor da legenda do fildset
-if($combo == "C"){
-	$legend = "Contadores";
-}elseif($combo == "E"){
-	$legend = "Emissores";
-}elseif($combo == "P"){
-	$legend = "Prefeitura";
-}//fim elseif
-//testa se o combo tem valor
-if($combo){
+ if($combo == "C"){
+ 	$legend = "Contadores";
+ }elseif($combo == "E"){
+ 	$legend = "Emissores";
+ }elseif($combo == "P"){
+ 	$legend = "Prefeitura";
+ }//fim elseif
+ 
+ //testa se o combo tem valor
+ if($combo){
 ?>
 <fieldset><legend>Logs <?php echo $legend;?></legend>
 	<table width="100%">
@@ -55,7 +57,7 @@ if($combo){
 		</tr>
 	</table>
 	<input type="hidden" name="hdCombo" value="<?php echo $combo;?>">
-</fieldset>
+</fieldset> 
 <div id="divresultados"></div>
 <?php
 }//fim if
