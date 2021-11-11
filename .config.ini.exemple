@@ -1,15 +1,35 @@
-[db_teste1]
+; Parâmetros de conexão padrão, quando NÃO HÁ multiplas aplicações compartilhando o mesmo
+; código fonte e sendo direcionadas por subdomínios.
 DB_HOST=localhost
-DB_DATABASE=db_1
-DB_USERNAME=user_1
-DB_PASSWORD=pass_1
+DB_PORT=3306
+DB_DATABASE=dbname
+DB_USERNAME=username
+DB_PASSWORD=123
 
-[db_teste2]
+; -------------------------------------------------------------------------------------------
+
+; Parâmetros de conexão padrão, quando HÁ multiplas aplicações compartilhando o mesmo
+; código fonte e sendo direcionadas por subdomínios.
+
+; Parâmetros referente ao primeiro subdomínio.
+[app1_domain]
 DB_HOST=localhost
-DB_DATABASE=db_2
-DB_USERNAME=user_2
-DB_PASSWORD=pass_2
+DB_PORT=3306
+DB_DATABASE=dbname_app1
+DB_USERNAME=username
+DB_PASSWORD=123
 
+; Parâmetros referente ao segundo subdomínio.
+[app2_domain]
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=dbname_app2
+DB_USERNAME=username
+DB_PASSWORD=123
+
+; -------------------------------------------------------------------------------------------
+
+; Parâmetros de configurações da conta de e-mail.
 [mail_config]
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.mailtrap.io
