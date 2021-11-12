@@ -23,11 +23,13 @@ Fith Floor, Boston, MA 02110-1301, USA
 
 require_once '../autoload.php';
 
-session_start();
+unset($_SESSION['contador']);
 session_destroy();
-session_unset($_SESSION['contador']);
 
 header('Location: ' . BASE_URL . 'contador/login.php');
 
-// print("<script language=JavaScript>parent.location.href='login.php'</script>"); ?>
+//print("<script language=JavaScript>parent.location.href='login.php'</script>");
+echo "mjfkjdrslfj";
+?>
+
 

@@ -34,31 +34,22 @@ if(!(isset($_SESSION["empresa"])))
 		</script>
 	";
 }else{
-	
 	require_once DIR_CONTADOR . 'include/header.php';	
-
 ?>
 <body>
-
-<?php require_once DIR_CONTADOR . 'include/navbar.php'; ?>
-
+    <?php require_once DIR_CONTADOR . 'include/navbar.php'; ?>
     <div id="content" class="container bg-light">
         <div class="row align-items-start">
             <!-- MENU -->
             <div class="col-md-3">
-                <?php 
-                //require_once DIR_CONTADOR . 'include/menu.php' 
-                require_once("include/menu.php");
-                ?>
+                <?php require_once("include/menu.php");?>
             </div>
-
             <div class="col-md">
-            <br>
-            <h1>Livro Principal</h1>
-            <h5>Atualização do cadastro de sua empresa.</h5>
-            <hr>
+                <br>
+                <h1>Livro Principal</h1>
+                <h5>Atualização do cadastro de sua empresa.</h5>
+                <hr>
                 <?php require_once("inc/livro_principal.php"); ?>
-            
             </div>
         </div>
         <br>
@@ -68,5 +59,4 @@ if(!(isset($_SESSION["empresa"])))
       <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
       <script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
 </body>
-</html>
 <?php } ?>

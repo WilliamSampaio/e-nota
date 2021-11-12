@@ -18,7 +18,7 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-    <?php 
+<?php 
 // inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
 session_name("contador");
 session_start();
@@ -34,39 +34,30 @@ if(!(isset($_SESSION["empresa"])))
 		</script>
 	";
 }else{
-	
 	require_once DIR_CONTADOR . 'include/header.php';	
-
 ?>
 
 <body>
-
-<?php require_once DIR_CONTADOR . 'include/navbar.php'; ?>
-
-        <div id="content" class="container bg-light">
-            <div class="row align-items-start">
-                <!-- MENU -->
-                <div class="col-md-3">
-                    <?php 
-                    //require_once DIR_CONTADOR . 'include/menu.php' 
-                    require_once("include/menu.php");
-                    ?>
-                </div>
-
-                <div class="col-md">
+    <?php require_once DIR_CONTADOR . 'include/navbar.php'; ?>
+    <div id="content" class="container bg-light">
+        <div class="row align-items-start">
+            <!-- MENU -->
+            <div class="col-md-3">
+                <?php require_once("include/menu.php");?>
+            </div>
+            <div class="col-md">
                 <br>
                 <h1>Notas Eletrônicas</h1>
                 <h5>Acesse as suas notas eletrônicas</h5>
                 <hr>
-                    <?php require_once("inc/notas_principal.php"); ?>
-                </div>
+                <?php require_once("inc/notas_principal.php"); ?>
             </div>
-            <br>
         </div>
-		<?php require_once("include/footer.php"); ?>
-		<script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
-		<script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
-		<script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
+        <br>
+    </div>
+    <?php require_once("include/footer.php"); ?>
+    <script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
+    <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
+    <script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
 </body>
-</html>
 <?php }?>

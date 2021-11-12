@@ -33,11 +33,8 @@ if (!(isset($_SESSION["empresa"]))) {
 	  </script>
   ";
 } else {
-
 	require_once DIR_CONTADOR . 'include/header.php';
-
 ?>
-
 <body>
 	<?php require_once DIR_CONTADOR . 'include/navbar.php' ?>
 	<div class="container bg-light">
@@ -58,9 +55,8 @@ if (!(isset($_SESSION["empresa"]))) {
 		<br>
 		<br>
 	</div>
-</body>
-<?php
-	require_once DIR_CONTADOR . 'include/footer.php';
-}
 
-?>
+	<?php require_once("include/footer.php"); ?>
+
+</body>
+<?php }?>

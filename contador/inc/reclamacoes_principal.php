@@ -24,7 +24,7 @@ $cnpjcpf = $_SESSION['login'];
 $campo   = tipoPessoa($cnpjcpf);
 
 $sql = $PDO->query("SELECT $campo FROM cadastro WHERE codigo = '$CODIGO_DA_EMPRESA'");
-list($prestador_cnpjcpf) = mysql_fetch_array($sql);
+list($prestador_cnpjcpf) = $sql->fetch();
 //SQL de filtragem de serviços
 $sql_listaPendentes = $PDO->query("SELECT codigo, especificacao, datareclamacao, responsavel, tomador_cnpj FROM reclamacoes WHERE estado = 'pendente' AND emissor_cnpjcpf = '$prestador_cnpjcpf' ORDER BY datareclamacao DESC LIMIT 0,10");
 
@@ -32,7 +32,7 @@ $sql_listaPendentes = $PDO->query("SELECT codigo, especificacao, datareclamacao,
  
 <!-- cabe�alho da pesquisa --> 
 <?php
-if(mysql_num_rows($sql_listaPendentes)>0){
+if($sql_listaPendentes->rowCount()>0){
 ?>   
 <form name="frmListaReclamacoesPendentes" method="post" action="reclamacoes.php">
 <table border="0" align="center" cellpadding="0" cellspacing="1">
@@ -61,7 +61,7 @@ if(mysql_num_rows($sql_listaPendentes)>0){
       <td width="30%">Especificação</td>
       <td width="40%">Tomador</td>
       <td width="5%">Dta Recl</td>
-      <td width="20%">Respons�vel</td>
+      <td width="20%">Responsavel</td>
       <td width="5%"></td>
     </tr>
     <tr>
@@ -69,7 +69,7 @@ if(mysql_num_rows($sql_listaPendentes)>0){
     </tr>
     <?php
     // lista o resultado do sql
-    while(list($codigo, $especificacao, $datareclamacao, $responsavel, $tomador_cnpj) = mysql_fetch_array($sql_listaPendentes)) {
+    while(list($codigo, $especificacao, $datareclamacao, $responsavel, $tomador_cnpj) = $sql_listaPendentes->fetch()) {
     ?>
     <tr>
       <td bgcolor="#FFFFFF"><?php echo $especificacao; ?></td>
@@ -104,7 +104,7 @@ if(mysql_num_rows($sql_listaPendentes)>0){
 </form>
 <?php
 }else{
-	echo "<center>Não há reclama��es pendentes</center>";
+	echo "<center>Não há reclamacoes pendentes</center>";
 }
 ?>
 <?php
@@ -122,7 +122,7 @@ LIMIT 0,10");
  
 <!-- cabe�alho da pesquisa --> 
 <?php
-if(mysql_num_rows($sql_listaAtendidas)>0){
+if($sql_listaAtendidas->rowCount()>0){
 ?>
 <form name="frmListaReclamacoesAtendidas" method="post" action="reclamacoes.php">
 <table border="0" align="center" cellpadding="0" cellspacing="1">
@@ -149,7 +149,7 @@ if(mysql_num_rows($sql_listaAtendidas)>0){
       <td width="30%">Especificação</td>
       <td width="40%">Tomador</td>
       <td width="5%">Dta Atend</td>
-      <td width="20%">Respons�vel</td>
+      <td width="20%">Responsavel</td>
       <td width="5%"></td>
     </tr>
     <tr>
@@ -157,7 +157,7 @@ if(mysql_num_rows($sql_listaAtendidas)>0){
     </tr>
   <?php
   // lista o resultado do sql
-  while(list($codigo, $especificacao, $dataatendimento, $responsavel, $tomador_cnpj) = mysql_fetch_array($sql_listaAtendidas)) {
+  while(list($codigo, $especificacao, $dataatendimento, $responsavel, $tomador_cnpj) = $sql_listaAtendidas->fetch()) {
   ?>
     <tr>
       <td bgcolor="#FFFFFF"><?php echo $especificacao; ?></td>
@@ -190,6 +190,6 @@ if(mysql_num_rows($sql_listaAtendidas)>0){
 </form>
 <?php
 }else{
-	echo "<center>Não há reclama��es atendidas</center>";
+	echo "<center>Não há reclamacoes atendidas</center>";
 }
 ?>

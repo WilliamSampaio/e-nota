@@ -22,6 +22,9 @@ Fith Floor, Boston, MA 02110-1301, USA
 // inicia a sessão verificando se jah esta com o usuario logado, se estiver entra na página admin
 session_name("contador");
 session_start();
+
+require_once '../autoload.php';
+
 if(!(isset($_SESSION["empresa"])))
 {   
 	echo "
@@ -30,9 +33,11 @@ if(!(isset($_SESSION["empresa"])))
 			window.location='login.php';
 		</script>
 	";
-}else{?>
+}else{
+  require_once DIR_CONTADOR . 'include/header.php';
+  ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -41,42 +46,31 @@ if(!(isset($_SESSION["empresa"])))
 <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
 <script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
 <link href="../css/padrao_emissor.css" rel="stylesheet" type="text/css" />
-</head>
+</head> -->
 
 <body>
-<center>
-<table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td><?php require_once("../include/topo.php"); ?></td>
-  </tr>
-  <tr>
-    <td bgcolor="#FFFFFF" height="400" valign="top" align="center">
-	
-<!-- frame central inicio --> 	
-<table border="0" cellspacing="0" cellpadding="0" height="100%">
-  <tr>
-    <td width="170" align="left" background="../img/menus/menu_fundo.jpg" valign="top"><?php require_once("inc/menu.php"); ?></td>
-    <td width="530"bgcolor="#FFFFFF" valign="top">
-	<img src="../img/cabecalhos/exportarnfe.jpg" />
-<!-- frame central lateral direita inicio -->	
-	
-<?php require_once("inc/exportar_principal.php"); ?>	
-	
-<!-- frame central lateral direita fim -->	
-	</td>
-  </tr>
-</table>
+    <?php require_once DIR_CONTADOR . 'include/navbar.php'; ?>
+    <div id="content" class="container bg-light">
+        <div class="row align-items-start">
+            <!-- MENU -->
+            <div class="col-md-3">
+                <?php require_once("include/menu.php");?>
+            </div>
+            <!--OPÇÕES-->
+            <div class="col-md">
+                <br>
+                <h1>Exportar Notas</h1>
+                <h5>Exporte suas notas aqui</h5>
+                <hr>
+                <?php require_once("inc/exportar_principal.php"); ?>
+            </div>
+        </div>
+        <br>
+    </div>
+    <?php require_once("include/footer.php"); ?>
 
-
-<!-- frame central fim --> 	
-	</td>
-  </tr>
-  <tr>
-    <td><?php require_once("inc/rodape.php"); ?></td>
-  </tr>
-</table>
-</center>
-
+    <script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
+    <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
+    <script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
 </body>
-</html>
-<?php }?>
+<?php } ?>

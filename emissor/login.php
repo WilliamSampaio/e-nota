@@ -24,17 +24,15 @@ session_name("emissor");
 session_start();
 
 require_once '../autoload.php';
-require_once '../site/inc/header.php';
+require_once DIR_CONTADOR . 'include/header.php';
 
 if (!(isset($_SESSION["empresa"]))) {
-
 	$_SESSION['autenticacao'] = rand(10000, 99999);
-
 ?>
 
 	<body>
 
-		<?php require_once '../site/inc/navbar.php'; ?>
+		<?php require_once DIR_CONTADOR . 'include/navbar.php';  ?>
 
 		<div class="container bg-light">
 			<div class="row align-items-center" style="padding-top: 128px; padding-bottom: 128px;">
@@ -94,21 +92,13 @@ if (!(isset($_SESSION["empresa"]))) {
 						<div class="text-center">
 							<a href="../site/recuperarsenha.php">Recuperar Senha</a>
 						</div>
-
-						<!--<tr> 
-							<td align="left">Código</td>
-							<td>	   	   
-							<input type="text" name="txtCodigo" id="txtCodigo" size="30" class="texto" onkeydown="return NumbersOnly(event);" />
-							</td>
-						</tr>-->
-
 					</form>
 					<!-- formulario de login Fim -->
 				</div>
 			</div>
 		</div>
 	<?php
-		require_once '../site/inc/footer.php';
+		require_once 'include/footer.php';
 	} else {
 		header('Location: ' . BASE_URL . 'emissor/aplic.php');
 	}

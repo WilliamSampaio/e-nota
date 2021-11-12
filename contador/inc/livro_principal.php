@@ -18,7 +18,7 @@ www.softwarepublico.gov.br, ou escreva para a Fundacao do Software Livre Inc., 5
 Fith Floor, Boston, MA 02110-1301, USA
 */
 ?>
-<script type="text/javascript" language="javascript" src="../scripts/jquery.js"></script>
+<!-- <script type="text/javascript" language="javascript" src="../scripts/jquery.js"></script>
 <script src="../scripts/padrao.js" language="javascript" type="text/javascript"></script>
 <script src="../scripts/jquery-1.1.3.1.pack.js" type="text/javascript"></script>
 <script src="../scripts/jquery.history_remote.pack.js" type="text/javascript"></script>
@@ -26,7 +26,7 @@ Fith Floor, Boston, MA 02110-1301, USA
 <script src="../scripts/java_site.js" language="javascript" type="text/javascript"></script>
 <script src="../scripts/java_emissor_contador.js" language="javascript" type="text/javascript"></script>
 <link rel="stylesheet" href="../css/jquery.tabs.css" type="text/css" media="print, projection, screen">
-<link href="../css/padrao_emissor.css" rel="stylesheet" type="text/css" />
+<link href="../css/padrao_emissor.css" rel="stylesheet" type="text/css" /> -->
 
 <?php
     $sql = $PDO->query("
