@@ -12,7 +12,7 @@ $router = new Router(URL_BASE);
 $router->namespace("Source\App");
 
 $router->group(null);
-$router->get('/', function(){
+$router->get('/', function () {
     header("Location: site");
 });
 
@@ -20,10 +20,18 @@ $router->get('/', function(){
  * Define as rotas do modulo SITE
  */
 $router->group('site');
-
-// inicio
 $router->get('/', "Site:inicio");
 $router->get('/prestadores', "Site:prestadores");
+$router->get('/contadores', "Site:contadores");
+$router->get('/tomadores', "Site:tomadores");
+$router->get('/rps', "Site:rps");
+$router->get('/beneficios', "Site:beneficios");
+$router->get('/faq', "Site:faq");
+$router->get('/ouvidoria/{opcao}', "Site:ouvidoria");
+$router->post('/ouvidoria/{opcao}', "Site:ouvidoria");
+$router->get('/ouvidoria', "Site:ouvidoria");
+$router->get('/noticias', "Site:noticias");
+$router->get('/legislacao', "Site:legislacao");
 
 
 /**
