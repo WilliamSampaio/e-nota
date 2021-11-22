@@ -10,4 +10,12 @@ class Log extends DataLayer
     {
         parent::__construct("logs", []);
     }
+
+    public function addLog(int $cod_usuario, string $acao)
+    {
+        $this->cod_usuario = $cod_usuario;
+        $this->ip = getenv("REMOTE_ADDR");
+        $this->acao = $acao;
+        return $this->save();
+    }
 }

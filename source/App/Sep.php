@@ -63,13 +63,16 @@ class Sep
                     $usuario->ultlogin = date_format($data, 'Y-m-d H:i:s');
                     $usuario->save();
 
-                    $log = new Log;
-                    $log->cod_usuario = $usuario->codigo;
-                    $log->ip = getenv("REMOTE_ADDR");
-                    $log->acao = "Efetuou o Login";
-                    $log->save();
+                    (new Log)->addLog($usuario->codigo, 'Efetuou o Login');
 
                     header('Location: ' . url('sep/principal'));
+                }else{
+
+                    // caso o codigo de segurança seja inválido
+                    $data['result'] = array(
+                        'status' => 'error',
+                        'mensagem' => 'Erro! Usuário inválido.'
+                    );
                 }
             } else {
 

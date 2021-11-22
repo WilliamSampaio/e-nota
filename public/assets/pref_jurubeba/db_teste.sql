@@ -8950,7 +8950,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 
 INSERT INTO `usuarios` (`codigo`, `nome`, `login`, `senha`, `tipo`, `ultlogin`, `nivel`) VALUES
-(1, 'Infortread', 'Admistrador', '064eb39d4b4a8875001473b4b7459abf', 'prefeitura', '2021-10-17 00:36:01', 'A');
+(1, 'Administrador', 'Administrador', '827ccb0eea8a706c4c34a16891f84e7b', 'prefeitura', '2021-10-17 00:36:01', 'A');
 
 --
 -- Índices de tabelas apagadas
