@@ -44,7 +44,7 @@
             </div>
             <div class="card-footer">
                 <img src="../img/box/web.png" width="14" height="14">
-                <a href="<?= BASE_URL ?>contador/index.php" target="_blank">Serviço online</a>
+                <a href="<?= url('contador') ?>" target="_blank">Serviço online</a>
             </div>
         </div>
     </div>

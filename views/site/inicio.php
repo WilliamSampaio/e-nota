@@ -49,7 +49,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <img src="../img/como_funciona.jpg" class="img-fluid" alt="...">
+                                <img src="<?= url('assets/img/como_funciona.jpg') ?>" class="img-fluid" alt="...">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -98,22 +98,13 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <?php
-                                /*$sql_contribuintes = $PDO->query("SELECT COUNT(codigo) FROM cadastro WHERE estado = 'A'");
-                                                list($empresas_ativas) = $sql_contribuintes->fetch();
-
-                                                $sql_nfeemididas = $PDO->query("SELECT COUNT(codigo) FROM notas");
-                                                list($notas_emitidas) = $sql_nfeemididas->fetch();*/
-                                ?>
 
                                 <p>Contribuintes autorizados à emissão de NFe:
-                                    <span style="color: red; font-weight: bold;"><?php //echo $empresas_ativas 
-                                                                                    ?></span>
+                                    <span style="color: red; font-weight: bold;"><?= $indicativos['cadastros'] ?></span>
                                 </p>
 
                                 <p>NFe já emitidas:
-                                    <span style="color: red; font-weight: bold;"><?php //echo $notas_emitidas 
-                                                                                    ?></span>
+                                    <span style="color: red; font-weight: bold;"><?= $indicativos['notas'] ?></span>
                                 </p>
 
                             </div>
@@ -127,17 +118,6 @@
         </div>
         <br>
     </div>
-
-    <?php
-    /*$sql = $PDO->query("SELECT ativar_creditos FROM configuracoes");
-                    if ($sql->rowCount()) {
-                        $ativar_creditos = $sql->fetch()[0];
-                    } else {
-                        $ativar_creditos = 'n';
-                    }
-
-                    if ($ativar_creditos == 's') {*/
-    ?>
 
     <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="card">
@@ -188,20 +168,23 @@
         <br>
     </div>
 
-    <div class="col-sm-12 col-md-6 col-lg-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Seus Créditos</h5>
-                <p class="card-text">Consulte seus créditos obtidos até o momento.</p>
+    <?php if ($configuracoes->ativar_creditos == 's') : ?>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Seus Créditos</h5>
+                    <p class="card-text">Consulte seus créditos obtidos até o momento.</p>
+                </div>
+                <div class="card-footer">
+                    <a type="button" href="tomadores.php" class="btn btn-primary">
+                        Saiba mais!
+                    </a>
+                </div>
             </div>
-            <div class="card-footer">
-                <a type="button" href="tomadores.php" class="btn btn-primary">
-                    Saiba mais!
-                </a>
-            </div>
+            <br>
         </div>
-        <br>
-    </div>
+
+    <?php endif ?>
+
 </div>
-<?php //} //fom if ativar_creditos 
-?>

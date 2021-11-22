@@ -4,7 +4,7 @@
             <tr>
                 <td width="15%" valign="middle">
                     <a class="navbar-brand" href="index.php">
-                        <img src="<?= url('assets/img/' . $configuracoes->brasao_nfe) ?>" alt="" width="64" height="64" class="d-inline-block align-text-top">
+                        <img src="<?= url('assets/pref_' . strtolower(str_replace(' ', '_', $configuracoes->cidade)) . "/img/{$configuracoes->brasao_nfe}") ?>" alt="" width="64" height="64" class="d-inline-block align-text-top">
                     </a>
                 </td>
                 <td width="85%">

@@ -23,6 +23,8 @@ $router->group('site');
 $router->get('/', "Site:inicio");
 $router->get('/prestadores', "Site:prestadores");
 $router->get('/contadores', "Site:contadores");
+$router->get('/tomadores/{opcao}', "Site:tomadores");
+$router->post('/tomadores/{opcao}', "Site:tomadores");
 $router->get('/tomadores', "Site:tomadores");
 $router->get('/rps', "Site:rps");
 $router->get('/beneficios', "Site:beneficios");
@@ -33,6 +35,33 @@ $router->get('/ouvidoria', "Site:ouvidoria");
 $router->get('/noticias', "Site:noticias");
 $router->get('/legislacao', "Site:legislacao");
 
+/**
+ * Define as rotas do modulo EMISSOR
+ */
+$router->group('emissor');
+$router->get('/', function($data){
+    echo '<h1>modulo emissor</h1>';
+    var_dump($data);
+});
+
+/**
+ * Define as rotas do modulo CONTADOR
+ */
+$router->group('contador');
+$router->get('/', function($data){
+    echo '<h1>modulo contador</h1>';
+    var_dump($data);
+});
+
+/**
+ * Define as rotas do modulo SEP
+ */
+$router->group('sep');
+$router->get('/', "Sep:inicio");
+$router->get('/login/{result}', "Sep:login");
+$router->get('/login', "Sep:login");
+$router->post('/login', "Sep:login");
+$router->get('/principal', "Sep:principal");
 
 /**
  * Tratamento dos erros

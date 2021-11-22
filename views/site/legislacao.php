@@ -67,7 +67,7 @@
                             <p>
                                 <i class="fas fa-file-pdf fa-2x" style="color: darkred;"></i>
                                 <?= date("d-m-Y", strtotime($leg->data_criacao)) . ' | ' ?>
-                                <a href="<?= url("assets/doc/" . str_replace(" ", "-", strtolower($configuracoes->cidade)) . "/legislacao/{$leg->arquivo}") ?>" target="_blank"> [Download] </a>
+                                <a href="<?= url('assets/pref_' . strtolower(str_replace(' ', '_', $configuracoes->cidade)) . "/doc/{$leg->arquivo}") ?>" target="_blank"> [Download] </a>
                             </p>
                         </div>
                     </div>

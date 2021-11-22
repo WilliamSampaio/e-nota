@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Manaus');
+
 define('URL_BASE', "http://" . $_SERVER['SERVER_NAME'] . "/public");
 
 define('DIR_BASE', $_SERVER['DOCUMENT_ROOT']);

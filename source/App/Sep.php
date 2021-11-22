@@ -8,39 +8,32 @@ use Source\Models\Legislacao;
 use Source\Models\Noticia;
 use Source\Models\Reclamacao;
 use Bissolli\ValidadorCpfCnpj\Documento;
+use DateTime;
+use Source\Helpers\SimpleCaptcha;
 use Source\Models\Cadastro;
-use Source\Models\Nota;
+use Source\Models\Log;
+use Source\Models\Usuario;
 
-class Site
+class Sep
 {
     private $view;
 
     public function __construct()
     {
+        session_start();
         $this->view = new Engine(dirBase('views'));
     }
 
-    public function inicio($data)
+    public function inicio()
     {
-        $configuracoes = new Configuracao();
-
-        $data = array(
-            'title' => 'Início | ' . SITE,
-            'configuracoes' => $configuracoes->findById(1)
-        );
-
-        $total_cadastros = (new Cadastro())->find("estado = :estado", "estado=A")->count();
-        $total_notas = (new Nota())->find()->count();
-
-        $data['indicativos'] = [
-            'cadastros' => $total_cadastros,
-            'notas' => $total_notas
-        ];
-
-        echo $this->view->render('site/inicio', $data);
+        if (isset($_SESSION["logado"])) {
+            header('Location: ' . url('sep/principal'));
+        } else {
+            header('Location: ' . url('sep/login'));
+        }
     }
 
-    public function prestadores($data)
+    public function login($_data)
     {
         $configuracoes = new Configuracao();
 
@@ -49,22 +42,83 @@ class Site
             'configuracoes' => $configuracoes->findById(1)
         );
 
-        echo $this->view->render('site/prestadores', $data);
+        // verifica se o formulario post foi submetido
+        if (isset($_data['submit'])) {
+
+            // verifica se o codigo de segurnça é correto
+            if ($_SESSION['captcha'] == $_data['codseguranca']) {
+
+                $login = $_data['txtLogin'];
+                $senha = md5($_data['txtSenha']);
+
+                $usuario = (new Usuario())->find("login = :login and senha = :senha", "login={$login}&senha={$senha}")->fetch();
+
+                if (isset($usuario)) {
+
+                    $_SESSION['logado'] = $usuario->codigo;
+                    $_SESSION['login'] = $usuario->login;
+                    $_SESSION['nivel_de_acesso'] = $usuario->nivel;
+
+                    $data = new DateTime();
+                    $usuario->ultlogin = date_format($data, 'Y-m-d H:i:s');
+                    $usuario->save();
+
+                    $log = new Log;
+                    $log->cod_usuario = $usuario->codigo;
+                    $log->ip = getenv("REMOTE_ADDR");
+                    $log->acao = "Efetuou o Login";
+                    $log->save();
+
+                    header('Location: ' . url('sep/principal'));
+                }
+            } else {
+
+                // caso o codigo de segurança seja inválido
+                $data['result'] = array(
+                    'status' => 'error',
+                    'mensagem' => 'Erro! Código de segurança inválido.'
+                );
+            }
+        }
+
+        $captcha = new SimpleCaptcha();
+
+        $data['captcha'] = $captcha;
+
+        $_SESSION['captcha'] = $captcha->getKey();
+
+        if ($_data['result'] == 'acesso_restrito_erro') {
+            $data['result'] = array(
+                'status' => 'error',
+                'mensagem' => 'Erro! Acesso Restrito.'
+            );
+        }
+
+        echo $this->view->render('sep/login', $data);
     }
 
-    public function contadores($data)
+    public function principal($data)
     {
-        $configuracoes = new Configuracao();
+        // temporaria mente, somente para destruir a sessão quando houver login
+        session_start();
+        session_destroy();
+        $_SESSION = [];
 
-        $data = array(
-            'title' => 'Contadores | ' . SITE,
-            'configuracoes' => $configuracoes->findById(1)
-        );
-
-        echo $this->view->render('site/contadores', $data);
+        // verifica se existe sessão ativa, caso não haja volta para tela de login
+        if (!isset($_SESSION['logado'])) {
+            header('Location: ' . url("sep/login/acesso_restrito_erro"));
+        }
     }
 
-    public function tomadores($_data)
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        $_SESSION = [];
+        header('Location: ' . url('sep'));
+    }
+
+    public function tomadores($data)
     {
         $configuracoes = new Configuracao();
 
@@ -73,33 +127,7 @@ class Site
             'configuracoes' => $configuracoes->findById(1)
         );
 
-        // verifica se o parâmetro passado após a rota tomadores .../tomadores/{opcao}
-        if (isset($_data['opcao'])) {
-
-            if ($_data['opcao'] == 'consultar-rps') {
-
-                // verifica se o formulario de consulta foi enviado via post
-                if (isset($_data['consultar'])) {
-
-                    $data['post'] = array(
-                        'txtNumeroRps' => $_data['txtNumeroRps'],
-                        'txtDataRps' => $_data['txtDataRps'],
-                        'txtPrestCpfCnpj' => $_data['txtPrestCpfCnpj'],
-                        'txtTomCpfCnpj' => $_data['txtTomCpfCnpj']
-                    );
-                }
-
-                echo $this->view->render('site/tomadores-consultar-rps', $data);
-            } elseif ($_data['opcao'] == 'autenticar-nota') {
-
-                echo $this->view->render('site/tomadores-autenticar-nota', $data);
-            } else {
-
-                echo $this->view->render('site/tomadores-gerar-guia', $data);
-            }
-        } else {
-            echo $this->view->render('site/tomadores', $data);
-        }
+        echo $this->view->render('site/tomadores', $data);
     }
 
     public function rps($data)

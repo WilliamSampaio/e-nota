@@ -44,7 +44,7 @@
             </div>
             <div class="card-footer">
                 <img src="../img/box/web.png" width="14" height="14">
-                <a href="../emissor/index.php" target="_blank">Serviço online</a>
+                <a href="<?= url('emissor') ?>" target="_blank">Serviço online</a>
             </div>
         </div>
     </div>

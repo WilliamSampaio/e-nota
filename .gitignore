@@ -25,3 +25,4 @@ extras/documentation
 
 .config.ini
 db/mysql/
+public/assets/pref_*/

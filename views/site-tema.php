@@ -28,7 +28,6 @@
         <br>
     </div>
 
-    <?= $this->section('footer') ?>
     <?= $this->section('scripts') ?>
 </body>
 

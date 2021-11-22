@@ -8,17 +8,10 @@
 
 <link href="<?= url('assets/font-awesome/css/all.css') ?>" rel="stylesheet">
 
-<link rel="icon" type="image/png" href="<?= url('assets/img/' . $configuracoes->brasao_nfe) ?>">
+<!-- folha de estilo que se aplica a todas as prefeituras -->
+<link href="<?= url('assets/css/main-style.css') ?>" rel="stylesheet">
 
-<style>
-    body {
-        background-color: lightgray;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
+<!-- folha de estilo referente a prefeitura -->
+<link href="<?= url('assets/pref_' . strtolower(str_replace(' ', '_', $configuracoes->cidade)) . '/style.css') ?>" rel="stylesheet">
 
-    footer {
-        margin-top: auto;
-    }
-</style>
+<link rel="icon" type="image/png" href="<?= url('assets/pref_' . strtolower(str_replace(' ', '_', $configuracoes->cidade)) . "/img/{$configuracoes->brasao_nfe}") ?>">

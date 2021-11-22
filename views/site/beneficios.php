@@ -56,7 +56,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body" style="text-align: center;">
-                                <img src="<?= url('assets/img/beneficios/emissor_txt.jpg') ?>" class="img-fluid" alt="...">
+                                <img src="<?= url('assets/img/emissor_txt.jpg') ?>" class="img-fluid" alt="...">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -90,7 +90,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body" style="text-align: center;">
-                                <img src="<?= url('assets/img/beneficios/tomador_txt.jpg') ?>" class="img-fluid" alt="...">
+                                <img src="<?= url('assets/img/tomador_txt.jpg') ?>" class="img-fluid" alt="...">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -124,7 +124,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body" style="text-align: center;">
-                                <img src="<?= url('assets/img/beneficios/prefeitura_txt.jpg') ?>" class="img-fluid" alt="...">
+                                <img src="<?= url('assets/img/prefeitura_txt.jpg') ?>" class="img-fluid" alt="...">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
