@@ -25,4 +25,6 @@ extras/documentation
 
 .config.ini
 db/mysql/
-public/assets/pref_*/
+
+# Enquanto estiver em desenvolvimento essa linha permanecerá comentada
+# public/assets/pref_*/
