@@ -13,6 +13,7 @@
         "coffeecode/datalayer": "^1.1",
         "league/plates": "^3.4",
         "robmorgan/phinx": "^0.12.9",
-        "bissolli/validador-cpf-cnpj": "^1.2"
+        "bissolli/validador-cpf-cnpj": "^1.2",
+        "williamsampaio/simple-captcha": "^1.0"
     }
 }

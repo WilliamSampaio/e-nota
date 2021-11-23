@@ -9,10 +9,10 @@ use Source\Models\Noticia;
 use Source\Models\Reclamacao;
 use Bissolli\ValidadorCpfCnpj\Documento;
 use DateTime;
-use Source\Helpers\SimpleCaptcha;
 use Source\Models\Cadastro;
 use Source\Models\Log;
 use Source\Models\Usuario;
+use WilliamSampaio\SimpleCaptcha\SimpleCaptcha;
 
 class Sep
 {
