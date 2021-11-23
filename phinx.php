@@ -8,7 +8,7 @@ return
         ],
         'environments' => [
             'default_migration_table' => 'phinxlog',
-            'default_environment' => 'production',
+            'default_environment' => 'development',
             'production' => [
                 'adapter' => DATA_LAYER_CONFIG['driver'],
                 'host' => DATA_LAYER_CONFIG['host'],

@@ -7,11 +7,14 @@ services:
     build: dockerfiles/php
     links:
       - db
+    environment:
+      DB_HOST: "db"
+      DB_PORT: "3306"
+      DB_NAME: "database"
+      DB_USER: "user"
+      DB_PASS: "pass"
     ports:
       - 80:80
-      # - "443:443"
-    # depends_on:
-    #   - db
     volumes:
       - ./:/var/www/html
     restart: always
@@ -27,7 +30,5 @@ services:
       MYSQL_USER: "user"
       MYSQL_PASSWORD: "pass"
     ports:
-      - 3306
-    # volumes:
-    #   - ./db/mysql:/var/lib/mysql
+      - 3306:3306
     restart: always
