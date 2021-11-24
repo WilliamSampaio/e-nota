@@ -42,8 +42,8 @@ final class Legislacao extends AbstractMigration
             $old_legislacao->rename('old_legislacao')->update();
         }
 
-        $legislacao = $this->table('legislacao');
-        $legislacao
+        $table = $this->table('legislacao');
+        $table
             ->addColumn('titulo', 'string', ['limit' => 200, 'null' => true])
             ->addColumn('texto', 'text', ['null' => true])
             ->addColumn('data_criacao', 'date', ['null' => true])
@@ -77,8 +77,8 @@ final class Legislacao extends AbstractMigration
 
         $exists = $this->hasTable('old_legislacao');
         if ($exists) {
-            $legislacao = $this->table('old_legislacao');
-            $legislacao->rename('legislacao')->update();
+            $table = $this->table('old_legislacao');
+            $table->rename('legislacao')->update();
         }
     }
 }

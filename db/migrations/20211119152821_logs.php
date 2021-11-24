@@ -18,7 +18,7 @@ final class Logs extends AbstractMigration
      * with the Table class.
      */
 
-    /*
+    /* - SQL ORIGINAL
     CREATE TABLE IF NOT EXISTS `logs` (
     `codigo` int(11) NOT NULL,
     `codusuario` int(11) DEFAULT NULL,
@@ -36,8 +36,8 @@ final class Logs extends AbstractMigration
             $old_legislacao->rename('old_logs')->update();
         }
 
-        $legislacao = $this->table('logs');
-        $legislacao
+        $table = $this->table('logs');
+        $table
             ->addColumn('cod_usuario', 'integer', ['limit' => 11, 'null' => true])
             ->addColumn('ip', 'string', ['limit' => 100, 'null' => true])
             ->addColumn('acao', 'string', ['limit' => 100, 'null' => true])
@@ -80,8 +80,8 @@ final class Logs extends AbstractMigration
 
         $exists = $this->hasTable('old_logs');
         if ($exists) {
-            $legislacao = $this->table('old_logs');
-            $legislacao->rename('logs')->update();
+            $table = $this->table('old_logs');
+            $table->rename('logs')->update();
         }
     }
 }

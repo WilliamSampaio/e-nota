@@ -37,8 +37,8 @@ final class Noticias extends AbstractMigration
             $old_legislacao->rename('old_noticias')->update();
         }
 
-        $legislacao = $this->table('noticias');
-        $legislacao
+        $table = $this->table('noticias');
+        $table
             ->addColumn('titulo', 'string', ['limit' => 100, 'null' => true])
             ->addColumn('texto', 'string', ['limit' => 500, 'null' => true])
             ->addColumn('data_criacao', 'date', ['null' => true])
@@ -70,8 +70,8 @@ final class Noticias extends AbstractMigration
 
         $exists = $this->hasTable('old_noticias');
         if ($exists) {
-            $legislacao = $this->table('old_noticias');
-            $legislacao->rename('noticias')->update();
+            $table = $this->table('old_noticias');
+            $table->rename('noticias')->update();
         }
     }
 }

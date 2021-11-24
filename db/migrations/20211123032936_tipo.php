@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
@@ -17,7 +18,7 @@ final class Tipo extends AbstractMigration
      * with the Table class.
      */
 
-    /*
+    /* - SQL ORIGINAL
     CREATE TABLE IF NOT EXISTS `tipo` (
     `codigo` int(11) NOT NULL,
     `tipo` varchar(30) DEFAULT NULL,
@@ -33,8 +34,8 @@ final class Tipo extends AbstractMigration
             $old_legislacao->rename('old_tipo')->update();
         }
 
-        $legislacao = $this->table('tipo');
-        $legislacao
+        $table = $this->table('tipo');
+        $table
             ->addColumn('tipo', 'string', ['limit' => 30, 'null' => true])
             ->addColumn('nome', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('created_at', 'timestamp', ['null' => true])
@@ -74,8 +75,8 @@ final class Tipo extends AbstractMigration
 
         $exists = $this->hasTable('old_tipo');
         if ($exists) {
-            $legislacao = $this->table('old_tipo');
-            $legislacao->rename('tipo')->update();
+            $table = $this->table('old_tipo');
+            $table->rename('tipo')->update();
         }
     }
 }

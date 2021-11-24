@@ -46,8 +46,8 @@ final class Reclamacoes extends AbstractMigration
             $old_legislacao->rename('old_reclamacoes')->update();
         }
 
-        $legislacao = $this->table('reclamacoes');
-        $legislacao
+        $table = $this->table('reclamacoes');
+        $table
             ->addColumn('assunto', 'string', ['limit' => 100, 'null' => true])
             ->addColumn('descricao', 'text', ['null' => true])
             ->addColumn('especificacao', 'string', ['limit' => 200, 'null' => true])
@@ -120,8 +120,8 @@ final class Reclamacoes extends AbstractMigration
 
         $exists = $this->hasTable('old_reclamacoes');
         if ($exists) {
-            $legislacao = $this->table('old_reclamacoes');
-            $legislacao->rename('reclamacoes')->update();
+            $table = $this->table('old_reclamacoes');
+            $table->rename('reclamacoes')->update();
         }
     }
 }
