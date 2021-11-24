@@ -38,6 +38,18 @@
 <h2>Consulta Recibo Provisório de Serviços (RPS)</h2>
 <hr><br>
 
+<?php
+
+if (isset($result) && $result['status'] == 'error') {
+    echo "<div class='alert alert-danger' role='alert'><p>" . $result['mensagem'] . "</p></div>";
+    unset($result);
+} elseif (isset($result) && $result['status'] == 'success') {
+    echo "<div class='alert alert-success' role='alert'><p>" . $result['mensagem'] . "</p></div>";
+    unset($result);
+}
+
+?>
+
 <form action="<?= url('site/tomadores/consultar-rps') ?>" method="post">
 
     <div class="mb-3 row">
