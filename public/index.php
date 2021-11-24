@@ -64,6 +64,12 @@ $router->post('/login', "Sep:login");
 $router->get('/principal', "Sep:principal");
 
 /**
+ * Define as rotas dos report
+ */
+$router->group('report');
+$router->get('/nota/{nota}', "Report:imprimirNota");
+
+/**
  * Tratamento dos erros
  */
 $router->group('error');
