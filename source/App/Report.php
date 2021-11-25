@@ -4,6 +4,7 @@ namespace Source\App;
 
 use League\Plates\Engine;
 use Source\Models\Configuracao;
+use Source\Models\Declaracao;
 use Source\Models\Nota;
 
 class Report
@@ -33,7 +34,8 @@ class Report
         $this->data['prestador'] = $nota->getPrestador()->data();
         $this->data['tomador'] = $nota->getTomador()->data();
         $this->data['servicos'] = $nota->getServicos();
-
+        $this->data['simples_nacional'] = $nota->getPrestador()->data()->codtipodeclaracao == (new Declaracao())->find('declaracao = :dec', "dec=Simples Nacional")->fetch()->id;
+		
         echo $this->view->render('report/imprimir-nota', $this->data);
     }
 }

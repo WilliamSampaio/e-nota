@@ -1,10 +1,5 @@
 <?php
 
-foreach($servicos as $servico):
-	var_dump($servico->data());
-	echo '<br><br>';
-endforeach;
-/*
 function verificaCampo($campo)
 {
 	return $campo == "" ? "NÃO INFORMADO" : $campo;
@@ -20,128 +15,23 @@ function formataEndereco($cadastro)
 	return $endereco;
 }
 
-//$notas = $_POST['hdNota'];
+function formataValor($valor)
+{
+	return number_format($valor, 2, ',', '.');
+}
+
+if ($configuracoes->ativar_creditos == "n") {
+	$display = "display:none";
+	$colspan = "colspan=\"2\"";
+} else {
+	$display = "display:block";
+	$colspan = "";
+}
 
 ?>
 
 <input style="margin-left: auto; margin-right: auto;" name="btImprimir" id="btImprimir" type="button" class="botao" value="Imprimir" onClick="document.getElementById('btImprimir').style.display = 'none';print();document.getElementById('btImprimir').style.display = 'block';">
 
-<?php
-// variaveis globais vindas do conect.php
-// $CODPREF,$PREFEITURA,$USUARIO,$SENHA,$BANCO,$TOPO,$FUNDO,$SECRETARIA,$LEI,$DECRETO,$CREDITO,$UF	
-
-// descriptografa o codigo
-// $CODIGO = base64_decode($_GET['cod']);
-// if (!$notas) {
-// 	$notas = 1;
-// }
-// sql feito na nota
-for ($c = 0; $c < $notas; $c++) {
-	if (($_POST['ckbNota' . $c]) || ($_GET['tipo'] == 'T')) {
-		$impnota[] = $_POST['ckbNota' . $c];
-		$codigo = $_POST['ckbNota' . $c];
-		$sql = $PDO->query(
-			"
-			SELECT
-			`notas`.`codigo`, 
-			`notas`.`numero`, 
-			`notas`.`codverificacao`,
-			`notas`.`datahoraemissao`, 
-			`notas`.`rps_numero`,
-			`notas`.`rps_data`, 
-			`notas`.`tomador_nome`, 
-			`notas`.`tomador_cnpjcpf`,
-			`notas`.`tomador_inscrmunicipal`,
-			`notas`.`tomador_inscrestadual`, 
-			`notas`.`tomador_endereco`,
-			`notas`.`tomador_logradouro`,
-			`notas`.`tomador_numero`,
-			`notas`.`tomador_complemento`,
-			`notas`.`tomador_cep`, 
-			`notas`.`tomador_municipio`, 
-			`notas`.`tomador_uf`,
-			`notas`.`tomador_email`, 
-			`notas`.`discriminacao`, 
-			`notas`.`valortotal`,
-			`notas`.`estado`, 
-			`notas`.`credito`, 
-			`notas`.`valordeducoes`, 
-			`notas`.`basecalculo`, 
-			`notas`.`valoriss`,
-			`notas`.`valorinss`,
-			`notas`.`aliqinss`,
-			`notas`.`valorirrf`,
-			`notas`.`aliqirrf`,
-			`notas`.`deducao_irrf`,
-			`notas`.`total_retencao`,
-			`notas`.`motivo_cancelamento`,
-			`cadastro`.`razaosocial`, 
-			`cadastro`.`nome`, 
-			`cadastro`.`cnpj`,
-			`cadastro`.`cpf`,
-			`cadastro`.`inscrmunicipal`, 
-			`cadastro`.`inscrestadual`,
-			`cadastro`.`logradouro`,
-			`cadastro`.`numero`,
-			`cadastro`.`municipio`, 
-			`cadastro`.`uf`, 
-			`cadastro`.`logo`,
-			`notas`.`issretido`, 
-			`cadastro`.`codtipo`,
-			`notas`.`pispasep`,
-			`cadastro`.`codtipodeclaracao`,
-			`notas`.`observacao`,
-			`notas`.`cofins`,
-			`notas`.`contribuicaosocial`
-			FROM
-			`notas` 
-			INNER JOIN
-			`cadastro` ON `notas`.`codemissor` = `cadastro`.`codigo`
-			WHERE
-			`notas`.`codigo` = '$CODIGO'"
-		);
-
-		list(
-			$codigo, $numero, $codverificacao, $datahoraemissao, $rps_numero, $rps_data,
-			$tomador_nome, $tomador_cnpjcpf, $tomador_inscrmunicipal, $tomador_inscrestadual,
-			$tomador_endereco, $tomador_logradouro, $tomador_numero, $tomador_complemento,
-			$tomador_cep, $tomador_municipio, $tomador_uf, $tomador_email, $discriminacao,
-			$valortotal, $estado, $credito, $valordeducoes, $basecalculo, $valoriss, $valorinss,
-			$aliqinss, $valorirrf, $aliqirrf, $deducao_irrf, $total_retencao, $motivo_cancelamento,
-			$empresa_razaosocial, $empresa_nome, $empresa_cnpj, $empresa_cpf, $empresa_inscrmunicipal,
-			$empresa_inscrestadual, $empresa_endereco, $empresa_numero, $empresa_municipio, $empresa_uf,
-			$empresa_logo, $issretido, $codtipo, $pispasep, $codtipodec, $observacao, $cofins, $contribuicaosocial
-		) = $sql->fetch();
-
-		$empresa_cnpjcpf = $empresa_cnpj . $empresa_cpf;
-
-		//nao tem soh endereco agora tem logradouro e numero com complemento
-		$tomador_endereco = "$tomador_logradouro, $tomador_numero";
-		//se tiver complemento, adiciona para a string de endereço
-		if ($tomador_complemento) {
-			$tomador_endereco .= ", $tomador_complemento";
-		}
-		//verifica o codtipo do simples nacional
-		$codtipoSN = coddeclaracao('Simples Nacional');
-
-		//Verifica na tabela configuracoes se os creditos estao ativos
-		$sql_verifica_creditos = $PDO->query("SELECT ativar_creditos FROM configuracoes");
-		list($ativar_creditos) = $sql_verifica_creditos->fetch();
-
-		if ($ativar_creditos == "n") {
-			$display = "display:none";
-			$colspan = "colspan=\"2\"";
-		} else {
-			$display = "display:block";
-			$colspan = "";
-		}
-
-		$sql_leidecreto = $PDO->query("SELECT lei, decreto FROM configuracoes");
-		list($lei, $decreto) = $sql_leidecreto->fetch();
-	}
-}
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -152,6 +42,7 @@ for ($c = 0; $c < $notas; $c++) {
 	<style type="text/css">
 		html {
 			font-family: sans-serif;
+			font-size: 1px;
 		}
 
 		table.gridview {
@@ -175,14 +66,14 @@ for ($c = 0; $c < $notas; $c++) {
 
 <body style="text-align: center;">
 
-	<table width="800" cellspacing="0" cellpadding="2" style="margin-left: auto; margin-right: auto; border:#000000 1px solid;border-collapse:collapse">
+	<table width="800" cellspacing="0" cellpadding="2" style="font-size: 10pt; margin-left: auto; margin-right: auto; border:#000000 1px solid;border-collapse:collapse">
 		<tr>
 			<td colspan="4" rowspan="3" width="75%" style="border:#000000 1px solid; text-align: center;">
 				<!-- tabela prefeitura inicio -->
 				<table width="100%" cellspacing="0" cellpadding="2">
 					<tr>
 						<td rowspan="4" width="20%" valign="top" style="text-align: center;">
-							<img src="<?= url('assets/pref_' . strtolower(str_replace(' ', '_', $configuracoes->cidade)) . "/img/{$configuracoes->brasao_nfe}") ?>" alt="" width="100" height="100" class="d-inline-block align-text-top">
+							<img src="<?= url('assets/pref_' . strtolower(str_replace(' ', '_', $configuracoes->cidade)) . "/img/{$configuracoes->brasao_nfe}") ?>" alt="" width="64" height="64" class="d-inline-block align-text-top">
 							<br />
 						</td>
 						<td width="80%" class="cab01"><?= strtoupper("Prefeitura Municipal de ") . $configuracoes->cidade ?></td>
@@ -225,14 +116,14 @@ for ($c = 0; $c < $notas; $c++) {
 		<tr>
 			<td colspan="6" style="border:#000000 1px solid; text-align: center;">
 				<!-- tabela prestador -->
-				<table width="100%" cellspacing="0" cellpadding="2">
+				<table width="100%" cellspacing="0" cellpadding="2" style="font-size: 10pt;">
 					<tr>
 						<td colspan="3" style="text-align: center;" class="cab03">PRESTADOR DE SERVIÇOS</td>
 					</tr>
 					<tr>
 						<td rowspan="6">
 							<?php if ($prestador->logo != "") : ?>
-								<img src="<?= url('assets/pref_' . strtolower(str_replace(' ', '_', $configuracoes->cidade)) . "/img/empresa/{$prestador->logo}") ?>" width="100" height="100">
+								<img src="<?= url('assets/pref_' . strtolower(str_replace(' ', '_', $configuracoes->cidade)) . "/img/empresa/{$prestador->logo}") ?>" width="64" height="64">
 							<?php endif ?>
 						</td>
 						<td style="text-align: left;">CNPJ/CPF: <strong><?= $prestador->cnpj . $prestador->cpf ?></strong></td>
@@ -262,7 +153,7 @@ for ($c = 0; $c < $notas; $c++) {
 			<td colspan="6" style="border:#000000 1px solid; text-align: center;">
 				<!-- tabela tomador inicio -->
 
-				<table width="100%" cellspacing="0" cellpadding="2" style="text-align: center;">
+				<table width="100%" cellspacing="0" cellpadding="2" style="font-size: 10pt;">
 					<tr>
 						<td colspan="3" class="cab03" style="text-align: center;">TOMADOR DE SERVIÇOS</td>
 					</tr>
@@ -295,33 +186,13 @@ for ($c = 0; $c < $notas; $c++) {
 
 				<!-- tabela discrimacao dos servicos -->
 
-				<table width="100%" cellspacing="0" cellpadding="2">
+				<table width="100%" cellspacing="0" cellpadding="2" style="font-size: 10pt;">
 					<tr>
 						<td class="cab03" style="text-align: center;">DISCRIMINAÇÃO DE SERVIÇOS E DEDUÇÕES</td>
 					</tr>
 					<tr>
 						<td height="400" style="text-align: left;" valign="top">
 							<br />
-							<?php 
-							//sql para listar os servicos da nota atual
-							$servicos_sql = $PDO->query("
-					SELECT 
-						s.codservico,
-						s.descricao,
-						ns.basecalculo, 
-						ns.iss,
-						ns.issretido,
-						s.aliquotair,
-						s.aliquota,
-						ns.discriminacao
-					FROM 
-						notas_servicos as ns
-					INNER JOIN
-						servicos as s ON ns.codservico = s.codigo
-					WHERE 
-						codnota = '$CODIGO'
-				");
-							?>
 							<table class="gridview" style="text-align: center;">
 								<tr>
 									<th style="text-align: center;">Código</th>
@@ -338,173 +209,153 @@ for ($c = 0; $c < $notas; $c++) {
 
 								?>
 									<tr>
-										<td style="text-align: center;" <?php if (!$servicos_dados['codservico']) {
-																			echo "title='Não possui codigo de serviço'";
-																		} ?>>
-											<?php if ($servicos_dados['codservico']) {
-												echo $servicos_dados['codservico'];
-											} else {
-												echo "N/P";
-											} ?>
+										<td style="text-align: center;" <?= !$servico->id ? "title='Não possui codigo de serviço'" : '' ?>>
+											<?= $servico->id ? $servico->id : "N/P" ?>
 										</td>
-										<td style="text-align: left;"><?= $servicos_dados['descricao'] ?></td>
-										<td style="text-align: right;"><?php if ($aliquotapercentual) {
-																			echo DecToMoeda($aliquotapercentual);
-																		} else {
-																			echo DecToMoeda($servicos_dados['aliquota']);
-																		} ?></td>
-										<td style="text-align: right;"><?= DecToMoeda($servicos_dados['basecalculo']) ?></td>
-										<td style="text-align: right;"><?= DecToMoeda($servicos_dados['issretido']) ?></td>
-										<td style="text-align: right;"><?= DecToMoeda($servicos_dados['iss']) ?></td>
+										<td style="text-align: left;"><?= $servico->descricao ?></td>
+										<td style="text-align: right;"><?= formataValor($servico->aliquota) ?></td>
+										<td style="text-align: right;"><?= formataValor($servico->base_calculo) ?></td>
+										<td style="text-align: right;"><?= formataValor($servico->iss_retido) ?></td>
+										<td style="text-align: right;"><?= formataValor($servico->iss) ?></td>
 									</tr>
-									<?php
-									?>
 									<tr>
 										<th colspan="6" style="text-align: center;"><strong>Discriminação</strong></th>
 									</tr>
 									<tr>
 										<td height="30" style="text-align: left;" colspan="6">
-											<?php
-											if ($servicos_dados['discriminacao']) {
-												echo $servicos_dados['discriminacao'];
-											} else {
-												echo "Não foi informado";
-											}
-											?>
+											<?= $servico->discriminacao ? $servico->discriminacao : "Não foi informado" ?>
 										</td>
 									</tr>
 								<?php
 
-									$totalALiquota += $servicos_dados['aliquota'];
-								endforeach
+									$totalALiquota += $servico->aliquota;
+								endforeach;
 
 								?>
 							</table>
-							<?php /*
 							<br />
-							<?php
-							// verifica o estado da nfe
-							if ($estado == "C") {
-								echo "<div align=center><span size=7 color=#FF0000><b>
-						ATENÇÃO!!<br />NFE CANCELADA</span> <br /><span size=5 color=#FF0000>
-						Motivo do cancelamento:<br /> $motivo_cancelamento</B></span></div>";
-							} // fim if
-
-							?>
+							<?php if ($nota->estado == "C") : ?>
+								<div style="text-align: center;">
+									<span size=7 color=#FF0000><b>ATENÇÃO!!<br>NFE CANCELADA</span><br>
+									<span size=5 color=#FF0000>Motivo do cancelamento:<br><?= $nota->motivo_cancelamento ?></b></span>
+								</div>
+							<?php endif ?>
 						</td>
 					</tr>
 				</table>
-
 
 				<!-- tabela discrimacao dos servicos -->
 			</td>
 		</tr>
 		<?php
-		if ($discriminacao) {
-			$discriminacao = nl2br($discriminacao);
+
+		if ($nota->discriminacao) :
+			$nota->discriminacao = nl2br($nota->discriminacao);
+
 		?>
 			<tr>
 				<td colspan="6" style="border:#000000 1px solid; text-align: center;">
-					<table width="100%">
+					<table width="100%" style="font-size: 10pt;">
 						<tr>
 							<td class="cab03" style="text-align: center;">DISCRIMINAÇÃO DA NOTA</td>
 						</tr>
 						<tr>
 							<td style="text-align: left;">
-								<?php
-								echo $discriminacao;
-								?>
+								<?= $nota->discriminacao ?>
 							</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
-		<?php
-		}
-		?>
+		<?php endif ?>
 
 		<?php
-		if ($observacao) {
+
+		if ($nota->observacao) :
+
 		?>
 			<tr>
 				<td colspan="6" style="border:#000000 1px solid; text-align: center;">
-					<table width="100%">
+					<table width="100%" style="font-size: 10pt;">
 						<tr>
 							<td class="cab03" style="text-align: center;">OBSERVAÇÕES DA NOTA</td>
 						</tr>
 						<tr>
 							<td style="text-align: left;">
-								<?php
-								echo $observacao;
-								?>
+								<?= $nota->observacao ?>
 							</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
-		<?php
-		}
-		?>
-
-
+		<?php endif ?>
 
 		<tr>
-			<td colspan="6" class="cab03" style="border:#000000 1px solid; text-align: center;">VALOR TOTAL DA NOTA = R$ <?= DecToMoeda($valortotal) ?></td>
+			<td colspan="6" class="cab03" style="border:#000000 1px solid; text-align: center;">VALOR TOTAL DA NOTA = R$ <?= formataValor($nota->valor_total) ?></td>
 		</tr>
-		<!--<tr>
-			<td colspan="6" style="text-align: left;" style="border:#000000 1px solid">Código do Serviço<br /><strong><?= $servico_codservico . " - " . $servico_descricao ?></strong></td>
-			</tr>-->
 		<tr>
 			<?php
-			if ($valoracrescimos > 0) {
+
+			if ($nota->valor_acrescimos > 0) :
 
 			?>
 				<td style="border:#000000 1px solid">Deduções (R$)<br />
-					<div style="text-align: right;"><strong><?= DecToMoeda($valordeducoes) ?></strong></div>
+					<div style="text-align: right;"><strong><?= formataValor($nota->valor_deducoes) ?></strong></div>
 				</td>
 				<td style="border:#000000 1px solid">Acréscimos (R$)<br />
-					<div style="text-align: right;"><strong><?= DecToMoeda($valoracrescimos) ?></strong></div>
+					<div style="text-align: right;"><strong><?= formataValor($nota->valor_acrescimos) ?></strong></div>
 				</td>
 			<?php
-			} else {
-				if ($ativar_creditos == "n") {
+
+			else :
+				if ($configuracoes->ativar_creditos == "n") :
 					$colspan = "colspan=\"3\"";
-				}
+				endif;
+
 			?>
+
 				<td style="border:#000000 1px solid">Valor Total das Deduções (R$)<br />
-					<div style="text-align: right;"><strong><?= DecToMoeda($valordeducoes) ?></strong></div>
+					<div style="text-align: right;"><strong><?= formataValor($nota->valor_deducoes) ?></strong></div>
 				</td>
-			<?php
-			}
-			?>
+
+			<?php endif ?>
+
 			<td style="border:#000000 1px solid" colspan="2">Base de Cálculo (R$)<br />
-				<div style="text-align: right;"><strong><?= DecToMoeda($basecalculo) ?></strong></div>
+				<div style="text-align: right;"><strong><?= formataValor($nota->base_calculo) ?></strong></div>
 			</td>
+
 			<td style="border:#000000 1px solid; display:none">
-				Alãquota (%)
-				<br />
+				Aliquota (%)
+				<br>
 				<div style="text-align: right;">
 					<strong>
 						<?php
-						if ($codtipodec == $codtipoSN) {
+
+						if ($simples_nacional) {
 							echo "----";
 						} else {
-							print DecToMoeda($totalALiquota) . " %";
-						} ?>
+							echo formataValor($totalALiquota) . " %";
+						}
+
+						?>
 					</strong>
 				</div>
 			</td>
+
 			<td style="border:#000000 1px solid; text-align: center;" <?= $colspan ?>>
 				Valor do ISS (R$)
 				<br />
 				<div style="text-align: right;">
 					<strong>
 						<?php
-						if ($codtipodec == $codtipoSN) {
+
+						if ($simples_nacional) :
 							echo "----";
-						} else {
-							print DecToMoeda($valoriss);
-						}  ?>
+						else :
+							echo formataValor($nota->valor_iss);
+						endif
+
+						?>
 					</strong>
 				</div>
 			</td>
@@ -515,11 +366,14 @@ for ($c = 0; $c < $notas; $c++) {
 				<div style="text-align: right;">
 					<strong>
 						<?php
-						if ($codtipodec == $codtipoSN) {
+
+						if ($simples_nacional) :
 							echo "----";
-						} else {
-							print DecToMoeda($credito);
-						} ?>
+						else :
+							echo formataValor($nota->credito);
+						endif
+
+						?>
 					</strong>
 				</div>
 			</td>
@@ -529,73 +383,85 @@ for ($c = 0; $c < $notas; $c++) {
 		</tr>
 		<tr>
 			<td colspan="6" style="border:#000000 1px solid; text-align: left;">
-				- Esta NF-e foi emitida com respaldo na Lei nº <?= $lei ?> e no Decreto nº <?= $decreto ?><br />
+				- Esta NF-e foi emitida com respaldo na Lei nº <?= $configuracoes->lei ?> e no Decreto nº <?= $configuracoes->decreto ?><br />
 				<?php
-				if ($codtipodec == $codtipoSN) {
+
+				if ($simples_nacional) :
 					echo "- Esta NF-e não gera créditos, pois a empresa prestadora de serviços é optante pelo Simples Nacional<br> ";
-				}
-				if ($issretido != 0) {
-					echo "- Esta NF-e possui retenção de ISS no valor de R$ " . DecToMoeda($issretido) . "<br> ";
-				}
+				endif;
 
-				if ($pispasep > 0) {
-					echo "- Está NF-e possui PIS/PASEP no valor de R$ " . DecToMoeda($pispasep) . "<br />";
-				}
+				if ($nota->iss_retido != 0) :
+					echo "- Esta NF-e possui retenção de ISS no valor de R$ " . formataValor($nota->iss_retido) . "<br> ";
+				endif;
 
-				if ($cofins > 0) {
-					echo "- Está NF-e possui COFINS no valor de R$ " . DecToMoeda($cofins) . "<br />";
-				}
+				if ($nota->pispasep > 0) :
+					echo "- Está NF-e possui PIS/PASEP no valor de R$ " . formataValor($nota->pispasep) . "<br />";
+				endif;
 
-				if ($contribuicaosocial > 0) {
-					echo "- Está NF-e possui Contribuição Social no valor de R$ " . DecToMoeda($contribuicaosocial) . "<br />";
-				}
+				if ($nota->cofins > 0) :
+					echo "- Está NF-e possui COFINS no valor de R$ " . formataValor($nota->cofins) . "<br />";
+				endif;
 
+				if ($nota->contribuicao_social > 0) :
+					echo "- Está NF-e possui Contribuição Social no valor de R$ " . formataValor($nota->contribuicao_social) . "<br />";
+				endif;
 
 				// verifica o estado do tomador
-				if (($CONF_CIDADE != $tomador_municipio) && ($codtipodec != $codtipoSN)) {
-					if ($ativar_creditos == "s") {
+				if (($configuracoes->cidade != $tomador->municipio) && (!$simples_nacional)) :
+					if ($configuracoes->ativar_creditos == "s") :
 						echo "- Esta NF-e não gera crédito, pois o Tomador de Serviços está localizado fora do município de $CONF_CIDADE<br>";
-					}
-				} // fim if	
-				if ($rps_numero) {
+					endif;
+				endif;
+
+				if ($nota->rps_numero) :
+
 				?>
-					- Esta NF-e substitui o RPS Nº <?= $rps_numero ?>, emitido em <?=(substr($rps_data, 8, 2) . "/" . substr($rps_data, 5, 2) . "/" . substr($rps_data, 0, 4)) ?><br />
+
+					- Esta NF-e substitui o RPS Nº <?= $nota->rps_numero ?>, emitido em <?= date("d/m/Y", strtotime($nota->rps_data)) ?><br />
+
 				<?php
-				} //fim if rps
+
+				endif;
+
 				//$valorinss,$aliqinss,$valorirrf,$aliqinss
-				if ($valorinss > 0) { //soh mostra se tiver valor
-					if ($aliqinss > 0) {
-						echo "- Retenção de INSS " . DecToMoeda($aliqinss) . "% com valor de R$ " . DecToMoeda($valorinss) . " <br>";
-					} else {
-						echo "- Retenção de INSS com valor de R$ " . DecToMoeda($valorinss) . " <br>";
-					}
-				}
-				if ($valorirrf > 0) { //soh mostra se tiver valor
-					if ($aliqirrf > 0) {
-						echo "- Retenção de IRRF " . DecToMoeda($aliqirrf) . "% com valor de R$ " . DecToMoeda($valorirrf) . "";
-						if ($deducao_irrf > 0) {
-							echo ". Dedução de R$ " . DecToMoeda($deducao_irrf);
-						}
+				if ($nota->valor_inss > 0) : //soh mostra se tiver valor
+					if ($nota->aliq_inss > 0) :
+						echo "- Retenção de INSS " . formataValor($nota->aliq_inss) . "% com valor de R$ " . formataValor($nota->valor_inss) . " <br>";
+					else :
+						echo "- Retenção de INSS com valor de R$ " . formataValor($nota->valor_inss) . " <br>";
+					endif;
+				endif;
+
+				if ($nota->valor_irrf > 0) : //soh mostra se tiver valor
+					if ($nota->aliq_irrf > 0) :
+						echo "- Retenção de IRRF " . formataValor($nota->aliq_irrf) . "% com valor de R$ " . formataValor($nota->valor_irrf) . "";
+						if ($nota->deducao_irrf > 0) :
+							echo ". Dedução de R$ " . formataValor($nota->deducao_irrf);
+						endif;
 						echo "<br>";
-					} else {
-						echo "- Retenção de IRRF com valor de R$ " . DecToMoeda($valorirrf) . "";
-						if ($deducao_irrf > 0) {
-							echo ". Dedução de R$ " . DecToMoeda($deducao_irrf);
-						}
+					else :
+						echo "- Retenção de IRRF com valor de R$ " . formataValor($nota->valor_irrf) . "";
+						if ($nota->deducao_irrf > 0) :
+							echo ". Dedução de R$ " . formataValor($nota->deducao_irrf);
+						endif;
 						echo "<br>";
-					}
-				}
-				if ($total_retencao > 0) {
-					echo "- Total de retenções da nota R$ " . DecToMoeda($total_retencao) . " <br>";
-				}
+					endif;
+				endif;
+
+				if ($nota->total_retencao > 0) :
+					echo "- Total de retenções da nota R$ " . formataValor($nota->total_retencao) . " <br>";
+				endif;
+
 				?>
 			</td>
 		</tr>
 
 		<?php
-		if ($datahoraemissao >= '2011-08-01 12:23:00') {
+
+		if ($nota->created_at >= '2011-08-01 12:23:00') :
 			echo "<tr><td><p>Créditos com validade apartir do dia 01/08/2011</p></td></tr>";
-		}
+		endif;
+
 		?>
 
 	</table>
