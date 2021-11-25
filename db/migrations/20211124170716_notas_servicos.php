@@ -34,8 +34,8 @@ final class NotasServicos extends AbstractMigration
     {
         $exists = $this->hasTable('notas_servicos');
         if ($exists) {
-            $old_legislacao = $this->table('notas_servicos');
-            $old_legislacao->rename('old_notas_servicos')->update();
+            $old_table = $this->table('notas_servicos');
+            $old_table->rename('old_notas_servicos')->update();
         }
 
         $table = $this->table('notas_servicos');

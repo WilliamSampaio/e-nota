@@ -38,8 +38,8 @@ final class Legislacao extends AbstractMigration
     {
         $exists = $this->hasTable('legislacao');
         if ($exists) {
-            $old_legislacao = $this->table('legislacao');
-            $old_legislacao->rename('old_legislacao')->update();
+            $old_table = $this->table('legislacao');
+            $old_table->rename('old_legislacao')->update();
         }
 
         $table = $this->table('legislacao');

@@ -71,8 +71,8 @@ final class Notas extends AbstractMigration
     {
         $exists = $this->hasTable('notas');
         if ($exists) {
-            $old_legislacao = $this->table('notas');
-            $old_legislacao->rename('old_notas')->update();
+            $old_table = $this->table('notas');
+            $old_table->rename('old_notas')->update();
         }
 
         $table = $this->table('notas');

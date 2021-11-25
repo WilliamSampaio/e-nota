@@ -33,8 +33,8 @@ final class Noticias extends AbstractMigration
     {
         $exists = $this->hasTable('noticias');
         if ($exists) {
-            $old_legislacao = $this->table('noticias');
-            $old_legislacao->rename('old_noticias')->update();
+            $old_table = $this->table('noticias');
+            $old_table->rename('old_noticias')->update();
         }
 
         $table = $this->table('noticias');

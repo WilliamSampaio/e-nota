@@ -32,8 +32,8 @@ final class Logs extends AbstractMigration
     {
         $exists = $this->hasTable('logs');
         if ($exists) {
-            $old_legislacao = $this->table('logs');
-            $old_legislacao->rename('old_logs')->update();
+            $old_table = $this->table('logs');
+            $old_table->rename('old_logs')->update();
         }
 
         $table = $this->table('logs');

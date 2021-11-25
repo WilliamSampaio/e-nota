@@ -42,8 +42,8 @@ final class Reclamacoes extends AbstractMigration
     {
         $exists = $this->hasTable('reclamacoes');
         if ($exists) {
-            $old_legislacao = $this->table('reclamacoes');
-            $old_legislacao->rename('old_reclamacoes')->update();
+            $old_table = $this->table('reclamacoes');
+            $old_table->rename('old_reclamacoes')->update();
         }
 
         $table = $this->table('reclamacoes');

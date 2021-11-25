@@ -30,43 +30,33 @@ final class Tipo extends AbstractMigration
     {
         $exists = $this->hasTable('tipo');
         if ($exists) {
-            $old_legislacao = $this->table('tipo');
-            $old_legislacao->rename('old_tipo')->update();
+            $old_table = $this->table('tipo');
+            $old_table->rename('old_tipo')->update();
         }
 
         $table = $this->table('tipo');
         $table
             ->addColumn('tipo', 'string', ['limit' => 30, 'null' => true])
             ->addColumn('nome', 'string', ['limit' => 255, 'null' => true])
-            ->addColumn('created_at', 'timestamp', ['null' => true])
-            ->addColumn('updated_at', 'timestamp', ['null' => true])
+            ->addColumn('created_at', 'timestamp', ['null' => true, 'default' => 'CURRENT_TIMESTAMP'])
+            ->addColumn('updated_at', 'timestamp', ['null' => true, 'default' => 'CURRENT_TIMESTAMP'])
             ->create();
 
-        $exists = $this->hasTable('old_tipo');
-        if ($exists) {
+        $rows = [
+            ['tipo' => 'prestador', 'nome' => 'Prestador'],
+            ['tipo' => 'simples', 'nome' => 'Simples Nacional'],
+            ['tipo' => 'empreiteira', 'nome' => 'Empreiteira'],
+            ['tipo' => 'orgao_publico', 'nome' => 'Orgão Público'],
+            ['tipo' => 'instituicao_financeira', 'nome' => 'Instituição Financeira'],
+            ['tipo' => 'cartorio', 'nome' => 'Cartório'],
+            ['tipo' => 'operadora_credito', 'nome' => 'Operadora de Crédito'],
+            ['tipo' => 'grafica', 'nome' => 'Gráfica'],
+            ['tipo' => 'contador', 'nome' => 'Contador'],
+            ['tipo' => 'tomador', 'nome' => 'Tomador'],
+            ['tipo' => 'diversao', 'nome' => 'Diversão Pública']
+        ];
 
-            $namesQuery = $this->getQueryBuilder();
-            $namesQuery
-                ->select([
-                    'tipo',
-                    'nome',
-                    'now()',
-                    'now()'
-                ])
-                ->from('old_tipo');
-
-            $builder = $this->getQueryBuilder();
-            $builder
-                ->insert([
-                    'tipo',
-                    'nome',
-                    'created_at',
-                    'updated_at'
-                ])
-                ->into('tipo')
-                ->values($namesQuery)
-                ->execute();
-        }
+        $table->insert($rows)->save();
     }
 
     public function down(): void

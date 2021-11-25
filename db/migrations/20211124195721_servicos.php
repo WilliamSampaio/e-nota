@@ -42,8 +42,8 @@ final class Servicos extends AbstractMigration
     {
         $exists = $this->hasTable('servicos');
         if ($exists) {
-            $old_legislacao = $this->table('servicos');
-            $old_legislacao->rename('old_servicos')->update();
+            $old_table = $this->table('servicos');
+            $old_table->rename('old_servicos')->update();
         }
 
         $table = $this->table('servicos');
